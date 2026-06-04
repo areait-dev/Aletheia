@@ -26,6 +26,12 @@ export default function ChiSiamo() {
         "Collaborazione: Lavorare insieme per raggiungere obiettivi comuni.",
         "Responsabilità: Contribuire positivamente alla società e all'ambiente."
       ]
+    },
+    direttore: {
+      nome: "Emilio Rossi",
+      ruolo: "Direttore Generale",
+      descrizione: "Emilio Rossi porta una vasta esperienza e una visione strategica, guidando Alètheia Srl verso l'innovazione e l'eccellenza nel settore della formazione.",
+      immagine: "/images/emilio-direttore.jpg" // Assicurati di avere questa immagine nella cartella public/images
     }
   };
 
@@ -94,6 +100,26 @@ export default function ChiSiamo() {
           </div>
         </div>
 
+      </section>
+
+      {/* Sezione Direttore */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-8 py-16 relative text-center bg-gray-50">
+        <span className="inline-block text-sm font-semibold tracking-[0.15em] uppercase text-[#008C95] mb-3">Il Nostro Team</span>
+        <h2 className="text-3xl lg:text-4xl font-extrabold text-[#0F172A] mb-8 leading-tight">
+          Conosci il Nostro <span className="text-[#008C95]">Direttore</span>
+        </h2>
+        <div className="relative inline-block w-60 h-60 rounded-full overflow-hidden shadow-lg group cursor-pointer">
+          <img
+            src={content.direttore.immagine}
+            alt={content.direttore.nome}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent flex flex-col items-center justify-end p-4 text-white text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <h3 className="text-xl font-bold">{content.direttore.nome}</h3>
+            <p className="text-sm font-medium">{content.direttore.ruolo}</p>
+            <p className="text-xs mt-2 hidden md:block">{content.direttore.descrizione}</p>
+          </div>
+        </div>
       </section>
 
       <footer id="contatti">
