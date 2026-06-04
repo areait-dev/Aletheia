@@ -5,6 +5,30 @@ import Header from '../components/Header';
 export default function ChiSiamo() {
   const [activeTab, setActiveTab] = useState('Visione');
 
+  // Questi sono i dati di missione, visione e valori.
+  // In un'applicazione reale, questi dati potrebbero provenire da un file JSON,
+  // da un CMS o da un'API. Per ora, li useremo come dati hardcoded.
+  const content = {
+    missione: {
+      titolo: "La Nostra Missione",
+      testo: "La nostra missione è fornire soluzioni innovative e di alta qualità che soddisfino le esigenze dei nostri clienti, promuovendo la crescita e il successo reciproco."
+    },
+    visione: {
+      titolo: "La Nostra Visione",
+      testo: "Essere un punto di riferimento nel settore, riconosciuti per l'eccellenza, l'integrità e l'impegno verso un futuro sostenibile e tecnologicamente avanzato."
+    },
+    valori: {
+      titolo: "I Nostri Valori",
+      lista: [
+        "Innovazione: Ricerca continua di nuove idee e tecnologie.",
+        "Qualità: Impegno costante per l'eccellenza in ogni aspetto.",
+        "Integrità: Agire con onestà, trasparenza ed etica.",
+        "Collaborazione: Lavorare insieme per raggiungere obiettivi comuni.",
+        "Responsabilità: Contribuire positivamente alla società e all'ambiente."
+      ]
+    }
+  };
+
   return (
     <>
       <Head>
@@ -46,26 +70,26 @@ export default function ChiSiamo() {
 
           <div className="about-tab-content">
             {activeTab === 'Visione' && (
-              <ul className="about-tab-list">
-                <li><strong>Sviluppo locale:</strong> Promuoviamo la crescita economica e l'occupazione attraverso sinergie stabili.</li>
-                <li><strong>Rete territoriale:</strong> Collaboriamo attivamente con Associazioni Datoriali, Sindacati, Enti Bilaterali, Terzo Settore e Pubblica Amministrazione.</li>
-                <li><strong>Radicamento siciliano:</strong> Costruiamo ponti solidi tra i professionisti del settore e il sistema socio-economico dell'isola.</li>
-              </ul>
+              <div>
+                <h2>{content.visione.titolo}</h2>
+                <p>{content.visione.testo}</p>
+              </div>
             )}
             {activeTab === 'Missione' && (
-              <ul className="about-tab-list">
-                <li><strong>Formazione e Consulenza:</strong> Progettiamo azioni formative mirate per giovani (ingresso nel lavoro) e occupati (aggiornamento tecnologico).</li>
-                <li><strong>Servizi accreditati:</strong> Offriamo Orientamento, Formazione Continua, Formazione a Distanza (FAD) e Sostegno all'inserimento lavorativo.</li>
-                <li><strong>Soluzioni per le imprese:</strong> Accompagniamo aziende private e PA dall'analisi dei problemi all'introduzione di nuove metodologie.</li>
-                <li><strong>Focus Agroalimentare:</strong> Vantiamo una specifica esperienza con oltre 40 piani formativi realizzati nell'ultimo triennio nel settore agricolo.</li>
-              </ul>
+              <div>
+                <h2>{content.missione.titolo}</h2>
+                <p>{content.missione.testo}</p>
+              </div>
             )}
             {activeTab === 'I Nostri Valori' && (
-              <ul className="about-tab-list">
-                <li><strong>Certificazioni ufficiali:</strong> Agenzia per il lavoro (DDS Nr 1.100 - ANPAL) ed Ente di formazione accreditato alla Regione Siciliana (ddg n 78).</li>
-                <li><strong>Competenza elevata:</strong> Team di operatori ad alta specializzazione che coprono diagnosi, progettazione, monitoraggio e valutazione.</li>
-                <li><strong>Strutture all'avanguardia:</strong> Sedi facilmente accessibili dotate di laboratori informatici, aule teoriche, postazioni multimediali e sistemi di feedback sistematici.</li>
-              </ul>
+              <div>
+                <h2>{content.valori.titolo}</h2>
+                <ul className="about-tab-list">
+                  {content.valori.lista.map((valore, index) => (
+                    <li key={index}>{valore}</li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         </div>
@@ -104,57 +128,3 @@ export default function ChiSiamo() {
     </>
   );
 }
-import React from 'react';
-
-const ChiSiamo = () => {
-  // Questi sono i dati di missione, visione e valori.
-  // In un'applicazione reale, questi dati potrebbero provenire da un file JSON,
-  // da un CMS o da un'API. Per ora, li useremo come dati hardcoded.
-  const content = {
-    missione: {
-      titolo: "La Nostra Missione",
-      testo: "La nostra missione è fornire soluzioni innovative e di alta qualità che soddisfino le esigenze dei nostri clienti, promuovendo la crescita e il successo reciproco."
-    },
-    visione: {
-      titolo: "La Nostra Visione",
-      testo: "Essere un punto di riferimento nel settore, riconosciuti per l'eccellenza, l'integrità e l'impegno verso un futuro sostenibile e tecnologicamente avanzato."
-    },
-    valori: {
-      titolo: "I Nostri Valori",
-      lista: [
-        "Innovazione: Ricerca continua di nuove idee e tecnologie.",
-        "Qualità: Impegno costante per l'eccellenza in ogni aspetto.",
-        "Integrità: Agire con onestà, trasparenza ed etica.",
-        "Collaborazione: Lavorare insieme per raggiungere obiettivi comuni.",
-        "Responsabilità: Contribuire positivamente alla società e all'ambiente."
-      ]
-    }
-  };
-
-  return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <h1>Chi Siamo</h1>
-
-      <section style={{ marginBottom: '30px' }}>
-        <h2>{content.missione.titolo}</h2>
-        <p>{content.missione.testo}</p>
-      </section>
-
-      <section style={{ marginBottom: '30px' }}>
-        <h2>{content.visione.titolo}</h2>
-        <p>{content.visione.testo}</p>
-      </section>
-
-      <section style={{ marginBottom: '30px' }}>
-        <h2>{content.valori.titolo}</h2>
-        <ul>
-          {content.valori.lista.map((valore, index) => (
-            <li key={index}>{valore}</li>
-          ))}
-        </ul>
-      </section>
-    </div>
-  );
-};
-
-export default ChiSiamo;
