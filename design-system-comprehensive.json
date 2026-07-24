@@ -1,0 +1,833 @@
+{
+  "metadata": {
+    "project": "Alètheia Srl - Next.js",
+    "generated": "2026-06-09",
+    "framework": "Next.js 13 + React 18 + Tailwind CSS 3 + Inline Styles",
+    "font_family": "Plus Jakarta Sans (400, 500, 600, 700, 800)",
+    "color_mode": "Light + Dark (Tailwind class-based)",
+    "status": "Production-ready mockup"
+  },
+  "typography_contextual": {
+    "headings": {
+      "h1": {
+        "font_size": "clamp(2.25rem, 5vw, 3.5rem)",
+        "font_weight": "900",
+        "line_height": "1.12",
+        "color_light": "#0F172A",
+        "color_dark": "#F8FAFC",
+        "letter_spacing": "normal",
+        "used_in": "pages/contatti.js (hero), pages/index.js (hero), pages/chi-siamo.js (hero)",
+        "notes": "Responsive clamp() for mobile to desktop scaling"
+      },
+      "h2": {
+        "font_size": ["1.4rem (contatti sidebar)", "1.3rem (contact form header)", "text-3xl md:text-4xl (courses, news)"],
+        "font_weight": ["900 (contatti)", "700 (courses)"],
+        "line_height": "1.25 (contatti) / 1.2 (default)",
+        "color_light": "#0F172A",
+        "color_dark": "dark:text-white",
+        "used_in": "All section headers"
+      },
+      "h3": {
+        "font_size": ["1.3rem (contact success)", "text-xl (chi-siamo content)", "text-lg (course cards)", "text-base (cert cards)"],
+        "font_weight": "700 (bold) / 800 (extrabold)",
+        "line_height": "1.2",
+        "color_light": "#0F172A",
+        "color_dark": "dark:text-white",
+        "used_in": "Subsection headers, card titles"
+      },
+      "h4": {
+        "font_size": "text-lg",
+        "font_weight": "700",
+        "color_light": "#FFFFFF",
+        "color_dark": "#FFFFFF",
+        "used_in": "Director card hover overlay (chi-siamo.js)",
+        "context": "White text on dark gradient background"
+      }
+    },
+    "body_text": {
+      "paragraph_default": {
+        "font_size": "text-base (16px) / 1rem",
+        "font_weight": "400",
+        "line_height": "1.6",
+        "color_light": "#475569",
+        "color_dark": "#A0AEC0",
+        "letter_spacing": "normal"
+      },
+      "paragraph_large": {
+        "font_size": "clamp(1rem, 2vw, 1.15rem)",
+        "font_weight": "400",
+        "line_height": "1.75",
+        "color_light": "rgba(255,255,255,0.68)",
+        "used_in": "pages/contatti.js hero subtitle"
+      },
+      "paragraph_small": {
+        "font_size": "text-sm (14px) / 0.875rem",
+        "font_weight": "400",
+        "line_height": "1.6",
+        "color_light": "#64748B",
+        "color_dark": "dark:text-gray-300"
+      },
+      "paragraph_xs": {
+        "font_size": "text-xs (12px) / 0.75rem",
+        "font_weight": "400",
+        "line_height": "1.6",
+        "color_light": "#94A3B8",
+        "color_dark": "#64748B"
+      }
+    },
+    "labels_and_captions": {
+      "label": {
+        "font_size": "0.8rem",
+        "font_weight": "700",
+        "color_light": "#334155",
+        "color_dark": "#E2E8F0",
+        "letter_spacing": "normal",
+        "used_in": "Form fields (contatti.js)"
+      },
+      "badge_uppercase": {
+        "font_size": "0.68rem",
+        "font_weight": "800",
+        "letter_spacing": "0.07em",
+        "text_transform": "uppercase",
+        "color": "varies by category",
+        "background": "{badgeColor}18 (18% opacity)",
+        "padding": "0.25rem 0.75rem",
+        "border_radius": "999px",
+        "used_in": "Course category cards (index.js)",
+        "examples": [
+          "Spesso gratuito (#10B981)",
+          "Obbligatorio per legge (#F59E0B)",
+          "Certificazioni internazionali (#6366F1)"
+        ]
+      },
+      "subtitle": {
+        "font_size": "text-teal-600 dark:text-[#10B981]",
+        "font_weight": "600 (semibold)",
+        "color_light": "#008C95",
+        "color_dark": "#10B981",
+        "used_in": "Section subtitles, certification subtitles"
+      },
+      "time_date": {
+        "font_size": "0.78rem / 0.82rem",
+        "font_weight": "500 / 600",
+        "color_light": "#94A3B8",
+        "color_dark": "#64748B",
+        "used_in": "News article dates (index.js)"
+      }
+    },
+    "links_and_buttons": {
+      "link_primary": {
+        "font_size": "0.9rem / 0.95rem",
+        "font_weight": "700",
+        "color_light": "#008C95",
+        "color_dark": "#10B981",
+        "text_decoration": "none",
+        "hover_color_light": "#006B73",
+        "hover_color_dark": "#059669",
+        "transition": "color 0.2s, gap 0.2s ease",
+        "used_in": "CTA links, article links, navigation"
+      },
+      "link_light": {
+        "font_size": "0.78rem",
+        "font_weight": "700",
+        "color_light": "#008C95",
+        "text_decoration": "none",
+        "display": "inline-block",
+        "used_in": "Info card links (contatti.js)"
+      },
+      "button_primary": {
+        "padding": "0.9rem 2.25rem",
+        "background": "linear-gradient(90deg, #008C95, #10B981)",
+        "color": "#FFFFFF",
+        "font_weight": "700",
+        "font_size": "0.95rem",
+        "border_radius": "999px",
+        "box_shadow": "0 4px 24px rgba(0,140,149,0.35)",
+        "hover_transform": "translateY(-2px)",
+        "hover_shadow": "0 8px 32px rgba(0,140,149,0.5)",
+        "transition": "transform 0.2s ease, box-shadow 0.2s ease",
+        "used_in": "Contact form submit (contatti.js)"
+      },
+      "button_secondary": {
+        "padding": "0.9rem 2rem",
+        "background": "#008C95",
+        "hover_background": "#006B73",
+        "color": "#FFFFFF",
+        "font_weight": "700",
+        "border_radius": "0.75rem",
+        "transition": "all 0.2s",
+        "used_in": "CTA buttons (index.js, chi-siamo.js)"
+      },
+      "button_outline": {
+        "padding": "0.9rem 2rem",
+        "background": "#FFFFFF/10 with backdrop blur",
+        "border": "2px solid rgba(255,255,255,0.3)",
+        "color": "#FFFFFF",
+        "font_weight": "700",
+        "border_radius": "0.75rem",
+        "hover_background": "rgba(255,255,255,0.2)",
+        "hover_border": "rgba(255,255,255,0.5)",
+        "transition": "all 0.2s",
+        "used_in": "Secondary CTA (index.js hero)"
+      }
+    }
+  },
+  "pages_sections": {
+    "pages/index.js": {
+      "1_hero": {
+        "section_class": "hero",
+        "height": "h-screen (100vh)",
+        "background": "linear-gradient(135deg, #0F172A 0%, #134E4A 100%)",
+        "padding": "custom via CSS",
+        "spacing_below": "py-16 md:py-24 (next section) = 64px/96px",
+        "elements": [
+          {
+            "name": "hero-deco (background decoration)",
+            "z_index": "0",
+            "opacity": "animated"
+          },
+          {
+            "name": "hero-badge",
+            "text": "Da oltre 20 anni al tuo fianco",
+            "styling": "inline CSS"
+          },
+          {
+            "name": "h1 headline",
+            "text": "Formazione professionale per il tuo futuro",
+            "color": "#FFFFFF",
+            "font_size": "responsive clamp()"
+          },
+          {
+            "name": "subtitle paragraph",
+            "color": "rgba(255,255,255,0.68)",
+            "margin_top": "mt-4"
+          },
+          {
+            "name": "search filter bar",
+            "layout": "flex flex-col sm:flex-row gap-3",
+            "margin_top": "mt-8",
+            "max_width": "max-w-2xl",
+            "input_style": "px-6 py-3 bg-white/10 border border-white/30 rounded-xl"
+          },
+          {
+            "name": "CTA buttons group",
+            "layout": "flex flex-wrap gap-4",
+            "margin_top": "mt-8",
+            "button_count": 2
+          }
+        ]
+      },
+      "2_courses_section": {
+        "section_class": "py-16 md:py-24 bg-slate-50 dark:bg-gray-900",
+        "padding": "py-16 (mobile) / py-24 (desktop) = 64px / 96px vertical",
+        "spacing_below": "mb-12 = 48px below header",
+        "elements": [
+          {
+            "name": "section header",
+            "padding": "px-4 sm:px-6 lg:px-8",
+            "text_center": true,
+            "spacing": "mb-12 = 48px"
+          },
+          {
+            "name": "course category cards grid",
+            "grid": "grid-cols-3 (desktop), grid-cols-1 (mobile)",
+            "gap": "gap-6 (1.5rem) = 24px",
+            "card_style": "rounded-3xl p-8 shadow-sm border",
+            "card_padding": "p-8 = 32px",
+            "card_margin": "flex flex-col gap-4 = 16px internal",
+            "hover_effect": {
+              "transform": "translateY(-4px)",
+              "shadow": "0 16px 40px rgba(0,0,0,0.08)"
+            }
+          },
+          {
+            "name": "view all link",
+            "margin_top": "mt-12 = 48px",
+            "color": "#008C95",
+            "font_size": "0.95rem",
+            "font_weight": "700"
+          }
+        ]
+      },
+      "3_stats_section": {
+        "section_class": "numbers-section",
+        "grid": "4 columns equal width",
+        "elements": [
+          {
+            "name": "NumberCounter component",
+            "count": 4,
+            "styling": "centered columns"
+          }
+        ]
+      },
+      "4_news_section": {
+        "section_class": "py-16 md:py-24 bg-white dark:bg-gray-800",
+        "padding": "64px / 96px vertical",
+        "elements": [
+          {
+            "name": "section header with link",
+            "layout": "flex items-end justify-between",
+            "margin_bottom": "mb-10 = 40px"
+          },
+          {
+            "name": "featured article card",
+            "layout": "flex flex-col md:flex-row",
+            "margin_bottom": "mb-6 = 24px",
+            "image_container": {
+              "width_mobile": "100%",
+              "width_desktop": "md:w-2/5 (40%)",
+              "height": "min-h-[220px] md:min-h-[280px]",
+              "object_fit": "object-cover",
+              "hover_effect": "group-hover:scale-105 on image"
+            },
+            "text_container": {
+              "width_desktop": "md:w-3/5 (60%)",
+              "padding": "p-6 md:p-10 = 24px / 40px"
+            }
+          },
+          {
+            "name": "small news cards grid",
+            "grid": "grid grid-cols-1 sm:grid-cols-3",
+            "gap": "gap-6 = 24px",
+            "count": 3,
+            "card_structure": {
+              "image": "aspect-video",
+              "text_padding": "p-5 = 20px",
+              "hover_effect": "hover:-translate-y-1 hover:shadow-xl"
+            }
+          }
+        ]
+      },
+      "5_footer": {
+        "section_class": "footer",
+        "layout": "grid footer-grid",
+        "spacing": "divided into columns"
+      }
+    },
+    "pages/chi-siamo.js": {
+      "1_hero": {
+        "section_class": "page-hero",
+        "height": "h-screen equivalent",
+        "background": "gradient overlay"
+      },
+      "2_mission_vision_values": {
+        "section_class": "max-w-screen-xl mx-auto px-6 py-16",
+        "padding": "py-16 = 64px vertical, px-6 = 24px horizontal",
+        "tab_navigation": {
+          "layout": "flex flex-wrap",
+          "border_bottom": "border-b-2 border-slate-200",
+          "tab_style": {
+            "padding": "0.65rem 1.25rem",
+            "font_size": "0.9rem",
+            "font_weight": "600 (normal) / 700 (active)",
+            "border_bottom": "3px solid transparent / 3px solid #008C95 (active)",
+            "color": "#64748B (normal) / #008C95 (active)",
+            "transition": "all 0.2s ease"
+          }
+        },
+        "layout_2columns": {
+          "layout": "flex flex-wrap gap-12 items-stretch",
+          "left_column": {
+            "flex": "flex-[2]",
+            "min_width": "min-w-[300px]",
+            "card_style": "bg-white rounded-2xl border border-slate-200 p-6 shadow-sm",
+            "content_padding": "space-y-5 (20px gap)"
+          },
+          "right_column": {
+            "flex": "flex-1",
+            "min_width": "min-w-[220px]",
+            "max_width": "max-width: 360px",
+            "image_container": {
+              "height": "min-h-[320px]",
+              "border_radius": "rounded-2xl",
+              "object_fit": "object-cover"
+            },
+            "hover_overlay": {
+              "background": "linear-gradient(135deg, rgba(15,23,42,0.95) 0%, rgba(0,140,149,0.92) 100%)",
+              "opacity": "0 (hidden) / 1 (on hover)",
+              "transition": "opacity 0.3s ease",
+              "padding": "1.5rem",
+              "gap": "gap-0.6rem = 6px"
+            }
+          }
+        }
+      },
+      "3_certifications": {
+        "section_class": "bg-slate-50",
+        "padding": "px-6 py-16 = 24px / 64px",
+        "header": {
+          "text_center": true,
+          "margin_bottom": "mb-12 = 48px"
+        },
+        "grid": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+        "gap": "gap-5 = 20px",
+        "cert_card": {
+          "structure": {
+            "icon_container": "w-16 h-16 (64x64px) rounded-full",
+            "icon_size": "text-3xl (30px)",
+            "title": "text-base font-bold",
+            "subtitle": "text-sm",
+            "padding": "p-6 = 24px"
+          },
+          "hover": {
+            "transform": "hover:-translate-y-1",
+            "shadow": "hover:shadow-lg",
+            "border": "hover:border-teal-500"
+          },
+          "modal": {
+            "icon_container": "w-20 h-20 (80x80px)",
+            "icon_size": "text-4xl (36px)",
+            "title": "text-2xl font-bold",
+            "max_height": "max-h-[85vh]",
+            "padding": "p-8 = 32px",
+            "border_radius": "rounded-2xl"
+          }
+        }
+      }
+    },
+    "pages/contatti.js": {
+      "1_hero": {
+        "section_class": "custom inline styles",
+        "padding": "paddingTop: 120px, paddingBottom: 5rem",
+        "background": "linear-gradient(135deg, #0F172A 0%, #134E4A 100%)",
+        "decorations": "2 radial gradients (absolute positioned)"
+      },
+      "2_contact_form_layout": {
+        "section_class": "bg-#F8FAFC",
+        "padding": "5rem 0",
+        "grid": "grid-template-columns: 1fr 1.6fr (desktop), 1fr (mobile)",
+        "gap": "gap: 3rem",
+        "left_column": {
+          "info_cards": {
+            "background": "#fff",
+            "padding": "1.5rem",
+            "border": "1px solid #E2E8F0",
+            "border_radius": "1.25rem",
+            "display": "flex items-start gap-1rem",
+            "count": 4,
+            "spacing": "gap: 1.25rem between cards",
+            "icon_container": {
+              "width": "44px",
+              "height": "44px",
+              "border_radius": "12px",
+              "background": "rgba(0,140,149,0.08)"
+            }
+          },
+          "map_embed": {
+            "height": "200px",
+            "border_radius": "1.25rem",
+            "margin_top": "margin-top: 0.5rem"
+          }
+        },
+        "right_column": {
+          "background": "#fff",
+          "border_radius": "1.5rem",
+          "padding": "2.5rem",
+          "border": "1px solid #E2E8F0",
+          "margin_top": "margin-top: 7.75rem",
+          "form_layout": {
+            "layout": "flex flex-col gap-1.25rem",
+            "row": "display: grid; grid-template-columns: 1fr 1fr (desktop), 1fr (mobile)",
+            "gap": "gap: 1rem",
+            "field_padding": "0.7rem 1rem"
+          },
+          "form_elements": {
+            "label": "font-size: 0.8rem; font-weight: 700",
+            "input": "border: 1.5px solid #E2E8F0; border-radius: 0.75rem; padding: 0.7rem 1rem",
+            "input_focus": "border-color: #008C95; box-shadow: 0 0 0 3px rgba(0,140,149,0.12)",
+            "textarea": "resize: vertical; min-height: 130px",
+            "select": "appearance: none; cursor: pointer"
+          },
+          "submit_button": {
+            "width": "100%",
+            "padding": "0.9rem 2.25rem",
+            "background": "linear-gradient(90deg, #008C95, #10B981)",
+            "color": "#FFFFFF",
+            "font_weight": "700",
+            "border_radius": "999px",
+            "box_shadow": "0 4px 24px rgba(0,140,149,0.35)"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "Header": {
+      "layout": "fixed top-0 left-0 right-0 z-100",
+      "height": "auto (flexible based on logo)",
+      "padding": "0.75rem 0",
+      "logo": {
+        "height": "80px",
+        "width": "auto"
+      },
+      "navbar": {
+        "display": "flex",
+        "gap": "gap-6 (1.5rem)",
+        "margin_left": "margin-left: 2.5rem",
+        "link_padding": "padding: 0.25rem 0"
+      },
+      "header_right": {
+        "display": "flex",
+        "gap": "flexible spacing",
+        "elements": ["theme_toggle", "platform_dropdown", "phone_link"]
+      },
+      "theme_toggle": {
+        "padding": "0.5rem 1rem",
+        "border_radius": "6px",
+        "font_size": "0.85rem",
+        "font_weight": "600",
+        "gap": "gap: 0.5rem (icon to text)",
+        "background_light": "rgba(0,0,0,0.05)",
+        "background_dark": "rgba(255,255,255,0.1)",
+        "border": "1px solid",
+        "transition": "all 0.3s ease"
+      },
+      "mega_menu_dropdown": {
+        "background": "#F8FAFC dark:bg-gray-900",
+        "padding": "custom flex layout",
+        "z_index": "z-99 (below header)",
+        "columns": 4
+      }
+    },
+    "Chatbot": {
+      "container": {
+        "position": "fixed bottom-8 right-8",
+        "z_index": "z-9999",
+        "layout": "flex flex-col items-flex-end"
+      },
+      "chat_window": {
+        "width": "360px (max-width: calc(100vw - 2rem))",
+        "border_radius": "1.25rem (20px)",
+        "box_shadow": "0 20px 60px rgba(0,0,0,0.18)",
+        "background": "var(--bg-light)",
+        "margin_bottom": "0.75rem",
+        "transform_origin": "bottom right",
+        "transform": "scale(0.85) (closed), scale(1) (open)",
+        "opacity": "0 (closed), 1 (open)",
+        "transition": "transform 0.25s ease, opacity 0.25s ease"
+      },
+      "header": {
+        "background": "linear-gradient(135deg, #008C95, #10B981)",
+        "padding": "1rem 1.25rem",
+        "display": "flex items-center gap-0.75rem"
+      },
+      "body": {
+        "background": "var(--bg-light)",
+        "padding": "1rem",
+        "max_height": "380px",
+        "overflow_y": "auto"
+      },
+      "faq_chip": {
+        "padding": "0.6rem 1rem",
+        "background": "var(--white) (default), #F0FDFA (hover)",
+        "border": "1px solid #E2E8F0 (default), 1px solid var(--primary) (hover)",
+        "border_radius": "999px",
+        "font_size": "0.82rem",
+        "font_weight": "600",
+        "transition": "all 0.2s"
+      },
+      "toggle_button": {
+        "width": "56px",
+        "height": "56px",
+        "border_radius": "50%",
+        "background": "linear-gradient(135deg, #008C95, #10B981)",
+        "box_shadow": "0 4px 20px rgba(0,140,149,0.45)",
+        "transform": "scale(1) (default), scale(1.08) (hover)",
+        "transition": "transform 0.2s ease"
+      },
+      "badge_indicator": {
+        "position": "absolute top-(-4px) right-(-4px)",
+        "width": "20px",
+        "height": "20px",
+        "background": "#EF4444",
+        "border_radius": "50%",
+        "border": "2px solid #fff"
+      }
+    },
+    "FormCandidato": {
+      "note": "Not analyzed in files (not found in current read)"
+    },
+    "FormAzienda": {
+      "note": "Not analyzed in files (not found in current read)"
+    }
+  },
+  "colors": {
+    "brand_palette": {
+      "primary": {
+        "color": "#008C95",
+        "name": "Teal primary",
+        "usage": [
+          "Primary buttons",
+          "Active links",
+          "Focus states",
+          "Badge backgrounds",
+          "Hover overlays",
+          "Gradient endpoints"
+        ]
+      },
+      "primary_hover": {
+        "color": "#006B73",
+        "darkened_version": "primary -16%"
+      },
+      "secondary": {
+        "color": "#10B981",
+        "name": "Green",
+        "usage": [
+          "Dark mode primary alternative",
+          "Gradient endpoints",
+          "Hover states in dark mode",
+          "Badge colors"
+        ]
+      },
+      "accent": {
+        "color": "#F59E0B",
+        "name": "Amber",
+        "usage": [
+          "Category badge (Obbligatoria)",
+          "Warning states"
+        ]
+      },
+      "info": {
+        "color": "#6366F1",
+        "name": "Indigo",
+        "usage": [
+          "Category badge (Professionale)"
+        ]
+      },
+      "error": {
+        "color": "#EF4444",
+        "name": "Red",
+        "usage": [
+          "Form validation errors",
+          "Delete actions",
+          "Chat badge indicator"
+        ]
+      }
+    },
+    "grayscale": {
+      "white": "#FFFFFF",
+      "gray_50": "#F8FAFC",
+      "gray_100": "#F1F5F9",
+      "gray_200": "#E2E8F0",
+      "gray_300": "#CBD5E1",
+      "gray_400": "#94A3B8",
+      "gray_500": "#64748B",
+      "gray_600": "#475569",
+      "gray_700": "#374151",
+      "gray_800": "#1F2937",
+      "gray_900": "#111827",
+      "black": "#0F172A"
+    },
+    "dark_mode": {
+      "--bg-light": "#F8FAFC",
+      "--bg-dark": "#0F172A",
+      "--text-dark": "#0F172A",
+      "--text-light": "#F8FAFC",
+      "--text-muted": "#475569",
+      "--text-muted-dark": "#A0AEC0"
+    }
+  },
+  "hover_active_states": {
+    "buttons": {
+      "primary_button": {
+        "default": {
+          "background": "#008C95",
+          "color": "#FFFFFF",
+          "shadow": "0 4px 24px rgba(0,140,149,0.35)"
+        },
+        "hover": {
+          "background": "#006B73",
+          "transform": "translateY(-2px)",
+          "shadow": "0 8px 32px rgba(0,140,149,0.5)",
+          "transition": "transform 0.2s ease, box-shadow 0.2s ease"
+        }
+      },
+      "outline_button": {
+        "default": {
+          "background": "rgba(255,255,255,0.1)",
+          "border": "2px solid rgba(255,255,255,0.3)"
+        },
+        "hover": {
+          "background": "rgba(255,255,255,0.2)",
+          "border": "2px solid rgba(255,255,255,0.5)",
+          "transition": "all 0.2s"
+        }
+      }
+    },
+    "cards": {
+      "course_card": {
+        "default": {
+          "shadow": "0 2px 8px rgba(0,0,0,0.04)",
+          "transform": "translateY(0)"
+        },
+        "hover": {
+          "shadow": "0 16px 40px rgba(0,0,0,0.08)",
+          "transform": "translateY(-4px)",
+          "transition": "all 0.3s"
+        }
+      },
+      "news_card": {
+        "default": {
+          "shadow": "0 2px 8px rgba(0,0,0,0.04)",
+          "transform": "translateY(0)"
+        },
+        "hover": {
+          "shadow": "0 20px 50px rgba(0,0,0,0.10)",
+          "transform": "translateY(-4px)",
+          "transition": "all 0.3s"
+        },
+        "image_hover": {
+          "transform": "scale(1.05)",
+          "transition": "transform 0.5s"
+        }
+      },
+      "cert_card": {
+        "default": {
+          "border": "1px solid border-slate-200",
+          "shadow": "shadow-sm"
+        },
+        "hover": {
+          "transform": "hover:-translate-y-1",
+          "border": "hover:border-teal-500 dark:hover:border-[#10B981]",
+          "shadow": "hover:shadow-lg",
+          "transition": "all 0.3s"
+        }
+      }
+    },
+    "links": {
+      "default": {
+        "color": "#008C95",
+        "text_decoration": "none"
+      },
+      "hover": {
+        "color": "#006B73",
+        "gap_expand": "group-hover:gap-3 (for icon + text)",
+        "transition": "color 0.2s, gap 0.2s ease"
+      }
+    },
+    "form_fields": {
+      "input_default": {
+        "border": "1.5px solid #E2E8F0",
+        "background": "#FFFFFF"
+      },
+      "input_focus": {
+        "border": "1.5px solid #008C95",
+        "shadow": "0 0 0 3px rgba(0,140,149,0.12)",
+        "transition": "border-color 0.2s, box-shadow 0.2s"
+      },
+      "input_error": {
+        "border": "1.5px solid #EF4444"
+      }
+    }
+  },
+  "z_index_hierarchy": {
+    "z-0": "decorative elements",
+    "z-10": "default stacked elements",
+    "z-50": "dropdowns, tooltips",
+    "z-100": "header.site-header",
+    "z-99": "mega-menu (below header)",
+    "z-200": "hamburger menu",
+    "z-1000": "modals (certification details)",
+    "z-9999": "chatbot floating widget"
+  },
+  "animations_transitions": {
+    "transitions": [
+      {
+        "name": "Default color transition",
+        "duration": "0.2s",
+        "easing": "ease",
+        "properties": "color"
+      },
+      {
+        "name": "Card elevation on hover",
+        "duration": "0.3s",
+        "easing": "ease",
+        "properties": "all (shadow, transform, border)"
+      },
+      {
+        "name": "Theme toggle transition",
+        "duration": "0.3s",
+        "easing": "ease",
+        "properties": "background-color, color"
+      },
+      {
+        "name": "Image zoom on hover",
+        "duration": "0.5s",
+        "easing": "ease",
+        "properties": "transform"
+      },
+      {
+        "name": "Chatbot window open/close",
+        "duration": "0.25s",
+        "easing": "ease",
+        "properties": "transform, opacity"
+      },
+      {
+        "name": "Form input focus",
+        "duration": "0.2s",
+        "easing": "ease",
+        "properties": "border-color, box-shadow"
+      }
+    ],
+    "keyframe_animations": [
+      {
+        "name": "fadeIn (chi-siamo.js)",
+        "from": "opacity: 0; transform: translateY(6px)",
+        "to": "opacity: 1; transform: translateY(0)",
+        "duration": "0.22s",
+        "easing": "ease-out"
+      },
+      {
+        "name": "fadeUp (contatti.js)",
+        "from": "opacity: 0; transform: translateY(18px)",
+        "to": "opacity: 1; transform: translateY(0)",
+        "duration": "0.55s",
+        "easing": "ease-out",
+        "variants": [
+          { "name": "fade-up-1", "delay": "0.08s" },
+          { "name": "fade-up-2", "delay": "0.18s" },
+          { "name": "fade-up-3", "delay": "0.28s" }
+        ]
+      }
+    ]
+  },
+  "images_media": {
+    "hero_backgrounds": {
+      "type": "gradient overlays",
+      "opacity": "varies",
+      "used_in": "All page heroes"
+    },
+    "news_cards": {
+      "featured_card": {
+        "aspect_ratio": "custom (2 columns: 40% / 60%)",
+        "height": "min-h-[220px] (mobile), md:min-h-[280px] (desktop)",
+        "object_fit": "object-cover",
+        "hover_effect": "scale(1.05) over 0.5s"
+      },
+      "small_news_cards": {
+        "aspect_ratio": "aspect-video (16:9)",
+        "object_fit": "object-cover",
+        "hover_effect": "group-hover:scale-105"
+      }
+    },
+    "director_image": {
+      "container_height": "min-h-[320px]",
+      "object_fit": "object-cover",
+      "hover_overlay": "opacity transition 0.3s",
+      "hover_image_zoom": "scale(1.04) over 0.5s"
+    }
+  },
+  "responsive_breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px"
+  },
+  "spacing_system": {
+    "padding": "p-1 to p-12 = 4px to 48px (4px increments)",
+    "margin": "mt-1 to mt-12 = 4px to 48px (4px increments)",
+    "gap": "gap-1 to gap-8 = 4px to 32px (4px increments)",
+    "section_vertical": "py-16 = 64px, py-24 = 96px",
+    "container_width": "90% max-width 1200px"
+  }
+}

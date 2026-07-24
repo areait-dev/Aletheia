@@ -1,0 +1,318 @@
+{
+  "project": "Alètheia Srl - Next.js Design System Report",
+  "date": "2026-06-09",
+  "framework": "Tailwind CSS + CSS Variables + Inline Styles",
+  "files_analyzed": 15,
+  "spacing": {
+    "padding": {
+      "p-1": "4px",
+      "p-2": "8px",
+      "p-3": "12px",
+      "p-4": "16px",
+      "p-5": "20px",
+      "p-6": "24px",
+      "p-8": "32px",
+      "p-10": "40px",
+      "p-12": "48px"
+    },
+    "margin": {
+      "mt-1": "4px",
+      "mt-2": "8px",
+      "mt-3": "12px",
+      "mt-4": "16px",
+      "mt-6": "24px",
+      "mt-8": "32px",
+      "mt-10": "40px",
+      "mt-12": "48px",
+      "pt-36": "144px",
+      "pb-16": "64px",
+      "mb-1": "4px",
+      "mb-2": "8px",
+      "mb-3": "12px",
+      "mb-4": "16px",
+      "mb-6": "24px",
+      "mx-auto": "auto (center)"
+    },
+    "gap": {
+      "gap-1": "4px",
+      "gap-2": "8px",
+      "gap-3": "12px",
+      "gap-4": "16px",
+      "gap-6": "24px",
+      "gap-8": "32px"
+    }
+  },
+  "sizing": {
+    "width": {
+      "w-16": "64px",
+      "w-20": "80px",
+      "w-full": "100%",
+      "w-[90%]": "90%"
+    },
+    "height": {
+      "h-1": "4px",
+      "h-2": "8px",
+      "h-3": "12px",
+      "h-4": "16px",
+      "h-5": "20px",
+      "h-6": "24px",
+      "h-8": "32px",
+      "h-10": "40px",
+      "h-12": "48px",
+      "h-16": "64px",
+      "h-20": "80px",
+      "h-24": "96px",
+      "h-32": "128px",
+      "h-40": "160px",
+      "h-48": "192px",
+      "h-64": "256px",
+      "h-80": "320px",
+      "h-96": "384px",
+      "h-full": "100%",
+      "h-screen": "100vh"
+    },
+    "max_width": {
+      "max-w-lg": "512px",
+      "max-w-xl": "576px",
+      "max-w-2xl": "672px",
+      "max-w-6xl": "1024px",
+      "max-w-7xl": "1280px",
+      "max-w-screen-xl": "1280px"
+    },
+    "min_height": {
+      "min-h-0": "0px",
+      "min-h-full": "100%",
+      "min-h-screen": "100vh",
+      "min-h-[220px]": "220px",
+      "min-h-[280px]": "280px",
+      "min-h-[320px]": "320px"
+    },
+    "max_height": {
+      "max-h-full": "100%",
+      "max-h-screen": "100vh",
+      "max-h-[85vh]": "85vh",
+      "max-h-[380px]": "380px"
+    },
+    "width_constraints": {
+      "min-w-[300px]": "300px",
+      "w-[90%]": "90%"
+    }
+  },
+  "typography": {
+    "font_family": "Plus Jakarta Sans, sans-serif",
+    "font_sizes": {
+      "text-xs": "12px",
+      "text-sm": "14px",
+      "text-base": "16px",
+      "text-lg": "18px",
+      "text-xl": "20px",
+      "text-2xl": "24px",
+      "text-3xl": "30px",
+      "text-4xl": "36px",
+      "text-5xl": "48px"
+    },
+    "font_weights": {
+      "font-medium": "500",
+      "font-semibold": "600",
+      "font-bold": "700",
+      "font-extrabold": "800"
+    },
+    "line_height": {
+      "leading-snug": "1.375",
+      "leading-relaxed": "1.625",
+      "leading-tight": "1.25"
+    },
+    "letter_spacing": {
+      "tracking-wide": "0.05em",
+      "tracking-widest": "0.1em"
+    }
+  },
+  "responsive_breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px",
+    "usage": [
+      "sm:flex-row",
+      "sm:grid-cols-2",
+      "md:py-24",
+      "md:text-5xl",
+      "md:w-2/5",
+      "md:w-3/5",
+      "md:flex-row",
+      "md:p-10",
+      "lg:grid-cols-3",
+      "lg:grid-cols-[260px_1fr]",
+      "xl:grid-cols-3"
+    ]
+  },
+  "colors": {
+    "brand_colors": {
+      "primary": "#008C95",
+      "primary_hover": "#006B73",
+      "primary_light": "#008C95/10",
+      "secondary": "#10B981",
+      "accent": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#6366F1"
+    },
+    "grayscale": {
+      "white": "#FFFFFF",
+      "gray_50": "#F8FAFC",
+      "gray_100": "#F1F5F9",
+      "gray_200": "#E2E8F0",
+      "gray_300": "#CBD5E1",
+      "gray_400": "#94A3B8",
+      "gray_500": "#64748B",
+      "gray_600": "#475569",
+      "gray_700": "#374151",
+      "gray_800": "#1F2937",
+      "gray_900": "#111827",
+      "black": "#0F172A"
+    },
+    "css_variables": {
+      "--bg-light": "#F8FAFC",
+      "--bg-dark": "#0F172A",
+      "--text-dark": "#0F172A",
+      "--text-light": "#F8FAFC",
+      "--text-muted": "#475569",
+      "--text-muted-dark": "#A0AEC0",
+      "--primary": "#008C95",
+      "--secondary": "#10B981",
+      "--shadow-sm": "0 2px 8px rgba(0,0,0,0.04)",
+      "--shadow-md": "0 4px 20px rgba(0,0,0,0.07)",
+      "--shadow-lg": "0 20px 50px rgba(0,0,0,0.10)"
+    },
+    "dark_mode_classes": {
+      "backgrounds": [
+        "dark:bg-gray-800",
+        "dark:bg-gray-900",
+        "dark:bg-gray-700",
+        "dark:bg-[#008C95]"
+      ],
+      "text": [
+        "dark:text-white",
+        "dark:text-gray-300",
+        "dark:text-gray-400",
+        "dark:text-gray-500"
+      ],
+      "borders": [
+        "dark:border-gray-700",
+        "dark:border-white/20"
+      ],
+      "accents": [
+        "dark:text-[#10B981]",
+        "dark:bg-[#008C95]"
+      ]
+    }
+  },
+  "border_radius": {
+    "rounded-lg": "8px",
+    "rounded-xl": "12px",
+    "rounded-2xl": "16px",
+    "rounded-3xl": "24px",
+    "rounded-full": "9999px"
+  },
+  "shadows": {
+    "shadow-sm": "0 2px 8px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06)",
+    "shadow-md": "0 4px 20px rgba(0,0,0,0.07), 0 0 1px rgba(0,0,0,0.05)",
+    "shadow-lg": "0 20px 50px rgba(0,0,0,0.10), 0 0 1px rgba(0,0,0,0.05)",
+    "shadow-2xl": "0 25px 50px rgba(0,0,0,0.15)"
+  },
+  "transitions": {
+    "durations": [
+      "duration-200",
+      "duration-300",
+      "duration-500"
+    ],
+    "properties": [
+      "transition-all",
+      "transition-colors",
+      "transition-transform"
+    ]
+  },
+  "component_patterns": {
+    "buttons": {
+      "primary": "bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 py-4 rounded-xl transition-all duration-200",
+      "outline": "bg-white/10 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-xl border-2 border-white/30 hover:bg-white/20",
+      "dark_mode": "dark:bg-[#10B981] dark:hover:bg-[#059669]"
+    },
+    "cards": {
+      "standard": "bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-gray-700",
+      "hover": "hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+    },
+    "inputs": {
+      "text": "border border-slate-200 rounded-xl px-4 py-3 transition-all focus:border-teal-500 focus:ring-2 focus:ring-teal-100",
+      "search": "flex-1 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/50"
+    },
+    "modals": {
+      "overlay": "fixed inset-0 bg-black/70 flex items-center justify-center z-[1000] backdrop-blur-sm",
+      "container": "bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-[90%] max-h-[85vh] overflow-y-auto p-8 shadow-2xl"
+    }
+  },
+  "grid_layouts": {
+    "columns": [
+      "grid-cols-1",
+      "grid-cols-2",
+      "grid-cols-3",
+      "sm:grid-cols-2",
+      "lg:grid-cols-3",
+      "xl:grid-cols-3"
+    ],
+    "responsive": {
+      "mobile": "1 column",
+      "tablet": "2 columns",
+      "desktop": "3 columns"
+    }
+  },
+  "height_by_section": {
+    "hero_section": {
+      "description": "Hero principale con sfondo gradient e testo grande",
+      "height": "h-screen (100vh)",
+      "used_in": "pages/index.js, pages/chi-siamo.js, pagine formazione, agenzia-per-il-lavoro",
+      "note": "Occupa l'intera altezza dello schermo"
+    },
+    "news_section": {
+      "description": "Sezione con articoli/notizie con immagini anteprima",
+      "card_height": "min-h-[220px] (mobile), md:min-h-[280px] (desktop)",
+      "used_in": "pages/index.js (news items)",
+      "explanation": "220px su mobile per non disperdere il contenuto, 280px su desktop per migliore proporzione aspetto"
+    },
+    "chat_modal": {
+      "description": "Finestra chat dell'assistente FAQ",
+      "max_height": "max-h-[85vh]",
+      "max_height_px": "380px (max per chat body)",
+      "used_in": "components/Chatbot.js",
+      "explanation": "85vh per lasciare spazio a bottom e top, 380px per body del chat per scroll se lungo"
+    },
+    "certification_cards": {
+      "description": "Card certificazioni e accreditamenti",
+      "icon_container": "w-16 h-16 (64px) e w-20 h-20 (80px nel modal)",
+      "used_in": "pages/chi-siamo.js (CertCard component)",
+      "explanation": "Icona quadrata 64x64 nelle card normali, 80x80 ampliata nel modal"
+    },
+    "filter_bar": {
+      "description": "Barra ricerca/filtro homepage",
+      "height": "py-3 (12px padding top/bottom = 48px totale)",
+      "used_in": "pages/index.js (hero search filter)",
+      "explanation": "Altezza contenuto con padding, risulta in input field proporzionato"
+    },
+    "logo_height": {
+      "description": "Logo in header",
+      "typical_height": "h-10 (40px)",
+      "context": "Tailwind standard per header branding"
+    },
+    "spacing_sections": {
+      "py-16": {
+        "height": "64px (16 * 4px) padding top e bottom",
+        "total_section": "96px se solo padding verticale",
+        "used_in": "Sezioni generiche (formazione, news, agenzia)"
+      },
+      "md:py-24": {
+        "height": "96px (24 * 4px) padding su desktop",
+        "used_in": "Sezioni importanti",
+        "explanation": "Aumenta lo spacing su schermi grandi per respiro visivo"
+      }
+    }
+  }
+}

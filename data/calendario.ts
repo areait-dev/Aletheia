@@ -1,0 +1,244 @@
+/**
+ * Dati calendario corsi — usati da pages/calendario-corsi.js
+ * I corsi NON sono inventati: titoli e slug provengono dal catalogo reale
+ * (pages/all-courses/index.js). Qui si aggiungono solo i dati di pianificazione
+ * (data, orario, sede, durata, posti). Periodo: giugno – luglio 2026.
+ *
+ * Mappatura categoryKey (catalogo) -> categoria (calendario):
+ *   obbligatoria   -> obbligatoria
+ *   regionale      -> regionale-fse
+ *   professionale  -> professionale
+ */
+
+export type CategoriaCorso = 'regionale-fse' | 'obbligatoria' | 'professionale';
+
+export interface CorsoCalendario {
+  id: number;
+  titolo: string;
+  slug: string; // corrisponde allo slug del corso in /all-courses/[slug]
+  categoria: CategoriaCorso;
+  data: string; // formato YYYY-MM-DD
+  orario: string; // es. "09:00 - 13:00"
+  sede: string;
+  durata: string; // es. "8 ore"
+  posti: number;
+  postiDisponibili: number;
+}
+
+// Etichette leggibili per le categorie
+export const CATEGORIE: { key: CategoriaCorso; label: string }[] = [
+  { key: 'regionale-fse', label: 'Regionale FSE' },
+  { key: 'obbligatoria', label: 'Obbligatoria' },
+  { key: 'professionale', label: 'Professionale' },
+];
+
+export const CALENDARIO: CorsoCalendario[] = [
+  // ── Formazione Obbligatoria ───────────────────────────────
+  {
+    id: 1,
+    titolo: 'Sicurezza sul Lavoro',
+    slug: 'sicurezza-sul-lavoro',
+    categoria: 'obbligatoria',
+    data: '2026-06-08',
+    orario: '09:00 - 13:00',
+    sede: 'Vittoria (RG) — Sede Alètheia',
+    durata: '4 ore',
+    posti: 20,
+    postiDisponibili: 12,
+  },
+  {
+    id: 2,
+    titolo: 'Decreto Attrezzature',
+    slug: 'decreto-attrezzature',
+    categoria: 'obbligatoria',
+    data: '2026-06-08',
+    orario: '14:30 - 18:30',
+    sede: 'Ragusa — Area Pratica',
+    durata: '8 ore',
+    posti: 15,
+    postiDisponibili: 2,
+  },
+  {
+    id: 3,
+    titolo: 'Fitosanitario',
+    slug: 'fitosanitario',
+    categoria: 'obbligatoria',
+    data: '2026-06-22',
+    orario: '09:30 - 12:30',
+    sede: 'Comiso (RG) — Aula Formativa',
+    durata: '3 ore',
+    posti: 18,
+    postiDisponibili: 5,
+  },
+  {
+    id: 4,
+    titolo: 'Sicurezza alimentare',
+    slug: 'sicurezza-alimentare',
+    categoria: 'obbligatoria',
+    data: '2026-07-20',
+    orario: '09:00 - 12:00',
+    sede: 'Comiso (RG) — Aula Formativa',
+    durata: '3 ore',
+    posti: 16,
+    postiDisponibili: 1,
+  },
+  // ── Formazione Regionale FSE ──────────────────────────────
+  {
+    id: 5,
+    titolo: 'FSE+',
+    slug: 'avviso-20-2024-fse',
+    categoria: 'regionale-fse',
+    data: '2026-06-15',
+    orario: '09:00 - 14:00',
+    sede: 'Vittoria (RG) — Sede Alètheia',
+    durata: '5 ore',
+    posti: 25,
+    postiDisponibili: 8,
+  },
+  {
+    id: 6,
+    titolo: 'Fondi interprofessionali',
+    slug: 'fondi-interprofessionali',
+    categoria: 'regionale-fse',
+    data: '2026-06-22',
+    orario: '15:00 - 18:00',
+    sede: 'Online — Aula Virtuale',
+    durata: '3 ore',
+    posti: 22,
+    postiDisponibili: 3,
+  },
+  {
+    id: 7,
+    titolo: 'PSR',
+    slug: 'misura-psr-1-2',
+    categoria: 'regionale-fse',
+    data: '2026-07-06',
+    orario: '09:00 - 14:00',
+    sede: 'Vittoria (RG) — Sede Alètheia',
+    durata: '5 ore',
+    posti: 24,
+    postiDisponibili: 0,
+  },
+  {
+    id: 8,
+    titolo: 'Fondo nuove competenze',
+    slug: 'fondo-nuove-competenze',
+    categoria: 'regionale-fse',
+    data: '2026-07-27',
+    orario: '16:00 - 19:00',
+    sede: 'Vittoria (RG) — Sede Alètheia',
+    durata: '3 ore',
+    posti: 20,
+    postiDisponibili: 11,
+  },
+  // ── Formazione Professionale ──────────────────────────────
+  {
+    id: 9,
+    titolo: 'ICDL',
+    slug: 'ecdl-icdl-full-standard',
+    categoria: 'professionale',
+    data: '2026-06-15',
+    orario: '15:00 - 18:00',
+    sede: 'Online — Aula Virtuale',
+    durata: '3 ore',
+    posti: 30,
+    postiDisponibili: 0,
+  },
+  {
+    id: 10,
+    titolo: 'Formazione continua',
+    slug: 'formazione-continua',
+    categoria: 'professionale',
+    data: '2026-06-29',
+    orario: '14:00 - 18:00',
+    sede: 'Online — Aula Virtuale',
+    durata: '4 ore',
+    posti: 28,
+    postiDisponibili: 14,
+  },
+  {
+    id: 11,
+    titolo: 'Corsi qualificati e Certificazione competenze',
+    slug: 'corsi-qualificati',
+    categoria: 'professionale',
+    data: '2026-07-06',
+    orario: '09:00 - 13:00',
+    sede: 'Vittoria (RG) — Sede Alètheia',
+    durata: '4 ore',
+    posti: 18,
+    postiDisponibili: 6,
+  },
+  {
+    id: 12,
+    titolo: 'Corsi per la PA',
+    slug: 'corsi-pa',
+    categoria: 'professionale',
+    data: '2026-07-13',
+    orario: '15:00 - 19:00',
+    sede: 'Online — Aula Virtuale',
+    durata: '4 ore',
+    posti: 26,
+    postiDisponibili: 19,
+  },
+  // ── Nuove date in partenza ────────────────────────────────
+  {
+    id: 13,
+    titolo: 'Sicurezza sul Lavoro',
+    slug: 'sicurezza-sul-lavoro',
+    categoria: 'obbligatoria',
+    data: '2026-07-30',
+    orario: '09:00 - 13:00',
+    sede: 'Vittoria (RG) — Sede Alètheia',
+    durata: '4 ore',
+    posti: 20,
+    postiDisponibili: 15,
+  },
+  {
+    id: 14,
+    titolo: 'FSE+',
+    slug: 'avviso-20-2024-fse',
+    categoria: 'regionale-fse',
+    data: '2026-08-03',
+    orario: '09:00 - 14:00',
+    sede: 'Online — Aula Virtuale',
+    durata: '5 ore',
+    posti: 25,
+    postiDisponibili: 18,
+  },
+  {
+    id: 15,
+    titolo: 'ICDL',
+    slug: 'ecdl-icdl-full-standard',
+    categoria: 'professionale',
+    data: '2026-08-10',
+    orario: '15:00 - 18:00',
+    sede: 'Online — Aula Virtuale',
+    durata: '3 ore',
+    posti: 30,
+    postiDisponibili: 22,
+  },
+  {
+    id: 16,
+    titolo: 'Decreto Attrezzature',
+    slug: 'decreto-attrezzature',
+    categoria: 'obbligatoria',
+    data: '2026-08-17',
+    orario: '14:30 - 18:30',
+    sede: 'Ragusa — Area Pratica',
+    durata: '8 ore',
+    posti: 15,
+    postiDisponibili: 9,
+  },
+  {
+    id: 17,
+    titolo: 'Formazione continua',
+    slug: 'formazione-continua',
+    categoria: 'professionale',
+    data: '2026-08-24',
+    orario: '14:00 - 18:00',
+    sede: 'Vittoria (RG) — Sede Alètheia',
+    durata: '4 ore',
+    posti: 28,
+    postiDisponibili: 20,
+  },
+];

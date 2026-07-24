@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alètheia Srl - I Nostri Corsi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #008C95;
+            --accent-color: #F59E0B;
+            --dark-bg: #1F2937;
+            --light-bg: #F9FAFB;
+            --border-color: #E5E7EB;
+            --text-dark: #111827;
+            --text-light: #6B7280;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 0.9rem 2.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* SEZIONE CORSI */
+        .courses-section {
+            padding: 4rem 2rem;
+            background-color: white;
+        }
+
+        .section-header {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* COURSE CARD */
+        .course-card {
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 280px;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-image-wrapper {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            border-radius: 0.75rem;
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease;
+            z-index: 1;
+        }
+
+        .course-card:hover .card-overlay {
+            background: rgba(0, 0, 0, 0.65);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: rgba(79, 70, 229, 0.95);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 3;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-content {
+            position: absolute;
+            inset: 0;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 2;
+            color: white;
+        }
+
+        .card-top {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-category {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .card-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .card-status {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.65rem 1.25rem;
+            border-radius: 0.4rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            white-space: nowrap;
+        }
+
+        .card-button:hover {
+            background-color: #4338CA;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+
+        .card-button:active {
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .courses-section {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .card-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Formazione Professionale d'Eccellenza</h1>
+            <p class="hero-subtitle">Scopri i nostri corsi e certifications riconosciuti a livello nazionale ed europeo</p>
+            <button class="hero-cta">Esplora Tutti i Corsi →</button>
+        </div>
+    </section>
+
+    <!-- SEZIONE I NOSTRI CORSI -->
+    <section class="courses-section">
+        <div class="section-header">
+            <h2 class="section-title">I Nostri Corsi</h2>
+            <p class="section-subtitle">Una selezione dei corsi più richiesti tra i nostri studenti e professionisti</p>
+        </div>
+
+        <div class="container">
+            <div class="courses-grid">
+                <!-- CARD 1: Sicurezza sul Lavoro -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Obbligatoria</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Formazione Obbligatoria</div>
+                            <h3 class="card-title">Sicurezza sul Lavoro</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">📋 Normativa Aziendale</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Decreto Attrezzature -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(240, 147, 251, 0.9) 0%, rgba(245, 87, 108, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Obbligatoria</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Formazione Obbligatoria</div>
+                            <h3 class="card-title">Decreto Attrezzature</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">📋 Patentini Nazionali</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3: Formazione COVID-19 -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(79, 172, 254, 0.9) 0%, rgba(0, 242, 254, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Obbligatoria</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Formazione Obbligatoria</div>
+                            <h3 class="card-title">Formazione COVID-19</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">🔄 Aggiornamento</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 4: AVVISO 20/2024 FSE+ -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(67, 233, 123, 0.9) 0%, rgba(56, 249, 215, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Professionale</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Formazione Professionale</div>
+                            <h3 class="card-title">AVVISO 20/2024 FSE+</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">💰 100% Finanziato</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 5: Corso di Cucina Professionale -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(250, 112, 154, 0.9) 0%, rgba(254, 225, 64, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Professionale</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Formazione Professionale</div>
+                            <h3 class="card-title">Cucina Professionale</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">🎓 576 Ore - Qualifica</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 6: Addetto Panificatore e Pasticciere -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(168, 237, 234, 0.9) 0%, rgba(253, 214, 227, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Professionale</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Formazione Professionale</div>
+                            <h3 class="card-title">Panificatore e Pasticciere</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">✅ 644 Ore - Qualifica</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 7: ECDL/ICDL Full Standard -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(255, 154, 86, 0.9) 0%, rgba(255, 106, 136, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Digitale</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Certificazioni Digitali</div>
+                            <h3 class="card-title">ECDL/ICDL Full Standard</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">⭐ Accreditato AICA</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 8: ICDL DigComp 2.2 -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(46, 46, 120, 0.9) 0%, rgba(102, 126, 234, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Digitale</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Certificazioni Digitali</div>
+                            <h3 class="card-title">ICDL DigComp 2.2</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">🌍 Standard Europeo</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 9: ECDL/ICDL Base & Standard -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(31, 162, 255, 0.9) 0%, rgba(18, 216, 250, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Digitale</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Certificazioni Digitali</div>
+                            <h3 class="card-title">ECDL Base & Standard</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">👨‍🎓 Crediti & Concorsi</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 10: Conduttore d'Impresa Agricola -->
+                <div class="course-card">
+                    <div class="card-image-wrapper" style="background: linear-gradient(135deg, rgba(110, 231, 183, 0.9) 0%, rgba(52, 211, 153, 0.9) 100%);"></div>
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Agricolo</span>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <div class="card-category">Settore Agricolo</div>
+                            <h3 class="card-title">Conduttore d'Impresa Agricola</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-status">🌱 Misura PSR 1.1</p>
+                            <button class="card-button">Esplora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
