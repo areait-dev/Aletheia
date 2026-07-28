@@ -24,8 +24,9 @@ const ALIAS_TO_DETAILS = {
   'personale-alimentarista-osa': 'sicurezza-alimentare',
   'carrelli-elevatori-semoventi-con-conduttore-a-bordo': 'carrelli-elevatori',
   'operatore-di-gru-per-autocarro': 'gru-su-autocarro',
-  'trattori-agricoli-o-forestali-su-ruote-o-cingoli': 'trattori-agricoli',
-  'trattori-agricoli-o-forestali-su-ruote-e-cingoli': 'trattori-agricoli',
+  // Nessun alias per "trattori-agricoli-o-forestali": le 4 varianti (Ruote/Cingoli/Ruote e Cingoli/
+  // Aggiornamento) confluiscono già in un'unica famiglia con quello slug (vedi LEVEL_PATTERNS sotto),
+  // che coincide con la chiave usata in coursesDetails - nessun alias necessario.
 };
 
 // Rumore da rimuovere prima del confronto tra label di priceVariants e descrittori di variante
@@ -49,15 +50,20 @@ function tokenize(str) {
 // Descrittori di livello/gruppo/modulo riconosciuti nei titoli - l'ordine conta (pattern più specifici prima)
 const LEVEL_PATTERNS = [
   /\bmeno\s+di\s+\d+\s+dipendenti\b/i,
-  /\bpi(u|ù)\s+di\s+\d+\s+dipendenti\b/i,
-  /\brischio\s+(basso|medio|alto)\b/i,
+  /\bpi(?:u|ù)\s+di\s+\d+\s+dipendenti\b/i,
+  /\brischio\s+(?:basso|medio|alto)\b/i,
   /\blivello\s+\d+\b/i,
-  /\bgruppo\s+[abc](\s*(e|\/)\s*[abc])?\b/i,
-  /\bmodulo\s+(comune|[a-e]\b|\d+\s*-?\s*[a-zàèéìòù,\s]*)/i,
+  /\bgruppo\s+[abc](?:\s*(?:e|\/)\s*[abc])?\b/i,
+  /\bmodulo\s+(?:comune|[a-e]\b|\d+\s*-?\s*[a-zàèéìòù,\s]*)/i,
   /\bparte\s+generale\b/i,
   /\bsotto\s+tensione\b/i,
-  /\bin\s+prossimit(a|à)\b/i,
+  /\bin\s+prossimit(?:a|à)\b/i,
   /\besterno\b/i,
+  // Descrittore tra parentesi (gruppo di cattura 1) usato per raggruppare varianti che altrimenti
+  // non condividerebbero un famTitle pulito - es. "Trattori Agricoli o Forestali (Ruote)" / "(Cingoli)" /
+  // "(Ruote e Cingoli)". Le parentesi non sono usate altrove nei titoli di coursesData, quindi il
+  // pattern è isolato e non rischia di intercettare altre famiglie (es. "... A Cingoli" senza parentesi).
+  /\((ruote e cingoli|ruote|cingoli)\)/i,
 ];
 
 // Prefissi di riempimento da rimuovere per far combaciare titolo "corso" e "aggiornamento" della stessa famiglia
@@ -77,7 +83,9 @@ function extractLevelDescriptor(title) {
   for (const pattern of LEVEL_PATTERNS) {
     const m = pattern.exec(remaining);
     if (m) {
-      found.push(m[0].trim());
+      // Se il pattern ha un gruppo di cattura (es. il descrittore tra parentesi) si usa quello come
+      // label, per non includere le parentesi stesse nell'etichetta mostrata nello switch dei livelli.
+      found.push((m[1] !== undefined ? m[1] : m[0]).trim());
       remaining = (remaining.slice(0, m.index) + remaining.slice(m.index + m[0].length)).replace(/\s+/g, ' ').trim();
     }
   }

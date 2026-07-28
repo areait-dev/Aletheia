@@ -9,6 +9,26 @@ import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 import antincendioContent from '../../data/content/antincendio-content';
 import antincendioAggiornamentoContent from '../../data/content/antincendio-aggiornamento-content';
+import carrelliElevatoriContent from '../../data/content/carrelli-elevatori-content';
+import carrelliElevatoriAggiornamentoContent from '../../data/content/carrelli-elevatori-aggiornamento-content';
+import trattoriAgricoliContent from '../../data/content/trattori-agricoli-content';
+import trattoriAgricoliAggiornamentoContent from '../../data/content/trattori-agricoli-aggiornamento-content';
+import formazioneDirigenteContent from '../../data/content/formazione-dirigente-content';
+import formazioneDirigenteAggiornamentoContent from '../../data/content/formazione-dirigente-aggiornamento-content';
+import formazioneLavoratoriContent from '../../data/content/formazione-lavoratori-content';
+import formazioneLavoratoriAggiornamentoContent from '../../data/content/formazione-lavoratori-aggiornamento-content';
+import lavoriInQuotaContent from '../../data/content/lavori-in-quota-content';
+import lavoriInQuotaAggiornamentoContent from '../../data/content/lavori-in-quota-aggiornamento-content';
+import pimusPonteggiContent from '../../data/content/pimus-ponteggi-content';
+import pimusPonteggiAggiornamentoContent from '../../data/content/pimus-ponteggi-aggiornamento-content';
+import primoSoccorsoContent from '../../data/content/primo-soccorso-content';
+import primoSoccorsoAggiornamentoContent from '../../data/content/primo-soccorso-aggiornamento-content';
+import rlsContent from '../../data/content/rls-content';
+import rlsAggiornamentoContent from '../../data/content/rls-aggiornamento-content';
+import rsppDatoreLavoroContent from '../../data/content/rspp-datore-lavoro-content';
+import rsppDatoreLavoroAggiornamentoContent from '../../data/content/rspp-datore-lavoro-aggiornamento-content';
+import rsppAsppContent from '../../data/content/rspp-aspp-content';
+import rsppAsppAggiornamentoContent from '../../data/content/rspp-aspp-aggiornamento-content';
 
 // Registro dei contenuti editoriali completi (descrizione/FAQ/moduli) per famiglia, separati per tipo
 // ("corso" vs "aggiornamento", perché i due materiali sono scritti/pubblicati in tempi diversi).
@@ -17,6 +37,70 @@ const EDITORIAL_CONTENT = {
   antincendio: {
     corso: antincendioContent.antincendio,
     aggiornamento: antincendioAggiornamentoContent,
+  },
+  'carrelli-elevatori-semoventi-con-conduttore-a-bordo': {
+    corso: carrelliElevatoriContent['carrelli-elevatori-semoventi-con-conduttore-a-bordo'],
+    aggiornamento: carrelliElevatoriAggiornamentoContent,
+  },
+  // Famiglia "Trattoristi": un'unica pagina con switch Ruote / Cingoli / Ruote e Cingoli / Aggiornamento.
+  // Le chiavi 'livello-1'..'livello-4' dentro trattori-agricoli-content.js/-aggiornamento-content.js sono
+  // posizionali (stesso ordine delle 4 voci raw in data/coursesRaw.js), non semantiche - vedi il commento
+  // su editorialLivelloKey più sotto.
+  'trattori-agricoli-o-forestali': {
+    corso: trattoriAgricoliContent['trattori-agricoli-o-forestali'],
+    aggiornamento: trattoriAgricoliAggiornamentoContent,
+  },
+  // Famiglia "formazione-dirigente": già raggruppata automaticamente da buildCourseFamilies (pattern
+  // "modulo comune" esistente in LEVEL_PATTERNS) - un'unica pagina con switch Corso/Aggiornamento.
+  'formazione-dirigente': {
+    corso: formazioneDirigenteContent['formazione-dirigente'],
+    aggiornamento: formazioneDirigenteAggiornamentoContent,
+  },
+  // Famiglia "formazione-dei-lavoratori": già raggruppata automaticamente da buildCourseFamilies in 5
+  // varianti (Parte Generale/Basso/Medio/Alto/Aggiornamento) - un'unica pagina con switch a 5 opzioni.
+  'formazione-dei-lavoratori': {
+    corso: formazioneLavoratoriContent['formazione-dei-lavoratori'],
+    aggiornamento: formazioneLavoratoriAggiornamentoContent,
+  },
+  // Famiglia "lavori-in-quota": già raggruppata automaticamente da buildCourseFamilies (livelloKey
+  // 'default' condivisa) - un'unica pagina con switch a pillola Corso/Aggiornamento.
+  'lavori-in-quota': {
+    corso: lavoriInQuotaContent['lavori-in-quota'],
+    aggiornamento: lavoriInQuotaAggiornamentoContent,
+  },
+  // Famiglia "pimus-ponteggi": già raggruppata automaticamente da buildCourseFamilies (livelloKey
+  // 'default' condivisa) - un'unica pagina con switch a pillola Corso/Aggiornamento.
+  'pimus-ponteggi': {
+    corso: pimusPonteggiContent['pimus-ponteggi'],
+    aggiornamento: pimusPonteggiAggiornamentoContent,
+  },
+  // Famiglia "primo-soccorso-aziendale": già raggruppata automaticamente da buildCourseFamilies in 2
+  // livelli (Gruppo A, Gruppo B E C), ciascuno con switch nidificato Corso/Aggiornamento - stesso
+  // pattern di "antincendio" (che ha 3 livelli anziché 2).
+  'primo-soccorso-aziendale': {
+    corso: primoSoccorsoContent['primo-soccorso-aziendale'],
+    aggiornamento: primoSoccorsoAggiornamentoContent,
+  },
+  // Famiglia "rls": già raggruppata automaticamente da buildCourseFamilies in 3 livelli a variante
+  // unica (corso base 32h + 2 aggiornamenti annuali <50/>50 dipendenti, nessuno annidato con
+  // corso/aggiornamento sullo stesso livello) - un'unica pagina con switch a 3 opzioni.
+  rls: {
+    corso: rlsContent.rls,
+    aggiornamento: rlsAggiornamentoContent,
+  },
+  // Famiglia "rspp-datore-di-lavoro": già raggruppata automaticamente da buildCourseFamilies in 6
+  // livelli a variante unica (Modulo Comune + 4 moduli settoriali, tutti tipo 'corso', + Aggiornamento
+  // generico tipo 'aggiornamento') - un'unica pagina con switch a 6 opzioni.
+  'rspp-datore-di-lavoro': {
+    corso: rsppDatoreLavoroContent['rspp-datore-di-lavoro'],
+    aggiornamento: rsppDatoreLavoroAggiornamentoContent,
+  },
+  // Famiglia "rspp-aspp" (RSPP/ASPP Esterno): già raggruppata automaticamente da buildCourseFamilies
+  // in 4 livelli a variante unica (Modulo A/B/C tipo 'corso' + Aggiornamento tipo 'aggiornamento') -
+  // un'unica pagina con switch a 4 opzioni.
+  'rspp-aspp': {
+    corso: rsppAsppContent['rspp-aspp'],
+    aggiornamento: rsppAsppAggiornamentoContent,
   },
 };
 
@@ -467,6 +551,34 @@ export const coursesDetails = {
     ],
     learningOutcomes: ['Conoscere compiti e responsabilità del preposto', 'Sorvegliare e controllare le attività lavorative', 'Gestire la comunicazione con lavoratori e datori di lavoro', 'Ottenere attestato con validità biennale'],
   },
+  // Famiglia "formazione-dirigente" già raggruppata automaticamente da buildCourseFamilies (il pattern
+  // "modulo comune" in LEVEL_PATTERNS isola il descrittore dal titolo raw "Formazione Dirigente Modulo
+  // Comune" -> famTitle "Formazione Dirigente", che combacia con "Aggiornamento Formazione Dirigente"):
+  // un'unica pagina con switch Corso/Aggiornamento, nessuna modifica a coursesRaw.js/courseFamilies.js.
+  'formazione-dirigente': {
+    title: 'Formazione Dirigente',
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80',
+    category: 'Formazione Obbligatoria',
+    duration: '12 ore (aggiornamento 6 ore)',
+    modality: 'FAD',
+    price: 'Da € 100,00',
+    priceVariants: [
+      { label: 'Modulo Comune 12H', amount: 150 },
+      { label: 'Aggiornamento 6H', amount: 100 },
+    ],
+    level: 'Avanzato',
+    lessons: '4 moduli',
+    students: '700+',
+    target: 'Dirigenti aziendali e responsabili di funzione o reparto con poteri organizzativi e di vigilanza',
+    overview: 'Il corso di Formazione per Dirigenti è obbligatorio ai sensi dell\'art. 2 comma 1 lett. d) e dell\'art. 37 comma 7 del D.Lgs. 81/2008 e dell\'Accordo Stato-Regioni del 17/04/2025, per chi riveste in azienda un ruolo dirigenziale con responsabilità in materia di salute e sicurezza. Il corso base dura 12 ore, erogate interamente in FAD; l\'aggiornamento periodico dura 6 ore.',
+    curriculum: [
+      { week: 1, title: 'Modulo giuridico-normativo', hours: 3, lessons: ['Sistema legislativo', 'Soggetti della prevenzione aziendale', 'Delega di funzioni', 'Responsabilità del dirigente'] },
+      { week: 2, title: 'Gestione e organizzazione della sicurezza', hours: 3, lessons: ['Modelli organizzativi', 'Sistemi di gestione della sicurezza'] },
+      { week: 3, title: 'Compiti specifici del dirigente', hours: 3, lessons: ['Misure di prevenzione', 'Sorveglianza sanitaria', 'Appalti', 'Gestione emergenze'] },
+      { week: 4, title: 'Comunicazione e formazione', hours: 3, lessons: ['Tecniche di comunicazione', 'Obblighi formativi', 'Rapporti con l\'RLS'] },
+    ],
+    learningOutcomes: ['Conoscere il sistema legislativo in materia di sicurezza', 'Esercitare correttamente i compiti di organizzazione e vigilanza', 'Gestire appalti, DUVRI ed emergenze', 'Ottenere attestato valido in tutta Italia'],
+  },
   'corso-rls': {
     title: 'RLS - Rappresentante dei Lavoratori',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80',
@@ -474,13 +586,17 @@ export const coursesDetails = {
     duration: '32 ore (aggiornamento 4-8 ore)',
     modality: 'Aula / FAD / Videoconferenza',
     price: 'Da € 60,00',
+    // NOTA: le label includono il descrittore "Più/Meno Di 50 Dipendenti" (non solo la durata) perché
+    // matchPriceVariant (data/courseFamilies.js) sceglie il prezzo per sovrapposizione di token con il
+    // levelLabel della variante ("Meno Di 50 Dipendenti" / "Più Di 50 Dipendenti") - senza quel
+    // descrittore nessuna label avrebbe token in comune e il prezzo risulterebbe "su richiesta".
     priceVariants: [
       { label: 'Nuovo 32H (Aula/FAD)', amount: 200 },
       { label: 'Nuovo 32H (Videoconferenza)', amount: 300 },
-      { label: 'Aggiornamento 8H (Aula/FAD)', amount: 90 },
-      { label: 'Aggiornamento 8H (Videoconferenza)', amount: 120 },
-      { label: 'Aggiornamento 4H (Aula/FAD)', amount: 60 },
-      { label: 'Aggiornamento 4H (Videoconferenza)', amount: 70 },
+      { label: 'Aggiornamento Più Di 50 Dipendenti (Aula/FAD)', amount: 90 },
+      { label: 'Aggiornamento Più Di 50 Dipendenti (Videoconferenza)', amount: 120 },
+      { label: 'Aggiornamento Meno Di 50 Dipendenti (Aula/FAD)', amount: 60 },
+      { label: 'Aggiornamento Meno Di 50 Dipendenti (Videoconferenza)', amount: 70 },
     ],
     level: 'Intermedio',
     lessons: '8 moduli',
@@ -495,31 +611,65 @@ export const coursesDetails = {
     ],
     learningOutcomes: ['Conoscere la normativa in materia di sicurezza', 'Partecipare attivamente alla valutazione dei rischi', 'Rappresentare efficacemente i lavoratori', 'Ottenere attestato con aggiornamento annuale'],
   },
+  // NOTA: questa entry alimenta la famiglia "rspp-datore-di-lavoro" tramite ALIAS_TO_DETAILS in
+  // data/courseFamilies.js. Le label dei priceVariants includono "Modulo N <Nome> <durata>H" perché
+  // matchPriceVariant sceglie il prezzo per sovrapposizione di token con il levelLabel della variante
+  // (es. "Modulo 1 - Agricoltura, Silvicoltura e Zootecnia") - includere il nome del settore evita
+  // ambiguità con gli altri moduli, che condividono tutti il token "modulo".
   'corso-rspp-datore-lavoro': {
     title: 'RSPP Datore di Lavoro',
     image: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400&q=80',
     category: 'Formazione Obbligatoria',
-    duration: '16-48 ore',
+    duration: '8-16 ore (aggiornamento 8 ore)',
     modality: 'Aula / Videoconferenza',
-    price: 'Da € 180,00',
+    price: 'Da € 100,00',
     priceVariants: [
-      { label: 'Rischio Basso 16H', amount: 180 },
-      { label: 'Rischio Medio 32H', amount: 280 },
-      { label: 'Rischio Alto 48H', amount: 380 },
-      { label: 'Aggiornamento 6H', amount: 90 },
+      { label: 'Modulo Comune 8H', amount: 100 },
+      { label: 'Modulo 1 Agricoltura 16H', amount: 200 },
+      { label: 'Modulo 2 Pesca 12H', amount: 180 },
+      { label: 'Modulo 3 Costruzioni 16H', amount: 200 },
+      { label: 'Modulo 4 Chimico 16H', amount: 200 },
+      { label: 'Aggiornamento 8H', amount: 130 },
     ],
     level: 'Avanzato',
-    lessons: '3 livelli di rischio',
+    lessons: 'Modulo Comune + 4 moduli settoriali',
     students: '800+',
-    target: 'Datori di lavoro che intendono ricoprire personalmente il ruolo di RSPP',
-    overview: 'Il corso RSPP Datore di Lavoro consente al titolare dell\'azienda di svolgere direttamente il ruolo di Responsabile del Servizio di Prevenzione e Protezione, ai sensi dell\'art. 34 del D.Lgs. 81/08. La durata varia in base al livello di rischio dell\'attività: 16 ore per rischio basso, 32 ore per rischio medio, 48 ore per rischio alto. L\'aggiornamento quinquennale di 6 ore è obbligatorio per mantenere la funzione.',
+    target: 'Datori di lavoro che intendono svolgere direttamente i compiti di RSPP nella propria azienda',
+    overview: 'Il percorso RSPP Datore di Lavoro consente al titolare dell\'azienda di svolgere direttamente il ruolo di Responsabile del Servizio di Prevenzione e Protezione, ai sensi dell\'art. 34 del D.Lgs. 81/2008 e dell\'Accordo Stato-Regioni del 17/04/2025. Si compone del Modulo Comune (8 ore, uguale per tutti i settori) abbinato a uno dei quattro moduli integrativi settoriali (Agricoltura/Silvicoltura/Zootecnia, Pesca, Costruzioni, Chimico-Petrolchimico), scelto in base alla classificazione ATECO dell\'azienda. L\'aggiornamento è un corso unico di 8 ore valido per tutti i settori.',
     curriculum: [
-      { week: 1, title: 'Normativa e responsabilità', hours: 8, lessons: ['D.Lgs. 81/08', 'Organizzazione della prevenzione', 'Responsabilità penale e civile', 'Delega di funzioni'] },
-      { week: 2, title: 'Valutazione dei rischi', hours: 8, lessons: ['Metodologia di valutazione', 'Documento di valutazione rischi', 'Misure di prevenzione', 'Sorveglianza sanitaria'] },
-      { week: 3, title: 'Gestione della sicurezza', hours: 8, lessons: ['Sistemi di gestione', 'Infortuni e malattie professionali', 'Comunicazione e formazione', 'Appalti e DUVRI'] },
-      { week: 4, title: 'Rischi specifici e aggiornamento', hours: 8, lessons: ['Rischi trasversali', 'Emergenze e primo soccorso', 'Cantieri e lavori speciali', 'Test finale'] },
+      { week: 1, title: 'Modulo Comune', hours: 8, lessons: ['Individuazione e valutazione dei rischi', 'Misure di prevenzione e protezione', 'DPI e segnaletica', 'Documento di valutazione dei rischi (DVR)'] },
+      { week: 2, title: 'Moduli integrativi settoriali', hours: 16, lessons: ['Agricoltura, Silvicoltura e Zootecnia (16h)', 'Pesca (12h)', 'Costruzioni (16h)', 'Chimico-Petrolchimico (16h)'] },
     ],
     learningOutcomes: ['Acquisire le competenze per gestire la sicurezza aziendale', 'Redigere e aggiornare il DVR', 'Organizzare il sistema di prevenzione e protezione', 'Ottenere abilitazione RSPP valida su tutto il territorio nazionale'],
+  },
+  // Famiglia "rspp-aspp" già raggruppata automaticamente da buildCourseFamilies (il pattern "esterno" di
+  // LEVEL_PATTERNS isola il descrittore da "RSPP/ASPP Esterno Modulo A" -> famTitle "RSPP/ASPP", che
+  // combacia con "Aggiornamento RSPP/ASPP Esterno"): un'unica pagina con switch Modulo A / Modulo B /
+  // Modulo C / Aggiornamento. Nessuna alias necessaria, la chiave qui sotto è family.id esatto.
+  'rspp-aspp': {
+    title: 'RSPP/ASPP Esterno',
+    image: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400&q=80',
+    category: 'Formazione Obbligatoria',
+    duration: '24-48 ore (aggiornamento 40 ore)',
+    modality: 'FAD / Videoconferenza',
+    price: 'Da € 350,00',
+    priceVariants: [
+      { label: 'Modulo A 28H', amount: 350 },
+      { label: 'Modulo B 48H', amount: 600 },
+      { label: 'Modulo C 24H', amount: 400 },
+      { label: 'Aggiornamento Esterno 40H', amount: 400 },
+    ],
+    level: 'Avanzato',
+    lessons: 'Modulo A + Modulo B (+ Modulo C per RSPP)',
+    students: '400+',
+    target: 'Chi intende diventare RSPP o ASPP esterno, consulenti e professionisti della sicurezza',
+    overview: 'Il percorso RSPP/ASPP Esterno abilita a svolgere il ruolo di Responsabile o Addetto al Servizio di Prevenzione e Protezione per conto terzi, ai sensi dell\'art. 32, comma 2, del D.Lgs. 81/2008 e dell\'Accordo Stato-Regioni del 17/04/2025. Si compone del Modulo A (28h, base comune), del Modulo B (48h, tecnico-specialistico) per la qualifica di ASPP, e del Modulo C (24h, gestionale-relazionale) aggiuntivo per la qualifica di RSPP. L\'aggiornamento periodico (40h) è comune a entrambe le figure.',
+    curriculum: [
+      { week: 1, title: 'Modulo A', hours: 28, lessons: ['Quadro normativo e sistema di prevenzione', 'Concetti di rischio, danno, prevenzione e protezione', 'Processo di valutazione dei rischi e DVR'] },
+      { week: 2, title: 'Modulo B', hours: 48, lessons: ['Rischi tecnici specifici', 'Ambienti di lavoro, incendio ed emergenze', 'Agenti fisici, chimici, biologici'] },
+      { week: 3, title: 'Modulo C (solo per RSPP)', hours: 24, lessons: ['Sistemi di gestione della sicurezza', 'Comunicazione e relazioni aziendali', 'Benessere organizzativo'] },
+    ],
+    learningOutcomes: ['Acquisire le competenze giuridico-normative e tecniche per la valutazione dei rischi', 'Conseguire la qualifica di ASPP (Modulo A+B) o RSPP (Modulo A+B+C)', 'Gestire sistemi di sicurezza e relazioni aziendali', 'Ottenere attestato valido su tutto il territorio nazionale'],
   },
   'corso-spazi-confinati': {
     title: 'Spazi Confinati',
@@ -545,29 +695,58 @@ export const coursesDetails = {
     ],
     learningOutcomes: ['Identificare e classificare gli spazi confinati', 'Conoscere i rischi specifici degli ambienti confinati', 'Applicare le procedure di accesso in sicurezza', 'Gestire le emergenze e le operazioni di salvataggio'],
   },
+  // Famiglia "lavori-in-quota" già raggruppata automaticamente da buildCourseFamilies: entrambe le
+  // varianti condividono livelloKey 'default' (nessun descrittore nel titolo), quindi confluiscono in
+  // un'unica pagina con lo switch a pillola Corso/Aggiornamento nidificato, stesso pattern di
+  // "carrelli-elevatori-semoventi-con-conduttore-a-bordo".
   'lavori-in-quota': {
-    title: 'Lavori in Quota',
+    title: 'Addetti ai Lavori in Quota e Utilizzo DPI Anticaduta (III Categoria)',
     image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&q=80',
     category: 'Formazione Obbligatoria',
-    duration: '8 ore',
+    duration: '8 ore (aggiornamento 4 ore)',
     modality: 'Aula',
-    price: 'Da € 90,00',
+    price: 'Da € 140,00',
     priceVariants: [
-      { label: 'Corso Nuovo', amount: 180 },
-      { label: 'Aggiornamento', amount: 90 },
+      { label: 'Corso 8H', amount: 250 },
+      { label: 'Aggiornamento 4H', amount: 140 },
     ],
     level: 'Specialistico',
     lessons: '4 moduli',
     students: '600+',
-    target: 'Lavoratori che operano in quota a un\'altezza superiore a 2 metri dal piano stabile',
-    overview: 'Il corso Lavori in Quota è obbligatorio per tutti i lavoratori esposti al rischio di caduta dall\'alto da un\'altezza superiore a 2 metri, ai sensi del D.Lgs. 81/08 artt. 105-116. Il percorso fornisce le competenze necessarie per utilizzare correttamente i dispositivi di protezione individuale di terza categoria (imbracature, cordini, sistemi anticaduta), riconoscere i rischi e applicare le procedure di sicurezza.',
+    target: 'Lavoratori che operano in quota utilizzando DPI anticaduta di III categoria',
+    overview: 'Il corso per Addetti ai Lavori in Quota e Utilizzo DPI Anticaduta di III Categoria è obbligatorio ai sensi del D.Lgs. 81/2008 coordinato con il D.Lgs. 106/2009, artt. 36, 37, 76 e 77. Il percorso fornisce le competenze teorico-pratiche per utilizzare correttamente i dispositivi di protezione individuale anticaduta di terza categoria in assenza di protezioni collettive.',
     curriculum: [
-      { week: 1, title: 'Normativa e rischi', hours: 2, lessons: ['D.Lgs. 81/08 titolo IV', 'Statistiche infortuni', 'Classificazione rischi caduta', 'Obblighi datore di lavoro'] },
-      { week: 2, title: 'DPI anticaduta', hours: 3, lessons: ['Imbracature di sicurezza', 'Cordini e dissipatori', 'Sistemi di arresto caduta', 'Ispezione e manutenzione DPI'] },
-      { week: 3, title: 'Attrezzature di lavoro', hours: 2, lessons: ['Scale portatili', 'Ponteggi e trabattelli', 'Piattaforme elevabili', 'Linee vita'] },
-      { week: 4, title: 'Procedure e emergenze', hours: 1, lessons: ['Permesso di lavoro', 'Segnaletica di sicurezza', 'Procedure di salvataggio', 'Test finale'] },
+      { week: 1, title: 'Moduli teorici', hours: 4, lessons: ['Rischio di caduta dall\'alto', 'Quadro normativo', 'Caratteristiche e scelta dei DPI', 'Sistemi di ancoraggio e fattore di caduta'] },
+      { week: 2, title: 'Moduli pratici', hours: 4, lessons: ['Vestizione ed equipaggiamento DPI', 'Posizionamento su struttura verticale', 'Accesso con doppio cordino', 'Soccorso dell\'operatore in quota'] },
     ],
-    learningOutcomes: ['Riconoscere i rischi di caduta dall\'alto', 'Utilizzare correttamente i DPI anticaduta', 'Applicare le procedure di sicurezza in quota', 'Ottenere attestato obbligatorio per lavori in quota'],
+    learningOutcomes: ['Valutare il rischio di caduta dall\'alto e scegliere i DPI idonei', 'Utilizzare correttamente sistemi di ancoraggio e posizionamento', 'Applicare le tecniche di accesso con doppio cordino', 'Ottenere attestato valido in tutta Italia'],
+  },
+  // Famiglia "pimus-ponteggi" già raggruppata automaticamente da buildCourseFamilies: entrambe le
+  // varianti condividono livelloKey 'default' (nessun descrittore nel titolo), quindi confluiscono in
+  // un'unica pagina con lo switch a pillola Corso/Aggiornamento nidificato, stesso pattern di
+  // "lavori-in-quota" e "carrelli-elevatori-semoventi-con-conduttore-a-bordo".
+  'pimus-ponteggi': {
+    title: 'Addetti/Preposti al Montaggio, Smontaggio e Trasformazione di Ponteggi (PIMUS)',
+    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80',
+    category: 'Formazione Obbligatoria',
+    duration: '28 ore (aggiornamento 4 ore)',
+    modality: 'Aula',
+    price: 'Da € 140,00',
+    priceVariants: [
+      { label: 'Corso 28H', amount: 400 },
+      { label: 'Aggiornamento 4H', amount: 140 },
+    ],
+    level: 'Specialistico',
+    lessons: '3 moduli',
+    students: '500+',
+    target: 'Lavoratori e preposti addetti al montaggio, smontaggio e trasformazione di ponteggi',
+    overview: 'Il corso di Formazione Teorico-Pratica Abilitante per Addetti e Preposti al Montaggio, Smontaggio e Trasformazione di Ponteggi (PIMUS) è obbligatorio ai sensi dell\'art. 136 e dell\'allegato XXI del D.Lgs. 81/2008. Il percorso forma gli addetti a operare in sicurezza su ponteggi a tubi e giunti (PTG), a telai prefabbricati (PTP) e a montanti e traversi prefabbricati (PMTP), in conformità al Piano di Montaggio, Uso e Smontaggio in Sicurezza (PIMUS).',
+    curriculum: [
+      { week: 1, title: 'Modulo giuridico-normativo', hours: 4, lessons: ['Legislazione in materia di prevenzione infortuni', 'Analisi dei rischi nei cantieri edili'] },
+      { week: 2, title: 'Modulo tecnico', hours: 10, lessons: ['Piano di Montaggio, Uso e Smontaggio in Sicurezza (PIMUS)', 'DPI anticaduta', 'Tecniche di ancoraggio'] },
+      { week: 3, title: 'Modulo pratico', hours: 14, lessons: ['Montaggio, smontaggio e trasformazione ponteggi PTG', 'Ponteggi PTP e PMTP', 'Gestione della prima emergenza e salvataggio'] },
+    ],
+    learningOutcomes: ['Interpretare e applicare il PIMUS', 'Montare, smontare e trasformare ponteggi PTG, PTP e PMTP in sicurezza', 'Utilizzare correttamente i DPI anticaduta e le tecniche di ancoraggio', 'Ottenere attestato valido in tutta Italia'],
   },
   'corso-pes-pav-pei': {
     title: 'PES / PAV / PEI - Rischio Elettrico',
@@ -705,27 +884,32 @@ export const coursesDetails = {
     ],
     learningOutcomes: ['Conoscere le caratteristiche tecniche delle macchine MMT', 'Eseguire i controlli di sicurezza pre-operativi', 'Condurre in sicurezza escavatori, pale e terne', 'Ottenere il patentino MMT valido 5 anni'],
   },
-  'trattori-agricoli': {
-    title: 'Trattori Agricoli e Forestali',
+  // Un'unica famiglia "Trattoristi" con switch Ruote / Cingoli / Ruote e Cingoli / Aggiornamento -
+  // vedi il commento sulle 4 voci raw in data/coursesRaw.js e i LEVEL_PATTERNS in data/courseFamilies.js.
+  'trattori-agricoli-o-forestali': {
+    title: 'Trattori Agricoli o Forestali',
     image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&q=80',
     category: 'Formazione Obbligatoria',
-    duration: '8 ore (aggiornamento 4 ore)',
+    duration: '8-13 ore (aggiornamento 4 ore)',
     modality: 'Aula + Pratica',
-    price: 'Da € 90,00',
+    price: 'Da € 100,00',
     priceVariants: [
-      { label: 'Nuovo 8H', amount: 160 },
-      { label: 'Aggiornamento 4H', amount: 90 },
+      { label: 'Ruote 8H', amount: 180 },
+      { label: 'Cingoli 8H', amount: 180 },
+      { label: 'Ruote e Cingoli 13H', amount: 250 },
+      { label: 'Aggiornamento 4H', amount: 100 },
     ],
     level: 'Base',
-    lessons: '2 moduli',
+    lessons: '3 percorsi + aggiornamento',
     students: '900+',
-    target: 'Operatori addetti alla conduzione di trattori agricoli e forestali su ruote e cingoli',
-    overview: 'Il corso per la conduzione di trattori agricoli e forestali è obbligatorio ai sensi dell\'art. 73 del D.Lgs. 81/08 e dell\'Accordo Stato-Regioni del 17/04/2025. Il percorso da 8 ore forma gli operatori alla guida sicura di trattori su ruote e cingoli, con attenzione ai rischi di ribaltamento, gestione delle attrezzature portate e trainanti, e procedure di sicurezza specifiche per il settore agricolo.',
+    target: 'Operatori addetti alla conduzione di trattori agricoli e forestali a ruote e/o a cingoli',
+    overview: 'Il corso per la conduzione di trattori agricoli o forestali è obbligatorio ai sensi dell\'art. 73 e dell\'allegato VIII del D.Lgs. 81/2008 e dell\'Accordo Stato-Regioni del 17/04/2025. È disponibile in 3 percorsi base (a ruote, a cingoli o combinato) più un aggiornamento generico di 4 ore valido per tutti.',
     curriculum: [
-      { week: 1, title: 'Modulo teorico', hours: 4, lessons: ['Normativa e responsabilità', 'Tipologie di trattori', 'Rischi di ribaltamento', 'Manutenzione e controlli'] },
-      { week: 2, title: 'Modulo pratico', hours: 4, lessons: ['Guida su percorso di prova', 'Gestione attrezzature portate', 'Manovre su pendii', 'Test pratico finale'] },
+      { week: 1, title: 'Modulo giuridico-normativo', hours: 1, lessons: ['Normativa e responsabilità dell\'operatore', 'Obblighi del datore di lavoro'] },
+      { week: 2, title: 'Modulo tecnico', hours: 3, lessons: ['Categorie e componenti dei trattori', 'Dispositivi di comando e sicurezza', 'Controlli pre-utilizzo'] },
+      { week: 3, title: 'Modulo pratico', hours: 4, lessons: ['Guida su percorso di prova', 'Manovre in campo aperto o su pendenza', 'Test pratico finale'] },
     ],
-    learningOutcomes: ['Conoscere le caratteristiche dei trattori agricoli e forestali', 'Identificare e prevenire il rischio di ribaltamento', 'Condurre in sicurezza su diversi tipi di terreno', 'Ottenere il patentino trattori valido 5 anni'],
+    learningOutcomes: ['Conoscere le caratteristiche dei trattori a ruote e a cingoli', 'Identificare e prevenire il rischio di ribaltamento', 'Condurre in sicurezza su terreno pianeggiante o in pendenza', 'Ottenere il patentino trattori valido 5 anni'],
   },
   'pompe-calcestruzzo': {
     title: 'Pompe per Calcestruzzo',
@@ -949,7 +1133,11 @@ export default function CourseDetail() {
   // non coincidono, quindi il lookup usa l'indice del livello nell'ordine di livelloEntries.
   const livelloIndexPerContenuto = livelloEntries.findIndex(([key]) => key === activeLivelloKey);
   const editorialLivelloKey = `livello-${livelloIndexPerContenuto + 1}`;
-  const contenutoLivello = EDITORIAL_CONTENT[family.id]?.[selectedTipo]?.[editorialLivelloKey] ?? null;
+  // Usa varianteCorrente.tipo (con fallback già applicato sopra) e non selectedTipo direttamente:
+  // per famiglie a variante unica di tipo "aggiornamento" (es. trattori-agricoli-o-forestali) lo
+  // switcher corso/aggiornamento è nascosto e selectedTipo resta bloccato sul default 'corso',
+  // che altrimenti farebbe fallire il lookup pur avendo contenuto editoriale disponibile.
+  const contenutoLivello = EDITORIAL_CONTENT[family.id]?.[varianteCorrente.tipo]?.[editorialLivelloKey] ?? null;
 
   const corsiCorrelatiRisolti = (contenutoLivello?.corsiCorrelati || [])
     .map((s) => resolveRelatedCourse(s, families))
@@ -1013,29 +1201,44 @@ export default function CourseDetail() {
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 0 2rem' }}>
           {hasMultipleLivelli && (
             <div role="tablist" aria-label="Livello del corso" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: hasAggiornamento ? '0.75rem' : 0 }}>
-              {livelloEntries.map(([key, label]) => (
-                <button
-                  key={key}
-                  role="tab"
-                  type="button"
-                  aria-selected={activeLivelloKey === key}
-                  onClick={() => selectLivello(key)}
-                  className="dark:border-[rgba(255,255,255,0.15)]"
-                  style={{
-                    padding: '0.5rem 1.1rem',
-                    borderRadius: '9999px',
-                    border: '2px solid',
-                    borderColor: activeLivelloKey === key ? '#008C95' : '#E2E8F0',
-                    background: activeLivelloKey === key ? '#008C95' : '#fff',
-                    color: activeLivelloKey === key ? '#fff' : '#334155',
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {label}
-                </button>
-              ))}
+              {(() => {
+                // Livelli "solo aggiornamento" (nessuna variante corso su quel livello) - la loro label
+                // grezza è spesso poco leggibile in un pulsante di switch (fallback sul titolo famiglia
+                // come in trattori-agricoli-o-forestali, oppure un singolo descrittore residuo come
+                // "Esterno" in rspp-aspp). Quando ce n'è UNO SOLO nell'intera famiglia non c'è ambiguità
+                // e lo rinominiamo sempre "Aggiornamento". Quando ce ne sono DUE O PIÙ (es. "rls": "Meno
+                // Di 50 Dipendenti" / "Più Di 50 Dipendenti") le label sono distintive e vanno mostrate
+                // così come sono, altrimenti diventerebbero pulsanti duplicati indistinguibili.
+                const soloAggiornamentoKeys = livelloEntries
+                  .filter(([k]) => family.varianti.filter((v) => v.livelloKey === k).every((v) => v.tipo === 'aggiornamento'))
+                  .map(([k]) => k);
+                return livelloEntries.map(([key, label]) => {
+                const displayLabel = soloAggiornamentoKeys.length === 1 && soloAggiornamentoKeys[0] === key ? 'Aggiornamento' : label;
+                return (
+                  <button
+                    key={key}
+                    role="tab"
+                    type="button"
+                    aria-selected={activeLivelloKey === key}
+                    onClick={() => selectLivello(key)}
+                    className="dark:border-[rgba(255,255,255,0.15)]"
+                    style={{
+                      padding: '0.5rem 1.1rem',
+                      borderRadius: '9999px',
+                      border: '2px solid',
+                      borderColor: activeLivelloKey === key ? '#008C95' : '#E2E8F0',
+                      background: activeLivelloKey === key ? '#008C95' : '#fff',
+                      color: activeLivelloKey === key ? '#fff' : '#334155',
+                      fontWeight: 700,
+                      fontSize: '0.85rem',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {displayLabel}
+                  </button>
+                );
+                });
+              })()}
             </div>
           )}
           {hasAggiornamento && (
@@ -1321,6 +1524,30 @@ export default function CourseDetail() {
               <i className="fas fa-file-invoice" style={{ marginRight: '0.5rem' }}></i>
               Richiedi preventivo
             </a>
+
+            {/* "Acquista ora" / WhatsApp - placeholder in attesa di un flusso di pagamento e di un
+                numero WhatsApp reali: nessun dato sensibile o statico è cablato qui, solo variabili
+                d'ambiente pubbliche con fallback "#" così i bottoni restano visibili e posizionati. */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+              <a
+                href={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                className="text-center font-semibold text-white rounded-xl py-3 px-6 no-underline"
+                style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', fontSize: '0.95rem' }}
+              >
+                <i className="fas fa-cart-shopping" style={{ marginRight: '0.5rem' }}></i>
+                Acquista ora
+              </a>
+              <a
+                href={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
+                target={process.env.NEXT_PUBLIC_WHATSAPP_URL ? '_blank' : undefined}
+                rel={process.env.NEXT_PUBLIC_WHATSAPP_URL ? 'noopener noreferrer' : undefined}
+                className="text-center font-semibold rounded-xl py-3 px-6 no-underline border border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400"
+                style={{ fontSize: '0.95rem' }}
+              >
+                <i className="fab fa-whatsapp" style={{ marginRight: '0.5rem' }}></i>
+                Contattaci su WhatsApp
+              </a>
+            </div>
           </div>
         )}
       </div>
