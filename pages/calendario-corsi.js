@@ -80,7 +80,7 @@ export default function CalendarioCorsi() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
-      <Header active="/calendario-corsi" />
+      <Header active="/calendario-corsi" solid />
 
       {/* HERO - stesso gradiente della pagina news */}
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 min-h-[320px] flex items-center pt-28 pb-12 px-5 sm:px-6 md:pt-32 md:pb-16">

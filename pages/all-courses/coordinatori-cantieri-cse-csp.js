@@ -9,179 +9,184 @@ import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
-const MAPS_HREF = 'https://maps.google.com/?q=Vittoria+RG+Aletheia+Srl';
-
-// Contenuto switchabile Corso base (12h) / Aggiornamento (6h) - stesso pattern del pill "Corso base /
-// Aggiornamento" usato nel template dinamico (pages/all-courses/[slug].js): cambia scheda tecnica,
-// testi, moduli e box prezzo nella sidebar in base al tipo selezionato.
+// Contenuto switchabile Corso base (120h) / Aggiornamento (40h) - stesso pattern del pill "Corso base /
+// Aggiornamento" usato nel template dinamico (pages/all-courses/[slug].js) e in formazione-del-preposto.js:
+// cambia scheda tecnica, testi, moduli e box prezzo nella sidebar in base al tipo selezionato.
 const CONTENUTO = {
   corso: {
-    titleSuffix: '· 12 ore',
+    titleSuffix: '· 120 ore',
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '12 ore' },
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Aggiornamento periodico previsto dalla normativa' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '120 ore' },
+      { icon: 'fas fa-video', label: 'Modalità', value: 'Videoconferenza (aula e FAD non disponibili)' },
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da mantenere con l'aggiornamento periodico (40 ore)" },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
+      { icon: 'fas fa-location-dot', label: 'Luogo del corso', value: 'Non applicabile — corso in videoconferenza' },
     ],
     descrizione: [
-      "Il Corso di Formazione per Preposti, della durata di 12 ore, è obbligatorio ai sensi dell'art. 37 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, per chiunque svolga in azienda funzioni di sovrintendenza e vigilanza sull'attività lavorativa di altri lavoratori.",
-      "Il preposto, secondo la definizione del D.Lgs 81/2008, è la persona che sovrintende all'attività lavorativa e garantisce l'attuazione delle direttive ricevute, controllandone la corretta esecuzione da parte dei lavoratori ed esercitando un funzionale potere di iniziativa: un ruolo che può essere formalmente designato dal datore di lavoro, ma che la normativa riconosce anche quando esercitato di fatto, indipendentemente dalla qualifica formale ricoperta. Per questo la formazione è obbligatoria per chiunque svolga concretamente questa funzione, anche senza una nomina esplicita.",
-      "Il corso si articola in quattro moduli: il Modulo I giuridico-normativo (3 ore), sull'individuazione del preposto, il preposto di fatto e i suoi compiti e obblighi; il Modulo II sulla gestione e organizzazione della sicurezza (3 ore), sulle modalità di esercizio della funzione di controllo ai sensi dell'art. 19 del D.Lgs 81/2008; il Modulo III sulla valutazione delle situazioni di rischio (3 ore), su misure di prevenzione, appalti, DUVRI e segnalazione di incidenti e infortuni mancati; il Modulo IV sulla comunicazione e informazione (3 ore), su tecniche di comunicazione e sensibilizzazione dei lavoratori, in particolare neoassunti, somministrati e stranieri.",
-      "Il corso è disponibile in aula o in videoconferenza sincrona con il docente; la modalità FAD non è prevista per questo corso, dato il carattere pratico e relazionale del ruolo del preposto. È possibile organizzare la formazione anche direttamente in azienda per i preposti designati o che svolgono di fatto questa funzione.",
+      "Il Corso di Formazione per Coordinatori della Sicurezza nelle Fasi di Progettazione ed Esecuzione dei Lavori (CSP-CSE), della durata di 120 ore, è obbligatorio ai sensi dell'art. 98 e dell'Allegato XIV del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, per chi intende assumere l'incarico di coordinatore della sicurezza nei cantieri temporanei o mobili.",
+      "Il Coordinatore per la Progettazione (CSP) e il Coordinatore per l'Esecuzione dei Lavori (CSE) sono le figure che, nei cantieri con presenza di più imprese, hanno il compito di redigere il Piano di Sicurezza e Coordinamento (PSC), coordinare le attività delle diverse imprese esecutrici e vigilare sull'applicazione delle misure di sicurezza durante l'esecuzione dell'opera. Si tratta di un ruolo di elevata responsabilità, che richiede competenze giuridiche, tecniche, metodologiche e relazionali approfondite.",
+      "Il corso, tra i più estesi previsti dalla normativa sulla sicurezza, si articola in otto moduli: due moduli giuridici (28 ore complessive) su normativa generale e specifica dei cantieri; due moduli tecnici (52 ore complessive) su rischi di caduta dall'alto, ponteggi, organizzazione del cantiere, rischi da macchine, attrezzature, sostanze chimiche, amianto e agenti fisici e biologici; due moduli metodologico-organizzativi (16 ore complessive) sull'elaborazione del PSC, del POS e del fascicolo, e su tecniche di comunicazione e gestione dei rapporti con committenza e progettisti; due moduli pratici (24 ore complessive) con stesura reale di Piani di Sicurezza e Coordinamento e simulazioni sul ruolo del coordinatore in fase di esecuzione.",
+      "Il corso si svolge interamente in videoconferenza sincrona con il docente, la modalità prevista per questo corso secondo il listino Alètheia. Data l'ampiezza dei contenuti e la centralità della parte pratica di stesura dei documenti di cantiere, il percorso è pensato per fornire competenze immediatamente spendibili nel ruolo di coordinatore.",
     ],
     aChiERivolto: [
-      'Lavoratori designati dal datore di lavoro come preposti in azienda',
-      'Lavoratori che di fatto sovrintendono e vigilano sull\'attività di altri colleghi, anche senza una nomina formale',
-      'Capisquadra, capireparto e responsabili di linea con potere di controllo sull\'esecuzione del lavoro altrui',
-      'Neoassunti destinati a ruoli con funzioni di sovrintendenza e vigilanza sui lavoratori',
-      'Datori di lavoro che devono garantire la formazione dei propri preposti ai sensi dell\'art. 37 D.Lgs 81/2008',
+      'Chi intende svolgere il ruolo di Coordinatore per la Progettazione (CSP)',
+      "Tecnici che intendono svolgere il ruolo di Coordinatore per l'Esecuzione dei Lavori (CSE) nei cantieri temporanei o mobili",
+      'Professionisti che operano nel settore delle costruzioni e vogliono ampliare le proprie competenze in materia di sicurezza nei cantieri',
+      'Datori di lavoro e imprese edili che vogliono formare internamente una figura qualificata come coordinatore della sicurezza',
     ],
     cosaImparerai: [
-      'Riconoscere i criteri di individuazione del preposto, compreso il preposto di fatto',
-      'Comprendere i compiti e gli obblighi specifici del ruolo di preposto',
-      'Esercitare correttamente la funzione di controllo sull\'osservanza delle norme da parte dei lavoratori (art. 19 D.Lgs 81/2008)',
-      'Valutare le situazioni di rischio e controllare la corretta esecuzione delle attività da parte dei lavoratori',
-      'Gestire gli obblighi connessi a contratti di appalto, d\'opera e di somministrazione, incluso il DUVRI',
-      'Sovraintendere e vigilare sulle attività lavorative garantendo l\'attuazione delle direttive ricevute',
-      'Individuare e segnalare correttamente incidenti e infortuni mancati',
-      'Applicare tecniche di comunicazione efficace verso lavoratori neoassunti, somministrati e stranieri',
+      'Applicare la legislazione di base e specifica in materia di sicurezza nei cantieri temporanei e mobili e nei lavori in quota',
+      "Riconoscere i rischi di caduta dall'alto e gestire correttamente ponteggi e opere provvisionali",
+      'Organizzare in sicurezza il cantiere e predisporre il cronoprogramma dei lavori',
+      'Valutare i rischi legati a macchine, attrezzature, sostanze chimiche, amianto, agenti fisici e biologici in cantiere',
+      "Elaborare contenuti e criteri metodologici del Piano di Sicurezza e Coordinamento (PSC), del Piano Sostitutivo di Sicurezza e del Piano Operativo di Sicurezza (POS)",
+      "Elaborare il fascicolo dell'opera e il PIMUS, e stimare i costi della sicurezza",
+      'Applicare tecniche di comunicazione, gestione dei gruppi e leadership nei rapporti con committenza, progettisti, direzione lavori e RLS',
+      'Redigere concretamente un Piano di Sicurezza e Coordinamento e simulare il ruolo di coordinatore in fase di esecuzione',
     ],
     faqs: [
       {
-        domanda: 'Chi è il preposto e chi deve fare questo corso?',
-        risposta: 'Il preposto è chi sovrintende all\'attività lavorativa di altri lavoratori e ne garantisce l\'attuazione delle direttive, anche solo di fatto e senza una nomina formale: la formazione è obbligatoria per chiunque svolga concretamente questo ruolo.',
+        domanda: 'Che differenza c\'è tra CSP e CSE?',
+        risposta: 'Il CSP opera nella fase di progettazione dell\'opera; il CSE opera durante l\'esecuzione dei lavori vigilando sulla sicurezza in cantiere. Questo corso abilita a entrambi i ruoli.',
       },
       {
-        domanda: 'Quanto dura il corso di formazione per preposti?',
-        risposta: 'Il corso dura 12 ore complessive, suddivise in quattro moduli da 3 ore ciascuno: giuridico-normativo, gestione e organizzazione della sicurezza, valutazione dei rischi e comunicazione.',
+        domanda: 'Quanto dura il corso Coordinatori CSE-CSP?',
+        risposta: 'Il corso dura 120 ore complessive, suddivise in moduli teorici, tecnici e pratici.',
       },
       {
-        domanda: 'Cos\'è il preposto di fatto?',
-        risposta: 'È chi esercita concretamente funzioni di sovrintendenza e vigilanza sui lavoratori, anche senza una designazione formale da parte del datore di lavoro: la normativa gli attribuisce gli stessi obblighi formativi di un preposto formalmente nominato.',
+        domanda: 'Il corso si può fare in aula?',
+        risposta: 'No, secondo il listino Alètheia questo modulo da 120 ore è disponibile solo in videoconferenza sincrona.',
       },
       {
-        domanda: 'Il corso si può fare in FAD?',
-        risposta: 'No, secondo il listino Alètheia questo corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.',
+        domanda: 'Il corso include la stesura pratica di un Piano di Sicurezza e Coordinamento?',
+        risposta: 'Sì, gli ultimi moduli pratici (24 ore totali) prevedono la stesura reale di PSC e simulazioni operative.',
       },
       {
-        domanda: 'Dopo il corso preposti serve un aggiornamento periodico?',
-        risposta: 'Sì, è previsto un corso di aggiornamento dedicato di 6 ore.',
+        domanda: 'Dopo il corso CSE-CSP serve un aggiornamento periodico?',
+        risposta: 'Sì, è obbligatorio un corso di aggiornamento dedicato di 40 ore.',
       },
     ],
-    programmaTitle: 'Programma Corso di Formazione per Preposti · 12 ore',
+    programmaTitle: 'Programma Corso Coordinatori CSE-CSP · 120 ore',
     moduli: [
       {
-        titolo: 'MODULO I - GIURIDICO-NORMATIVO',
-        durataOre: 3,
-        argomenti: ['Individuazione del preposto', 'Il preposto di fatto', 'Compiti e obblighi del preposto'],
+        titolo: 'MODULI GIURIDICI (I-II)',
+        durataOre: 28,
+        argomenti: ['Normativa generale sulla sicurezza nei cantieri', 'Normativa specifica di settore (Titolo IV D.Lgs 81/08)'],
       },
       {
-        titolo: 'MODULO II - GESTIONE E ORGANIZZAZIONE DELLA SICUREZZA',
-        durataOre: 3,
-        argomenti: ['Modalità di esercizio della funzione di controllo (art. 19 D.Lgs 81/2008)'],
+        titolo: 'MODULI TECNICI (III-IV)',
+        durataOre: 52,
+        argomenti: [
+          "Rischi di caduta dall'alto e ponteggi",
+          'Organizzazione del cantiere',
+          'Rischi da macchine, attrezzature e sostanze chimiche',
+          'Amianto, agenti fisici e biologici',
+        ],
       },
       {
-        titolo: 'MODULO III - VALUTAZIONE DELLE SITUAZIONI DI RISCHIO',
-        durataOre: 3,
-        argomenti: ['Misure di prevenzione', 'Appalti e DUVRI', 'Segnalazione di incidenti e infortuni mancati'],
+        titolo: 'MODULI METODOLOGICO-ORGANIZZATIVI (V-VI)',
+        durataOre: 16,
+        argomenti: [
+          "Elaborazione del PSC, del POS e del fascicolo dell'opera",
+          'Tecniche di comunicazione e gestione dei rapporti con committenza e progettisti',
+        ],
       },
       {
-        titolo: 'MODULO IV - COMUNICAZIONE E INFORMAZIONE',
-        durataOre: 3,
-        argomenti: ['Tecniche di comunicazione', 'Sensibilizzazione dei lavoratori neoassunti, somministrati e stranieri'],
+        titolo: 'MODULI PRATICI (VII-VIII)',
+        durataOre: 24,
+        argomenti: ['Stesura reale di un Piano di Sicurezza e Coordinamento', 'Simulazioni sul ruolo del coordinatore in fase di esecuzione'],
       },
     ],
     prezzo: [
-      { label: 'Aula', value: '€ 160,00 + IVA' },
-      { label: 'Videoconferenza', value: '€ 160,00 + IVA' },
+      { label: 'Videoconferenza', value: '€ 500,00 + IVA' },
     ],
-    prezzoNumerico: 160,
+    prezzoNumerico: 500,
   },
 
   aggiornamento: {
-    titleSuffix: '· 6 ore',
+    titleSuffix: '· 40 ore',
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '6 ore' },
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da ripetere periodicamente ai sensi dell'art. 37 D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17/04/2025" },
+      { icon: 'fas fa-clock', label: 'Durata', value: '40 ore' },
+      { icon: 'fas fa-laptop', label: 'Modalità', value: 'FAD (aula e videoconferenza non disponibili)' },
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da ripetere periodicamente ai sensi dell'art. 98 e dell'Allegato XIV del D.Lgs 81/2008" },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
+      { icon: 'fas fa-location-dot', label: 'Luogo del corso', value: 'Non applicabile — corso interamente in FAD' },
     ],
     descrizione: [
-      "Questo è il corso di aggiornamento per preposti, della durata di 6 ore, non il corso base: è rivolto a chi ha già completato la formazione iniziale di 12 ore e deve rinnovarla periodicamente, ai sensi dell'art. 37 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.",
-      "L'aggiornamento periodico è obbligatorio perché il ruolo del preposto, per sua natura operativo e relazionale, richiede un allineamento costante alle novità normative e alle prassi di gestione della sicurezza in azienda: chi sovrintende e vigila sull'attività di altri lavoratori deve rimanere aggiornato per continuare a esercitare correttamente questa funzione, anche alla luce di eventuali cambiamenti nell'organizzazione aziendale o nei contratti di appalto.",
-      "Il corso, erogato in un modulo unico, approfondisce l'individuazione del preposto di fatto tra designazione ed effettività del ruolo, gli obblighi connessi a contratti di appalto, d'opera e di somministrazione, la gestione del rischio interferenziale e il DUVRI, le modalità per sovraintendere e vigilare sulle attività lavorative garantendo l'attuazione delle direttive ricevute, e le modalità di comunicazione e relazione con gli altri soggetti della prevenzione aziendale.",
-      "Il corso è pensato per chi ha già l'attestato di formazione preposti in scadenza. Chi invece non ha mai conseguito la formazione di base deve frequentare il corso completo di 12 ore, non l'aggiornamento. Il corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.",
+      "Questo è il corso di aggiornamento per Coordinatori della Sicurezza nelle Fasi di Progettazione ed Esecuzione dei Lavori (CSP-CSE), della durata di 40 ore, non il corso base: è rivolto a chi ha già conseguito l'attestato di formazione iniziale di 120 ore e deve rinnovarlo periodicamente, ai sensi dell'art. 98 e dell'Allegato XIV del D.Lgs 81/2008.",
+      "L'aggiornamento periodico è obbligatorio perché il ruolo di coordinatore della sicurezza richiede un costante allineamento a normative tecniche, novità legislative e casistiche reali che evolvono nel tempo: chi coordina la sicurezza nei cantieri deve rimanere aggiornato su piani di sicurezza, gestione degli infortuni, attrezzature di lavoro e protezione da agenti fisici e sostanze pericolose, per continuare a esercitare correttamente questo ruolo di elevata responsabilità.",
+      "Il corso si articola in otto moduli: il Piano di Sicurezza e Coordinamento (8 ore), con analisi dell'art. 100 e dell'allegato XV del D.Lgs 81/08 e dell'apparato sanzionatorio; PIMUS, ponteggi e opere provvisionali (5 ore); infortunio e malattia professionale (5 ore), con analisi di casi reali; norme di organizzazione del cantiere e DPI (5 ore); protezione da agenti fisici e sostanze pericolose (5 ore), inclusi agenti cancerogeni e mutageni; attrezzature di lavoro (4 ore); spazi e ambienti confinati (4 ore), ai sensi del D.P.R. 177/2011; e il sopralluogo in cantiere (4 ore), con esempi di verbali.",
+      "Il corso è pensato per chi ha già l'attestato CSP-CSE in scadenza. Chi invece non ha mai conseguito la formazione di base di 120 ore deve frequentare il corso completo, non l'aggiornamento. Il corso si svolge interamente in FAD, la modalità prevista per questo corso secondo il listino Alètheia.",
     ],
     aChiERivolto: [
-      'Preposti già formati (attestato di 12 ore) con formazione in scadenza',
-      'Capisquadra, capireparto e responsabili di linea già formati come preposti che devono rinnovare la propria formazione',
-      'Lavoratori che svolgono di fatto funzioni di preposto e devono mantenere aggiornata la propria formazione',
-      'Datori di lavoro che devono garantire l\'aggiornamento periodico dei propri preposti',
-      'Attenzione: chi non ha mai conseguito l\'attestato di formazione preposti di 12 ore deve prima frequentare il corso base, non l\'aggiornamento',
+      'Coordinatori della Sicurezza (CSP e CSE) già formati (attestato di 120 ore) con formazione in scadenza',
+      'Ingegneri, architetti, geometri e altri tecnici già abilitati come coordinatori della sicurezza nei cantieri',
+      'Professionisti che devono mantenere aggiornata la propria abilitazione per continuare a operare come coordinatori della sicurezza',
+      "Attenzione: chi non ha mai conseguito l'attestato di formazione iniziale di 120 ore deve prima frequentare il corso base, non l'aggiornamento",
     ],
     cosaImparerai: [
-      'Approfondire l\'individuazione del preposto di fatto, tra designazione ed effettività del ruolo',
-      'Aggiornare le conoscenze sugli obblighi connessi a contratti di appalto, d\'opera e di somministrazione',
-      'Consolidare la gestione del rischio interferenziale e del DUVRI',
-      'Aggiornare le modalità per sovraintendere e vigilare sulle attività lavorative garantendo l\'attuazione delle direttive ricevute',
-      'Consolidare le modalità di comunicazione e relazione con gli altri soggetti della prevenzione aziendale',
+      "Aggiornarsi sull'art. 100 e sull'allegato XV del D.Lgs 81/08 relativi ai contenuti minimi del PSC",
+      "Approfondire il Piano Sostitutivo di Sicurezza e l'apparato sanzionatorio previsto dal D.Lgs 81/08",
+      'Aggiornare le competenze su PIMUS, ponteggi, opere provvisionali e redazione del progetto esecutivo',
+      'Analizzare casi reali di infortunio e malattia professionale alla luce della normativa INAIL',
+      'Aggiornarsi sulle novità legislative in materia di organizzazione del cantiere e dispositivi di protezione individuale',
+      'Gestire la protezione da agenti fisici, agenti cancerogeni, mutageni e sostanze pericolose',
+      'Applicare la normativa aggiornata su attrezzature di lavoro e direttiva macchine',
+      'Gestire spazi e ambienti confinati ai sensi del D.P.R. 177/2011 ed effettuare correttamente il sopralluogo in cantiere',
     ],
     faqs: [
       {
-        domanda: 'Ogni quanto va rinnovata la formazione per preposti?',
-        risposta: 'La formazione va aggiornata periodicamente.',
+        domanda: "Ogni quanto va rinnovata l'abilitazione CSP-CSE?",
+        risposta: "L'abilitazione richiede un aggiornamento periodico costante per mantenere la validità legale.",
       },
       {
-        domanda: 'Quanto dura l\'aggiornamento formazione preposti?',
-        risposta: 'L\'aggiornamento dura 6 ore, erogate in un modulo unico che approfondisce temi come il preposto di fatto, gli appalti, il DUVRI e le tecniche di vigilanza e comunicazione.',
+        domanda: 'Quanto dura l\'aggiornamento Coordinatori CSE-CSP?',
+        risposta: 'Dura 40 ore complessive, strutturate in moduli mirati su ponteggi, DVR, DPI, agenti fisici e spazi confinati.',
       },
       {
-        domanda: 'Il corso si può fare in FAD?',
-        risposta: 'No, secondo il listino Alètheia questo corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.',
+        domanda: 'Il corso si può fare in aula?',
+        risposta: 'No, secondo il listino ufficiale Alètheia, questo aggiornamento da 40 ore è erogato esclusivamente in modalità FAD.',
       },
       {
-        domanda: 'Posso fare l\'aggiornamento se non ho mai fatto il corso base?',
-        risposta: 'No, l\'aggiornamento è riservato a chi ha già conseguito l\'attestato di formazione preposti di 12 ore. Senza formazione di base è necessario frequentare il corso completo.',
+        domanda: 'Il corso tratta anche gli spazi confinati?',
+        risposta: 'Sì, include un modulo tecnico specifico focalizzato sugli spazi e ambienti confinati ai sensi del D.P.R. 177/2011.',
       },
       {
-        domanda: 'L\'aggiornamento tratta anche la gestione degli appalti e del DUVRI?',
-        risposta: 'Sì, il programma include un approfondimento sugli obblighi connessi a contratti di appalto, d\'opera e di somministrazione, e sulla gestione del rischio interferenziale tramite il DUVRI.',
+        domanda: "Posso fare l'aggiornamento se non ho mai fatto il corso base di 120 ore?",
+        risposta: "No, l'aggiornamento è riservato a chi ha già completato il percorso iniziale completo.",
       },
     ],
-    programmaTitle: 'Programma Aggiornamento Formazione per Preposti · 6 ore',
+    programmaTitle: 'Programma Aggiornamento Coordinatori CSE-CSP · 40 ore',
     moduli: [
-      {
-        titolo: 'MODULO UNICO - AGGIORNAMENTO',
-        durataOre: 6,
-        argomenti: [
-          'Il preposto di fatto: tra designazione ed effettività del ruolo',
-          'Obblighi connessi a contratti di appalto, d\'opera e di somministrazione',
-          'Gestione del rischio interferenziale e DUVRI',
-          'Sovraintendere e vigilare sulle attività lavorative garantendo l\'attuazione delle direttive ricevute',
-          'Comunicazione e relazione con gli altri soggetti della prevenzione aziendale',
-        ],
-      },
+      { titolo: 'PIANO DI SICUREZZA E COORDINAMENTO', durataOre: 8, argomenti: ["Art. 100 e Allegato XV del D.Lgs 81/08", 'Apparato sanzionatorio'] },
+      { titolo: 'PIMUS, PONTEGGI E OPERE PROVVISIONALI', durataOre: 5, argomenti: ['Redazione del progetto esecutivo', 'Aggiornamenti normativi'] },
+      { titolo: 'INFORTUNIO E MALATTIA PROFESSIONALE', durataOre: 5, argomenti: ['Analisi di casi reali', 'Normativa INAIL'] },
+      { titolo: 'NORME DI ORGANIZZAZIONE DEL CANTIERE E DPI', durataOre: 5, argomenti: ['Novità legislative', 'Dispositivi di protezione individuale'] },
+      { titolo: 'PROTEZIONE DA AGENTI FISICI E SOSTANZE PERICOLOSE', durataOre: 5, argomenti: ['Agenti cancerogeni e mutageni', 'Sostanze pericolose'] },
+      { titolo: 'ATTREZZATURE DI LAVORO', durataOre: 4, argomenti: ['Normativa aggiornata', 'Direttiva macchine'] },
+      { titolo: 'SPAZI E AMBIENTI CONFINATI', durataOre: 4, argomenti: ['D.P.R. 177/2011'] },
+      { titolo: 'SOPRALLUOGO IN CANTIERE', durataOre: 4, argomenti: ['Esempi di verbali'] },
     ],
     prezzo: [
-      { label: 'Aula', value: '€ 90,00 + IVA' },
-      { label: 'Videoconferenza', value: '€ 90,00 + IVA' },
+      { label: 'FAD', value: '€ 240,00 + IVA' },
     ],
-    prezzoNumerico: 90,
+    prezzoNumerico: 240,
   },
 };
 
 const corsiCorrelatiSlugs = [
-  'formazione-dirigente',
-  'formazione-dei-lavoratori-rischio-medio',
-  'rspp-datore-di-lavoro',
+  'pimus-ponteggi',
+  'lavori-in-quota',
+  'rspp-datore-di-lavoro-modulo-3-costruzioni',
 ];
 
-export default function CorsoFormazionePreposto() {
+export default function CorsoCoordinatoriCseCsp() {
   const { addToCart } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('corso');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const [modalitaSelezionata, setModalitaSelezionata] = useState('aula');
   const carouselRef = useRef(null);
 
   const c = CONTENUTO[selectedTipo];
@@ -192,16 +197,14 @@ export default function CorsoFormazionePreposto() {
   };
 
   const families = buildCourseFamilies(coursesData, {}, { quiet: true });
-  const corsiCorrelatiResolti = corsiCorrelatiSlugs
+  const corsiCorrelati = corsiCorrelatiSlugs
     .map((s) => resolveRelatedCourse(s, families))
     .filter(Boolean)
-    .map((c2) => {
-      const slug = c2.href.split('/').pop();
+    .map((cc) => {
+      const slug = cc.href.split('/').pop();
       const fam = families.find((f) => f.slug === slug);
-      return { ...c2, image: fam?.image || null };
+      return { ...cc, image: fam?.image || null };
     });
-
-  const corsiCorrelati = corsiCorrelatiResolti;
 
   const scrollCarousel = (dir) => {
     const el = carouselRef.current;
@@ -214,11 +217,11 @@ export default function CorsoFormazionePreposto() {
   return (
     <>
       <Head>
-        <title>Corso Formazione Preposto – 12 ore | Alètheia</title>
+        <title>Corso Coordinatori Sicurezza CSE-CSP – 120h | Alètheia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Corso formazione preposti, 12 ore, art. 37 D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG)."
+          content="Corso Coordinatori Sicurezza Cantieri CSE-CSP, 120 ore in videoconferenza, art. 98 D.Lgs 81/2008. Attestato valido in Italia. Alètheia, Vittoria (RG)."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -254,7 +257,7 @@ export default function CorsoFormazionePreposto() {
         .cp-tabs-area { grid-area: tabs; }
         .cp-price-area { grid-area: price; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 - il margine allinea il bordo del box al testo Panoramica/Moduli, non al bordo invisibile del padding dei bottoni */
+          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 */
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -283,13 +286,23 @@ export default function CorsoFormazionePreposto() {
         <div className="container">
           <div className="cp-page-grid">
 
-            {/* ── AREA "top": breadcrumb + switch Corso base / Aggiornamento, sola sulla prima riga ── */}
+            {/* ── AREA "top": breadcrumb + H1, sola sulla prima riga ── */}
             <div className="cp-top-area">
-              <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-                <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
+              <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                <Link href="/" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Home</Link>
                 <span className="text-slate-300 dark:text-gray-600">/</span>
-                <span className="text-slate-600 dark:text-gray-300">Formazione del Preposto</span>
+                <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione</Link>
+                <span className="text-slate-300 dark:text-gray-600">/</span>
+                <Link href="/formazione/obbligatoria" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione obbligatoria</Link>
+                <span className="text-slate-300 dark:text-gray-600">/</span>
+                <Link href="/all-courses/coordinatori-cantieri-cse-csp" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Coordinatori Cantieri CSE-CSP</Link>
+                <span className="text-slate-300 dark:text-gray-600">/</span>
+                <span className="text-slate-600 dark:text-gray-300">{selectedTipo === 'corso' ? 'Corso CSE-CSP' : 'Aggiornamento CSE-CSP'}</span>
               </nav>
+
+              <h1 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, lineHeight: 1.2, marginBottom: '1.25rem' }}>
+                {selectedTipo === 'corso' ? 'Corso di Formazione per ' : 'Aggiornamento '}Coordinatori della Sicurezza nelle Fasi di Progettazione ed Esecuzione dei Lavori (CSP-CSE) <span className="text-slate-400 dark:text-gray-500" style={{ fontWeight: 700 }}>{c.titleSuffix}</span>
+              </h1>
 
               {/* SWITCH Corso base / Aggiornamento - stesso pattern a pillola del template dinamico corsi */}
               <div role="tablist" aria-label="Corso o aggiornamento" style={{ display: 'inline-flex', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
@@ -312,7 +325,7 @@ export default function CorsoFormazionePreposto() {
                       fontFamily: 'inherit',
                     }}
                   >
-                    {tipo === 'corso' ? 'Corso base · 12 ore' : 'Aggiornamento · 6 ore'}
+                    {tipo === 'corso' ? 'Corso base · 120 ore' : 'Aggiornamento · 40 ore'}
                   </button>
                 ))}
               </div>
@@ -346,51 +359,7 @@ export default function CorsoFormazionePreposto() {
                 {activeTab === 'overview' && (
                   <div>
                     {/* SCHEDA TECNICA: apre sempre il tab Panoramica, cambia con il tipo selezionato */}
-                    <CourseSchedaTecnica items={c.schedaTecnica}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
-                          <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.15rem' }}>
-                            {[
-                              { key: 'aula', label: 'Aula' },
-                              { key: 'videoconferenza', label: 'Videoconferenza' },
-                            ].map((m) => (
-                              <button
-                                key={m.key}
-                                type="button"
-                                onClick={() => setModalitaSelezionata(m.key)}
-                                style={{
-                                  fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
-                                  color: modalitaSelezionata === m.key ? '#6EE7B7' : 'rgba(255,255,255,0.5)',
-                                  background: 'none', border: 'none', padding: 0,
-                                  textDecoration: modalitaSelezionata === m.key ? 'underline' : 'none',
-                                }}
-                              >
-                                {m.label}{m.key !== 'videoconferenza' ? ' ·' : ''}
-                              </button>
-                            ))}
-                          </div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>FAD non disponibile per questo corso</span>
-                        </div>
-                      </div>
-
-                      {modalitaSelezionata === 'aula' && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                          </div>
-                          <div>
-                            <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
-                            <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
-                              Sede Alètheia, Vittoria (RG) <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
-                            </a>
-                          </div>
-                        </div>
-                      )}
-                    </CourseSchedaTecnica>
+                    <CourseSchedaTecnica items={c.schedaTecnica} />
 
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
                     {c.descrizione.map((paragrafo, i) => (
@@ -451,7 +420,7 @@ export default function CorsoFormazionePreposto() {
                       {c.programmaTitle}
                     </h2>
                     <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
-                      Il corso è strutturato in {c.moduli.length} {c.moduli.length === 1 ? 'modulo' : 'moduli'}.
+                      Il corso è strutturato in {c.moduli.length} moduli.
                     </p>
                     <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -490,7 +459,7 @@ export default function CorsoFormazionePreposto() {
               <PricingSidebar
                 priceRows={c.prezzo}
                 buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
-                onAddToCartClick={() => addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico })}
+                onAddToCartClick={() => addToCart({ id: `coordinatori-cantieri-cse-csp-${selectedTipo}`, slug: 'coordinatori-cantieri-cse-csp', title: 'Coordinatori Cantieri CSE-CSP', variant: c.titleSuffix, price: c.prezzoNumerico })}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>

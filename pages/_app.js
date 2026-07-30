@@ -2,7 +2,6 @@ import '../styles/globals.css';
 import 'lenis/dist/lenis.css';
 import { useEffect } from 'react';
 import Chatbot from '../components/Chatbot';
-import CustomCursor from '../components/CustomCursor';
 import { ThemeProvider } from '../context/ThemeContext';
 import { CartProvider } from '../context/CartContext';
 import { initLenis, destroyLenis } from '../lib/lenis';
@@ -40,7 +39,6 @@ function MyApp({ Component, pageProps }) {
           <div style={{ '--font-viga': "'Viga', sans-serif", display: 'contents' }}>
             <Component {...pageProps} />
             <Chatbot />
-            <CustomCursor />
           </div>
         </CartProvider>
       </ThemeProvider>

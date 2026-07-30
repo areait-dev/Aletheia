@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
+import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useCart } from '../../context/CartContext';
@@ -1115,11 +1116,24 @@ export default function CourseDetail() {
     setSelectedLivelloKey(initialKey);
   }, [family, router.isReady, router.query.livello, selectedLivelloKey]);
 
+  // Su un caricamento diretto (refresh/URL diretto) il router non è ancora "ready" al primo render
+  // server/client: router.query.slug è vuoto finché Next.js non idrata i parametri della route, quindi
+  // "family" risulta temporaneamente non trovata anche per uno slug valido. Senza questo guard si vedeva
+  // lampeggiare "Corso non trovato" prima del contenuto reale a ogni refresh - qui mostriamo solo l'header
+  // (già con lo sfondo corretto) mentre si attende, ed il messaggio di errore vero solo a router pronto.
   if (!family) {
+    if (!router.isReady) {
+      return (
+        <>
+          <Head><title>Alètheia Srl</title></Head>
+          <Header active="/all-courses" solid />
+        </>
+      );
+    }
     return (
       <>
         <Head><title>Corso non trovato - Alètheia Srl</title></Head>
-        <Header active="/all-courses" />
+        <Header active="/all-courses" solid />
         <div style={{ textAlign: 'center', padding: '6rem 2rem' }}>
           <h1 style={{ marginTop: '1rem' }}>Corso non trovato</h1>
           <p style={{ color: '#6B7280', marginTop: '0.5rem' }}>Il corso che stai cercando non esiste o è stato rimosso.</p>
@@ -1204,32 +1218,38 @@ export default function CourseDetail() {
       </Head>
 
       <style jsx global>{`
-        /* Layout a due colonne: sidebar prezzo sticky a destra su desktop (lg+), full-width e in cima
-           alle tab su mobile/tablet - stesso pattern della pagina dedicata del corso Carriponte. */
+        /* Standard architetturale unico per TUTTE le pagine corso (template dinamico + pagine dedicate):
+           due colonne 7fr/3fr con la sidebar prezzo sticky (top-24) staccata di gap-16 dal contenuto.
+           Il box prezzo è allineato alla riga della barra tab (Panoramica/Moduli), non al breadcrumb/
+           switch soprastanti: "top" occupa da sola la prima riga, "tabs"/"price" condividono la seconda.
+           Su mobile/tablet colonna singola con il box prezzo che precede le tab. */
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "switch" "price" "tabs";
-          gap: 2rem;
+          grid-template-areas: "top" "price" "tabs";
+          gap: 1.25rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
             grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            /* Riga vuota (".") sotto lo switch livello/tipo nella colonna destra: il box prezzo
-               parte così dalla seconda riga, allineato alla riga delle tab (Panoramica/Moduli)
-               invece che allo switch soprastante. */
-            grid-template-areas: "switch ." "tabs price";
-            column-gap: 7rem; /* box prezzo più staccato/spostato a destra */
-            row-gap: 1.5rem;
+            grid-template-areas: "top ." "tabs price";
+            column-gap: 4rem; /* gap-16: distacco netto tra contenuto e sidebar */
+            row-gap: 1.25rem;
           }
         }
-        .cp-switch-area { grid-area: switch; }
+        .cp-top-area { grid-area: top; min-width: 0; }
         .cp-tabs-area { grid-area: tabs; min-width: 0; }
         .cp-price-area { grid-area: price; min-width: 0; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 100px; align-self: start; }
+          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 - il margine allinea il bordo del box al testo Panoramica/Moduli, non al bordo invisibile del padding dei bottoni */
         }
+
+        .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        @media (max-width: 560px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
+
+        .cp-valore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+        @media (max-width: 768px) { .cp-valore-grid { grid-template-columns: 1fr; gap: 2rem; } }
 
         .cp-carousel-track {
           display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -1246,49 +1266,55 @@ export default function CourseDetail() {
         .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
       `}</style>
 
-      <Header active="/all-courses" />
-
-      {/* HERO SECTION */}
-      <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #008C95 100%)', color: 'white', padding: '8rem 2rem 4rem 2rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <span style={{ backgroundColor: 'rgba(255,255,255,0.2)', padding: '0.5rem 1.25rem', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '600', display: 'inline-block', marginBottom: '1.5rem' }}>
-            {course.category}
-          </span>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.2' }}>{course.title}</h1>
-          <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-            <span>{course.duration}</span>
-            <span>{course.modality}</span>
-            <span>{course.price}</span>
-            <span>{course.level}</span>
-            <span>{course.students} studenti</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="dark:bg-dark-bg">
-      {/* Breadcrumb */}
-      <div className="bg-slate-50 dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '0.75rem 0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
-          <Link href="/all-courses" style={{ color: '#008C95', textDecoration: 'none' }}>Tutti i corsi</Link>
-          <span style={{ margin: '0 0.5rem', color: '#9CA3AF' }}>/</span>
-          <span className="text-slate-600 dark:text-gray-300">{course.title}</span>
-        </div>
-      </div>
+      <Header active="/all-courses" solid />
 
       {/* LAYOUT A DUE COLONNE: colonna sinistra (tabs) 70-75% + sidebar destra (prezzo) 25-30%, sticky su
           desktop. Su mobile/tablet il box prezzo passa a larghezza intera e si posiziona subito sopra le
-          tab (grid-template-areas "price" "tabs"), coerente con la pagina dedicata del corso Carriponte. */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 3rem 2rem' }}>
+          tab (grid-template-areas "price" "tabs"), stessa struttura .container di tutte le pagine corso
+          (es. formazione-del-preposto.js) per garantire identica larghezza colonna/sidebar. */}
+      <section className="bg-white dark:bg-dark-bg" style={{ paddingTop: '120px', paddingBottom: '3rem' }}>
+        <div className="container">
         <div className="cp-page-grid">
 
-      {/* Riga superiore sinistra: switch livello/tipo (se presente) + barra tab Panoramica/Moduli.
-          Sta tutta nella riga 1 della griglia, così la riga 2 (dove parte il box prezzo) inizia
-          esattamente al bordo della barra tab, allineando il box a quella riga invece che allo switch. */}
-      <div className="cp-switch-area">
+      <div className="cp-top-area">
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+          <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
+          <span className="text-slate-300 dark:text-gray-600">/</span>
+          <span className="text-slate-600 dark:text-gray-300">{course.title}</span>
+        </nav>
+
         {(hasMultipleLivelli || hasAggiornamento) && (
-          <div style={{ marginBottom: '1.25rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem' }}>
+          {hasAggiornamento && (
+            <div role="tablist" aria-label="Corso o aggiornamento" style={{ display: 'inline-flex', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
+              {['corso', 'aggiornamento'].map((tipo) => {
+                const durataTipo = variantiLivello.find((v) => v.tipo === tipo)?.durataOre;
+                return (
+                <button
+                  key={tipo}
+                  role="tab"
+                  type="button"
+                  aria-selected={selectedTipo === tipo}
+                  onClick={() => selectTipo(tipo)}
+                  style={{
+                    padding: '0.5rem 1.1rem',
+                    borderRadius: '9999px',
+                    border: 'none',
+                    background: selectedTipo === tipo ? '#008C95' : 'transparent',
+                    color: selectedTipo === tipo ? '#fff' : '#334155',
+                    fontWeight: 700,
+                    fontSize: '0.85rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}{durataTipo ? ` · ${durataTipo}` : ''}
+                </button>
+                );
+              })}
+            </div>
+          )}
           {hasMultipleLivelli && (
-            <div role="tablist" aria-label="Livello del corso" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: hasAggiornamento ? '0.75rem' : 0 }}>
+            <div role="tablist" aria-label="Livello del corso" style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
               {(() => {
                 // Livelli "solo aggiornamento" (nessuna variante corso su quel livello) - la loro label
                 // grezza è spesso poco leggibile in un pulsante di switch (fallback sul titolo famiglia
@@ -1309,13 +1335,11 @@ export default function CourseDetail() {
                     type="button"
                     aria-selected={activeLivelloKey === key}
                     onClick={() => selectLivello(key)}
-                    className="dark:border-[rgba(255,255,255,0.15)]"
                     style={{
                       padding: '0.5rem 1.1rem',
                       borderRadius: '9999px',
-                      border: '2px solid',
-                      borderColor: activeLivelloKey === key ? '#008C95' : '#E2E8F0',
-                      background: activeLivelloKey === key ? '#008C95' : '#fff',
+                      border: 'none',
+                      background: activeLivelloKey === key ? '#008C95' : 'transparent',
                       color: activeLivelloKey === key ? '#fff' : '#334155',
                       fontWeight: 700,
                       fontSize: '0.85rem',
@@ -1329,36 +1353,13 @@ export default function CourseDetail() {
               })()}
             </div>
           )}
-          {hasAggiornamento && (
-            <div role="tablist" aria-label="Corso o aggiornamento" style={{ display: 'inline-flex', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
-              {['corso', 'aggiornamento'].map((tipo) => (
-                <button
-                  key={tipo}
-                  role="tab"
-                  type="button"
-                  aria-selected={selectedTipo === tipo}
-                  onClick={() => selectTipo(tipo)}
-                  style={{
-                    padding: '0.4rem 1rem',
-                    borderRadius: '9999px',
-                    border: 'none',
-                    background: selectedTipo === tipo ? '#008C95' : 'transparent',
-                    color: selectedTipo === tipo ? '#fff' : '#334155',
-                    fontWeight: 700,
-                    fontSize: '0.8rem',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}
-                </button>
-              ))}
-            </div>
-          )}
           </div>
         )}
+      </div>
 
+      <div className="cp-tabs-area">
         {/* TABS */}
-        <div className="border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ display: 'flex', gap: '0.5rem', borderBottom: '2px solid' }}>
+        <div className="border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ display: 'flex', gap: '0.5rem', borderBottom: '2px solid', flexWrap: 'wrap' }}>
           {[
             { id: 'overview', label: 'Panoramica' },
             { id: 'moduli', label: 'Moduli' },
@@ -1368,33 +1369,49 @@ export default function CourseDetail() {
             </button>
           ))}
         </div>
-      </div>
 
-          <div className="cp-tabs-area">
       {/* TAB CONTENT - pilotato da contenutoLivello (data/content/*.js): null per le varianti "aggiornamento"
-          o per famiglie senza materiale editoriale ancora pronto → placeholder invece di un tab vuoto/rotto */}
+          o per famiglie senza materiale editoriale ancora pronto → placeholder invece di un tab vuoto/rotto.
+          La scheda tecnica (CourseSchedaTecnica) apre sempre il tab Panoramica, come da standard comune
+          a tutte le pagine corso, seguita dai testi descrittivi e infine dall'accordion FAQ. */}
       <div style={{ paddingTop: '2rem' }}>
         {!contenutoLivello ? (
-          <div className="bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl" style={{ padding: '2.5rem', textAlign: 'center' }}>
-            <i className="fas fa-hourglass-half" style={{ fontSize: '1.5rem', color: '#94A3B8', marginBottom: '0.75rem' }}></i>
-            <p className="text-slate-500 dark:text-gray-300" style={{ margin: 0, fontSize: '0.95rem' }}>
-              Contenuto dettagliato in arrivo. Nel frattempo trovi qui sopra durata, modalità e attestato.
-            </p>
+          <div>
+            {activeTab === 'overview' && (
+              <CourseSchedaTecnica
+                items={[
+                  { icon: 'fas fa-clock', label: 'Durata', value: course.duration },
+                  { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: course.modality },
+                  { icon: 'fas fa-certificate', label: 'Attestato', value: family.varianti[0]?.attestato || 'Attestato valido in tutta Italia' },
+                  { icon: 'fas fa-users', label: 'Partecipanti', value: course.students ? `${course.students}` : 'Su richiesta' },
+                ]}
+              />
+            )}
+            <div className="bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl" style={{ padding: '2.5rem', textAlign: 'center' }}>
+              <i className="fas fa-hourglass-half" style={{ fontSize: '1.5rem', color: '#94A3B8', marginBottom: '0.75rem' }}></i>
+              <p className="text-slate-500 dark:text-gray-300" style={{ margin: 0, fontSize: '0.95rem' }}>
+                Contenuto dettagliato in arrivo. Nel frattempo trovi qui sopra durata, modalità e attestato.
+              </p>
+            </div>
           </div>
         ) : activeTab === 'overview' ? (
           <div>
-            {course.image && (
-              <div className="w-full rounded-2xl overflow-hidden mb-8" style={{ maxHeight: '320px' }}>
-                <img src={course.image} alt={course.title} className="w-full h-full object-cover" style={{ maxHeight: '320px' }} />
-              </div>
-            )}
+            <CourseSchedaTecnica
+              items={[
+                { icon: 'fas fa-clock', label: 'Durata', value: `${contenutoLivello.durataOre} ore` },
+                { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita },
+                { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita },
+                { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato },
+                { icon: 'fas fa-users', label: 'Partecipanti', value: `Max ${contenutoLivello.partecipantiMax} persone` },
+              ]}
+            />
 
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1rem' }}>Descrizione del corso</h2>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
             {contenutoLivello.descrizione.split('\n\n').map((paragrafo, i) => (
               <p key={i} className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginBottom: '1.25rem' }}>{paragrafo}</p>
             ))}
 
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.aChiERivolto.map((riga, i) => (
                 <li key={i} style={{ padding: '0.4rem 0', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
@@ -1404,7 +1421,7 @@ export default function CourseDetail() {
               ))}
             </ul>
 
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1rem' }}>Cosa imparerai</h2>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Cosa imparerai</h2>
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.cosaImparerai.map((outcome, i) => (
                 <li key={i} style={{ padding: '0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -1415,7 +1432,7 @@ export default function CourseDetail() {
             </ul>
 
             {/* FAQ - accordion, una sola domanda aperta alla volta */}
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1rem' }}>Domande frequenti</h2>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Domande frequenti</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
               {contenutoLivello.faq.map((item, i) => {
                 const isOpen = openFaqIndex === i;
@@ -1440,64 +1457,10 @@ export default function CourseDetail() {
                 );
               })}
             </div>
-
-            {corsiCorrelatiRisolti.length > 0 && (
-              <>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', gap: '1rem', flexWrap: 'wrap' }}>
-                  <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>Corsi correlati</h2>
-                  {corsiCorrelatiRisolti.length > 3 && (
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <button type="button" onClick={() => scrollCarousel(-1)} aria-label="Corsi precedenti" className="cp-carousel-arrow">
-                        <i className="fas fa-arrow-left"></i>
-                      </button>
-                      <button type="button" onClick={() => scrollCarousel(1)} aria-label="Corsi successivi" className="cp-carousel-arrow">
-                        <i className="fas fa-arrow-right"></i>
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                <div ref={carouselRef} className="cp-carousel-track">
-                  {corsiCorrelatiRisolti.map((c, i) => (
-                    <Link
-                      key={i}
-                      href={c.href}
-                      className="corso-correlato-card group bg-white dark:bg-dark-card"
-                      style={{
-                        flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
-                        scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
-                        boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                      }}
-                    >
-                      <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
-                        {c.image ? (
-                          <img
-                            src={c.image}
-                            alt={c.titolo}
-                            loading="lazy"
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.35s ease' }}
-                            className="group-hover:scale-105"
-                          />
-                        ) : (
-                          <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }} />
-                        )}
-                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
-                      </div>
-                      <div style={{ padding: '1rem 1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{c.titolo}</span>
-                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: 'auto' }}>
-                          Scopri di più <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem' }}></i>
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </>
-            )}
           </div>
         ) : (
           <div>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1rem' }}>Programma Formativo</h2>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Programma Formativo</h2>
             <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
               Il corso è strutturato in {contenutoLivello.moduli.length} moduli per un totale di {contenutoLivello.durataOre} ore
             </p>
@@ -1626,8 +1589,68 @@ export default function CourseDetail() {
             )}
           </aside>
         </div>
-      </div>
-      </div>
+        </div>
+      </section>
+
+      {/* ══════════════ CORSI CORRELATI - sezione a parte dopo la descrizione del corso, carosello con
+          frecce, stesso pattern di formazione-del-preposto.js ══════════════ */}
+      {corsiCorrelatiRisolti.length > 0 && (
+        <section className="bg-white dark:bg-dark-bg border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
+          <div className="container">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', gap: '1rem', flexWrap: 'wrap' }}>
+              <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, margin: 0 }}>
+                Corsi correlati
+              </h2>
+              {corsiCorrelatiRisolti.length > 3 && (
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <button type="button" onClick={() => scrollCarousel(-1)} aria-label="Corsi precedenti" className="cp-carousel-arrow">
+                    <i className="fas fa-arrow-left"></i>
+                  </button>
+                  <button type="button" onClick={() => scrollCarousel(1)} aria-label="Corsi successivi" className="cp-carousel-arrow">
+                    <i className="fas fa-arrow-right"></i>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div ref={carouselRef} className="cp-carousel-track">
+              {corsiCorrelatiRisolti.map((c, i) => (
+                <Link
+                  key={i}
+                  href={c.href}
+                  className="corso-correlato-card group bg-white dark:bg-dark-card"
+                  style={{
+                    flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
+                    scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+                  }}
+                >
+                  <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
+                    {c.image ? (
+                      <img
+                        src={c.image}
+                        alt={c.titolo}
+                        loading="lazy"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.35s ease' }}
+                        className="group-hover:scale-105"
+                      />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }} />
+                    )}
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
+                  </div>
+                  <div style={{ padding: '1rem 1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{c.titolo}</span>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: 'auto' }}>
+                      Scopri di più <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem' }}></i>
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* BOTTONE RICHIEDI INFO */}
       <div style={{ position: 'fixed', right: '2rem', bottom: '2rem', zIndex: 100 }}>

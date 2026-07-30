@@ -8,103 +8,78 @@ import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
-const COURSE_TITLE = 'Corso Addetti alla Conduzione di Carriponte';
-const AGGIORNAMENTO_TITLE = 'Aggiornamento Addetti alla Conduzione di Carriponte';
-const CARRIPONTE_IMAGE = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80';
-const MAPS_HREF = 'https://maps.google.com/?q=Via+del+Carrubo+Vittoria+RG';
+const CSE_IMAGE = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80';
 
 const schedaTecnica = [
-  { icon: 'fas fa-clock', label: 'Durata', value: '11 ore' },
-  { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Aggiornamento ogni 5 anni' },
-  { icon: 'fas fa-certificate', label: 'Attestato', value: 'Attestato valido in tutta Italia' },
+  { icon: 'fas fa-clock', label: 'Durata', value: '40 ore' },
+  { icon: 'fas fa-laptop', label: 'Modalità', value: 'FAD (aula e videoconferenza non disponibili)' },
+  { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da ripetere periodicamente ai sensi dell'art. 98 e dell'Allegato XIV del D.Lgs 81/2008" },
+  { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
   { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
+  { icon: 'fas fa-location-dot', label: 'Luogo del corso', value: 'Non applicabile — corso interamente in FAD' },
 ];
 
 const aChiERivolto = [
-  'Lavoratori che utilizzano carriponte e gru a cavalletto con comando pensile o radiocomando',
-  'Operatori addetti al sollevamento e alla movimentazione di materiali in ambito industriale e produttivo',
-  "Lavoratori già in possesso di esperienza pregressa che devono regolarizzare la propria posizione con il nuovo Accordo Stato-Regioni 2026",
-  'Datori di lavoro che ricoprono personalmente il ruolo di operatore carroponte',
+  'Coordinatori della Sicurezza (CSP e CSE) già formati (attestato di 120 ore) con formazione in scadenza',
+  'Ingegneri, architetti, geometri e altri tecnici già abilitati come coordinatori della sicurezza nei cantieri',
+  'Professionisti che devono mantenere aggiornata la propria abilitazione per continuare a operare come coordinatori della sicurezza',
+  "Attenzione: chi non ha mai conseguito l'attestato di formazione iniziale di 120 ore deve prima frequentare il corso base, non l'aggiornamento",
 ];
 
 const cosaImparerai = [
-  'Identificare le caratteristiche costruttive del carroponte e distinguerlo dalla gru a portale',
-  'Condurre in sicurezza il carroponte con comando pensile e con radiocomando',
-  'Riconoscere e valutare i rischi specifici legati al sollevamento e alla movimentazione dei carichi',
-  "Eseguire i controlli pre-operativi e verificare l'efficienza dell'attrezzatura prima dell'utilizzo",
-  'Applicare le procedure operative di sicurezza durante le manovre di sollevamento',
-  'Gestire correttamente imbracature, ganci e accessori di sollevamento',
-  'Operare in sicurezza negli spazi ristretti e confinati tipici degli ambienti industriali',
-  'Riconoscere e gestire le situazioni di emergenza durante la conduzione del carroponte',
+  "Aggiornarsi sull'art. 100 e sull'allegato XV del D.Lgs 81/08 relativi ai contenuti minimi del PSC",
+  "Approfondire il Piano Sostitutivo di Sicurezza e l'apparato sanzionatorio previsto dal D.Lgs 81/08",
+  'Aggiornare le competenze su PIMUS, ponteggi, opere provvisionali e redazione del progetto esecutivo',
+  'Analizzare casi reali di infortunio e malattia professionale alla luce della normativa INAIL',
+  "Aggiornarsi sulle novità legislative in materia di organizzazione del cantiere e dispositivi di protezione individuale",
+  'Gestire la protezione da agenti fisici, agenti cancerogeni, mutageni e sostanze pericolose',
+  'Applicare la normativa aggiornata su attrezzature di lavoro e direttiva macchine',
+  'Gestire spazi e ambienti confinati ai sensi del D.P.R. 177/2011 ed effettuare correttamente il sopralluogo in cantiere',
 ];
 
 const faqs = [
   {
-    domanda: 'Il corso carroponte è obbligatorio?',
-    risposta: "Sì. Dal 24 maggio 2026 il nuovo Accordo Stato-Regioni ha inserito il carroponte tra le attrezzature che richiedono un'abilitazione specifica standardizzata. Chi già opera su questi mezzi deve regolarizzare la propria posizione seguendo il percorso formativo previsto, che include modulo teorico-tecnico e prova pratica documentata.",
+    domanda: "Ogni quanto va rinnovata l'abilitazione CSP-CSE?",
+    risposta: "L'abilitazione richiede un aggiornamento periodico costante per mantenere la validità legale.",
   },
   {
-    domanda: 'Qual è la differenza tra carroponte e gru a portale?',
-    risposta: 'Sono due macchine distinte con percorsi formativi diversi. Il carroponte scorre su binari posizionati in quota, all\'interno di capannoni industriali, ed è comandato con pensile o radiocomando. La gru a portale scorre invece su binari a terra, sostenuta da quattro bracci. Chi utilizza entrambe le attrezzature deve frequentare entrambi i corsi.',
+    domanda: 'Quanto dura l\'aggiornamento Coordinatori CSE-CSP?',
+    risposta: 'Dura 40 ore complessive, strutturate in moduli mirati su ponteggi, DVR, DPI, agenti fisici e spazi confinati.',
   },
   {
-    domanda: 'Ogni quanto va rinnovato il corso per Addetti alla Conduzione di Carriponte?',
-    risposta: "L'aggiornamento è obbligatorio ogni 5 anni, della durata di 4 ore. La mancata frequenza entro i termini previsti comporta la decadenza dell'abilitazione e l'impossibilità di operare legalmente sull'attrezzatura.",
+    domanda: 'Il corso si può fare in aula?',
+    risposta: 'No, secondo il listino ufficiale Alètheia, questo aggiornamento da 40 ore è erogato esclusivamente in modalità FAD.',
   },
   {
-    domanda: "L'attestato è valido in tutta Italia?",
-    risposta: "Sì. L'attestato rilasciato al termine del corso è valido su tutto il territorio nazionale, in conformità con il nuovo Accordo Stato-Regioni e il D.Lgs. 81/08.",
+    domanda: 'Il corso tratta anche gli spazi confinati?',
+    risposta: 'Sì, include un modulo tecnico specifico focalizzato sugli spazi e ambienti confinati ai sensi del D.P.R. 177/2011.',
   },
   {
-    domanda: 'È possibile organizzare il corso direttamente in azienda?',
-    risposta: 'Sì, con un minimo di 15 partecipanti. Alètheia può organizzare il corso presso la sede aziendale, inclusa la parte pratica. Contattaci per ricevere un preventivo personalizzato.',
+    domanda: "Posso fare l'aggiornamento se non ho mai fatto il corso base di 120 ore?",
+    risposta: "No, l'aggiornamento è riservato a chi ha già completato il percorso iniziale completo.",
   },
 ];
 
 const moduli = [
-  {
-    titolo: "MODULO 1 - L'INCENDIO E LA PREVENZIONE INCENDI",
-    durataOre: 1,
-    argomenti: [
-      'Principi della combustione',
-      'Prodotti della combustione',
-      "Le sostanze estinguenti in relazione al tipo di incendio",
-      "Effetti dell'incendio sull'uomo",
-      'Divieti e limitazioni di esercizio',
-      'Misure comportamentali',
-    ],
-  },
-  {
-    titolo: 'MODULO 2 - PROTEZIONE ANTINCENDIO E PROCEDURE DA ADOTTARE IN CASO DI INCENDIO',
-    durataOre: 1,
-    argomenti: [
-      'Principali misure di protezione antincendio',
-      'Evacuazione in caso di incendio',
-      'Chiamata dei soccorsi',
-    ],
-  },
-  {
-    titolo: 'MODULO 3 - ESERCITAZIONI PRATICHE',
-    durataOre: 2,
-    argomenti: [
-      'Presa visione e chiarimenti sugli estintori portatili',
-      "Esercitazioni sull'uso degli estintori portatili",
-      "Presa visione del registro antincendio, chiarimenti ed esercitazione riguardante l'attività di sorveglianza",
-    ],
-  },
+  { titolo: 'PIANO DI SICUREZZA E COORDINAMENTO', durataOre: 8, argomenti: ["Art. 100 e Allegato XV del D.Lgs 81/08", 'Apparato sanzionatorio'] },
+  { titolo: 'PIMUS, PONTEGGI E OPERE PROVVISIONALI', durataOre: 5, argomenti: ['Redazione del progetto esecutivo', 'Aggiornamenti normativi'] },
+  { titolo: 'INFORTUNIO E MALATTIA PROFESSIONALE', durataOre: 5, argomenti: ['Analisi di casi reali', 'Normativa INAIL'] },
+  { titolo: 'NORME DI ORGANIZZAZIONE DEL CANTIERE E DPI', durataOre: 5, argomenti: ['Novità legislative', 'Dispositivi di protezione individuale'] },
+  { titolo: 'PROTEZIONE DA AGENTI FISICI E SOSTANZE PERICOLOSE', durataOre: 5, argomenti: ['Agenti cancerogeni e mutageni', 'Sostanze pericolose'] },
+  { titolo: 'ATTREZZATURE DI LAVORO', durataOre: 4, argomenti: ['Normativa aggiornata', 'Direttiva macchine'] },
+  { titolo: 'SPAZI E AMBIENTI CONFINATI', durataOre: 4, argomenti: ['D.P.R. 177/2011'] },
+  { titolo: 'SOPRALLUOGO IN CANTIERE', durataOre: 4, argomenti: ['Esempi di verbali'] },
 ];
 
 const corsiCorrelatiSlugs = [
-  'carrelli-elevatori-semoventi-con-conduttore-a-bordo',
-  'operatore-di-gru-per-autocarro',
-  'p-l-e-con-e-senza-stabilizzatori',
-  'formazione-dei-lavoratori-rischio-medio',
+  'pimus-ponteggi',
+  'lavori-in-quota',
+  'rspp-datore-di-lavoro-modulo-3-costruzioni',
 ];
 
-export default function CorsoCarriponte() {
+export default function AggiornamentoCoordinatoriCseCsp() {
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const [modalitaSelezionata, setModalitaSelezionata] = useState('aula');
   const carouselRef = useRef(null);
 
   const families = buildCourseFamilies(coursesData, {}, { quiet: true });
@@ -118,7 +93,7 @@ export default function CorsoCarriponte() {
     });
 
   const corsiCorrelati = [
-    { titolo: 'Aggiornamento Carriponte', href: `/contatti?corso=${encodeURIComponent(AGGIORNAMENTO_TITLE)}`, image: CARRIPONTE_IMAGE, meta: '4 ore · € 150,00' },
+    { titolo: 'Corso Coordinatori Cantieri CSE-CSP · 120 ore (corso base)', href: '/all-courses/coordinatori-cantieri-cse-csp', image: CSE_IMAGE, meta: '120 ore · € 500,00' },
     ...corsiCorrelatiResolti,
   ];
 
@@ -133,11 +108,11 @@ export default function CorsoCarriponte() {
   return (
     <>
       <Head>
-        <title>{COURSE_TITLE} (11 ore) - Alètheia Srl</title>
+        <title>Aggiornamento Coordinatori CSE-CSP – 40h | Alètheia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Corso Addetti alla Conduzione di Carriponte, 11 ore, conforme al D.Lgs. 81/08 e al nuovo Accordo Stato-Regioni. Attestato valido in tutta Italia."
+          content="Aggiornamento Coordinatori Sicurezza Cantieri CSE-CSP, 40 ore in FAD, art. 98 D.Lgs 81/2008. Attestato valido in Italia. Alètheia, Vittoria (RG)."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -146,16 +121,6 @@ export default function CorsoCarriponte() {
       <Header active="/all-courses" solid />
 
       <style jsx global>{`
-        .cta-btn-primary-cp {
-          display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
-          padding: 0.9rem 1.75rem; border-radius: 999px;
-          background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
-          font-weight: 800; font-size: 0.95rem; text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.35);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none; cursor: pointer; font-family: inherit;
-        }
-        .cta-btn-primary-cp:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
         .cta-btn-whatsapp-cp {
           display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
           padding: 0.9rem 1.75rem; border-radius: 999px; background: rgba(37,211,102,0.06);
@@ -164,9 +129,6 @@ export default function CorsoCarriponte() {
         }
         .cta-btn-whatsapp-cp:hover { background: rgba(37,211,102,0.1); }
 
-        /* Standard architetturale unico per TUTTE le pagine corso: breadcrumb in cima alla colonna
-           sinistra, due colonne 7fr/3fr con sidebar prezzo sticky (top-24) staccata di gap-16 dal
-           contenuto. Su mobile/tablet colonna singola con il box prezzo prima delle tab. */
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
@@ -186,7 +148,7 @@ export default function CorsoCarriponte() {
         .cp-tabs-area { grid-area: tabs; }
         .cp-price-area { grid-area: price; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 - il margine allinea il bordo del box al testo Panoramica/Moduli, non al bordo invisibile del padding dei bottoni */
+          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 */
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -215,13 +177,23 @@ export default function CorsoCarriponte() {
         <div className="container">
           <div className="cp-page-grid">
 
-            {/* ── AREA "top": breadcrumb da sola sulla prima riga ── */}
+            {/* ── AREA "top": breadcrumb + H1, sola sulla prima riga ── */}
             <div className="cp-top-area">
-              <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', flexWrap: 'wrap' }}>
-                <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
+              <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                <Link href="/" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Home</Link>
                 <span className="text-slate-300 dark:text-gray-600">/</span>
-                <span className="text-slate-600 dark:text-gray-300">{COURSE_TITLE}</span>
+                <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione</Link>
+                <span className="text-slate-300 dark:text-gray-600">/</span>
+                <Link href="/formazione/obbligatoria" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione obbligatoria</Link>
+                <span className="text-slate-300 dark:text-gray-600">/</span>
+                <Link href="/all-courses/coordinatori-cantieri-cse-csp" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Coordinatori Cantieri CSE-CSP</Link>
+                <span className="text-slate-300 dark:text-gray-600">/</span>
+                <span className="text-slate-600 dark:text-gray-300">Aggiornamento CSE-CSP</span>
               </nav>
+
+              <h1 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, lineHeight: 1.2, margin: 0 }}>
+                Aggiornamento Coordinatori della Sicurezza nelle Fasi di Progettazione ed Esecuzione dei Lavori (CSP-CSE) <span className="text-slate-400 dark:text-gray-500" style={{ fontWeight: 700 }}>· 40 ore</span>
+              </h1>
             </div>
 
             {/* ── AREA "tabs": sistema Panoramica / Moduli, allineata alla riga della sidebar prezzo ── */}
@@ -252,60 +224,20 @@ export default function CorsoCarriponte() {
                 {activeTab === 'overview' && (
                   <div>
                     {/* SCHEDA TECNICA: apre sempre il tab Panoramica, come da standard comune a tutte le pagine corso */}
-                    <CourseSchedaTecnica items={schedaTecnica}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
-                          <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.15rem' }}>
-                            {[
-                              { key: 'aula', label: 'Aula' },
-                              { key: 'videoconferenza', label: 'Videoconferenza (solo parte teorica)' },
-                            ].map((m) => (
-                              <button
-                                key={m.key}
-                                type="button"
-                                onClick={() => setModalitaSelezionata(m.key)}
-                                style={{
-                                  fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
-                                  color: modalitaSelezionata === m.key ? '#6EE7B7' : 'rgba(255,255,255,0.5)',
-                                  background: 'none', border: 'none', padding: 0,
-                                  textDecoration: modalitaSelezionata === m.key ? 'underline' : 'none',
-                                }}
-                              >
-                                {m.label}{m.key !== 'videoconferenza' ? ' ·' : ''}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {modalitaSelezionata === 'aula' && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                          </div>
-                          <div>
-                            <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
-                            <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
-                              Vedi mappa <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
-                            </a>
-                          </div>
-                        </div>
-                      )}
-                    </CourseSchedaTecnica>
+                    <CourseSchedaTecnica items={schedaTecnica} />
 
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
                     <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                      Il corso è progettato in conformità con il D.Lgs. 81/08 e con le disposizioni del nuovo Accordo Stato-Regioni, garantendo agli operatori un&apos;abilitazione riconosciuta e valida su tutto il territorio nazionale. Il carroponte è la macchina destinata al sollevamento e allo spostamento di materiali e merci con movimenti ristretti e confinati. Non va confuso con la gru a portale, che scorre su binari posti diversi metri più in basso della struttura, sostenuta da quattro bracci: due macchine diverse, due modalità operative diverse, due percorsi formativi diversi.
+                      Questo è il corso di aggiornamento per Coordinatori della Sicurezza nelle Fasi di Progettazione ed Esecuzione dei Lavori (CSP-CSE), della durata di 40 ore, non il corso base: è rivolto a chi ha già conseguito l&apos;attestato di formazione iniziale di 120 ore e deve rinnovarlo periodicamente, ai sensi dell&apos;art. 98 e dell&apos;Allegato XIV del D.Lgs 81/2008.
                     </p>
                     <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                      Dal 24 maggio 2026 l&apos;abilitazione carroponte è regolata dal nuovo Accordo Stato-Regioni: non è più sufficiente una formazione interna gestita dal datore di lavoro — serve un percorso strutturato con modulo teorico e prova pratica documentata, valido su tutto il territorio nazionale. Il corso forma gli operatori a condurre in sicurezza il carroponte con comando pensile o radiocomando, riconoscere i rischi legati all&apos;ambiente di lavoro e alla movimentazione dei carichi, e rispettare tutti i requisiti previsti dalla normativa vigente.
+                      L&apos;aggiornamento periodico è obbligatorio perché il ruolo di coordinatore della sicurezza richiede un costante allineamento a normative tecniche, novità legislative e casistiche reali che evolvono nel tempo: chi coordina la sicurezza nei cantieri deve rimanere aggiornato su piani di sicurezza, gestione degli infortuni, attrezzature di lavoro e protezione da agenti fisici e sostanze pericolose, per continuare a esercitare correttamente questo ruolo di elevata responsabilità.
                     </p>
                     <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                      Il percorso formativo include tecniche operative per la movimentazione carichi in sicurezza, con particolare attenzione alla valutazione della portata, alla scelta delle imbracature e alla gestione delle manovre in spazi ristretti. Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti. La parte teorica è disponibile anche in videoconferenza. La prova pratica deve essere svolta obbligatoriamente in presenza.
+                      Il corso si articola in otto moduli: il Piano di Sicurezza e Coordinamento (8 ore), con analisi dell&apos;art. 100 e dell&apos;allegato XV del D.Lgs 81/08 e dell&apos;apparato sanzionatorio; PIMUS, ponteggi e opere provvisionali (5 ore); infortunio e malattia professionale (5 ore), con analisi di casi reali; norme di organizzazione del cantiere e DPI (5 ore); protezione da agenti fisici e sostanze pericolose (5 ore), inclusi agenti cancerogeni e mutageni; attrezzature di lavoro (4 ore); spazi e ambienti confinati (4 ore), ai sensi del D.P.R. 177/2011; e il sopralluogo in cantiere (4 ore), con esempi di verbali.
+                    </p>
+                    <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                      Il corso è pensato per chi ha già l&apos;attestato CSP-CSE in scadenza. Chi invece non ha mai conseguito la formazione di base di 120 ore deve frequentare il corso completo, non l&apos;aggiornamento. Il corso si svolge interamente in FAD, la modalità prevista per questo corso secondo il listino Alètheia.
                     </p>
 
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
@@ -359,7 +291,7 @@ export default function CorsoCarriponte() {
                 {activeTab === 'moduli' && (
                   <div>
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-                      Programma Corso Addetti alla Conduzione di Carriponte · 11 ore
+                      Programma Aggiornamento Coordinatori CSE-CSP · 40 ore
                     </h2>
                     <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
                       Il corso è strutturato in {moduli.length} moduli.
@@ -399,8 +331,7 @@ export default function CorsoCarriponte() {
             <aside className="cp-price-area">
               <PricingSidebar
                 priceRows={[
-                  { label: 'Corso Completo', value: '€ 270,00' },
-                  { label: 'Corso Aggiornamento', value: '€ 150,00' },
+                  { label: 'FAD', value: '€ 240,00 + IVA' },
                 ]}
                 buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
@@ -411,7 +342,7 @@ export default function CorsoCarriponte() {
       </section>
 
       {/* ══════════════ CORSI CORRELATI - carosello con frecce ══════════════ */}
-      <section className="bg-slate-50 dark:bg-dark-bg border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
+      <section className="bg-white dark:bg-dark-bg border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
         <div className="container">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', gap: '1rem', flexWrap: 'wrap' }}>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, margin: 0 }}>
@@ -449,11 +380,11 @@ export default function CorsoCarriponte() {
                       className="group-hover:scale-105"
                     />
                   ) : (
-                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }} />
+                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }} />
                   )}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
                   <span style={{ position: 'absolute', bottom: '0.6rem', left: '0.85rem', color: '#fff', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                    {c.meta || 'Decreto Attrezzature'}
+                    {c.meta || 'Sicurezza sul Lavoro'}
                   </span>
                 </div>
                 <div style={{ padding: '1rem 1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

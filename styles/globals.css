@@ -96,53 +96,6 @@ html.dark body {
   color: var(--text-light); /* #F2F2F2 su scuro */
 }
 
-/* Cursore custom animato (dot + ring), vedi components/CustomCursor.js.
-   Nasconde la freccia di sistema solo su dispositivi con puntatore preciso (mouse/trackpad);
-   sopra un elemento cliccabile torna la manina di sistema e il cursore custom si nasconde. */
-@media (pointer: fine) {
-  body.custom-cursor-active,
-  body.custom-cursor-active * {
-    cursor: none !important;
-  }
-
-  body.custom-cursor-active.cursor-hover,
-  body.custom-cursor-active.cursor-hover * {
-    cursor: pointer !important;
-  }
-}
-
-.custom-cursor-dot,
-.custom-cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  will-change: transform;
-  transition: opacity 0.15s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
-}
-
-.custom-cursor-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--primary);
-  transform: translate(-50%, -50%);
-}
-
-.custom-cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid var(--primary);
-  transform: translate(-50%, -50%);
-  opacity: 0.6;
-}
-
-.custom-cursor-dot.is-hover,
-.custom-cursor-ring.is-hover {
-  opacity: 0;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-viga), sans-serif;
   font-weight: 400;
@@ -256,6 +209,30 @@ img {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Header "solid" forzato (prop Header.js `solid`): usato dalle pagine senza hero scura in cima
+   (corsi, archivio, categorie formazione). Blindato con !important e legato solo al prop, mai
+   allo stato scroll/JS, così non può sparire per timing di hydration/HMR. */
+.site-header--solid {
+  background: rgba(255,255,255,0.95) !important;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08) !important;
+  /* Su alcuni browser/GPU backdrop-filter+background semi-trasparente su elemento fixed causa un bug
+     di rendering noto che rende l'elemento invisibile pur essendo nel DOM. Con sfondo ormai opaco
+     il blur non serve più: lo disattiviamo per eliminare questa classe di bug alla radice. */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.site-header--solid .navbar a,
+.site-header--solid .header-phone {
+  color: #0F172A !important;
+}
+html.dark .site-header--solid {
+  background: rgba(0, 49, 52, 0.95) !important;
+}
+html.dark .site-header--solid .navbar a,
+html.dark .site-header--solid .header-phone {
+  color: #F8FAFC !important;
 }
 
 html.dark .site-header {
@@ -2335,6 +2312,13 @@ footer {
   .site-header {
     padding: 0.75rem 0;
     background: transparent;
+  }
+
+  /* Su mobile il background transparent sopra va rispettato solo finché l'header non è
+     "scrolled"/solid (vedi Header.js prop `solid`): altrimenti logo/hamburger restano
+     bianchi su sfondo bianco nelle pagine (es. corsi) che non hanno una hero scura sotto. */
+  .site-header.scrolled {
+    background: rgba(255,255,255,0.95);
   }
 
   .navbar {

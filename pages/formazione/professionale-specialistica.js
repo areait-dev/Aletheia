@@ -110,7 +110,7 @@ export default function FormazioneProfessionaleSpecialistica() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
-      <Header active="/" />
+      <Header active="/" solid />
 
       <style jsx global>{`
         @keyframes fadeUp {

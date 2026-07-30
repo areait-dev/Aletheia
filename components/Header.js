@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import CartDrawer from './CartDrawer';
 import { darkTokens } from '../lib/darkTokens';
 
-export default function Header({ active }) {
+export default function Header({ active, solid = false }) {
   const themeCtx = useTheme();
   const theme = themeCtx?.theme;
   const toggleTheme = themeCtx?.toggleTheme || (() => {});
@@ -57,7 +57,7 @@ export default function Header({ active }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isLight = scrolled || formazioneOpen;
+  const isLight = scrolled || formazioneOpen || solid;
 
   const links = [
     { href: '/', label: 'Home' },
@@ -70,7 +70,10 @@ export default function Header({ active }) {
 
   return (
     <>
-    <header className={`site-header${isLight ? ' scrolled' : ''}${formazioneOpen ? ' menu-is-open' : ''}`}>
+    <header
+      className={`site-header${isLight ? ' scrolled' : ''}${formazioneOpen ? ' menu-is-open' : ''}${solid ? ' site-header--solid' : ''}`}
+      style={solid ? { background: '#ffffff', backdropFilter: 'none', WebkitBackdropFilter: 'none', boxShadow: '0 2px 20px rgba(0,0,0,0.08)' } : undefined}
+    >
       <div className="container">
         {/* LOGO */}
         <div className="logo">
@@ -86,6 +89,7 @@ export default function Header({ active }) {
               key={link.href}
               href={link.href}
               className={active === link.href ? 'active' : ''}
+              style={{ color: isLight ? '#0F172A' : undefined }}
               aria-expanded={link.label === 'Formazione' ? formazioneOpen : undefined}
               aria-haspopup={link.label === 'Formazione' ? 'true' : undefined}
               onClick={(e) => {
@@ -145,7 +149,7 @@ export default function Header({ active }) {
               </div>
             )}
           </div>
-          <a href="tel:+390932862613" className="header-phone">
+          <a href="tel:+390932862613" className="header-phone" style={{ color: isLight ? '#0F172A' : undefined }}>
             +39 0932 862613
           </a>
           {/* CARRELLO */}

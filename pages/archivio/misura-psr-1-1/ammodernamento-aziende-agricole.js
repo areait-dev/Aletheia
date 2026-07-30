@@ -16,7 +16,7 @@ export default function AvvisoMisuraPsr11AmmodernamentoAziendeAgricole() {
 
   return (
     <>
-      <Header />
+      <Header solid />
       <main className="bg-white dark:bg-gray-900 min-h-screen pt-40 pb-16 px-4">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-8">

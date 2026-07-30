@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
+import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -15,12 +16,6 @@ const schedaTecnica = [
   { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da ripetere periodicamente ai sensi dell'art. 37 D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17/04/2025" },
   { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
   { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
-];
-
-const valoriFormazione = [
-  { icon: 'fas fa-shield-halved', titolo: 'Conformità normativa garantita', testo: 'Percorsi progettati in aderenza all\'art. 37 del D.Lgs 81/2008 e all\'Accordo Stato Regioni, con attestato valido su tutto il territorio nazionale.' },
-  { icon: 'fas fa-chalkboard-user', titolo: 'Docenti qualificati', testo: 'Formatori con esperienza diretta sul campo, in grado di calare la normativa nelle situazioni operative reali dei preposti.' },
-  { icon: 'fas fa-arrows-to-circle', titolo: 'Flessibilità di erogazione', testo: 'Corsi in aula o in videoconferenza, anche direttamente in azienda, per adattarsi alle esigenze organizzative di ogni realtà.' },
 ];
 
 const aChiERivolto = [
@@ -124,7 +119,7 @@ export default function AggiornamentoFormazionePreposto() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
-      <Header active="/all-courses" />
+      <Header active="/all-courses" solid />
 
       <style jsx global>{`
         .cta-btn-whatsapp-cp {
@@ -138,31 +133,29 @@ export default function AggiornamentoFormazionePreposto() {
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "hero" "price" "tabs";
-          gap: 2rem;
+          grid-template-areas: "top" "price" "tabs";
+          gap: 1.25rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
             grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            grid-template-areas: "hero price" "tabs price";
-            gap: 4rem;
+            grid-template-areas: "top ." "tabs price";
+            column-gap: 4rem; /* gap-16: distacco netto tra contenuto e sidebar */
+            row-gap: 1.25rem;
           }
         }
-        .cp-hero-area { grid-area: hero; }
+        .cp-top-area { grid-area: top; }
         .cp-tabs-area { grid-area: tabs; }
         .cp-price-area { grid-area: price; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 100px; align-self: start; }
+          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 - il margine allinea il bordo del box al testo Panoramica/Moduli, non al bordo invisibile del padding dei bottoni */
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         @media (max-width: 560px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
 
         .cp-tabs { display: flex; gap: 0.5rem; border-bottom: 2px solid; flex-wrap: wrap; }
-
-        .cp-valore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
-        @media (max-width: 768px) { .cp-valore-grid { grid-template-columns: 1fr; gap: 2rem; } }
 
         .cp-carousel-track {
           display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -180,102 +173,23 @@ export default function AggiornamentoFormazionePreposto() {
         .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
       `}</style>
 
-      {/* ══════════════ TITOLO + SCHEDA TECNICA + TAB (colonna sinistra) & BOX PREZZO STICKY (colonna destra) ══════════════ */}
+      {/* ══════════════ TAB (colonna sinistra) & BOX PREZZO STICKY (colonna destra) ══════════════ */}
       <section className="bg-white dark:bg-dark-bg" style={{ paddingTop: '120px', paddingBottom: '5rem' }}>
         <div className="container">
           <div className="cp-page-grid">
 
-            {/* ── AREA "hero": breadcrumb, badge, H1, scheda tecnica - pannello scuro arrotondato ── */}
-            <div className="cp-hero-area">
-              <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-                <Link href="/" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Home</Link>
-                <span className="text-slate-300 dark:text-gray-600">/</span>
-                <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione</Link>
-                <span className="text-slate-300 dark:text-gray-600">/</span>
-                <Link href="/formazione/obbligatoria" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione obbligatoria</Link>
+            {/* ── AREA "top": breadcrumb da sola sulla prima riga ── */}
+            <div className="cp-top-area">
+              <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', flexWrap: 'wrap' }}>
+                <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
                 <span className="text-slate-300 dark:text-gray-600">/</span>
                 <Link href="/all-courses/formazione-del-preposto" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione del Preposto</Link>
                 <span className="text-slate-300 dark:text-gray-600">/</span>
-                <span className="text-slate-600 dark:text-gray-300">Aggiornamento Preposto</span>
+                <span className="text-slate-600 dark:text-gray-300">Aggiornamento</span>
               </nav>
-
-              <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', borderRadius: '1.75rem', padding: 'clamp(1.75rem, 4vw, 2.75rem)', position: 'relative', overflow: 'hidden' }}>
-                <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.14) 0%, transparent 70%)' }} />
-
-                <div style={{ position: 'relative', zIndex: 1 }}>
-                  <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6EE7B7', background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)', padding: '0.35rem 0.9rem', borderRadius: '999px', marginBottom: '1.25rem' }}>
-                    Obbligatoria · Art. 37 D.Lgs 81/2008
-                  </span>
-
-                  <h1 style={{ fontSize: 'clamp(1.75rem, 3.6vw, 2.5rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.5rem' }}>
-                    Aggiornamento Formazione per Preposti <span style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 700 }}>· 6 ore</span>
-                  </h1>
-
-                  {/* SCHEDA TECNICA */}
-                  <div className="cp-scheda-grid">
-                    {schedaTecnica.map((s) => (
-                      <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className={s.icon} style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{s.label}</span>
-                          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#fff' }}>{s.value}</span>
-                        </div>
-                      </div>
-                    ))}
-
-                    {/* Modalità con selettore Aula / Videoconferenza */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                      </div>
-                      <div>
-                        <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
-                        <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.15rem' }}>
-                          {[
-                            { key: 'aula', label: 'Aula' },
-                            { key: 'videoconferenza', label: 'Videoconferenza' },
-                          ].map((m) => (
-                            <button
-                              key={m.key}
-                              type="button"
-                              onClick={() => setModalitaSelezionata(m.key)}
-                              style={{
-                                fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
-                                color: modalitaSelezionata === m.key ? '#6EE7B7' : 'rgba(255,255,255,0.5)',
-                                background: 'none', border: 'none', padding: 0,
-                                textDecoration: modalitaSelezionata === m.key ? 'underline' : 'none',
-                              }}
-                            >
-                              {m.label}{m.key !== 'videoconferenza' ? ' ·' : ''}
-                            </button>
-                          ))}
-                        </div>
-                        <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>FAD non disponibile per questo corso</span>
-                      </div>
-                    </div>
-
-                    {/* Luogo del corso - solo se modalità "aula" */}
-                    {modalitaSelezionata === 'aula' && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
-                          <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
-                            Sede Alètheia, Vittoria (RG) <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
-                          </a>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
             </div>
 
-            {/* ── AREA "tabs": sistema Panoramica / Moduli ── */}
+            {/* ── AREA "tabs": sistema Panoramica / Moduli, allineata alla riga della sidebar prezzo ── */}
             <div className="cp-tabs-area">
               <div className="cp-tabs border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
                 {[
@@ -302,6 +216,53 @@ export default function AggiornamentoFormazionePreposto() {
               <div style={{ paddingTop: '2rem' }}>
                 {activeTab === 'overview' && (
                   <div>
+                    {/* SCHEDA TECNICA: apre sempre il tab Panoramica, come da standard comune a tutte le pagine corso */}
+                    <CourseSchedaTecnica items={schedaTecnica}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
+                        </div>
+                        <div>
+                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
+                          <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.15rem' }}>
+                            {[
+                              { key: 'aula', label: 'Aula' },
+                              { key: 'videoconferenza', label: 'Videoconferenza' },
+                            ].map((m) => (
+                              <button
+                                key={m.key}
+                                type="button"
+                                onClick={() => setModalitaSelezionata(m.key)}
+                                style={{
+                                  fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
+                                  color: modalitaSelezionata === m.key ? '#6EE7B7' : 'rgba(255,255,255,0.5)',
+                                  background: 'none', border: 'none', padding: 0,
+                                  textDecoration: modalitaSelezionata === m.key ? 'underline' : 'none',
+                                }}
+                              >
+                                {m.label}{m.key !== 'videoconferenza' ? ' ·' : ''}
+                              </button>
+                            ))}
+                          </div>
+                          <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>FAD non disponibile per questo corso</span>
+                        </div>
+                      </div>
+
+                      {modalitaSelezionata === 'aula' && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
+                          </div>
+                          <div>
+                            <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
+                            <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
+                              Sede Alètheia, Vittoria (RG) <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </CourseSchedaTecnica>
+
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
                     <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>
                       Questo è il corso di aggiornamento per preposti, della durata di 6 ore, non il corso base: è rivolto a chi ha già completato la formazione iniziale di 12 ore e deve rinnovarla periodicamente, ai sensi dell&apos;art. 37 del D.Lgs 81/2008 e dell&apos;Accordo Stato Regioni del 17 aprile 2025.
@@ -414,26 +375,6 @@ export default function AggiornamentoFormazionePreposto() {
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════ FORMAZIONE CHE CREA VALORE - sezione indipendente su sfondo chiaro ══════════════ */}
-      <section className="bg-slate-50 dark:bg-dark-card border-y border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
-        <div className="container">
-          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, textAlign: 'center', marginBottom: '2.5rem' }}>
-            Formazione che crea valore
-          </h2>
-          <div className="cp-valore-grid">
-            {valoriFormazione.map((v) => (
-              <div key={v.titolo} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.85rem' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: 'rgba(0,140,149,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className={v.icon} style={{ color: '#008C95', fontSize: '1.4rem' }}></i>
-                </div>
-                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>{v.titolo}</h3>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.65, margin: 0, maxWidth: '320px' }}>{v.testo}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

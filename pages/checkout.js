@@ -64,7 +64,7 @@ export default function Checkout() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <Header active="/checkout" />
+      <Header active="/checkout" solid />
 
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #0a4f54 60%, #008C95 100%)', color: 'white', paddingTop: '7rem', paddingBottom: '2.5rem', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
