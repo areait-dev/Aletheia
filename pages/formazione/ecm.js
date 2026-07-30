@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { useTheme } from '../../context/ThemeContext';
 
 const modalita = [
   {
@@ -158,6 +159,8 @@ function ContattoECMForm() {
 
 export default function FormazioneECM() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const { theme } = useTheme() || { theme: 'light' };
+  const isDark = theme === 'dark';
 
   return (
     <>
@@ -194,6 +197,7 @@ export default function FormazioneECM() {
           display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
           text-transform: uppercase; color: #008C95; margin-bottom: 0.6rem;
         }
+        .dark .section-badge-ecm { color: #6EE7B7; }
         .cta-btn-primary-ecm {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0.85rem 2rem; border-radius: 999px;
@@ -244,6 +248,13 @@ export default function FormazioneECM() {
           font-family: inherit; width: 100%; justify-content: center;
         }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
+
+        /* Contatti + Form: layout a due colonne per evitare la card isolata nel vuoto */
+        .ecm-contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 2rem; align-items: stretch; }
+        @media (max-width: 900px) { .ecm-contact-grid { grid-template-columns: 1fr; } }
+        .ecm-contact-info { display: flex; flex-direction: column; height: 100%; }
+        .ecm-info-row { display: flex; align-items: flex-start; gap: 0.85rem; }
+        .ecm-info-row + .ecm-info-row { margin-top: 1.25rem; }
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
@@ -254,7 +265,7 @@ export default function FormazioneECM() {
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="hero-badge-ecm fade-up">Educazione Continua in Medicina</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem', maxWidth: '760px' }}>
+          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem', maxWidth: '900px' }}>
             Corsi{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               ECM
@@ -262,7 +273,7 @@ export default function FormazioneECM() {
             {' '}per professionisti sanitari
           </h1>
 
-          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '820px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
+          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '960px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
             Formazione continua accreditata per medici, infermieri, fisioterapisti e operatori sociosanitari. Ottieni i Crediti ECM.
           </p>
 
@@ -277,7 +288,7 @@ export default function FormazioneECM() {
       <section className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
           <span className="section-badge-ecm">Provider ECM accreditato · Regione Siciliana</span>
-          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '820px' }}>
+          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '960px' }}>
             Un provider ECM accreditato per la tua formazione continua
           </h2>
           <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '1.5rem' }}>
@@ -293,7 +304,7 @@ export default function FormazioneECM() {
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           {/* A chi si rivolge */}
-          <div style={{ maxWidth: '820px', marginBottom: '3.5rem' }}>
+          <div style={{ marginBottom: '3.5rem' }}>
             <span className="section-badge-ecm">A chi si rivolgono i corsi ECM</span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
               Formazione dedicata ai professionisti della sanità
@@ -309,7 +320,7 @@ export default function FormazioneECM() {
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
               Corsi ECM in aula e in FAD, in tutta la Sicilia
             </h2>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '820px' }}>
+            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '960px' }}>
               Alètheia organizza attività formative accreditate in diverse modalità, per adattarsi ai tempi e alle esigenze dei professionisti sanitari:
             </p>
           </div>
@@ -355,7 +366,7 @@ export default function FormazioneECM() {
                     style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '1.1rem 1.4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', cursor: 'pointer', fontWeight: 700, fontSize: '0.95rem' }}
                   >
                     <span>{item.domanda}</span>
-                    <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: '#008C95', flexShrink: 0 }}></i>
+                    <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: isDark ? '#6EE7B7' : '#008C95', flexShrink: 0 }}></i>
                   </button>
                   {isOpen && (
                     <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, padding: '0 1.4rem 1.4rem', lineHeight: 1.75, fontSize: '0.9rem' }}>
@@ -369,22 +380,11 @@ export default function FormazioneECM() {
         </div>
       </section>
 
-      {/* ══════════════ BANNER INTERMEDIO ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', padding: '4rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h3 style={{ fontSize: 'clamp(1.4rem, 2.8vw, 1.9rem)', fontWeight: 900, color: '#fff', marginBottom: '1rem', lineHeight: 1.3 }}>
-            Vuoi metterti in regola con i tuoi crediti ECM?
-          </h3>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.68)', maxWidth: '720px', margin: '0 auto', lineHeight: 1.8 }}>
-            Contattaci per scoprire i corsi ECM in programma e pianificare il tuo percorso di aggiornamento. Come provider accreditato, ti seguiamo dalla scelta del corso al rilascio dei crediti.
-          </p>
-        </div>
-      </section>
-
       {/* ══════════════ CONTATTI & FORM ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+        <div className="container">
+          <div style={{ marginBottom: '2.5rem', maxWidth: '900px' }}>
+            <span className="section-badge-ecm">Parliamone</span>
             <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
               Vuoi saperne di più sui corsi ECM?
             </h3>
@@ -393,8 +393,77 @@ export default function FormazioneECM() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1.5rem', padding: '2.5rem', boxShadow: '0 4px 30px rgba(0,0,0,0.05)' }}>
-            <ContattoECMForm />
+          <div className="ecm-contact-grid">
+            {/* Colonna informativa: dà contesto al form ed evita lo spazio vuoto */}
+            <div
+              className="ecm-contact-info"
+              style={{
+                background: isDark ? 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' : '#fff',
+                border: isDark ? 'none' : '1px solid #E2E8F0',
+                borderRadius: '1.5rem', padding: '2.25rem', color: isDark ? '#fff' : '#0F172A', position: 'relative', overflow: 'hidden',
+                boxShadow: isDark ? 'none' : '0 4px 30px rgba(0,0,0,0.05)',
+              }}
+            >
+              <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: isDark ? 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(16,185,129,0.18) 0%, transparent 70%)' : 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(0,140,149,0.06) 0%, transparent 70%)' }} />
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '13px', background: isDark ? 'rgba(16,185,129,0.15)' : 'rgba(0,140,149,0.08)', border: isDark ? '1px solid rgba(16,185,129,0.3)' : '1px solid rgba(0,140,149,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                  <i className="fas fa-user-doctor" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.2rem' }}></i>
+                </div>
+                <h4 className="text-slate-900 dark:text-white" style={{ fontSize: '1.15rem', fontWeight: 800, margin: '0 0 0.6rem' }}>
+                  Provider ECM accreditato
+                </h4>
+                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: '0 0 1.75rem' }}>
+                  Rispondiamo entro 24 ore lavorative con i corsi in programma, le modalità disponibili e i crediti acquisibili in base al tuo profilo professionale.
+                </p>
+
+                <div className="ecm-info-row">
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-phone" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                  </div>
+                  <div>
+                    <span className="dark:text-gray-500" style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Telefono</span>
+                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>+39 0932 862613</span>
+                  </div>
+                </div>
+                <div className="ecm-info-row">
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-envelope" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                  </div>
+                  <div>
+                    <span className="dark:text-gray-500" style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Email</span>
+                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>info@aletheiasrl.it</span>
+                  </div>
+                </div>
+                <div className="ecm-info-row">
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-clock" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                  </div>
+                  <div>
+                    <span className="dark:text-gray-500" style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Tempo di risposta</span>
+                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>Entro 24 ore lavorative</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Colonna form */}
+            <div
+              className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+              style={{ borderRadius: '1.5rem', overflow: 'hidden', boxShadow: '0 4px 30px rgba(0,0,0,0.05)' }}
+            >
+              <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)' }} />
+              <div style={{ padding: '2.25rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1.75rem' }}>
+                  <div style={{ width: '44px', height: '44px', minWidth: '44px', borderRadius: '12px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-paper-plane" style={{ color: '#008C95', fontSize: '1.1rem' }}></i>
+                  </div>
+                  <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, lineHeight: 1.3 }}>
+                    Richiedi informazioni
+                  </h3>
+                </div>
+                <ContattoECMForm />
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -213,7 +213,7 @@ export default function Header({ active }) {
                   </button>
                 </div>
                 <div className={`sub-dropdown-menu${subDropdowns.regionale ? ' open' : ''}`}>
-                  <a href="/all-courses?categoria=fse-plus" onClick={() => setFormazioneOpen(false)}>FSE+</a>
+                  <a href="/all-courses?categoria=fse-plus" onClick={() => setFormazioneOpen(false)}>Formazione Regionale</a>
                   <a href="/all-courses?categoria=fondi-interprofessionali" onClick={() => setFormazioneOpen(false)}>Fondi interprofessionali</a>
                   <a href="/all-courses?categoria=fondo-nuove-competenze" onClick={() => setFormazioneOpen(false)}>Fondo nuove competenze</a>
                 </div>

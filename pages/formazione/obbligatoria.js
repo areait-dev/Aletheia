@@ -515,8 +515,8 @@ export default function FormazioneObbligatoria() {
                   <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: k.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className={k.icon} style={{ color: k.color, fontSize: '1.3rem' }}></i>
                   </div>
-                  <span className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, lineHeight: 1.2 }}>{k.headline}</span>
-                  <span className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem', lineHeight: 1.6 }}>{k.text}</span>
+                  <span className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '0.02em' }}>{k.headline}</span>
+                  <span className="text-slate-600 dark:text-gray-300" style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: '0.85rem', lineHeight: 1.6 }}>{k.text}</span>
                 </div>
               </div>
             ))}

@@ -2,8 +2,9 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import PricingSidebar from '../../components/PricingSidebar';
 import Link from 'next/link';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
@@ -818,6 +819,28 @@ export const coursesDetails = {
     ],
     learningOutcomes: ['Conoscere le norme di sicurezza per l\'uso dei carrelli', 'Valutare la stabilità e la portata del mezzo', 'Eseguire manovre in sicurezza a vuoto e a carico', 'Ottenere il patentino muletto valido 5 anni'],
   },
+  'addetti-alla-conduzione-di-carriponte': {
+    title: 'Addetti alla Conduzione di Carriponte',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&q=80',
+    category: 'Formazione Obbligatoria',
+    duration: '11 ore (aggiornamento 4 ore)',
+    modality: 'Aula + Pratica',
+    price: 'Da € 150,00',
+    priceVariants: [
+      { label: 'Nuovo 11H', amount: 270 },
+      { label: 'Aggiornamento 4H', amount: 150 },
+    ],
+    level: 'Specialistico',
+    lessons: '2 moduli',
+    students: '300+',
+    target: 'Lavoratori addetti alla conduzione di carriponte e gru a cavalletto con comando pensile o radiocomando',
+    overview: 'Il corso per Addetti alla Conduzione di Carriponte è conforme al D.Lgs. 81/08 e al nuovo Accordo Stato-Regioni, che dal 24 maggio 2026 richiede un\'abilitazione specifica standardizzata per questa attrezzatura, con modulo teorico e prova pratica documentata.',
+    curriculum: [
+      { week: 1, title: 'Modulo teorico', hours: 7, lessons: ['Normativa e Accordo Stato-Regioni 2026', 'Caratteristiche costruttive del carroponte', 'Rischi da sollevamento e movimentazione carichi', 'Imbracature, ganci e accessori'] },
+      { week: 2, title: 'Modulo pratico', hours: 4, lessons: ['Comando pensile e radiocomando', 'Controlli pre-operativi', 'Manovre in spazi ristretti', 'Gestione delle emergenze'] },
+    ],
+    learningOutcomes: ['Distinguere il carroponte dalla gru a portale', 'Condurre in sicurezza con comando pensile e radiocomando', 'Valutare i rischi di sollevamento e movimentazione', 'Ottenere l\'abilitazione valida 5 anni'],
+  },
   'piattaforme-elevabili-ple': {
     title: 'Piattaforme Elevabili PLE',
     image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80',
@@ -1064,6 +1087,14 @@ export default function CourseDetail() {
   const [selectedLivelloKey, setSelectedLivelloKey] = useState(null);
   const [selectedTipo, setSelectedTipo] = useState('corso');
   const [openFaqIndex, setOpenFaqIndex] = useState(null); // FAQ aperta nell'accordion - dipende dal livello, va resettata al cambio
+  const carouselRef = useRef(null);
+  const scrollCarousel = (dir) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const card = el.querySelector('.corso-correlato-card');
+    const step = card ? card.offsetWidth + 16 : 280;
+    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
 
   // Famiglie derivate automaticamente da coursesData (livelli/varianti annidati) + dettagli editoriali per prezzo/overview.
   // I vecchi slug per-livello (es. /all-courses/antincendio-rischio-basso-livello-1) sono gestiti a monte da
@@ -1141,7 +1172,12 @@ export default function CourseDetail() {
 
   const corsiCorrelatiRisolti = (contenutoLivello?.corsiCorrelati || [])
     .map((s) => resolveRelatedCourse(s, families))
-    .filter(Boolean);
+    .filter(Boolean)
+    .map((c) => {
+      const relatedSlug = c.href.split('/').pop();
+      const relatedFamily = families.find((f) => f.slug === relatedSlug);
+      return { ...c, image: relatedFamily?.image || null };
+    });
 
   // Oggetto "course" sintetizzato dalla famiglia + variante selezionata: mantiene compatibile il resto del render sottostante
   const course = {
@@ -1166,6 +1202,49 @@ export default function CourseDetail() {
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
       </Head>
+
+      <style jsx global>{`
+        /* Layout a due colonne: sidebar prezzo sticky a destra su desktop (lg+), full-width e in cima
+           alle tab su mobile/tablet - stesso pattern della pagina dedicata del corso Carriponte. */
+        .cp-page-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-areas: "switch" "price" "tabs";
+          gap: 2rem;
+          align-items: start;
+        }
+        @media (min-width: 992px) {
+          .cp-page-grid {
+            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+            /* Riga vuota (".") sotto lo switch livello/tipo nella colonna destra: il box prezzo
+               parte così dalla seconda riga, allineato alla riga delle tab (Panoramica/Moduli)
+               invece che allo switch soprastante. */
+            grid-template-areas: "switch ." "tabs price";
+            column-gap: 7rem; /* box prezzo più staccato/spostato a destra */
+            row-gap: 1.5rem;
+          }
+        }
+        .cp-switch-area { grid-area: switch; }
+        .cp-tabs-area { grid-area: tabs; min-width: 0; }
+        .cp-price-area { grid-area: price; min-width: 0; }
+        @media (min-width: 992px) {
+          .cp-price-area { position: sticky; top: 100px; align-self: start; }
+        }
+
+        .cp-carousel-track {
+          display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: none;
+        }
+        .cp-carousel-track::-webkit-scrollbar { display: none; }
+        .cp-carousel-arrow {
+          width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #E2E8F0;
+          background: #fff; color: #008C95; display: flex; align-items: center; justify-content: center;
+          cursor: pointer; font-size: 0.85rem; transition: all 0.2s ease;
+        }
+        .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+        .dark .cp-carousel-arrow { background: #1F2937; border-color: rgba(255,255,255,0.15); color: #6EE7B7; }
+        .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+      `}</style>
 
       <Header active="/all-courses" />
 
@@ -1196,9 +1275,18 @@ export default function CourseDetail() {
         </div>
       </div>
 
-      {/* SWITCH LIVELLO / TIPO - mostrato solo se la famiglia ha più varianti annidate */}
-      {(hasMultipleLivelli || hasAggiornamento) && (
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 0 2rem' }}>
+      {/* LAYOUT A DUE COLONNE: colonna sinistra (tabs) 70-75% + sidebar destra (prezzo) 25-30%, sticky su
+          desktop. Su mobile/tablet il box prezzo passa a larghezza intera e si posiziona subito sopra le
+          tab (grid-template-areas "price" "tabs"), coerente con la pagina dedicata del corso Carriponte. */}
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 3rem 2rem' }}>
+        <div className="cp-page-grid">
+
+      {/* Riga superiore sinistra: switch livello/tipo (se presente) + barra tab Panoramica/Moduli.
+          Sta tutta nella riga 1 della griglia, così la riga 2 (dove parte il box prezzo) inizia
+          esattamente al bordo della barra tab, allineando il box a quella riga invece che allo switch. */}
+      <div className="cp-switch-area">
+        {(hasMultipleLivelli || hasAggiornamento) && (
+          <div style={{ marginBottom: '1.25rem' }}>
           {hasMultipleLivelli && (
             <div role="tablist" aria-label="Livello del corso" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: hasAggiornamento ? '0.75rem' : 0 }}>
               {(() => {
@@ -1266,11 +1354,10 @@ export default function CourseDetail() {
               ))}
             </div>
           )}
-        </div>
-      )}
+          </div>
+        )}
 
-      {/* TABS */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 0 2rem' }}>
+        {/* TABS */}
         <div className="border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ display: 'flex', gap: '0.5rem', borderBottom: '2px solid' }}>
           {[
             { id: 'overview', label: 'Panoramica' },
@@ -1283,9 +1370,10 @@ export default function CourseDetail() {
         </div>
       </div>
 
+          <div className="cp-tabs-area">
       {/* TAB CONTENT - pilotato da contenutoLivello (data/content/*.js): null per le varianti "aggiornamento"
           o per famiglie senza materiale editoriale ancora pronto → placeholder invece di un tab vuoto/rotto */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 3rem 2rem' }}>
+      <div style={{ paddingTop: '2rem' }}>
         {!contenutoLivello ? (
           <div className="bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl" style={{ padding: '2.5rem', textAlign: 'center' }}>
             <i className="fas fa-hourglass-half" style={{ fontSize: '1.5rem', color: '#94A3B8', marginBottom: '0.75rem' }}></i>
@@ -1355,16 +1443,52 @@ export default function CourseDetail() {
 
             {corsiCorrelatiRisolti.length > 0 && (
               <>
-                <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1rem' }}>Corsi correlati</h2>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', gap: '1rem', flexWrap: 'wrap' }}>
+                  <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>Corsi correlati</h2>
+                  {corsiCorrelatiRisolti.length > 3 && (
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <button type="button" onClick={() => scrollCarousel(-1)} aria-label="Corsi precedenti" className="cp-carousel-arrow">
+                        <i className="fas fa-arrow-left"></i>
+                      </button>
+                      <button type="button" onClick={() => scrollCarousel(1)} aria-label="Corsi successivi" className="cp-carousel-arrow">
+                        <i className="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                <div ref={carouselRef} className="cp-carousel-track">
                   {corsiCorrelatiRisolti.map((c, i) => (
                     <Link
                       key={i}
                       href={c.href}
-                      className="text-teal-600 dark:text-[#10B981] border border-teal-600 dark:border-[#10B981]"
-                      style={{ borderRadius: '9999px', padding: '0.5rem 1.1rem', fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none' }}
+                      className="corso-correlato-card group bg-white dark:bg-dark-card"
+                      style={{
+                        flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
+                        scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+                      }}
                     >
-                      {c.titolo}
+                      <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
+                        {c.image ? (
+                          <img
+                            src={c.image}
+                            alt={c.titolo}
+                            loading="lazy"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.35s ease' }}
+                            className="group-hover:scale-105"
+                          />
+                        ) : (
+                          <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }} />
+                        )}
+                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
+                      </div>
+                      <div style={{ padding: '1rem 1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{c.titolo}</span>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: 'auto' }}>
+                          Scopri di più <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem' }}></i>
+                        </span>
+                      </div>
                     </Link>
                   ))}
                 </div>
@@ -1410,146 +1534,98 @@ export default function CourseDetail() {
           </div>
         )}
       </div>
-
-      {/* PREZZI E ISCRIZIONE */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem 3rem 2rem' }}>
-        <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1rem' }}>Prezzi e iscrizione</h2>
-
-        {/* CASO 1 - Corso finanziato / gratuito */}
-        {/Finanziato|Gratuito/i.test(course.price) ? (
-          <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/40 rounded-2xl p-6" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '480px' }}>
-            <span style={{ display: 'inline-block', backgroundColor: '#DCFCE7', color: '#15803D', padding: '0.5rem 1.25rem', borderRadius: '50px', fontWeight: '700', fontSize: '0.9rem', width: 'fit-content' }}>
-              <i className="fas fa-check-circle" style={{ marginRight: '0.4rem' }}></i>
-              Corso finanziato - gratuito per i partecipanti
-            </span>
-            <p className="text-emerald-800 dark:text-emerald-200" style={{ fontSize: '0.875rem', lineHeight: 1.6, margin: 0 }}>
-              Questo corso è completamente finanziato. Contattaci per verificare la tua eligibilità e avviare l&apos;iscrizione.
-            </p>
-            <a
-              href={`/contatti?corso=${encodeURIComponent(course.title)}`}
-              className="text-center text-sm font-semibold text-white rounded-xl py-3 px-6 no-underline"
-              style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', width: 'fit-content' }}
-            >
-              Richiedi informazioni
-            </a>
           </div>
 
-        /* CASO 2 - Acquistabile online (ICDL/certificazioni), prezzo della variante selezionata sopra */
-        ) : course.purchasable ? (
-          <div style={{ maxWidth: '480px' }}>
-            <div className="flex flex-col gap-3 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-xl p-4 bg-white dark:bg-dark-card">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-slate-700 dark:text-gray-200">{varianteCorrente.prezzoLabel}</span>
-                <span className="text-teal-600 font-bold text-base">{prezzoTesto}</span>
-              </div>
-              <button
-                onClick={() => addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image })}
-                className="w-full text-center text-sm font-semibold text-white rounded-xl py-2 px-4 transition-colors"
-                style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', border: 'none', cursor: 'pointer' }}
+          {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet,
+              subito sopra le tab. Per i corsi senza un prezzo letterale (finanziati/gratuiti) mostra
+              comunque un box con CTA di contatto, mai una sidebar vuota. */}
+          <aside className="cp-price-area">
+            {/* CASO 1 - Corso finanziato / gratuito */}
+            {/Finanziato|Gratuito/i.test(course.price) ? (
+              <PricingSidebar
+                buyHref={`/contatti?corso=${encodeURIComponent(course.title)}`}
+                buyLabel="Richiedi informazioni"
               >
-                🛒 Aggiungi al carrello
-              </button>
-              <a
-                href={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(varianteCorrente.label)}`}
-                className="w-full text-center text-sm font-semibold rounded-xl py-2 px-4 no-underline border border-teal-600 text-teal-600 dark:text-[#10B981] dark:border-[#10B981]"
-              >
-                Richiedi iscrizione
-              </a>
-            </div>
-          </div>
-
-        /* CASO 3 - Iscrizione online senza pagamento anticipato (OSS, ASACOM) */
-        ) : course.enrollOnly ? (
-          <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6" style={{ maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <span className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Quota di iscrizione</span>
-              <span style={{ fontSize: '1.35rem', fontWeight: '800', color: '#008C95' }}>Su richiesta</span>
-            </div>
-            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
-              <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
-              <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
-                <strong>Pagamento all&apos;avvio del corso.</strong> Inviaci la richiesta di iscrizione: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
-              </p>
-            </div>
-            <a
-              href={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=iscrizione`}
-              className="text-center font-semibold text-white rounded-xl py-3 px-6 no-underline"
-              style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', fontSize: '0.95rem' }}
-            >
-              <i className="fas fa-paper-plane" style={{ marginRight: '0.5rem' }}></i>
-              Invia richiesta di iscrizione
-            </a>
-            <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: 0, textAlign: 'center' }}>
-              Riceverai una conferma entro 24-48 ore lavorative
-            </p>
-          </div>
-
-        /* CASO 4 - Non acquistabile online: mostra prezzi + Richiedi preventivo */
-        ) : (
-          <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6" style={{ maxWidth: Array.isArray(course.priceVariants) ? '100%' : '480px', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            {Array.isArray(course.priceVariants) ? (
-              /* Varianti prezzo ma non acquistabile online → griglia con "Richiedi preventivo" */
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.85rem', margin: 0 }}>Seleziona il percorso di interesse per richiedere un preventivo personalizzato.</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.6rem' }}>
-                  {course.priceVariants.map((v, i) => (
-                    <a
-                      key={i}
-                      href={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(v.label)}`}
-                      className="flex items-center justify-between border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-xl p-4 bg-slate-50 dark:bg-gray-700 no-underline hover:border-teal-400 transition-colors"
-                    >
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                        <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.875rem', fontWeight: '600' }}>{v.label}</span>
-                        <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#008C95' }}>€ {v.amount}</span>
-                      </div>
-                      <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#008C95', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
-                        Richiedi preventivo →
-                      </span>
-                    </a>
-                  ))}
+                <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/40 rounded-2xl p-6" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <span style={{ display: 'inline-block', backgroundColor: '#DCFCE7', color: '#15803D', padding: '0.5rem 1.25rem', borderRadius: '50px', fontWeight: '700', fontSize: '0.9rem', width: 'fit-content' }}>
+                    <i className="fas fa-check-circle" style={{ marginRight: '0.4rem' }}></i>
+                    Corso finanziato - gratuito per i partecipanti
+                  </span>
+                  <p className="text-emerald-800 dark:text-emerald-200" style={{ fontSize: '0.875rem', lineHeight: 1.6, margin: 0 }}>
+                    Questo corso è completamente finanziato. Contattaci per verificare la tua eligibilità e avviare l&apos;iscrizione.
+                  </p>
                 </div>
-              </div>
-            ) : (
-              /* Prezzo singolo */
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <span className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Quota di partecipazione</span>
-                <span style={{ fontSize: '1.35rem', fontWeight: '800', color: '#008C95' }}>{course.price}</span>
-              </div>
-            )}
-            <a
-              href={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
-              className="text-center font-semibold text-white rounded-xl py-3 px-6 no-underline"
-              style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', fontSize: '0.95rem', width: 'fit-content' }}
-            >
-              <i className="fas fa-file-invoice" style={{ marginRight: '0.5rem' }}></i>
-              Richiedi preventivo
-            </a>
+              </PricingSidebar>
 
-            {/* "Acquista ora" / WhatsApp - placeholder in attesa di un flusso di pagamento e di un
-                numero WhatsApp reali: nessun dato sensibile o statico è cablato qui, solo variabili
-                d'ambiente pubbliche con fallback "#" così i bottoni restano visibili e posizionati. */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-              <a
-                href={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
-                className="text-center font-semibold text-white rounded-xl py-3 px-6 no-underline"
-                style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', fontSize: '0.95rem' }}
+            /* CASO 2 - Acquistabile online (ICDL/certificazioni), prezzo della variante selezionata sopra */
+            ) : course.purchasable ? (
+              <PricingSidebar
+                priceRows={[{ label: varianteCorrente.prezzoLabel, value: prezzoTesto }]}
+                onBuyClick={() => addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image })}
+                buyLabel="Aggiungi al carrello"
+                quoteHref={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(varianteCorrente.label)}`}
+                quoteLabel="Richiedi iscrizione"
+              />
+
+            /* CASO 3 - Iscrizione online senza pagamento anticipato (OSS, ASACOM) */
+            ) : course.enrollOnly ? (
+              <>
+                <PricingSidebar
+                  priceRows={[{ label: 'Quota di iscrizione', value: 'Su richiesta' }]}
+                  buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=iscrizione`}
+                  buyLabel="Invia richiesta di iscrizione"
+                >
+                  <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                    <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
+                    <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
+                      <strong>Pagamento all&apos;avvio del corso.</strong> Inviaci la richiesta di iscrizione: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
+                    </p>
+                  </div>
+                </PricingSidebar>
+                <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: '0.75rem 0 0', textAlign: 'center' }}>
+                  Riceverai una conferma entro 24-48 ore lavorative
+                </p>
+              </>
+
+            /* CASO 4 - Non acquistabile online: mostra prezzi + Richiedi preventivo. "Acquista ora" resta
+               il bottone dominante (pieno, grassetto); "Richiedi preventivo" e WhatsApp sono outline per
+               non appesantire il box - placeholder in attesa di un flusso di pagamento e di un numero
+               WhatsApp reali: nessun dato sensibile o statico è cablato qui, solo variabili d'ambiente
+               pubbliche con fallback "#". */
+            ) : (
+              <PricingSidebar
+                priceRows={Array.isArray(course.priceVariants) ? undefined : [{ label: 'Quota di partecipazione', value: course.price }]}
+                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                quoteHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               >
-                <i className="fas fa-cart-shopping" style={{ marginRight: '0.5rem' }}></i>
-                Acquista ora
-              </a>
-              <a
-                href={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
-                target={process.env.NEXT_PUBLIC_WHATSAPP_URL ? '_blank' : undefined}
-                rel={process.env.NEXT_PUBLIC_WHATSAPP_URL ? 'noopener noreferrer' : undefined}
-                className="text-center font-semibold rounded-xl py-3 px-6 no-underline border border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400"
-                style={{ fontSize: '0.95rem' }}
-              >
-                <i className="fab fa-whatsapp" style={{ marginRight: '0.5rem' }}></i>
-                Contattaci su WhatsApp
-              </a>
-            </div>
-          </div>
-        )}
+                {Array.isArray(course.priceVariants) && (
+                  /* Varianti prezzo ma non acquistabile online → griglia con "Richiedi preventivo" per variante */
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.85rem', margin: 0 }}>Seleziona il percorso di interesse per richiedere un preventivo personalizzato.</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.6rem' }}>
+                      {course.priceVariants.map((v, i) => (
+                        <a
+                          key={i}
+                          href={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(v.label)}`}
+                          className="flex items-center justify-between border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-xl p-4 bg-slate-50 dark:bg-gray-700 no-underline hover:border-teal-400 transition-colors"
+                        >
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                            <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.875rem', fontWeight: '600' }}>{v.label}</span>
+                            <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#008C95' }}>€ {v.amount}</span>
+                          </div>
+                          <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#008C95', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
+                            Richiedi preventivo →
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </PricingSidebar>
+            )}
+          </aside>
+        </div>
       </div>
       </div>
 
