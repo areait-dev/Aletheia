@@ -426,7 +426,7 @@ export default function FormAzienda() {
                     </div>
                     <span style={{ fontSize: '0.825rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
                       Ho letto e accetto la{' '}
-                      <a href="/privacy-policy" style={{ color: '#008C95', textDecoration: 'underline' }}>
+                      <a href="/privacy-cookie" style={{ color: '#008C95', textDecoration: 'underline' }}>
                         Privacy Policy
                       </a>{' '}
                       di Alètheia S.r.l.

@@ -282,7 +282,7 @@ export default function ServiziAlleImprese() {
         }
         .cta-btn-primary {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.9rem 2.25rem; border-radius: 999px;
+          padding: 0.85rem 2rem; border-radius: 999px;
           background: linear-gradient(90deg, #008C95, #10B981);
           color: #fff; font-weight: 700; font-size: 0.95rem;
           text-decoration: none; font-family: inherit;
@@ -291,7 +291,7 @@ export default function ServiziAlleImprese() {
         }
         .cta-btn-primary:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0,140,149,0.52);
+          box-shadow: 0 8px 32px rgba(0,140,149,0.5);
         }
       `}</style>
 

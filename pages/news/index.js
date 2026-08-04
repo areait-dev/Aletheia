@@ -209,20 +209,32 @@ export default function NewsPage() {
           box-shadow: 0 0 0 3px rgba(0,140,149,0.1);
         }
         .search-input::placeholder { color: #94A3B8; }
-        :global(.dark) .search-input,
-        :global(.dark) .year-select {
+        :global(.dark) .search-input {
           background: #374151;
           color: #F8FAFC;
           border-color: #374151;
         }
+        :global(.dark) .year-select {
+          background-color: #374151;
+          color: #F8FAFC;
+          border-color: #374151;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2310B981' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+        }
 
         .year-select {
           padding: 0.75rem 1.5rem;
+          padding-right: 2.75rem;
           border: 1px solid #E2E8F0;
           border-radius: 999px;
           font-size: 0.9rem;
           color: #0F172A;
-          background: #fff;
+          background-color: #fff;
+          appearance: none;
+          -webkit-appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23008C95' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 1.1rem center;
+          background-size: 10px;
           outline: none;
           cursor: pointer;
           font-family: inherit;
