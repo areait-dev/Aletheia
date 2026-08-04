@@ -10,8 +10,7 @@ const avvisi = [
     title: 'Avviso 1/2026 POC',
     text: 'Percorsi di formazione professionale finanziati dal Programma Operativo Complementare Sicilia, finalizzati al conseguimento di una qualifica professionale riconosciuta e spendibile nel mercato del lavoro.',
     modalita: 'Aula (o variabile)',
-    href: 'https://www.aletheiasrl.it/index.php/i-nostri-corsi/formazione-professionale/avviso-n-1-2026-poc-sicilia-2014-2020',
-    external: true,
+    href: '/archivio/avviso-1-2026-poc',
   },
   {
     badge: 'Disoccupati, NASpI, ADI',
@@ -19,7 +18,6 @@ const avvisi = [
     title: 'Avviso 6/2025 GOL – Garanzia di Occupabilità dei Lavoratori',
     text: 'Il Programma GOL – Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.',
     modalita: 'Aula (o variabile)',
-    href: '/calendario-corsi',
   },
   {
     badge: 'Qualifica, Stage, Indennità di frequenza',
@@ -27,8 +25,7 @@ const avvisi = [
     title: 'Avviso 7/2023 - II Finestra',
     text: 'Percorsi rivolti a disoccupati e inoccupati che prevedono una qualifica professionale riconosciuta, indennità di frequenza e stage presso aziende partner.',
     modalita: 'Aula + Stage (o variabile)',
-    href: 'https://www.aletheiasrl.it/index.php/i-nostri-corsi/formazione-professionale/avviso-7-2023-2a-finestra',
-    external: true,
+    href: '/archivio/avviso-7-2023',
   },
   {
     badge: 'Assistente Familiare',
@@ -37,8 +34,7 @@ const avvisi = [
     text: 'Percorso finanziato dedicato alla formazione della figura professionale di Assistente Familiare, sempre più richiesta nel settore socio-assistenziale. Il corso comprende formazione teorica, attività pratiche e rilascio della qualifica professionale.',
     durata: '300 ore',
     modalita: 'Aula + Stage',
-    href: 'https://www.aletheiasrl.it/index.php/i-nostri-corsi/formazione-professionale/avviso-20-2024-fse',
-    external: true,
+    href: '/archivio/avviso-20-2024-fse',
     image: 'https://www.aletheiasrl.it/images/avviso20_2024/Avv.20_Ass.Familare_banner.jpg',
   },
 ];
@@ -80,24 +76,27 @@ const faqs = [
 
 function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external, image }) {
   const [hovered, setHovered] = useState(false);
+  const clickable = Boolean(href);
+  const Tag = clickable ? 'a' : 'div';
   return (
-    <a
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <Tag
+      href={clickable ? href : undefined}
+      target={clickable && external ? '_blank' : undefined}
+      rel={clickable && external ? 'noopener noreferrer' : undefined}
+      onMouseEnter={clickable ? () => setHovered(true) : undefined}
+      onMouseLeave={clickable ? () => setHovered(false) : undefined}
       className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
       style={{
         borderRadius: '1.25rem',
         overflow: 'hidden',
-        cursor: 'pointer',
+        cursor: clickable ? 'pointer' : 'default',
         textDecoration: 'none',
         display: 'flex',
         flexDirection: 'column',
         transition: 'transform 0.25s ease, box-shadow 0.25s ease',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         boxShadow: hovered ? '0 16px 40px rgba(0,0,0,0.1)' : '0 2px 12px rgba(0,0,0,0.05)',
+        opacity: clickable ? 1 : 0.85,
       }}
     >
       <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
@@ -138,12 +137,18 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
         </div>
 
         <div className="border-slate-100 dark:border-[rgba(255,255,255,0.08)]" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingTop: '0.75rem', borderTop: '1px solid' }}>
-          <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', opacity: hovered ? 1 : 0.6, transition: 'opacity 0.2s' }}>
-            Scopri {durata ? 'il corso' : 'i corsi'}
-          </span>
+          {clickable ? (
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', opacity: hovered ? 1 : 0.6, transition: 'opacity 0.2s' }}>
+              Scopri {durata ? 'il corso' : 'i corsi'}
+            </span>
+          ) : (
+            <span className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.78rem', fontWeight: 700 }}>
+              Prossimamente
+            </span>
+          )}
         </div>
       </div>
-    </a>
+    </Tag>
   );
 }
 
@@ -185,6 +190,17 @@ export default function FormazioneRegionale() {
         }
         @media (max-width: 600px) {
           .avvisi-grid { grid-template-columns: 1fr; }
+        }
+
+        .faq-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-auto-flow: column;
+          grid-template-rows: repeat(2, auto);
+          gap: 0.85rem 1.5rem;
+        }
+        @media (max-width: 768px) {
+          .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
         }
 
         .requisiti-valore-grid {
@@ -262,26 +278,6 @@ export default function FormazioneRegionale() {
           background: rgba(255,255,255,0.08);
           border-color: rgba(255,255,255,0.5);
         }
-        .cta-btn-outline-light {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0.85rem 2rem;
-          border-radius: 999px;
-          background: transparent;
-          color: #008C95;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          border: 2px solid rgba(0,140,149,0.3);
-          transition: all 0.2s ease;
-          font-family: inherit;
-          cursor: pointer;
-        }
-        .cta-btn-outline-light:hover {
-          background: rgba(0,140,149,0.08);
-          border-color: #008C95;
-        }
       `}</style>
 
       {/* ── HERO ── */}
@@ -309,37 +305,58 @@ export default function FormazioneRegionale() {
           </div>
 
           <h1 className="fade-up fade-up-1" style={{
-            fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',
+            fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)',
             fontWeight: 900,
             color: '#fff',
-            lineHeight: 1.12,
+            lineHeight: 1.15,
             marginBottom: '1.25rem',
-            maxWidth: '700px',
           }}>
-            Formazione{' '}
+            Formazione regionale{' '}
             <span style={{
               background: 'linear-gradient(90deg, #10B981, #008C95)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Regionale
-            </span>
+              gratuita
+            </span>{' '}
+            in Sicilia con qualifica riconosciuta.
           </h1>
 
           <p className="fade-up fade-up-2" style={{
             fontSize: 'clamp(1rem, 2vw, 1.15rem)',
             color: 'rgba(255,255,255,0.68)',
-            maxWidth: '820px',
             lineHeight: 1.75,
             marginBottom: '2.5rem',
           }}>
-            Percorsi formativi finanziati dalla Regione Siciliana attraverso avvisi pubblici europei e nazionali. Spesso completamente gratuiti per i partecipanti.
+            Alètheia Srl è ente accreditato dalla Regione Siciliana (DDG n. 78/2017). Eroga percorsi formativi finanziati attraverso FSE+, Programma GOL, POC Sicilia e altri programmi regionali, rivolti a disoccupati, inoccupati e persone in cerca di nuove opportunità professionali. I corsi sono gratuiti con qualifica riconosciuta, indennità di frequenza e stage in azienda, per trasformare la formazione in un&apos;opportunità concreta di lavoro.
           </p>
 
           <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a href="#avvisi" className="cta-btn-primary">Vedi gli avvisi</a>
+            <a href="#avvisi" className="cta-btn-primary">Scopri gli avvisi</a>
             <a href="/contatti" className="cta-btn-outline">Contattaci</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════ PERCHÉ SCEGLIERE LA FORMAZIONE FINANZIATA ══════════════ */}
+      <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
+        <div className="container">
+          <div>
+            <span className="section-badge">Perché scegliere la formazione finanziata</span>
+            <p className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.15rem, 2vw, 1.4rem)', fontWeight: 800, margin: '0 0 1.5rem', lineHeight: 1.4 }}>
+              Gratuita. Certificata. Spendibile nel mondo del lavoro.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+              {puntiDiForza.map((p) => (
+                <div key={p.text} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.85rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className={p.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
+                  </div>
+                  <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{p.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -358,55 +375,6 @@ export default function FormazioneRegionale() {
             <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
               La Formazione Regionale comprende tutti i percorsi attivati attraverso avvisi pubblici finanziati dalla Regione Siciliana, spesso in co-finanziamento con fondi europei (FSE+, FESR) o nazionali (PNRR). Alètheia Srl è ente accreditato dalla Regione Siciliana (DDG n. 78/2017) e gestisce questi percorsi dalla progettazione alla rendicontazione finale, garantendo la massima qualità e conformità normativa.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════ DETTAGLIO CORSI GRATUITI REGIONALI ══════════════ */}
-      <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
-        <div className="container">
-          <div style={{ display: 'flex', gap: '3rem', alignItems: 'center', flexWrap: 'wrap' }}>
-            <div style={{ flex: '1 1 420px', minWidth: '280px' }}>
-              <span className="section-badge">Corsi gratuiti in Sicilia FSE+, GOL, POC</span>
-              <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-                Formazione regionale gratuita in Sicilia con qualifica riconosciuta.
-              </h2>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '1.5rem' }}>
-                Alètheia Srl è ente accreditato dalla Regione Siciliana (DDG n. 78/2017). Eroga percorsi formativi finanziati attraverso FSE+, Programma GOL, POC Sicilia e altri programmi regionali, rivolti a disoccupati, inoccupati e persone in cerca di nuove opportunità professionali. I corsi sono gratuiti con qualifica riconosciuta, indennità di frequenza e stage in azienda, per trasformare la formazione in un&apos;opportunità concreta di lavoro.
-              </p>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <a href="#avvisi" className="cta-btn-primary">Scopri gli avvisi</a>
-                <a href="/contatti" className="cta-btn-outline-light">Contattaci</a>
-              </div>
-            </div>
-
-            {/* Placeholder logo Regione Siciliana */}
-            <div
-              className="bg-white dark:bg-dark-card border-slate-200 dark:border-[rgba(255,255,255,0.08)] text-slate-400 dark:text-gray-500"
-              style={{ flex: '0 0 260px', minWidth: '220px', height: '220px', border: '1px dashed', borderRadius: '1.25rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
-              aria-label="Logo Regione Siciliana (placeholder)"
-            >
-              <i className="fas fa-image" style={{ fontSize: '2.25rem' }} aria-hidden="true"></i>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, textAlign: 'center', padding: '0 1rem' }}>Logo Regione Siciliana</span>
-            </div>
-          </div>
-
-          {/* Perché la formazione finanziata */}
-          <div style={{ marginTop: '3rem' }}>
-            <span className="section-badge">Perché scegliere la formazione finanziata</span>
-            <p className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.15rem, 2vw, 1.4rem)', fontWeight: 800, margin: '0 0 1.5rem', lineHeight: 1.4 }}>
-              Gratuita. Certificata. Spendibile nel mondo del lavoro.
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-              {puntiDiForza.map((p) => (
-                <div key={p.text} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.85rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className={p.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
-                  </div>
-                  <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{p.text}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -491,7 +459,7 @@ export default function FormazioneRegionale() {
 
       {/* ══════════════ FAQ ══════════════ */}
       <section className="bg-white dark:bg-dark-card border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
-        <div className="container" style={{ maxWidth: '860px' }}>
+        <div className="container">
           <div style={{ marginBottom: '2.5rem' }}>
             <span className="section-badge">Domande frequenti sulla formazione regionale in Sicilia</span>
             <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', margin: 0, lineHeight: 1.7 }}>
@@ -499,7 +467,7 @@ export default function FormazioneRegionale() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+          <div className="faq-grid">
             {faqs.map((item, i) => {
               const isOpen = openFaqIndex === i;
               return (
