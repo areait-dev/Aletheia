@@ -140,6 +140,30 @@ export default function Chatbot() {
 
   return (
     <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+      <style jsx>{`
+        @keyframes chatbot-breathe {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.06); }
+        }
+        .chatbot-toggle-mark {
+          animation: chatbot-breathe 3s ease-in-out infinite;
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+        }
+        .chatbot-toggle-mark.is-open {
+          animation: none;
+          transform: rotate(90deg) scale(0.9);
+          opacity: 0;
+        }
+        .chatbot-toggle-close {
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+          transform: rotate(-90deg) scale(0.5);
+          opacity: 0;
+        }
+        .chatbot-toggle-close.is-open {
+          transform: rotate(0deg) scale(1);
+          opacity: 1;
+        }
+      `}</style>
 
       {/* Finestra chat */}
       <div style={{
@@ -376,10 +400,19 @@ export default function Chatbot() {
           flexShrink: 0,
         }}
       >
-        <i
-          className={open ? 'fas fa-times' : 'fas fa-comment-dots'}
-          style={{ color: '#fff', fontSize: '1.3rem', transition: 'opacity 0.15s' }}
-        ></i>
+        <div style={{ position: 'relative', width: '26px', height: '26px' }}>
+          <img
+            src="/images/logo/pittogramma-white.png"
+            alt=""
+            aria-hidden="true"
+            className={`chatbot-toggle-mark${open ? ' is-open' : ''}`}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }}
+          />
+          <i
+            className={`fas fa-times chatbot-toggle-close${open ? ' is-open' : ''}`}
+            style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '1.3rem' }}
+          ></i>
+        </div>
         {!open && (
           <span style={{
             position: 'absolute', top: '-4px', right: '-4px',

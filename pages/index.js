@@ -465,7 +465,7 @@ export default function Home() {
       </section>
 
       {/* ── 2 · I NOSTRI CORSI ───────────────────────────── */}
-      <section className="py-16 md:py-24 bg-slate-50 dark:bg-dark-bg" aria-labelledby="courses-heading">
+      <section className="py-16 md:py-20 bg-slate-50 dark:bg-dark-bg" aria-labelledby="courses-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
@@ -659,7 +659,7 @@ export default function Home() {
       </section>
 
       {/* ── 4 · ULTIME NOTIZIE ───────────────────────────── */}
-      <section id="news" className="py-16 md:py-24 bg-light dark:bg-dark-bg" aria-labelledby="news-heading">
+      <section id="news" className="py-16 md:py-20 bg-light dark:bg-dark-bg" aria-labelledby="news-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header sezione */}

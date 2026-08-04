@@ -10,7 +10,7 @@ export default function PrivacyCookie() {
       </Head>
       <Header />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
-        <section className="max-w-4xl mx-auto px-6 sm:px-12 py-24">
+        <section className="max-w-4xl mx-auto px-6 sm:px-12 py-20">
           <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-4 block">
             Trasparenza
           </span>

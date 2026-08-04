@@ -83,7 +83,11 @@ export default function Header({ active, solid = false }) {
         {/* LOGO */}
         <div className="logo">
           <a href="/" aria-label="Vai alla homepage" style={{ display: 'inline-flex' }}>
-            <img src="/logo.png" alt="Alètheia" style={{ height: '80px', width: 'auto' }} />
+            <img
+              src={theme === 'dark' ? '/logo-white.png' : '/logo.png'}
+              alt="Alètheia"
+              style={{ height: '80px', width: 'auto' }}
+            />
           </a>
         </div>
 
@@ -132,7 +136,7 @@ export default function Header({ active, solid = false }) {
             }}
           >
             <i
-              className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}
+              className={`far ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}
               style={{ fontSize: '1.1rem', color: iconColor, transition: 'color 0.3s ease' }}
             />
           </button>
