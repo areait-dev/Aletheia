@@ -611,7 +611,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 Consulta le nostre offerte di lavoro attive e candidati direttamente online.
               </p>
               <a
-                href="https://aletheia4job.it/offerte-di-lavoro"
+                href="https://aletheia4job.it/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -821,7 +821,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
 
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="https://aletheia4job.it/offerte-di-lavoro"
+              href="https://aletheia4job.it/"
               target="_blank"
               rel="noopener noreferrer"
               style={{

@@ -278,7 +278,7 @@ const SEARCH_CATEGORIES = [
   { value: 'fse', label: 'Formazione Finanziata' },
   { value: 'obbligatoria', label: 'Formazione Obbligatoria' },
   { value: 'professionale', label: 'Formazione Professionale e PA' },
-  { value: 'offerte', label: 'Offerte di lavoro', href: 'https://aletheia4job.it/offerte-di-lavoro' },
+  { value: 'offerte', label: 'Offerte di lavoro', href: 'https://aletheia4job.it/' },
 ];
 
 function HeroSearch() {
@@ -422,7 +422,7 @@ export default function Home() {
               Scopri i corsi
             </a>
             <a
-              href="https://aletheia4job.it/offerte-di-lavoro"
+              href="https://aletheia4job.it/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-200 text-base"
