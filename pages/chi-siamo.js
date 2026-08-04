@@ -17,7 +17,7 @@ function scrollToCertificazioni() {
   }
 }
 
-function CertCard({ icon, title, subtitle, description, benefits, pdfUrl }) {
+function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraLinks }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -80,6 +80,22 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl }) {
               >
                 <i className="fas fa-file-pdf"></i> Visualizza Certificato
               </a>
+            )}
+
+            {extraLinks && extraLinks.length > 0 && (
+              <div className="flex flex-col gap-2 mt-2">
+                {extraLinks.map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 w-full py-3 bg-white dark:bg-transparent border border-teal-600 dark:border-[#10B981] text-teal-600 dark:text-[#10B981] hover:bg-teal-50 dark:hover:bg-teal-900/20 font-semibold rounded-xl transition-all duration-200 text-sm no-underline"
+                  >
+                    <i className="fas fa-file-pdf"></i> {link.label}
+                  </a>
+                ))}
+              </div>
             )}
           </div>
         </div>
@@ -392,7 +408,7 @@ export default function ChiSiamo() {
               subtitle="Sistemi di gestione per la qualità"
               description="La certificazione ISO 9001:2015 attesta che Alètheia s.r.l. adotta un sistema di gestione della qualità conforme agli standard internazionali, garantendo processi efficienti, miglioramento continuo e soddisfazione del cliente."
               benefits={['Servizi di formazione e consulenza di qualità', 'Processi standardizzati e tracciabili', 'Miglioramento continuo delle performance']}
-              pdfUrl="/pdf/certificati/iso-9001.pdf"
+              pdfUrl="/pdf/certificati/ALTH2572Q1901_-certificate-release_ISO9001_20220408.pdf"
             />
             <CertCard
               icon="fas fa-venus-mars"
@@ -400,7 +416,8 @@ export default function ChiSiamo() {
               subtitle="Parità di genere"
               description="La prassi di riferimento UNI/PdR 125:2022 certifica l'impegno di Alètheia s.r.l. per la parità di genere, garantendo politiche aziendali inclusive e trasparenti, riconosciute dal PNRR."
               benefits={['Pari opportunità di carriera', 'Trasparenza retributiva', 'Ambienti di lavoro inclusivi', 'Agevolazioni fiscali e premialità nei bandi']}
-              pdfUrl="/pdf/certificati/uni-pdr-125.pdf"
+              pdfUrl="/pdf/certificati/2023_ALETHEIA_paritdigenere.pdf"
+              extraLinks={[{ label: 'Politica Aziendale', url: '/pdf/certificati/ALL1--POLITICA-PDR-125-Aletheia.pdf' }]}
             />
             <CertCard
               icon="fas fa-school"
@@ -408,7 +425,7 @@ export default function ChiSiamo() {
               subtitle="Sistema di Gestione per Organizzazioni Educative"
               description="Certificazione specifica per le organizzazioni educative, garantisce che Alètheia s.r.l. eroga servizi formativi di alta qualità, centrati sull'apprendimento e il miglioramento continuo."
               benefits={['Processi formativi standardizzati', 'Focalizzazione sui bisogni dei discenti', "Valutazione dell'efficacia dell'apprendimento"]}
-              pdfUrl="/pdf/certificati/uni-iso-21001.pdf"
+              pdfUrl="/pdf/certificati/ALTH2572A2002_certificate-release_ISO21001_20240322.pdf"
             />
             <CertCard
               icon="fas fa-chalkboard-user"
@@ -416,7 +433,7 @@ export default function ChiSiamo() {
               subtitle="Servizi di formazione professionale non formale"
               description="La norma definisce i requisiti per i servizi di formazione professionale non formale, garantendo trasparenza, coerenza e qualità nell'offerta formativa."
               benefits={["Trasparenza nell'offerta formativa", 'Qualità dei contenuti e dei materiali', 'Gestione efficace dei processi di erogazione']}
-              pdfUrl="/pdf/certificati/uni-iso-29993.pdf"
+              pdfUrl="/pdf/certificati/ALTH2572A2003_certificate-release_ISO29993_20240322.pdf"
             />
             <CertCard
               icon="fas fa-clipboard-list"
