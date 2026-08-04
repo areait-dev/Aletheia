@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { useTheme } from '../../context/ThemeContext';
 
 const target = [
   {
@@ -75,6 +76,8 @@ const faqs = [
 
 export default function FondoNuoveCompetenze() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const { theme } = useTheme() || { theme: 'light' };
+  const isDark = theme === 'dark';
 
   return (
     <>
@@ -366,7 +369,9 @@ export default function FondoNuoveCompetenze() {
             borderRadius: '1.25rem',
             padding: '2.5rem',
             marginTop: '2rem',
-            background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
+            background: isDark ? '#1f2937' : 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
+            border: isDark ? '1px solid rgba(255,255,255,0.08)' : 'none',
+            borderLeft: isDark ? '3px solid #10B981' : 'none',
             display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'flex-start',
           }}>
             <p style={{

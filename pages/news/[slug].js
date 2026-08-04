@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import { ALL_NEWS, getNewsBySlug, formatDate } from '../../lib/newsData';
+import { useTheme } from '../../context/ThemeContext';
 
 /* ─── Data fetching (invariato) ─────────────────────────────── */
 
@@ -233,6 +234,8 @@ export default function ArticlePage({ article, related }) {
   const readingTime = estimateReadingTime(article.body);
   const category = getCategory(article.slug);
   const tags = getTags(article.slug);
+  const { theme } = useTheme() || { theme: 'light' };
+  const isDark = theme === 'dark';
 
   return (
     <>
@@ -489,7 +492,12 @@ export default function ArticlePage({ article, related }) {
                 )}
 
                 {/* Widget: CTA contatti */}
-                <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', borderRadius: '1rem', padding: '1.5rem', textAlign: 'center' }}>
+                <div style={{
+                  background: isDark ? '#1f2937' : 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
+                  border: isDark ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                  borderLeft: isDark ? '3px solid #10B981' : 'none',
+                  borderRadius: '1rem', padding: '1.5rem', textAlign: 'center',
+                }}>
                   <p style={{ margin: '0 0 0.5rem', fontSize: '0.95rem', fontWeight: 800, color: '#fff', lineHeight: 1.35 }}>
                     Vuoi maggiori informazioni?
                   </p>

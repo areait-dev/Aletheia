@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { useTheme } from '../../context/ThemeContext';
 
 const percorsi = [
   {
@@ -71,6 +72,9 @@ function PercorsoCard({ badge, icon, title, text, cta, href }) {
 }
 
 export default function FormazioneFinanziataSicilia() {
+  const { theme } = useTheme() || { theme: 'light' };
+  const isDark = theme === 'dark';
+
   return (
     <>
       <Head>
@@ -251,7 +255,13 @@ export default function FormazioneFinanziataSicilia() {
               </a>
             </div>
 
-            <div style={{ borderRadius: '1.25rem', padding: '2rem', background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}>
+            <div style={{
+              borderRadius: '1.25rem',
+              padding: '2rem',
+              background: isDark ? '#1f2937' : 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
+              border: isDark ? '1px solid rgba(255,255,255,0.08)' : 'none',
+              borderLeft: isDark ? '3px solid #10B981' : 'none',
+            }}>
               <h3 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '0 0 0.75rem', lineHeight: 1.3, color: '#fff' }}>
                 Non sai quale percorso scegliere?
               </h3>
