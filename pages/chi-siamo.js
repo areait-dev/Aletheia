@@ -239,7 +239,7 @@ export default function ChiSiamo() {
       </section>
 
       {/* SEZIONE PRINCIPALE */}
-      <section id="cosa-facciamo" className="max-w-screen-xl mx-auto px-6 py-16">
+      <section id="cosa-facciamo" className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
         <span className="inline-block text-xs font-semibold tracking-widest uppercase text-teal-600 dark:text-teal-400 mb-2">
           Ciò che guida ogni nostro progetto
         </span>
@@ -385,7 +385,7 @@ export default function ChiSiamo() {
 
       {/* SEZIONE CERTIFICAZIONI */}
       <section id="certificazioni" className="bg-slate-50 dark:bg-dark-bg" style={{ scrollMarginTop: '80px' }}>
-        <div className="max-w-screen-xl mx-auto px-6 py-16">
+        <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
           <div className="text-left mb-12">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-teal-600 dark:text-teal-400 mb-2">
               Certificazioni e accreditamenti
