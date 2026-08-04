@@ -226,7 +226,7 @@ export const coursesDetails = {
     learningOutcomes: ['Acquisire competenze', 'Stage in azienda', 'Certificazione competenze', 'Inserimento lavorativo']
   },
   'fondi-interprofessionali': {
-    title: 'Fondi interprofessionali',
+    title: 'Fondi Interprofessionali',
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=80',
     category: 'Formazione Regionale FSE',
     duration: '40 ore',
@@ -265,7 +265,7 @@ export const coursesDetails = {
     learningOutcomes: ['Tecniche agricole', 'Gestione sostenibile', 'Marketing prodotti', 'Innovazione']
   },
   'fondo-nuove-competenze': {
-    title: 'Fondo nuove competenze',
+    title: 'Fondo Nuove Competenze',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80',
     category: 'Formazione Regionale FSE',
     duration: '60 ore',

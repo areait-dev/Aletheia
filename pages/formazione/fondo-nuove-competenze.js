@@ -46,13 +46,13 @@ const vantaggi = [
 ];
 
 const servizi = [
-  'analisi dei fabbisogni aziendali',
-  'verifica dei requisiti di accesso',
-  'progettazione del piano formativo',
-  'supporto nella predisposizione degli accordi previsti dalla misura',
-  'gestione della domanda',
-  'coordinamento delle attività formative',
-  'monitoraggio e rendicontazione finale',
+  'Analisi dei fabbisogni aziendali',
+  'Verifica dei requisiti di accesso',
+  'Progettazione del piano formativo',
+  'Supporto nella predisposizione degli accordi previsti dalla misura',
+  'Gestione della domanda',
+  'Coordinamento delle attività formative',
+  'Monitoraggio e rendicontazione finale',
 ];
 
 const faqs = [

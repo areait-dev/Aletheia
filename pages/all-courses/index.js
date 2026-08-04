@@ -26,8 +26,8 @@ const categoryMeta = {
 // Sotto-categorie granulari: corrispondono ai query param ?categoria= usati nel mega menu di Formazione (Header.js)
 const subCategoryMeta = {
   'fse-plus':                      'FSE+',
-  'fondi-interprofessionali':      'Fondi interprofessionali',
-  'fondo-nuove-competenze':        'Fondo nuove competenze',
+  'fondi-interprofessionali':      'Fondi Interprofessionali',
+  'fondo-nuove-competenze':        'Fondo Nuove Competenze',
   'sicurezza-lavoro':              'Sicurezza sui luoghi di lavoro',
   'decreto-attrezzature':          'Decreto attrezzature',
   'fitosanitario':                 'Fitosanitario',

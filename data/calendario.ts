@@ -97,7 +97,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 6,
-    titolo: 'Fondi interprofessionali',
+    titolo: 'Fondi Interprofessionali',
     slug: 'fondi-interprofessionali',
     categoria: 'regionale-fse',
     data: '2026-06-22',
@@ -121,7 +121,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 8,
-    titolo: 'Fondo nuove competenze',
+    titolo: 'Fondo Nuove Competenze',
     slug: 'fondo-nuove-competenze',
     categoria: 'regionale-fse',
     data: '2026-07-27',

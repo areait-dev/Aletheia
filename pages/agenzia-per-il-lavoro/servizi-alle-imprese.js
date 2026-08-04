@@ -33,7 +33,7 @@ const SERVICES = [
     icon: 'fas fa-graduation-cap',
     title: 'Formazione Aziendale',
     description:
-      'Progettiamo percorsi formativi su misura per sviluppare le competenze del tuo personale e adeguarle alle evoluzioni tecnologiche e organizzative del mercato. Gestiamo anche l\'accesso ai fondi interprofessionali.',
+      'Progettiamo percorsi formativi su misura per sviluppare le competenze del tuo personale e adeguarle alle evoluzioni tecnologiche e organizzative del mercato. Gestiamo anche l\'accesso ai Fondi Interprofessionali.',
     tag: 'Upskilling',
     color: '#10B981',
   },

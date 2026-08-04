@@ -163,7 +163,7 @@ export default function AiutiDiStato2024() {
           </p>
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-            Ha inoltre ricevuto in data 14/08/2024 € 8.626,89 come saldo per Contributo fondo nuove Competenze.
+            Ha inoltre ricevuto in data 14/08/2024 € 8.626,89 come saldo per Contributo Fondo Nuove Competenze.
           </p>
 
           <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
