@@ -50,10 +50,10 @@ export default function Footer() {
             </div>
 
             <div className="mt-6 flex gap-4 text-slate-400 dark:text-slate-500 text-lg">
-              <a href="#" aria-label="Facebook" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-facebook-f" /></a>
-              <a href="#" aria-label="Instagram" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-instagram" /></a>
-              <a href="#" aria-label="LinkedIn" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-linkedin-in" /></a>
-              <a href="#" aria-label="Telegram" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-telegram" /></a>
+              <a href="https://www.facebook.com/aletheiasrl.it/?locale=it_IT" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-facebook-f" /></a>
+              <a href="https://www.instagram.com/aletheiasrl/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-instagram" /></a>
+              <a href="https://it.linkedin.com/company/al%C3%A9theia-srl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-linkedin-in" /></a>
+              <a href="https://t.me/alethiaapl" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-telegram" /></a>
             </div>
 
             <div className="flex flex-col gap-1.5 mt-6 text-xs text-slate-500 dark:text-slate-500">
