@@ -14,15 +14,15 @@ const percorsi = [
     href: '/formazione/regionale',
   },
   {
-    badge: 'La formazione che la tua azienda sta già finanziando.',
+    badge: 'La formazione che la tua azienda sta già finanziando',
     icon: 'fas fa-building',
     title: 'Fondi Interprofessionali per aziende',
-    text: 'Ogni azienda versa lo 0,30% dei contributi INPS destinati alla formazione continua dei propri dipendenti. Attraverso i Fondi Interprofessionali queste risorse possono trasformarsi in percorsi formativi senza costi aggiuntivi per l\'impresa. Non è un incentivo da richiedere: è un contributo che la tua azienda versa già per legge. Fon.Ter, For.Agri, Fondimpresa: i fondi ci sono, basta sapere come attivarli. Dall\'analisi dei fabbisogni alla progettazione, dalla gestione amministrativa alla rendicontazione, Alètheia segue ogni fase del progetto permettendoti di investire sulle competenze senza appesantire il budget aziendale. La tua azienda forma i dipendenti, i costi li copre il fondo.',
+    text: 'Ogni azienda versa già lo 0,30% dei contributi INPS destinato alla formazione continua dei dipendenti. Attraverso i Fondi Interprofessionali, Fon.Ter, For.Agri, Fondimpresa e altri, quelle risorse diventano percorsi formativi senza costi aggiuntivi per l\'impresa. Alètheia segue ogni fase: dall\'analisi dei fabbisogni alla rendicontazione finale. La tua azienda forma i dipendenti. I costi li copre il fondo.',
     cta: 'Scopri di più',
     href: '/formazione/fondi-interprofessionali',
   },
   {
-    badge: 'Forma i tuoi dipendenti senza costi retributivi.',
+    badge: 'Forma i tuoi dipendenti senza costi retributivi',
     icon: 'fas fa-lightbulb',
     title: 'Fondo Nuove Competenze',
     text: 'Il Fondo Nuove Competenze consente alle imprese di destinare parte dell\'orario lavorativo alla formazione, con il rimborso dei costi retributivi previsto dalla misura. Digitalizzazione, transizione ecologica, innovazione organizzativa e sviluppo delle competenze strategiche diventano un investimento sostenibile per preparare l\'azienda alle sfide del mercato. Verifica con il nostro team se la tua impresa possiede i requisiti di accesso.',
@@ -207,11 +207,11 @@ export default function FormazioneFinanziataSicilia() {
           </h1>
 
           <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '820px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Corsi finanziati dalla Regione Siciliana, dai Fondi Interprofessionali e dal Fondo Nuove Competenze. Formarsi senza costi è possibile: noi ti mostriamo come. Ogni anno milioni di euro destinati alla formazione restano inutilizzati. Fondi europei, regionali e interprofessionali che le aziende non sanno di poter attivare, e i lavoratori non sanno di poter richiedere. Alètheia trasforma queste opportunità in percorsi formativi concreti: progettiamo, eroghiamo e rendicontiamo. Alètheia è un Ente di Formazione accreditato dalla Regione Siciliana e soggetto attuatore presso i principali Fondi Paritetici Interprofessionali nazionali.
+            Fondi regionali, europei e interprofessionali esistono per questo. Ogni anno restano inutilizzati, noi ti aiutiamo ad attivarli e trasformarli in formazione concreta, a costo zero. Alètheia è un Ente di Formazione accreditato dalla Regione Siciliana e soggetto attuatore presso i principali Fondi Paritetici Interprofessionali nazionali.
           </p>
 
           <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a href="#offerta" className="cta-btn-primary">Scopri i programmi attivi</a>
+            <a href="#offerta" className="cta-btn-primary">Scopri i percorsi</a>
             <a href="/contatti" className="cta-btn-outline">Contattaci</a>
           </div>
         </div>

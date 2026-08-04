@@ -240,9 +240,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           .hero-wrap { flex-direction: column; }
           .hero-panel { padding: 3.5rem 2rem; flex: none !important; }
           .panel-extra.open { max-height: 300px; }
-          .chi-siamo-img2 { display: none; }
-          .chi-siamo-img1 { height: 260px !important; width: 100% !important; flex: none !important; }
-          .chi-siamo-imgs { position: static !important; }
         }
 
         .stat-card {
@@ -276,6 +273,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             }}
             onMouseEnter={() => setHoveredPanel('candidati')}
             onMouseLeave={() => setHoveredPanel(null)}
+            onClick={() => setHoveredPanel((p) => (p === 'candidati' ? null : 'candidati'))}
           >
             <img
               className="panel-bg"
@@ -292,8 +290,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             />
 
             <div className="panel-content">
-              {/* Icon */}
-  
               {/* Badge */}
               <span
                 style={{
@@ -381,6 +377,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             }}
             onMouseEnter={() => setHoveredPanel('aziende')}
             onMouseLeave={() => setHoveredPanel(null)}
+            onClick={() => setHoveredPanel((p) => (p === 'aziende' ? null : 'aziende'))}
           >
             <img
               className="panel-bg"
@@ -563,11 +560,11 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             </div>
 
             {/* Colonna immagine */}
-            <div style={{ flex: '2 1 260px', paddingTop: '4.5rem' }}>
+            <div style={{ flex: '2 1 260px', paddingTop: '2rem' }}>
               <div style={{
                 borderRadius: '1.5rem',
                 overflow: 'hidden',
-                aspectRatio: '3/4',
+                aspectRatio: '4/3',
                 boxShadow: '0 24px 60px rgba(0,0,0,0.13)',
               }}>
                 <img
@@ -686,7 +683,15 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 ))
               ) : (
                 <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
-                  Nessuna offerta disponibile al momento. Consulta tutte le posizioni su aletheia4job.it.
+                  Nessuna offerta disponibile al momento. Consulta tutte le posizioni su{' '}
+                  <a
+                    href="https://aletheia4job.it/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}
+                  >
+                    aletheia4job.it
+                  </a>.
                 </p>
               )}
             </div>

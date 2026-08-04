@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import FormAzienda from '../../components/FormAzienda';
 import { useTheme } from '../../context/ThemeContext';
 
 const target = [
@@ -250,7 +251,7 @@ export default function FondoNuoveCompetenze() {
           </h1>
 
           <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Ottenendo il rimborso del costo delle ore dedicate all&apos;aggiornamento professionale. È uno strumento pensato per accompagnare le aziende nei processi di digitalizzazione, transizione ecologica e innovazione organizzativa, senza rallentare la crescita del business. Con Alètheia verifichi i requisiti, progetti il percorso formativo e gestisci l&apos;intera domanda con un unico partner.
+            Il Fondo Nuove Competenze è una misura ANPAL che permette alle imprese di destinare parte dell&apos;orario di lavoro alla formazione, ottenendo il rimborso delle ore dedicate all&apos;aggiornamento professionale. Pensato per accompagnare le aziende nella digitalizzazione, nella transizione ecologica e nell&apos;innovazione organizzativa senza rallentare il business. Con Alètheia verifichi i requisiti, progetti il percorso e gestisci l&apos;intera domanda con un unico partner.
           </p>
 
           <div className="fade-up fade-up-3">
@@ -258,21 +259,6 @@ export default function FondoNuoveCompetenze() {
               Verifica se la tua azienda può accedere
               <i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════ COSA COPRE IL FONDO ══════════════ */}
-      <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
-        <div className="container">
-          <div>
-            <span className="section-badge">Cos&apos;è il Fondo Nuove Competenze</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Trasforma le ore di lavoro in un investimento per la tua impresa
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', marginTop: '1rem', lineHeight: 1.85 }}>
-              Il Fondo Nuove Competenze (FNC) è una misura promossa da ANPAL e finanziata con risorse nazionali ed europee, pensata per accompagnare le aziende nelle transizioni digitale ed ecologica. Attraverso una rimodulazione dell&apos;orario di lavoro, parte delle ore normalmente dedicate all&apos;attività lavorativa vengono impiegate nella formazione. Il costo retributivo e contributivo di quelle ore viene rimborsato secondo le modalità previste dall&apos;avviso. In questo modo la tua azienda può aggiornare le competenze del personale senza dover sostenere integralmente il costo del tempo dedicato alla formazione.
-            </p>
           </div>
         </div>
       </section>
@@ -440,6 +426,8 @@ export default function FondoNuoveCompetenze() {
           <a href="/contatti" className="cta-btn-primary">Richiedi una consulenza gratuita</a>
         </div>
       </section>
+
+      <FormAzienda />
 
       <Footer />
     </>

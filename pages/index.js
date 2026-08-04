@@ -97,10 +97,13 @@ const clientiLoghi = [
   { name: 'Wayne Ent.', icon: 'fas fa-building' },
 ];
 
-/* Aziende del gruppo Promotergroup - loghi in public/images/gruppo/ */
+/* Aziende del gruppo Promotergroup - loghi in public/images/gruppo/
+   NOTA: loghi ufficiali di "Promoter Srl" e "Promoteragri" non ancora disponibili
+   nel progetto (da fornire per completare la lista richiesta). */
 const gruppoLoghi = [
   { name: 'Promotergroup', src: '/images/gruppo/Logo Promotergroup (R).png' },
-  { name: 'Doses', src: '/images/gruppo/DOSES - logo orizzontale.png' },
+  { name: 'Promosan', src: '/images/gruppo/logo_promosan.png' },
+  { name: 'Promoter Soc. Coop.', src: '/images/gruppo/Promoter Soc. Coop800.png' },
   { name: 'Iside', src: '/images/gruppo/Risorsa 8.png' },
 ];
 

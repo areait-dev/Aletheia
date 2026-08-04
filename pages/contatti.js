@@ -63,7 +63,8 @@ const MOTIVI = [
   'Informazioni su un corso',
   'Candidatura / ricerca lavoro',
   'Servizi alle imprese',
-  'Programma G.O.L.',
+  'Formazione obbligatoria',
+  'Formazione finanziata',
   'Richiesta preventivo',
   'Altro',
 ];
@@ -285,7 +286,7 @@ export default function Contatti() {
             maxWidth: '800px',
             lineHeight: 1.75,
           }}>
-            Hai domande su corsi, offerte di lavoro o servizi alle imprese? Scrivici o chiamaci: ti risponderemo entro 24 ore.
+            Hai domande su corsi, offerte di lavoro o servizi alle imprese? Scrivici o chiamaci.
           </p>
         </div>
       </section>
@@ -418,7 +419,7 @@ export default function Contatti() {
                     Messaggio inviato!
                   </h3>
                   <p className="text-slate-500 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
-                    Grazie per averci contattato. Ti risponderemo entro 24 ore lavorative all&apos;indirizzo email indicato.
+                    Grazie per averci contattato. Ti risponderemo al più presto all&apos;indirizzo email indicato.
                   </p>
                   <button
                     onClick={() => { setSent(false); setForm({ nome: '', cognome: '', email: '', telefono: '', motivo: '', messaggio: '', privacy: false }); }}

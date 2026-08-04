@@ -102,9 +102,16 @@ function NewsCard({ news }) {
   );
 }
 
+const CATEGORIE = [
+  { value: '', label: 'Tutte' },
+  { value: 'apl', label: 'Agenzia per il lavoro' },
+  { value: 'formazione', label: 'Formazione' },
+];
+
 export default function NewsPage() {
   const [query, setQuery] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
+  const [selectedCategoria, setSelectedCategoria] = useState('');
 
   const years = [...new Set(ALL_NEWS.map(n => Number(n.date.slice(0, 4))))].sort((a, b) => b - a);
 
@@ -115,7 +122,9 @@ export default function NewsPage() {
       news.excerpt.toLowerCase().includes(query.toLowerCase());
     const matchYear =
       selectedYear === '' || news.date.slice(0, 4) === selectedYear;
-    return matchQuery && matchYear;
+    const matchCategoria =
+      selectedCategoria === '' || news.tags?.includes(selectedCategoria);
+    return matchQuery && matchYear && matchCategoria;
   });
 
   return (
@@ -320,6 +329,36 @@ export default function NewsPage() {
       {/* ── FILTRI ───────────────────────────────────────────── */}
       <section className="bg-slate-50 dark:bg-dark-bg border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '2rem 0' }}>
         <div className="container">
+          {/* Filtro categoria */}
+          <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+            {CATEGORIE.map((c) => {
+              const isActive = selectedCategoria === c.value;
+              return (
+                <button
+                  key={c.value}
+                  type="button"
+                  onClick={() => setSelectedCategoria(c.value)}
+                  aria-pressed={isActive}
+                  className={isActive ? '' : 'text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.15)]'}
+                  style={{
+                    padding: '0.5rem 1.1rem',
+                    borderRadius: '999px',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    fontFamily: 'inherit',
+                    cursor: 'pointer',
+                    border: isActive ? 'none' : '1px solid',
+                    background: isActive ? 'linear-gradient(90deg, #008C95, #10B981)' : 'transparent',
+                    color: isActive ? '#fff' : undefined,
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
+          </div>
+
           <div
             className="filter-row"
             style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}
@@ -406,7 +445,7 @@ export default function NewsPage() {
                 Prova con parole chiave diverse o cambia l&#39;anno selezionato.
               </p>
               <button
-                onClick={() => { setQuery(''); setSelectedYear(''); }}
+                onClick={() => { setQuery(''); setSelectedYear(''); setSelectedCategoria(''); }}
                 style={{
                   marginTop: '0.5rem',
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',

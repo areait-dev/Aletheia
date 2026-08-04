@@ -68,7 +68,7 @@ const faqs = [
 ];
 
 const EMPTY_FORM = {
-  ente: '', referente: '', ruolo: '', email: '', telefono: '', area: '', messaggio: '',
+  ente: '', referente: '', ruolo: '', email: '', telefono: '', area: '', messaggio: '', privacy: false,
 };
 
 function AreaCard({ icon, title, text }) {
@@ -125,12 +125,16 @@ function FormField({ label, required, children, isDark }) {
 function ConsulenzaPAForm({ isDark }) {
   const [fields, setFields] = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
   const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
+  const setCheck = (e) => setFields((p) => ({ ...p, privacy: e.target.checked }));
   const inputStyle = getInputStyle(isDark);
   const groupLabelColor = isDark ? '#6EE7B7' : '#008C95';
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!fields.privacy) { setErrors({ privacy: 'Devi accettare la Privacy Policy' }); return; }
+    setErrors({});
     setSubmitted(true);
   }
 
@@ -208,6 +212,22 @@ function ConsulenzaPAForm({ isDark }) {
           />
         </FormField>
       </div>
+
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+        <input
+          id="pa-privacy"
+          type="checkbox"
+          checked={fields.privacy}
+          onChange={setCheck}
+          style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#008C95', flexShrink: 0, cursor: 'pointer' }}
+        />
+        <label htmlFor="pa-privacy" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer', color: isDark ? 'rgba(255,255,255,0.65)' : '#475569' }}>
+          Ho letto e accetto la{' '}
+          <a href="/privacy-cookie" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
+          {' '}e acconsento al trattamento dei dati ai sensi del GDPR. <span style={{ color: '#008C95' }}>*</span>
+        </label>
+      </div>
+      {errors.privacy && <p style={{ margin: '-0.85rem 0 0', fontSize: '0.75rem', color: '#EF4444' }}><i className="fas fa-exclamation-circle" style={{ marginRight: '4px' }}></i>{errors.privacy}</p>}
 
       <button
         type="submit"
@@ -333,7 +353,7 @@ export default function CorsiPA() {
           </h1>
 
           <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '960px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Percorsi su misura per Comuni, enti locali e aziende pubbliche, attivabili tramite MEPA. Alètheia affianca Comuni, enti locali, aziende partecipate e amministrazioni pubbliche con programmi di formazione progettati sulle reali esigenze degli uffici, nel rispetto della normativa vigente e degli obiettivi di modernizzazione della PA. Grazie all&apos;iscrizione al Mercato Elettronico della Pubblica Amministrazione (MEPA), semplifichiamo le procedure di affidamento dei servizi formativi.
+            Percorsi su misura per Comuni, enti locali e aziende pubbliche, attivabili tramite MEPA. Alètheia affianca le pubbliche amministrazioni con programmi formativi progettati sulle reali esigenze degli uffici, nel rispetto della normativa vigente e degli obiettivi di modernizzazione della PA. L&apos;iscrizione al MEPA semplifica le procedure di affidamento dei servizi formativi.
           </p>
 
           <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>

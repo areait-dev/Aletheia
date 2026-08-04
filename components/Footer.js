@@ -76,7 +76,7 @@ export default function Footer() {
               <a href="/calendario-corsi" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
                 <span className="text-teal-600/70 dark:text-teal-400/70 mr-1.5 font-bold">›</span>Calendario corsi
               </a>
-              <a href="https://elearning.aletheiasrl.it" target="_blank" rel="noopener noreferrer" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+              <a href="https://www.aletheiasrl.it/elearning2/" target="_blank" rel="noopener noreferrer" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
                 <span className="text-teal-600/70 dark:text-teal-400/70 mr-1.5 font-bold">›</span>Piattaforma e-learning
               </a>
             </div>

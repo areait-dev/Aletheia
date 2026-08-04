@@ -56,7 +56,7 @@ export default function ReclamiProposte() {
       </Head>
       <Header />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
-        <section className="max-w-3xl mx-auto px-6 sm:px-12 py-20">
+        <section className="max-w-3xl mx-auto px-6 sm:px-12 pt-40 pb-24">
           <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-4 block">
             Trasparenza
           </span>

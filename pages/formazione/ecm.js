@@ -50,7 +50,7 @@ const faqs = [
 ];
 
 const EMPTY_FORM = {
-  nome: '', cognome: '', professione: '', ordine: '', email: '', telefono: '', messaggio: '',
+  nome: '', cognome: '', professione: '', ordine: '', email: '', telefono: '', messaggio: '', privacy: false,
 };
 
 function ContattoECMForm() {
@@ -59,8 +59,8 @@ function ContattoECMForm() {
   const [sent, setSent] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((p) => ({ ...p, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setForm((p) => ({ ...p, [name]: type === 'checkbox' ? checked : value }));
   };
 
   function validate() {
@@ -69,6 +69,7 @@ function ContattoECMForm() {
     if (!form.cognome.trim()) err.cognome = 'Campo obbligatorio';
     if (!form.email.trim()) err.email = 'Campo obbligatorio';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) err.email = 'Email non valida';
+    if (!form.privacy) err.privacy = 'Devi accettare la Privacy Policy';
     return err;
   }
 
@@ -90,7 +91,7 @@ function ContattoECMForm() {
           Richiesta inviata!
         </h3>
         <p className="text-slate-500 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
-          Grazie per averci contattato. Il nostro team ti risponderà entro 24 ore lavorative con tutte le informazioni sui corsi ECM.
+          Grazie per averci contattato. Il nostro team ti fornirà a breve tutte le informazioni sui corsi ECM.
         </p>
         <button
           onClick={() => { setSent(false); setForm(EMPTY_FORM); }}
@@ -145,6 +146,23 @@ function ContattoECMForm() {
         <label htmlFor="messaggio" className="text-slate-700 dark:text-gray-300">Messaggio</label>
         <textarea id="messaggio" name="messaggio" placeholder="Scrivi qui la tua richiesta…" value={form.messaggio} onChange={handleChange} className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400" />
       </div>
+
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+        <input
+          id="privacy"
+          name="privacy"
+          type="checkbox"
+          checked={form.privacy}
+          onChange={handleChange}
+          style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#008C95', flexShrink: 0, cursor: 'pointer' }}
+        />
+        <label htmlFor="privacy" className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer' }}>
+          Ho letto e accetto la{' '}
+          <a href="/privacy-cookie" className="text-[#008C95] dark:text-[#10B981]" style={{ fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
+          {' '}e acconsento al trattamento dei miei dati personali ai sensi del GDPR. <span style={{ color: '#EF4444' }}>*</span>
+        </label>
+      </div>
+      {errors.privacy && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.privacy}</p>}
 
       <button type="submit" className="submit-btn">
         Invia richiesta
@@ -289,7 +307,7 @@ export default function FormazioneECM() {
         <div className="container">
           <span className="section-badge-ecm">Provider ECM accreditato · Regione Siciliana</span>
           <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '960px' }}>
-            Un provider ECM accreditato per la tua formazione continua
+            Formazione continua per i professionisti della sanità
           </h2>
           <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '1.5rem' }}>
             Alètheia S.r.l. è provider ECM accreditato dalla Regione Siciliana, abilitato alla progettazione e realizzazione di attività formative rivolte ai professionisti sanitari e al rilascio diretto dei crediti ECM. Non tutti gli enti che erogano formazione sanitaria possono assegnare crediti ECM: solo un provider accreditato è autorizzato dal sistema nazionale a farlo. Scegliere Alètheia significa affidarsi a un ente che risponde ai requisiti di qualità, trasparenza e appropriatezza scientifica previsti dalla normativa ECM. Come provider accreditato, Alètheia è abilitato a organizzare corsi, convegni, congressi e altre attività formative finalizzate all&apos;acquisizione dei crediti ECM obbligatori, garantendo che ogni percorso sia progettato secondo criteri di qualità dei contenuti e reale validità professionale.
@@ -303,17 +321,6 @@ export default function FormazioneECM() {
       {/* ══════════════ TARGET & PROPOSTA FORMATIVA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          {/* A chi si rivolge */}
-          <div style={{ marginBottom: '3.5rem' }}>
-            <span className="section-badge-ecm">A chi si rivolgono i corsi ECM</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-              Formazione dedicata ai professionisti della sanità
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
-              I corsi ECM di Alètheia si rivolgono a tutti i professionisti sanitari e sociosanitari tenuti all&apos;obbligo di aggiornamento continuo. Ogni percorso è progettato per coniugare rigore scientifico e applicabilità pratica, così da tradurre l&apos;aggiornamento obbligatorio in competenze realmente utili nell&apos;attività quotidiana.
-            </p>
-          </div>
-
           {/* Modalità */}
           <div style={{ marginBottom: '2.5rem' }}>
             <span className="section-badge-ecm">La proposta formativa</span>
@@ -413,7 +420,7 @@ export default function FormazioneECM() {
                   Provider ECM accreditato
                 </h4>
                 <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: '0 0 1.75rem' }}>
-                  Rispondiamo entro 24 ore lavorative con i corsi in programma, le modalità disponibili e i crediti acquisibili in base al tuo profilo professionale.
+                  Vuoi saperne di più sui corsi ECM? Il nostro team è a disposizione per fornirti tutte le informazioni sui corsi in programma, le modalità disponibili e i crediti acquisibili in base al tuo profilo professionale.
                 </p>
 
                 <div className="ecm-info-row">
@@ -432,15 +439,6 @@ export default function FormazioneECM() {
                   <div>
                     <span className="dark:text-gray-500" style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Email</span>
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>info@aletheiasrl.it</span>
-                  </div>
-                </div>
-                <div className="ecm-info-row">
-                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-clock" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
-                  </div>
-                  <div>
-                    <span className="dark:text-gray-500" style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Tempo di risposta</span>
-                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>Entro 24 ore lavorative</span>
                   </div>
                 </div>
               </div>

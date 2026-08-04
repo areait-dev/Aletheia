@@ -113,7 +113,7 @@ const ecoLoghi = [
 ];
 
 export default function ChiSiamo() {
-  const [activeTab, setActiveTab] = useState('Visione');
+  const [activeTab, setActiveTab] = useState('Missione');
 
   const content = {
     missione: {
@@ -140,8 +140,8 @@ export default function ChiSiamo() {
   };
 
   const tabs = [
-    { key: 'Visione', data: content.visione },
     { key: 'Missione', data: content.missione },
+    { key: 'Visione', data: content.visione },
     { key: 'I Nostri Valori', data: content.valori },
   ];
 
@@ -185,9 +185,9 @@ export default function ChiSiamo() {
             Da vent&rsquo;anni trasformiamo la <span>formazione</span> in opportunità
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-            Alètheia è Ente di Formazione accreditato e Agenzia per il Lavoro autorizzata.
-            Progettiamo percorsi che collegano competenze, lavoro e crescita per le imprese,
-            accompagnando persone e organizzazioni lungo tutto il loro sviluppo professionale.
+            Alètheia è Ente di Formazione accreditato e Agenzia per il Lavoro autorizzata dalla
+            Regione Siciliana. Progettiamo percorsi formativi che trasformano competenze in
+            opportunità per le persone e per le imprese.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
             <a
@@ -333,7 +333,7 @@ export default function ChiSiamo() {
               { accent: 'bg-teal-500', titolo: 'Esperti in formazione finanziata', desc: "Oltre 100 progetti gestiti con fondi FSE, PSR, FEAMP e Fondi Interprofessionali. Seguiamo l'intero processo, dall'analisi dei fabbisogni alla rendicontazione finale." },
               { accent: 'bg-indigo-500', titolo: 'Certificazioni riconosciute', desc: 'Percorsi qualificanti e certificazioni spendibili nel mercato del lavoro e nei concorsi pubblici. Siamo anche Test Center AICA.' },
               { accent: 'bg-teal-500', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
-              { accent: 'bg-indigo-500', titolo: 'La forza di un gruppo', desc: 'Alètheia è l’ente di formazione di Promotergroup S.p.A., un ecosistema che integra formazione, consulenza aziendale, salute e sicurezza, comunicazione. Scegliere Alètheia significa accedere a una rete di competenze che va ben oltre la prima formazione.' },
+              { accent: 'bg-indigo-500', titolo: 'La forza di un gruppo', desc: 'Va ben oltre la prima formazione: un ecosistema che integra consulenza aziendale, salute e sicurezza, comunicazione, all’interno di Promotergroup S.p.A.' },
             ].map((card) => (
               <div
                 key={card.titolo}
@@ -456,7 +456,7 @@ export default function ChiSiamo() {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm">
                 <div className="h-14 flex items-center mb-4">
                   <img

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import FormAzienda from '../../components/FormAzienda';
 
 const vantaggi = [
   'Formazione a costo zero (o quasi): i corsi sono finanziati dal Fondo, non dal bilancio aziendale',
@@ -15,20 +16,20 @@ const partner = ['Fondimpresa', 'Fon.Ter', 'For.Agri'];
 
 const faqs = [
   {
-    domanda: 'Chi può accedere al Fondo Nuove Competenze?',
-    risposta: 'Possono accedere le imprese private che rispettano i requisiti previsti dall\'avviso vigente e intendono aggiornare le competenze dei propri dipendenti attraverso percorsi formativi dedicati.',
+    domanda: 'Chi può accedere ai Fondi Interprofessionali?',
+    risposta: 'Tutte le aziende con dipendenti, di qualsiasi settore e dimensione, che versano già il contributo obbligatorio dello 0,30% all\'INPS. Basta aderire al Fondo scelto: l\'adesione è gratuita e non comporta costi aggiuntivi.',
   },
   {
     domanda: 'Quanto costa alla mia azienda?',
-    risposta: 'Il Fondo rimborsa, secondo quanto previsto dalla misura, il costo delle ore di lavoro destinate alla formazione. Le modalità e l\'entità del contributo dipendono dall\'avviso attivo.',
+    risposta: 'Nulla di aggiuntivo: i corsi sono finanziati dal Fondo con le risorse che l\'azienda versa già per legge tramite i contributi INPS. Non è un incentivo da richiedere, ma un contributo già dovuto da attivare.',
   },
   {
-    domanda: 'Quali corsi possono essere finanziati?',
-    risposta: 'I percorsi riguardano principalmente digitalizzazione, transizione ecologica, innovazione organizzativa e sviluppo delle competenze strategiche, ma possono essere progettati in base ai reali fabbisogni dell\'impresa.',
+    domanda: 'Quale Fondo devo scegliere per la mia azienda?',
+    risposta: 'Dipende dal settore e dal CCNL applicato (es. Fon.Ter, For.Agri, Fondimpresa e altri). Il nostro team verifica gratuitamente qual è il Fondo più adatto e ti segue nell\'attivazione.',
   },
   {
-    domanda: 'Il Fondo Nuove Competenze è sempre aperto?',
-    risposta: 'Il Fondo viene attivato attraverso specifici avvisi pubblici. Requisiti, modalità operative e finestre temporali possono cambiare nel tempo. Il nostro team verifica gratuitamente se sono presenti opportunità attive.',
+    domanda: 'Quanto tempo serve per attivare un percorso formativo?',
+    risposta: 'I tempi variano in base al Fondo e all\'avviso di riferimento. Alètheia segue l\'intero iter, dall\'analisi dei fabbisogni alla progettazione, per rendere il processo il più rapido possibile.',
   },
 ];
 
@@ -181,7 +182,7 @@ export default function FondiInterprofessionali() {
           </h1>
 
           <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Ogni azienda versa già lo 0,30% dei contributi INPS destinato alla formazione continua dei propri lavoratori. Attraverso i Fondi Interprofessionali queste risorse possono diventare corsi di formazione completamente finanziati, senza incidere sul budget aziendale. Alètheia ti accompagna in ogni fase del processo: analizziamo i fabbisogni formativi, individuiamo il Fondo più adatto, progettiamo il piano formativo e gestiamo tutta la parte amministrativa fino alla rendicontazione finale.
+            Ogni azienda versa già lo 0,30% dei contributi INPS destinato alla formazione continua. Attraverso i Fondi Interprofessionali quelle risorse diventano percorsi formativi senza costi aggiuntivi per l&apos;impresa. Alètheia ti accompagna in ogni fase del processo: analizziamo i fabbisogni formativi, individuiamo il Fondo più adatto, progettiamo il piano formativo e gestiamo tutta la parte amministrativa fino alla rendicontazione finale.
           </p>
 
           <div className="fade-up fade-up-3">
@@ -235,7 +236,7 @@ export default function FondiInterprofessionali() {
               Un unico partner per progettare, finanziare e gestire la formazione aziendale
             </h2>
             <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
-              La vera difficoltà non è trovare i finanziamenti, ma gestire correttamente tutto il percorso. Molte aziende rinunciano a utilizzare i Fondi Interprofessionali non perché manchino le opportunità, ma perché il percorso di accesso viene percepito come complesso: scelta del Fondo più adatto, analisi dei fabbisogni, progettazione, gestione amministrativa e rendicontazione richiedono tempo e competenze specifiche. Con Alètheia tutto questo diventa semplice. Affianchiamo le imprese in ogni fase del processo, trasformando il fabbisogno formativo in un piano finanziato e pronto per essere realizzato. Dall&apos;analisi delle esigenze aziendali alla scelta dello strumento più idoneo, dalla progettazione dei percorsi alla loro erogazione, fino alla gestione amministrativa e alla rendicontazione finale, ci occupiamo di ogni aspetto operativo. Non è necessario presentare un progetto già definito: bastano poche informazioni e noi le trasformiamo in progetto. Il nostro team individua la soluzione più adatta e sviluppa un piano formativo coerente con le opportunità di finanziamento disponibili. Concentrati sulla tua azienda. Alla formazione dei tuoi dipendenti ci pensiamo noi, a costo zero.
+              La vera difficoltà non è trovare i finanziamenti, ma gestire correttamente tutto il percorso. Scelta del fondo, analisi dei fabbisogni, progettazione, gestione amministrativa e rendicontazione richiedono tempo e competenze specifiche. Con Alètheia tutto questo diventa semplice: affianchiamo le imprese in ogni fase, dalla prima analisi fino alla rendicontazione finale. Non è necessario avere già un progetto definito, bastano poche informazioni e noi le trasformiamo in un piano formativo finanziato e pronto per essere realizzato. Concentrati sulla tua azienda. Alla formazione dei tuoi dipendenti ci pensiamo noi, a costo zero.
             </p>
           </div>
 
@@ -277,7 +278,7 @@ export default function FondiInterprofessionali() {
               Domande frequenti
             </h2>
             <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', margin: 0, lineHeight: 1.7 }}>
-              FAQ sul Fondo Nuove Competenze
+              FAQ sui Fondi Interprofessionali per le aziende
             </p>
           </div>
 
@@ -320,6 +321,8 @@ export default function FondiInterprofessionali() {
           <a href="/contatti" className="cta-btn-primary">Richiedi una consulenza gratuita</a>
         </div>
       </section>
+
+      <FormAzienda />
 
       <Footer />
     </>

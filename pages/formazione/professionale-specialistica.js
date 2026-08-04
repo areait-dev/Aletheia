@@ -175,7 +175,7 @@ export default function FormazioneProfessionaleSpecialistica() {
           </h1>
 
           <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '960px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Corsi qualificati, certificazioni riconosciute e percorsi formativi per persone, aziende e Pubblica Amministrazione. Alètheia progetta percorsi professionalizzanti con un obiettivo preciso: competenze concrete, riconosciute, immediatamente spendibili. Dalle certificazioni informatiche ICDL ai corsi ECM per operatori sanitari, dai corsi qualificati ai percorsi su misura per la Pubblica Amministrazione, un unico partner per aggiornare le tue competenze o quelle della tua organizzazione.
+            Corsi qualificati, certificazioni riconosciute e percorsi formativi per persone, aziende e Pubblica Amministrazione. Dalle certificazioni ICDL ai corsi ECM, dai percorsi qualificati alla formazione su misura per la PA, un unico partner per sviluppare competenze concrete, riconosciute e immediatamente spendibili.
           </p>
 
           <div className="fade-up fade-up-3">

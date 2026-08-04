@@ -10,13 +10,14 @@ const avvisi = [
     title: 'Avviso 1/2026 POC',
     text: 'Percorsi di formazione professionale finanziati dal Programma Operativo Complementare Sicilia, finalizzati al conseguimento di una qualifica professionale riconosciuta e spendibile nel mercato del lavoro.',
     modalita: 'Aula (o variabile)',
-    href: '/calendario-corsi',
+    href: 'https://www.aletheiasrl.it/index.php/i-nostri-corsi/formazione-professionale/avviso-n-1-2026-poc-sicilia-2014-2020',
+    external: true,
   },
   {
-    badge: 'Disoccupati - NASpI - ADI',
+    badge: 'Disoccupati, NASpI, ADI',
     logo: 'UE · Ministero del Lavoro · GOL',
     title: 'Avviso 6/2025 GOL – Garanzia di Occupabilità dei Lavoratori',
-    text: 'Il Programma GOL – Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro. Rivolto a disoccupati, beneficiari di NASpI, Assegno di Inclusione e altre categorie previste dal programma.',
+    text: 'Il Programma GOL – Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.',
     modalita: 'Aula (o variabile)',
     href: '/calendario-corsi',
   },
@@ -26,7 +27,8 @@ const avvisi = [
     title: 'Avviso 7/2023 - II Finestra',
     text: 'Percorsi rivolti a disoccupati e inoccupati che prevedono una qualifica professionale riconosciuta, indennità di frequenza e stage presso aziende partner.',
     modalita: 'Aula + Stage (o variabile)',
-    href: '/archivio/avviso-7-2023',
+    href: 'https://www.aletheiasrl.it/index.php/i-nostri-corsi/formazione-professionale/avviso-7-2023-2a-finestra',
+    external: true,
   },
   {
     badge: 'Assistente Familiare',
@@ -35,7 +37,9 @@ const avvisi = [
     text: 'Percorso finanziato dedicato alla formazione della figura professionale di Assistente Familiare, sempre più richiesta nel settore socio-assistenziale. Il corso comprende formazione teorica, attività pratiche e rilascio della qualifica professionale.',
     durata: '300 ore',
     modalita: 'Aula + Stage',
-    href: '/all-courses/avviso-20-2024-fse',
+    href: 'https://www.aletheiasrl.it/index.php/i-nostri-corsi/formazione-professionale/avviso-20-2024-fse',
+    external: true,
+    image: 'https://www.aletheiasrl.it/images/avviso20_2024/Avv.20_Ass.Familare_banner.jpg',
   },
 ];
 
@@ -60,13 +64,27 @@ const faqs = [
     domanda: 'Come si accede ai corsi di formazione regionale gratuiti in Sicilia?',
     risposta: 'Per accedere ai corsi di formazione regionale in Sicilia è necessario possedere i requisiti previsti dallo specifico bando o avviso pubblico (come lo stato di disoccupazione, la residenza in Sicilia o specifiche fasce d\'età) e presentare la domanda di iscrizione direttamente presso il nostro ente Alètheia, che ti supporterà in tutta la fase di verifica e presentazione.',
   },
+  {
+    domanda: 'I corsi regionali sono davvero gratuiti?',
+    risposta: 'Sì, i percorsi finanziati attraverso FSE+, POC Sicilia e gli altri programmi regionali sono completamente gratuiti per i partecipanti. In molti casi è prevista anche un\'indennità di frequenza.',
+  },
+  {
+    domanda: 'Ottengo una qualifica riconosciuta al termine del corso?',
+    risposta: 'Sì, la maggior parte degli avvisi regionali prevede il rilascio di una qualifica professionale o di un attestato riconosciuto a livello regionale e nazionale, spendibile nel mercato del lavoro.',
+  },
+  {
+    domanda: 'Come faccio a sapere quale avviso è attivo per il mio profilo?',
+    risposta: 'I requisiti cambiano da avviso ad avviso. Contattaci per una verifica gratuita: analizziamo la tua situazione e ti indichiamo subito se hai i requisiti per uno o più percorsi disponibili.',
+  },
 ];
 
-function AvvisoCard({ badge, logo, title, text, durata, modalita, href }) {
+function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external, image }) {
   const [hovered, setHovered] = useState(false);
   return (
     <a
       href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
@@ -88,14 +106,20 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href }) {
           {badge}
         </span>
 
-        {/* Placeholder loghi ente/programma - da sostituire con le immagini reali quando disponibili */}
-        <div
-          className="border-slate-200 dark:border-[rgba(255,255,255,0.1)] text-slate-400 dark:text-gray-500"
-          style={{ border: '1px dashed', borderRadius: '0.6rem', padding: '0.5rem 0.75rem', fontSize: '0.68rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}
-        >
-          <i className="far fa-image" aria-hidden="true"></i>
-          <span>{logo}</span>
-        </div>
+        {image ? (
+          <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '110px' }}>
+            <img src={image} alt={title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+        ) : (
+          /* Placeholder loghi ente/programma - da sostituire con le immagini reali quando disponibili */
+          <div
+            className="border-slate-200 dark:border-[rgba(255,255,255,0.1)] text-slate-400 dark:text-gray-500"
+            style={{ border: '1px dashed', borderRadius: '0.6rem', padding: '0.5rem 0.75rem', fontSize: '0.68rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+          >
+            <i className="far fa-image" aria-hidden="true"></i>
+            <span>{logo}</span>
+          </div>
+        )}
 
         <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1rem', fontWeight: 800, margin: 0, lineHeight: 1.35 }}>{title}</h3>
         <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem', lineHeight: 1.7, margin: 0, flex: 1 }}>{text}</p>
@@ -238,6 +262,26 @@ export default function FormazioneRegionale() {
           background: rgba(255,255,255,0.08);
           border-color: rgba(255,255,255,0.5);
         }
+        .cta-btn-outline-light {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.55rem;
+          padding: 0.85rem 2rem;
+          border-radius: 999px;
+          background: transparent;
+          color: #008C95;
+          font-weight: 700;
+          font-size: 0.95rem;
+          text-decoration: none;
+          border: 2px solid rgba(0,140,149,0.3);
+          transition: all 0.2s ease;
+          font-family: inherit;
+          cursor: pointer;
+        }
+        .cta-btn-outline-light:hover {
+          background: rgba(0,140,149,0.08);
+          border-color: #008C95;
+        }
       `}</style>
 
       {/* ── HERO ── */}
@@ -325,12 +369,15 @@ export default function FormazioneRegionale() {
             <div style={{ flex: '1 1 420px', minWidth: '280px' }}>
               <span className="section-badge">Corsi gratuiti in Sicilia FSE+, GOL, POC</span>
               <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-                Corsi di formazione gratuiti in Sicilia con qualifica riconosciuta
+                Formazione regionale gratuita in Sicilia con qualifica riconosciuta.
               </h2>
               <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '1.5rem' }}>
-                Cerchi corsi gratuiti in Sicilia per trovare lavoro, cambiare professione o acquisire nuove competenze? Alètheia è un Ente di Formazione accreditato dalla Regione Siciliana e realizza percorsi finanziati attraverso FSE+, Programma GOL, POC Sicilia e altri programmi regionali, rivolti a disoccupati, inoccupati e persone in cerca di nuove opportunità professionali. I corsi sono completamente gratuiti e possono includere qualifica professionale riconosciuta, indennità di frequenza e stage presso aziende del territorio, per trasformare la formazione in una concreta opportunità di inserimento lavorativo.
+                Alètheia Srl è ente accreditato dalla Regione Siciliana (DDG n. 78/2017). Eroga percorsi formativi finanziati attraverso FSE+, Programma GOL, POC Sicilia e altri programmi regionali, rivolti a disoccupati, inoccupati e persone in cerca di nuove opportunità professionali. I corsi sono gratuiti con qualifica riconosciuta, indennità di frequenza e stage in azienda, per trasformare la formazione in un&apos;opportunità concreta di lavoro.
               </p>
-              <a href="#avvisi" className="cta-btn-primary">Scopri i corsi</a>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <a href="#avvisi" className="cta-btn-primary">Scopri gli avvisi</a>
+                <a href="/contatti" className="cta-btn-outline-light">Contattaci</a>
+              </div>
             </div>
 
             {/* Placeholder logo Regione Siciliana */}
@@ -345,14 +392,21 @@ export default function FormazioneRegionale() {
           </div>
 
           {/* Perché la formazione finanziata */}
-          <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1.25rem', padding: '2.5rem', marginTop: '3rem' }}>
+          <div style={{ marginTop: '3rem' }}>
             <span className="section-badge">Perché scegliere la formazione finanziata</span>
-            <p className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.15rem, 2vw, 1.4rem)', fontWeight: 800, margin: '0 0 1rem', lineHeight: 1.4 }}>
+            <p className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.15rem, 2vw, 1.4rem)', fontWeight: 800, margin: '0 0 1.5rem', lineHeight: 1.4 }}>
               Gratuita. Certificata. Spendibile nel mondo del lavoro.
             </p>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0, maxWidth: '820px' }}>
-              Frequentare un corso finanziato significa acquisire competenze richieste dalle aziende senza sostenere costi. Ogni percorso promosso da Alètheia è progettato per favorire l&apos;ingresso o il reinserimento nel mercato del lavoro attraverso una formazione pratica, qualifiche riconosciute e il supporto di docenti specializzati.
-            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+              {puntiDiForza.map((p) => (
+                <div key={p.text} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.85rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className={p.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
+                  </div>
+                  <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{p.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -479,10 +533,10 @@ export default function FormazioneRegionale() {
             Hai domande?
           </span>
           <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 900, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>
-            Scopri se hai i requisiti
+            Non sai quale corso scegliere?
           </h2>
           <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', maxWidth: '720px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-            Ogni avviso ha requisiti specifici di accesso. Contattaci per una consulenza gratuita: ti aiutiamo a individuare il percorso più adatto alla tua situazione.
+            Raccontaci la tua situazione, in pochi minuti ti diciamo se hai i requisiti, quale avviso fa per te e come candidarti. Il servizio di orientamento è gratuito.
           </p>
           <a href="/contatti" className="cta-btn-primary">Contattaci</a>
         </div>

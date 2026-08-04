@@ -82,7 +82,7 @@ const faqs = [
 
 const EMPTY_FORM = {
   ragioneSociale: '', piva: '', telefono: '', email: '',
-  nome: '', cognome: '', sede: '', partecipanti: '',
+  nome: '', cognome: '', sede: '', partecipanti: '', privacy: false,
 };
 
 function AreaCard({ badge, icon, title, text, cta, href }) {
@@ -252,12 +252,16 @@ const focusOff = (isDark) => (e) => { e.target.style.borderColor = isDark ? 'rgb
 function ConsulenzaForm({ isDark }) {
   const [fields, setFields] = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
   const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
+  const setCheck = (e) => setFields((p) => ({ ...p, privacy: e.target.checked }));
   const inputStyle = getInputStyle(isDark);
   const groupLabelColor = isDark ? 'rgba(110,231,183,0.8)' : '#008C95';
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!fields.privacy) { setErrors({ privacy: 'Devi accettare la Privacy Policy' }); return; }
+    setErrors({});
     setSubmitted(true);
   }
 
@@ -332,6 +336,22 @@ function ConsulenzaForm({ isDark }) {
           </FormField>
         </div>
       </div>
+
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+        <input
+          id="obb-privacy"
+          type="checkbox"
+          checked={fields.privacy}
+          onChange={setCheck}
+          style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#008C95', flexShrink: 0, cursor: 'pointer' }}
+        />
+        <label htmlFor="obb-privacy" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer', color: isDark ? 'rgba(255,255,255,0.65)' : '#475569' }}>
+          Ho letto e accetto la{' '}
+          <a href="/privacy-cookie" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
+          {' '}e acconsento al trattamento dei dati ai sensi del GDPR. <span style={{ color: '#008C95' }}>*</span>
+        </label>
+      </div>
+      {errors.privacy && <p style={{ margin: '-0.85rem 0 0', fontSize: '0.75rem', color: '#EF4444' }}><i className="fas fa-exclamation-circle" style={{ marginRight: '4px' }}></i>{errors.privacy}</p>}
 
       <button
         type="submit"

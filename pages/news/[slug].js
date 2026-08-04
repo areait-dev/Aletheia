@@ -24,10 +24,6 @@ export async function getStaticProps({ params }) {
 
 /* ─── Utilities ─────────────────────────────────────────────── */
 
-function estimateReadingTime(text) {
-  return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
-}
-
 function getCategory(slug) {
   if (/sicurezza|accordo-stato|obbligatori/.test(slug)) return { label: 'Sicurezza sul lavoro', color: '#F59E0B' };
   if (/intelligenza|ai|digitale/.test(slug)) return { label: 'Innovazione', color: '#6366F1' };
@@ -231,7 +227,6 @@ function RelatedCardLarge({ article }) {
 /* ─── Page ───────────────────────────────────────────────────── */
 
 export default function ArticlePage({ article, related }) {
-  const readingTime = estimateReadingTime(article.body);
   const category = getCategory(article.slug);
   const tags = getTags(article.slug);
   const { theme } = useTheme() || { theme: 'light' };
@@ -372,15 +367,11 @@ export default function ArticlePage({ article, related }) {
             {article.title}
           </h1>
 
-          {/* Metadati: data + tempo di lettura */}
+          {/* Metadati: data */}
           <div className="hero-animate hero-animate-3" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.65)', fontWeight: 500 }}>
               <i className="far fa-calendar-alt" style={{ fontSize: '0.8rem', color: '#6EE7B7' }} />
               {formatDate(article.date)}
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.65)', fontWeight: 500 }}>
-              <i className="far fa-clock" style={{ fontSize: '0.8rem', color: '#6EE7B7' }} />
-              {readingTime} min di lettura
             </span>
           </div>
         </div>
@@ -392,22 +383,22 @@ export default function ArticlePage({ article, related }) {
       <section className="bg-light dark:bg-dark-bg" style={{ padding: '4rem 0 5rem' }}>
         <div className="container">
 
-          {/* Immagine articolo - standalone, a tutta larghezza del contenitore */}
-          {article.image && (
-            <div className="max-w-5xl mx-auto" style={{ marginBottom: '32px' }}>
-              <img
-                src={article.image}
-                alt={article.title}
-                style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: '16px', display: 'block', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }}
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-              />
-            </div>
-          )}
-
           <div className="article-layout">
 
             {/* ── Colonna principale (70%) ────────────────────── */}
             <main>
+              {/* Immagine articolo - allineata esattamente alla colonna di testo */}
+              {article.image && (
+                <div style={{ marginBottom: '2rem' }}>
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: '16px', display: 'block', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                </div>
+              )}
+
               {/* Lead / excerpt in evidenza */}
               <p className="text-slate-600 dark:text-gray-300 bg-teal-50 dark:bg-teal-900/20" style={{
                 fontSize: '1.2rem', fontWeight: 500,
