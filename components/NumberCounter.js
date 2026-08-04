@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-export default function NumberCounter({ target, label, icon, duration = 2000 }) {
+export default function NumberCounter({ target, label, icon, duration = 2000, prefix = '', valueClassName = 'text-5xl font-extrabold text-emerald-400 tracking-tight tabular-nums leading-none' }) {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
   const ref = useRef(null);
@@ -36,11 +36,11 @@ export default function NumberCounter({ target, label, icon, duration = 2000 }) 
   }, [hasStarted, target, duration]);
 
   const suffix = target.toString().includes('+') ? '+' : target.toString().includes('%') ? '%' : '';
-  const displayValue = count.toLocaleString('en-US') + suffix;
+  const displayValue = prefix + count.toLocaleString('it-IT') + suffix;
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-3 px-4 py-6">
-      <div className="text-5xl font-extrabold text-emerald-400 tracking-tight tabular-nums leading-none">
+      <div className={valueClassName}>
         {displayValue}
       </div>
       <div className="text-white/75 font-semibold text-xs uppercase tracking-[0.12em]">

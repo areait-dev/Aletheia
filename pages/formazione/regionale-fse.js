@@ -18,7 +18,7 @@ const percorsi = [
     title: 'Fondi Interprofessionali per aziende',
     text: 'Ogni azienda versa lo 0,30% dei contributi INPS destinati alla formazione continua dei propri dipendenti. Attraverso i Fondi Interprofessionali queste risorse possono trasformarsi in percorsi formativi senza costi aggiuntivi per l\'impresa. Non è un incentivo da richiedere: è un contributo che la tua azienda versa già per legge. Fon.Ter, For.Agri, Fondimpresa: i fondi ci sono, basta sapere come attivarli. Dall\'analisi dei fabbisogni alla progettazione, dalla gestione amministrativa alla rendicontazione, Alètheia segue ogni fase del progetto permettendoti di investire sulle competenze senza appesantire il budget aziendale. La tua azienda forma i dipendenti, i costi li copre il fondo.',
     cta: 'Scopri di più',
-    href: '/all-courses?categoria=fondi-interprofessionali',
+    href: '/formazione/fondi-interprofessionali',
   },
   {
     badge: 'Forma i tuoi dipendenti senza costi retributivi.',
@@ -26,7 +26,7 @@ const percorsi = [
     title: 'Fondo Nuove Competenze',
     text: 'Il Fondo Nuove Competenze consente alle imprese di destinare parte dell\'orario lavorativo alla formazione, con il rimborso dei costi retributivi previsto dalla misura. Digitalizzazione, transizione ecologica, innovazione organizzativa e sviluppo delle competenze strategiche diventano un investimento sostenibile per preparare l\'azienda alle sfide del mercato. Verifica con il nostro team se la tua impresa possiede i requisiti di accesso.',
     cta: 'Scopri di più',
-    href: '/all-courses?categoria=fondo-nuove-competenze',
+    href: '/formazione/fondo-nuove-competenze',
   },
 ];
 
