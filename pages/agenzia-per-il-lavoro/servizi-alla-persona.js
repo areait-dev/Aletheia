@@ -342,7 +342,7 @@ export default function ServiziAllaPersona() {
           </p>
 
           <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a href="/agenzia-per-il-lavoro/offerte-di-lavoro" className="cta-btn-primary">Vedi le offerte</a>
+            <a href="https://aletheia4job.it/offerte-di-lavoro" target="_blank" rel="noopener noreferrer" className="cta-btn-primary">Vedi le offerte</a>
             <a href="#contatti" className="cta-btn-outline">Contattaci</a>
           </div>
         </div>
@@ -586,7 +586,7 @@ export default function ServiziAllaPersona() {
           </p>
 
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="/agenzia-per-il-lavoro/offerte-di-lavoro" className="cta-btn-primary">Vedi le offerte</a>
+            <a href="https://aletheia4job.it/offerte-di-lavoro" target="_blank" rel="noopener noreferrer" className="cta-btn-primary">Vedi le offerte</a>
             <a href="#contatti" className="cta-btn-outline">Contattaci</a>
           </div>
         </div>
