@@ -58,6 +58,11 @@ export default function Header({ active, solid = false }) {
   }, []);
 
   const isLight = scrolled || formazioneOpen || solid;
+  // Colore icone/hamburger: la CSS gestisce già i link nav e il telefono (classi
+  // .scrolled / --solid, con varianti html.dark dedicate). Le icone sciolte (tema,
+  // carrello, hamburger) non hanno equivalente CSS, quindi vanno calcolate qui
+  // tenendo conto sia dello stato scrolled/solid sia del tema attivo.
+  const iconColor = isLight ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : '#FFFFFF';
 
   const links = [
     { href: '/', label: 'Home' },
@@ -89,7 +94,6 @@ export default function Header({ active, solid = false }) {
               key={link.href}
               href={link.href}
               className={active === link.href ? 'active' : ''}
-              style={{ color: isLight ? '#0F172A' : undefined }}
               aria-expanded={link.label === 'Formazione' ? formazioneOpen : undefined}
               aria-haspopup={link.label === 'Formazione' ? 'true' : undefined}
               onClick={(e) => {
@@ -129,7 +133,7 @@ export default function Header({ active, solid = false }) {
           >
             <i
               className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}
-              style={{ fontSize: '1.1rem', color: isLight ? '#0F172A' : '#FFFFFF', transition: 'color 0.3s ease' }}
+              style={{ fontSize: '1.1rem', color: iconColor, transition: 'color 0.3s ease' }}
             />
           </button>
           <div className="cta-dropdown" ref={dropdownRef}>
@@ -149,7 +153,7 @@ export default function Header({ active, solid = false }) {
               </div>
             )}
           </div>
-          <a href="tel:+390932862613" className="header-phone" style={{ color: isLight ? '#0F172A' : undefined }}>
+          <a href="tel:+390932862613" className="header-phone">
             +39 0932 862613
           </a>
           {/* CARRELLO */}
@@ -161,7 +165,7 @@ export default function Header({ active, solid = false }) {
           >
             <i
               className="fas fa-shopping-cart"
-              style={{ fontSize: '1.2rem', color: isLight ? '#0F172A' : '#FFFFFF', transition: 'color 0.3s ease' }}
+              style={{ fontSize: '1.2rem', color: iconColor, transition: 'color 0.3s ease' }}
             ></i>
             {count > 0 && (
               <span style={{
@@ -186,9 +190,9 @@ export default function Header({ active, solid = false }) {
           aria-controls="mainNav"
           style={{ zIndex: 200 }}
         >
-          <span style={{ background: isLight || menuOpen ? '#0F172A' : 'white' }}></span>
-          <span style={{ background: isLight || menuOpen ? '#0F172A' : 'white' }}></span>
-          <span style={{ background: isLight || menuOpen ? '#0F172A' : 'white' }}></span>
+          <span style={{ background: menuOpen ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : iconColor }}></span>
+          <span style={{ background: menuOpen ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : iconColor }}></span>
+          <span style={{ background: menuOpen ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : iconColor }}></span>
         </button>
       </div>
 
