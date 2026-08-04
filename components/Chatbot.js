@@ -143,11 +143,18 @@ export default function Chatbot() {
       <style jsx>{`
         @keyframes chatbot-breathe {
           0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.06); }
+          50% { transform: scale(1.16); }
         }
         .chatbot-toggle-mark {
-          animation: chatbot-breathe 3s ease-in-out infinite;
+          animation: chatbot-breathe 2.2s ease-in-out infinite;
           transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+        }
+        @keyframes chatbot-glow {
+          0%, 100% { box-shadow: 0 4px 20px var(--chatbot-glow-color, rgba(0,140,149,0.45)); }
+          50% { box-shadow: 0 4px 32px var(--chatbot-glow-color, rgba(0,140,149,0.45)), 0 0 0 8px var(--chatbot-glow-ring, rgba(0,140,149,0.12)); }
+        }
+        .chatbot-toggle-btn {
+          animation: chatbot-glow 2.2s ease-in-out infinite;
         }
         .chatbot-toggle-mark.is-open {
           animation: none;
@@ -386,6 +393,7 @@ export default function Chatbot() {
         onMouseEnter={() => setBtnHover(true)}
         onMouseLeave={() => setBtnHover(false)}
         aria-label={open ? 'Chiudi assistente' : 'Apri assistente FAQ'}
+        className={!open ? 'chatbot-toggle-btn' : ''}
         style={{
           position: 'relative',
           width: '56px', height: '56px',
@@ -394,7 +402,9 @@ export default function Chatbot() {
           border: 'none',
           cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: theme === 'dark' ? '0 4px 20px rgba(16,185,129,0.45)' : '0 4px 20px rgba(0,140,149,0.45)',
+          boxShadow: open ? (theme === 'dark' ? '0 4px 20px rgba(16,185,129,0.45)' : '0 4px 20px rgba(0,140,149,0.45)') : undefined,
+          '--chatbot-glow-color': theme === 'dark' ? 'rgba(16,185,129,0.45)' : 'rgba(0,140,149,0.45)',
+          '--chatbot-glow-ring': theme === 'dark' ? 'rgba(16,185,129,0.14)' : 'rgba(0,140,149,0.12)',
           transform: btnHover ? 'scale(1.08)' : 'scale(1)',
           transition: 'transform 0.2s ease',
           flexShrink: 0,
