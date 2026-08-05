@@ -147,7 +147,7 @@ export default function Header({ active, solid = false }) {
             {dropdownOpen && (
               <div className="cta-dropdown-menu">
                 <a
-                  href="https://webapp.center"
+                  href="https://www.aletheiasrl.it/elearning2/"
                   target="_blank"
                   rel="noreferrer"
                   className="cta-dropdown-item"
@@ -225,7 +225,7 @@ export default function Header({ active, solid = false }) {
                   </button>
                 </div>
                 <div className={`sub-dropdown-menu${subDropdowns.regionale ? ' open' : ''}`}>
-                  <a href="/all-courses?categoria=fse-plus" onClick={() => setFormazioneOpen(false)}>Formazione Regionale</a>
+                  <a href="https://aletheiasrl.vercel.app/formazione/regionale" onClick={() => setFormazioneOpen(false)}>Formazione Regionale</a>
                   <a href="/formazione/fondi-interprofessionali" onClick={() => setFormazioneOpen(false)}>Fondi Interprofessionali</a>
                   <a href="/formazione/fondo-nuove-competenze" onClick={() => setFormazioneOpen(false)}>Fondo Nuove Competenze</a>
                 </div>
