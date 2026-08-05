@@ -492,7 +492,6 @@ export default function CorsoFormazionePreposto() {
                 onBuyClick={() => { addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico })}
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
           </div>

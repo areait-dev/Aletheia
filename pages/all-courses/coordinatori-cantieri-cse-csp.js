@@ -461,7 +461,6 @@ export default function CorsoCoordinatoriCseCsp() {
                 onBuyClick={() => { addToCart({ id: `coordinatori-cantieri-cse-csp-${selectedTipo}`, slug: 'coordinatori-cantieri-cse-csp', title: 'Coordinatori Cantieri CSE-CSP', variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `coordinatori-cantieri-cse-csp-${selectedTipo}`, slug: 'coordinatori-cantieri-cse-csp', title: 'Coordinatori Cantieri CSE-CSP', variant: c.titleSuffix, price: c.prezzoNumerico })}
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
           </div>

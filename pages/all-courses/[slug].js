@@ -1526,8 +1526,6 @@ export default function CourseDetail() {
                 priceRows={[{ label: varianteCorrente.prezzoLabel, value: prezzoTesto }]}
                 onBuyClick={() => addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image })}
                 buyLabel="Aggiungi al carrello"
-                quoteHref={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(varianteCorrente.label)}`}
-                quoteLabel="Richiedi iscrizione"
               />
 
             /* CASO 3 - Iscrizione online senza pagamento anticipato (OSS, ASACOM) */
@@ -1560,8 +1558,6 @@ export default function CourseDetail() {
                 onBuyClick={() => { addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image })}
-                quoteHref={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(varianteCorrente.label)}`}
-                quoteLabel="Richiedi preventivo"
               />
 
             /* CASO 5 - Nessun prezzo fisso (su richiesta/range/convenzioni): "Richiedi preventivo"
@@ -1571,7 +1567,6 @@ export default function CourseDetail() {
                 priceRows={[{ label: 'Quota di partecipazione', value: course.price }]}
                 buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
                 buyLabel="Richiedi preventivo"
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             )}
           </aside>

@@ -338,7 +338,6 @@ export default function AggiornamentoCoordinatoriCseCsp() {
                 onBuyClick={() => { addToCart({ id: 'aggiornamento-coordinatori-cantieri-cse-csp', slug: 'aggiornamento-coordinatori-cantieri-cse-csp', title: 'Aggiornamento Coordinatori Cantieri CSE-CSP', variant: 'FAD', price: 240 }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: 'aggiornamento-coordinatori-cantieri-cse-csp', slug: 'aggiornamento-coordinatori-cantieri-cse-csp', title: 'Aggiornamento Coordinatori Cantieri CSE-CSP', variant: 'FAD', price: 240 })}
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
           </div>

@@ -407,7 +407,6 @@ export default function CorsoCarriponte() {
                 onBuyClick={() => { addToCart({ id: 'addetti-alla-conduzione-di-carriponte', slug: 'addetti-alla-conduzione-di-carriponte', title: COURSE_TITLE, variant: 'Corso Completo', price: 270 }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: 'addetti-alla-conduzione-di-carriponte', slug: 'addetti-alla-conduzione-di-carriponte', title: COURSE_TITLE, variant: 'Corso Completo', price: 270 })}
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
           </div>

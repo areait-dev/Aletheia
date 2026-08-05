@@ -381,7 +381,6 @@ export default function CorsoDatoreDiLavoro() {
                 onBuyClick={() => { addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
           </div>

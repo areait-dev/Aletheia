@@ -376,7 +376,6 @@ export default function AggiornamentoFormazionePreposto() {
                 onBuyClick={() => { addToCart({ id: 'aggiornamento-formazione-del-preposto', slug: 'aggiornamento-formazione-del-preposto', title: 'Aggiornamento Formazione del Preposto', variant: 'Aula/Videoconferenza', price: 90 }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: 'aggiornamento-formazione-del-preposto', slug: 'aggiornamento-formazione-del-preposto', title: 'Aggiornamento Formazione del Preposto', variant: 'Aula/Videoconferenza', price: 90 })}
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
           </div>
