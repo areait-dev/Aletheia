@@ -203,15 +203,6 @@ export default function FormazioneRegionale() {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
         }
 
-        .requisiti-valore-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2.5rem;
-        }
-        @media (max-width: 900px) {
-          .requisiti-valore-grid { grid-template-columns: 1fr; }
-        }
-
         .section-badge {
           display: inline-block;
           font-size: 0.68rem;
@@ -385,7 +376,7 @@ export default function FormazioneRegionale() {
       {/* ══════════════ REQUISITI & VALORE ALÈTHEIA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div className="requisiti-valore-grid">
+          <div style={{ maxWidth: '640px', margin: '0 auto' }}>
             {/* Requisiti di accesso */}
             <div>
               <span className="section-badge">Requisiti di accesso</span>
@@ -411,28 +402,6 @@ export default function FormazioneRegionale() {
                 <a href="/contatti" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#008C95', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', width: 'fit-content' }}>
                   Verifica i tuoi requisiti <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
                 </a>
-              </div>
-            </div>
-
-            {/* Perché Alètheia */}
-            <div>
-              <span className="section-badge">Perché Alètheia</span>
-              <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.3 }}>
-                L&apos;ente di formazione che ti accompagna fino all&apos;inserimento lavorativo
-              </h2>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.92rem', lineHeight: 1.75, marginBottom: '1.5rem' }}>
-                Non organizziamo semplicemente corsi. Ti aiutiamo a scegliere il percorso più adatto, verifichiamo i requisiti di accesso e ti accompagniamo durante tutto il percorso formativo.
-              </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
-                {puntiDiForza.map((p) => (
-                  <div key={p.text} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.85rem', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                    <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <i className={p.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
-                    </div>
-                    <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{p.text}</span>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
