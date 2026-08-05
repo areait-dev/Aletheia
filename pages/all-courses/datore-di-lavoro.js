@@ -136,7 +136,7 @@ const CONTENUTO = {
 };
 
 export default function CorsoDatoreDiLavoro() {
-  const { addToCart } = useCart();
+  const { addToCart, setCartOpen } = useCart();
   const [variante, setVariante] = useState('datore');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const carouselRef = useRef(null);
@@ -378,7 +378,8 @@ export default function CorsoDatoreDiLavoro() {
             <aside className="cp-price-area">
               <PricingSidebar
                 priceRows={c.prezzo}
-                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                onBuyClick={() => { addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
+                buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />

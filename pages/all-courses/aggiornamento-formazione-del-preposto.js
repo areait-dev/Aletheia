@@ -7,6 +7,7 @@ import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
+import { useCart } from '../../context/CartContext';
 
 const PREPOSTO_IMAGE = 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=600&q=80';
 const MAPS_HREF = 'https://maps.google.com/?q=Vittoria+RG+Aletheia+Srl';
@@ -78,6 +79,7 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function AggiornamentoFormazionePreposto() {
+  const { addToCart, setCartOpen } = useCart();
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [modalitaSelezionata, setModalitaSelezionata] = useState('aula');
@@ -371,7 +373,9 @@ export default function AggiornamentoFormazionePreposto() {
                   { label: 'Aula', value: '€ 90,00 + IVA' },
                   { label: 'Videoconferenza', value: '€ 90,00 + IVA' },
                 ]}
-                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                onBuyClick={() => { addToCart({ id: 'aggiornamento-formazione-del-preposto', slug: 'aggiornamento-formazione-del-preposto', title: 'Aggiornamento Formazione del Preposto', variant: 'Aula/Videoconferenza', price: 90 }); setCartOpen(true); }}
+                buyLabel="Acquista ora"
+                onAddToCartClick={() => addToCart({ id: 'aggiornamento-formazione-del-preposto', slug: 'aggiornamento-formazione-del-preposto', title: 'Aggiornamento Formazione del Preposto', variant: 'Aula/Videoconferenza', price: 90 })}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>

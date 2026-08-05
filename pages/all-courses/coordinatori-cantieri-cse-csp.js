@@ -183,7 +183,7 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoCoordinatoriCseCsp() {
-  const { addToCart } = useCart();
+  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('corso');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -458,7 +458,8 @@ export default function CorsoCoordinatoriCseCsp() {
             <aside className="cp-price-area">
               <PricingSidebar
                 priceRows={c.prezzo}
-                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                onBuyClick={() => { addToCart({ id: `coordinatori-cantieri-cse-csp-${selectedTipo}`, slug: 'coordinatori-cantieri-cse-csp', title: 'Coordinatori Cantieri CSE-CSP', variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
+                buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `coordinatori-cantieri-cse-csp-${selectedTipo}`, slug: 'coordinatori-cantieri-cse-csp', title: 'Coordinatori Cantieri CSE-CSP', variant: c.titleSuffix, price: c.prezzoNumerico })}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />

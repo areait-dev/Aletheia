@@ -177,7 +177,7 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoFormazionePreposto() {
-  const { addToCart } = useCart();
+  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('corso');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -489,7 +489,8 @@ export default function CorsoFormazionePreposto() {
             <aside className="cp-price-area">
               <PricingSidebar
                 priceRows={c.prezzo}
-                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                onBuyClick={() => { addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
+                buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico })}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />

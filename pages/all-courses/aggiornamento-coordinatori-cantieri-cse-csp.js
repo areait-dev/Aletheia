@@ -7,6 +7,7 @@ import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
+import { useCart } from '../../context/CartContext';
 
 const CSE_IMAGE = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80';
 
@@ -78,6 +79,7 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function AggiornamentoCoordinatoriCseCsp() {
+  const { addToCart, setCartOpen } = useCart();
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const carouselRef = useRef(null);
@@ -333,7 +335,9 @@ export default function AggiornamentoCoordinatoriCseCsp() {
                 priceRows={[
                   { label: 'FAD', value: '€ 240,00 + IVA' },
                 ]}
-                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                onBuyClick={() => { addToCart({ id: 'aggiornamento-coordinatori-cantieri-cse-csp', slug: 'aggiornamento-coordinatori-cantieri-cse-csp', title: 'Aggiornamento Coordinatori Cantieri CSE-CSP', variant: 'FAD', price: 240 }); setCartOpen(true); }}
+                buyLabel="Acquista ora"
+                onAddToCartClick={() => addToCart({ id: 'aggiornamento-coordinatori-cantieri-cse-csp', slug: 'aggiornamento-coordinatori-cantieri-cse-csp', title: 'Aggiornamento Coordinatori Cantieri CSE-CSP', variant: 'FAD', price: 240 })}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>

@@ -1082,7 +1082,7 @@ export const coursesDetails = {
 export default function CourseDetail() {
   const router = useRouter();
   const { slug } = router.query;
-  const { addToCart } = useCart();
+  const { addToCart, setCartOpen } = useCart();
   const [showForm, setShowForm] = useState(false);
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'moduli' - indipendente da livello/tipo, non si resetta al cambio
   const [selectedLivelloKey, setSelectedLivelloKey] = useState(null);
@@ -1550,42 +1550,29 @@ export default function CourseDetail() {
                 </p>
               </>
 
-            /* CASO 4 - Non acquistabile online: mostra prezzi + Richiedi preventivo. "Acquista ora" resta
-               il bottone dominante (pieno, grassetto); "Richiedi preventivo" e WhatsApp sono outline per
-               non appesantire il box - placeholder in attesa di un flusso di pagamento e di un numero
-               WhatsApp reali: nessun dato sensibile o statico è cablato qui, solo variabili d'ambiente
-               pubbliche con fallback "#". */
+            /* CASO 4 - Prezzo fisso noto per la variante selezionata (varianteCorrente.prezzo è un
+               numero): stesso flusso carrello di CASO 2, "Acquista ora" aggiunge al carrello e apre
+               subito il drawer (come i bottoni "Buy now" dei negozi online) invece di puntare a un
+               link statico non configurato. */
+            ) : varianteCorrente.prezzo != null ? (
+              <PricingSidebar
+                priceRows={[{ label: 'Quota di partecipazione', value: prezzoTesto }]}
+                onBuyClick={() => { addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image }); setCartOpen(true); }}
+                buyLabel="Acquista ora"
+                onAddToCartClick={() => addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image })}
+                quoteHref={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(varianteCorrente.label)}`}
+                quoteLabel="Richiedi preventivo"
+              />
+
+            /* CASO 5 - Nessun prezzo fisso (su richiesta/range/convenzioni): "Richiedi preventivo"
+               resta l'unica CTA dominante, niente più "Acquista ora" verso un link statico morto. */
             ) : (
               <PricingSidebar
-                priceRows={Array.isArray(course.priceVariants) ? undefined : [{ label: 'Quota di partecipazione', value: course.price }]}
-                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
-                quoteHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                priceRows={[{ label: 'Quota di partecipazione', value: course.price }]}
+                buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
-              >
-                {Array.isArray(course.priceVariants) && (
-                  /* Varianti prezzo ma non acquistabile online → griglia con "Richiedi preventivo" per variante */
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.85rem', margin: 0 }}>Seleziona il percorso di interesse per richiedere un preventivo personalizzato.</p>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.6rem' }}>
-                      {course.priceVariants.map((v, i) => (
-                        <a
-                          key={i}
-                          href={`/contatti?corso=${encodeURIComponent(course.title)}&variante=${encodeURIComponent(v.label)}`}
-                          className="flex items-center justify-between border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-xl p-4 bg-slate-50 dark:bg-gray-700 no-underline hover:border-teal-400 transition-colors"
-                        >
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                            <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.875rem', fontWeight: '600' }}>{v.label}</span>
-                            <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#008C95' }}>€ {v.amount}</span>
-                          </div>
-                          <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#008C95', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
-                            Richiedi preventivo →
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </PricingSidebar>
+              />
             )}
           </aside>
         </div>

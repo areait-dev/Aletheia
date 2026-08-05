@@ -7,6 +7,7 @@ import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
+import { useCart } from '../../context/CartContext';
 
 const COURSE_TITLE = 'Corso Addetti alla Conduzione di Carriponte';
 const AGGIORNAMENTO_TITLE = 'Aggiornamento Addetti alla Conduzione di Carriponte';
@@ -102,6 +103,7 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoCarriponte() {
+  const { addToCart, setCartOpen } = useCart();
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [modalitaSelezionata, setModalitaSelezionata] = useState('aula');
@@ -402,7 +404,9 @@ export default function CorsoCarriponte() {
                   { label: 'Corso Completo', value: '€ 270,00' },
                   { label: 'Corso Aggiornamento', value: '€ 150,00' },
                 ]}
-                buyHref={process.env.NEXT_PUBLIC_CHECKOUT_URL || '#'}
+                onBuyClick={() => { addToCart({ id: 'addetti-alla-conduzione-di-carriponte', slug: 'addetti-alla-conduzione-di-carriponte', title: COURSE_TITLE, variant: 'Corso Completo', price: 270 }); setCartOpen(true); }}
+                buyLabel="Acquista ora"
+                onAddToCartClick={() => addToCart({ id: 'addetti-alla-conduzione-di-carriponte', slug: 'addetti-alla-conduzione-di-carriponte', title: COURSE_TITLE, variant: 'Corso Completo', price: 270 })}
                 whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             </aside>
