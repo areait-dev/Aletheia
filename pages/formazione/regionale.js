@@ -361,24 +361,6 @@ export default function FormazioneRegionale() {
         </div>
       </section>
 
-      {/* ── INTRO ── */}
-      <section className="bg-light dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
-        <div className="container">
-          <div style={{ flex: 1 }}>
-            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#008C95', marginBottom: '0.5rem' }}>
-              Fondi regionali per la formazione
-            </span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-              Avvisi pubblici della{' '}
-              <span style={{ color: '#008C95' }}>Regione Siciliana</span>
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
-              La Formazione Regionale comprende tutti i percorsi attivati attraverso avvisi pubblici finanziati dalla Regione Siciliana, spesso in co-finanziamento con fondi europei (FSE+, FESR) o nazionali (PNRR). Alètheia Srl è ente accreditato dalla Regione Siciliana (DDG n. 78/2017) e gestisce questi percorsi dalla progettazione alla rendicontazione finale, garantendo la massima qualità e conformità normativa.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ══════════════ AVVISI DELLA REGIONE SICILIANA ══════════════ */}
       <section id="avvisi" className="bg-white dark:bg-dark-card" style={{ padding: '5rem 0' }}>
         <div className="container">
