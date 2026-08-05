@@ -139,7 +139,7 @@ export default function Chatbot() {
   if (cartOpen) return null;
 
   return (
-    <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+    <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', pointerEvents: 'none' }}>
       <style jsx>{`
         @keyframes chatbot-breathe {
           0%, 100% { transform: scale(1); }
@@ -186,6 +186,9 @@ export default function Chatbot() {
         opacity: open ? 1 : 0,
         pointerEvents: open ? 'auto' : 'none',
         transition: 'transform 0.25s ease, opacity 0.25s ease',
+        // Il wrapper esterno ha pointerEvents:none (occupa un'area fissa 360x583 in basso a
+        // destra, sovrapposta ad altri elementi della pagina anche a chat chiusa): questa
+        // finestra deve riattivare i click solo quando è effettivamente visibile (open).
       }}>
 
         {/* Header */}
@@ -408,6 +411,7 @@ export default function Chatbot() {
           transform: btnHover ? 'scale(1.08)' : 'scale(1)',
           transition: 'transform 0.2s ease',
           flexShrink: 0,
+          pointerEvents: 'auto',
         }}
       >
         <div style={{ position: 'relative', width: '26px', height: '26px' }}>
