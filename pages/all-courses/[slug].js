@@ -1508,6 +1508,7 @@ export default function CourseDetail() {
               <PricingSidebar
                 buyHref={`/contatti?corso=${encodeURIComponent(course.title)}`}
                 buyLabel="Richiedi informazioni"
+                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               >
                 <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/40 rounded-2xl p-6" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <span style={{ display: 'inline-block', backgroundColor: '#DCFCE7', color: '#15803D', padding: '0.5rem 1.25rem', borderRadius: '50px', fontWeight: '700', fontSize: '0.9rem', width: 'fit-content' }}>
@@ -1535,6 +1536,7 @@ export default function CourseDetail() {
                   priceRows={[{ label: 'Quota di iscrizione', value: 'Su richiesta' }]}
                   buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=iscrizione`}
                   buyLabel="Invia richiesta di iscrizione"
+                  whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                 >
                   <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
                     <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
@@ -1567,6 +1569,7 @@ export default function CourseDetail() {
                 priceRows={[{ label: 'Quota di partecipazione', value: course.price }]}
                 buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
                 buyLabel="Richiedi preventivo"
+                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
               />
             )}
           </aside>
