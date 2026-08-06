@@ -12,16 +12,104 @@ import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFami
 // TODO: sostituire con l'indirizzo esatto della sede e il link Google Maps ufficiale non appena confermati da Alètheia
 const MAPS_HREF = 'https://maps.google.com/?q=Vittoria+RG+Aletheia+Srl';
 
-// Contenuto switchabile Corso base (12h) / Aggiornamento (6h) - stesso pattern del pill "Corso base /
-// Aggiornamento" usato nel template dinamico (pages/all-courses/[slug].js): cambia scheda tecnica,
-// testi, moduli e box prezzo nella sidebar in base al tipo selezionato.
+// Contenuto switchabile Sotto Tensione (16h) / In Prossimità (12h) - stesso pattern a pillola già usato
+// in formazione-del-preposto.js e datore-di-lavoro.js: cambia scheda tecnica, testi, moduli e box
+// prezzo nella sidebar in base alla variante selezionata.
 const CONTENUTO = {
-  corso: {
-    title: 'Corso di Formazione per Preposti',
+  sottoTensione: {
+    title: 'Corso PES, PAV, PEI per Addetti ai Lavori Elettrici Sotto Tensione',
+    titleSuffix: '· 16 ore',
+    breadcrumbLabel: 'Corso Lavori Elettrici Sotto Tensione',
+    titleSeo: 'Corso PES PAV PEI Sotto Tensione – 16h | Alètheia',
+    metaDescription: 'Corso PES PAV PEI lavori elettrici sotto tensione, 16 ore, CEI 11-27 ed. 2025. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    schedaTecnica: [
+      { icon: 'fas fa-clock', label: 'Durata', value: '16 ore (4 ore teoria, 12 ore pratica)' },
+      // TODO: confermare con Alètheia la periodicità esatta di rinnovo (es. "ogni 5 anni") non ancora comunicata
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Aggiornamento periodico previsto dalla normativa' },
+      { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
+      { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
+    ],
+    descrizione: [
+      "Il Corso PES, PAV, PEI per Addetti ai Lavori Elettrici Sotto Tensione, della durata di 16 ore, è obbligatorio ai sensi dell'art. 37 del D.Lgs 81/2008 e della nuova Norma CEI 11-27, VI edizione 2025, per chiunque debba conseguire o mantenere le qualifiche di PES (Persona Esperta), PAV (Persona Avvertita) e PEI (Persona Esperta lavori sotto tensione).",
+      "Il corso affronta i rischi di folgorazione, arco elettrico e ustioni connessi ai lavori elettrici, allineandosi alle novità introdotte dalla VI edizione 2025 della norma su impianti in bassa, media e alta tensione. Vengono trattati la CEI EN 50110-1, gli effetti dell'elettricità sul corpo umano, la scelta e l'uso dei DPI, i ruoli di GL (Gestore Lavori), RI (Responsabile Impianto) e RLE (Referente Lavori Elettrici), il calcolo delle distanze di sicurezza, la redazione di piani di lavoro e piani di intervento, e le procedure operative per lavori fuori tensione, in prossimità e sotto tensione in bassa tensione (BT).",
+      "Il programma prevede 4 ore di teoria e 12 ore di pratica: la parte pratica include esercitazioni sulla scelta dei DPI, sulla messa a terra e in cortocircuito, e sulla gestione delle terre di lavoro in cantiere e in impianto.",
+      "Il corso è disponibile in aula o in FAD (formazione a distanza); la videoconferenza non è prevista per questa variante, dato il carattere pratico dell'addestramento sotto tensione. È possibile organizzare la formazione anche direttamente in azienda.",
+    ],
+    aChiERivolto: [
+      'Lavoratori che devono conseguire o rinnovare la qualifica PES o PAV',
+      'Addetti PEI destinati a operare sotto tensione in bassa tensione (BT)',
+      'Manutentori e tecnici di impianti elettrici industriali, civili e di cantiere',
+      'RI (Responsabile Impianto) e RLE (Referente Lavori Elettrici) da aggiornare alla Norma CEI 11-27 edizione 2025',
+      "Datori di lavoro che devono garantire la formazione del personale addetto ai lavori elettrici ai sensi dell'art. 37 D.Lgs 81/2008",
+    ],
+    cosaImparerai: [
+      "Applicare le disposizioni legislative del D.Lgs 81/2008 sui lavori elettrici",
+      'Conoscere le prescrizioni della Norma CEI 11-27 edizione 2025 e della CEI EN 50110-1',
+      "Riconoscere gli effetti dell'arco elettrico e intervenire con il primo soccorso",
+      'Scegliere e utilizzare correttamente i DPI per lavori sotto tensione',
+      'Comprendere i compiti di GL, RI e RLE',
+      'Calcolare le distanze di sicurezza dalle parti attive',
+      'Redigere ed applicare il piano di lavoro e il piano di intervento',
+      'Applicare le procedure per lavori fuori tensione, in prossimità e sotto tensione in BT, inclusa la messa a terra e in cortocircuito',
+    ],
+    faqs: [
+      {
+        domanda: 'Cosa significano le sigle PES, PAV e PEI?',
+        risposta: 'PES (Persona Esperta) e PAV (Persona Avvertita) sono le qualifiche previste dalla Norma CEI 11-27 per chi opera su impianti elettrici; PEI (Persona Esperta lavori sotto tensione) è la qualifica specifica per chi esegue lavori direttamente sotto tensione in bassa tensione.',
+      },
+      {
+        domanda: 'Il corso segue la nuova edizione della CEI 11-27?',
+        risposta: 'Sì, il programma è aggiornato alla Norma CEI 11-27, VI edizione 2025, che introduce novità sulla gestione dei lavori elettrici in bassa, media e alta tensione.',
+      },
+      {
+        domanda: 'Quanto dura il corso e come è articolato?',
+        risposta: 'Il corso dura 16 ore complessive: 4 ore di teoria sulla normativa e le procedure, e 12 ore di pratica con esercitazioni su DPI, messa a terra e in cortocircuito.',
+      },
+      {
+        domanda: 'Il corso si può fare in FAD?',
+        risposta: "Sì, secondo il listino Alètheia questo corso è disponibile in aula o in FAD; la videoconferenza non è prevista per questa variante.",
+      },
+      {
+        domanda: 'Questo corso abilita anche ai lavori in prossimità?',
+        risposta: 'Per i soli lavori in prossimità (senza operare sotto tensione) è disponibile il corso dedicato da 12 ore: puoi passare a quella variante con lo switch qui sopra.',
+      },
+    ],
+    programmaTitle: 'Programma Corso PES, PAV, PEI Sotto Tensione · 16 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - NORMATIVA E RISCHIO ELETTRICO',
+        durataOre: 2,
+        argomenti: ['D.Lgs 81/2008 e Norma CEI 11-27 ed. 2025', 'CEI EN 50110-1', 'Effetti dell\'elettricità e arco elettrico'],
+      },
+      {
+        titolo: 'MODULO II - RUOLI, DPI E PIANIFICAZIONE',
+        durataOre: 2,
+        argomenti: ['Ruoli di GL, RI e RLE', 'Scelta e uso dei DPI', 'Calcolo delle distanze di sicurezza', 'Piano di lavoro e piano di intervento'],
+      },
+      {
+        titolo: 'MODULO III - PRATICA: PROCEDURE OPERATIVE',
+        durataOre: 8,
+        argomenti: ['Procedure fuori tensione, in prossimità e sotto tensione in BT', 'Scelta pratica dei DPI', 'Messa a terra e in cortocircuito'],
+      },
+      {
+        titolo: 'MODULO IV - PRATICA: ESERCITAZIONI E VERIFICA',
+        durataOre: 4,
+        argomenti: ['Terre di lavoro', 'Simulazioni operative', 'Verifica pratica finale'],
+      },
+    ],
+    prezzo: [
+      { label: 'Aula', value: '€ 250,00 + IVA' },
+      { label: 'FAD', value: '€ 250,00 + IVA' },
+    ],
+    prezzoNumerico: 250,
+  },
+
+  inProssimita: {
+    title: 'Corso PES, PAV per Addetti ai Lavori Elettrici in Prossimità',
     titleSuffix: '· 12 ore',
-    breadcrumbLabel: 'Corso Preposto',
-    titleSeo: 'Corso Formazione Preposto – 12 ore | Alètheia',
-    metaDescription: 'Corso formazione preposti, 12 ore, art. 37 D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    breadcrumbLabel: 'Corso Lavori Elettrici in Prossimità',
+    titleSeo: 'Corso PES PAV Lavori Elettrici in Prossimità – 12h | Alètheia',
+    metaDescription: 'Corso PES PAV lavori elettrici in prossimità, 12 ore, CEI 11-27 ed. 2025. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
     schedaTecnica: [
       { icon: 'fas fa-clock', label: 'Durata', value: '12 ore' },
       // TODO: confermare con Alètheia la periodicità esatta di rinnovo (es. "ogni 5 anni") non ancora comunicata
@@ -30,166 +118,81 @@ const CONTENUTO = {
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
     descrizione: [
-      "Il Corso di Formazione per Preposti, della durata di 12 ore, è obbligatorio ai sensi dell'art. 37 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, per chiunque svolga in azienda funzioni di sovrintendenza e vigilanza sull'attività lavorativa di altri lavoratori.",
-      "Il preposto, secondo la definizione del D.Lgs 81/2008, è la persona che sovrintende all'attività lavorativa e garantisce l'attuazione delle direttive ricevute, controllandone la corretta esecuzione da parte dei lavoratori ed esercitando un funzionale potere di iniziativa: un ruolo che può essere formalmente designato dal datore di lavoro, ma che la normativa riconosce anche quando esercitato di fatto, indipendentemente dalla qualifica formale ricoperta. Per questo la formazione è obbligatoria per chiunque svolga concretamente questa funzione, anche senza una nomina esplicita.",
-      "Il corso si articola in quattro moduli: il Modulo I giuridico-normativo (3 ore), sull'individuazione del preposto, il preposto di fatto e i suoi compiti e obblighi; il Modulo II sulla gestione e organizzazione della sicurezza (3 ore), sulle modalità di esercizio della funzione di controllo ai sensi dell'art. 19 del D.Lgs 81/2008; il Modulo III sulla valutazione delle situazioni di rischio (3 ore), su misure di prevenzione, appalti, DUVRI e segnalazione di incidenti e infortuni mancati; il Modulo IV sulla comunicazione e informazione (3 ore), su tecniche di comunicazione e sensibilizzazione dei lavoratori, in particolare neoassunti, somministrati e stranieri.",
-      "Il corso è disponibile in aula o in videoconferenza sincrona con il docente; la modalità FAD non è prevista per questo corso, dato il carattere pratico e relazionale del ruolo del preposto. È possibile organizzare la formazione anche direttamente in azienda per i preposti designati o che svolgono di fatto questa funzione.",
+      "Il Corso PES, PAV per Addetti ai Lavori Elettrici in Prossimità, della durata di 12 ore, è obbligatorio ai sensi dell'art. 37 del D.Lgs 81/2008 e della Norma CEI 11-27, VI edizione 2025, per chi opera in prossimità di parti attive di impianti elettrici senza eseguire lavori sotto tensione.",
+      "A differenza del corso Sotto Tensione, questa variante non prevede addestramento operativo su parti in tensione: si concentra sulla valutazione del rischio da prossimità, sul mantenimento delle distanze di sicurezza (DL4, DA, DV) e sulle misure organizzative e di segnalazione necessarie per lavorare in sicurezza vicino a impianti elettrici attivi.",
+      "Il programma tratta la CEI EN 50110-1, i ruoli di GL (Gestore Lavori), RI (Responsabile Impianto) e RLE (Referente Lavori Elettrici), il calcolo e la delimitazione delle zone di rispetto e di lavoro, la scelta dei DPI idonei ai lavori in prossimità, e le procedure di segnalazione e delimitazione dell'area.",
+      "Il corso è disponibile in aula o in FAD; la videoconferenza non è prevista. È possibile organizzare la formazione anche direttamente in azienda. Chi deve operare anche sotto tensione deve invece frequentare il corso da 16 ore.",
     ],
     aChiERivolto: [
-      'Lavoratori designati dal datore di lavoro come preposti in azienda',
-      'Lavoratori che di fatto sovrintendono e vigilano sull\'attività di altri colleghi, anche senza una nomina formale',
-      'Capisquadra, capireparto e responsabili di linea con potere di controllo sull\'esecuzione del lavoro altrui',
-      'Neoassunti destinati a ruoli con funzioni di sovrintendenza e vigilanza sui lavoratori',
-      'Datori di lavoro che devono garantire la formazione dei propri preposti ai sensi dell\'art. 37 D.Lgs 81/2008',
+      'Lavoratori che operano in prossimità di parti attive senza eseguire lavori sotto tensione',
+      'Manutentori e tecnici che devono mantenere la qualifica PAV',
+      'Addetti a lavori edili, di giardinaggio o di cantiere in prossimità di linee e impianti elettrici',
+      'RI e RLE che devono aggiornare le procedure di gestione della prossimità alla Norma CEI 11-27 edizione 2025',
+      "Datori di lavoro che devono garantire la formazione del personale che opera in prossimità di impianti elettrici ai sensi dell'art. 37 D.Lgs 81/2008",
     ],
     cosaImparerai: [
-      'Riconoscere i criteri di individuazione del preposto, compreso il preposto di fatto',
-      'Comprendere i compiti e gli obblighi specifici del ruolo di preposto',
-      'Esercitare correttamente la funzione di controllo sull\'osservanza delle norme da parte dei lavoratori (art. 19 D.Lgs 81/2008)',
-      'Valutare le situazioni di rischio e controllare la corretta esecuzione delle attività da parte dei lavoratori',
-      'Gestire gli obblighi connessi a contratti di appalto, d\'opera e di somministrazione, incluso il DUVRI',
-      'Sovraintendere e vigilare sulle attività lavorative garantendo l\'attuazione delle direttive ricevute',
-      'Individuare e segnalare correttamente incidenti e infortuni mancati',
-      'Applicare tecniche di comunicazione efficace verso lavoratori neoassunti, somministrati e stranieri',
+      "Applicare le disposizioni legislative del D.Lgs 81/2008 sui lavori in prossimità di impianti elettrici",
+      'Conoscere le prescrizioni della Norma CEI 11-27 edizione 2025 e della CEI EN 50110-1 sulla prossimità',
+      'Calcolare e delimitare le zone di rispetto e di lavoro',
+      'Scegliere e utilizzare i DPI idonei ai lavori in prossimità',
+      'Comprendere i compiti di GL, RI e RLE nella gestione della prossimità',
+      'Applicare le procedure di segnalazione e delimitazione dell\'area di lavoro',
     ],
     faqs: [
       {
-        domanda: 'Chi è il preposto e chi deve fare questo corso?',
-        risposta: 'Il preposto è chi sovrintende all\'attività lavorativa di altri lavoratori e ne garantisce l\'attuazione delle direttive, anche solo di fatto e senza una nomina formale: la formazione è obbligatoria per chiunque svolga concretamente questo ruolo.',
+        domanda: 'In cosa si differenzia questo corso da quello Sotto Tensione (16 ore)?',
+        risposta: "Questo corso abilita a operare in prossimità di parti attive senza eseguire lavori sotto tensione; per operare direttamente sotto tensione in bassa tensione è necessario il corso PEI da 16 ore, disponibile con lo switch qui sopra.",
       },
       {
-        domanda: 'Quanto dura il corso di formazione per preposti?',
-        risposta: 'Il corso dura 12 ore complessive, suddivise in quattro moduli da 3 ore ciascuno: giuridico-normativo, gestione e organizzazione della sicurezza, valutazione dei rischi e comunicazione.',
+        domanda: 'Il corso segue la nuova edizione della CEI 11-27?',
+        risposta: 'Sì, il programma è aggiornato alla Norma CEI 11-27, VI edizione 2025.',
       },
       {
-        domanda: 'Cos\'è il preposto di fatto?',
-        risposta: 'È chi esercita concretamente funzioni di sovrintendenza e vigilanza sui lavoratori, anche senza una designazione formale da parte del datore di lavoro: la normativa gli attribuisce gli stessi obblighi formativi di un preposto formalmente nominato.',
-      },
-      {
-        domanda: 'Il corso si può fare in FAD?',
-        risposta: 'No, secondo il listino Alètheia questo corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.',
-      },
-      {
-        domanda: 'Dopo il corso preposti serve un aggiornamento periodico?',
-        risposta: 'Sì, è previsto un corso di aggiornamento dedicato di 6 ore.',
-      },
-    ],
-    programmaTitle: 'Programma Corso di Formazione per Preposti · 12 ore',
-    moduli: [
-      {
-        titolo: 'MODULO I - GIURIDICO-NORMATIVO',
-        durataOre: 3,
-        argomenti: ['Individuazione del preposto', 'Il preposto di fatto', 'Compiti e obblighi del preposto'],
-      },
-      {
-        titolo: 'MODULO II - GESTIONE E ORGANIZZAZIONE DELLA SICUREZZA',
-        durataOre: 3,
-        argomenti: ['Modalità di esercizio della funzione di controllo (art. 19 D.Lgs 81/2008)'],
-      },
-      {
-        titolo: 'MODULO III - VALUTAZIONE DELLE SITUAZIONI DI RISCHIO',
-        durataOre: 3,
-        argomenti: ['Misure di prevenzione', 'Appalti e DUVRI', 'Segnalazione di incidenti e infortuni mancati'],
-      },
-      {
-        titolo: 'MODULO IV - COMUNICAZIONE E INFORMAZIONE',
-        durataOre: 3,
-        argomenti: ['Tecniche di comunicazione', 'Sensibilizzazione dei lavoratori neoassunti, somministrati e stranieri'],
-      },
-    ],
-    prezzo: [
-      { label: 'Aula', value: '€ 160,00 + IVA' },
-      { label: 'Videoconferenza', value: '€ 160,00 + IVA' },
-    ],
-    prezzoNumerico: 160,
-  },
-
-  aggiornamento: {
-    title: 'Aggiornamento Formazione per Preposti',
-    titleSuffix: '· 6 ore',
-    breadcrumbLabel: 'Aggiornamento Preposto',
-    titleSeo: 'Aggiornamento Formazione Preposto – 6h | Alètheia',
-    metaDescription: 'Aggiornamento formazione preposti, 6 ore, art. 37 D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
-    schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '6 ore' },
-      // TODO: confermare con Alètheia la periodicità esatta di rinnovo (es. "ogni 5 anni") non ancora comunicata
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da ripetere periodicamente ai sensi dell'art. 37 D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17/04/2025" },
-      { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
-      { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
-    ],
-    descrizione: [
-      "Questo è il corso di aggiornamento per preposti, della durata di 6 ore, non il corso base: è rivolto a chi ha già completato la formazione iniziale di 12 ore e deve rinnovarla periodicamente, ai sensi dell'art. 37 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.",
-      "L'aggiornamento periodico è obbligatorio perché il ruolo del preposto, per sua natura operativo e relazionale, richiede un allineamento costante alle novità normative e alle prassi di gestione della sicurezza in azienda: chi sovrintende e vigila sull'attività di altri lavoratori deve rimanere aggiornato per continuare a esercitare correttamente questa funzione, anche alla luce di eventuali cambiamenti nell'organizzazione aziendale o nei contratti di appalto.",
-      "Il corso, erogato in un modulo unico, approfondisce l'individuazione del preposto di fatto tra designazione ed effettività del ruolo, gli obblighi connessi a contratti di appalto, d'opera e di somministrazione, la gestione del rischio interferenziale e il DUVRI, le modalità per sovraintendere e vigilare sulle attività lavorative garantendo l'attuazione delle direttive ricevute, e le modalità di comunicazione e relazione con gli altri soggetti della prevenzione aziendale.",
-      "Il corso è pensato per chi ha già l'attestato di formazione preposti in scadenza. Chi invece non ha mai conseguito la formazione di base deve frequentare il corso completo di 12 ore, non l'aggiornamento. Il corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.",
-    ],
-    aChiERivolto: [
-      'Preposti già formati (attestato di 12 ore) con formazione in scadenza',
-      'Capisquadra, capireparto e responsabili di linea già formati come preposti che devono rinnovare la propria formazione',
-      'Lavoratori che svolgono di fatto funzioni di preposto e devono mantenere aggiornata la propria formazione',
-      'Datori di lavoro che devono garantire l\'aggiornamento periodico dei propri preposti',
-      'Attenzione: chi non ha mai conseguito l\'attestato di formazione preposti di 12 ore deve prima frequentare il corso base, non l\'aggiornamento',
-    ],
-    cosaImparerai: [
-      'Approfondire l\'individuazione del preposto di fatto, tra designazione ed effettività del ruolo',
-      'Aggiornare le conoscenze sugli obblighi connessi a contratti di appalto, d\'opera e di somministrazione',
-      'Consolidare la gestione del rischio interferenziale e del DUVRI',
-      'Aggiornare le modalità per sovraintendere e vigilare sulle attività lavorative garantendo l\'attuazione delle direttive ricevute',
-      'Consolidare le modalità di comunicazione e relazione con gli altri soggetti della prevenzione aziendale',
-    ],
-    faqs: [
-      {
-        domanda: 'Ogni quanto va rinnovata la formazione per preposti?',
-        risposta: 'La formazione va aggiornata periodicamente.',
-      },
-      {
-        domanda: 'Quanto dura l\'aggiornamento formazione preposti?',
-        risposta: 'L\'aggiornamento dura 6 ore, erogate in un modulo unico che approfondisce temi come il preposto di fatto, gli appalti, il DUVRI e le tecniche di vigilanza e comunicazione.',
+        domanda: 'Quanto dura il corso per lavori in prossimità?',
+        risposta: 'Il corso dura 12 ore complessive, tra normativa, calcolo delle distanze di sicurezza e procedure operative di prossimità.',
       },
       {
         domanda: 'Il corso si può fare in FAD?',
-        risposta: 'No, secondo il listino Alètheia questo corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.',
-      },
-      {
-        domanda: 'Posso fare l\'aggiornamento se non ho mai fatto il corso base?',
-        risposta: 'No, l\'aggiornamento è riservato a chi ha già conseguito l\'attestato di formazione preposti di 12 ore. Senza formazione di base è necessario frequentare il corso completo.',
-      },
-      {
-        domanda: 'L\'aggiornamento tratta anche la gestione degli appalti e del DUVRI?',
-        risposta: 'Sì, il programma include un approfondimento sugli obblighi connessi a contratti di appalto, d\'opera e di somministrazione, e sulla gestione del rischio interferenziale tramite il DUVRI.',
+        risposta: 'Sì, secondo il listino Alètheia questo corso è disponibile in aula o in FAD; la videoconferenza non è prevista.',
       },
     ],
-    programmaTitle: 'Programma Aggiornamento Formazione per Preposti · 6 ore',
+    programmaTitle: 'Programma Corso PES, PAV in Prossimità · 12 ore',
     moduli: [
       {
-        titolo: 'MODULO UNICO - AGGIORNAMENTO',
-        durataOre: 6,
-        argomenti: [
-          'Il preposto di fatto: tra designazione ed effettività del ruolo',
-          'Obblighi connessi a contratti di appalto, d\'opera e di somministrazione',
-          'Gestione del rischio interferenziale e DUVRI',
-          'Sovraintendere e vigilare sulle attività lavorative garantendo l\'attuazione delle direttive ricevute',
-          'Comunicazione e relazione con gli altri soggetti della prevenzione aziendale',
-        ],
+        titolo: 'MODULO I - NORMATIVA E RISCHIO DA PROSSIMITÀ',
+        durataOre: 4,
+        argomenti: ['D.Lgs 81/2008 e Norma CEI 11-27 ed. 2025', 'CEI EN 50110-1', 'Effetti dell\'elettricità'],
+      },
+      {
+        titolo: 'MODULO II - RUOLI E DISTANZE DI SICUREZZA',
+        durataOre: 4,
+        argomenti: ['Ruoli di GL, RI e RLE', 'Calcolo e delimitazione delle zone di rispetto e di lavoro', 'DPI per lavori in prossimità'],
+      },
+      {
+        titolo: 'MODULO III - PROCEDURE OPERATIVE E VERIFICA',
+        durataOre: 4,
+        argomenti: ['Segnalazione e delimitazione dell\'area', 'Casi pratici', 'Verifica finale'],
       },
     ],
+    // TODO: prezzo provvisorio basato sul listino generico esistente (coursesDetails['corso-pes-pav-pei']) -
+    // confermare con Alètheia il prezzo ufficiale della variante "in prossimità" da 12 ore
     prezzo: [
-      { label: 'Aula', value: '€ 90,00 + IVA' },
-      { label: 'Videoconferenza', value: '€ 90,00 + IVA' },
+      { label: 'Aula', value: '€ 200,00 + IVA' },
+      { label: 'FAD', value: '€ 200,00 + IVA' },
     ],
-    prezzoNumerico: 90,
+    prezzoNumerico: 200,
   },
 };
 
 const corsiCorrelatiSlugs = [
-  'formazione-dirigente',
   'formazione-dei-lavoratori-rischio-medio',
-  'rspp-datore-di-lavoro',
+  'formazione-dei-lavoratori-rischio-alto',
+  'lavori-in-quota',
 ];
 
-export default function CorsoFormazionePreposto() {
+export default function CorsoPesPav() {
   const { addToCart, setCartOpen } = useCart();
-  const [selectedTipo, setSelectedTipo] = useState('corso');
+  const [selectedTipo, setSelectedTipo] = useState('sottoTensione');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [modalitaSelezionata, setModalitaSelezionata] = useState('aula');
@@ -291,7 +294,7 @@ export default function CorsoFormazionePreposto() {
         <div className="container">
           <div className="cp-page-grid">
 
-            {/* ── AREA "top": breadcrumb + switch Corso base / Aggiornamento, sola sulla prima riga ── */}
+            {/* ── AREA "top": breadcrumb + H1 + switch Sotto Tensione / In Prossimità ── */}
             <div className="cp-top-area">
               <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
                 <Link href="/" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Home</Link>
@@ -300,7 +303,7 @@ export default function CorsoFormazionePreposto() {
                 <span className="text-slate-300 dark:text-gray-600">/</span>
                 <Link href="/formazione/obbligatoria" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione obbligatoria</Link>
                 <span className="text-slate-300 dark:text-gray-600">/</span>
-                <Link href="/all-courses/formazione-del-preposto" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione del Preposto</Link>
+                <Link href="/all-courses/pes-pav-lavori-elettrici" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>PES / PAV</Link>
                 <span className="text-slate-300 dark:text-gray-600">/</span>
                 <span className="text-slate-600 dark:text-gray-300">{c.breadcrumbLabel}</span>
               </nav>
@@ -309,9 +312,9 @@ export default function CorsoFormazionePreposto() {
                 {c.title} <span className="text-slate-400 dark:text-gray-500" style={{ fontWeight: 700 }}>{c.titleSuffix}</span>
               </h1>
 
-              {/* SWITCH Corso base / Aggiornamento - stesso pattern a pillola del template dinamico corsi */}
-              <div role="tablist" aria-label="Corso o aggiornamento" style={{ display: 'inline-flex', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
-                {['corso', 'aggiornamento'].map((tipo) => (
+              {/* SWITCH Sotto Tensione / In Prossimità - stesso pattern a pillola delle altre pagine corso */}
+              <div role="tablist" aria-label="Variante del corso" style={{ display: 'inline-flex', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
+                {['sottoTensione', 'inProssimita'].map((tipo) => (
                   <button
                     key={tipo}
                     role="tab"
@@ -330,7 +333,7 @@ export default function CorsoFormazionePreposto() {
                       fontFamily: 'inherit',
                     }}
                   >
-                    {tipo === 'corso' ? 'Corso base · 12 ore' : 'Aggiornamento · 6 ore'}
+                    {tipo === 'sottoTensione' ? 'Sotto Tensione · 16 ore' : 'In Prossimità · 12 ore'}
                   </button>
                 ))}
               </div>
@@ -363,18 +366,18 @@ export default function CorsoFormazionePreposto() {
               <div style={{ paddingTop: '2rem' }}>
                 {activeTab === 'overview' && (
                   <div>
-                    {/* SCHEDA TECNICA: apre sempre il tab Panoramica, cambia con il tipo selezionato */}
+                    {/* SCHEDA TECNICA: apre sempre il tab Panoramica, cambia con la variante selezionata */}
                     <CourseSchedaTecnica items={c.schedaTecnica}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
+                          <i className="fas fa-bolt" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
                         </div>
                         <div>
                           <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
                           <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.15rem' }}>
                             {[
                               { key: 'aula', label: 'Aula' },
-                              { key: 'videoconferenza', label: 'Videoconferenza' },
+                              { key: 'fad', label: 'FAD' },
                             ].map((m) => (
                               <button
                                 key={m.key}
@@ -387,11 +390,11 @@ export default function CorsoFormazionePreposto() {
                                   textDecoration: modalitaSelezionata === m.key ? 'underline' : 'none',
                                 }}
                               >
-                                {m.label}{m.key !== 'videoconferenza' ? ' ·' : ''}
+                                {m.label}{m.key !== 'fad' ? ' ·' : ''}
                               </button>
                             ))}
                           </div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>FAD non disponibile per questo corso</span>
+                          <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>Videoconferenza non disponibile per questo corso</span>
                         </div>
                       </div>
 
@@ -503,18 +506,19 @@ export default function CorsoFormazionePreposto() {
             </div>
 
             {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet.
-                Cambia riga prezzo/label in base al tipo selezionato nello switch qui sopra. */}
+                Cambia riga prezzo/label in base alla variante selezionata nello switch qui sopra. */}
             <aside className="cp-price-area">
               <PricingSidebar
                 priceRows={c.prezzo}
-                onBuyClick={() => { addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
+                onBuyClick={() => { addToCart({ id: `pes-pav-lavori-elettrici-${selectedTipo}`, slug: 'pes-pav-lavori-elettrici', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico })}
+                onAddToCartClick={() => addToCart({ id: `pes-pav-lavori-elettrici-${selectedTipo}`, slug: 'pes-pav-lavori-elettrici', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
+                whatsappHref="https://wa.me/?text=Informazioni%20corso%20PES%2FPAV"
               >
-                {selectedTipo === 'corso' && (
+                {selectedTipo === 'sottoTensione' && (
                   <button
                     type="button"
-                    onClick={() => selectTipo('aggiornamento')}
+                    onClick={() => selectTipo('inProssimita')}
                     className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
                     style={{
                       width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
@@ -522,8 +526,23 @@ export default function CorsoFormazionePreposto() {
                       fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
                     }}
                   >
-                    <span>Devi solo rinnovare l'attestato? <strong>Aggiornamento 6 ore</strong></span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>€ 90,00 + IVA</span>
+                    <span>Devi operare solo <strong>in prossimità</strong>, non sotto tensione?</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso 12 ore</span>
+                  </button>
+                )}
+                {selectedTipo === 'inProssimita' && (
+                  <button
+                    type="button"
+                    onClick={() => selectTipo('sottoTensione')}
+                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
+                    style={{
+                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
+                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
+                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
+                    }}
+                  >
+                    <span>Devi operare anche <strong>sotto tensione</strong>?</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso 16 ore</span>
                   </button>
                 )}
               </PricingSidebar>

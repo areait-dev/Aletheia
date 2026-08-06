@@ -18,8 +18,9 @@ const CONTENUTO = {
     titleSuffix: '· 16 ore',
     title: 'Corso di Formazione per Datore di Lavoro',
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '16 ore' },
-      { icon: 'fas fa-laptop', label: 'Modalità', value: 'FAD (aula e videoconferenza non disponibili)' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '16 ore (4 ore modulo normativo, 12 ore organizzazione e gestione)' },
+      { icon: 'fas fa-laptop', label: 'Modalità', value: 'Solo FAD (formazione a distanza asincrona) — aula e videoconferenza non disponibili' },
+      // TODO: confermare con Alètheia la periodicità esatta di rinnovo (es. "ogni 5 anni") non ancora comunicata
       { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da mantenere con l'aggiornamento periodico dedicato (6 ore)" },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
@@ -79,8 +80,9 @@ const CONTENUTO = {
     titleSuffix: '· 6 ore',
     title: 'Formazione Aggiuntiva "Cantieri" per Datore di Lavoro e Dirigente',
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '6 ore' },
-      { icon: 'fas fa-laptop', label: 'Modalità', value: 'FAD (aula e videoconferenza non disponibili)' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '6 ore (modulo unico)' },
+      { icon: 'fas fa-laptop', label: 'Modalità', value: 'Solo FAD (formazione a distanza asincrona) — aula e videoconferenza non disponibili' },
+      // TODO: confermare con Alètheia la periodicità esatta di rinnovo/validità del modulo cantieri, non ancora comunicata
       { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da mantenere in abbinamento al corso base (Datore di Lavoro o Dirigente) di riferimento' },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
@@ -157,11 +159,14 @@ export default function CorsoDatoreDiLavoro() {
     return { ...r, image: fam?.image || null };
   };
 
+  // Risolto una volta e riusato sia nei correlati sotto sia nell'upsell della sidebar prezzo.
+  const aggiornamentoLink = resolveLink('aggiornamento-datore-di-lavoro');
+
   // Corsi correlati per variante: "switchTo" attiva lo switch in-pagina invece di navigare altrove,
   // per le due varianti che coesistono su questa stessa pagina (Datore di Lavoro <-> Cantieri).
   const corsiCorrelati = variante === 'datore'
     ? [
-        resolveLink('aggiornamento-datore-di-lavoro'),
+        aggiornamentoLink,
         { titolo: 'Formazione Aggiuntiva Cantieri per Datore di Lavoro e Dirigente · 6 ore', switchTo: 'cantieri', meta: '6 ore · € 90,00' },
         resolveLink('formazione-dirigente'),
         resolveLink('rspp-datore-di-lavoro-modulo-comune'),
@@ -324,6 +329,18 @@ export default function CorsoDatoreDiLavoro() {
                     <p key={i} className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>{paragrafo}</p>
                   ))}
 
+                  {/* Link ipertestuale incrociato: il modulo cantieri si abbina anche al corso base Dirigente,
+                      non solo al Datore di Lavoro - richiamo esplicito nel testo oltre che nei correlati sotto. */}
+                  {variante === 'cantieri' && (
+                    <p className="bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)] text-slate-600 dark:text-gray-300" style={{ borderRadius: '0.75rem', padding: '1rem 1.25rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+                      <i className="fas fa-circle-info" style={{ color: '#008C95', marginRight: '0.5rem' }}></i>
+                      Non hai ancora completato la formazione base? Questo modulo si abbina sia al{' '}
+                      <Link href="/all-courses/datore-di-lavoro" className="text-teal-600 dark:text-[#6EE7B7]" style={{ fontWeight: 700 }}>Corso di Formazione per Datore di Lavoro (16 ore)</Link>
+                      {' '}sia al{' '}
+                      <Link href="/all-courses/formazione-dirigente" className="text-teal-600 dark:text-[#6EE7B7]" style={{ fontWeight: 700 }}>Corso di Formazione Dirigente (12 ore)</Link>.
+                    </p>
+                  )}
+
                   <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
                   <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {c.aChiERivolto.map((riga) => (
@@ -381,7 +398,54 @@ export default function CorsoDatoreDiLavoro() {
                 onBuyClick={() => { addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
                 buyLabel="Acquista ora"
                 onAddToCartClick={() => addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
-              />
+                whatsappHref="https://wa.me/?text=Informazioni%20corso%20Formazione%20Datore%20di%20Lavoro"
+              >
+                {variante === 'datore' ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => selectVariante('cantieri')}
+                      className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
+                      style={{
+                        width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
+                        borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
+                        fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
+                      }}
+                    >
+                      <span>Operi in <strong>cantieri</strong>? Modulo aggiuntivo 6 ore</span>
+                      <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>€ 90,00 + IVA</span>
+                    </button>
+                    {aggiornamentoLink && (
+                      <Link
+                        href={aggiornamentoLink.href}
+                        className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
+                        style={{
+                          width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
+                          borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', textDecoration: 'none',
+                          fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
+                        }}
+                      >
+                        <span>Devi solo rinnovare l'attestato? <strong>Aggiornamento 6 ore</strong></span>
+                        <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>€ 100,00 + IVA</span>
+                      </Link>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => selectVariante('datore')}
+                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
+                    style={{
+                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
+                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
+                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
+                    }}
+                  >
+                    <span>Devi ancora fare il <strong>corso base</strong>?</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Datore di Lavoro · 16h</span>
+                  </button>
+                )}
+              </PricingSidebar>
             </aside>
           </div>
         </div>
