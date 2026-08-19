@@ -1,7 +1,23 @@
 import Link from 'next/link';
 
+interface Variante {
+  livelloKey: string;
+  label: string;
+  attestato?: string;
+}
+
+interface Family {
+  slug: string;
+  titolo: string;
+  provider: string;
+  image?: string;
+  gradient?: string;
+  badge: string;
+  varianti: Variante[];
+}
+
 // Etichetta sintetica di un livello per il tag "L1 · L2 · L3" (es. "Livello 1" -> "L1", "Gruppo A" -> "A")
-function shortLevelLabel(label) {
+function shortLevelLabel(label: string): string {
   const m = /livello\s*(\d+)/i.exec(label);
   if (m) return `L${m[1]}`;
   const g = /gruppo\s*([abc](\s*(e|\/)\s*[abc])?)/i.exec(label);
@@ -12,7 +28,7 @@ function shortLevelLabel(label) {
 }
 
 /** Card unificata per famiglia di corso (es. Antincendio) - un solo livello di UI per tutte le varianti annidate. */
-export default function CourseFamilyCard({ family }) {
+export default function CourseFamilyCard({ family }: { family: Family }) {
   const livelli = Array.from(new Map(family.varianti.map((v) => [v.livelloKey, v.label])).values());
   const hasMultipleLivelli = livelli.length > 1 && livelli.some((l) => l !== family.titolo);
 

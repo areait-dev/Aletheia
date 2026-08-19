@@ -1,5 +1,17 @@
 import { useState } from 'react';
 
+interface Offerta {
+  titolo: string;
+  città: string;
+  tipoContratto: string;
+  image?: string;
+}
+
+interface JobOfferCardProps {
+  offerta: Offerta;
+  onApply: (offerta: Offerta) => void;
+}
+
 const SOCIAL = [
   { icon: 'fab fa-linkedin-in',    label: 'LinkedIn' },
   { icon: 'fab fa-facebook-f',     label: 'Facebook' },
@@ -7,13 +19,13 @@ const SOCIAL = [
   { icon: 'fab fa-telegram-plane', label: 'Telegram' },
 ];
 
-const CONTRACT_COLORS = {
+const CONTRACT_COLORS: Record<string, { bg: string; text: string }> = {
   'Tempo indeterminato': { bg: '#008C95', text: '#fff' },
   'Tempo determinato':   { bg: '#6366F1', text: '#fff' },
   'Somministrazione':    { bg: '#F59E0B', text: '#0F172A' },
 };
 
-export default function JobOfferCard({ offerta, onApply }) {
+export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
   const [hovered, setHovered] = useState(false);
   const contractColor = CONTRACT_COLORS[offerta.tipoContratto] || { bg: '#008C95', text: '#fff' };
 

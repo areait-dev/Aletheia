@@ -1,4 +1,17 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
+
+interface Breadcrumb {
+  label: string;
+  href?: string;
+}
+
+interface CourseHeroProps {
+  breadcrumb?: Breadcrumb[];
+  badge?: string;
+  title: ReactNode;
+  titleSuffix?: ReactNode;
+}
 
 /**
  * Hero scura "slim" per le pagine corso: solo breadcrumb + badge + H1. Va renderizzata FUORI dal
@@ -6,7 +19,7 @@ import Link from 'next/link';
  * (durata/modalità/attestato/ecc.) NON vive più qui, ma dentro il tab "Panoramica" tramite
  * CourseSchedaTecnica, secondo lo standard architetturale approvato per tutte le pagine corso.
  */
-export default function CourseHero({ breadcrumb = [], badge, title, titleSuffix }) {
+export default function CourseHero({ breadcrumb = [], badge, title, titleSuffix }: CourseHeroProps) {
   return (
     <div className="cp-hero-slim">
       <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>

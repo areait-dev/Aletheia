@@ -1,9 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
 
-export default function NumberCounter({ target, label, icon, duration = 2000, prefix = '', valueClassName = 'text-5xl font-extrabold text-emerald-400 tracking-tight tabular-nums leading-none' }) {
+interface NumberCounterProps {
+  target: string | number;
+  label: string;
+  icon?: string;
+  duration?: number;
+  prefix?: string;
+  valueClassName?: string;
+}
+
+export default function NumberCounter({
+  target,
+  label,
+  icon,
+  duration = 2000,
+  prefix = '',
+  valueClassName = 'text-5xl font-extrabold text-emerald-400 tracking-tight tabular-nums leading-none',
+}: NumberCounterProps) {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

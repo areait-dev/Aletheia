@@ -1,4 +1,15 @@
-const DEFAULT_VALORI = [
+interface Valore {
+  icon: string;
+  titolo: string;
+  testo: string;
+}
+
+interface FormazioneValoreSectionProps {
+  titolo?: string;
+  valori?: Valore[];
+}
+
+const DEFAULT_VALORI: Valore[] = [
   { icon: 'fas fa-shield-halved', titolo: 'Conformità normativa garantita', testo: 'Percorsi progettati in aderenza alla normativa vigente, con attestato valido su tutto il territorio nazionale.' },
   { icon: 'fas fa-chalkboard-user', titolo: 'Docenti qualificati', testo: 'Formatori con esperienza diretta sul campo, in grado di calare la normativa nelle situazioni operative reali.' },
   { icon: 'fas fa-arrows-to-circle', titolo: 'Flessibilità di erogazione', testo: 'Corsi in aula o in videoconferenza, anche direttamente in azienda, per adattarsi alle esigenze organizzative di ogni realtà.' },
@@ -9,7 +20,7 @@ const DEFAULT_VALORI = [
  * 3 colonne minimali (icona verde petrolio, titolo, testo), 1 colonna su mobile. Stesso contenuto
  * di default su tutte le pagine corso, sovrascrivibile per famiglia tramite `titolo`/`valori`.
  */
-export default function FormazioneValoreSection({ titolo = 'Formazione che crea valore, non solo attestati', valori = DEFAULT_VALORI }) {
+export default function FormazioneValoreSection({ titolo = 'Formazione che crea valore, non solo attestati', valori = DEFAULT_VALORI }: FormazioneValoreSectionProps) {
   return (
     <section className="bg-slate-50 dark:bg-dark-card border-y border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
       <div className="container">

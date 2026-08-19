@@ -1,7 +1,12 @@
 import { useCart } from '../context/CartContext';
 import Link from 'next/link';
 
-export default function CartDrawer({ open, onClose }) {
+interface CartDrawerProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function CartDrawer({ open, onClose }: CartDrawerProps) {
   const { cart = [], removeFromCart, updateQty, total, clearCart } = useCart() || {};
 
   return (
@@ -27,7 +32,7 @@ export default function CartDrawer({ open, onClose }) {
         {/* Header */}
         <div className="border-b border-gray-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h2 className="text-gray-900 dark:text-gray-50" style={{ fontWeight: 700, fontSize: '1.1rem' }}>
-            Il tuo carrello {cart.length > 0 && `(${cart.reduce((s, i) => s + i.qty, 0)})`}
+            Il tuo carrello {cart.length > 0 && `(${cart.reduce((s: number, i: any) => s + i.qty, 0)})`}
           </h2>
           <button onClick={onClose} className="text-gray-500 dark:text-gray-400" style={{ background: 'none', border: 'none', fontSize: '1.25rem', cursor: 'pointer' }}>✕</button>
         </div>
@@ -39,7 +44,7 @@ export default function CartDrawer({ open, onClose }) {
               <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🛒</p>
               <p>Il carrello è vuoto</p>
             </div>
-          ) : cart.map((item) => (
+          ) : cart.map((item: any) => (
             <div key={item.id} style={{ padding: '0.75rem 0', borderBottom: '1px solid #F3F4F6' }}>
 
               {/* Riga 1: titolo + pulsante rimuovi */}

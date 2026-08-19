@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
+import type { CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
 
-const FAQ_FORMAZIONE = [
+interface Faq {
+  q: string;
+  a: string;
+}
+
+const FAQ_FORMAZIONE: Faq[] = [
   { q: "Come mi iscrivo a un corso?", a: "Puoi iscriverti direttamente dal nostro sito nella sezione 'Tutti i corsi', oppure contattarci al +39 0932 862613 o via email a info@aletheiasrl.it." },
   { q: "I corsi sono in presenza o online?", a: "Offriamo entrambe le modalità: corsi in presenza presso la nostra sede di Vittoria (RG) e corsi FAD (Formazione a Distanza) sulla nostra piattaforma e-learning." },
   { q: "Ci sono corsi gratuiti disponibili?", a: "Sì! Gestiamo corsi finanziati attraverso il Programma G.O.L., l'Avviso FSE+ e altri bandi regionali. Contattaci per scoprire se hai i requisiti per accedere gratuitamente." },
@@ -14,7 +20,7 @@ const FAQ_FORMAZIONE = [
   { q: "Come posso pagare un corso?", a: "Contattaci direttamente per conoscere le modalità di pagamento disponibili: bonifico bancario, rateizzazione o finanziamenti agevolati. Chiamaci al +39 0932 862613." },
 ];
 
-const FAQ_LAVORO = [
+const FAQ_LAVORO: Faq[] = [
   { q: "Come posso candidarmi a un'offerta di lavoro?", a: "Puoi consultare le offerte attive nella sezione 'Offerte di Lavoro' e candidarti online, oppure inviarci il tuo CV a info@aletheiasrl.it specificando il ruolo di interesse." },
   { q: "Cos'è il Programma G.O.L.?", a: "Il Programma Garanzia Occupabilità Lavoratori (G.O.L.) è un piano nazionale per il reinserimento lavorativo. Offre percorsi personalizzati di formazione e riqualificazione professionale completamente finanziati." },
   { q: "Cosa si intende per Garanzia Giovani?", a: "È un programma rivolto ai giovani NEET (under 30 non occupati e non in formazione) che offre orientamento, formazione e tirocinio finanziati dalla Regione Siciliana." },
@@ -25,7 +31,7 @@ const FAQ_LAVORO = [
   { q: "Dove si trova la vostra sede?", a: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG). Puoi contattarci al +39 0932 862613 o via email a info@aletheiasrl.it." },
 ];
 
-const FAQ_GENERALE = [
+const FAQ_GENERALE: Faq[] = [
   { q: "Chi è Alètheia S.r.l.?", a: "Alètheia S.r.l. è un ente di formazione professionale e agenzia per il lavoro con sede a Vittoria (RG), operativo dal 2005 in Sicilia. Facciamo parte del gruppo PromoterGroup S.p.A." },
   { q: "Quali servizi offrite?", a: "Offriamo formazione professionale (corsi obbligatori, ECDL/ICDL, corsi finanziati), servizi di agenzia per il lavoro (ricerca personale, somministrazione, orientamento) e supporto alle imprese." },
   { q: "Avete corsi sulla sicurezza sul lavoro?", a: "Sì, siamo specializzati in formazione obbligatoria sulla sicurezza: corsi per lavoratori, preposti, dirigenti e datori di lavoro, conformi all'Accordo Stato-Regioni." },
@@ -35,7 +41,7 @@ const FAQ_GENERALE = [
   { q: "Cosa sono i corsi FSE+?", a: "Sono corsi professionalizzanti co-finanziati dal Fondo Sociale Europeo, spesso gratuiti per i partecipanti. Gestiamo diversi avvisi FSE+ per la Regione Siciliana." },
 ];
 
-const ALL_FAQ = [...FAQ_FORMAZIONE, ...FAQ_LAVORO, ...FAQ_GENERALE];
+const ALL_FAQ: Faq[] = [...FAQ_FORMAZIONE, ...FAQ_LAVORO, ...FAQ_GENERALE];
 
 // Parole chiave sui temi trattati dal sito: se la domanda libera non ne contiene
 // nessuna, l'assistente non tenta un match e resta pertinente al solo ambito Alètheia.
@@ -49,7 +55,7 @@ const SITE_KEYWORDS = [
   'gru', 'trattori', 'ple', 'quota', 'elettric', 'fondo', 'psr', 'oss', 'asacom',
 ];
 
-function tokenize(str) {
+function tokenize(str: string): string[] {
   return str
     .toLowerCase()
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -61,13 +67,13 @@ function tokenize(str) {
 /** Cerca tra tutte le FAQ del sito la risposta più pertinente alla domanda libera
  *  dell'utente. Ritorna null se la domanda non tocca nessun argomento del sito
  *  (l'assistente non deve rispondere a temi non pertinenti). */
-function findBestAnswer(question) {
+function findBestAnswer(question: string): Faq | null {
   const qNorm = question.toLowerCase();
   const isOnTopic = SITE_KEYWORDS.some((kw) => qNorm.includes(kw));
   if (!isOnTopic) return null;
 
   const qTokens = new Set(tokenize(question));
-  let best = null;
+  let best: Faq | null = null;
   let bestScore = 0;
   for (const faq of ALL_FAQ) {
     const faqTokens = tokenize(faq.q + ' ' + faq.a);
@@ -81,7 +87,7 @@ function findBestAnswer(question) {
   return bestScore > 0 ? best : null;
 }
 
-function useFAQ() {
+function useFAQ(): Faq[] {
   const router = useRouter();
   const path = router.pathname;
   if (path.includes('agenzia-per-il-lavoro')) return FAQ_LAVORO;
@@ -93,15 +99,15 @@ export default function Chatbot() {
   const { theme } = useTheme() || { theme: 'light' };
   const { cartOpen } = useCart() || {};
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<Faq | null>(null);
   const [notPertinent, setNotPertinent] = useState(false);
   const [query, setQuery] = useState('');
   const [btnHover, setBtnHover] = useState(false);
-  const [chipHover, setChipHover] = useState(null);
-  const bodyRef = useRef(null);
+  const [chipHover, setChipHover] = useState<number | null>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const faqs = useFAQ();
 
-  const handleAsk = (e) => {
+  const handleAsk = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const q = query.trim();
     if (!q) return;
@@ -412,7 +418,7 @@ export default function Chatbot() {
           transition: 'transform 0.2s ease',
           flexShrink: 0,
           pointerEvents: 'auto',
-        }}
+        } as CSSProperties}
       >
         <div style={{ position: 'relative', width: '26px', height: '26px' }}>
           <img

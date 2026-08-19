@@ -1,7 +1,12 @@
+interface ArchivioTestoProps {
+  testo?: string;
+  className?: string;
+}
+
 // Renderizza il testo estratto dall'archivio (public/pdf/archivio/descrizioni.json):
 // i blocchi separati da riga vuota in cui ogni riga inizia con "- " diventano
 // una lista con pallino brand, gli altri restano paragrafi semplici.
-export default function ArchivioTesto({ testo, className = '' }) {
+export default function ArchivioTesto({ testo, className = '' }: ArchivioTestoProps) {
   if (!testo) return null;
 
   const blocchi = testo.split(/\n\n+/).filter((b) => b.trim());

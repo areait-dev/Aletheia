@@ -2,9 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
 import CartDrawer from './CartDrawer';
-import { darkTokens } from '../lib/darkTokens';
 
-export default function Header({ active, solid = false }) {
+interface HeaderProps {
+  active?: string;
+  solid?: boolean;
+}
+
+type SubDropdownKey = 'regionale' | 'obbligatoria' | 'professionale';
+
+export default function Header({ active, solid = false }: HeaderProps) {
   const themeCtx = useTheme();
   const theme = themeCtx?.theme;
   const toggleTheme = themeCtx?.toggleTheme || (() => {});
@@ -17,9 +23,9 @@ export default function Header({ active, solid = false }) {
   const [formazioneOpen, setFormazioneOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const [subDropdowns, setSubDropdowns] = useState({
+  const [subDropdowns, setSubDropdowns] = useState<Record<SubDropdownKey, boolean>>({
     regionale: false,
     obbligatoria: false,
     professionale: false,
@@ -29,7 +35,7 @@ export default function Header({ active, solid = false }) {
     setMounted(true);
   }, []);
 
-  const toggleSubDropdown = (key) => {
+  const toggleSubDropdown = (key: SubDropdownKey) => {
     setSubDropdowns((prev) => ({
       regionale: false,
       obbligatoria: false,
@@ -39,12 +45,12 @@ export default function Header({ active, solid = false }) {
   };
 
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setDropdownOpen(false);
       }
       const headerEl = document.querySelector('.site-header');
-      if (headerEl && !headerEl.contains(e.target)) setFormazioneOpen(false);
+      if (headerEl && !headerEl.contains(e.target as Node)) setFormazioneOpen(false);
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);

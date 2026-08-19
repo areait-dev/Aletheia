@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 const SETTORI = [
@@ -28,11 +29,25 @@ const SERVIZI = [
 const INFO_ITEMS = [
   { icon: 'fas fa-phone',         label: 'Telefono', value: '+39 0932 862613',   href: 'tel:+390932862613' },
   { icon: 'fas fa-envelope',      label: 'Email',    value: 'info@aletheiasrl.it', href: 'mailto:info@aletheiasrl.it' },
-  { icon: 'fas fa-map-marker-alt',label: 'Sede',     value: 'Via del Carrubo, snc - 97019 Vittoria (RG)', href: null },
-  { icon: 'fas fa-clock',         label: 'Orari',    value: 'Lun-Ven: 9:00-13:00 / 15:00-18:00', href: null },
+  { icon: 'fas fa-map-marker-alt',label: 'Sede',     value: 'Via del Carrubo, snc - 97019 Vittoria (RG)', href: null as string | null },
+  { icon: 'fas fa-clock',         label: 'Orari',    value: 'Lun-Ven: 9:00-13:00 / 15:00-18:00', href: null as string | null },
 ];
 
-const EMPTY = {
+interface FormFields {
+  ragioneSociale: string;
+  partitaIva: string;
+  nomeReferente: string;
+  cognomeReferente: string;
+  email: string;
+  telefono: string;
+  settore: string;
+  dipendenti: string;
+  servizio: string;
+  descrizione: string;
+  privacy: boolean;
+}
+
+const EMPTY: FormFields = {
   ragioneSociale: '', partitaIva: '',
   nomeReferente: '', cognomeReferente: '',
   email: '', telefono: '',
@@ -40,7 +55,17 @@ const EMPTY = {
   descrizione: '', privacy: false,
 };
 
-function Field({ label, required, error, children, isDark }) {
+type FormErrors = Partial<Record<keyof FormFields, string>>;
+
+interface FieldProps {
+  label: string;
+  required?: boolean;
+  error?: string;
+  children: ReactNode;
+  isDark: boolean;
+}
+
+function Field({ label, required, error, children, isDark }: FieldProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
       <label style={{
@@ -60,7 +85,7 @@ function Field({ label, required, error, children, isDark }) {
   );
 }
 
-const baseInput = (hasError, isDark) => ({
+const baseInput = (hasError: boolean, isDark: boolean): CSSProperties => ({
   width: '100%', padding: '0.7rem 1rem', borderRadius: '10px',
   border: `1.5px solid ${hasError ? '#F87171' : isDark ? 'rgba(148,163,184,0.2)' : 'rgba(255,255,255,0.12)'}`,
   background: isDark ? 'rgba(51,65,85,0.3)' : 'rgba(255,255,255,0.06)',
@@ -70,7 +95,7 @@ const baseInput = (hasError, isDark) => ({
   fontFamily: 'inherit', boxSizing: 'border-box',
 });
 
-const selectStyle = (hasError, isDark) => ({
+const selectStyle = (hasError: boolean, isDark: boolean): CSSProperties => ({
   ...baseInput(hasError, isDark),
   appearance: 'none',
   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2310B981' d='M6 8L0 0h12z'/%3E%3C/svg%3E")`,
@@ -81,22 +106,22 @@ const selectStyle = (hasError, isDark) => ({
   cursor: 'pointer',
 });
 
-const focusOn  = (e) => { e.target.style.borderColor = '#10B981'; };
-const focusOff = (hasErr, isDark) => (e) => { e.target.style.borderColor = hasErr ? '#F87171' : isDark ? 'rgba(148,163,184,0.2)' : 'rgba(255,255,255,0.12)'; };
+const focusOn  = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.target.style.borderColor = '#10B981'; };
+const focusOff = (hasErr: boolean, isDark: boolean) => (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.target.style.borderColor = hasErr ? '#F87171' : isDark ? 'rgba(148,163,184,0.2)' : 'rgba(255,255,255,0.12)'; };
 
 export default function FormAzienda() {
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
-  const [fields, setFields] = useState(EMPTY);
-  const [errors, setErrors] = useState({});
+  const [fields, setFields] = useState<FormFields>(EMPTY);
+  const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const set  = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
-  const setCheck = (e) => setFields((p) => ({ ...p, privacy: e.target.checked }));
+  const set = (k: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setFields((p) => ({ ...p, [k]: e.target.value }));
+  const setCheck = (e: React.ChangeEvent<HTMLInputElement>) => setFields((p) => ({ ...p, privacy: e.target.checked }));
 
-  function validate() {
-    const err = {};
+  function validate(): FormErrors {
+    const err: FormErrors = {};
     if (!fields.ragioneSociale.trim()) err.ragioneSociale = 'Campo obbligatorio';
     if (!fields.nomeReferente.trim())  err.nomeReferente  = 'Campo obbligatorio';
     if (!fields.cognomeReferente.trim()) err.cognomeReferente = 'Campo obbligatorio';
@@ -110,7 +135,7 @@ export default function FormAzienda() {
     return err;
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }

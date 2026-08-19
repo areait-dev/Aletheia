@@ -1,3 +1,26 @@
+import type { MouseEventHandler, ReactNode } from 'react';
+
+interface PriceRow {
+  label: string;
+  value: ReactNode;
+}
+
+interface PricingSidebarProps {
+  className?: string;
+  title?: string;
+  priceRows?: PriceRow[];
+  customContent?: ReactNode;
+  children?: ReactNode;
+  buyLabel?: string;
+  buyHref?: string;
+  onBuyClick?: MouseEventHandler<HTMLAnchorElement>;
+  addToCartLabel?: string;
+  onAddToCartClick?: () => void;
+  quoteLabel?: string;
+  quoteHref?: string;
+  whatsappHref?: string;
+}
+
 /**
  * Sidebar prezzo riutilizzabile per le pagine corso (pages/all-courses/[slug].js e
  * pages/all-courses/addetti-alla-conduzione-di-carriponte.js).
@@ -19,7 +42,7 @@ export default function PricingSidebar({
   quoteLabel = 'Richiedi preventivo',
   quoteHref,
   whatsappHref,
-}) {
+}: PricingSidebarProps) {
   return (
     <div
       className={`bg-white dark:bg-dark-card rounded-xl shadow-md border border-gray-200 dark:border-[rgba(255,255,255,0.08)] ${className}`}

@@ -27,23 +27,45 @@ const INFO_ITEMS = [
     icon: 'fas fa-map-marker-alt',
     label: 'Sede',
     value: 'Via del Carrubo, snc - 97019 Vittoria (RG)',
-    href: null,
+    href: null as string | null,
   },
   {
     icon: 'fas fa-clock',
     label: 'Orari',
     value: 'Lun-Ven: 9:00-13:00 / 15:00-18:00',
-    href: null,
+    href: null as string | null,
   },
 ];
 
-const EMPTY = {
+interface FormFields {
+  nome: string;
+  cognome: string;
+  email: string;
+  telefono: string;
+  dataNascita: string;
+  comune: string;
+  servizio: string;
+  messaggio: string;
+  privacy: boolean;
+  cv: File | null;
+}
+
+const EMPTY: FormFields = {
   nome: '', cognome: '', email: '', telefono: '',
   dataNascita: '', comune: '', servizio: '', messaggio: '',
   privacy: false, cv: null,
 };
 
-function Field({ label, required, error, children }) {
+type FormErrors = Partial<Record<keyof FormFields, string>>;
+
+interface FieldProps {
+  label: string;
+  required?: boolean;
+  error?: string;
+  children: React.ReactNode;
+}
+
+function Field({ label, required, error, children }: FieldProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
       <label style={{
@@ -63,7 +85,7 @@ function Field({ label, required, error, children }) {
   );
 }
 
-const inputStyle = (hasError) => ({
+const inputStyle = (hasError: boolean): React.CSSProperties => ({
   width: '100%',
   padding: '0.7rem 1rem',
   borderRadius: '10px',
@@ -77,19 +99,23 @@ const inputStyle = (hasError) => ({
   boxSizing: 'border-box',
 });
 
-export default function FormCandidato({ posizioneDefault = '' }) {
-  const [fields, setFields] = useState({ ...EMPTY, messaggio: posizioneDefault ? `Candidatura per: ${posizioneDefault}` : '' });
-  const [errors, setErrors] = useState({});
+interface FormCandidatoProps {
+  posizioneDefault?: string;
+}
+
+export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoProps) {
+  const [fields, setFields] = useState<FormFields>({ ...EMPTY, messaggio: posizioneDefault ? `Candidatura per: ${posizioneDefault}` : '' });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState('');
-  const fileRef = useRef(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
-  const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
-  const setCheck = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.checked }));
+  const set = (k: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setFields((p) => ({ ...p, [k]: e.target.value }));
+  const setCheck = (k: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement>) => setFields((p) => ({ ...p, [k]: e.target.checked }));
 
-  function validate() {
-    const e = {};
+  function validate(): FormErrors {
+    const e: FormErrors = {};
     if (!fields.nome.trim()) e.nome = 'Campo obbligatorio';
     if (!fields.cognome.trim()) e.cognome = 'Campo obbligatorio';
     if (!fields.email.trim()) e.email = 'Campo obbligatorio';
@@ -100,15 +126,15 @@ export default function FormCandidato({ posizioneDefault = '' }) {
     return e;
   }
 
-  function handleFile(e) {
-    const file = e.target.files[0];
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
     if (file) {
       setFields((p) => ({ ...p, cv: file }));
       setFileName(file.name);
     }
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }

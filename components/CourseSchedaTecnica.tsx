@@ -1,3 +1,16 @@
+import type { ReactNode } from 'react';
+
+interface SchedaItem {
+  icon: string;
+  label: string;
+  value: ReactNode;
+}
+
+interface CourseSchedaTecnicaProps {
+  items?: SchedaItem[];
+  children?: ReactNode;
+}
+
 /**
  * Banner scuro / card verde petrolio con la scheda tecnica del corso (durata, validità, attestato,
  * partecipanti, modalità, luogo del corso). Va renderizzato come PRIMO elemento dentro il tab
@@ -8,7 +21,7 @@
  * mappa "Luogo del corso", che nelle pagine chiamanti restano stateful e quindi non sono riducibili
  * a un item statico).
  */
-export default function CourseSchedaTecnica({ items = [], children }) {
+export default function CourseSchedaTecnica({ items = [], children }: CourseSchedaTecnicaProps) {
   return (
     <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', borderRadius: '1.5rem', padding: 'clamp(1.5rem, 3.5vw, 2rem)', position: 'relative', overflow: 'hidden', marginBottom: '2rem' }}>
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.14) 0%, transparent 70%)' }} />
