@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
+import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useCart } from '../../context/CartContext';
@@ -408,6 +409,7 @@ export const coursesDetails = {
     learningOutcomes: ['Tecniche panificazione', 'Tecniche pasticceria', 'Stage', 'Qualifica']
   },
   'conduttore-impresa-agricola': {
+    enrollOnly: true,
     title: 'Conduttore d\'Impresa Agricola',
     image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&q=80',
     category: 'Settore Agricolo',
@@ -1529,19 +1531,22 @@ export default function CourseDetail() {
                 buyLabel="Aggiungi al carrello"
               />
 
-            /* CASO 3 - Iscrizione online senza pagamento anticipato (OSS, ASACOM) */
+            /* CASO 3 - Iscrizione online senza pagamento anticipato, a soglia (OSS, ASACOM,
+               Conduttore d'Impresa Agricola): il pulsante "Iscriviti" incrementa il conteggio
+               iscritti (EnrollmentProgress) invece di puntare solo a un link statico - al
+               raggiungimento di 15 iscrizioni lo staff viene avvisato per ricontattare gli
+               iscritti e avviare il corso. */
             ) : course.enrollOnly ? (
               <>
                 <PricingSidebar
                   priceRows={[{ label: 'Quota di iscrizione', value: 'Su richiesta' }]}
-                  buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=iscrizione`}
-                  buyLabel="Invia richiesta di iscrizione"
                   whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                 >
+                  <EnrollmentProgress courseId={slug} courseTitle={course.title} />
                   <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
                     <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
                     <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
-                      <strong>Pagamento all&apos;avvio del corso.</strong> Inviaci la richiesta di iscrizione: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
+                      <strong>Pagamento all&apos;avvio del corso.</strong> Il corso parte al raggiungimento di 15 iscrizioni: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
                     </p>
                   </div>
                 </PricingSidebar>
@@ -1550,7 +1555,17 @@ export default function CourseDetail() {
                 </p>
               </>
 
-            /* CASO 4 - Prezzo fisso noto per la variante selezionata (varianteCorrente.prezzo è un
+            /* CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
+               regione a regione, quindi niente prezzo in vetrina né carrello - solo "Richiedi
+               preventivo", come CASO 5. */
+            ) : varianteCorrente.obbligatoria ? (
+              <PricingSidebar
+                buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
+                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
+              />
+
+            /* CASO 4B - Prezzo fisso noto per la variante selezionata (varianteCorrente.prezzo è un
                numero): stesso flusso carrello di CASO 2, "Acquista ora" aggiunge al carrello e apre
                subito il drawer (come i bottoni "Buy now" dei negozi online) invece di puntare a un
                link statico non configurato. */

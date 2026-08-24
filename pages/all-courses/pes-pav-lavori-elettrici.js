@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -191,7 +190,6 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoPesPav() {
-  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('sottoTensione');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -509,10 +507,8 @@ export default function CorsoPesPav() {
                 Cambia riga prezzo/label in base alla variante selezionata nello switch qui sopra. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={c.prezzo}
-                onBuyClick={() => { addToCart({ id: `pes-pav-lavori-elettrici-${selectedTipo}`, slug: 'pes-pav-lavori-elettrici', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `pes-pav-lavori-elettrici-${selectedTipo}`, slug: 'pes-pav-lavori-elettrici', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20PES%2FPAV"
               >
                 {selectedTipo === 'sottoTensione' && (

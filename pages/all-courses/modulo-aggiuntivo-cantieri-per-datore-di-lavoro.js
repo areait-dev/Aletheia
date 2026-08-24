@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -76,10 +75,8 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function ModuloAggiuntivoCantieriDatoreLavoro() {
-  const { addToCart, setCartOpen } = useCart();
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const carouselRef = useRef(null);
-  const prezzoNumerico = 90;
 
   const families = buildCourseFamilies(coursesData, {}, { quiet: true });
   const corsiCorrelatiResolti = corsiCorrelatiSlugs
@@ -247,10 +244,8 @@ export default function ModuloAggiuntivoCantieriDatoreLavoro() {
                 Unica riga FAD 90€ + IVA — nessuna opzione Aula/Videoconferenza per questo corso. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={[{ label: 'FAD', value: '€ 90,00 + IVA' }]}
-                onBuyClick={() => { addToCart({ id: 'modulo-aggiuntivo-cantieri-per-datore-di-lavoro', slug: 'modulo-aggiuntivo-cantieri-per-datore-di-lavoro', title: 'Formazione Aggiuntiva "Cantieri" per Datore di Lavoro e Dirigente', variant: '6 ore · FAD', price: prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: 'modulo-aggiuntivo-cantieri-per-datore-di-lavoro', slug: 'modulo-aggiuntivo-cantieri-per-datore-di-lavoro', title: 'Formazione Aggiuntiva "Cantieri" per Datore di Lavoro e Dirigente', variant: '6 ore · FAD', price: prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent('Formazione Aggiuntiva "Cantieri" per Datore di Lavoro e Dirigente')}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20Modulo%20Aggiuntivo%20Cantieri%20Datore%20di%20Lavoro%2FDirigente"
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

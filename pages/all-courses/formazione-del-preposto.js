@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -188,7 +187,6 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoFormazionePreposto() {
-  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('corso');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -506,10 +504,8 @@ export default function CorsoFormazionePreposto() {
                 Cambia riga prezzo/label in base al tipo selezionato nello switch qui sopra. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={c.prezzo}
-                onBuyClick={() => { addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `formazione-del-preposto-${selectedTipo}`, slug: 'formazione-del-preposto', title: 'Formazione del Preposto', variant: c.titleSuffix, price: c.prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent('Formazione del Preposto')}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
               >
                 {selectedTipo === 'corso' && (
                   <button
@@ -523,7 +519,6 @@ export default function CorsoFormazionePreposto() {
                     }}
                   >
                     <span>Devi solo rinnovare l'attestato? <strong>Aggiornamento 6 ore</strong></span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>€ 90,00 + IVA</span>
                   </button>
                 )}
               </PricingSidebar>

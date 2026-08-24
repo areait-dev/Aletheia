@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -138,7 +137,6 @@ const CONTENUTO = {
 };
 
 export default function CorsoDatoreDiLavoro() {
-  const { addToCart, setCartOpen } = useCart();
   const [variante, setVariante] = useState('datore');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const carouselRef = useRef(null);
@@ -167,12 +165,12 @@ export default function CorsoDatoreDiLavoro() {
   const corsiCorrelati = variante === 'datore'
     ? [
         aggiornamentoLink,
-        { titolo: 'Formazione Aggiuntiva Cantieri per Datore di Lavoro e Dirigente · 6 ore', switchTo: 'cantieri', meta: '6 ore · € 90,00' },
+        { titolo: 'Formazione Aggiuntiva Cantieri per Datore di Lavoro e Dirigente · 6 ore', switchTo: 'cantieri', meta: '6 ore' },
         resolveLink('formazione-dirigente'),
         resolveLink('rspp-datore-di-lavoro-modulo-comune'),
       ].filter(Boolean)
     : [
-        { titolo: 'Corso di Formazione per Datore di Lavoro · 16 ore', switchTo: 'datore', meta: '16 ore · € 160,00' },
+        { titolo: 'Corso di Formazione per Datore di Lavoro · 16 ore', switchTo: 'datore', meta: '16 ore' },
         resolveLink('formazione-dirigente'),
         resolveLink('coordinatori-cantieri-cse-csp'),
         resolveLink('pimus-ponteggi'),
@@ -394,10 +392,8 @@ export default function CorsoDatoreDiLavoro() {
                 Cambia riga prezzo/label in base alla variante selezionata nello switch qui sopra. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={c.prezzo}
-                onBuyClick={() => { addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `datore-di-lavoro-${variante}`, slug: 'datore-di-lavoro', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Formazione%20Datore%20di%20Lavoro"
               >
                 {variante === 'datore' ? (
@@ -413,7 +409,6 @@ export default function CorsoDatoreDiLavoro() {
                       }}
                     >
                       <span>Operi in <strong>cantieri</strong>? Modulo aggiuntivo 6 ore</span>
-                      <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>€ 90,00 + IVA</span>
                     </button>
                     {aggiornamentoLink && (
                       <Link
@@ -426,7 +421,6 @@ export default function CorsoDatoreDiLavoro() {
                         }}
                       >
                         <span>Devi solo rinnovare l'attestato? <strong>Aggiornamento 6 ore</strong></span>
-                        <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>€ 100,00 + IVA</span>
                       </Link>
                     )}
                   </div>

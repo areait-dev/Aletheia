@@ -163,9 +163,6 @@ export default function Header({ active, solid = false }: HeaderProps) {
               </div>
             )}
           </div>
-          <a href="tel:+390932862613" className="header-phone">
-            +39 0932 862613
-          </a>
           {/* CARRELLO */}
           <button
             onClick={() => setCartOpen(true)}

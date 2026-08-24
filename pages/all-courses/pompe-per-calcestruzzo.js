@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -74,7 +73,6 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoPompePerCalcestruzzo() {
-  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('base');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -350,10 +348,8 @@ export default function CorsoPompePerCalcestruzzo() {
                 Cambia riga prezzo/label in base alla variante selezionata nello switch qui sopra. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={c.prezzo}
-                onBuyClick={() => { addToCart({ id: `pompe-per-calcestruzzo-${selectedTipo}`, slug: 'pompe-per-calcestruzzo', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `pompe-per-calcestruzzo-${selectedTipo}`, slug: 'pompe-per-calcestruzzo', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Pompe%20per%20Calcestruzzo"
               >
                 {selectedTipo === 'base' && (
@@ -368,7 +364,7 @@ export default function CorsoPompePerCalcestruzzo() {
                     }}
                   >
                     <span>Devi solo <strong>rinnovare</strong> il patentino già in tuo possesso?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento 100€</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento</span>
                   </button>
                 )}
                 {selectedTipo === 'aggiornamento' && (
@@ -383,7 +379,7 @@ export default function CorsoPompePerCalcestruzzo() {
                     }}
                   >
                     <span>Devi conseguire il patentino <strong>per la prima volta</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso Nuovo · 14 ore, 250€</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso Nuovo · 14 ore</span>
                   </button>
                 )}
               </PricingSidebar>

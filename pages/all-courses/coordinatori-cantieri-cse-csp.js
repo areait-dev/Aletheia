@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -183,7 +182,6 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoCoordinatoriCseCsp() {
-  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('corso');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -457,10 +455,8 @@ export default function CorsoCoordinatoriCseCsp() {
                 Cambia riga prezzo/label in base al tipo selezionato nello switch qui sopra. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={c.prezzo}
-                onBuyClick={() => { addToCart({ id: `coordinatori-cantieri-cse-csp-${selectedTipo}`, slug: 'coordinatori-cantieri-cse-csp', title: 'Coordinatori Cantieri CSE-CSP', variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `coordinatori-cantieri-cse-csp-${selectedTipo}`, slug: 'coordinatori-cantieri-cse-csp', title: 'Coordinatori Cantieri CSE-CSP', variant: c.titleSuffix, price: c.prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent('Coordinatori Cantieri CSE-CSP')}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
               />
             </aside>
           </div>

@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -72,7 +71,6 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoAddettiCaricatoriCmm() {
-  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('base');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -348,10 +346,8 @@ export default function CorsoAddettiCaricatoriCmm() {
                 Cambia riga prezzo/label in base alla variante selezionata nello switch qui sopra. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={c.prezzo}
-                onBuyClick={() => { addToCart({ id: `addetti-caricatori-movimentazione-di-materiali-cmm-${selectedTipo}`, slug: 'addetti-caricatori-movimentazione-di-materiali-cmm', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `addetti-caricatori-movimentazione-di-materiali-cmm-${selectedTipo}`, slug: 'addetti-caricatori-movimentazione-di-materiali-cmm', title: c.title, variant: c.titleSuffix, price: c.prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Addetti%20Caricatori%20Movimentazione%20Materiali"
               >
                 {selectedTipo === 'base' && (
@@ -366,7 +362,7 @@ export default function CorsoAddettiCaricatoriCmm() {
                     }}
                   >
                     <span>Devi solo <strong>rinnovare</strong> l'attestato già in tuo possesso?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento 150€</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento</span>
                   </button>
                 )}
                 {selectedTipo === 'aggiornamento' && (
@@ -381,7 +377,7 @@ export default function CorsoAddettiCaricatoriCmm() {
                     }}
                   >
                     <span>Devi conseguire l'attestato <strong>per la prima volta</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso Base · 8 ore, 270€</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso Base · 8 ore</span>
                   </button>
                 )}
               </PricingSidebar>

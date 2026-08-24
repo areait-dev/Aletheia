@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PricingSidebar from '../../components/PricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
@@ -143,7 +142,6 @@ const corsiCorrelatiSlugs = [
 ];
 
 export default function CorsoPersonaleAlimentaristaOsa() {
-  const { addToCart, setCartOpen } = useCart();
   const [selectedTipo, setSelectedTipo] = useState('base');
   const [activeTab, setActiveTab] = useState('overview');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -151,9 +149,6 @@ export default function CorsoPersonaleAlimentaristaOsa() {
   const carouselRef = useRef(null);
 
   const c = CONTENUTO[selectedTipo];
-  const prezzoNumerico = modalitaSelezionata === 'aula' ? c.prezzoAula : c.prezzoFad;
-  const prezzoRows = c.prezzoRowsBuilder(c.prezzoAula, c.prezzoFad)
-    .sort((a) => (a.key === modalitaSelezionata ? -1 : 1));
 
   const selectTipo = (tipo) => {
     setSelectedTipo(tipo);
@@ -458,10 +453,8 @@ export default function CorsoPersonaleAlimentaristaOsa() {
                 Cambia riga prezzo/label in base alla variante e alla modalità (Aula/FAD) selezionate. */}
             <aside className="cp-price-area">
               <PricingSidebar
-                priceRows={prezzoRows}
-                onBuyClick={() => { addToCart({ id: `personale-alimentarista-osa-${selectedTipo}-${modalitaSelezionata}`, slug: 'personale-alimentarista-osa', title: c.title, variant: `${c.titleSuffix} · ${modalitaSelezionata === 'aula' ? 'Aula' : 'FAD'}`, price: prezzoNumerico }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `personale-alimentarista-osa-${selectedTipo}-${modalitaSelezionata}`, slug: 'personale-alimentarista-osa', title: c.title, variant: `${c.titleSuffix} · ${modalitaSelezionata === 'aula' ? 'Aula' : 'FAD'}`, price: prezzoNumerico })}
+                buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
+                buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Personale%20Alimentarista%20OSA"
               >
                 {selectedTipo === 'base' && (
@@ -476,7 +469,7 @@ export default function CorsoPersonaleAlimentaristaOsa() {
                     }}
                   >
                     <span>Devi solo <strong>rinnovare</strong> l'attestato già in tuo possesso?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento 60€</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento</span>
                   </button>
                 )}
                 {selectedTipo === 'aggiornamento' && (
@@ -491,7 +484,7 @@ export default function CorsoPersonaleAlimentaristaOsa() {
                     }}
                   >
                     <span>Devi conseguire l'attestato <strong>per la prima volta</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso OSA · 12 ore, 80€</span>
+                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso OSA · 12 ore</span>
                   </button>
                 )}
               </PricingSidebar>

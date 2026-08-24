@@ -176,8 +176,12 @@ function modalitaFromSede(sede) {
   return /online/i.test(sede) ? 'Online' : 'In Presenza';
 }
 
-// Giorni dei prossimi corsi (max 10 distinti), ciascuno con i suoi corsi
-const corsiOrdinati = [...CALENDARIO].sort((a, b) => a.data.localeCompare(b.data));
+// Giorni dei prossimi corsi (max 10 distinti) a partire da oggi, ciascuno con i suoi corsi.
+// Il confronto su stringa 'YYYY-MM-DD' funziona perché è lessicograficamente ordinabile come una data.
+const oggiISO = new Date().toISOString().slice(0, 10);
+const corsiOrdinati = [...CALENDARIO]
+  .filter((c) => c.data >= oggiISO)
+  .sort((a, b) => a.data.localeCompare(b.data));
 const giorniCalendario = [...new Set(corsiOrdinati.map((c) => c.data))]
   .slice(0, 10)
   .map((data) => ({ data, corsi: corsiOrdinati.filter((c) => c.data === data) }));
@@ -406,7 +410,7 @@ export default function Home() {
             Formiamo. Orientiamo. Inseriamo.
           </div>
           <h1>
-            Siamo il ponte tra <span>formazione</span> e <span>lavoro</span>
+            Il ponte tra <span>formazione</span> e <span>lavoro</span>
           </h1>
           <p>
             Trasformiamo competenze in occupazione concreta. Dall&apos;orientamento

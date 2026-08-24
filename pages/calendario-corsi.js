@@ -37,38 +37,53 @@ function postiStyle(postiDisponibili) {
 }
 
 export default function CalendarioCorsi() {
-  const [meseFiltro, setMeseFiltro] = useState('');       // es. "5" (indice mese)
   const [categoriaFiltro, setCategoriaFiltro] = useState(''); // es. "obbligatoria"
+  const [meseAperto, setMeseAperto] = useState(null); // indice mese (0-11) espanso in fisarmonica, o null
 
-  // Mesi presenti nei dati (ordinati)
-  const mesiDisponibili = useMemo(() => {
-    const set = new Set(CALENDARIO.map((c) => parseDate(c.data).m));
-    return [...set].sort((a, b) => a - b);
-  }, []);
-
+  // Corsi filtrati per categoria (il mese non è più un filtro ma un accordion nella vista principale)
   const corsiFiltrati = useMemo(() => {
     return CALENDARIO
-      .filter((c) => {
-        const mese = parseDate(c.data).m;
-        const matchMese = meseFiltro === '' || mese === Number(meseFiltro);
-        const matchCat = categoriaFiltro === '' || c.categoria === categoriaFiltro;
-        return matchMese && matchCat;
-      })
+      .filter((c) => categoriaFiltro === '' || c.categoria === categoriaFiltro)
       .sort((a, b) => a.data.localeCompare(b.data));
-  }, [meseFiltro, categoriaFiltro]);
+  }, [categoriaFiltro]);
 
-  // Raggruppamento per data
-  const gruppi = useMemo(() => {
-    const map = new Map();
+  // Finestra fissa del calendario: da Agosto 2026 a Luglio 2027 (12 mesi consecutivi a cavallo di due anni)
+  const FINESTRA_MESI = useMemo(() => {
+    const out = [];
+    for (let i = 0; i < 12; i++) {
+      const m = (7 + i) % 12; // 7 = Agosto (indice 0-based)
+      const y = 2026 + Math.floor((7 + i) / 12);
+      out.push({ m, y });
+    }
+    return out;
+  }, []);
+
+  // I mesi della finestra, ciascuno con i propri corsi (array vuoto se nessuno)
+  const mesiConCorsi = useMemo(() => {
+    const map = new Map(); // "y-m" -> corsi[]
     corsiFiltrati.forEach((c) => {
+      const { y, m } = parseDate(c.data);
+      const key = `${y}-${m}`;
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(c);
+    });
+    return FINESTRA_MESI.map(({ m, y }) => ({ m, y, corsi: map.get(`${y}-${m}`) || [] }));
+  }, [corsiFiltrati, FINESTRA_MESI]);
+
+  // Raggruppamento per data dei corsi di un singolo mese (usato nell'accordion aperto)
+  const gruppiPerMese = (corsiDelMese) => {
+    const map = new Map();
+    corsiDelMese.forEach((c) => {
       if (!map.has(c.data)) map.set(c.data, []);
       map.get(c.data).push(c);
     });
     return [...map.entries()]; // [ [data, corsi[]], ... ]
-  }, [corsiFiltrati]);
+  };
 
-  const hasFilters = meseFiltro !== '' || categoriaFiltro !== '';
-  const resetFiltri = () => { setMeseFiltro(''); setCategoriaFiltro(''); };
+  const toggleMese = (m) => setMeseAperto((prev) => (prev === m ? null : m));
+
+  const hasFilters = categoriaFiltro !== '';
+  const resetFiltri = () => { setCategoriaFiltro(''); };
 
   return (
     <>
@@ -114,34 +129,6 @@ export default function CalendarioCorsi() {
               <h2 className="text-slate-900 dark:text-gray-50 font-extrabold text-sm uppercase tracking-wider mb-4">
                 Filtra i corsi
               </h2>
-
-              {/* Filtro mese */}
-              <div className="mb-5">
-                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                  Mese
-                </label>
-                <div className="flex flex-col gap-1">
-                  <button
-                    onClick={() => setMeseFiltro('')}
-                    className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      meseFiltro === '' ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
-                    }`}
-                  >
-                    Tutti i mesi
-                  </button>
-                  {mesiDisponibili.map((m) => (
-                    <button
-                      key={m}
-                      onClick={() => setMeseFiltro(String(m))}
-                      className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        meseFiltro === String(m) ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
-                      }`}
-                    >
-                      {MESI[m]} 2026
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               {/* Filtro categoria */}
               <div className="mb-5">
@@ -196,108 +183,160 @@ export default function CalendarioCorsi() {
               </p>
             </div>
 
-            {gruppi.length === 0 ? (
+            {corsiFiltrati.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <i className="far fa-calendar-xmark text-4xl text-slate-300 dark:text-gray-600 mb-3" />
                 <p className="text-slate-500 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
                 <p className="text-slate-400 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
               </div>
             ) : (
-              <div className="flex flex-col gap-8">
-                {gruppi.map(([data, corsi]) => (
-                  <div key={data}>
-                    {/* Intestazione data gruppo */}
-                    <h3 className="text-sm font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-3 pl-1">
-                      {formatLongDate(data)}
-                    </h3>
-
-                    <div className="flex flex-col gap-4">
-                      {corsi.map((corso) => {
-                        const { d, m } = parseDate(corso.data);
-                        const posti = postiStyle(corso.postiDisponibili);
-                        const esaurito = corso.postiDisponibili === 0;
-                        return (
+              <div className="flex flex-col gap-4">
+                {mesiConCorsi.map(({ m, y, corsi }) => {
+                  const aperto = meseAperto === m;
+                  return (
+                    <div
+                      key={m}
+                      className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl shadow-sm overflow-hidden"
+                    >
+                      {/* Header mese - cliccabile per espandere/chiudere solo se ha corsi in programma */}
+                      <button
+                        type="button"
+                        onClick={() => corsi.length > 0 && toggleMese(m)}
+                        aria-expanded={aperto}
+                        disabled={corsi.length === 0}
+                        className={`w-full flex items-center justify-between gap-4 px-5 py-4 text-left transition-colors ${
+                          corsi.length > 0 ? 'hover:bg-slate-50 dark:hover:bg-gray-700 cursor-pointer' : 'cursor-default opacity-60'
+                        }`}
+                      >
+                        <div className="flex items-center gap-4">
                           <div
-                            key={corso.id}
-                            className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl shadow-sm p-5 flex flex-col sm:flex-row gap-5 transition-shadow hover:shadow-md"
+                            className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                            style={{ background: aperto ? '#008C95' : 'rgba(0,140,149,0.1)' }}
                           >
-                            {/* Data in evidenza */}
-                            <div className="flex sm:flex-col items-center justify-center sm:justify-start flex-shrink-0 sm:w-20 gap-2 sm:gap-0">
-                              <span style={{ fontSize: '2.25rem', fontWeight: 900, color: '#008C95', lineHeight: 1 }}>
-                                {String(d).padStart(2, '0')}
-                              </span>
-                              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                                {MESI_ABBR[m]}
-                              </span>
-                            </div>
+                            <i
+                              className="fas fa-calendar-days"
+                              style={{ fontSize: '1.1rem', color: aperto ? '#fff' : '#008C95' }}
+                            />
+                          </div>
+                          <div>
+                            <h3 className="text-slate-900 dark:text-gray-50 font-extrabold text-base leading-snug">
+                              {MESI[m]} {y}
+                            </h3>
+                            <p className="text-slate-500 dark:text-gray-400 text-sm">
+                              {corsi.length === 0 ? 'Nessun corso in programma' : `${corsi.length} ${corsi.length === 1 ? 'corso in programma' : 'corsi in programma'}`}
+                            </p>
+                          </div>
+                        </div>
+                        {corsi.length > 0 && (
+                          <i
+                            className="fas fa-chevron-down text-slate-400 dark:text-gray-500 transition-transform flex-shrink-0"
+                            style={{ transform: aperto ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                          />
+                        )}
+                      </button>
 
-                            {/* Separatore verticale (desktop) */}
-                            <div className="hidden sm:block w-px bg-slate-100 dark:bg-gray-700" />
-
-                            {/* Dettagli */}
-                            <div className="flex-1 min-w-0">
-                              <div className="flex flex-wrap items-center gap-2 mb-2">
-                                <span style={{
-                                  display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-                                  padding: '0.2rem 0.7rem', borderRadius: '999px',
-                                  background: `${categoryColor[corso.categoria]}1f`,
-                                  border: `1px solid ${categoryColor[corso.categoria]}55`,
-                                  fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
-                                  color: categoryColor[corso.categoria],
-                                }}>
-                                  {categoryLabel[corso.categoria]}
-                                </span>
-                              </div>
-
-                              <h4 className="text-slate-900 dark:text-gray-50 font-extrabold text-base leading-snug mb-3">
-                                {corso.titolo}
+                      {/* Corpo mese - giorni con corsi, visibile solo se aperto */}
+                      {aperto && corsi.length > 0 && (
+                        <div className="px-5 pb-5 pt-1 flex flex-col gap-8 border-t border-slate-100 dark:border-gray-700">
+                          {gruppiPerMese(corsi).map(([data, corsiDelGiorno]) => (
+                            <div key={data} className="mt-6">
+                              {/* Intestazione data gruppo */}
+                              <h4 className="text-sm font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-3 pl-1">
+                                {formatLongDate(data)}
                               </h4>
 
-                              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600 dark:text-gray-300">
-                                <span className="inline-flex items-center gap-1.5">
-                                  <i className="fas fa-location-dot text-teal-600 dark:text-teal-400" /> {corso.sede}
-                                </span>
-                                <span className="inline-flex items-center gap-1.5">
-                                  <i className="far fa-clock text-teal-600 dark:text-teal-400" /> {corso.orario}
-                                </span>
-                                <span className="inline-flex items-center gap-1.5">
-                                  <i className="fas fa-hourglass-half text-teal-600 dark:text-teal-400" /> {corso.durata}
-                                </span>
-                              </div>
+                              <div className="flex flex-col gap-4">
+                                {corsiDelGiorno.map((corso) => {
+                                  const { d, m: meseCorso } = parseDate(corso.data);
+                                  const posti = postiStyle(corso.postiDisponibili);
+                                  const esaurito = corso.postiDisponibili === 0;
+                                  return (
+                                    <div
+                                      key={corso.id}
+                                      className="bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-5 flex flex-col sm:flex-row gap-5 transition-shadow hover:shadow-md"
+                                    >
+                                      {/* Data in evidenza */}
+                                      <div className="flex sm:flex-col items-center justify-center sm:justify-start flex-shrink-0 sm:w-20 gap-2 sm:gap-0">
+                                        <span style={{ fontSize: '2.25rem', fontWeight: 900, color: '#008C95', lineHeight: 1 }}>
+                                          {String(d).padStart(2, '0')}
+                                        </span>
+                                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                                          {MESI_ABBR[meseCorso]}
+                                        </span>
+                                      </div>
 
-                              {/* Posti */}
-                              <div className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: posti.color }}>
-                                <i className={`fas ${posti.icon}`} /> {posti.label}
+                                      {/* Separatore verticale (desktop) */}
+                                      <div className="hidden sm:block w-px bg-slate-200 dark:bg-gray-700" />
+
+                                      {/* Dettagli */}
+                                      <div className="flex-1 min-w-0">
+                                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                                          <span style={{
+                                            display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+                                            padding: '0.2rem 0.7rem', borderRadius: '999px',
+                                            background: `${categoryColor[corso.categoria]}1f`,
+                                            border: `1px solid ${categoryColor[corso.categoria]}55`,
+                                            fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+                                            color: categoryColor[corso.categoria],
+                                          }}>
+                                            {categoryLabel[corso.categoria]}
+                                          </span>
+                                        </div>
+
+                                        <h5 className="text-slate-900 dark:text-gray-50 font-extrabold text-base leading-snug mb-3">
+                                          {corso.titolo}
+                                        </h5>
+
+                                        <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600 dark:text-gray-300">
+                                          <span className="inline-flex items-center gap-1.5">
+                                            <i className="fas fa-location-dot text-teal-600 dark:text-teal-400" /> {corso.sede}
+                                          </span>
+                                          <span className="inline-flex items-center gap-1.5">
+                                            <i className="far fa-clock text-teal-600 dark:text-teal-400" /> {corso.orario}
+                                          </span>
+                                          <span className="inline-flex items-center gap-1.5">
+                                            <i className="fas fa-hourglass-half text-teal-600 dark:text-teal-400" /> {corso.durata}
+                                          </span>
+                                        </div>
+
+                                        {/* Posti */}
+                                        <div className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: posti.color }}>
+                                          <i className={`fas ${posti.icon}`} /> {posti.label}
+                                        </div>
+                                      </div>
+
+                                      {/* Azione */}
+                                      <div className="flex items-center sm:items-end flex-shrink-0">
+                                        {esaurito ? (
+                                          <a
+                                            href={`/contatti?corso=${encodeURIComponent(corso.titolo)}&intento=lista-attesa`}
+                                            className="inline-flex items-center gap-2 bg-slate-200 dark:bg-gray-700 text-slate-600 dark:text-gray-300 font-bold text-sm px-5 py-2.5 rounded-xl no-underline hover:bg-slate-300 dark:hover:bg-gray-600 transition-colors whitespace-nowrap"
+                                          >
+                                            <i className="fas fa-clock-rotate-left" /> Lista d'attesa
+                                          </a>
+                                        ) : (
+                                          <a
+                                            href={`/all-courses/${corso.slug}`}
+                                            className="text-white font-bold text-sm px-6 py-2.5 rounded-xl no-underline transition-colors whitespace-nowrap"
+                                            style={{ background: '#008C95' }}
+                                            onMouseEnter={(e) => (e.currentTarget.style.background = '#006B73')}
+                                            onMouseLeave={(e) => (e.currentTarget.style.background = '#008C95')}
+                                          >
+                                            Iscriviti
+                                          </a>
+                                        )}
+                                      </div>
+                                    </div>
+                                  );
+                                })}
                               </div>
                             </div>
-
-                            {/* Azione */}
-                            <div className="flex items-center sm:items-end flex-shrink-0">
-                              {esaurito ? (
-                                <a
-                                  href={`/contatti?corso=${encodeURIComponent(corso.titolo)}&intento=lista-attesa`}
-                                  className="inline-flex items-center gap-2 bg-slate-200 dark:bg-gray-700 text-slate-600 dark:text-gray-300 font-bold text-sm px-5 py-2.5 rounded-xl no-underline hover:bg-slate-300 dark:hover:bg-gray-600 transition-colors whitespace-nowrap"
-                                >
-                                  <i className="fas fa-clock-rotate-left" /> Lista d'attesa
-                                </a>
-                              ) : (
-                                <a
-                                  href={`/all-courses/${corso.slug}`}
-                                  className="text-white font-bold text-sm px-6 py-2.5 rounded-xl no-underline transition-colors whitespace-nowrap"
-                                  style={{ background: '#008C95' }}
-                                  onMouseEnter={(e) => (e.currentTarget.style.background = '#006B73')}
-                                  onMouseLeave={(e) => (e.currentTarget.style.background = '#008C95')}
-                                >
-                                  Iscriviti
-                                </a>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </main>

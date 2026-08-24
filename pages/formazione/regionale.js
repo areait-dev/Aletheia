@@ -203,6 +203,10 @@ export default function FormazioneRegionale() {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
         }
 
+        @media (max-width: 640px) {
+          .requisiti-list { grid-template-columns: 1fr !important; }
+        }
+
         .section-badge {
           display: inline-block;
           font-size: 0.68rem;
@@ -376,7 +380,7 @@ export default function FormazioneRegionale() {
       {/* ══════════════ REQUISITI & VALORE ALÈTHEIA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             {/* Requisiti di accesso */}
             <div>
               <span className="section-badge">Requisiti di accesso</span>
@@ -386,7 +390,7 @@ export default function FormazioneRegionale() {
               <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.92rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
                 I requisiti cambiano in base al bando, ma generalmente possono partecipare:
               </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.75rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.75rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', columnGap: '1.5rem', rowGap: '0.65rem' }} className="requisiti-list">
                 {requisiti.map((r) => (
                   <li key={r} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
                     <i className="fas fa-check-circle" style={{ color: '#10B981', marginTop: '0.2rem', flexShrink: 0 }}></i>

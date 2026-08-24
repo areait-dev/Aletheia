@@ -244,9 +244,9 @@ export default function FondoNuoveCompetenze() {
           <div className="hero-badge fade-up fade-up-1">Formazione senza costi retributivi</div>
 
           <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem' }}>
-            Il Fondo Nuove Competenze permette alle imprese di destinare parte dell&apos;orario di lavoro alla{' '}
+            Fondo{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              formazione
+              Nuove Competenze
             </span>
           </h1>
 
