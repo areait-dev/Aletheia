@@ -55,6 +55,14 @@ export default function AllCourses() {
   // Riferimento alla griglia corsi: usato per riportare in cima ai primi corsi al cambio categoria
   const gridRef = useRef(null);
 
+  // framer-motion (motion.div/AnimatePresence) va renderizzato SOLO lato client: eseguirlo
+  // durante il prerendering Node (SSG) manda in crash il build su alcuni ambienti
+  // ("Cannot read properties of null (reading 'useContext')" dentro framer-motion).
+  // Il server/primo paint mostra quindi la stessa griglia senza motion; dopo l'hydration
+  // subentra la versione animata, senza mismatch (la struttura DOM di partenza è identica).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   // Skeleton di cortesia sui cambi di filtro "macro" (categoria/sotto-categoria/shop),
   // non sulla ricerca testuale: digitare deve restare istantaneo.
   const [isFiltering, setIsFiltering] = useState(false);
@@ -341,7 +349,7 @@ export default function AllCourses() {
               <p className="text-slate-500 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
               <p className="text-slate-400 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
             </div>
-          ) : (
+          ) : mounted ? (
             <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
               <AnimatePresence mode="popLayout">
                 {filteredFamilies.map((family, i) => (
@@ -364,6 +372,18 @@ export default function AllCourses() {
                 ))}
               </AnimatePresence>
             </motion.div>
+          ) : (
+            // Prerendering (SSG) e primo paint prima dell'hydration: stessa griglia,
+            // senza framer-motion (vedi commento su `mounted` sopra).
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+              {filteredFamilies.map((family) => (
+                <div key={family.slug} className="h-full">
+                  <Reveal className="h-full">
+                    <CourseFamilyCard family={family} />
+                  </Reveal>
+                </div>
+              ))}
+            </div>
           )}
         </main>
       </div>
