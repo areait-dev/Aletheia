@@ -33,7 +33,7 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
   const hasMultipleLivelli = livelli.length > 1 && livelli.some((l) => l !== family.titolo);
 
   return (
-    <Link href={`/all-courses/${family.slug}`} style={{ textDecoration: 'none' }} className="group">
+    <Link href={`/all-courses/${family.slug}`} style={{ textDecoration: 'none' }} className="group block h-full">
       <div className="bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-slate-100 dark:border-[rgba(255,255,255,0.08)] shadow-sm transition-all duration-300 w-full h-full min-h-[420px] flex flex-col hover:-translate-y-1 hover:shadow-lg">
         <div className="relative h-[180px] overflow-hidden flex-shrink-0">
           <img

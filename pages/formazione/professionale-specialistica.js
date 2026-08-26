@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import Reveal from '../../components/Reveal';
 
 const heroBadges = [
   { icon: 'fas fa-award', label: 'Ente accreditato Regione Siciliana' },
@@ -12,86 +13,151 @@ const valori = [
   {
     icon: 'fas fa-lightbulb',
     title: 'Contenuti aggiornati',
-    text: "Programmi progettati con docenti professionisti, non teoria fine a sé stessa, ma competenze che funzionano fuori dall'aula.",
+    text: (
+      <>Programmi progettati con <strong className="text-slate-900 dark:text-white font-bold">docenti professionisti</strong>: non teoria fine a sé stessa, ma <strong className="text-slate-900 dark:text-white font-bold">competenze pratiche</strong> spendibili sul lavoro.</>
+    ),
   },
   {
     icon: 'fas fa-file-circle-check',
     title: 'Certificazioni riconosciute',
-    text: 'ICDL, qualifiche professionali, crediti ECM, titoli e certificazioni con valore reale sul mercato del lavoro, nei concorsi pubblici e nelle graduatorie scolastiche.',
+    text: (
+      <><strong className="text-slate-900 dark:text-white font-bold">ICDL, qualifiche regionali e crediti ECM</strong>. Titoli validi per il mercato privato, concorsi pubblici e graduatorie scolastiche.</>
+    ),
   },
   {
     icon: 'fas fa-bullseye',
     title: 'Percorsi su misura',
-    text: 'Per privati e PA. In aula, online o direttamente presso il tuo ente.',
+    text: (
+      <>Soluzioni flessibili per <strong className="text-slate-900 dark:text-white font-bold">privati, aziende e Pubblica Amministrazione</strong>. Corsi in aula, online o direttamente presso il tuo ente.</>
+    ),
   },
 ];
 
 const verticali = [
   {
-    badge: 'Riconosciute in 150+ paesi',
-    title: 'Certificazioni informatiche ICDL',
-    text: 'La certificazione ICDL è lo standard europeo per le competenze digitali — riconosciuta in oltre 150 paesi, richiesta nei concorsi pubblici, valida per le graduatorie scolastiche e sempre più richiesta dalle aziende nei processi di selezione. Alètheia è Test Center AICA qualificato, gli esami si sostengono direttamente nella nostra sede di Vittoria (RG), senza spostamenti.',
+    color: 'blue',
+    sopratitolo: 'Certificazioni digitali',
+    title: 'Certificazioni Informatiche ICDL',
+    bullets: [
+      'Standard europeo per le competenze digitali richiesto nei concorsi pubblici.',
+      'Test Center AICA qualificato con esami direttamente in sede a Vittoria.',
+      'Percorsi flessibili per studenti, professionisti e docenti.',
+    ],
     icon: 'fas fa-laptop-code',
     cta: 'Scopri le certificazioni',
     href: '/all-courses?categoria=certificazioni-informatiche',
   },
   {
-    badge: 'Qualifiche professionali riconosciute',
+    color: 'amber',
+    sopratitolo: 'Crescita professionale',
     title: 'Corsi Qualificati',
-    text: 'Percorsi di qualifica e riqualificazione professionale per acquisire competenze certificate e nuove opportunità lavorative. Pensati per chi vuole specializzarsi in un settore, cambiare professione o rafforzare il proprio profilo con titoli riconosciuti a livello nazionale. Ogni corso si conclude con un attestato o una qualifica professionale inserita nel Repertorio Nazionale, spendibile subito nel mercato del lavoro.',
+    bullets: [
+      'Percorsi di qualifica e riqualificazione per nuove opportunità lavorative.',
+      'Qualifiche ufficiali inserite nel Repertorio Nazionale e spendibili sul mercato.',
+      'Certificazione delle competenze acquisite con titoli riconosciuti.',
+    ],
     icon: 'fas fa-certificate',
     cta: 'Scopri i corsi qualificati',
     href: '/all-courses?categoria=certificazione',
   },
   {
-    badge: 'Educazione Continua in Medicina',
+    color: 'teal',
+    sopratitolo: 'Educazione sanitaria',
     title: 'Corsi ECM',
-    text: "La formazione continua non è un'opzione per i professionisti della salute — è un requisito. Il sistema ECM obbliga medici, infermieri, farmacisti e tutti gli operatori sanitari ad acquisire crediti formativi ogni anno. Alètheia è Provider ECM accreditato e progetta percorsi specifici per operatori sanitari e sociosanitari, contenuti aggiornati, crediti certificati, modalità flessibili per chi lavora in corsia e non può fermarsi.",
+    bullets: [
+      'Crediti formativi obbligatori ogni anno per tutti i professionisti della salute.',
+      'Provider ECM accreditato con contenuti scientifici sempre aggiornati.',
+      'Modalità di fruizione flessibili studiate per chi già lavora in corsia.',
+    ],
     icon: 'fas fa-user-doctor',
     cta: 'Scopri i corsi ECM',
     href: '/formazione/ecm',
   },
   {
-    badge: 'Percorsi su misura per enti pubblici',
-    title: 'Formazione per la Pubblica Amministrazione',
-    text: 'Gli enti pubblici hanno esigenze formative specifiche, normative in continua evoluzione, digitalizzazione dei processi, anticorruzione, trasparenza, gestione dei procedimenti amministrativi. Alètheia progetta percorsi dedicati al personale della PA, erogabili direttamente presso la sede dell\'ente con docenti specializzati in ambito istituzionale. Formazione che rispetta i tempi e le esigenze operative della Pubblica Amministrazione.',
+    color: 'indigo',
+    sopratitolo: 'Per enti pubblici',
+    title: 'Formazione per la PA',
+    bullets: [
+      'Piani formativi mirati su digitalizzazione, anticorruzione e trasparenza.',
+      'Corsi erogabili direttamente in sede o in modalità dedicate.',
+      'Docenti altamente specializzati e orientati alle esigenze della PA.',
+    ],
     icon: 'fas fa-landmark',
     cta: 'Scopri la formazione PA',
     href: '/formazione/corsi-pa',
   },
 ];
 
-function VerticaleCard({ badge, title, text, icon, cta, href }) {
+// Classi statiche (necessarie per Tailwind JIT: niente interpolazione dinamica di classi colore)
+const COLOR_STYLES = {
+  blue: {
+    iconBg: 'bg-blue-50 dark:bg-blue-900/20',
+    iconText: 'text-blue-600 dark:text-blue-300',
+    sopratitolo: 'text-blue-600 dark:text-blue-300',
+    topBorder: 'bg-blue-600',
+    bullet: 'text-blue-600 dark:text-blue-300',
+    btn: 'border-blue-600 text-blue-600 dark:border-blue-300 dark:text-blue-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-300 dark:hover:text-slate-900',
+  },
+  amber: {
+    iconBg: 'bg-amber-50 dark:bg-amber-900/20',
+    iconText: 'text-amber-600 dark:text-amber-300',
+    sopratitolo: 'text-amber-600 dark:text-amber-300',
+    topBorder: 'bg-amber-600',
+    bullet: 'text-amber-600 dark:text-amber-300',
+    btn: 'border-amber-600 text-amber-600 dark:border-amber-300 dark:text-amber-300 hover:bg-amber-600 hover:text-white dark:hover:bg-amber-300 dark:hover:text-slate-900',
+  },
+  teal: {
+    iconBg: 'bg-teal-50 dark:bg-teal-900/20',
+    iconText: 'text-teal-600 dark:text-teal-300',
+    sopratitolo: 'text-teal-600 dark:text-teal-300',
+    topBorder: 'bg-teal-600',
+    bullet: 'text-teal-600 dark:text-teal-300',
+    btn: 'border-teal-600 text-teal-600 dark:border-teal-300 dark:text-teal-300 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-300 dark:hover:text-slate-900',
+  },
+  indigo: {
+    iconBg: 'bg-indigo-50 dark:bg-indigo-900/20',
+    iconText: 'text-indigo-900 dark:text-indigo-300',
+    sopratitolo: 'text-indigo-900 dark:text-indigo-300',
+    topBorder: 'bg-indigo-900',
+    bullet: 'text-indigo-900 dark:text-indigo-300',
+    btn: 'border-indigo-900 text-indigo-900 dark:border-indigo-300 dark:text-indigo-300 hover:bg-indigo-900 hover:text-white dark:hover:bg-indigo-300 dark:hover:text-slate-900',
+  },
+};
+
+function VerticaleCard({ color, sopratitolo, title, bullets, icon, cta, href }) {
+  const c = COLOR_STYLES[color];
   return (
     <a
       href={href}
-      className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] group area-nav-card"
-      style={{
-        borderRadius: '1.25rem',
-        overflow: 'hidden',
-        textDecoration: 'none',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        padding: '2rem',
-        transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-      }}
+      className="h-full bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] flex flex-col overflow-hidden no-underline transition-all duration-300 hover:-translate-y-2 hover:shadow-md rounded-2xl"
     >
-      <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s ease' }} className="group-hover:bg-[#008C95]">
-        <i className={icon} style={{ fontSize: '1.35rem', color: '#008C95' }}></i>
+      <div className={`h-1 ${c.topBorder}`} />
+      <div className="p-8 flex flex-col gap-3 flex-1">
+        <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${c.iconBg}`}>
+          <i className={`${icon} ${c.iconText}`} style={{ fontSize: '1.35rem' }}></i>
+        </div>
+
+        <span className={`text-xs font-extrabold uppercase tracking-widest ${c.sopratitolo}`}>
+          {sopratitolo}
+        </span>
+
+        <h3 className="text-slate-900 dark:text-white text-xl font-extrabold leading-snug m-0">
+          {title}
+        </h3>
+
+        <ul className="list-none m-0 p-0 space-y-2 flex-1">
+          {bullets.map((b, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-slate-600 dark:text-gray-300 leading-relaxed">
+              <i className={`fas fa-check text-xs mt-1 shrink-0 ${c.bullet}`}></i>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <span className={`mt-auto inline-flex items-center justify-center gap-2 text-sm font-bold rounded-full border-2 px-5 py-2.5 transition-all duration-300 ${c.btn}`}>
+          {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
+        </span>
       </div>
-
-      <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#008C95' }}>
-        {badge}
-      </span>
-
-      <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0, lineHeight: 1.3 }}>{title}</h3>
-
-      <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.88rem', lineHeight: 1.8, margin: 0, flex: 1 }}>{text}</p>
-
-      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-        {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
-      </span>
     </a>
   );
 }
@@ -146,10 +212,8 @@ export default function FormazioneProfessionaleSpecialistica() {
         .valori-grid-fps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         @media (max-width: 800px) { .valori-grid-fps { grid-template-columns: 1fr; } }
 
-        .aree-grid-fps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .aree-grid-fps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; align-items: stretch; }
         @media (max-width: 800px) { .aree-grid-fps { grid-template-columns: 1fr; } }
-
-        .area-nav-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
@@ -187,18 +251,22 @@ export default function FormazioneProfessionaleSpecialistica() {
       {/* ══════════════ FORMAZIONE CHE CREA VALORE ══════════════ */}
       <section className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4.5rem 0' }}>
         <div className="container">
-          <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.5rem)', fontWeight: 900, marginBottom: '2.5rem', textAlign: 'center' }}>
+          <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '2.5rem', textAlign: 'center' }}>
             Formazione che crea valore, non solo attestati
           </h3>
-          <div className="valori-grid-fps">
-            {valori.map((v) => (
-              <div key={v.title} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '0.75rem' }}>
-                <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className={v.icon} style={{ color: '#008C95', fontSize: '1.15rem' }}></i>
+          <div className="valori-grid-fps items-stretch">
+            {valori.map((v, i) => (
+              <Reveal key={v.title} delay={(i % 4) * 80} className="h-full">
+                <div
+                  className="h-full bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-xl p-8 flex flex-col items-start text-left gap-3"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center">
+                    <i className={`${v.icon} text-teal-600 dark:text-teal-300`} style={{ fontSize: '1.3rem' }}></i>
+                  </div>
+                  <span className="text-slate-900 dark:text-white text-lg font-extrabold">{v.title}</span>
+                  <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed m-0">{v.text}</p>
                 </div>
-                <span className="text-slate-900 dark:text-white" style={{ fontSize: '1rem', fontWeight: 800 }}>{v.title}</span>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: 0, maxWidth: '320px' }}>{v.text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -220,8 +288,10 @@ export default function FormazioneProfessionaleSpecialistica() {
           </div>
 
           <div className="aree-grid-fps">
-            {verticali.map((v) => (
-              <VerticaleCard key={v.title} {...v} />
+            {verticali.map((v, i) => (
+              <Reveal key={v.title} delay={(i % 3) * 90} className="h-full">
+                <VerticaleCard {...v} />
+              </Reveal>
             ))}
           </div>
         </div>

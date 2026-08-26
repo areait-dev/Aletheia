@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import { ALL_NEWS, formatDate } from '../../lib/newsData';
+import Reveal from '../../components/Reveal';
 
 function NewsCard({ news }) {
   const [hovered, setHovered] = useState(false);
@@ -24,6 +25,7 @@ function NewsCard({ news }) {
         transition: 'transform 0.25s ease, box-shadow 0.25s ease',
         display: 'flex',
         flexDirection: 'column',
+        height: '100%',
       }}
     >
       {/* Immagine */}
@@ -417,8 +419,10 @@ export default function NewsPage() {
         <div className="container">
           {filtered.length > 0 ? (
             <div className="news-grid">
-              {filtered.map(news => (
-                <NewsCard key={news.id} news={news} />
+              {filtered.map((news, i) => (
+                <Reveal key={news.id} delay={(i % 6) * 80} className="h-full">
+                  <NewsCard news={news} />
+                </Reveal>
               ))}
             </div>
           ) : (

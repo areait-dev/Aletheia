@@ -3,67 +3,105 @@ import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useTheme } from '../../context/ThemeContext';
+import Reveal from '../../components/Reveal';
 
 const percorsi = [
   {
     badge: 'FSE+, POC Sicilia, PSR, FEAMP',
     icon: 'fas fa-map-marked-alt',
     title: 'Formazione Regionale',
-    text: 'Percorsi finanziati dalla Regione Siciliana e dall\'Unione Europea rivolti a disoccupati, inoccupati e a chi desidera acquisire nuove competenze professionali. I corsi sono completamente gratuiti e possono prevedere stage aziendali, indennità di frequenza e il rilascio di qualifiche o certificazioni riconosciute. Alètheia partecipa agli avvisi pubblici regionali e ti accompagna nella verifica dei requisiti e nell\'iscrizione ai percorsi disponibili.',
+    bullets: [
+      'Percorsi finanziati da Regione Siciliana e Unione Europea',
+      'Rivolti a disoccupati, inoccupati e chi cerca nuove competenze',
+      'Stage aziendali, indennità di frequenza, qualifiche riconosciute',
+      'Alètheia ti segue nella verifica requisiti e iscrizione',
+    ],
     cta: 'Scopri i corsi',
     href: '/formazione/regionale',
+    image: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Aula di formazione regionale con studenti al lavoro',
   },
   {
     badge: 'La formazione che la tua azienda sta già finanziando',
     icon: 'fas fa-building',
     title: 'Fondi Interprofessionali per aziende',
-    text: 'Ogni azienda versa già lo 0,30% dei contributi INPS destinato alla formazione continua dei dipendenti. Attraverso i Fondi Interprofessionali, Fon.Ter, For.Agri, Fondimpresa e altri, quelle risorse diventano percorsi formativi senza costi aggiuntivi per l\'impresa. Alètheia segue ogni fase: dall\'analisi dei fabbisogni alla rendicontazione finale. La tua azienda forma i dipendenti. I costi li copre il fondo.',
+    bullets: [
+      'Usa lo 0,30% dei contributi INPS già versati per la formazione',
+      'Fon.Ter, For.Agri, Fondimpresa e altri fondi paritetici',
+      'Nessun costo aggiuntivo per l\'impresa',
+      'Alètheia segue tutto: dai fabbisogni alla rendicontazione',
+    ],
     cta: 'Scopri di più',
     href: '/formazione/fondi-interprofessionali',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Riunione aziendale per la formazione dei dipendenti',
   },
   {
     badge: 'Forma i tuoi dipendenti senza costi retributivi',
     icon: 'fas fa-lightbulb',
     title: 'Fondo Nuove Competenze',
-    text: 'Il Fondo Nuove Competenze consente alle imprese di destinare parte dell\'orario lavorativo alla formazione, con il rimborso dei costi retributivi previsto dalla misura. Digitalizzazione, transizione ecologica, innovazione organizzativa e sviluppo delle competenze strategiche diventano un investimento sostenibile per preparare l\'azienda alle sfide del mercato. Verifica con il nostro team se la tua impresa possiede i requisiti di accesso.',
+    bullets: [
+      'Formazione durante l\'orario di lavoro, con rimborso dei costi retributivi',
+      'Digitalizzazione, transizione ecologica, competenze strategiche',
+      'Investimento sostenibile per affrontare le sfide del mercato',
+      'Verifica gratuita dei requisiti con il nostro team',
+    ],
     cta: 'Scopri di più',
     href: '/formazione/fondo-nuove-competenze',
+    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Team che lavora su innovazione e competenze digitali',
   },
 ];
 
-function PercorsoCard({ badge, icon, title, text, cta, href }) {
+function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
   return (
     <a
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+      className="group"
       style={{
+        position: 'relative',
         borderRadius: '1.25rem',
         overflow: 'hidden',
         cursor: 'pointer',
         textDecoration: 'none',
         display: 'flex',
-        flexDirection: 'column',
-        transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered ? '0 16px 40px rgba(0,0,0,0.1)' : '0 2px 12px rgba(0,0,0,0.05)',
+        minHeight: '420px',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+        transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
+        boxShadow: hovered ? '0 20px 48px rgba(0,0,0,0.22)' : '0 4px 18px rgba(0,0,0,0.1)',
       }}
     >
-      <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
-      <div style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
-          <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#008C95', background: 'rgba(0,140,149,0.08)', padding: '0.3rem 0.7rem', borderRadius: '999px' }}>
-            {badge}
-          </span>
-          <div style={{ width: '44px', height: '44px', minWidth: '44px', borderRadius: '12px', background: hovered ? '#008C95' : 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s ease' }}>
-            <i className={icon} style={{ fontSize: '1.2rem', color: hovered ? '#fff' : '#008C95' }}></i>
-          </div>
+      <img
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+          transform: hovered ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.5s ease',
+        }}
+      />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(4,15,20,0.92) 10%, rgba(4,15,20,0.6) 55%, rgba(4,15,20,0.12) 100%)' }} />
+
+      <div style={{ position: 'relative', zIndex: 1, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1, justifyContent: 'flex-end' }}>
+        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <i className={icon} style={{ fontSize: '1.05rem', color: '#6EE7B7' }}></i>
         </div>
-        <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, lineHeight: 1.3 }}>{title}</h3>
-        <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.88rem', lineHeight: 1.75, margin: 0, flex: 1 }}>{text}</p>
-        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.25rem' }}>
+        <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6EE7B7', width: 'fit-content' }}>
+          {badge}
+        </span>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, lineHeight: 1.3, color: '#fff' }}>{title}</h3>
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          {bullets.map((b, i) => (
+            <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.83rem', lineHeight: 1.5, color: 'rgba(255,255,255,0.85)' }}>
+              <i className="fas fa-check" style={{ color: '#6EE7B7', fontSize: '0.7rem', marginTop: '0.3rem', flexShrink: 0 }}></i>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.25rem' }}>
           {cta}
         </span>
       </div>
@@ -231,8 +269,10 @@ export default function FormazioneFinanziataSicilia() {
           </div>
 
           <div className="percorsi-grid">
-            {percorsi.map((p) => (
-              <PercorsoCard key={p.title} {...p} />
+            {percorsi.map((p, i) => (
+              <Reveal key={p.title} delay={(i % 3) * 90}>
+                <PercorsoCard {...p} />
+              </Reveal>
             ))}
           </div>
         </div>

@@ -1750,6 +1750,18 @@ html.dark .category-card p {
   outline-offset: 3px;
 }
 
+/* ===== PERCORSI FORMATIVI - hover elevazione card ===== */
+.percorso-card {
+  transition: transform 300ms ease-out, box-shadow 300ms ease-out;
+}
+
+.percorso-card:hover,
+.percorso-card:focus-visible {
+  transform: translateY(-4px);
+  /* Ombra morbida e diffusa (tinta brand, non nera) invece di un'ombra netta */
+  box-shadow: 0 20px 40px -14px rgba(0, 140, 149, 0.22), 0 8px 20px -10px rgba(15, 23, 42, 0.08);
+}
+
 /* ===== STATS / NUMBERS ===== */
 .numbers-section {
   background: linear-gradient(135deg, #0F172A 0%, #0a4f54 50%, #008C95 100%);

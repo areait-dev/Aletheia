@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import Reveal from '../../components/Reveal';
 
 const avvisi = [
   {
@@ -11,6 +12,8 @@ const avvisi = [
     text: 'Percorsi di formazione professionale finanziati dal Programma Operativo Complementare Sicilia, finalizzati al conseguimento di una qualifica professionale riconosciuta e spendibile nel mercato del lavoro.',
     modalita: 'Aula (o variabile)',
     href: '/archivio/avviso-1-2026-poc',
+    image: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Aula di formazione professionale con studenti',
   },
   {
     badge: 'Disoccupati, NASpI, ADI',
@@ -18,6 +21,8 @@ const avvisi = [
     title: 'Avviso 6/2025 GOL – Garanzia di Occupabilità dei Lavoratori',
     text: 'Il Programma GOL – Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.',
     modalita: 'Aula (o variabile)',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Persona in colloquio di lavoro per il reinserimento occupazionale',
   },
   {
     badge: 'Qualifica, Stage, Indennità di frequenza',
@@ -26,6 +31,8 @@ const avvisi = [
     text: 'Percorsi rivolti a disoccupati e inoccupati che prevedono una qualifica professionale riconosciuta, indennità di frequenza e stage presso aziende partner.',
     modalita: 'Aula + Stage (o variabile)',
     href: '/archivio/avviso-7-2023',
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Stage in azienda con affiancamento professionale',
   },
   {
     badge: 'Assistente Familiare',
@@ -35,7 +42,8 @@ const avvisi = [
     durata: '300 ore',
     modalita: 'Aula + Stage',
     href: '/archivio/avviso-20-2024-fse',
-    image: 'https://www.aletheiasrl.it/images/avviso20_2024/Avv.20_Ass.Familare_banner.jpg',
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Assistente familiare che si prende cura di una persona anziana',
   },
 ];
 
@@ -74,7 +82,7 @@ const faqs = [
   },
 ];
 
-function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external, image }) {
+function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
   const clickable = Boolean(href);
   const Tag = clickable ? 'a' : 'div';
@@ -105,20 +113,13 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
           {badge}
         </span>
 
-        {image ? (
-          <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '110px' }}>
-            <img src={image} alt={title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-        ) : (
-          /* Placeholder loghi ente/programma - da sostituire con le immagini reali quando disponibili */
-          <div
-            className="border-slate-200 dark:border-[rgba(255,255,255,0.1)] text-slate-400 dark:text-gray-500"
-            style={{ border: '1px dashed', borderRadius: '0.6rem', padding: '0.5rem 0.75rem', fontSize: '0.68rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}
-          >
-            <i className="far fa-image" aria-hidden="true"></i>
-            <span>{logo}</span>
-          </div>
-        )}
+        <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '140px' }}>
+          <img src={image} alt={imageAlt || title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+
+        <span className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 700 }}>
+          {logo}
+        </span>
 
         <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1rem', fontWeight: 800, margin: 0, lineHeight: 1.35 }}>{title}</h3>
         <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem', lineHeight: 1.7, margin: 0, flex: 1 }}>{text}</p>
@@ -370,8 +371,10 @@ export default function FormazioneRegionale() {
           </div>
 
           <div className="avvisi-grid">
-            {avvisi.map((a) => (
-              <AvvisoCard key={a.title} {...a} />
+            {avvisi.map((a, i) => (
+              <Reveal key={a.title} delay={(i % 3) * 90}>
+                <AvvisoCard {...a} />
+              </Reveal>
             ))}
           </div>
         </div>

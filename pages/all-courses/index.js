@@ -1,14 +1,19 @@
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { getLenis } from '../../lib/lenis';
 import { buildCourseFamilies } from '../../data/courseFamilies';
 import CourseFamilyCard from '../../components/CourseFamilyCard';
+import CourseSkeleton from '../../components/CourseSkeleton';
+import Reveal from '../../components/Reveal';
 
 import { coursesData } from '../../data/coursesRaw';
+
+const GRID_SPRING = { type: 'spring', stiffness: 500, damping: 40 };
 
 const categoryMeta = {
   'sicurezza-lavoro':    { name: 'Sicurezza sul Lavoro', icon: 'fas fa-hard-hat' },
@@ -49,6 +54,20 @@ export default function AllCourses() {
   const [shopFilter, setShopFilter] = useState(false);
   // Riferimento alla griglia corsi: usato per riportare in cima ai primi corsi al cambio categoria
   const gridRef = useRef(null);
+
+  // Skeleton di cortesia sui cambi di filtro "macro" (categoria/sotto-categoria/shop),
+  // non sulla ricerca testuale: digitare deve restare istantaneo.
+  const [isFiltering, setIsFiltering] = useState(false);
+  const filterMountRef = useRef(true);
+  useEffect(() => {
+    if (filterMountRef.current) {
+      filterMountRef.current = false;
+      return;
+    }
+    setIsFiltering(true);
+    const t = setTimeout(() => setIsFiltering(false), 350);
+    return () => clearTimeout(t);
+  }, [selectedCategory, selectedSub, shopFilter]);
 
   // Riporta in cima alla pagina in modo ISTANTANEO. Lo scroll fluido qui è
   // controproducente: partendo dal fondo, mentre la lista si accorcia il browser
@@ -311,17 +330,40 @@ export default function AllCourses() {
             )}
           </div>
 
-          {filteredFamilies.length === 0 ? (
+          {isFiltering ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+              {Array.from({ length: Math.min(filteredFamilies.length || 6, 6) }).map((_, i) => (
+                <CourseSkeleton key={i} />
+              ))}
+            </div>
+          ) : filteredFamilies.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <p className="text-slate-500 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
               <p className="text-slate-400 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-              {filteredFamilies.map((family) => (
-                <CourseFamilyCard key={family.slug} family={family} />
-              ))}
-            </div>
+            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+              <AnimatePresence mode="popLayout">
+                {filteredFamilies.map((family, i) => (
+                  <motion.div
+                    key={family.slug}
+                    layout
+                    className="h-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      layout: GRID_SPRING,
+                      opacity: { duration: 0.25, ease: 'easeOut', delay: Math.min(i, 8) * 0.03 },
+                    }}
+                  >
+                    <Reveal className="h-full">
+                      <CourseFamilyCard family={family} />
+                    </Reveal>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           )}
         </main>
       </div>

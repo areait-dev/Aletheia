@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
 import CartDrawer from './CartDrawer';
+import ThemeToggle from './ThemeToggle';
 
 interface HeaderProps {
   active?: string;
@@ -13,7 +14,6 @@ type SubDropdownKey = 'regionale' | 'obbligatoria' | 'professionale';
 export default function Header({ active, solid = false }: HeaderProps) {
   const themeCtx = useTheme();
   const theme = themeCtx?.theme;
-  const toggleTheme = themeCtx?.toggleTheme || (() => {});
   const cartCtx = useCart();
   const count = cartCtx?.count ?? 0;
   const cartOpen = cartCtx?.cartOpen ?? false;
@@ -123,29 +123,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
 
         {/* HEADER RIGHT */}
         <div className="header-right">
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            title={theme === 'dark' ? 'Passa a Light Mode' : 'Passa a Dark Mode'}
-            aria-label="Attiva/disattiva dark mode"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              border: 'none',
-              background: 'transparent',
-              cursor: 'pointer',
-              flexShrink: 0,
-            }}
-          >
-            <i
-              className={`far ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}
-              style={{ fontSize: '1.1rem', color: iconColor, transition: 'color 0.3s ease' }}
-            />
-          </button>
+          <ThemeToggle color={iconColor} />
           <div className="cta-dropdown" ref={dropdownRef}>
             <button className="cta-nav-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
               Piattaforma

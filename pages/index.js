@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import NumberCounter from '../components/NumberCounter';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Reveal from '../components/Reveal';
+import HeroParallax from '../components/HeroParallax';
 import { CALENDARIO, CATEGORIE } from '../data/calendario';
 
 /* ─── Dati statici ───────────────────────────────────────── */
@@ -15,6 +17,8 @@ const categorie = [
     title: 'Formazione Finanziata',
     description: 'Percorsi finanziati da fondi regionali, europei e interprofessionali per acquisire nuove competenze, ottenere qualifiche professionali e aumentare le opportunità di inserimento lavorativo.',
     color: '#008C95',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
+    imageAlt: 'Persone che collaborano durante un percorso di formazione finanziata',
   },
   {
     href: '/formazione/obbligatoria',
@@ -23,6 +27,8 @@ const categorie = [
     title: 'Formazione obbligatoria',
     description: 'Corsi obbligatori conformi al D.Lgs. 81/08. Sicurezza sul lavoro, Decreto Attrezzature, Fitosanitario e Sicurezza alimentare. Metti a norma la tua azienda.',
     color: '#008C95',
+    image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=80',
+    imageAlt: 'Lavoratore con casco e dispositivi di sicurezza in cantiere',
   },
   {
     href: '/formazione/professionale-specialistica',
@@ -31,58 +37,64 @@ const categorie = [
     title: 'Formazione professionale',
     description: 'Certificazioni ICDL, corsi con qualifica professionale, formazione continua e percorsi per la Pubblica Amministrazione. I corsi che potenziano il tuo curriculum.',
     color: '#008C95',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+    imageAlt: 'Persona che sostiene un esame di certificazione al computer',
   },
 ];
 
-function CategoriaCard({ href, badge, badgeColor, title, description, color }) {
-  const [hovered, setHovered] = useState(false);
+function CategoriaCard({ href, badge, badgeColor, title, description, image, imageAlt }) {
   return (
     <a
       href={href}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-8 flex flex-col gap-4 no-underline cursor-pointer transition-all duration-300"
-      style={{
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered ? '0 16px 40px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0.04)',
-      }}
+      className="percorso-card group block relative h-[420px] rounded-3xl overflow-hidden no-underline cursor-pointer"
+      style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
     >
-      {/* Badge */}
-      <span style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.35rem',
-        alignSelf: 'flex-start',
-        fontSize: '0.68rem',
-        fontWeight: 800,
-        letterSpacing: '0.07em',
-        textTransform: 'uppercase',
-        color: badgeColor,
-        background: `${badgeColor}18`,
-        padding: '0.25rem 0.75rem',
-        borderRadius: '999px',
-      }}>
-        {badge}
-      </span>
+      {/* Immagine di sfondo */}
+      <img
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/10" />
 
-      {/* Titolo */}
-      <h3 className="text-lg font-bold text-gray-900 dark:text-white m-0 leading-snug">
-        {title}
-      </h3>
+      {/* Contenuto sovrapposto */}
+      <div className="absolute inset-0 z-10 p-7 flex flex-col justify-end h-full text-white">
+        {/* Badge */}
+        <span style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.35rem',
+          alignSelf: 'flex-start',
+          fontSize: '0.68rem',
+          fontWeight: 800,
+          letterSpacing: '0.07em',
+          textTransform: 'uppercase',
+          color: badgeColor,
+          background: 'rgba(255,255,255,0.95)',
+          padding: '0.25rem 0.75rem',
+          borderRadius: '999px',
+          marginBottom: '0.85rem',
+        }}>
+          {badge}
+        </span>
 
-      {/* Descrizione */}
-      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed m-0 flex-1">
-        {description}
-      </p>
+        {/* Titolo */}
+        <h3 className="text-xl font-bold text-white m-0 leading-snug mb-2">
+          {title}
+        </h3>
 
-      {/* Link */}
-      <span style={{
-        display: 'flex', alignItems: 'center', gap: '0.4rem',
-        fontSize: '0.85rem', fontWeight: 700, color,
-        marginTop: '0.25rem',
-      }}>
-        Scopri i corsi
-      </span>
+        {/* Descrizione */}
+        <p className="text-sm text-slate-200 leading-relaxed m-0 mb-4 line-clamp-3">
+          {description}
+        </p>
+
+        {/* Link */}
+        <span className="inline-flex items-center gap-2 self-start text-sm font-bold text-white">
+          Scopri i corsi
+          <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
+      </div>
     </a>
   );
 }
@@ -267,9 +279,10 @@ function CorsiCalendarTabs({ giorni }) {
             {/* Azione */}
             <a
               href={`/all-courses/${corso.slug}`}
-              className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl text-sm transition-colors shrink-0 w-full md:w-auto text-center"
+              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl text-sm transition-colors duration-300 shrink-0 w-full md:w-auto text-center"
             >
               Iscriviti ora
+              <i className="fas fa-arrow-right text-xs transition-transform duration-300 ease-out group-hover/btn:translate-x-1" aria-hidden="true" />
             </a>
           </div>
         ))}
@@ -401,48 +414,50 @@ export default function Home() {
 
       {/* ── 1 · HERO ─────────────────────────────────────── */}
       <section className="hero" style={{ overflow: 'visible' }}>
-        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', borderRadius: 'inherit' }} aria-hidden="true">
-          <div className="hero-deco hero-deco-1"></div>
-          <div className="hero-deco hero-deco-2"></div>
-        </div>
-        <div className="container">
-          <div className="hero-badge">
-            Formiamo. Orientiamo. Inseriamo.
+        <HeroParallax>
+          <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', borderRadius: 'inherit' }} aria-hidden="true">
+            <div className="hero-deco hero-deco-1" data-parallax-fast></div>
+            <div className="hero-deco hero-deco-2" data-parallax-fast></div>
           </div>
-          <h1>
-            Il ponte tra <span>formazione</span> e <span>lavoro</span>
-          </h1>
-          <p>
-            Trasformiamo competenze in occupazione concreta. Dall&apos;orientamento
-            alla formazione, fino all&apos;inserimento lavorativo. Accompagniamo
-            persone e imprese in ogni fase della crescita professionale.
-          </p>
+          <div className="container" data-parallax-slow>
+            <div className="hero-badge">
+              Formiamo. Orientiamo. Inseriamo.
+            </div>
+            <h1>
+              Il ponte tra <span>formazione</span> e <span>lavoro</span>
+            </h1>
+            <p>
+              Trasformiamo competenze in occupazione concreta. Dall&apos;orientamento
+              alla formazione, fino all&apos;inserimento lavorativo. Accompagniamo
+              persone e imprese in ogni fase della crescita professionale.
+            </p>
 
-          {/* Filtro di ricerca - barra unica a capsula */}
-          <HeroSearch />
+            {/* Filtro di ricerca - barra unica a capsula */}
+            <HeroSearch />
 
-          <div className="flex flex-wrap gap-4 justify-center mt-8">
-            <a
-              href="/all-courses"
-              className="inline-flex items-center gap-2 bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-base"
-            >
-              Scopri i corsi
-            </a>
-            <a
-              href="https://aletheia4job.it/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-200 text-base"
-            >
-              <i className="fas fa-briefcase text-sm" aria-hidden="true" />
-              Vedi offerte di lavoro
-            </a>
+            <div className="flex flex-wrap gap-4 justify-center mt-8">
+              <a
+                href="/all-courses"
+                className="inline-flex items-center gap-2 bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-base"
+              >
+                Scopri i corsi
+              </a>
+              <a
+                href="https://aletheia4job.it/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-200 text-base"
+              >
+                <i className="fas fa-briefcase text-sm" aria-hidden="true" />
+                Vedi offerte di lavoro
+              </a>
+            </div>
           </div>
-        </div>
+        </HeroParallax>
       </section>
 
       {/* ── 1b · CALENDARIO CORSI ────────────────────────── */}
-      <section className="pt-14 pb-20 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
+      <Reveal as="section" className="pt-14 pb-20 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
@@ -469,13 +484,13 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── 2 · I NOSTRI CORSI ───────────────────────────── */}
       <section className="py-16 md:py-20 bg-slate-50 dark:bg-dark-bg" aria-labelledby="courses-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center mb-12">
+          <Reveal className="text-center mb-12">
             <span className="inline-block bg-[#008C95]/10 text-[#008C95] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
               I nostri percorsi formativi
             </span>
@@ -485,11 +500,13 @@ export default function Home() {
             <p className="mt-3 text-slate-500 dark:text-gray-300 text-lg max-w-4xl mx-auto">
               Dalla formazione finanziata alle certificazioni professionali, fino ai corsi obbligatori per aziende e lavoratori: sviluppiamo competenze richieste dal mercato e spendibili nel mondo del lavoro.
             </p>
-          </div>
+          </Reveal>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="courses-cat-grid">
-            {categorie.map((cat) => (
-              <CategoriaCard key={cat.href} {...cat} />
+            {categorie.map((cat, i) => (
+              <Reveal key={cat.href} delay={i * 100}>
+                <CategoriaCard {...cat} />
+              </Reveal>
             ))}
           </div>
 
@@ -527,7 +544,7 @@ export default function Home() {
       </section>
 
       {/* ── 3b · COSA FACCIAMO ───────────────────────────── */}
-      <section className="py-20 bg-light dark:bg-dark-bg" aria-labelledby="cosa-facciamo-heading">
+      <Reveal as="section" className="py-20 bg-light dark:bg-dark-bg" aria-labelledby="cosa-facciamo-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
@@ -547,60 +564,64 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
 
             {/* Card Formazione */}
-            <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
-                alt="Aula di formazione professionale"
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-teal-950/95 via-teal-950/70 to-transparent" />
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
-                <p className="font-black tracking-wider text-xs text-teal-300 uppercase mb-2">Sviluppo delle Competenze</p>
-                <h3 className="text-2xl font-bold text-white mb-3">Formazione</h3>
-                <p className="text-slate-200 text-sm leading-relaxed max-w-md">
-                  Progettiamo percorsi formativi che rispondono alle esigenze reali del
-                  mercato del lavoro. Corsi finanziati, formazione obbligatoria, qualifiche
-                  professionali e certificazioni riconosciute.
-                </p>
-                <a
-                  href="/all-courses"
-                  className="mt-5 self-start bg-teal-500 hover:bg-teal-400 text-teal-950 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
-                >
-                  Scopri di più →
-                </a>
+            <Reveal>
+              <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+                <img
+                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
+                  alt="Aula di formazione professionale"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-teal-950/95 via-teal-950/70 to-transparent" />
+                <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
+                  <p className="font-black tracking-wider text-xs text-teal-300 uppercase mb-2">Sviluppo delle Competenze</p>
+                  <h3 className="text-2xl font-bold text-white mb-3">Formazione</h3>
+                  <p className="text-slate-200 text-sm leading-relaxed max-w-md">
+                    Progettiamo percorsi formativi che rispondono alle esigenze reali del
+                    mercato del lavoro. Corsi finanziati, formazione obbligatoria, qualifiche
+                    professionali e certificazioni riconosciute.
+                  </p>
+                  <a
+                    href="/all-courses"
+                    className="mt-5 self-start bg-teal-500 hover:bg-teal-400 text-teal-950 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
+                  >
+                    Scopri di più →
+                  </a>
+                </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Card Orientamento */}
-            <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80"
-                alt="Colloquio di selezione del personale"
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/95 via-indigo-950/70 to-transparent" />
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
-                <p className="font-black tracking-wider text-xs text-indigo-300 uppercase mb-2">Orientamento e inserimento</p>
-                <h3 className="text-2xl font-bold text-white mb-3">Agenzia per il Lavoro</h3>
-                <p className="text-slate-200 text-sm leading-relaxed max-w-md">
-                  Siamo Agenzia per il Lavoro autorizzata. Supportiamo giovani, lavoratori
-                  e aziende nei processi di orientamento e selezione, creando la connessione
-                  perfetta tra profili e imprese.
-                </p>
-                <a
-                  href="/agenzia-per-il-lavoro"
-                  className="mt-5 self-start bg-indigo-500 hover:bg-indigo-400 text-indigo-950 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
-                >
-                  Scopri di più →
-                </a>
+            <Reveal delay={120}>
+              <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+                <img
+                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80"
+                  alt="Colloquio di selezione del personale"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/95 via-indigo-950/70 to-transparent" />
+                <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
+                  <p className="font-black tracking-wider text-xs text-indigo-300 uppercase mb-2">Orientamento e inserimento</p>
+                  <h3 className="text-2xl font-bold text-white mb-3">Agenzia per il Lavoro</h3>
+                  <p className="text-slate-200 text-sm leading-relaxed max-w-md">
+                    Siamo Agenzia per il Lavoro autorizzata. Supportiamo giovani, lavoratori
+                    e aziende nei processi di orientamento e selezione, creando la connessione
+                    perfetta tra profili e imprese.
+                  </p>
+                  <a
+                    href="/agenzia-per-il-lavoro"
+                    className="mt-5 self-start bg-indigo-500 hover:bg-indigo-400 text-indigo-950 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
+                  >
+                    Scopri di più →
+                  </a>
+                </div>
               </div>
-            </div>
+            </Reveal>
 
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── 3e · PARTE DEL GRUPPO ────────────────────────── */}
       <section className="pt-16 pb-20 bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
@@ -632,7 +653,7 @@ export default function Home() {
                   src={logo.src}
                   alt={logo.name}
                   loading="lazy"
-                  className="max-h-10 w-auto object-contain shrink-0 brightness-0 invert opacity-60 hover:opacity-100 transition-all duration-300"
+                  className="max-h-10 w-auto object-contain shrink-0 brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const el = e.currentTarget;
                     el.style.display = 'none';
@@ -670,7 +691,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header sezione */}
-          <div className="flex items-end justify-between mb-10">
+          <Reveal className="flex items-end justify-between mb-10">
             <div>
               <span className="inline-block bg-[#008C95]/10 text-[#008C95] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
                 News
@@ -686,16 +707,17 @@ export default function Home() {
             >
               Vedi tutte le notizie
             </a>
-          </div>
+          </Reveal>
 
           {/* 3 card affiancate - prime tre notizie */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {newsItems.slice(0, 3).map((item) => (
+            {newsItems.slice(0, 3).map((item, i) => (
+              <Reveal key={item.id} delay={i * 100} className="h-full">
               <a
-                key={item.id}
                 href={`/news/${item.slug}`}
                 aria-label={`Leggi l'articolo: ${item.title}`}
-                className="group flex flex-col rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008C95]"
+                className="percorso-card group flex flex-col h-full rounded-2xl overflow-hidden bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008C95]"
+                style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
               >
                 {/* Immagine 16/9 */}
                 <div className="relative aspect-video bg-slate-200 dark:bg-gray-700 overflow-hidden">
@@ -723,6 +745,7 @@ export default function Home() {
                   </span>
                 </div>
               </a>
+              </Reveal>
             ))}
           </div>
 
@@ -748,11 +771,11 @@ export default function Home() {
             {[...clientiLoghi, ...clientiLoghi].map((logo, i) => (
               <div
                 key={i}
-                className="flex items-center justify-center h-12 px-10 shrink-0 text-slate-400 dark:text-white/70"
+                className="group/logo flex items-center justify-center h-12 px-10 shrink-0"
                 aria-hidden={i >= clientiLoghi.length}
               >
-                {/* Placeholder logo - sostituire con <img src="/images/clienti/..." /> */}
-                <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap">
+                {/* Placeholder logo - sostituire con <img src="/images/clienti/..." className="grayscale opacity-70 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 transition-all duration-300" /> */}
+                <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap text-slate-400 dark:text-white/70 grayscale opacity-80 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:text-[#008C95] dark:group-hover/logo:text-[#10B981] transition-all duration-300">
                   <i className={`${logo.icon} text-2xl`} aria-hidden="true" />
                   {logo.name}
                 </span>

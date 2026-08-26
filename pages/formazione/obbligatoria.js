@@ -4,39 +4,48 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { CALENDARIO } from '../../data/calendario';
 import { useTheme } from '../../context/ThemeContext';
+import Reveal from '../../components/Reveal';
 
 const aree = [
   {
     badge: 'D.Lgs. 81/08 · Accordo Stato-Regioni',
     icon: 'fas fa-hard-hat',
     title: 'Sicurezza sul lavoro',
-    text: 'La sicurezza dei lavoratori parte dalla formazione. Il cuore della formazione obbligatoria: tutti i corsi previsti dal D.Lgs. 81/08 per lavoratori, preposti, dirigenti, datori di lavoro e figure della sicurezza aziendale (RSPP, antincendio, primo soccorso).',
+    text: 'Corsi obbligatori per lavoratori, preposti, dirigenti e addetti alle emergenze (RSPP, antincendio, primo soccorso).',
     cta: 'Scopri i corsi sicurezza',
     href: '/all-courses?categoria=sicurezza-lavoro',
+    image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Lavoratore con casco e dispositivi di sicurezza in cantiere',
   },
   {
     badge: 'Accordo Stato-Regioni · Abilitazione obbligatoria',
     icon: 'fas fa-tools',
     title: 'Corsi abilitazione attrezzature di lavoro',
-    text: "Corsi obbligatori per chi utilizza carrelli elevatori, gru, piattaforme aeree (PLE), escavatori e altre attrezzature specifiche. L'Accordo Stato-Regioni impone un'abilitazione standardizzata: senza attestato non si può operare legalmente.",
+    text: 'Corsi per il rilascio del patentino attrezzature: carrelli elevatori, gru, piattaforme aeree (PLE) ed escavatori.',
     cta: 'Scopri i corsi attrezzature',
     href: '/all-courses?categoria=decreto-attrezzature',
+    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Operatore alla guida di un carrello elevatore in magazzino',
   },
   {
     badge: 'Patentino obbligatorio',
     icon: 'fas fa-leaf',
     title: 'Fitosanitario',
-    text: 'Il patentino fitosanitario è obbligatorio per chi acquista, utilizza o distribuisce prodotti fitosanitari professionali.',
+    text: "Corsi per il rilascio e il rinnovo del patentino obbligatorio per l'acquisto, l'utilizzo e la distribuzione di prodotti professionali.",
     cta: 'Scopri i corsi',
     href: '/all-courses?categoria=fitosanitario',
+    image: 'https://images.unsplash.com/photo-1585504198199-20277593b94f?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Trattamento fitosanitario in campo agricolo',
   },
   {
     badge: 'Reg. CE 852/2004 · HACCP',
     icon: 'fas fa-utensils',
     title: 'Sicurezza alimentare',
-    text: 'Obbligatorio per tutti gli operatori del settore alimentare. Il corso HACCP, Hazard Analysis and Critical Control Points, è richiesto per chiunque manipoli, trasformi, conservi o distribuisca alimenti.',
+    text: 'Corsi HACCP per tutti gli operatori del settore alimentare: titolari, manipolatori, addetti alla conservazione e vendita.',
     cta: 'Scopri i corsi',
     href: '/all-courses?categoria=sicurezza-alimentare',
+    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Operatore alimentare al lavoro in cucina professionale',
   },
 ];
 
@@ -48,9 +57,27 @@ const step = [
 ];
 
 const puntiForza = [
-  { icon: 'fas fa-shield-alt', title: 'Attestati validi ovunque', text: "Tutti i corsi sono conformi al D.Lgs. 81/08, all'Accordo Stato-Regioni 2025 e alle normative specifiche di settore. Gli attestati rilasciati sono riconosciuti su tutto il territorio nazionale." },
-  { icon: 'fas fa-sliders-h', title: 'Flessibilità reale', text: 'La formazione si adatta alle esigenze della tua azienda: corsi in aula presso le nostre sedi, in FAD per i percorsi compatibili con la normativa vigente o direttamente presso la sede aziendale.' },
-  { icon: 'fas fa-bell', title: 'Gestione delle scadenze', text: 'Non devi ricordarti da solo quando scade la formazione dei tuoi dipendenti. Alètheia monitora le scadenze e ti supporta nella pianificazione degli aggiornamenti, aiutandoti a mantenere sempre la tua azienda in regola.' },
+  {
+    icon: 'fas fa-shield-alt',
+    title: 'Attestati validi ovunque',
+    text: (
+      <>Corsi pienamente conformi al <strong className="text-slate-900 dark:text-white font-bold">D.Lgs. 81/08</strong> e all&apos;<strong className="text-slate-900 dark:text-white font-bold">Accordo Stato-Regioni</strong>. Rilasciamo attestati ufficiali validi su tutto il territorio nazionale.</>
+    ),
+  },
+  {
+    icon: 'fas fa-sliders-h',
+    title: 'Flessibilità reale',
+    text: (
+      <>Formazione cucita sulle esigenze aziendali: corsi in <strong className="text-slate-900 dark:text-white font-bold">aula</strong> presso le nostre sedi, in <strong className="text-slate-900 dark:text-white font-bold">FAD (online)</strong> o direttamente presso la tua sede.</>
+    ),
+  },
+  {
+    icon: 'fas fa-bell',
+    title: 'Gestione delle scadenze',
+    text: (
+      <>Ci occupiamo noi di tutto. Alètheia <strong className="text-slate-900 dark:text-white font-bold">monitora le scadenze</strong> della formazione dei tuoi dipendenti e pianifica i rinnovi per tenerti sempre in regola.</>
+    ),
+  },
 ];
 
 const faqs = [
@@ -85,43 +112,49 @@ const EMPTY_FORM = {
   nome: '', cognome: '', sede: '', partecipanti: '', privacy: false,
 };
 
-function AreaCard({ badge, icon, title, text, cta, href }) {
+function AreaCard({ badge, icon, title, text, cta, href, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
   return (
     <a
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
       style={{
+        position: 'relative',
         borderRadius: '1.25rem',
         overflow: 'hidden',
         cursor: 'pointer',
         textDecoration: 'none',
         display: 'flex',
-        flexDirection: 'column',
-        transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered ? '0 16px 40px rgba(0,0,0,0.1)' : '0 2px 12px rgba(0,0,0,0.05)',
+        minHeight: '380px',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+        transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
+        boxShadow: hovered ? '0 20px 48px rgba(0,0,0,0.22)' : '0 4px 18px rgba(0,0,0,0.1)',
       }}
     >
-      <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
-      <div style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
-          <span style={{ fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.07em', textTransform: 'uppercase', color: '#008C95', background: 'rgba(0,140,149,0.08)', padding: '0.25rem 0.6rem', borderRadius: '999px' }}>
-            {badge}
-          </span>
-          <div style={{ width: '44px', height: '44px', minWidth: '44px', borderRadius: '12px', background: hovered ? '#008C95' : 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s ease' }}>
-            <i className={icon} style={{ fontSize: '1.2rem', color: hovered ? '#fff' : '#008C95' }}></i>
-          </div>
+      <img
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+          transform: hovered ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.5s ease',
+        }}
+      />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.3) 100%)' }} />
+
+      <div style={{ position: 'relative', zIndex: 1, padding: '1.6rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, justifyContent: 'flex-start' }}>
+        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <i className={icon} style={{ fontSize: '1.05rem', color: '#6EE7B7' }}></i>
         </div>
-        <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, lineHeight: 1.3 }}>{title}</h3>
-        <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: 0, flex: 1 }}>{text}</p>
-        <div className="border-slate-100 dark:border-[rgba(255,255,255,0.08)]" style={{ display: 'flex', alignItems: 'center', paddingTop: '0.75rem', borderTop: '1px solid' }}>
-          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem' }}></i>
-          </span>
-        </div>
+        <span style={{ fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.07em', textTransform: 'uppercase', color: '#6EE7B7', width: 'fit-content' }}>
+          {badge}
+        </span>
+        <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, lineHeight: 1.3, color: '#fff' }}>{title}</h3>
+        <p style={{ fontSize: '0.83rem', lineHeight: 1.65, margin: 0, color: 'rgba(255,255,255,0.85)' }}>{text}</p>
+        <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: 'auto' }}>
+          {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem' }}></i>
+        </span>
       </div>
     </a>
   );
@@ -450,7 +483,7 @@ export default function FormazioneObbligatoria() {
         @media (max-width: 1000px) { .step-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 560px) { .step-grid { grid-template-columns: 1fr; } }
 
-        .valore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .valore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: stretch; }
         @media (max-width: 900px) { .valore-grid { grid-template-columns: 1fr; } }
 
         .obb-form-row { grid-template-columns: 1fr 1fr; }
@@ -516,27 +549,27 @@ export default function FormazioneObbligatoria() {
             La formazione obbligatoria: un requisito per lavorare in sicurezza
           </h2>
           <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '2rem' }}>
-            Il D.Lgs. 81/08, il Testo Unico sulla Salute e Sicurezza sul Lavoro, obbliga ogni datore di lavoro a formare tutti i lavoratori, in ogni settore e a prescindere dalle dimensioni aziendali. La mancata formazione espone a sanzioni fino a €6.400 per lavoratore e, in caso di infortunio, aggrava la responsabilità penale del datore di lavoro. La formazione obbligatoria non è un costo da minimizzare. È una responsabilità da gestire bene, con un partner affidabile, attestati riconosciuti e tempi certi.
+            Il <strong className="text-slate-900 dark:text-white font-bold">D.Lgs. 81/08</strong> obbliga ogni datore di lavoro a formare i propri dipendenti, a prescindere dalle dimensioni aziendali. La mancata formazione espone a <strong className="text-slate-900 dark:text-white font-bold">pesanti sanzioni finanziarie e penali</strong>. Affidati a un partner sicuro per garantire attestati riconosciuti e tempi certi.
           </p>
 
-          <div className="evidence-grid" style={{ marginBottom: '3rem' }}>
+          <div className="evidence-grid items-stretch" style={{ marginBottom: '3rem' }}>
             {[
-              { icon: 'fas fa-triangle-exclamation', color: '#D97706', bg: 'rgba(217,119,6,0.1)', headline: 'Fino a €6.400', text: 'di sanzione per ogni lavoratore non formato, a carico del datore di lavoro' },
-              { icon: 'fas fa-file-lines', color: '#008C95', bg: 'rgba(0,140,149,0.1)', headline: 'Valore nazionale', text: 'attestati validi su tutto il territorio italiano' },
-              { icon: 'fas fa-circle-check', color: '#10B981', bg: 'rgba(16,185,129,0.1)', headline: 'Sempre aggiornati', text: "corsi conformi all'Accordo Stato-Regioni 2025" },
+              { icon: 'fas fa-triangle-exclamation', color: '#D97706', bg: 'rgba(217,119,6,0.1)', borderColor: '#D97706', headline: 'Fino a €6.400', text: 'di sanzione per ogni lavoratore non formato, a carico del datore di lavoro' },
+              { icon: 'fas fa-file-lines', color: '#008C95', bg: 'rgba(0,140,149,0.1)', borderColor: '#0F172A', headline: 'Valore nazionale', text: 'attestati validi e riconosciuti su tutto il territorio italiano' },
+              { icon: 'fas fa-circle-check', color: '#10B981', bg: 'rgba(16,185,129,0.1)', borderColor: '#0F172A', headline: 'Sempre aggiornati', text: "corsi e programmi costantemente conformi all'Accordo Stato-Regioni" },
             ].map((k) => (
               <div
                 key={k.headline}
-                className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
-                style={{ borderRadius: '1rem', overflow: 'hidden' }}
+                className="h-full bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+                style={{ borderRadius: '1rem', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
               >
-                <div style={{ height: '3px', background: k.color }} />
-                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div style={{ height: '4px', background: k.borderColor }} />
+                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}>
                   <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: k.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className={k.icon} style={{ color: k.color, fontSize: '1.3rem' }}></i>
                   </div>
                   <span className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '0.02em' }}>{k.headline}</span>
-                  <span className="text-slate-600 dark:text-gray-300" style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: '0.85rem', lineHeight: 1.6 }}>{k.text}</span>
+                  <span className="text-slate-600 dark:text-gray-300 text-base" style={{ lineHeight: 1.6 }}>{k.text}</span>
                 </div>
               </div>
             ))}
@@ -558,8 +591,10 @@ export default function FormazioneObbligatoria() {
           </div>
 
           <div className="aree-grid">
-            {aree.map((a) => (
-              <AreaCard key={a.title} {...a} />
+            {aree.map((a, i) => (
+              <Reveal key={a.title} delay={(i % 3) * 90}>
+                <AreaCard {...a} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -603,36 +638,35 @@ export default function FormazioneObbligatoria() {
           </div>
 
           <div className="valore-grid" style={{ marginBottom: '3rem' }}>
-            {puntiForza.map((p) => (
-              <div key={p.title} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className={p.icon} style={{ color: '#008C95', fontSize: '1.15rem' }}></i>
+            {puntiForza.map((p, i) => (
+              <Reveal key={p.title} delay={(i % 4) * 80} className="h-full">
+                <div className="h-full bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] shadow-sm" style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', gap: '0.85rem' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className={p.icon} style={{ color: '#008C95', fontSize: '1.15rem' }}></i>
+                  </div>
+                  <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0 }}>{p.title}</h3>
+                  <p className="text-slate-600 dark:text-gray-300 text-base" style={{ lineHeight: 1.7, margin: 0 }}>{p.text}</p>
                 </div>
-                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>{p.title}</h3>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: 0 }}>{p.text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
-          {/* Box ecosistema Promotergroup - dark mode invariato, light mode adattato */}
+          {/* Box ecosistema Promotergroup - banner premium scuro, fisso in entrambi i temi */}
           <div
+            className="bg-slate-900"
             style={{
-              background: isDark
-                ? 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)'
-                : 'linear-gradient(135deg, #EFF6F6 0%, #E0F2E9 100%)',
-              border: isDark ? 'none' : '1px solid #D1E7E9',
               borderRadius: '1.25rem', padding: '2.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center',
             }}
           >
-            <div style={{ width: '56px', height: '56px', minWidth: '56px', borderRadius: '14px', background: isDark ? 'rgba(16,185,129,0.15)' : 'rgba(0,140,149,0.1)', border: isDark ? '1px solid rgba(16,185,129,0.3)' : '1px solid rgba(0,140,149,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <i className="fas fa-diagram-project" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.5rem' }}></i>
+            <div style={{ width: '56px', height: '56px', minWidth: '56px', borderRadius: '14px', background: 'rgba(110,231,183,0.15)', border: '1px solid rgba(110,231,183,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <i className="fas fa-diagram-project" style={{ color: '#6EE7B7', fontSize: '1.5rem' }}></i>
             </div>
             <div style={{ flex: 1, minWidth: '260px' }}>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: isDark ? '#fff' : '#0F172A', margin: '0 0 0.6rem' }}>
+              <h3 className="text-white" style={{ fontSize: '1.15rem', fontWeight: 800, margin: '0 0 0.6rem' }}>
                 Una rete di competenze al servizio della tua azienda
               </h3>
-              <p style={{ fontSize: '0.9rem', color: isDark ? 'rgba(255,255,255,0.65)' : '#475569', lineHeight: 1.75, margin: 0 }}>
-                Alètheia fa parte di Promotergroup, un ecosistema di aziende specializzate che gestisce in modo integrato ogni esigenza di formazione e sicurezza sul lavoro. Oltre ai corsi obbligatori, puoi contare sull&apos;area Sicurezza sul Lavoro Promotergroup per consulenza, prevenzione e adempimenti normativi. Un unico interlocutore, competenze coordinate e tempi e costi ottimizzati.
+              <p className="text-slate-300" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
+                Alètheia fa parte di <strong className="text-white font-bold">Promotergroup</strong>, un ecosistema di aziende specializzate nella gestione integrata di formazione e sicurezza sul lavoro. Un unico interlocutore per garantirti <strong className="text-white font-bold">competenze coordinate, tempi certi e costi ottimizzati</strong>.
               </p>
             </div>
           </div>

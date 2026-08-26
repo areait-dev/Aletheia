@@ -1,9 +1,14 @@
 import Head from 'next/head';
 import Footer from '../components/Footer';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import { ALL_NEWS, formatDate } from '../lib/newsData';
+import JobSkeleton from '../components/JobSkeleton';
+import Reveal from '../components/Reveal';
+
+const GRID_SPRING = { type: 'spring', stiffness: 500, damping: 40 };
 
 // Solo le news rilevanti per l'Agenzia per il Lavoro (tag 'apl')
 const aplNews = ALL_NEWS.filter((n) => n.tags?.includes('apl'));
@@ -28,6 +33,7 @@ function NewsCard({ news }) {
         transition: 'transform 0.25s ease, box-shadow 0.25s ease',
         display: 'flex',
         flexDirection: 'column',
+        height: '100%',
       }}
     >
       {/* Immagine */}
@@ -108,6 +114,12 @@ function NewsCard({ news }) {
 
 export default function AgenziaPerIlLavoro({ jobs = [] }) {
   const [hoveredPanel, setHoveredPanel] = useState(null);
+  // Skeleton di cortesia durante l'inizializzazione della pagina (evita reflow al mount).
+  const [jobsLoading, setJobsLoading] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setJobsLoading(false), 450);
+    return () => clearTimeout(t);
+  }, []);
 
   const candidatiExtra = [
     'Migliaia di offerte di lavoro aggiornate',
@@ -634,67 +646,69 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             </div>
 
             {/* Right: offerte live da aletheia4job.it */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {jobs.length > 0 ? (
-                jobs.map((job) => (
-                  <a
-                    key={job.id}
-                    href={job.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
-                    style={{
-                      borderRadius: '1rem',
-                      padding: '1.25rem 1.5rem',
-                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                      gap: '1rem',
-                      textDecoration: 'none',
-                      transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-                      cursor: 'pointer',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-3px)';
-                      e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.09)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
-                  >
-                    <div>
-                      <p className="text-slate-900 dark:text-white" style={{ margin: '0 0 0.35rem', fontWeight: 800, fontSize: '0.95rem' }}>{job.title}</p>
-                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                        {job.location && (
-                          <span className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                            <i className="fas fa-map-marker-alt" style={{ color: '#008C95', fontSize: '0.65rem' }}></i>
-                            {job.location}
-                          </span>
-                        )}
-                        {job.contractType && (
-                          <span className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                            <i className="fas fa-clock" style={{ color: '#008C95', fontSize: '0.65rem' }}></i>
-                            {job.contractType}
-                          </span>
-                        )}
+            {jobsLoading ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {Array.from({ length: 3 }).map((_, i) => <JobSkeleton key={i} />)}
+              </div>
+            ) : jobs.length > 0 ? (
+              <motion.div layout style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <AnimatePresence mode="popLayout">
+                  {jobs.map((job, i) => (
+                    <Reveal key={job.id} delay={i * 80}>
+                    <motion.a
+                      layout
+                      href={job.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+                      exit={{ opacity: 0 }}
+                      transition={{ layout: GRID_SPRING }}
+                      style={{
+                        borderRadius: '1rem',
+                        padding: '1.25rem 1.5rem',
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        gap: '1rem',
+                        textDecoration: 'none',
+                        cursor: 'pointer',
+                      }}
+                      whileHover={{ y: -3, boxShadow: '0 10px 30px rgba(0,0,0,0.09)' }}
+                    >
+                      <div>
+                        <p className="text-slate-900 dark:text-white" style={{ margin: '0 0 0.35rem', fontWeight: 800, fontSize: '0.95rem' }}>{job.title}</p>
+                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                          {job.location && (
+                            <span className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                              <i className="fas fa-map-marker-alt" style={{ color: '#008C95', fontSize: '0.65rem' }}></i>
+                              {job.location}
+                            </span>
+                          )}
+                          {job.contractType && (
+                            <span className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                              <i className="fas fa-clock" style={{ color: '#008C95', fontSize: '0.65rem' }}></i>
+                              {job.contractType}
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <i className="fas fa-arrow-right" style={{ color: '#008C95', fontSize: '0.85rem', flexShrink: 0 }}></i>
-                  </a>
-                ))
-              ) : (
-                <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
-                  Nessuna offerta disponibile al momento. Consulta tutte le posizioni su{' '}
-                  <a
-                    href="https://aletheia4job.it/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}
-                  >
-                    aletheia4job.it
-                  </a>.
-                </p>
-              )}
-            </div>
+                      <i className="fas fa-arrow-right" style={{ color: '#008C95', fontSize: '0.85rem', flexShrink: 0 }}></i>
+                    </motion.a>
+                    </Reveal>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            ) : (
+              <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
+                Nessuna offerta disponibile al momento. Consulta tutte le posizioni su{' '}
+                <a
+                  href="https://aletheia4job.it/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}
+                >
+                  aletheia4job.it
+                </a>.
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -730,8 +744,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '1.5rem',
             }}>
-              {aplNews.slice(0, 3).map((news) => (
-                <NewsCard key={news.id} news={news} />
+              {aplNews.slice(0, 3).map((news, i) => (
+                <Reveal key={news.id} delay={i * 100} className="h-full">
+                  <NewsCard news={news} />
+                </Reveal>
               ))}
             </div>
           </div>

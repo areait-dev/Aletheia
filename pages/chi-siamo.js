@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import { useState } from 'react';
 import Header from '../components/Header';
 import { getLenis } from '../lib/lenis';
+import Reveal from '../components/Reveal';
 
 // Scroll fluido (Lenis) verso la sezione Qualità e Certificazioni,
 // con fallback nativo se Lenis non è ancora inizializzato.
@@ -17,6 +18,35 @@ function scrollToCertificazioni() {
   }
 }
 
+function AccreditamentoCard({ logo, logoAlt, title, code, logoScale }) {
+  return (
+    <article className="group h-full bg-white dark:bg-dark-card rounded-xl p-6 sm:p-7 flex flex-col transition-all duration-300 shadow-sm border border-slate-200 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-1 hover:shadow-md">
+      {/* Logo */}
+      <div className="w-full h-20 flex items-center justify-start">
+        <img
+          src={logo}
+          alt={logoAlt}
+          loading="lazy"
+          className="h-full max-w-[70%] object-contain object-left"
+          style={logoScale ? { transform: `scale(${logoScale})`, transformOrigin: 'left center' } : undefined}
+        />
+      </div>
+
+      {/* Titolo */}
+      <h3 className="text-lg font-bold text-[#0B2E45] dark:text-white leading-snug mt-6 mb-3">
+        {title}
+      </h3>
+
+      {/* Badge accreditamento */}
+      {code && (
+        <span className="inline-block self-start mt-auto text-xs font-bold uppercase tracking-wide text-[#0B4A52] dark:text-teal-100 bg-[#0B4A52]/8 dark:bg-teal-100/10 px-3 py-1.5 rounded-lg">
+          {code}
+        </span>
+      )}
+    </article>
+  );
+}
+
 function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraLinks }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -24,15 +54,16 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
     <>
       <div
         onClick={() => setShowModal(true)}
-        className="bg-white dark:bg-dark-card rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 shadow-sm border border-slate-200 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-1 hover:shadow-lg hover:border-teal-500 dark:hover:border-[#10B981] group"
+        className="h-full bg-white dark:bg-dark-card rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-2 hover:shadow-lg flex flex-col items-center group"
       >
-        <div className="w-16 h-16 bg-teal-50 dark:bg-teal-900/20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl text-teal-600 dark:text-[#10B981] transition-colors duration-300 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/40">
+        <div className="w-16 h-16 bg-teal-50 dark:bg-teal-900/20 rounded-full flex items-center justify-center mb-4 text-3xl text-teal-600 dark:text-[#10B981] transition-colors duration-300 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/40">
           <i className={icon}></i>
         </div>
-        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">{title}</h3>
-        <p className="text-sm text-slate-500 dark:text-gray-400 mb-3">{subtitle}</p>
-        <span className="text-xs text-teal-600 dark:text-[#10B981] inline-flex items-center gap-1 font-semibold">
-          Clicca per dettagli <i className="fas fa-arrow-right" style={{ fontSize: '9px' }}></i>
+        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">{title}</h3>
+        <p className="text-sm text-slate-500 dark:text-gray-400 mb-5 flex-1">{subtitle}</p>
+        <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#0B4A52] dark:text-teal-200 border border-slate-200 dark:border-[rgba(255,255,255,0.15)] rounded-full px-4 py-2 transition-all duration-300 group-hover:border-teal-400 dark:group-hover:border-teal-300/40">
+          Scopri i dettagli
+          <i className="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1" style={{ fontSize: '9px' }}></i>
         </span>
       </div>
 
@@ -334,19 +365,20 @@ export default function ChiSiamo() {
               { accent: 'bg-indigo-500', titolo: 'Certificazioni riconosciute', desc: 'Percorsi qualificanti e certificazioni spendibili nel mercato del lavoro e nei concorsi pubblici. Siamo anche Test Center AICA.' },
               { accent: 'bg-teal-500', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
               { accent: 'bg-indigo-500', titolo: 'La forza di un gruppo', desc: 'Alètheia è l’ente di formazione di Promotergroup S.p.A., un ecosistema che integra formazione, consulenza aziendale, salute e sicurezza, comunicazione. Scegliere Alètheia significa accedere a una rete di competenze che va ben oltre la formazione.' },
-            ].map((card) => (
-              <div
-                key={card.titolo}
-                className="group bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-              >
-                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 flex items-center gap-2 normal-case tracking-normal">
-                  <span className={`w-1.5 h-4 rounded-full inline-block ${card.accent}`} />
-                  {card.titolo}
-                </h3>
-                <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
-                  {card.desc}
-                </p>
-              </div>
+            ].map((card, i) => (
+              <Reveal key={card.titolo} delay={(i % 4) * 80}>
+                <div
+                  className="group bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                >
+                  <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 flex items-center gap-2 normal-case tracking-normal">
+                    <span className={`w-1.5 h-4 rounded-full inline-block ${card.accent}`} />
+                    {card.titolo}
+                  </h3>
+                  <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
+                    {card.desc}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -372,12 +404,14 @@ export default function ChiSiamo() {
               { n: '04', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Sanità e welfare', desc: 'Percorsi per operatori socio-sanitari, assistenti familiari e operatori socio-assistenziali.' },
               { n: '05', accent: 'text-teal-500/30 dark:text-teal-400/20', titolo: 'Competenze digitali', desc: 'Certificazioni ICDL e percorsi AICA per scuola, imprese e pubblica amministrazione.' },
               { n: '06', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Pubblica Amministrazione', desc: 'Percorsi su misura per enti locali, assessorati e operatori del settore pubblico. Formazione che rispetta i tempi e le esigenze della PA.' },
-            ].map((s) => (
-              <div key={s.n}>
-                <span className={`text-4xl font-black ${s.accent} mb-2 block tracking-tight`}>{s.n}</span>
-                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 normal-case tracking-normal">{s.titolo}</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{s.desc}</p>
-              </div>
+            ].map((s, i) => (
+              <Reveal key={s.n} delay={(i % 3) * 90}>
+                <div>
+                  <span className={`text-4xl font-black ${s.accent} mb-2 block tracking-tight`}>{s.n}</span>
+                  <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 normal-case tracking-normal">{s.titolo}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{s.desc}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -401,48 +435,58 @@ export default function ChiSiamo() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <CertCard
-              icon="fas fa-certificate"
-              title="ISO 9001"
-              subtitle="Sistemi di gestione per la qualità"
-              description="La certificazione ISO 9001:2015 attesta che Alètheia s.r.l. adotta un sistema di gestione della qualità conforme agli standard internazionali, garantendo processi efficienti, miglioramento continuo e soddisfazione del cliente."
-              benefits={['Servizi di formazione e consulenza di qualità', 'Processi standardizzati e tracciabili', 'Miglioramento continuo delle performance']}
-              pdfUrl="/pdf/certificati/ALTH2572Q1901_-certificate-release_ISO9001_20220408.pdf"
-            />
-            <CertCard
-              icon="fas fa-venus-mars"
-              title="UNI PDR 125:2022"
-              subtitle="Parità di genere"
-              description="La prassi di riferimento UNI/PdR 125:2022 certifica l'impegno di Alètheia s.r.l. per la parità di genere, garantendo politiche aziendali inclusive e trasparenti, riconosciute dal PNRR."
-              benefits={['Pari opportunità di carriera', 'Trasparenza retributiva', 'Ambienti di lavoro inclusivi', 'Agevolazioni fiscali e premialità nei bandi']}
-              pdfUrl="/pdf/certificati/2023_ALETHEIA_paritdigenere.pdf"
-              extraLinks={[{ label: 'Politica Aziendale', url: '/pdf/certificati/ALL1--POLITICA-PDR-125-Aletheia.pdf' }]}
-            />
-            <CertCard
-              icon="fas fa-school"
-              title="UNI ISO 21001:2019"
-              subtitle="Sistema di Gestione per Organizzazioni Educative"
-              description="Certificazione specifica per le organizzazioni educative, garantisce che Alètheia s.r.l. eroga servizi formativi di alta qualità, centrati sull'apprendimento e il miglioramento continuo."
-              benefits={['Processi formativi standardizzati', 'Focalizzazione sui bisogni dei discenti', "Valutazione dell'efficacia dell'apprendimento"]}
-              pdfUrl="/pdf/certificati/ALTH2572A2002_certificate-release_ISO21001_20240322.pdf"
-            />
-            <CertCard
-              icon="fas fa-chalkboard-user"
-              title="UNI ISO 29993:2019"
-              subtitle="Servizi di formazione professionale non formale"
-              description="La norma definisce i requisiti per i servizi di formazione professionale non formale, garantendo trasparenza, coerenza e qualità nell'offerta formativa."
-              benefits={["Trasparenza nell'offerta formativa", 'Qualità dei contenuti e dei materiali', 'Gestione efficace dei processi di erogazione']}
-              pdfUrl="/pdf/certificati/ALTH2572A2003_certificate-release_ISO29993_20240322.pdf"
-            />
-            <CertCard
-              icon="fas fa-clipboard-list"
-              title="UNI ISO 29992:2019"
-              subtitle="Valutazione dei risultati dell'apprendimento"
-              description="La norma garantisce l'adozione di metodi rigorosi per la valutazione dei risultati dell'apprendimento, assicurando l'efficacia dei percorsi formativi."
-              benefits={["Valutazione oggettiva delle competenze", "Monitoraggio continuo dell'apprendimento", 'Certificazione delle competenze acquisite']}
-              pdfUrl="/pdf/certificati/ALTH2572A2404_certificate-release_ISO29992_20240322.pdf"
-            />
+          <div className="flex flex-wrap justify-center gap-5">
+            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+              <CertCard
+                icon="fas fa-certificate"
+                title="ISO 9001"
+                subtitle="Sistemi di gestione per la qualità"
+                description="La certificazione ISO 9001:2015 attesta che Alètheia s.r.l. adotta un sistema di gestione della qualità conforme agli standard internazionali, garantendo processi efficienti, miglioramento continuo e soddisfazione del cliente."
+                benefits={['Servizi di formazione e consulenza di qualità', 'Processi standardizzati e tracciabili', 'Miglioramento continuo delle performance']}
+                pdfUrl="/pdf/certificati/ALTH2572Q1901_-certificate-release_ISO9001_20220408.pdf"
+              />
+            </div>
+            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+              <CertCard
+                icon="fas fa-venus-mars"
+                title="UNI PDR 125:2022"
+                subtitle="Parità di genere"
+                description="La prassi di riferimento UNI/PdR 125:2022 certifica l'impegno di Alètheia s.r.l. per la parità di genere, garantendo politiche aziendali inclusive e trasparenti, riconosciute dal PNRR."
+                benefits={['Pari opportunità di carriera', 'Trasparenza retributiva', 'Ambienti di lavoro inclusivi', 'Agevolazioni fiscali e premialità nei bandi']}
+                pdfUrl="/pdf/certificati/2023_ALETHEIA_paritdigenere.pdf"
+                extraLinks={[{ label: 'Politica Aziendale', url: '/pdf/certificati/ALL1--POLITICA-PDR-125-Aletheia.pdf' }]}
+              />
+            </div>
+            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+              <CertCard
+                icon="fas fa-school"
+                title="UNI ISO 21001:2019"
+                subtitle="Sistema di Gestione per Organizzazioni Educative"
+                description="Certificazione specifica per le organizzazioni educative, garantisce che Alètheia s.r.l. eroga servizi formativi di alta qualità, centrati sull'apprendimento e il miglioramento continuo."
+                benefits={['Processi formativi standardizzati', 'Focalizzazione sui bisogni dei discenti', "Valutazione dell'efficacia dell'apprendimento"]}
+                pdfUrl="/pdf/certificati/ALTH2572A2002_certificate-release_ISO21001_20240322.pdf"
+              />
+            </div>
+            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+              <CertCard
+                icon="fas fa-chalkboard-user"
+                title="UNI ISO 29993:2019"
+                subtitle="Servizi di formazione professionale non formale"
+                description="La norma definisce i requisiti per i servizi di formazione professionale non formale, garantendo trasparenza, coerenza e qualità nell'offerta formativa."
+                benefits={["Trasparenza nell'offerta formativa", 'Qualità dei contenuti e dei materiali', 'Gestione efficace dei processi di erogazione']}
+                pdfUrl="/pdf/certificati/ALTH2572A2003_certificate-release_ISO29993_20240322.pdf"
+              />
+            </div>
+            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+              <CertCard
+                icon="fas fa-clipboard-list"
+                title="UNI ISO 29992:2019"
+                subtitle="Valutazione dei risultati dell'apprendimento"
+                description="La norma garantisce l'adozione di metodi rigorosi per la valutazione dei risultati dell'apprendimento, assicurando l'efficacia dei percorsi formativi."
+                benefits={["Valutazione oggettiva delle competenze", "Monitoraggio continuo dell'apprendimento", 'Certificazione delle competenze acquisite']}
+                pdfUrl="/pdf/certificati/ALTH2572A2404_certificate-release_ISO29992_20240322.pdf"
+              />
+            </div>
           </div>
 
           {/* Accreditamenti istituzionali */}
@@ -456,81 +500,31 @@ export default function ChiSiamo() {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm">
-                <div className="h-14 flex items-center mb-4">
-                  <img
-                    src="/images/accreditamenti/regione.svg"
-                    alt="Regione Siciliana"
-                    loading="lazy"
-                    className="max-h-full w-auto object-contain"
-                  />
-                </div>
-                <h4 className="text-slate-900 dark:text-white font-bold text-base mb-2">
-                  Ente di formazione accreditato Regione Siciliana
-                </h4>
-                <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
-                  DDG n. 78 del 20/01/2017. Accreditamento per l&rsquo;erogazione di Orientamento,
-                  Formazione Continua, Formazione a Distanza (FAD), Formazione Specialistica
-                  post-diploma e post-laurea, Sostegno all&rsquo;inserimento lavorativo.
-                </p>
-              </div>
-              <div className="bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm">
-                <div className="h-14 flex items-center mb-4">
-                  <img
-                    src="/images/accreditamenti/image-removebg-preview.png"
-                    alt="Ministero del Lavoro e delle Politiche Sociali"
-                    loading="lazy"
-                    className="max-h-full w-auto object-contain"
-                  />
-                </div>
-                <h4 className="text-slate-900 dark:text-white font-bold text-base mb-2">
-                  Agenzia per il lavoro autorizzata
-                </h4>
-                <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
-                  Iscrizione all&rsquo;Albo delle Agenzie per il Lavoro del Ministero del Lavoro
-                  e delle Politiche Sociali e autorizzazione Regione Siciliana (DDS n. 1100 del
-                  26/04/2019). Accreditata per i servizi per il lavoro generali e obbligatori
-                  (SGO) e per i servizi per il lavoro specialistici facoltativi (SSF).
-                </p>
-              </div>
-              <div className="bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm">
-                <div className="h-14 flex items-center mb-4">
-                  <img
-                    src="/images/accreditamenti/aica.jpg"
-                    alt="AICA"
-                    loading="lazy"
-                    className="max-h-full w-auto object-contain"
-                  />
-                </div>
-                <h4 className="text-slate-900 dark:text-white font-bold text-base mb-2">
-                  Test Center AICA - ICDL (AKHF0001)
-                </h4>
-                <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
-                  Sede ufficiale per certificazioni digitali riconosciute in oltre 150 Paesi.
-                  Esami disponibili presso la sede di Vittoria. Un punto di riferimento nel
-                  territorio ibleo.
-                </p>
-              </div>
-              <div className="bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm">
-                <div className="h-20 flex items-center mb-4">
-                  <img
-                    src="/images/accreditamenti/image-removebg-preview (1).png"
-                    alt="ECM - Educazione Continua in Medicina"
-                    loading="lazy"
-                    className="w-full object-contain"
-                    style={{ maxHeight: '80px' }}
-                  />
-                </div>
-                <h4 className="text-slate-900 dark:text-white font-bold text-base mb-2">
-                  Provider ECM - Educazione Continua in Medicina
-                </h4>
-                <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
-                  Alètheia è provider accreditato ECM per l&rsquo;erogazione di percorsi di
-                  formazione continua riconosciuti dal Ministero della Salute, destinati a
-                  professionisti sanitari e operatori del settore socio-sanitario.
-                </p>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+              <AccreditamentoCard
+                logo="/images/accreditamenti/regione.svg"
+                logoAlt="Regione Siciliana"
+                title="Ente di Formazione accreditato Regione Siciliana"
+                code="DDG n. 78 del 20/01/2017"
+              />
+              <AccreditamentoCard
+                logo="/images/accreditamenti/image-removebg-preview.png"
+                logoAlt="Ministero del Lavoro e delle Politiche Sociali"
+                title="Agenzia per il Lavoro autorizzata"
+                code="DDS n. 1100 del 26/04/2019"
+              />
+              <AccreditamentoCard
+                logo="/images/accreditamenti/aica.jpg"
+                logoAlt="AICA"
+                title="Test Center AICA – ICDL"
+                code="Codice AKHF0001"
+              />
+              <AccreditamentoCard
+                logo="/images/accreditamenti/Logo-ECM.png"
+                logoAlt="ECM - Educazione Continua in Medicina"
+                title="Provider ECM – Educazione Continua in Medicina"
+                code="Provider Accreditato Ministero della Salute"
+              />
             </div>
           </div>
         </div>
