@@ -295,9 +295,13 @@ export default function Header({ active, solid = false }: HeaderProps) {
           aria-controls="mainNav"
           style={{ zIndex: 200 }}
         >
-          <span style={{ background: menuOpen ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : iconColor }}></span>
-          <span style={{ background: menuOpen ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : iconColor }}></span>
-          <span style={{ background: menuOpen ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : iconColor }}></span>
+          {/* A menu aperto la "X" sta sempre sopra l'overlay scuro a schermo intero
+              (stesso gradiente in entrambi i temi, vedi .navbar), quindi va sempre
+              chiara — non dipende da `theme` come nello stato chiuso, dove invece
+              l'icona sta sopra l'header e ne segue lo sfondo variabile. */}
+          <span style={{ background: menuOpen ? '#FFFFFF' : iconColor }}></span>
+          <span style={{ background: menuOpen ? '#FFFFFF' : iconColor }}></span>
+          <span style={{ background: menuOpen ? '#FFFFFF' : iconColor }}></span>
         </button>
       </div>
 

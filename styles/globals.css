@@ -2465,6 +2465,33 @@ html.dark .elearning p {
     justify-content: center;
   }
 
+  /* Il menu mobile a schermo intero deve restare sempre leggibile (testo bianco,
+     hover/active in verde brand) indipendentemente dallo stato dell'header sotto
+     di esso: .scrolled (header "solidificato" desktop, color:#0F172A) e
+     .site-header--solid/.menu-is-open (già !important) hanno selettori con
+     specificità/priorità più alta di quelli sopra e altrimenti vincerebbero,
+     rendendo il testo scuro/illeggibile su questo sfondo scuro — capitava ad
+     es. scrollando la pagina prima di aprire l'hamburger. */
+  .navbar-open a {
+    color: var(--white) !important;
+  }
+  .navbar-open a:hover,
+  .navbar-open a:focus-visible,
+  .navbar-open a.active {
+    color: #6EE7B7 !important;
+  }
+  .navbar-open .navbar-formazione-sublinks a {
+    color: rgba(255,255,255,0.65) !important;
+  }
+  .navbar-open .navbar-formazione-sublinks a:hover,
+  .navbar-open .navbar-formazione-sublinks a:focus-visible,
+  .navbar-open .navbar-formazione-sublinks a:active {
+    color: #6EE7B7 !important;
+  }
+  .navbar-open .navbar-formazione-calendar {
+    color: #6EE7B7 !important;
+  }
+
   .header-right {
     display: none;
   }
