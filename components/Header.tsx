@@ -12,6 +12,45 @@ interface HeaderProps {
 
 type SubDropdownKey = 'regionale' | 'obbligatoria' | 'professionale';
 
+// Gruppi del mega-menu "Formazione": unica fonte dati condivisa tra il mega-menu
+// desktop (colonne 1-3) e l'accordion mobile dentro .navbar (vedi sotto) — sotto i
+// 992px il mega-menu passa a position:static e finisce dietro l'overlay fisso del
+// menu mobile (non cliccabile), quindi su mobile serve una resa alternativa inline.
+const FORMAZIONE_GROUPS: { key: SubDropdownKey; href: string; title: string; items: { label: string; href: string }[] }[] = [
+  {
+    key: 'regionale',
+    href: '/formazione/regionale-fse',
+    title: 'Formazione Finanziata',
+    items: [
+      { label: 'Formazione Regionale', href: 'https://aletheiasrl.vercel.app/formazione/regionale' },
+      { label: 'Fondi Interprofessionali', href: '/formazione/fondi-interprofessionali' },
+      { label: 'Fondo Nuove Competenze', href: '/formazione/fondo-nuove-competenze' },
+    ],
+  },
+  {
+    key: 'obbligatoria',
+    href: '/formazione/obbligatoria',
+    title: 'Formazione Obbligatoria',
+    items: [
+      { label: 'Sicurezza sui luoghi di lavoro', href: '/all-courses?categoria=sicurezza-lavoro' },
+      { label: 'Decreto attrezzature', href: '/all-courses?categoria=decreto-attrezzature' },
+      { label: 'Fitosanitario', href: '/all-courses?categoria=fitosanitario' },
+      { label: 'Sicurezza alimentare', href: '/all-courses?categoria=sicurezza-alimentare' },
+    ],
+  },
+  {
+    key: 'professionale',
+    href: '/formazione/professionale-specialistica',
+    title: 'Formazione Professionale e PA',
+    items: [
+      { label: 'Certificazioni Informatiche', href: '/all-courses?categoria=certificazioni-informatiche' },
+      { label: 'Corsi Qualificati', href: '/all-courses?categoria=certificazione' },
+      { label: 'ECM', href: '/formazione/ecm' },
+      { label: 'Corsi per la PA', href: '/formazione/corsi-pa' },
+    ],
+  },
+];
+
 export default function Header({ active, solid = false }: HeaderProps) {
   const themeCtx = useTheme();
   const theme = themeCtx?.theme;
@@ -22,6 +61,10 @@ export default function Header({ active, solid = false }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [formazioneOpen, setFormazioneOpen] = useState(false);
+  // Solo mobile: "Formazione" apre una seconda schermata dedicata dentro il menu
+  // a tutto schermo (con pulsante "Torna al menu"), invece di un accordion inline
+  // che allungherebbe troppo il menu principale.
+  const [mobileFormazioneScreen, setMobileFormazioneScreen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -102,27 +145,97 @@ export default function Header({ active, solid = false }: HeaderProps) {
         </div>
 
         {/* NAV */}
-        <nav className={`navbar${menuOpen ? ' navbar-open' : ''}`} id="mainNav">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={active === link.href ? 'active' : ''}
-              aria-expanded={link.label === 'Formazione' ? formazioneOpen : undefined}
-              aria-haspopup={link.label === 'Formazione' ? 'true' : undefined}
-              onClick={(e) => {
-                if (link.label === 'Formazione') {
-                  e.preventDefault();
-                  setFormazioneOpen(!formazioneOpen);
-                } else {
-                  setMenuOpen(false);
-                  setFormazioneOpen(false);
-                }
-              }}
+        <nav
+          className={`navbar${menuOpen ? ' navbar-open' : ''}${mobileFormazioneScreen ? ' navbar-screen-formazione' : ''}`}
+          id="mainNav"
+        >
+          {/* Schermata principale: su desktop è la barra orizzontale normale (i
+              wrapper spariscono via display:contents), su mobile è la lista di
+              link a tutto schermo. Nascosta su mobile mentre è attiva la
+              sotto-schermata "Formazione" (vedi .navbar-screen-formazione in CSS). */}
+          <div className="navbar-screen-main">
+            {links.map((link) => {
+              if (link.label === 'Formazione') {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className={active === link.href ? 'active' : ''}
+                    aria-expanded={formazioneOpen}
+                    aria-haspopup="true"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (menuOpen) {
+                        // Mobile: apre la sotto-schermata dedicata invece del mega-menu
+                        // desktop (che sotto i 992px finirebbe nascosto dietro l'overlay).
+                        setMobileFormazioneScreen(true);
+                      } else {
+                        setFormazioneOpen(!formazioneOpen);
+                      }
+                    }}
+                  >
+                    {link.label}
+                    <i className="fas fa-chevron-right navbar-formazione-caret" aria-hidden="true"></i>
+                  </a>
+                );
+              }
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={active === link.href ? 'active' : ''}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setFormazioneOpen(false);
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Sotto-schermata "Formazione": solo mobile, sostituisce la lista
+              principale invece di espandersi in un accordion (che allungherebbe
+              troppo il menu). Nascosta di default via CSS, mostrata solo sotto i
+              768px quando .navbar-screen-formazione è attiva. */}
+          <div className="navbar-screen-formazione-panel">
+            <button
+              type="button"
+              className="navbar-back-btn"
+              onClick={() => setMobileFormazioneScreen(false)}
             >
-              {link.label}
+              <i className="fas fa-arrow-left" aria-hidden="true"></i> Torna al menu
+            </button>
+            {FORMAZIONE_GROUPS.map((group) => (
+              <div key={group.key} className="navbar-formazione-group">
+                <a
+                  href={group.href}
+                  onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
+                >
+                  {group.title}
+                </a>
+                <div className="navbar-formazione-sublinks">
+                  {group.items.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <a
+              href="/calendario-corsi"
+              className="navbar-formazione-calendar"
+              onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
+            >
+              Calendario Corsi <i className="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
-          ))}
+          </div>
         </nav>
 
         {/* HEADER RIGHT */}
@@ -173,7 +286,10 @@ export default function Header({ active, solid = false }: HeaderProps) {
         {/* HAMBURGER */}
         <button
           className={`hamburger${menuOpen ? ' hamburger-open' : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => {
+            setMenuOpen(!menuOpen);
+            setMobileFormazioneScreen(false);
+          }}
           aria-label={menuOpen ? 'Chiudi menu' : 'Apri menu'}
           aria-expanded={menuOpen}
           aria-controls="mainNav"
@@ -189,91 +305,34 @@ export default function Header({ active, solid = false }: HeaderProps) {
       {formazioneOpen && (
         <div className="mega-menu-dropdown">
           <div className="mega-menu-container">
-            {/* Col 1: Formazione Finanziata */}
-            <div className="mega-col-links">
-              <div className="sub-dropdown-wrapper">
-                <div className="sub-dropdown-toggle-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <a
-                    href="/formazione/regionale-fse"
-                    onClick={() => setFormazioneOpen(false)}
-                    className="text-slate-900 dark:text-white"
-                    style={{ fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem' }}
-                  >
-                    Formazione Finanziata
-                  </a>
-                  <button
-                    className="sub-dropdown-toggle-icon text-[#008C95] dark:text-[#10B981]"
-                    onClick={() => toggleSubDropdown('regionale')}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem' }}
-                  >
-                    ▾
-                  </button>
-                </div>
-                <div className={`sub-dropdown-menu${subDropdowns.regionale ? ' open' : ''}`}>
-                  <a href="https://aletheiasrl.vercel.app/formazione/regionale" onClick={() => setFormazioneOpen(false)}>Formazione Regionale</a>
-                  <a href="/formazione/fondi-interprofessionali" onClick={() => setFormazioneOpen(false)}>Fondi Interprofessionali</a>
-                  <a href="/formazione/fondo-nuove-competenze" onClick={() => setFormazioneOpen(false)}>Fondo Nuove Competenze</a>
-                </div>
-              </div>
-            </div>
-
-            {/* Col 2: Formazione Obbligatoria */}
-            <div className="mega-col-links">
-              <div className="sub-dropdown-wrapper">
-                <div className="sub-dropdown-toggle-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <a
-                    href="/formazione/obbligatoria"
-                    onClick={() => setFormazioneOpen(false)}
-                    className="text-slate-900 dark:text-white"
-                    style={{ fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem' }}
-                  >
-                    Formazione Obbligatoria
-                  </a>
-                  <button
-                    className="sub-dropdown-toggle-icon text-[#008C95] dark:text-[#10B981]"
-                    onClick={() => toggleSubDropdown('obbligatoria')}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem' }}
-                  >
-                    ▾
-                  </button>
-                </div>
-                <div className={`sub-dropdown-menu${subDropdowns.obbligatoria ? ' open' : ''}`}>
-                  <a href="/all-courses?categoria=sicurezza-lavoro" onClick={() => setFormazioneOpen(false)}>Sicurezza sui luoghi di lavoro</a>
-                  <a href="/all-courses?categoria=decreto-attrezzature" onClick={() => setFormazioneOpen(false)}>Decreto attrezzature</a>
-                  <a href="/all-courses?categoria=fitosanitario" onClick={() => setFormazioneOpen(false)}>Fitosanitario</a>
-                  <a href="/all-courses?categoria=sicurezza-alimentare" onClick={() => setFormazioneOpen(false)}>Sicurezza alimentare</a>
+            {FORMAZIONE_GROUPS.map((group) => (
+              <div key={group.key} className="mega-col-links">
+                <div className="sub-dropdown-wrapper">
+                  <div className="sub-dropdown-toggle-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <a
+                      href={group.href}
+                      onClick={() => setFormazioneOpen(false)}
+                      className="text-slate-900 dark:text-white"
+                      style={{ fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem' }}
+                    >
+                      {group.title}
+                    </a>
+                    <button
+                      className="sub-dropdown-toggle-icon text-[#008C95] dark:text-[#10B981]"
+                      onClick={() => toggleSubDropdown(group.key)}
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem' }}
+                    >
+                      ▾
+                    </button>
+                  </div>
+                  <div className={`sub-dropdown-menu${subDropdowns[group.key] ? ' open' : ''}`}>
+                    {group.items.map((item) => (
+                      <a key={item.href} href={item.href} onClick={() => setFormazioneOpen(false)}>{item.label}</a>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Col 3: Formazione Professionale */}
-            <div className="mega-col-links">
-              <div className="sub-dropdown-wrapper">
-                <div className="sub-dropdown-toggle-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <a
-                    href="/formazione/professionale-specialistica"
-                    onClick={() => setFormazioneOpen(false)}
-                    className="text-slate-900 dark:text-white"
-                    style={{ fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem' }}
-                  >
-                    Formazione Professionale e PA
-                  </a>
-                  <button
-                    className="sub-dropdown-toggle-icon text-[#008C95] dark:text-[#10B981]"
-                    onClick={() => toggleSubDropdown('professionale')}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem' }}
-                  >
-                    ▾
-                  </button>
-                </div>
-                <div className={`sub-dropdown-menu${subDropdowns.professionale ? ' open' : ''}`}>
-                  <a href="/all-courses?categoria=certificazioni-informatiche" onClick={() => setFormazioneOpen(false)}>Certificazioni Informatiche</a>
-                  <a href="/all-courses?categoria=certificazione" onClick={() => setFormazioneOpen(false)}>Corsi Qualificati</a>
-                  <a href="/formazione/ecm" onClick={() => setFormazioneOpen(false)}>ECM</a>
-                  <a href="/formazione/corsi-pa" onClick={() => setFormazioneOpen(false)}>Corsi per la PA</a>
-                </div>
-              </div>
-            </div>
+            ))}
 
             {/* Col 4: Calendario */}
             <div className="mega-col-info">

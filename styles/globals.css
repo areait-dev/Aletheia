@@ -333,6 +333,33 @@ html.dark .site-header.scrolled .header-phone {
   margin-right: auto;
 }
 
+/* Wrapper della lista principale dentro .navbar: su desktop deve sparire dal
+   flusso (i link restano flex-item diretti di .navbar, layout identico a
+   prima); su mobile diventa la lista verticale a schermo intero (vedi @media
+   più sotto). */
+.navbar-screen-main {
+  display: contents;
+}
+
+/* Sotto-schermata "Formazione": solo mobile (drill-down con "Torna al menu"
+   invece di un accordion, che allungherebbe troppo il menu principale).
+   Nascosta di default su desktop, dove "Formazione" apre invece il mega-menu
+   sotto l'header. */
+.navbar-screen-formazione-panel,
+.navbar-back-btn {
+  display: none;
+}
+
+/* Freccetta indicatore dropdown accanto a "Formazione": visibile sia su
+   desktop (mega-menu) sia su mobile (apre la sotto-schermata), un po'
+   staccata dal testo. */
+.navbar-formazione-caret {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
 .navbar a {
   color: rgba(255,255,255,0.85);
   font-weight: 500;
@@ -2289,13 +2316,17 @@ html.dark .elearning p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.97);
+    /* Stesso gradiente scuro del brand usato in hero/page-hero, non più nero pieno */
+    background: linear-gradient(160deg, #0F172A 0%, #0a4f54 60%, #003134 100%);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
+    gap: 1.75rem;
     z-index: 100;
     margin: 0;
+    padding: 6.5rem 1.5rem 3rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .navbar-open {
@@ -2307,9 +2338,131 @@ html.dark .elearning p {
     color: var(--white);
   }
 
+  /* Hover/focus/active nel colore brand: #6EE7B7 (già usato per "Calendario Corsi"
+     nel pannello Formazione qui sotto) invece del teal pieno #008C95, che contro
+     questo sfondo scuro (navy → teal → verde scuro) ha un contrasto troppo basso. */
+  .navbar a:hover,
+  .navbar a:focus-visible,
+  .navbar a.active {
+    color: #6EE7B7;
+  }
+
   .navbar a::after {
-    background: var(--white);
+    background: #6EE7B7;
     bottom: -4px;
+  }
+
+  /* Schermata principale: lista verticale a schermo intero. Nascosta quando è
+     attiva la sotto-schermata "Formazione" (.navbar-screen-formazione). */
+  .navbar-screen-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    width: 100%;
+  }
+
+  .navbar.navbar-screen-formazione .navbar-screen-main {
+    display: none;
+  }
+
+  /* Voce "Formazione": su mobile apre una sotto-schermata dedicata (drill-down
+     con "Torna al menu") invece del mega-menu desktop, che sotto i 992px
+     diventa position:static e finirebbe dietro l'overlay fisso di .navbar —
+     non raggiungibile dal tocco. Un accordion inline è stato scartato perché
+     con 3 gruppi e ~13 link allungherebbe troppo il menu principale. */
+  .navbar-formazione-caret {
+    display: inline-block;
+    font-size: 0.75rem;
+    margin-left: 0.55rem;
+  }
+
+  .navbar-screen-formazione-panel {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .navbar.navbar-screen-formazione .navbar-screen-formazione-panel {
+    display: flex;
+  }
+
+  .navbar-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.92rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .navbar-back-btn:hover,
+  .navbar-back-btn:active {
+    color: var(--white);
+  }
+
+  .navbar-formazione-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .navbar-formazione-group > a {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .navbar-formazione-group > a:hover,
+  .navbar-formazione-group > a:focus-visible {
+    color: #6EE7B7;
+  }
+
+  .navbar-formazione-sublinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navbar-formazione-sublinks a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+  }
+
+  .navbar-formazione-sublinks a:hover,
+  .navbar-formazione-sublinks a:focus-visible,
+  .navbar-formazione-sublinks a:active {
+    color: #6EE7B7;
+  }
+
+  .navbar-formazione-calendar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #6EE7B7;
+    text-decoration: none;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    width: 100%;
+    justify-content: center;
   }
 
   .header-right {
