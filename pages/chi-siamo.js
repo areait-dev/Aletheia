@@ -1,7 +1,9 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Footer from '../components/Footer';
 import { useState } from 'react';
 import Header from '../components/Header';
+import SeoHead from '../components/SeoHead';
 import { getLenis } from '../lib/lenis';
 import Reveal from '../components/Reveal';
 
@@ -22,12 +24,14 @@ function AccreditamentoCard({ logo, logoAlt, title, code, logoScale }) {
   return (
     <article className="group h-full bg-white dark:bg-dark-card rounded-xl p-6 sm:p-7 flex flex-col transition-all duration-300 shadow-sm border border-slate-200 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-1 hover:shadow-md">
       {/* Logo */}
-      <div className="w-full h-20 flex items-center justify-start">
-        <img
+      <div className="relative w-full h-20 max-w-[70%] flex items-center justify-start">
+        <Image
           src={logo}
           alt={logoAlt}
+          fill
+          sizes="200px"
           loading="lazy"
-          className="h-full max-w-[70%] object-contain object-left"
+          className="object-contain object-left"
           style={logoScale ? { transform: `scale(${logoScale})`, transformOrigin: 'left center' } : undefined}
         />
       </div>
@@ -185,6 +189,11 @@ export default function ChiSiamo() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <SeoHead
+          title="Chi Siamo - Alètheia Srl"
+          description="Alètheia Srl: mission, vision e valori di un ente di formazione professionale e Agenzia per il Lavoro attivo dal 2005 a Vittoria (RG), parte del gruppo Promotergroup."
+          url="/chi-siamo"
+        />
       </Head>
 
       <Header active="/chi-siamo" />

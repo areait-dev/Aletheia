@@ -1085,7 +1085,6 @@ export default function CourseDetail() {
   const router = useRouter();
   const { slug } = router.query;
   const { addToCart, setCartOpen } = useCart();
-  const [showForm, setShowForm] = useState(false);
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'moduli' - indipendente da livello/tipo, non si resetta al cambio
   const [selectedLivelloKey, setSelectedLivelloKey] = useState(null);
   const [selectedTipo, setSelectedTipo] = useState('corso');
@@ -1652,32 +1651,6 @@ export default function CourseDetail() {
         </section>
       )}
 
-      {/* BOTTONE RICHIEDI INFO */}
-      <div style={{ position: 'fixed', right: '2rem', bottom: '2rem', zIndex: 100 }}>
-        <button onClick={() => setShowForm(true)} style={{ backgroundColor: '#008C95', color: 'white', border: 'none', padding: '1rem 1.5rem', borderRadius: '50px', fontWeight: '600', fontSize: '0.9rem', cursor: 'pointer', transition: 'all 0.3s ease', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.2)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#006B73'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#008C95'}>
-          Richiedi informazioni
-        </button>
-      </div>
-
-      {/* MODAL FORM */}
-      {showForm && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowForm(false)}>
-          <div className="bg-white dark:bg-dark-card" style={{ borderRadius: '1rem', maxWidth: '500px', width: '90%', padding: '2rem', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setShowForm(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', fontSize: '1.25rem', cursor: 'pointer', color: '#94A3B8' }}><i className="fas fa-times"></i></button>
-            <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem' }}>Richiedi informazioni</h3>
-            <p className="text-slate-500 dark:text-gray-300" style={{ marginBottom: '1.5rem' }}>Compila il modulo per ricevere maggiori dettagli su <strong>{course.title}</strong></p>
-            <input type="text" placeholder="Nome e Cognome" className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white border border-slate-200 dark:border-gray-600 placeholder-slate-400 dark:placeholder-gray-400" style={{ width: '100%', padding: '0.75rem', marginBottom: '1rem', borderRadius: '0.5rem' }} />
-            <input type="email" placeholder="Email" className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white border border-slate-200 dark:border-gray-600 placeholder-slate-400 dark:placeholder-gray-400" style={{ width: '100%', padding: '0.75rem', marginBottom: '1rem', borderRadius: '0.5rem' }} />
-            <input type="tel" placeholder="Telefono" className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white border border-slate-200 dark:border-gray-600 placeholder-slate-400 dark:placeholder-gray-400" style={{ width: '100%', padding: '0.75rem', marginBottom: '1rem', borderRadius: '0.5rem' }} />
-            <textarea placeholder="Messaggio (opzionale)" rows="3" className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white border border-slate-200 dark:border-gray-600 placeholder-slate-400 dark:placeholder-gray-400" style={{ width: '100%', padding: '0.75rem', marginBottom: '1.5rem', borderRadius: '0.5rem', resize: 'vertical' }}></textarea>
-            <button style={{ width: '100%', backgroundColor: '#008C95', color: 'white', padding: '0.85rem', border: 'none', borderRadius: '9999px', fontWeight: '600', cursor: 'pointer' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#006B73'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#008C95'}>
-              Invia richiesta
-            </button>
-          </div>
-        </div>
-      )}
       <Footer />
     </>
   );

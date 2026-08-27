@@ -18,5 +18,11 @@ npm-debug.log*
 # misc
 .DS_Store
 
+# screenshot di test Playwright temporanei
+/test-screenshots/
+
+# log domande chatbot senza risposta (dati inseriti dagli utenti, non versionare)
+/data/chatbot-log/
+
 # typescript
 *.tsbuildinfo

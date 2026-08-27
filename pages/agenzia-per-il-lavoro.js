@@ -1,9 +1,11 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
+import SeoHead from '../components/SeoHead';
 import { ALL_NEWS, formatDate } from '../lib/newsData';
 import JobSkeleton from '../components/JobSkeleton';
 import Reveal from '../components/Reveal';
@@ -142,14 +144,15 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
       <Head>
         <title>Agenzia per il Lavoro - Alètheia Srl</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="Alètheia Srl - Agenzia per il Lavoro autorizzata. Servizi di somministrazione, ricerca e selezione, outplacement e formazione professionale in Sicilia."
-        />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+        <SeoHead
+          title="Agenzia per il Lavoro - Alètheia Srl"
+          description="Alètheia Srl - Agenzia per il Lavoro autorizzata. Servizi di somministrazione, ricerca e selezione, outplacement e formazione professionale in Sicilia."
+          url="/agenzia-per-il-lavoro"
         />
       </Head>
 
@@ -287,11 +290,13 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             onMouseLeave={() => setHoveredPanel(null)}
             onClick={() => setHoveredPanel((p) => (p === 'candidati' ? null : 'candidati'))}
           >
-            <img
+            <Image
               className="panel-bg"
               src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?auto=format&fit=crop&w=1200&q=80"
               alt=""
               aria-hidden="true"
+              fill
+              sizes="50vw"
             />
             <div
               className="panel-overlay"
@@ -391,11 +396,13 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             onMouseLeave={() => setHoveredPanel(null)}
             onClick={() => setHoveredPanel((p) => (p === 'aziende' ? null : 'aziende'))}
           >
-            <img
+            <Image
               className="panel-bg"
               src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
               alt=""
               aria-hidden="true"
+              fill
+              sizes="50vw"
             />
             <div
               className="panel-overlay"
@@ -574,16 +581,19 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             {/* Colonna immagine */}
             <div style={{ flex: '2 1 260px', paddingTop: '2rem' }}>
               <div style={{
+                position: 'relative',
                 borderRadius: '1.5rem',
                 overflow: 'hidden',
                 aspectRatio: '4/3',
                 boxShadow: '0 24px 60px rgba(0,0,0,0.13)',
               }}>
-                <img
+                <Image
                   src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Team Alètheia al lavoro"
+                  fill
+                  sizes="(min-width: 768px) 40vw, 100vw"
                   loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
             </div>

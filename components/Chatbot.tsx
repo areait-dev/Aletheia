@@ -95,15 +95,42 @@ function useFAQ(): Faq[] {
   return FAQ_GENERALE;
 }
 
+// Invia in modo silenzioso (fire-and-forget) le domande senza risposta all'endpoint
+// di log: un fallimento qui non deve mai interrompere l'esperienza dell'utente.
+function logUnanswered(question: string, page: string) {
+  try {
+    fetch('/api/chatbot-unanswered', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question, page }),
+    }).catch(() => {});
+  } catch {
+    // no-op: il logging non è mai bloccante
+  }
+}
+
+const CHATBOT_OPENED_KEY = 'chatbot-opened';
+
 export default function Chatbot() {
   const { theme } = useTheme() || { theme: 'light' };
   const { cartOpen } = useCart() || {};
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Faq | null>(null);
   const [notPertinent, setNotPertinent] = useState(false);
   const [query, setQuery] = useState('');
   const [btnHover, setBtnHover] = useState(false);
   const [chipHover, setChipHover] = useState<number | null>(null);
+  // true se il bot è già stato aperto in questa sessione (sessionStorage): in tal
+  // caso l'animazione breathe/glow del pulsante non deve più ripartire.
+  const [hasOpenedOnce, setHasOpenedOnce] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      return sessionStorage.getItem(CHATBOT_OPENED_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
   const bodyRef = useRef<HTMLDivElement>(null);
   const faqs = useFAQ();
 
@@ -118,20 +145,30 @@ export default function Chatbot() {
     } else {
       setSelected(null);
       setNotPertinent(true);
+      logUnanswered(q, router.pathname);
     }
     setQuery('');
   };
 
   useEffect(() => {
-    if (selected && bodyRef.current) {
+    if ((selected || notPertinent) && bodyRef.current) {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
-  }, [selected]);
+  }, [selected, notPertinent]);
 
   const handleOpen = () => {
     setOpen(true);
     setSelected(null);
     setNotPertinent(false);
+    if (!hasOpenedOnce) {
+      setHasOpenedOnce(true);
+      try {
+        sessionStorage.setItem(CHATBOT_OPENED_KEY, '1');
+      } catch {
+        // sessionStorage non disponibile (es. privacy mode): l'animazione
+        // semplicemente ripartirà alla prossima apertura, non è un problema critico.
+      }
+    }
   };
 
   const handleClose = () => {
@@ -145,8 +182,27 @@ export default function Chatbot() {
   if (cartOpen) return null;
 
   return (
-    <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', pointerEvents: 'none' }}>
+    <div className="chatbot-root">
       <style jsx>{`
+        .chatbot-root {
+          position: fixed;
+          bottom: 2rem;
+          right: 2rem;
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          pointer-events: none;
+        }
+        /* Su tablet/mobile il bottone flottante ha più probabilità di finire sopra
+           contenuti di pagina (card, tab, CTA) proprio nel primo schermo utile:
+           lo rimpiccioliamo e lo avviciniamo all'angolo per ridurre l'area coperta. */
+        @media (max-width: 1024px) {
+          .chatbot-root {
+            bottom: 0.75rem;
+            right: 0.75rem;
+          }
+        }
         @keyframes chatbot-breathe {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.16); }
@@ -166,6 +222,30 @@ export default function Chatbot() {
           animation: none;
           transform: rotate(90deg) scale(0.9);
           opacity: 0;
+        }
+        .chatbot-toggle-mark.no-breathe {
+          animation: none;
+        }
+        .chatbot-toggle-size {
+          width: 56px;
+          height: 56px;
+        }
+        .chatbot-icon-size {
+          width: 26px;
+          height: 26px;
+        }
+        /* Bottone più piccolo su tablet/mobile: riduce l'area che può finire sopra
+           contenuti di pagina nel primo schermo utile (vedi .chatbot-root sopra). */
+        @media (max-width: 1024px) {
+          .chatbot-toggle-size {
+            /* 44px = target minimo consigliato WCAG 2.5.5 per elementi touch */
+            width: 44px;
+            height: 44px;
+          }
+          .chatbot-icon-size {
+            width: 20px;
+            height: 20px;
+          }
         }
         .chatbot-toggle-close {
           transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
@@ -246,14 +326,75 @@ export default function Chatbot() {
                   maxWidth: '90%',
                   lineHeight: 1.6,
                 }}>
-                  Posso rispondere solo a domande su corsi, formazione e servizi Alètheia (agenzia per il lavoro). Per questa richiesta contattaci direttamente.
-                  <div style={{ marginTop: '0.6rem', borderTop: theme === 'dark' ? '1px solid #4B5563' : '1px solid #F1F5F9', paddingTop: '0.5rem' }}>
-                    <a href="/#contatti" style={{ fontSize: '0.76rem', color: theme === 'dark' ? '#10B981' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>
-                      Contattaci per saperne di più →
+                  Non ho trovato una risposta precisa a questa domanda. Puoi contattarci direttamente:
+                  <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
+                    <a
+                      href="tel:+390932862613"
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                        background: theme === 'dark' ? '#10B981' : '#008C95',
+                        color: '#fff', fontWeight: 700, fontSize: '0.76rem',
+                        padding: '0.5rem 0.9rem', borderRadius: '9999px', textDecoration: 'none',
+                      }}
+                    >
+                      <i className="fas fa-phone" style={{ fontSize: '0.7rem' }}></i>
+                      Chiamaci
+                    </a>
+                    <a
+                      href="mailto:info@aletheiasrl.it"
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                        background: 'transparent',
+                        border: theme === 'dark' ? '1px solid #10B981' : '1px solid #008C95',
+                        color: theme === 'dark' ? '#10B981' : '#008C95',
+                        fontWeight: 700, fontSize: '0.76rem',
+                        padding: '0.5rem 0.9rem', borderRadius: '9999px', textDecoration: 'none',
+                      }}
+                    >
+                      <i className="fas fa-envelope" style={{ fontSize: '0.7rem' }}></i>
+                      Scrivici
                     </a>
                   </div>
                 </div>
               </div>
+
+              {faqs.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                  <p style={{ margin: '0.25rem 0 0', fontSize: '0.74rem', fontWeight: 600, color: theme === 'dark' ? '#9CA3AF' : '#64748B' }}>
+                    Forse ti interessa anche:
+                  </p>
+                  {faqs.slice(0, 3).map((faq, i) => (
+                    <button
+                      key={faq.q}
+                      onClick={() => {
+                        setSelected(faq);
+                        setNotPertinent(false);
+                      }}
+                      onMouseEnter={() => setChipHover(i)}
+                      onMouseLeave={() => setChipHover(null)}
+                      style={{
+                        background: chipHover === i
+                          ? (theme === 'dark' ? '#1e3a3a' : '#F0FDFA')
+                          : (theme === 'dark' ? '#374151' : '#fff'),
+                        border: chipHover === i ? '1px solid #10B981' : (theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0'),
+                        borderRadius: '999px',
+                        padding: '0.55rem 0.9rem',
+                        fontSize: '0.78rem',
+                        fontWeight: 600,
+                        color: chipHover === i ? '#10B981' : (theme === 'dark' ? '#E2E8F0' : '#0F172A'),
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        width: '100%',
+                        transition: 'all 0.2s',
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {faq.q}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               <button
                 onClick={() => setNotPertinent(false)}
                 style={{
@@ -402,10 +543,9 @@ export default function Chatbot() {
         onMouseEnter={() => setBtnHover(true)}
         onMouseLeave={() => setBtnHover(false)}
         aria-label={open ? 'Chiudi assistente' : 'Apri assistente FAQ'}
-        className={!open ? 'chatbot-toggle-btn' : ''}
+        className={`chatbot-toggle-size${!open && !hasOpenedOnce ? ' chatbot-toggle-btn' : ''}`}
         style={{
           position: 'relative',
-          width: '56px', height: '56px',
           borderRadius: '50%',
           background: theme === 'dark' ? 'linear-gradient(135deg, #10B981, #34D399)' : 'linear-gradient(135deg, #008C95, #10B981)',
           border: 'none',
@@ -420,12 +560,12 @@ export default function Chatbot() {
           pointerEvents: 'auto',
         } as CSSProperties}
       >
-        <div style={{ position: 'relative', width: '26px', height: '26px' }}>
+        <div className="chatbot-icon-size" style={{ position: 'relative' }}>
           <img
             src="/images/logo/pittogramma-white.png"
             alt=""
             aria-hidden="true"
-            className={`chatbot-toggle-mark${open ? ' is-open' : ''}`}
+            className={`chatbot-toggle-mark${open ? ' is-open' : ''}${hasOpenedOnce ? ' no-breathe' : ''}`}
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }}
           />
           <i

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const certificazioni = [
   { name: 'ISO 9001', src: '/images/certificazioni/Logo_9001_IT-removebg-preview.png', srcDark: '/images/certificazioni_dark/Logo 9001 IT.png' },
   { name: 'ISO 14001', src: '/images/certificazioni/Logo_14001_IT-removebg-preview.png', srcDark: '/images/certificazioni_dark/Logo 14001 IT.png' },
@@ -105,16 +107,20 @@ export default function Footer() {
               {certificazioni.map((cert) => (
                 <div key={cert.name}>
                   {/* Light mode */}
-                  <img
+                  <Image
                     src={cert.src}
                     alt={cert.name}
+                    width={140}
+                    height={95}
                     loading="lazy"
                     className="block dark:hidden h-[95px] w-auto object-contain"
                   />
                   {/* Dark mode - loghi dedicati */}
-                  <img
+                  <Image
                     src={cert.srcDark}
                     alt={cert.name}
+                    width={140}
+                    height={95}
                     loading="lazy"
                     className="hidden dark:block h-[95px] w-auto object-contain"
                   />

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
 import CartDrawer from './CartDrawer';
@@ -89,9 +90,12 @@ export default function Header({ active, solid = false }: HeaderProps) {
         {/* LOGO */}
         <div className="logo">
           <a href="/" aria-label="Vai alla homepage" style={{ display: 'inline-flex' }}>
-            <img
+            <Image
               src={theme === 'dark' ? '/logo-white.png' : '/logo.png'}
               alt="Alètheia"
+              width={200}
+              height={80}
+              priority
               style={{ height: '80px', width: 'auto' }}
             />
           </a>

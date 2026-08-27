@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SeoHead from '../components/SeoHead';
 import { darkTokens } from '../lib/darkTokens';
 
 const SEDI = [
@@ -69,6 +70,15 @@ const MOTIVI = [
   'Altro',
 ];
 
+// Unica fonte per title/description della pagina: usati sia nel <title> reale
+// (che SeoHead non gestisce) sia passati a SeoHead per description/OG/Twitter,
+// così il testo non è scritto due volte nel markup.
+const PAGE_TITLE = 'Contatti - Alètheia Srl';
+const PAGE_DESCRIPTION = "Contatta Alètheia Srl: sede a Vittoria (RG), telefono +39 0932 862613, email info@aletheiasrl.it. Formazione professionale e agenzia per il lavoro in Sicilia.";
+
+// Telefono opzionale: se valorizzato deve contenere solo cifre, spazi, + o -
+const PHONE_RE = /^[0-9\s+-]+$/;
+
 export default function Contatti() {
   const [activeSede, setActiveSede] = useState(0);
   const [form, setForm] = useState({
@@ -83,12 +93,15 @@ export default function Contatti() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState({});
   const [hoveredBtn, setHoveredBtn] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     const e = {};
     if (!form.nome.trim()) e.nome = 'Campo obbligatorio';
     if (!form.cognome.trim()) e.cognome = 'Campo obbligatorio';
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Email non valida';
+    if (form.telefono.trim() && !PHONE_RE.test(form.telefono)) e.telefono = 'Usa solo numeri, spazi, + o -';
+    if (!form.motivo) e.motivo = "Seleziona l'oggetto della richiesta";
     if (!form.messaggio.trim()) e.messaggio = 'Campo obbligatorio';
     if (!form.privacy) e.privacy = 'Devi accettare la privacy policy';
     return e;
@@ -104,17 +117,23 @@ export default function Contatti() {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    setSent(true);
+    // Invio ancora simulato (in attesa del backend headless): il breve delay rende
+    // realistico lo stato di caricamento e resterà utile quando ci sarà una vera chiamata API.
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSent(true);
+    }, 500);
   };
 
   return (
     <>
       <Head>
-        <title>Contatti - Alètheia Srl</title>
+        <title>{PAGE_TITLE}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Contatta Alètheia Srl: sede a Vittoria (RG), telefono +39 0932 862613, email info@aletheiasrl.it. Formazione professionale e agenzia per il lavoro in Sicilia." />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <SeoHead title={PAGE_TITLE} description={PAGE_DESCRIPTION} url="/contatti" />
       </Head>
 
       <Header active="/contatti" />
@@ -195,7 +214,28 @@ export default function Contatti() {
           gap: 0.3rem;
         }
         .field textarea { resize: vertical; min-height: 130px; }
-        .field select { appearance: none; cursor: pointer; }
+        .field select {
+          appearance: none;
+          cursor: pointer;
+          /* spazio a destra per non far sovrapporre il testo lungo delle option alla freccia */
+          padding-right: 2.5rem;
+        }
+        .field-select-wrap { position: relative; }
+        .field-select-wrap::after {
+          content: '\f078';
+          font-family: 'Font Awesome 6 Free';
+          font-weight: 900;
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 0.7rem;
+          color: #94a3b8;
+          pointer-events: none;
+        }
+        :global(html.dark) .field-select-wrap::after {
+          color: #64748b;
+        }
 
         .submit-btn {
           display: inline-flex;
@@ -218,6 +258,23 @@ export default function Contatti() {
         .submit-btn:hover {
           transform: translateY(-2px);
           box-shadow: 0 8px 32px rgba(0,140,149,0.5);
+        }
+        .submit-btn:disabled {
+          cursor: not-allowed;
+          opacity: 0.85;
+          transform: none;
+        }
+        .submit-spinner {
+          width: 15px;
+          height: 15px;
+          border: 2px solid rgba(255,255,255,0.4);
+          border-top-color: #fff;
+          border-radius: 50%;
+          animation: submit-spin 0.7s linear infinite;
+          flex-shrink: 0;
+        }
+        @keyframes submit-spin {
+          to { transform: rotate(360deg); }
         }
 
         .sedi-grid {
@@ -443,40 +500,44 @@ export default function Contatti() {
                     <div className="form-row">
                       <div className="field">
                         <label htmlFor="nome" className="text-slate-700 dark:text-gray-300">Nome <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="nome" name="nome" type="text" placeholder="Mario" value={form.nome} onChange={handleChange} className={`${errors.nome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
-                        {errors.nome && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.nome}</p>}
+                        <input id="nome" name="nome" type="text" placeholder="Mario" value={form.nome} onChange={handleChange} aria-invalid={!!errors.nome} aria-describedby={errors.nome ? 'nome-error' : undefined} className={`${errors.nome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        {errors.nome && <p id="nome-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.nome}</p>}
                       </div>
                       <div className="field">
                         <label htmlFor="cognome" className="text-slate-700 dark:text-gray-300">Cognome <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="cognome" name="cognome" type="text" placeholder="Rossi" value={form.cognome} onChange={handleChange} className={`${errors.cognome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
-                        {errors.cognome && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.cognome}</p>}
+                        <input id="cognome" name="cognome" type="text" placeholder="Rossi" value={form.cognome} onChange={handleChange} aria-invalid={!!errors.cognome} aria-describedby={errors.cognome ? 'cognome-error' : undefined} className={`${errors.cognome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        {errors.cognome && <p id="cognome-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.cognome}</p>}
                       </div>
                     </div>
 
                     <div className="form-row">
                       <div className="field">
                         <label htmlFor="email" className="text-slate-700 dark:text-gray-300">Email <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="email" name="email" type="email" placeholder="mario@esempio.it" value={form.email} onChange={handleChange} className={`${errors.email ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
-                        {errors.email && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.email}</p>}
+                        <input id="email" name="email" type="email" placeholder="mario@esempio.it" value={form.email} onChange={handleChange} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} className={`${errors.email ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        {errors.email && <p id="email-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.email}</p>}
                       </div>
                       <div className="field">
                         <label htmlFor="telefono" className="text-slate-700 dark:text-gray-300">Telefono</label>
-                        <input id="telefono" name="telefono" type="tel" placeholder="+39 000 0000000" value={form.telefono} onChange={handleChange} className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400" />
+                        <input id="telefono" name="telefono" type="tel" placeholder="+39 000 0000000" value={form.telefono} onChange={handleChange} aria-invalid={!!errors.telefono} aria-describedby={errors.telefono ? 'telefono-error' : undefined} className={`${errors.telefono ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        {errors.telefono && <p id="telefono-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.telefono}</p>}
                       </div>
                     </div>
 
                     <div className="field">
-                      <label htmlFor="motivo" className="text-slate-700 dark:text-gray-300">Motivo del contatto</label>
-                      <select id="motivo" name="motivo" value={form.motivo} onChange={handleChange} className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white">
-                        <option value="">Seleziona un motivo…</option>
-                        {MOTIVI.map((m) => <option key={m} value={m}>{m}</option>)}
-                      </select>
+                      <label htmlFor="motivo" className="text-slate-700 dark:text-gray-300">Oggetto della richiesta <span style={{ color: '#EF4444' }}>*</span></label>
+                      <div className="field-select-wrap">
+                        <select id="motivo" name="motivo" value={form.motivo} onChange={handleChange} aria-invalid={!!errors.motivo} aria-describedby={errors.motivo ? 'motivo-error' : undefined} className={`${errors.motivo ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white`}>
+                          <option value="">Seleziona l&apos;oggetto della richiesta…</option>
+                          {MOTIVI.map((m) => <option key={m} value={m}>{m}</option>)}
+                        </select>
+                      </div>
+                      {errors.motivo && <p id="motivo-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.motivo}</p>}
                     </div>
 
                     <div className="field">
                       <label htmlFor="messaggio" className="text-slate-700 dark:text-gray-300">Messaggio <span style={{ color: '#EF4444' }}>*</span></label>
-                      <textarea id="messaggio" name="messaggio" placeholder="Scrivi il tuo messaggio…" value={form.messaggio} onChange={handleChange} className={`${errors.messaggio ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
-                      {errors.messaggio && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.messaggio}</p>}
+                      <textarea id="messaggio" name="messaggio" placeholder="Scrivi il tuo messaggio…" value={form.messaggio} onChange={handleChange} aria-invalid={!!errors.messaggio} aria-describedby={errors.messaggio ? 'messaggio-error' : undefined} className={`${errors.messaggio ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                      {errors.messaggio && <p id="messaggio-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.messaggio}</p>}
                     </div>
 
                     {/* Privacy */}
@@ -487,6 +548,8 @@ export default function Contatti() {
                         type="checkbox"
                         checked={form.privacy}
                         onChange={handleChange}
+                        aria-invalid={!!errors.privacy}
+                        aria-describedby={errors.privacy ? 'privacy-error' : undefined}
                         style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#008C95', flexShrink: 0, cursor: 'pointer' }}
                       />
                       <label htmlFor="privacy" className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer' }}>
@@ -495,10 +558,17 @@ export default function Contatti() {
                         {' '}e acconsento al trattamento dei miei dati personali ai sensi del GDPR. <span style={{ color: '#EF4444' }}>*</span>
                       </label>
                     </div>
-                    {errors.privacy && <p style={{ margin: '-0.5rem 0 0', fontSize: '0.73rem', color: '#EF4444', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><i className="fas fa-exclamation-circle"></i>{errors.privacy}</p>}
+                    {errors.privacy && <p id="privacy-error" style={{ margin: '-0.5rem 0 0', fontSize: '0.73rem', color: '#EF4444', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><i className="fas fa-exclamation-circle"></i>{errors.privacy}</p>}
 
-                    <button type="submit" className="submit-btn" onMouseEnter={() => setHoveredBtn(true)} onMouseLeave={() => setHoveredBtn(false)}>
-                      Invia messaggio
+                    <button type="submit" className="submit-btn" disabled={isSubmitting} onMouseEnter={() => setHoveredBtn(true)} onMouseLeave={() => setHoveredBtn(false)}>
+                      {isSubmitting ? (
+                        <>
+                          <span className="submit-spinner" aria-hidden="true"></span>
+                          Invio in corso…
+                        </>
+                      ) : (
+                        'Invia messaggio'
+                      )}
                     </button>
 
                     <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>

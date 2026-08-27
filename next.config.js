@@ -59,7 +59,7 @@ function buildCourseRedirects() {
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.aletheiasrl.it'],
+    domains: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com'],
   },
   async redirects() {
     return buildCourseRedirects();

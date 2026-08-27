@@ -1,6 +1,8 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import NumberCounter from '../components/NumberCounter';
+import SeoHead from '../components/SeoHead';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
@@ -408,6 +410,11 @@ export default function Home() {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
+        <SeoHead
+          title="Alètheia Srl - Formazione Professionale"
+          description="Alètheia Srl: ente di formazione professionale e Agenzia per il Lavoro a Vittoria (RG). Corsi finanziati, formazione obbligatoria, certificazioni e inserimento lavorativo."
+          url="/"
+        />
       </Head>
 
       <Header active="/" />
@@ -457,7 +464,7 @@ export default function Home() {
       </section>
 
       {/* ── 1b · CALENDARIO CORSI ────────────────────────── */}
-      <Reveal as="section" className="pt-14 pb-20 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
+      <Reveal as="section" className="pt-16 pb-24 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
@@ -487,7 +494,7 @@ export default function Home() {
       </Reveal>
 
       {/* ── 2 · I NOSTRI CORSI ───────────────────────────── */}
-      <section className="py-16 md:py-20 bg-slate-50 dark:bg-dark-bg" aria-labelledby="courses-heading">
+      <section className="py-20 md:py-24 bg-slate-50 dark:bg-dark-bg" aria-labelledby="courses-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <Reveal className="text-center mb-12">
@@ -544,7 +551,7 @@ export default function Home() {
       </section>
 
       {/* ── 3b · COSA FACCIAMO ───────────────────────────── */}
-      <Reveal as="section" className="py-20 bg-light dark:bg-dark-bg" aria-labelledby="cosa-facciamo-heading">
+      <Reveal as="section" className="py-24 bg-light dark:bg-dark-bg" aria-labelledby="cosa-facciamo-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
@@ -566,11 +573,13 @@ export default function Home() {
             {/* Card Formazione */}
             <Reveal>
               <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
                   alt="Aula di formazione professionale"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-950/95 via-teal-950/70 to-transparent" />
                 <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
@@ -594,11 +603,13 @@ export default function Home() {
             {/* Card Orientamento */}
             <Reveal delay={120}>
               <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80"
                   alt="Colloquio di selezione del personale"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/95 via-indigo-950/70 to-transparent" />
                 <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
@@ -624,7 +635,7 @@ export default function Home() {
       </Reveal>
 
       {/* ── 3e · PARTE DEL GRUPPO ────────────────────────── */}
-      <section className="pt-16 pb-20 bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
+      <section className="pt-20 pb-24 bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block bg-white/10 text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
@@ -687,7 +698,7 @@ export default function Home() {
       </section>
 
       {/* ── 4 · ULTIME NOTIZIE ───────────────────────────── */}
-      <section id="news" className="py-16 md:py-20 bg-light dark:bg-dark-bg" aria-labelledby="news-heading">
+      <section id="news" className="py-20 md:py-24 bg-light dark:bg-dark-bg" aria-labelledby="news-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header sezione */}
@@ -753,7 +764,7 @@ export default function Home() {
       </section>
 
       {/* ── 4a · LOGHI CLIENTI ───────────────────────────── */}
-      <section className="py-20 bg-light dark:bg-dark-bg" aria-labelledby="clienti-heading">
+      <section className="py-24 bg-light dark:bg-dark-bg" aria-labelledby="clienti-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="inline-block bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
