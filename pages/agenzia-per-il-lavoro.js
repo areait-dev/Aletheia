@@ -514,7 +514,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           <div style={{ display: 'flex', gap: '4rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
             {/* Colonna testo (60%) */}
-            <div style={{ flex: '3 1 300px' }}>
+            <Reveal className="flex-[3_1_300px]">
               <span style={{
                 display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
                 letterSpacing: '0.1em', textTransform: 'uppercase',
@@ -576,10 +576,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                   </span>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
             {/* Colonna immagine */}
-            <div style={{ flex: '2 1 260px', paddingTop: '2rem' }}>
+            <Reveal delay={100} className="flex-[2_1_260px] pt-8">
               <div style={{
                 position: 'relative',
                 borderRadius: '1.5rem',
@@ -596,7 +596,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                   style={{ objectFit: 'cover' }}
                 />
               </div>
-            </div>
+            </Reveal>
 
           </div>
         </div>

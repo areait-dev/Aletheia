@@ -219,6 +219,19 @@ img {
   transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
+/* Stesso bug di rendering di backdrop-filter+fixed già risolto sopra per .site-header--solid,
+   in una variante più grave: .navbar (il menu mobile a schermo intero, position:fixed) è
+   discendente di .site-header, quindi il backdrop-filter dell'header diventa il suo
+   "containing block" invece del viewport — il menu nero non copre più tutto lo schermo ma
+   resta compresso all'altezza dell'header, con le voci sotto che sbordano senza sfondo sopra
+   il contenuto della pagina. Disattiviamo il blur mentre il menu mobile è aperto: a overlay
+   quasi opaco (rgba(0,0,0,0.97)) il blur dietro non è comunque visibile.
+   className aggiunta da Header.tsx quando menuOpen è true. */
+.site-header.mobile-nav-open {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 /* Header "solid" forzato (prop Header.js `solid`): usato dalle pagine senza hero scura in cima
    (corsi, archivio, categorie formazione). Blindato con !important e legato solo al prop, mai
    allo stato scroll/JS, così non può sparire per timing di hydration/HMR. */

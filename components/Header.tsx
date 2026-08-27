@@ -83,7 +83,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
   return (
     <>
     <header
-      className={`site-header${isLight ? ' scrolled' : ''}${formazioneOpen ? ' menu-is-open' : ''}${solid ? ' site-header--solid' : ''}`}
+      className={`site-header${isLight ? ' scrolled' : ''}${formazioneOpen ? ' menu-is-open' : ''}${solid ? ' site-header--solid' : ''}${menuOpen ? ' mobile-nav-open' : ''}`}
       style={solid ? { background: '#ffffff', backdropFilter: 'none', WebkitBackdropFilter: 'none', boxShadow: '0 2px 20px rgba(0,0,0,0.08)' } : undefined}
     >
       <div className="container">

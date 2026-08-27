@@ -344,13 +344,15 @@ export default function FormazioneRegionale() {
               Gratuita. Certificata. Spendibile nel mondo del lavoro.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-              {puntiDiForza.map((p) => (
-                <div key={p.text} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.85rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className={p.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
+              {puntiDiForza.map((p, i) => (
+                <Reveal key={p.text} delay={(i % 4) * 80}>
+                  <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.85rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className={p.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
+                    </div>
+                    <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{p.text}</span>
                   </div>
-                  <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{p.text}</span>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>

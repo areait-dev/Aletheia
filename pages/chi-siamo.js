@@ -375,9 +375,9 @@ export default function ChiSiamo() {
               { accent: 'bg-teal-500', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
               { accent: 'bg-indigo-500', titolo: 'La forza di un gruppo', desc: 'Alètheia è l’ente di formazione di Promotergroup S.p.A., un ecosistema che integra formazione, consulenza aziendale, salute e sicurezza, comunicazione. Scegliere Alètheia significa accedere a una rete di competenze che va ben oltre la formazione.' },
             ].map((card, i) => (
-              <Reveal key={card.titolo} delay={(i % 4) * 80}>
+              <Reveal key={card.titolo} delay={(i % 4) * 80} className="h-full">
                 <div
-                  className="group bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                  className="group h-full bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                 >
                   <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 flex items-center gap-2 normal-case tracking-normal">
                     <span className={`w-1.5 h-4 rounded-full inline-block ${card.accent}`} />
@@ -445,7 +445,7 @@ export default function ChiSiamo() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-5">
-            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+            <Reveal delay={0} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
                 icon="fas fa-certificate"
                 title="ISO 9001"
@@ -454,8 +454,8 @@ export default function ChiSiamo() {
                 benefits={['Servizi di formazione e consulenza di qualità', 'Processi standardizzati e tracciabili', 'Miglioramento continuo delle performance']}
                 pdfUrl="/pdf/certificati/ALTH2572Q1901_-certificate-release_ISO9001_20220408.pdf"
               />
-            </div>
-            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+            </Reveal>
+            <Reveal delay={80} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
                 icon="fas fa-venus-mars"
                 title="UNI PDR 125:2022"
@@ -465,8 +465,8 @@ export default function ChiSiamo() {
                 pdfUrl="/pdf/certificati/2023_ALETHEIA_paritdigenere.pdf"
                 extraLinks={[{ label: 'Politica Aziendale', url: '/pdf/certificati/ALL1--POLITICA-PDR-125-Aletheia.pdf' }]}
               />
-            </div>
-            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+            </Reveal>
+            <Reveal delay={160} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
                 icon="fas fa-school"
                 title="UNI ISO 21001:2019"
@@ -475,8 +475,8 @@ export default function ChiSiamo() {
                 benefits={['Processi formativi standardizzati', 'Focalizzazione sui bisogni dei discenti', "Valutazione dell'efficacia dell'apprendimento"]}
                 pdfUrl="/pdf/certificati/ALTH2572A2002_certificate-release_ISO21001_20240322.pdf"
               />
-            </div>
-            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+            </Reveal>
+            <Reveal delay={240} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
                 icon="fas fa-chalkboard-user"
                 title="UNI ISO 29993:2019"
@@ -485,8 +485,8 @@ export default function ChiSiamo() {
                 benefits={["Trasparenza nell'offerta formativa", 'Qualità dei contenuti e dei materiali', 'Gestione efficace dei processi di erogazione']}
                 pdfUrl="/pdf/certificati/ALTH2572A2003_certificate-release_ISO29993_20240322.pdf"
               />
-            </div>
-            <div className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+            </Reveal>
+            <Reveal delay={320} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
                 icon="fas fa-clipboard-list"
                 title="UNI ISO 29992:2019"
@@ -495,7 +495,7 @@ export default function ChiSiamo() {
                 benefits={["Valutazione oggettiva delle competenze", "Monitoraggio continuo dell'apprendimento", 'Certificazione delle competenze acquisite']}
                 pdfUrl="/pdf/certificati/ALTH2572A2404_certificate-release_ISO29992_20240322.pdf"
               />
-            </div>
+            </Reveal>
           </div>
 
           {/* Accreditamenti istituzionali */}
@@ -510,30 +510,38 @@ export default function ChiSiamo() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
-              <AccreditamentoCard
-                logo="/images/accreditamenti/regione.svg"
-                logoAlt="Regione Siciliana"
-                title="Ente di Formazione accreditato Regione Siciliana"
-                code="DDG n. 78 del 20/01/2017"
-              />
-              <AccreditamentoCard
-                logo="/images/accreditamenti/image-removebg-preview.png"
-                logoAlt="Ministero del Lavoro e delle Politiche Sociali"
-                title="Agenzia per il Lavoro autorizzata"
-                code="DDS n. 1100 del 26/04/2019"
-              />
-              <AccreditamentoCard
-                logo="/images/accreditamenti/aica.jpg"
-                logoAlt="AICA"
-                title="Test Center AICA – ICDL"
-                code="Codice AKHF0001"
-              />
-              <AccreditamentoCard
-                logo="/images/accreditamenti/Logo-ECM.png"
-                logoAlt="ECM - Educazione Continua in Medicina"
-                title="Provider ECM – Educazione Continua in Medicina"
-                code="Provider Accreditato Ministero della Salute"
-              />
+              <Reveal delay={0} className="h-full">
+                <AccreditamentoCard
+                  logo="/images/accreditamenti/regione.svg"
+                  logoAlt="Regione Siciliana"
+                  title="Ente di Formazione accreditato Regione Siciliana"
+                  code="DDG n. 78 del 20/01/2017"
+                />
+              </Reveal>
+              <Reveal delay={80} className="h-full">
+                <AccreditamentoCard
+                  logo="/images/accreditamenti/image-removebg-preview.png"
+                  logoAlt="Ministero del Lavoro e delle Politiche Sociali"
+                  title="Agenzia per il Lavoro autorizzata"
+                  code="DDS n. 1100 del 26/04/2019"
+                />
+              </Reveal>
+              <Reveal delay={160} className="h-full">
+                <AccreditamentoCard
+                  logo="/images/accreditamenti/aica.jpg"
+                  logoAlt="AICA"
+                  title="Test Center AICA – ICDL"
+                  code="Codice AKHF0001"
+                />
+              </Reveal>
+              <Reveal delay={240} className="h-full">
+                <AccreditamentoCard
+                  logo="/images/accreditamenti/Logo-ECM.png"
+                  logoAlt="ECM - Educazione Continua in Medicina"
+                  title="Provider ECM – Educazione Continua in Medicina"
+                  code="Provider Accreditato Ministero della Salute"
+                />
+              </Reveal>
             </div>
           </div>
         </div>
@@ -543,7 +551,7 @@ export default function ChiSiamo() {
       <section className="bg-light dark:bg-dark-bg">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch py-20 px-6 sm:px-12 max-w-7xl mx-auto">
           {/* Colonna sede */}
-          <div>
+          <Reveal>
             <span className="bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
               La nostra sede
             </span>
@@ -582,10 +590,10 @@ export default function ChiSiamo() {
                 <span className="text-slate-600 dark:text-gray-300 text-sm">Lun - Ven · 9:00-13:00 / 14:00-18:00</span>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Colonna CTA */}
-          <div className="bg-gradient-to-br from-slate-950 via-teal-950 to-slate-950 text-white rounded-3xl p-8 flex flex-col justify-center shadow-lg border border-slate-800/50">
+          <Reveal delay={100} className="bg-gradient-to-br from-slate-950 via-teal-950 to-slate-950 text-white rounded-3xl p-8 flex flex-col justify-center shadow-lg border border-slate-800/50">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
               Vuoi costruire il tuo percorso professionale?
             </h3>
@@ -599,7 +607,7 @@ export default function ChiSiamo() {
             >
               Richiedi consulenza gratuita
             </a>
-          </div>
+          </Reveal>
         </div>
       </section>
 

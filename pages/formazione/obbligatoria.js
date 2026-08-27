@@ -557,21 +557,22 @@ export default function FormazioneObbligatoria() {
               { icon: 'fas fa-triangle-exclamation', color: '#D97706', bg: 'rgba(217,119,6,0.1)', borderColor: '#D97706', headline: 'Fino a €6.400', text: 'di sanzione per ogni lavoratore non formato, a carico del datore di lavoro' },
               { icon: 'fas fa-file-lines', color: '#008C95', bg: 'rgba(0,140,149,0.1)', borderColor: '#0F172A', headline: 'Valore nazionale', text: 'attestati validi e riconosciuti su tutto il territorio italiano' },
               { icon: 'fas fa-circle-check', color: '#10B981', bg: 'rgba(16,185,129,0.1)', borderColor: '#0F172A', headline: 'Sempre aggiornati', text: "corsi e programmi costantemente conformi all'Accordo Stato-Regioni" },
-            ].map((k) => (
-              <div
-                key={k.headline}
-                className="h-full bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
-                style={{ borderRadius: '1rem', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-              >
-                <div style={{ height: '4px', background: k.borderColor }} />
-                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}>
-                  <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: k.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className={k.icon} style={{ color: k.color, fontSize: '1.3rem' }}></i>
+            ].map((k, i) => (
+              <Reveal key={k.headline} delay={i * 90} className="h-full">
+                <div
+                  className="h-full bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+                  style={{ borderRadius: '1rem', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
+                >
+                  <div style={{ height: '4px', background: k.borderColor }} />
+                  <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1 }}>
+                    <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: k.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className={k.icon} style={{ color: k.color, fontSize: '1.3rem' }}></i>
+                    </div>
+                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '0.02em' }}>{k.headline}</span>
+                    <span className="text-slate-600 dark:text-gray-300 text-base" style={{ lineHeight: 1.6 }}>{k.text}</span>
                   </div>
-                  <span className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '0.02em' }}>{k.headline}</span>
-                  <span className="text-slate-600 dark:text-gray-300 text-base" style={{ lineHeight: 1.6 }}>{k.text}</span>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -611,17 +612,19 @@ export default function FormazioneObbligatoria() {
           </div>
 
           <div className="step-grid">
-            {step.map((s) => (
-              <div key={s.n} className="bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ width: '42px', height: '42px', minWidth: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #008C95, #10B981)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className={s.icon} style={{ color: '#fff', fontSize: '1.05rem' }}></i>
+            {step.map((s, i) => (
+              <Reveal key={s.n} delay={(i % 4) * 80}>
+                <div className="bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '42px', height: '42px', minWidth: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #008C95, #10B981)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className={s.icon} style={{ color: '#fff', fontSize: '1.05rem' }}></i>
+                    </div>
+                    <span style={{ fontSize: '1.5rem', fontWeight: 900, color: 'rgba(0,140,149,0.25)' }}>{s.n}</span>
                   </div>
-                  <span style={{ fontSize: '1.5rem', fontWeight: 900, color: 'rgba(0,140,149,0.25)' }}>{s.n}</span>
+                  <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>{s.title}</h3>
+                  <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.7, margin: 0 }}>{s.text}</p>
                 </div>
-                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>{s.title}</h3>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.7, margin: 0 }}>{s.text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
