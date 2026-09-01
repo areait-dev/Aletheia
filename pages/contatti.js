@@ -1,9 +1,10 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SeoHead from '../components/SeoHead';
 import { darkTokens } from '../lib/darkTokens';
+import { getCookieConsent } from '../components/CookieConsent';
 
 const SEDI = [
   {
@@ -81,6 +82,16 @@ const PHONE_RE = /^[0-9\s+-]+$/;
 
 export default function Contatti() {
   const [activeSede, setActiveSede] = useState(0);
+  // La mappa Google Maps carica script/iframe di terze parti: la mostriamo solo
+  // dopo che l'utente ha accettato i cookie dal banner di consenso (CookieConsent.tsx).
+  const [mapsConsent, setMapsConsent] = useState(false);
+
+  useEffect(() => {
+    setMapsConsent(getCookieConsent() === 'accepted');
+    const onChange = (e) => setMapsConsent(e.detail === 'accepted');
+    window.addEventListener('cookie-consent-change', onChange);
+    return () => window.removeEventListener('cookie-consent-change', onChange);
+  }, []);
   const [form, setForm] = useState({
     nome: '',
     cognome: '',
@@ -440,17 +451,44 @@ export default function Contatti() {
 
               {/* Mappa embed - aggiornata in base alla sede selezionata */}
               <div className="border border-slate-200 dark:border-gray-700" style={{ flex: 1, minHeight: '200px', borderRadius: '1.25rem', overflow: 'hidden' }}>
-                <iframe
-                  key={activeSede}
-                  title={`Sede Alètheia Srl - ${SEDI[activeSede].città}`}
-                  src={SEDI[activeSede].mapsEmbed}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, display: 'block', minHeight: '200px' }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+                {mapsConsent ? (
+                  <iframe
+                    key={activeSede}
+                    title={`Sede Alètheia Srl - ${SEDI[activeSede].città}`}
+                    src={SEDI[activeSede].mapsEmbed}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, display: 'block', minHeight: '200px' }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                ) : (
+                  <div
+                    className="bg-slate-50 dark:bg-gray-800 text-slate-600 dark:text-gray-300"
+                    style={{ width: '100%', height: '100%', minHeight: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', padding: '1.5rem', textAlign: 'center' }}
+                  >
+                    <i className="fas fa-map-location-dot" style={{ fontSize: '1.5rem', color: '#008C95' }}></i>
+                    <p style={{ margin: 0, fontSize: '0.85rem', maxWidth: '280px' }}>
+                      La mappa richiede cookie di terze parti (Google Maps).
+                    </p>
+                    <button
+                      onClick={() => {
+                        try {
+                          window.localStorage.setItem('cookie-consent', 'accepted');
+                        } catch {}
+                        window.dispatchEvent(new CustomEvent('cookie-consent-change', { detail: 'accepted' }));
+                      }}
+                      style={{
+                        padding: '0.5rem 1.1rem', borderRadius: '9999px', fontWeight: 700, fontSize: '0.8rem',
+                        cursor: 'pointer', border: 'none', color: '#fff',
+                        background: 'linear-gradient(90deg, #008C95, #10B981)',
+                      }}
+                    >
+                      Accetta i cookie per visualizzare la mappa
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from '../context/ThemeContext';
 import { CartProvider } from '../context/CartContext';
 import { initLenis, destroyLenis } from '../lib/lenis';
 import { SITE_NAME, SITE_URL } from '../components/SeoHead';
+import CookieConsent from '../components/CookieConsent';
 
 // Chatbot non contribuisce al first paint: caricato lato client dopo l'idratazione
 // per non bloccare il rendering iniziale della pagina.
@@ -72,6 +73,7 @@ function MyApp({ Component, pageProps }) {
           <div style={{ '--font-viga': "'Viga', sans-serif", display: 'contents' }}>
             <Component {...pageProps} />
             <Chatbot />
+            <CookieConsent />
           </div>
         </CartProvider>
       </ThemeProvider>

@@ -131,8 +131,21 @@ export default function Checkout() {
 
       <Header active="/checkout" solid />
 
+      {/* Banner modalità demo: questa pagina è raggiungibile pubblicamente e non ha
+          alcun gateway di pagamento reale collegato — lo segnaliamo esplicitamente
+          all'utente prima che inserisca dati di una carta. */}
+      <div
+        className="bg-amber-50 dark:bg-amber-900/20 border-b border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200"
+        style={{ paddingTop: '5.5rem', paddingBottom: '0.85rem', paddingLeft: '1.5rem', paddingRight: '1.5rem', textAlign: 'center' }}
+      >
+        <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+          <i className="fas fa-triangle-exclamation" aria-hidden="true"></i>
+          Modalità dimostrativa — nessun pagamento reale verrà elaborato
+        </p>
+      </div>
+
       {/* Hero */}
-      <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #0a4f54 60%, #008C95 100%)', color: 'white', paddingTop: '7rem', paddingBottom: '2.5rem', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
+      <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #0a4f54 60%, #008C95 100%)', color: 'white', paddingTop: '2.5rem', paddingBottom: '2.5rem', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <Link href="/all-courses" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem', marginBottom: '1rem' }}>
             ← Torna ai corsi

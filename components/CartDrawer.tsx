@@ -34,14 +34,14 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
           <h2 className="text-gray-900 dark:text-gray-50" style={{ fontWeight: 700, fontSize: '1.1rem' }}>
             Il tuo carrello {cart.length > 0 && `(${cart.reduce((s: number, i: any) => s + i.qty, 0)})`}
           </h2>
-          <button onClick={onClose} className="text-gray-500 dark:text-gray-400" style={{ background: 'none', border: 'none', fontSize: '1.25rem', cursor: 'pointer' }}>✕</button>
+          <button onClick={onClose} className="text-gray-500 dark:text-gray-400" style={{ background: 'none', border: 'none', fontSize: '1.25rem', cursor: 'pointer' }}><i className="fas fa-times"></i></button>
         </div>
 
         {/* Items */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
           {cart.length === 0 ? (
             <div className="text-gray-400 dark:text-gray-400" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-              <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🛒</p>
+              <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}><i className="fas fa-shopping-cart"></i></p>
               <p>Il carrello è vuoto</p>
             </div>
           ) : cart.map((item: any) => (
@@ -57,7 +57,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                   className="text-red-400 hover:text-red-600"
                   style={{ background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, fontSize: '0.85rem', padding: 0 }}
                 >
-                  ✕
+                  <i className="fas fa-times"></i>
                 </button>
               </div>
 
