@@ -1870,7 +1870,7 @@ export default function CourseDetail() {
                   </div>
                   <div className="flex-1 flex flex-col gap-2" style={{ padding: '1.1rem 1.25rem' }}>
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{c.titolo}</span>
-                    <span className="text-teal-600 dark:text-[#6EE7B7] flex items-center gap-1.5 mt-auto font-bold" style={{ fontSize: '0.82rem' }}>
+                    <span className="text-primary dark:text-[#6EE7B7] flex items-center gap-1.5 mt-auto font-bold" style={{ fontSize: '0.82rem' }}>
                       Scopri di più
                       <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
                     </span>

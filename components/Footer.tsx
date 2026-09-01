@@ -21,29 +21,29 @@ export default function Footer() {
                 href="https://www.google.com/maps/search/?api=1&query=Via+del+Carrubo+Vittoria+RG"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+                className="flex items-center gap-2.5 hover:text-primary dark:hover:text-[#10B981] transition-colors"
               >
-                <svg className="text-teal-600 dark:text-teal-400 shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="text-primary dark:text-[#10B981] shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
                 Via del Carrubo, snc - 97019 Vittoria (RG)
               </a>
-              <a href="tel:+390932862613" className="flex items-center gap-2.5 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
-                <svg className="text-teal-600 dark:text-teal-400 shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <a href="tel:+390932862613" className="flex items-center gap-2.5 hover:text-primary dark:hover:text-[#10B981] transition-colors">
+                <svg className="text-primary dark:text-[#10B981] shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
                 +39 0932 862613
               </a>
-              <a href="mailto:info@aletheiasrl.it" className="flex items-center gap-2.5 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
-                <svg className="text-teal-600 dark:text-teal-400 shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <a href="mailto:info@aletheiasrl.it" className="flex items-center gap-2.5 hover:text-primary dark:hover:text-[#10B981] transition-colors">
+                <svg className="text-primary dark:text-[#10B981] shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="m22 7-10 5L2 7" />
                 </svg>
                 info@aletheiasrl.it
               </a>
               <span className="flex items-center gap-2.5 text-xs text-slate-500 dark:text-slate-500 pt-1">
-                <svg className="text-teal-600 dark:text-teal-400 shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="text-primary dark:text-[#10B981] shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 6v6l4 2" />
                 </svg>
@@ -72,23 +72,23 @@ export default function Footer() {
 
             <span className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3 block">Formazione</span>
             <div className="pl-3 space-y-2.5 text-[13px] text-slate-600 dark:text-slate-400 border-l border-slate-200 dark:border-slate-800">
-              <a href="/pdf/catalogo.pdf" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
-                <span className="text-teal-600/70 dark:text-teal-400/70 mr-1.5 font-bold">›</span>Catalogo corsi (pdf scaricabile)
+              <a href="/pdf/catalogo.pdf" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">
+                <span className="text-primary/70 dark:text-[#10B981]/70 mr-1.5 font-bold">›</span>Catalogo corsi (pdf scaricabile)
               </a>
-              <a href="/calendario-corsi" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
-                <span className="text-teal-600/70 dark:text-teal-400/70 mr-1.5 font-bold">›</span>Calendario corsi
+              <a href="/calendario-corsi" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">
+                <span className="text-primary/70 dark:text-[#10B981]/70 mr-1.5 font-bold">›</span>Calendario corsi
               </a>
-              <a href="https://www.aletheiasrl.it/elearning2/" target="_blank" rel="noopener noreferrer" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
-                <span className="text-teal-600/70 dark:text-teal-400/70 mr-1.5 font-bold">›</span>Piattaforma e-learning
+              <a href="https://www.aletheiasrl.it/elearning2/" target="_blank" rel="noopener noreferrer" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">
+                <span className="text-primary/70 dark:text-[#10B981]/70 mr-1.5 font-bold">›</span>Piattaforma e-learning
               </a>
             </div>
 
             <div className="space-y-3 mt-4 text-sm font-medium text-slate-700 dark:text-slate-300">
-              <a href="/agenzia-per-il-lavoro" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Agenzia per il lavoro</a>
-              <a href="/chi-siamo" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Chi siamo</a>
-              <a href="/news" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">News</a>
-              <a href="/archivio" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Archivio</a>
-              <a href="/contatti" className="block hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Contatti</a>
+              <a href="/agenzia-per-il-lavoro" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">Agenzia per il lavoro</a>
+              <a href="/chi-siamo" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">Chi siamo</a>
+              <a href="/news" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">News</a>
+              <a href="/archivio" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">Archivio</a>
+              <a href="/contatti" className="block hover:text-primary dark:hover:text-[#10B981] transition-colors">Contatti</a>
             </div>
           </div>
 
@@ -141,7 +141,7 @@ export default function Footer() {
                 href="https://www.promotergroup.eu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors underline"
+                className="text-primary dark:text-[#10B981] hover:text-[#006B73] dark:hover:text-[#059669] transition-colors underline"
               >
                 Promotergroup S.p.A.
               </a>

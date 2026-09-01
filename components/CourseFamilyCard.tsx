@@ -53,7 +53,7 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
 
         <div className="p-5 flex flex-col flex-1 overflow-hidden">
           <h3
-            className="font-viga uppercase text-[18px] text-slate-900 dark:text-white leading-snug mt-1 mb-1 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors line-clamp-3"
+            className="font-viga uppercase text-[18px] text-slate-900 dark:text-white leading-snug mt-1 mb-1 group-hover:text-[#006B73] dark:group-hover:text-[#059669] transition-colors line-clamp-3"
             style={{ fontSynthesis: 'none' }}
           >
             {family.titolo}

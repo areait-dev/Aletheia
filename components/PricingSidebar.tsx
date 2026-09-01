@@ -67,7 +67,7 @@ export default function PricingSidebar({
                   {row.label}
                 </span>
                 <span
-                  className="text-teal-600 dark:text-[#10B981]"
+                  className="text-primary dark:text-[#10B981]"
                   style={{ fontSize: i === 0 ? '1.85rem' : '1.15rem', fontWeight: 800, lineHeight: 1 }}
                 >
                   {row.value}
@@ -119,7 +119,7 @@ export default function PricingSidebar({
           {quoteHref && (
             <a
               href={quoteHref}
-              className="w-full text-center rounded-xl py-2.5 px-6 no-underline border border-teal-600/60 text-teal-700 dark:border-[#10B981]/50 dark:text-[#6EE7B7] !m-0 !mb-0 !mt-0"
+              className="w-full text-center rounded-xl py-2.5 px-6 no-underline border border-primary/60 text-[#006B73] dark:border-[#10B981]/50 dark:text-[#6EE7B7] !m-0 !mb-0 !mt-0"
               style={{
                 fontWeight: 600, fontSize: '0.95rem', background: 'transparent', boxSizing: 'border-box',
                 paddingTop: '10px', paddingBottom: '10px', margin: 0, marginBottom: 0, marginTop: 0,

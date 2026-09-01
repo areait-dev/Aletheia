@@ -70,7 +70,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
 
               {/* Riga 3: prezzo totale riga + controlli quantità */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <p className="font-bold text-teal-600 dark:text-teal-400" style={{ margin: 0, fontSize: '0.95rem' }}>
+                <p className="font-bold text-primary dark:text-[#10B981]" style={{ margin: 0, fontSize: '0.95rem' }}>
                   € {(item.price * item.qty).toLocaleString('it-IT')}
                   {item.qty > 1 && (
                     <span className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.75rem', fontWeight: 400, marginLeft: '0.35rem' }}>
