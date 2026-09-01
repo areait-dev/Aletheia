@@ -344,8 +344,8 @@ export default function FormazioneECM() {
             ))}
           </div>
 
-          <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-900/40" style={{ borderRadius: '1rem', padding: '1.25rem 1.75rem' }}>
-            <p className="text-teal-900 dark:text-teal-200" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.7 }}>
+          <div className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30" style={{ borderRadius: '1rem', padding: '1.25rem 1.75rem' }}>
+            <p className="text-[#004D52] dark:text-[#10B981]" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.7 }}>
               Grazie all&apos;esperienza e alla rete di docenti qualificati di Promotergroup, Alètheia affianca aziende sanitarie e singoli professionisti nella pianificazione del proprio percorso di aggiornamento.
             </p>
           </div>

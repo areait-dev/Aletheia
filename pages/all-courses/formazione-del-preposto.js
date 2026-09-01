@@ -506,22 +506,7 @@ export default function CorsoFormazionePreposto() {
               <PricingSidebar
                 buyHref={`/contatti?corso=${encodeURIComponent('Formazione del Preposto')}&tipo=preventivo`}
                 buyLabel="Richiedi preventivo"
-              >
-                {selectedTipo === 'corso' && (
-                  <button
-                    type="button"
-                    onClick={() => selectTipo('aggiornamento')}
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
-                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
-                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                    }}
-                  >
-                    <span>Devi solo rinnovare l'attestato? <strong>Aggiornamento 6 ore</strong></span>
-                  </button>
-                )}
-              </PricingSidebar>
+              />
             </aside>
           </div>
         </div>

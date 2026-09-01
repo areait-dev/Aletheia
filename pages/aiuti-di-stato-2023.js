@@ -92,7 +92,7 @@ export default function AiutiDiStato2023() {
       <Header />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-4xl mx-auto px-6 sm:px-12 pt-40 pb-24">
-          <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-4 block">
+          <span className="text-primary dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-4 block">
             Trasparenza
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-50 mb-4">

@@ -172,7 +172,7 @@ export default function PrivacyCookie() {
 
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-4xl mx-auto px-6 sm:px-12 pt-40 pb-24">
-          <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-4 block">
+          <span className="text-primary dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-4 block">
             Trasparenza
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-50 mb-3">
@@ -219,7 +219,7 @@ export default function PrivacyCookie() {
 
             {/* ══════════════ 1. PRIVACY POLICY ══════════════ */}
             <div>
-              <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-2 block">
+              <span className="text-primary dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-2 block">
                 Sezione 1
               </span>
               <SectionTitle id="privacy-policy">Privacy Policy</SectionTitle>
@@ -276,7 +276,7 @@ export default function PrivacyCookie() {
 
             {/* ══════════════ 2. COOKIE POLICY ══════════════ */}
             <div>
-              <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-2 block">
+              <span className="text-primary dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-2 block">
                 Sezione 2
               </span>
               <SectionTitle id="cookie-policy">Cookie Policy</SectionTitle>
@@ -323,14 +323,14 @@ export default function PrivacyCookie() {
 
             {/* ══════════════ 3. TESTO BANNER COOKIE ══════════════ */}
             <div>
-              <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-2 block">
+              <span className="text-primary dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-2 block">
                 Sezione 3
               </span>
               <SectionTitle>Testo per il banner cookie</SectionTitle>
               <p className="mb-3 text-sm text-gray-500 dark:text-gray-400">
                 Copia ufficiale di riferimento per il componente banner di consenso cookie del sito.
               </p>
-              <blockquote className="border-l-4 border-teal-500 dark:border-teal-400 bg-gray-50 dark:bg-gray-800 rounded-r-xl px-5 py-4 italic text-gray-700 dark:text-gray-200">
+              <blockquote className="border-l-4 border-primary dark:border-[#10B981] bg-gray-50 dark:bg-gray-800 rounded-r-xl px-5 py-4 italic text-gray-700 dark:text-gray-200">
                 Questo sito utilizza cookie tecnici necessari al funzionamento e, previo consenso, cookie o strumenti
                 di terze parti per statistiche, contenuti incorporati o altre finalità indicate nella Cookie Policy.
                 Puoi accettare tutti i cookie, rifiutare quelli non necessari o personalizzare le tue preferenze. Puoi

@@ -89,7 +89,7 @@ L'aggiornamento si svolge in aula presso la sede Alètheia di Vittoria (RG), con
 
     corsiCorrelati: [
       'carrelli-elevatori-semoventi-con-conduttore-a-bordo',
-      'ple-su-stabilizzatori',
+      'ple-piattaforme-di-lavoro-mobili-elevabili',
       'gru-su-autocarro',
     ]
   }

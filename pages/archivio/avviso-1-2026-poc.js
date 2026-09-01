@@ -101,15 +101,15 @@ export default function Avviso12026Poc() {
             </h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
               {QUALIFICHE.map((q) => (
-                <span key={q} className="bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-900/40 text-teal-700 dark:text-teal-300" style={{ padding: '0.35rem 0.9rem', borderRadius: '999px', fontSize: '0.82rem', fontWeight: 600 }}>
+                <span key={q} className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30 text-primary dark:text-[#10B981]" style={{ padding: '0.35rem 0.9rem', borderRadius: '999px', fontSize: '0.82rem', fontWeight: 600 }}>
                   {q}
                 </span>
               ))}
             </div>
           </section>
 
-          <section className="bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-900/40" style={{ borderRadius: '1rem', padding: '1.5rem', marginBottom: '2.5rem' }}>
-            <p className="text-teal-900 dark:text-teal-200" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.7 }}>
+          <section className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30" style={{ borderRadius: '1rem', padding: '1.5rem', marginBottom: '2.5rem' }}>
+            <p className="text-[#004D52] dark:text-[#10B981]" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.7 }}>
               <i className="far fa-calendar-alt" style={{ marginRight: '0.5rem' }}></i>
               Scadenza pre-iscrizioni: 13 aprile 2026, ore 16:00. Pre-iscrizione online su{' '}
               <a href="https://corsi.aletheiasrl.it/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>corsi.aletheiasrl.it</a>.

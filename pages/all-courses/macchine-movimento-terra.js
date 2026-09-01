@@ -18,7 +18,7 @@ const NOTA_MODULI_IN_AGGIORNAMENTO = 'Dettaglio moduli in aggiornamento — La r
 
 const corsiCorrelatiSlugs = [
   'carrelli-elevatori-semoventi-conduttore-a-bordo',
-  'ple-su-stabilizzatori',
+  'ple-piattaforme-di-lavoro-mobili-elevabili',
   'operatore-di-gru-per-autocarro',
 ];
 
@@ -27,7 +27,7 @@ const ORDINE_SWITCH = ['escavatoriIdraulici', 'escavatoriFune', 'paleCaricatrici
 const PILL_LABEL = {
   escavatoriIdraulici: 'Escavatori Idraulici · 10h',
   escavatoriFune: 'Escavatori a Fune · 10h',
-  paleCaricatrici: 'Pale Caricatrici Frontali · 10h',
+  paleCaricatrici: 'Pale Caricatrici Frontali · 12h',
   terne: 'Terne · 10h',
   autoribaltabili: 'Autoribaltabili a Cingoli · 10h',
   combinato: 'Corso Combinato · 16h',
@@ -47,8 +47,7 @@ const FAQ_UNICA = [
   },
   {
     domanda: "Ogni quanto va rinnovata l'abilitazione?",
-    // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA - confermare la periodicità esatta di rinnovo (5 anni)
-    risposta: "L'abilitazione ha validità quinquennale: ogni 5 anni va rinnovata frequentando il corso di aggiornamento da 4 ore, valido per tutte le macchine movimento terra già abilitate.",
+    risposta: "L'abilitazione va rinnovata periodicamente frequentando il corso di aggiornamento da 4 ore, valido per escavatori idraulici, caricatori frontali e terne già abilitati, ai sensi dell'art. 73 e dell'Allegato IX del D.Lgs 81/2008.",
   },
   {
     domanda: "L'abilitazione è valida su tutto il territorio nazionale?",
@@ -72,7 +71,7 @@ const CONTENUTO = {
     titleSuffix: '· 10 ore',
     breadcrumbLabel: 'Corso Escavatori Idraulici',
     titleSeo: 'Corso Escavatori Idraulici – 10 ore | Alètheia',
-    metaDescription: 'Corso conduzione escavatori idraulici, 10 ore. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    metaDescription: "Corso conduzione escavatori idraulici, 10 ore, art. 73 e Allegato IX D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).",
     schedaTecnica: [
       { icon: 'fas fa-clock', label: 'Durata', value: '10 ore' },
       // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
@@ -97,6 +96,37 @@ const CONTENUTO = {
       'Gestire la stabilità del mezzo tramite il corretto posizionamento dei piedi stabilizzatori',
     ],
     programmaTitle: 'Programma Corso Addetti alla Conduzione di Escavatori Idraulici · 10 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - GIURIDICO-NORMATIVO',
+        durataOre: 1,
+        argomenti: [
+          "Presentazione del corso; cenni di normativa generale in materia di igiene e sicurezza del lavoro (D.Lgs 81/2008)",
+          'Responsabilità dell\'operatore',
+        ],
+      },
+      {
+        titolo: 'MODULO II - TECNICO',
+        durataOre: 3,
+        argomenti: [
+          'Attrezzature con riferimento a escavatori, caricatori, terne e autoribaltabili a cingoli',
+          'Componenti strutturali; dispositivi di comando e sicurezza',
+          'Visibilità e identificazione zone cieche',
+          'Controlli; uso in sicurezza, rischi e precauzioni',
+          'Protezione da agenti fisici',
+        ],
+      },
+      {
+        titolo: 'MODULO III - PRATICO',
+        durataOre: 6,
+        argomenti: [
+          'Componenti strutturali; individuazione dei dispositivi di comando e di sicurezza',
+          'Controlli pre-utilizzo; pianificazione operazioni di campo',
+          'Operazioni di movimentazione carichi, manovra di agganci rapidi per attrezzi',
+          'Esercitazioni pratiche; guida dell\'escavatore su strada',
+        ],
+      },
+    ],
     prezzo: [{ label: 'Aula', value: '€ 200,00 + IVA' }],
     prezzoNumerico: 200,
   },
@@ -136,21 +166,21 @@ const CONTENUTO = {
   },
 
   paleCaricatrici: {
-    title: 'Corso Addetti alla Conduzione di Pale Caricatrici Frontali',
-    titleSuffix: '· 10 ore',
+    title: 'Corso Addetti alla Conduzione di Pale Caricatrici Frontali e con Braccio Mobile (Ragno)',
+    titleSuffix: '· 12 ore',
     breadcrumbLabel: 'Corso Pale Caricatrici Frontali',
-    titleSeo: 'Corso Pale Caricatrici Frontali – 10 ore | Alètheia',
-    metaDescription: 'Corso conduzione pale caricatrici frontali, 10 ore. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    titleSeo: 'Corso Pale Caricatrici Frontali – 12 ore | Alètheia',
+    metaDescription: 'Corso conduzione pale caricatrici frontali e con braccio mobile (ragno), 12 ore, artt. 37, 71 comma 7 e 73 comma 5 D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '10 ore' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '12 ore (1 giuridico-normativo, 3 tecnico, 8 pratico)' },
       // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
       { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da definire — aggiornamento disponibile (4 ore)' },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
     descrizione: [
-      "La conduzione di caricatori frontali (pale meccaniche) richiede una specifica abilitazione ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 22 febbraio 2012. Sono macchine gommate o cingolate dotate di benna frontale per il carico, lo spostamento e l'accatastamento di materiali sciolti come inerti, terra e rifiuti da costruzione.",
-      "Il corso, della durata di 10 ore, è la formazione di riferimento per chi opera nella logistica di cantiere, nei piazzali di stoccaggio e negli impianti di riciclaggio inerti, e trasmette le competenze per il carico in sicurezza, il calcolo dei pesi e la gestione della stabilità del mezzo.",
+      "La conduzione di pale caricatrici frontali e con braccio mobile (ragno) richiede una specifica abilitazione ai sensi degli artt. 37, 71 comma 7 e 73 comma 5 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 17 aprile 2025. Sono macchine gommate o cingolate dotate di benna frontale (o braccio mobile) per il carico, lo spostamento e l'accatastamento di materiali sciolti come inerti, terra e rifiuti da costruzione.",
+      "Il corso, della durata di 12 ore, è la formazione di riferimento per chi opera nella logistica di cantiere, nei piazzali di stoccaggio e negli impianti di riciclaggio inerti, e trasmette le competenze per il carico in sicurezza, il calcolo dei pesi e la gestione della stabilità del mezzo.",
     ],
     aChiERivolto: [
       'Operatori della logistica di cantiere e addetti allo stoccaggio inerti',
@@ -164,7 +194,42 @@ const CONTENUTO = {
       'Applicare le tecniche operative di carico, spostamento e accatastamento dei materiali sciolti',
       'Gestire la stabilità del mezzo durante le fasi di carico e trasporto',
     ],
-    programmaTitle: 'Programma Corso Addetti alla Conduzione di Pale Caricatrici Frontali · 10 ore',
+    programmaTitle: 'Programma Corso Addetti alla Conduzione di Pale Caricatrici Frontali e con Braccio Mobile (Ragno) · 12 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - GIURIDICO-NORMATIVO',
+        durataOre: 1,
+        argomenti: [
+          'Cenni di normativa generale in materia di igiene e sicurezza del lavoro (D.Lgs 81/2008)',
+          'Responsabilità dell\'operatore',
+        ],
+      },
+      {
+        titolo: 'MODULO II - TECNICO',
+        durataOre: 3,
+        argomenti: [
+          'Categorie di attrezzature: escavatori, caricatori, terne',
+          'Componenti strutturali e circuiti di comando',
+          'Dispositivi di comando e di sicurezza; visibilità e zone cieche',
+          'Controlli pre-utilizzo, modalità di utilizzo in sicurezza e rischi',
+          'Avviamento, spostamento, azionamenti e manovre',
+          'Protezione nei confronti degli agenti fisici: rumore e vibrazioni',
+        ],
+      },
+      {
+        titolo: 'MODULO III - PRATICO',
+        durataOre: 8,
+        argomenti: [
+          'Individuazione dei componenti strutturali e dei dispositivi di comando e sicurezza',
+          'Controlli pre-utilizzo del caricatore',
+          'Pianificazione delle operazioni di caricamento',
+          'Operazioni di movimentazione e sollevamento carichi, agganci rapidi per attrezzi',
+          'Esercitazioni: predisposizione del mezzo, guida con attrezzature, trasferimento stradale',
+          'Uso del caricatore in campo: manovra di caricamento, movimentazione carichi pesanti, uso con forche o pinza',
+          'Messa a riposo e trasporto del caricatore',
+        ],
+      },
+    ],
     prezzo: [{ label: 'Aula', value: '€ 200,00 + IVA' }],
     prezzoNumerico: 200,
   },
@@ -199,6 +264,48 @@ const CONTENUTO = {
       'Gestire la stabilità del mezzo nel passaggio tra le due modalità operative',
     ],
     programmaTitle: 'Programma Corso Addetti alla Conduzione di Terne · 10 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - GIURIDICO-NORMATIVO',
+        durataOre: 1,
+        argomenti: [
+          "Presentazione del corso; cenni di normativa generale in materia di igiene e sicurezza del lavoro (D.Lgs 81/2008)",
+          'Responsabilità dell\'operatore',
+        ],
+      },
+      {
+        titolo: 'MODULO II - TECNICO',
+        durataOre: 3,
+        argomenti: [
+          'Categorie di attrezzature: escavatori, caricatori, terne e autoribaltabili a cingoli',
+          'Componenti strutturali e circuiti di comando',
+          'Dispositivi di comando e di sicurezza; visibilità e zone cieche',
+          'Controlli pre-utilizzo, modalità di utilizzo in sicurezza e rischi',
+          'Protezione nei confronti degli agenti fisici: rumore e vibrazioni',
+        ],
+      },
+      {
+        titolo: 'MODULO III - PRATICO (I)',
+        durataOre: 3,
+        argomenti: [
+          'Individuazione dei componenti strutturali e dei dispositivi di comando e sicurezza',
+          'Controlli pre-utilizzo della terna',
+          'Pianificazione delle operazioni di scavo e caricamento',
+          'Operazioni di movimentazione carichi, agganci rapidi per attrezzi',
+        ],
+      },
+      {
+        titolo: 'MODULO IV - PRATICO (II)',
+        durataOre: 3,
+        argomenti: [
+          'Guida della terna su strada',
+          'Esecuzione di manovre di scavo e riempimento, accoppiamento attrezzature',
+          'Manovre di livellamento e movimentazione carichi di precisione',
+          'Aggancio di attrezzature speciali (martello demolitore, pinza idraulica, trivella)',
+          'Messa a riposo e trasporto della terna',
+        ],
+      },
+    ],
     prezzo: [{ label: 'Aula', value: '€ 200,00 + IVA' }],
     prezzoNumerico: 200,
   },
@@ -233,6 +340,37 @@ const CONTENUTO = {
       'Gestire la stabilità del mezzo e il rischio di ribaltamento su fondi sconnessi',
     ],
     programmaTitle: 'Programma Corso Addetti alla Conduzione di Autoribaltabili a Cingoli · 10 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - NORMATIVO-GIURIDICO',
+        durataOre: 1,
+        argomenti: [
+          'Panorama normativo in materia di sicurezza e igiene nei luoghi di lavoro (D.Lgs 81/2008)',
+          'Responsabilità dell\'operatore',
+        ],
+      },
+      {
+        titolo: 'MODULO II - TECNICO',
+        durataOre: 3,
+        argomenti: [
+          'Categorie di attrezzature con riferimento agli escavatori',
+          'Componenti strutturali e circuiti di comando',
+          'Dispositivi di comando e di sicurezza; visibilità e zone cieche',
+          'Controlli pre-utilizzo, modalità di utilizzo in sicurezza e rischi',
+          'Protezione nei confronti degli agenti fisici: rumore e vibrazioni',
+        ],
+      },
+      {
+        titolo: 'MODULO III - PRATICO',
+        durataOre: 6,
+        argomenti: [
+          'Predisposizione del mezzo e posizionamento organi di lavoro',
+          'Guida a pieno carico e trasferimento stradale',
+          'Uso dell\'autoribaltabile in campo: manovre di scaricamento e spargimento',
+          'Messa a riposo dell\'autoribaltabile',
+        ],
+      },
+    ],
     prezzo: [{ label: 'Aula', value: '€ 200,00 + IVA' }],
     prezzoNumerico: 200,
   },
@@ -269,6 +407,47 @@ const CONTENUTO = {
       "Attuare le procedure di emergenza in caso di guasto meccanico, idraulico o instabilità del terreno",
     ],
     programmaTitle: 'Programma Corso Addetti alla Conduzione di Escavatori Idraulici, Caricatori Frontali e Terne · 16 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - GIURIDICO-NORMATIVO',
+        durataOre: 1,
+        argomenti: [
+          "Presentazione del corso; cenni di normativa generale in materia di igiene e sicurezza del lavoro (D.Lgs 81/2008)",
+          'Responsabilità dell\'operatore',
+        ],
+      },
+      {
+        titolo: 'MODULO II - TECNICO',
+        durataOre: 3,
+        argomenti: [
+          'Attrezzature con riferimento a escavatori, caricatori, terne e autoribaltabili a cingoli',
+          'Componenti strutturali; dispositivi di comando e sicurezza',
+          'Visibilità e identificazione zone cieche',
+          'Controlli; uso in sicurezza, rischi e precauzioni',
+          'Protezione da agenti fisici',
+        ],
+      },
+      {
+        titolo: 'MODULO III - PRATICO (I)',
+        durataOre: 6,
+        argomenti: [
+          'Individuazione dei componenti strutturali e dei dispositivi di comando e sicurezza',
+          'Controlli pre-utilizzo',
+          'Pianificazione delle operazioni di campo, scavo e caricamento',
+          'Operazioni di movimentazione e sollevamento carichi, agganci rapidi per attrezzi',
+        ],
+      },
+      {
+        titolo: 'MODULO IV - PRATICO (II)',
+        durataOre: 6,
+        argomenti: [
+          'Esercitazioni di pratiche operative',
+          'Uso, messa a riposo e trasporto di escavatori idraulici, caricatori frontali e terne',
+          'Salita sul carrellone di trasporto',
+          'Individuazione dei punti di aggancio per il sollevamento',
+        ],
+      },
+    ],
     prezzo: [{ label: 'Aula', value: '€ 300,00 + IVA' }],
     prezzoNumerico: 300,
   },
@@ -278,30 +457,45 @@ const CONTENUTO = {
     titleSuffix: '· 4 ore',
     breadcrumbLabel: 'Aggiornamento',
     titleSeo: 'Aggiornamento Macchine Movimento Terra – 4h | Alètheia',
-    metaDescription: 'Aggiornamento conduzione macchine movimento terra, 4 ore. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    metaDescription: "Aggiornamento conduzione escavatori idraulici, caricatori frontali e terne, 4 ore, art. 73 e Allegato IX D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).",
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '4 ore' },
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da ripetere periodicamente — da definire' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '4 ore (interamente pratiche)' },
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da ripetere periodicamente ai sensi dell'art. 73 e dell'Allegato IX del D.Lgs 81/2008" },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
     descrizione: [
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA - confermare la periodicità esatta di rinnovo (5 anni)
-      "Il corso di aggiornamento da 4 ore è il percorso periodico obbligatorio per rinnovare la validità quinquennale del patentino unico per le Macchine Movimento Terra (MMT). Il modulo offre un richiamo focalizzato sulle norme di comportamento, sulla legislazione aggiornata in materia di attrezzature di lavoro e sulle procedure di sicurezza nell'utilizzo di escavatori, pale meccaniche e terne.",
-      "L'obiettivo è riattivare l'attenzione dell'operatore sulle corrette prassi operative, analizzare i trend di infortunio più frequenti nei cantieri per aumentarne la consapevolezza del rischio e verificare l'evoluzione tecnologica dei sistemi di sicurezza attivi e passivi installati sui macchinari di ultima generazione.",
+      "Questo è il corso di aggiornamento abilitante per addetti alla conduzione di escavatori idraulici, caricatori frontali e terne, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale e deve rinnovarlo prima della scadenza, ai sensi dell'art. 73 e dell'Allegato IX del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.",
+      "Il corso, interamente pratico, richiama i contenuti principali del corso base sulla responsabilità dell'operatore e sulle modalità di uso in sicurezza, e prevede esercitazioni pratiche operative con simulazioni di movimentazione di escavatori idraulici, caricatori frontali e terne.",
     ],
     aChiERivolto: [
-      'Operatori e conducenti di macchine movimento terra che hanno già completato il corso base da 16 ore',
-      "Lavoratori edili e impiantisti in possesso del patentino MMT in prossimità della scadenza dei 5 anni",
+      'Operatori e conducenti di macchine movimento terra già formati, con attestato in scadenza',
+      "Lavoratori edili e impiantisti in possesso del patentino MMT che devono rinnovare la propria idoneità",
+      'Datori di lavoro che devono garantire l\'aggiornamento periodico degli operatori',
     ],
     cosaImparerai: [
-      "Analizzare gli aggiornamenti normativi e le linee guida nazionali sull'uso delle macchine nei cantieri",
-      "Ripassare le check-list di controllo pre-uso avanzate per l'efficienza dei sistemi idraulici e di bloccaggio",
-      'Revisionare criticamente le manovre vietate e le cause principali di instabilità e ribaltamento dei mezzi',
-      'Aggiornare le procedure operative di emergenza e di cooperazione con la sicurezza del cantiere',
+      "Richiamare la normativa generale in materia di igiene e sicurezza sull'uso di attrezzature semoventi con operatore a bordo",
+      'Riconoscere i fattori di rischio e pericolo e le modalità di uso in sicurezza',
+      "Individuare i dispositivi di comando e sicurezza e il loro funzionamento",
+      'Esercitarsi in simulazioni di movimentazione di escavatori idraulici, caricatori frontali e terne',
+      'Applicare le procedure operative di sicurezza, di salvataggio e le manovre di emergenza',
     ],
-    programmaTitle: 'Programma Aggiornamento Addetti alla Conduzione di Macchine Movimento Terra · 4 ore',
+    programmaTitle: 'Programma Aggiornamento Addetti alla Conduzione di Escavatori Idraulici, Caricatori Frontali e Terne · 4 ore',
+    moduli: [
+      {
+        titolo: 'MODULO UNICO - MODULO PRATICO',
+        durataOre: 4,
+        argomenti: [
+          "Cenni di normativa generale in materia di igiene e sicurezza del lavoro con riferimento all'uso di attrezzature semoventi con operatore a bordo",
+          "Responsabilità dell'operatore, modalità di uso in sicurezza e individuazione dei fattori di rischio e pericolo",
+          'Esercitazioni pratiche operative',
+          'Individuazione dei dispositivi di comando e sicurezza e loro funzionamento',
+          'Simulazioni di movimentazione di escavatori idraulici, caricatori frontali e terne',
+          'Procedure operative di sicurezza, di salvataggio e manovre di emergenza',
+          'Controlli pre-post utilizzo',
+        ],
+      },
+    ],
     prezzo: [{ label: 'Aula', value: '€ 100,00 + IVA' }],
     prezzoNumerico: 100,
   },
@@ -570,13 +764,46 @@ export default function CorsoMacchineMovimentoTerra() {
 
                 {activeTab === 'moduli' && (
                   <div>
-                    {/* <!-- TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA --> */}
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>
                       {c.programmaTitle}
                     </h2>
-                    <div className="cp-placeholder-block text-slate-500 dark:text-gray-400 border-slate-200 dark:border-[rgba(255,255,255,0.15)]">
-                      {NOTA_MODULI_IN_AGGIORNAMENTO}
-                    </div>
+                    {!c.moduli ? (
+                      <div className="cp-placeholder-block text-slate-500 dark:text-gray-400 border-slate-200 dark:border-[rgba(255,255,255,0.15)]">
+                        {NOTA_MODULI_IN_AGGIORNAMENTO}
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
+                          Il corso è strutturato in {c.moduli.length} moduli per un totale di {c.moduli.reduce((tot, m) => tot + m.durataOre, 0)} ore
+                        </p>
+                        <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                            <thead>
+                              <tr className="bg-slate-50 dark:bg-gray-700">
+                                <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modulo</th>
+                                <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>Durata</th>
+                                <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Argomenti</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {c.moduli.map((modulo, i) => (
+                                <tr key={i} className="border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
+                                  <td className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{modulo.titolo}</td>
+                                  <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>{modulo.durataOre} ore</td>
+                                  <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
+                                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                                      {modulo.argomenti.map((arg, j) => (
+                                        <li key={j} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{arg}</li>
+                                      ))}
+                                    </ul>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -589,38 +816,7 @@ export default function CorsoMacchineMovimentoTerra() {
                 buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
                 buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Macchine%20Movimento%20Terra"
-              >
-                {selectedTipo !== 'aggiornamento' && (
-                  <button
-                    type="button"
-                    onClick={() => selectTipo('aggiornamento')}
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
-                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
-                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                    }}
-                  >
-                    <span>Devi solo <strong>rinnovare</strong> il patentino già in tuo possesso?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento</span>
-                  </button>
-                )}
-                {selectedTipo === 'aggiornamento' && (
-                  <button
-                    type="button"
-                    onClick={() => selectTipo('combinato')}
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
-                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
-                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                    }}
-                  >
-                    <span>Devi conseguire il patentino <strong>per la prima volta</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Scegli la macchina qui sopra</span>
-                  </button>
-                )}
-              </PricingSidebar>
+              />
             </aside>
           </div>
         </div>

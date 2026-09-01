@@ -107,12 +107,12 @@ const COLOR_STYLES = {
     btn: 'border-amber-600 text-amber-600 dark:border-amber-300 dark:text-amber-300 hover:bg-amber-600 hover:text-white dark:hover:bg-amber-300 dark:hover:text-slate-900',
   },
   teal: {
-    iconBg: 'bg-teal-50 dark:bg-teal-900/20',
-    iconText: 'text-teal-600 dark:text-teal-300',
-    sopratitolo: 'text-teal-600 dark:text-teal-300',
-    topBorder: 'bg-teal-600',
-    bullet: 'text-teal-600 dark:text-teal-300',
-    btn: 'border-teal-600 text-teal-600 dark:border-teal-300 dark:text-teal-300 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-300 dark:hover:text-slate-900',
+    iconBg: 'bg-[#008C95]/10 dark:bg-[#10B981]/10',
+    iconText: 'text-primary dark:text-[#10B981]',
+    sopratitolo: 'text-primary dark:text-[#10B981]',
+    topBorder: 'bg-primary',
+    bullet: 'text-primary dark:text-[#10B981]',
+    btn: 'border-primary text-primary dark:border-[#10B981] dark:text-[#10B981] hover:bg-primary hover:text-white dark:hover:bg-[#10B981] dark:hover:text-slate-900',
   },
   indigo: {
     iconBg: 'bg-indigo-50 dark:bg-indigo-900/20',
@@ -260,8 +260,8 @@ export default function FormazioneProfessionaleSpecialistica() {
                 <div
                   className="h-full bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-xl p-8 flex flex-col items-start text-left gap-3"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center">
-                    <i className={`${v.icon} text-teal-600 dark:text-teal-300`} style={{ fontSize: '1.3rem' }}></i>
+                  <div className="w-12 h-12 rounded-xl bg-[#008C95]/10 dark:bg-[#10B981]/10 flex items-center justify-center">
+                    <i className={`${v.icon} text-primary dark:text-[#10B981]`} style={{ fontSize: '1.3rem' }}></i>
                   </div>
                   <span className="text-slate-900 dark:text-white text-lg font-extrabold">{v.title}</span>
                   <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed m-0">{v.text}</p>

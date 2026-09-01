@@ -43,7 +43,7 @@ function AccreditamentoCard({ logo, logoAlt, title, code, logoScale }) {
 
       {/* Badge accreditamento */}
       {code && (
-        <span className="inline-block self-start mt-auto text-xs font-bold uppercase tracking-wide text-[#0B4A52] dark:text-teal-100 bg-[#0B4A52]/8 dark:bg-teal-100/10 px-3 py-1.5 rounded-lg">
+        <span className="inline-block self-start mt-auto text-xs font-bold uppercase tracking-wide text-[#0B4A52] dark:text-[#10B981] bg-[#0B4A52]/8 dark:bg-[#10B981]/10 px-3 py-1.5 rounded-lg">
           {code}
         </span>
       )}
@@ -60,12 +60,12 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
         onClick={() => setShowModal(true)}
         className="h-full bg-white dark:bg-dark-card rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-2 hover:shadow-lg flex flex-col items-center group"
       >
-        <div className="w-16 h-16 bg-teal-50 dark:bg-teal-900/20 rounded-full flex items-center justify-center mb-4 text-3xl text-teal-600 dark:text-[#10B981] transition-colors duration-300 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/40">
+        <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-primary dark:text-[#10B981] transition-colors duration-300 group-hover:bg-[#008C95]/15 dark:group-hover:bg-[#10B981]/20">
           <i className={icon}></i>
         </div>
         <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">{title}</h3>
         <p className="text-sm text-slate-500 dark:text-gray-400 mb-5 flex-1">{subtitle}</p>
-        <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#0B4A52] dark:text-teal-200 border border-slate-200 dark:border-[rgba(255,255,255,0.15)] rounded-full px-4 py-2 transition-all duration-300 group-hover:border-teal-400 dark:group-hover:border-teal-300/40">
+        <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#0B4A52] dark:text-[#10B981] border border-slate-200 dark:border-[rgba(255,255,255,0.15)] rounded-full px-4 py-2 transition-all duration-300 group-hover:border-[#10B981] dark:group-hover:border-[#10B981]/40">
           Scopri i dettagli
           <i className="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1" style={{ fontSize: '9px' }}></i>
         </span>
@@ -82,24 +82,24 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
           >
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-slate-400 dark:text-gray-500 hover:text-teal-600 dark:hover:text-[#10B981] transition-colors text-xl bg-transparent border-none cursor-pointer"
+              className="absolute top-4 right-4 text-slate-400 dark:text-gray-500 hover:text-primary dark:hover:text-[#10B981] transition-colors text-xl bg-transparent border-none cursor-pointer"
             >
               <i className="fas fa-times"></i>
             </button>
 
-            <div className="w-20 h-20 bg-teal-50 dark:bg-teal-900/20 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl text-teal-600 dark:text-[#10B981]">
+            <div className="w-20 h-20 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl text-primary dark:text-[#10B981]">
               <i className={icon}></i>
             </div>
 
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-1">{title}</h3>
-            <p className="text-teal-600 dark:text-[#10B981] font-semibold text-center mb-6">{subtitle}</p>
+            <p className="text-primary dark:text-[#10B981] font-semibold text-center mb-6">{subtitle}</p>
             <p className="text-slate-600 dark:text-gray-300 leading-relaxed mb-6 text-sm">{description}</p>
 
             {benefits && benefits.length > 0 && (
               <div className="bg-slate-50 dark:bg-gray-700 rounded-xl p-4 mb-6 space-y-2">
                 {benefits.map((benefit, i) => (
                   <p key={i} className="text-slate-700 dark:text-gray-300 text-sm flex items-start gap-2">
-                    <i className="fas fa-check-circle text-teal-600 dark:text-[#10B981] mt-0.5 flex-shrink-0"></i>
+                    <i className="fas fa-check-circle text-primary dark:text-[#10B981] mt-0.5 flex-shrink-0"></i>
                     {benefit}
                   </p>
                 ))}
@@ -111,7 +111,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
                 href={pdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full py-3 bg-teal-600 dark:bg-[#008C95] hover:bg-teal-700 dark:hover:bg-[#006B73] text-white font-semibold rounded-xl transition-all duration-200 text-sm no-underline"
+                className="flex items-center justify-center gap-3 w-full py-3 bg-primary dark:bg-[#008C95] hover:bg-[#006B73] dark:hover:bg-[#006B73] text-white font-semibold rounded-xl transition-all duration-200 text-sm no-underline"
               >
                 <i className="fas fa-file-pdf"></i> Visualizza Certificato
               </a>
@@ -125,7 +125,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full py-3 bg-white dark:bg-transparent border border-teal-600 dark:border-[#10B981] text-teal-600 dark:text-[#10B981] hover:bg-teal-50 dark:hover:bg-teal-900/20 font-semibold rounded-xl transition-all duration-200 text-sm no-underline"
+                    className="flex items-center justify-center gap-3 w-full py-3 bg-white dark:bg-transparent border border-primary dark:border-[#10B981] text-primary dark:text-[#10B981] hover:bg-[#008C95]/10 dark:hover:bg-[#10B981]/10 font-semibold rounded-xl transition-all duration-200 text-sm no-underline"
                   >
                     <i className="fas fa-file-pdf"></i> {link.label}
                   </a>
@@ -232,7 +232,7 @@ export default function ChiSiamo() {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
             <a
               href="#cosa-facciamo"
-              className="bg-teal-500 hover:bg-teal-400 text-teal-950 font-bold px-6 py-3 rounded-xl text-sm transition-all"
+              className="bg-primary hover:bg-[#10B981] text-white font-bold px-6 py-3 rounded-xl text-sm transition-all"
             >
               Scopri cosa facciamo
             </a>
@@ -251,7 +251,7 @@ export default function ChiSiamo() {
         <div className="py-20 px-6 sm:px-12 max-w-7xl mx-auto">
           {/* Testo a tutta larghezza */}
           <div>
-            <span className="bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
               La nostra storia
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
@@ -280,11 +280,11 @@ export default function ChiSiamo() {
 
       {/* SEZIONE PRINCIPALE */}
       <section id="cosa-facciamo" className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-teal-600 dark:text-teal-400 mb-2">
+        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary dark:text-[#10B981] mb-2">
           Ciò che guida ogni nostro progetto
         </span>
         <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-10">
-          Formazione che genera <span className="text-teal-600 dark:text-teal-400">impatto</span>
+          Formazione che genera <span className="text-primary dark:text-[#10B981]">impatto</span>
         </h2>
 
         {/* TAB NAV - fuori dalle colonne, sopra entrambe */}
@@ -325,11 +325,11 @@ export default function ChiSiamo() {
               {activeData && (
                 <div className="animate-fadeIn">
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{activeData.titolo}</h3>
-                  <p className="text-teal-600 dark:text-teal-400 font-medium mb-6 text-sm">{activeData.sottotitolo}</p>
+                  <p className="text-primary dark:text-[#10B981] font-medium mb-6 text-sm">{activeData.sottotitolo}</p>
                   <div className="space-y-5">
                     {activeData.punti.map((item, idx) => (
                       <div key={idx} className="flex gap-3">
-                        <div className="w-2 h-2 rounded-full bg-teal-500 mt-2 flex-shrink-0"></div>
+                        <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
                         <div>
                           <strong className="block text-slate-900 dark:text-white mb-1 text-sm">{item.key}</strong>
                           <p className="text-slate-500 dark:text-gray-300 leading-relaxed text-sm m-0">{item.desc}</p>
@@ -347,7 +347,7 @@ export default function ChiSiamo() {
       {/* I NOSTRI PUNTI DI FORZA */}
       <section className="bg-slate-50 dark:bg-dark-bg py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-12">
-          <span className="bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+          <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
             Perché scegliere Alètheia
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -368,11 +368,11 @@ export default function ChiSiamo() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { accent: 'bg-teal-500', titolo: 'Sistema formazione-lavoro integrato', desc: "Due ruoli, un obiettivo solo: trasformare ogni competenza acquisita in un'opportunità concreta di inserimento o crescita professionale." },
+              { accent: 'bg-primary', titolo: 'Sistema formazione-lavoro integrato', desc: "Due ruoli, un obiettivo solo: trasformare ogni competenza acquisita in un'opportunità concreta di inserimento o crescita professionale." },
               { accent: 'bg-indigo-500', titolo: 'Affidabilità certificata', desc: 'Accreditamento regionale, iscrizione ANPAL e certificazioni ISO: garanzie ufficiali che attestano qualità e trasparenza.' },
-              { accent: 'bg-teal-500', titolo: 'Esperti in formazione finanziata', desc: "Oltre 100 progetti gestiti con fondi FSE, PSR, FEAMP e Fondi Interprofessionali. Seguiamo l'intero processo, dall'analisi dei fabbisogni alla rendicontazione finale." },
+              { accent: 'bg-primary', titolo: 'Esperti in formazione finanziata', desc: "Oltre 100 progetti gestiti con fondi FSE, PSR, FEAMP e Fondi Interprofessionali. Seguiamo l'intero processo, dall'analisi dei fabbisogni alla rendicontazione finale." },
               { accent: 'bg-indigo-500', titolo: 'Certificazioni riconosciute', desc: 'Percorsi qualificanti e certificazioni spendibili nel mercato del lavoro e nei concorsi pubblici. Siamo anche Test Center AICA.' },
-              { accent: 'bg-teal-500', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
+              { accent: 'bg-primary', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
               { accent: 'bg-indigo-500', titolo: 'La forza di un gruppo', desc: 'Alètheia è l’ente di formazione di Promotergroup S.p.A., un ecosistema che integra formazione, consulenza aziendale, salute e sicurezza, comunicazione. Scegliere Alètheia significa accedere a una rete di competenze che va ben oltre la formazione.' },
             ].map((card, i) => (
               <Reveal key={card.titolo} delay={(i % 4) * 80} className="h-full">
@@ -397,7 +397,7 @@ export default function ChiSiamo() {
       <section className="bg-light dark:bg-dark-bg">
         <div className="max-w-7xl mx-auto py-20 px-6 sm:px-12">
           <div className="mb-16">
-            <span className="bg-teal-50 text-teal-700 dark:bg-teal-950/50 dark:text-teal-400 px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="bg-[#008C95]/10 text-primary dark:bg-[#004D52]/50 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
               Le nostre Expertise
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight uppercase">
@@ -407,11 +407,11 @@ export default function ChiSiamo() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
             {[
-              { n: '01', accent: 'text-teal-500/30 dark:text-teal-400/20', titolo: 'Sicurezza sul lavoro', desc: 'Oltre 5.000 lavoratori formati. Corsi conformi al D.Lgs. 81/08 per aziende e PA.' },
+              { n: '01', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Sicurezza sul lavoro', desc: 'Oltre 5.000 lavoratori formati. Corsi conformi al D.Lgs. 81/08 per aziende e PA.' },
               { n: '02', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Agricoltura e agroalimentare', desc: "Vantiamo una specifica esperienza nel settore agricolo e agroalimentare. Percorsi PSR, FEAMP, fitosanitario, conduzione d'impresa agricola, innovazione in agricoltura." },
-              { n: '03', accent: 'text-teal-500/30 dark:text-teal-400/20', titolo: 'Formazione finanziata', desc: "FSE+, Fondi Interprofessionali, Fondo Nuove Competenze, POC Sicilia. Gestione completa: dall'analisi dei fabbisogni alla rendicontazione." },
+              { n: '03', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Formazione finanziata', desc: "FSE+, Fondi Interprofessionali, Fondo Nuove Competenze, POC Sicilia. Gestione completa: dall'analisi dei fabbisogni alla rendicontazione." },
               { n: '04', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Sanità e welfare', desc: 'Percorsi per operatori socio-sanitari, assistenti familiari e operatori socio-assistenziali.' },
-              { n: '05', accent: 'text-teal-500/30 dark:text-teal-400/20', titolo: 'Competenze digitali', desc: 'Certificazioni ICDL e percorsi AICA per scuola, imprese e pubblica amministrazione.' },
+              { n: '05', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Competenze digitali', desc: 'Certificazioni ICDL e percorsi AICA per scuola, imprese e pubblica amministrazione.' },
               { n: '06', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Pubblica Amministrazione', desc: 'Percorsi su misura per enti locali, assessorati e operatori del settore pubblico. Formazione che rispetta i tempi e le esigenze della PA.' },
             ].map((s, i) => (
               <Reveal key={s.n} delay={(i % 3) * 90}>
@@ -430,7 +430,7 @@ export default function ChiSiamo() {
       <section id="certificazioni" className="bg-slate-50 dark:bg-dark-bg" style={{ scrollMarginTop: '80px' }}>
         <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
           <div className="text-left mb-12">
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-teal-600 dark:text-teal-400 mb-2">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary dark:text-[#10B981] mb-2">
               Certificazioni e accreditamenti
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
@@ -501,7 +501,7 @@ export default function ChiSiamo() {
           {/* Accreditamenti istituzionali */}
           <div className="mt-16 pt-12 border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
             <div className="text-left mb-10">
-              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-teal-600 dark:text-teal-400 mb-2">
+              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary dark:text-[#10B981] mb-2">
                 Accreditamenti
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -552,7 +552,7 @@ export default function ChiSiamo() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch py-20 px-6 sm:px-12 max-w-7xl mx-auto">
           {/* Colonna sede */}
           <Reveal>
-            <span className="bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
               La nostra sede
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
@@ -566,7 +566,7 @@ export default function ChiSiamo() {
 
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <svg className="text-teal-600 dark:text-[#10B981] shrink-0 w-5 h-5 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="text-primary dark:text-[#10B981] shrink-0 w-5 h-5 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
@@ -576,14 +576,14 @@ export default function ChiSiamo() {
                     href="https://www.google.com/maps/search/?api=1&query=Via+del+Carrubo+Vittoria+RG"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-teal-600 hover:text-teal-700 dark:text-[#10B981] dark:hover:text-[#059669] text-xs font-bold transition-colors block mt-0.5 cursor-pointer"
+                    className="text-primary hover:text-[#006B73] dark:text-[#10B981] dark:hover:text-[#059669] text-xs font-bold transition-colors block mt-0.5 cursor-pointer"
                   >
                     Vedi su Google Maps →
                   </a>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <svg className="text-teal-600 dark:text-[#10B981] shrink-0 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="text-primary dark:text-[#10B981] shrink-0 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 6v6l4 2" />
                 </svg>
@@ -593,7 +593,7 @@ export default function ChiSiamo() {
           </Reveal>
 
           {/* Colonna CTA */}
-          <Reveal delay={100} className="bg-gradient-to-br from-slate-950 via-teal-950 to-slate-950 text-white rounded-3xl p-8 flex flex-col justify-center shadow-lg border border-slate-800/50">
+          <Reveal delay={100} className="bg-gradient-to-br from-slate-950 via-[#003134] to-slate-950 text-white rounded-3xl p-8 flex flex-col justify-center shadow-lg border border-slate-800/50">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
               Vuoi costruire il tuo percorso professionale?
             </h3>
@@ -603,7 +603,7 @@ export default function ChiSiamo() {
             </p>
             <a
               href="/contatti"
-              className="inline-block text-center bg-teal-500 hover:bg-teal-400 text-teal-950 font-extrabold px-6 py-3.5 rounded-xl text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-teal-500/10 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
+              className="inline-block text-center bg-primary hover:bg-[#10B981] text-white font-extrabold px-6 py-3.5 rounded-xl text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
             >
               Richiedi consulenza gratuita
             </a>

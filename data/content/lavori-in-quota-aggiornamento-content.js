@@ -13,11 +13,13 @@ module.exports = {
     partecipantiMax: 30,
     prezzo: 140,
 
-    descrizione: `Questo è il corso di aggiornamento per addetti ai lavori in quota e utilizzo DPI anticaduta di III categoria, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale di 8 ore e deve rinnovarlo periodicamente, ai sensi del D.Lgs 81/2008 coordinato con il D.Lgs 106/2009, artt. 36, 37, 76 e 77.
+    descrizione: `Questo è il corso di Aggiornamento all'Utilizzo di DPI III Categoria, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale di 8 ore e deve rinnovarlo periodicamente, ai sensi degli artt. 76 e 77 del D.Lgs 81/2008 e s.m.i.
 
-L'aggiornamento periodico è obbligatorio perché l'uso dei DPI anticaduta richiede una pratica costante per restare efficace in una situazione reale di emergenza: le manovre di posizionamento, accesso e soccorso in quota si affinano con l'esercizio ripetuto, ed è per questo che la normativa richiede un richiamo periodico sia teorico sia pratico, distinto dalla formazione iniziale più estesa.
+L'aggiornamento periodico è obbligatorio perché l'uso dei DPI anticaduta richiede una pratica costante per restare efficace in una situazione reale di emergenza: le manovre di vestizione, ancoraggio e aggancio si affinano con l'esercizio ripetuto, ed è per questo che la normativa richiede un richiamo periodico sia teorico sia pratico, distinto dalla formazione iniziale più estesa.
 
-Il corso, articolato in un unico modulo di 4 ore (2 ore di teoria e 2 ore di pratica), richiama i contenuti principali del corso base: protezione individuale e scelta dei DPI, obblighi dei lavoratori, caratteristiche dei DPI per la protezione dalle cadute dall'alto, durata e manutenzione, sistemi di protezione (posizionamento, trattenuta e anticaduta), equipaggiamento e collegamento corretto dei DPI, posizionamento su struttura verticale, accesso su scala semplice e soccorso dell'operatore in quota.
+Il corso si articola in due moduli: il Modulo I teorico (2 ore), su tipologie di DPI anticaduta di terza categoria, individuazione dei sistemi più adeguati ai rischi, normativa, caratteristiche tecniche, corretto uso, verifiche e manutenzione; il Modulo II pratico (2 ore), con esercitazioni di vestizione e svestizione con imbracature, cordini e DPI di III categoria, scelta dell'ancoraggio e del sistema di aggancio, linee vita e linee di ancoraggio flessibili orizzontali.
+
+Si precisa che questo modulo di aggiornamento non assolve a quanto previsto dal comma 5 dell'art. 37 del D.Lgs 81/2008.
 
 Il corso è pensato per chi ha già l'attestato base in scadenza o scaduto da poco. Chi invece ha un'abilitazione scaduta da troppo tempo, o non l'ha mai conseguita, deve necessariamente frequentare il corso base completo di 8 ore, non l'aggiornamento.
 
@@ -31,12 +33,12 @@ Il corso si svolge in aula e in area pratica presso la sede Alètheia di Vittori
     ],
 
     cosaImparerai: [
-      'Richiamare le modalità di scelta e adeguatezza dei DPI',
-      'Consolidare gli obblighi dei lavoratori',
-      'Aggiornare le norme su durata, manutenzione e conservazione dei DPI',
-      'Applicare le procedure di verifica e controllo dei DPI',
-      'Esercitarsi in vestizione, collegamento e posizionamento su struttura verticale',
-      'Consolidare le tecniche di soccorso'
+      'Riconoscere le tipologie dei DPI anticaduta di terza categoria',
+      'Individuare i sistemi anticaduta più corretti e adeguati ai rischi connessi al lavoro da svolgere',
+      'Aggiornare le conoscenze su normativa, caratteristiche tecniche, verifiche e manutenzione dei DPI',
+      'Indossare correttamente un\'imbracatura anticaduta e scegliere casco e dissipatori di energia idonei',
+      'Scegliere l\'ancoraggio e il sistema di aggancio più adatto, incluse le linee vita orizzontali flessibili',
+      'Esercitarsi in vestizione e svestizione con DPI di III categoria specifici'
     ],
 
     faq: [
@@ -46,11 +48,11 @@ Il corso si svolge in aula e in area pratica presso la sede Alètheia di Vittori
       },
       {
         domanda: 'Quanto dura l\'aggiornamento?',
-        risposta: '4 ore complessive: 2 ore di richiamo teorico e 2 ore di prove pratiche.'
+        risposta: '4 ore complessive: 2 ore di modulo teorico e 2 ore di modulo pratico.'
       },
       {
-        domanda: 'Include esercitazioni pratiche?',
-        risposta: 'Sì, la metà del corso prevede addestramento su equipaggiamento, collegamento DPI, struttura verticale, scala semplice e soccorso.'
+        domanda: 'Questo aggiornamento sostituisce anche la formazione lavori in quota prevista dal comma 5 art. 37 D.Lgs 81/2008?',
+        risposta: 'No, questo modulo di aggiornamento sui DPI di III categoria non assolve a quanto previsto dal comma 5 dell\'art. 37 del D.Lgs 81/2008.'
       },
       {
         domanda: 'Cosa succede se l\'attestato è scaduto da tempo?',
@@ -64,15 +66,25 @@ Il corso si svolge in aula e in area pratica presso la sede Alètheia di Vittori
 
     moduli: [
       {
-        titolo: 'MODULO UNICO - RICHIAMO TEORICO E ADDESTRAMENTO PRATICO',
-        durataOreTeoria: 2,
-        durataOrePratica: 2,
+        titolo: 'MODULO I - MODULO TEORICO',
+        durataOre: 2,
         argomenti: [
-          'Richiamo teorico-normativo sui sistemi di protezione',
-          'Verifica dei DPI',
-          'Vestizione ed equipaggiamento',
-          'Salita su scala semplice',
-          'Simulazione di soccorso dell\'operatore in quota'
+          'Le tipologie dei DPI anticaduta di terza categoria',
+          'Individuazione dei sistemi anticaduta più corretti e adeguati ai rischi connessi al tipo di lavoro da svolgere',
+          'Normativa e caratteristiche tecniche',
+          'Definizione delle modalità per il corretto uso degli anticaduta in relazione alle problematiche operative',
+          'Verifiche e manutenzione'
+        ]
+      },
+      {
+        titolo: 'MODULO II - MODULO PRATICO',
+        durataOre: 2,
+        argomenti: [
+          'Corretto metodo per indossare un\'imbracatura anticaduta',
+          'Scelta dei DPI anticaduta, del casco di protezione e dei dissipatori di energia',
+          'Scelta dell\'ancoraggio e sistema di aggancio',
+          'Linee vita e linee di ancoraggio flessibili orizzontali; dispositivi di ancoraggio',
+          'Esercitazioni pratiche di vestizione e svestizione con DPI specifici (imbracature, cordino e DPI di III categoria previsti dall\'azienda)'
         ]
       }
     ],

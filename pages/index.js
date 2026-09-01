@@ -226,7 +226,7 @@ function CorsiCalendarTabs({ giorni }) {
               aria-pressed={isActive}
               className={`flex flex-col items-center justify-center shrink-0 w-16 h-16 rounded-xl transition-all ${
                 isActive
-                  ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
+                  ? 'bg-primary text-white shadow-md shadow-primary/20'
                   : 'bg-gray-50 dark:bg-dark-bg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-card'
               }`}
             >
@@ -281,7 +281,7 @@ function CorsiCalendarTabs({ giorni }) {
             {/* Azione */}
             <a
               href={`/all-courses/${corso.slug}`}
-              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl text-sm transition-colors duration-300 shrink-0 w-full md:w-auto text-center"
+              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary hover:bg-[#006B73] text-white font-semibold rounded-xl text-sm transition-colors duration-300 shrink-0 w-full md:w-auto text-center"
             >
               Iscriviti ora
               <i className="fas fa-arrow-right text-xs transition-transform duration-300 ease-out group-hover/btn:translate-x-1" aria-hidden="true" />
@@ -467,7 +467,7 @@ export default function Home() {
       <Reveal as="section" className="pt-16 pb-24 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
               Calendario corsi
             </span>
             <h2 id="calendario-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -485,7 +485,7 @@ export default function Home() {
           <div className="text-center mt-12">
             <a
               href="/calendario-corsi"
-              className="inline-flex items-center gap-2 text-teal-600 dark:text-[#10B981] hover:text-teal-700 dark:hover:text-[#059669] font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-primary dark:text-[#10B981] hover:text-[#006B73] dark:hover:text-[#059669] font-semibold transition-colors"
             >
               Vedi il calendario completo →
             </a>
@@ -555,7 +555,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
-            <span className="inline-block bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
               Cosa facciamo
             </span>
             <h2 id="cosa-facciamo-heading" className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
@@ -581,9 +581,9 @@ export default function Home() {
                   loading="lazy"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal-950/95 via-teal-950/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#004D52]/95 via-[#004D52]/70 to-transparent" />
                 <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
-                  <p className="font-black tracking-wider text-xs text-teal-300 uppercase mb-2">Sviluppo delle Competenze</p>
+                  <p className="font-black tracking-wider text-xs text-[#10B981] uppercase mb-2">Sviluppo delle Competenze</p>
                   <h3 className="text-2xl font-bold text-white mb-3">Formazione</h3>
                   <p className="text-slate-200 text-sm leading-relaxed max-w-md">
                     Progettiamo percorsi formativi che rispondono alle esigenze reali del
@@ -592,7 +592,7 @@ export default function Home() {
                   </p>
                   <a
                     href="/all-courses"
-                    className="mt-5 self-start bg-teal-500 hover:bg-teal-400 text-teal-950 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
+                    className="mt-5 self-start bg-primary hover:bg-[#10B981] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
                   >
                     Scopri di più →
                   </a>
@@ -767,7 +767,7 @@ export default function Home() {
       <section className="py-24 bg-light dark:bg-dark-bg" aria-labelledby="clienti-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="inline-block bg-teal-50 dark:bg-[#008C95]/20 text-teal-700 dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
               Clienti
             </span>
             <h2 id="clienti-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">
@@ -814,7 +814,7 @@ export default function Home() {
       </section>
 
       {/* ── 4b · CTA FINALE ──────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-teal-950 to-slate-950 text-white border-t border-slate-900">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-[#003134] to-slate-950 text-white border-t border-slate-900">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white text-balance">
             Hai bisogno di un corso<br className="hidden sm:block" /> o stai cercando lavoro?
@@ -826,7 +826,7 @@ export default function Home() {
           <div className="pt-4">
             <a
               href="/contatti"
-              className="inline-block bg-teal-500 hover:bg-teal-400 text-teal-950 font-bold px-8 py-4 rounded-xl text-base transition-all duration-[250ms] shadow-lg shadow-teal-500/10 hover:shadow-teal-400/20 hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-block bg-primary hover:bg-[#10B981] text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-[250ms] shadow-lg shadow-[#008C95]/10 hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0"
             >
               Contattaci
             </a>

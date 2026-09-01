@@ -98,7 +98,7 @@ export default function CalendarioCorsi() {
       <Header active="/calendario-corsi" solid />
 
       {/* HERO - stesso gradiente della pagina news */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 min-h-[320px] flex items-center pt-28 pb-12 px-5 sm:px-6 md:pt-32 md:pb-16">
+      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-[#004D52] min-h-[320px] flex items-center pt-28 pb-12 px-5 sm:px-6 md:pt-32 md:pb-16">
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: '#008C95' }} />
         <div className="max-w-6xl mx-auto w-full">
           <span style={{
@@ -139,7 +139,7 @@ export default function CalendarioCorsi() {
                   <button
                     onClick={() => setCategoriaFiltro('')}
                     className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      categoriaFiltro === '' ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                      categoriaFiltro === '' ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                     }`}
                   >
                     Tutte le categorie
@@ -149,7 +149,7 @@ export default function CalendarioCorsi() {
                       key={cat.key}
                       onClick={() => setCategoriaFiltro(cat.key)}
                       className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        categoriaFiltro === cat.key ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                        categoriaFiltro === cat.key ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                       }`}
                     >
                       <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: categoryColor[cat.key], flexShrink: 0 }} />
@@ -289,13 +289,13 @@ export default function CalendarioCorsi() {
 
                                         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600 dark:text-gray-300">
                                           <span className="inline-flex items-center gap-1.5">
-                                            <i className="fas fa-location-dot text-teal-600 dark:text-teal-400" /> {corso.sede}
+                                            <i className="fas fa-location-dot text-primary dark:text-[#10B981]" /> {corso.sede}
                                           </span>
                                           <span className="inline-flex items-center gap-1.5">
-                                            <i className="far fa-clock text-teal-600 dark:text-teal-400" /> {corso.orario}
+                                            <i className="far fa-clock text-primary dark:text-[#10B981]" /> {corso.orario}
                                           </span>
                                           <span className="inline-flex items-center gap-1.5">
-                                            <i className="fas fa-hourglass-half text-teal-600 dark:text-teal-400" /> {corso.durata}
+                                            <i className="fas fa-hourglass-half text-primary dark:text-[#10B981]" /> {corso.durata}
                                           </span>
                                         </div>
 

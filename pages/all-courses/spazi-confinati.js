@@ -11,61 +11,72 @@ import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFami
 // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
 const MAPS_HREF = 'https://maps.google.com/?q=Vittoria+RG+Aletheia+Srl';
 
-// Dicitura usata esclusivamente nel tab Moduli/Programma d'esame, in attesa del programma corso
-// ufficiale (ripartizione ore/teoria-pratica) fornito da Alètheia.
-// TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA
-const NOTA_MODULI_IN_AGGIORNAMENTO = 'Dettaglio moduli in aggiornamento — La ripartizione delle ore e i moduli tecnici saranno disponibili a breve.';
-
 // Stesso pattern a pillola già usato in patentino-fitosanitario.js, pes-pav-lavori-elettrici.js,
 // formazione-del-preposto.js: cambia scheda tecnica, testi, FAQ e box prezzo nella sidebar in base
 // alla variante selezionata (Corso Base 12h / Aggiornamento 4h). Solo modalità Aula: Videoconferenza
 // e FAD sono disattivate/nascoste per questo corso.
 const CONTENUTO = {
   base: {
-    title: 'Corso Ambiente e Spazi Confinati',
+    title: 'Corso Spazi Confinati o Sospetti di Inquinamento',
     titleSuffix: '· 12 ore',
     breadcrumbLabel: 'Corso Spazi Confinati',
     titleSeo: 'Corso Spazi Confinati – 12 ore | Alètheia',
-    metaDescription: 'Corso ambiente e spazi confinati, 12 ore. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    metaDescription: 'Corso ambienti sospetti di inquinamento e spazi confinati, 12 ore, D.P.R. 177/2011. Attestato valido in Italia. Alètheia S.r.l., Vittoria (RG).',
     schedaTecnica: [
       { icon: 'fas fa-clock', label: 'Durata', value: '12 ore' },
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da definire — aggiornamento disponibile (4 ore, pagina dedicata)' },
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Aggiornamento ogni 5 anni ai sensi del D.P.R. 177/2011' },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
     descrizione: [
-      "Il Corso Ambiente e Spazi Confinati da 12 ore fornisce la formazione e l'addestramento obbligatori ai sensi del D.P.R. 177/2011 per tutti i lavoratori e le imprese che operano in ambienti sospetti di inquinamento o confinati. Le attività all'interno di cisterne, silos, pozzi, reti fognarie e serbatoi presentano rischi critici di asfissia, presenza di gas tossici, incendi o esplosioni. Il percorso formativo mira a trasmettere le competenze necessarie per identificare i pericoli, applicare rigorose procedure di sicurezza pre-ingresso e gestire correttamente le strumentazioni di monitoraggio ambientale. Grande importanza viene data alle tecniche di soccorso e recupero rapido del lavoratore infortunato, garantendo la piena conformità ai requisiti di qualificazione previsti dalla legge per operare anche in regime di appalto o subappalto.",
+      "Il Corso di Formazione per Lavoratori, Datori di Lavoro e Lavoratori Autonomi che Operano in Ambienti Sospetti di Inquinamento o Confinati, della durata di 12 ore, è obbligatorio ai sensi degli artt. 37, 66 e 121 del D.Lgs 81/2008, dell'art. 2, lett. d), del D.P.R. n. 177 del 14 settembre 2011 e dell'Accordo Stato Regioni del 17 aprile 2025.",
+      "Gli ambienti confinati o sospetti di inquinamento — come cisterne, silos, pozzi, fogne, vasche, serbatoi e vani interrati — sono tra i contesti di lavoro più pericolosi in assoluto: atmosfere con difetto o eccesso di ossigeno, presenza di agenti chimici pericolosi per asfissia o intossicazione, rischio di esplosione e incendio, seppellimento e cadute dall'alto rendono necessaria una formazione approfondita.",
+      "Il corso si articola in due moduli: il Modulo I teorico (4 ore), focalizzato su normativa, identificazione dei rischi e procedure di ingresso; il Modulo II pratico (8 ore), con simulazioni reali su dispositivi e strumentazione (DPI, APVR, imbracature, tripode, rilevatori di gas, misuratori di esplosività) e procedure di recupero infortunato.",
     ],
     aChiERivolto: [
-      'Operatori ecologici e addetti alla manutenzione delle reti fognarie e idriche',
-      'Tecnici industriali incaricati della pulizia e manutenzione di cisterne, vasche e silos',
-      'Manutentori, impiantisti e artigiani che operano in ambienti con ventilazione limitata o sospetti di inquinamento',
-      'Preposti, datori di lavoro e responsabili della sicurezza che devono qualificare il personale ai sensi del D.P.R. 177/2011',
+      'Lavoratori che accedono a cisterne, silos, pozzi, fogne, vasche o serbatoi',
+      'Datori di lavoro che operano personalmente in ambienti sospetti di inquinamento o confinati',
+      'Lavoratori autonomi che svolgono attività in spazi confinati',
+      'Addetti di aziende agricole, industriali, edili e di manutenzione',
     ],
     cosaImparerai: [
-      'Riconoscere e classificare gli spazi confinati e gli ambienti sospetti di inquinamento',
-      'Applicare il quadro normativo di riferimento nazionale, con particolare focus sul D.P.R. 177/2011',
-      "Utilizzare i dispositivi di rilevazione dell'atmosfera e analizzare i rischi tramite gas detector multigas",
-      'Scegliere e indossare i DPI di terza categoria per le vie respiratorie (maschere, filtri, autorespiratori APVR)',
-      'Gestire i dispositivi anticaduta, i sistemi di recupero a treppiede e i dispositivi di evacuazione rapida',
-      'Attuare le procedure operative di emergenza, salvataggio e primo soccorso specifico per ambienti confinati',
+      'Applicare la normativa di riferimento in materia di ambienti confinati (D.P.R. 177/2011)',
+      'Identificare correttamente i rischi specifici (atmosfere pericolose, anossia, esplosioni)',
+      'Utilizzare correttamente DPI specifici, APVR, imbracature di sicurezza e tripode di recupero',
+      'Utilizzare rilevatori di gas e misuratori di esplosività per il monitoraggio ambientale statico e dinamico',
     ],
     faqs: [
       {
-        domanda: 'Quali ambienti vengono considerati spazi confinati secondo il D.P.R. 177/2011?',
-        risposta: "Rientrano in questa categoria tutti gli ambienti limitati o non progettati per un'occupazione continua, in cui il pericolo di morte o di infortunio grave è molto elevato a causa della presenza di agenti chimici pericolosi o carenza di ossigeno, come silos, cisterne, pozzi e fogne.",
+        domanda: 'Cosa si intende per ambiente confinato o sospetto di inquinamento?',
+        risposta: 'Sono spazi con aperture limitate di accesso e uscita, ventilazione naturale sfavorevole, non progettati per la permanenza continuativa (es. cisterne, silos, pozzi, fogne).',
       },
       {
-        domanda: 'Il corso da 12 ore prevede un addestramento pratico?',
-        risposta: "Sì, il corso include una sezione dedicata alle esercitazioni pratiche sull'uso dei rilevatori di gas, sul corretto posizionamento dei sistemi di recupero e sull'indossamento dei DPI di terza categoria.",
-      },
-      {
-        domanda: "Quali sanzioni rischia l'azienda se opera senza questa qualificazione?",
-        risposta: 'Il D.P.R. 177/2011 impone la presenza di personale interamente formato e addestrato; la mancata qualificazione comporta l\'impossibilità di operare in questi ambienti e sanzioni penali e amministrative severe per il datore di lavoro.',
+        domanda: 'Quanto dura il corso spazi confinati?',
+        risposta: 'Il corso dura 12 ore complessive: 4 ore di modulo teorico sulla normativa e sui rischi specifici, e 8 ore di modulo pratico con simulazioni.',
       },
     ],
-    programmaTitle: 'Programma Corso Ambiente e Spazi Confinati · 12 ore',
+    programmaTitle: 'Programma Corso Spazi Confinati o Sospetti di Inquinamento · 12 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - TEORICO',
+        durataOre: 4,
+        argomenti: [
+          'Normativa di riferimento (D.P.R. 177/2011, artt. 37, 66 e 121 D.Lgs 81/2008)',
+          'Identificazione e classificazione dei rischi negli ambienti confinati',
+          'Procedure di ingresso e permessi di lavoro',
+        ],
+      },
+      {
+        titolo: 'MODULO II - PRATICO',
+        durataOre: 8,
+        argomenti: [
+          'Simulazioni con DPI, APVR, imbracature e tripode di recupero',
+          'Utilizzo di rilevatori di gas e misuratori di esplosività',
+          'Monitoraggio ambientale statico e dinamico',
+          'Procedure di recupero infortunato',
+        ],
+      },
+    ],
     prezzo: [
       { label: 'Aula', value: '€ 280,00 + IVA' },
     ],
@@ -73,48 +84,60 @@ const CONTENUTO = {
   },
 
   aggiornamento: {
-    title: 'Aggiornamento Ambiente e Spazi Confinati',
+    title: 'Aggiornamento Abilitante per Lavori in Spazi Confinati',
     titleSuffix: '· 4 ore',
     breadcrumbLabel: 'Aggiornamento Spazi Confinati',
-    titleSeo: 'Aggiornamento Spazi Confinati – 4h | Alètheia',
-    metaDescription: 'Aggiornamento ambiente e spazi confinati, 4 ore. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    titleSeo: 'Aggiornamento Spazi Confinati – 4 ore | Alètheia',
+    metaDescription: 'Aggiornamento ambienti sospetti di inquinamento e spazi confinati, 4 ore, D.P.R. 177/2011. Attestato valido in Italia. Alètheia S.r.l., Vittoria (RG).',
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '4 ore' },
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da ripetere periodicamente — da definire' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '4 ore (2 ore teoria + 2 ore pratica)' },
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da ripetere ogni 5 anni ai sensi del D.P.R. 177/2011' },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
     descrizione: [
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA - confermare la periodicità esatta di rinnovo
-      "L'Aggiornamento per Ambiente e Spazi Confinati da 4 ore è il percorso obbligatorio dedicato al rinnovo periodico dell'abilitazione professionale per l'accesso e il lavoro in ambienti critici. Il corso si concentra sul ripasso e sul consolidamento delle procedure di sicurezza pre-ingresso e delle istruzioni operative aziendali. Attraverso l'analisi dei trend di infortunio più recenti e lo studio di casi reali, i partecipanti aggiornano la propria consapevolezza del rischio e verificano l'evoluzione tecnologica dei sistemi di rilevazione dell'atmosfera e dei dispositivi di protezione e salvataggio individuale.",
+      "Questo è il corso di aggiornamento abilitante per lavori in ambienti sospetti di inquinamento e spazi confinati, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale di 12 ore e deve rinnovarlo prima della scadenza, ai sensi degli artt. 37, 66 e 121 del D.Lgs 81/2008, del D.P.R. 177/2011 e dell'Accordo Stato Regioni del 17 aprile 2025.",
+      "L'aggiornamento periodico è obbligatorio perché operare in ambienti confinati comporta rischi che richiedono un costante allineamento a normative, procedure e strumentazione: la gestione delle emergenze in spazi ad accesso limitato richiede un richiamo pratico periodico.",
+      "Il corso è erogato in un modulo unico di 4 ore suddiviso in: 2 ore di teoria (richiamo normativo, check-list di ingresso, analisi rischi più frequenti come anossia e fumi) e 2 ore di pratica (esercitazioni con DPI, APVR, imbracature, tripode, gestione del soccorso con tecniche di primo soccorso e BLS).",
     ],
     aChiERivolto: [
-      'Operatori, manutentori e tecnici che hanno già completato il corso base da 12 ore e devono rinnovare la propria qualifica prima della scadenza',
-      'Preposti e datori di lavoro che supervisionano le attività in spazi confinati e devono mantenere aggiornate le competenze operative delle squadre',
+      'Lavoratori già formati (attestato di 12 ore) con formazione in scadenza o scaduta da poco',
+      'Datori di lavoro e lavoratori autonomi già abilitati che devono rinnovare il certificato',
+      "Aziende che devono garantire l'aggiornamento periodico quinquennale del personale",
     ],
     cosaImparerai: [
-      'Analizzare le novità normative e le nuove linee guida nazionali ed europee sugli spazi confinati',
-      'Ripassare le check-list operative pre-ingresso e la gestione dei permessi di lavoro elettrici o meccanici',
-      "Verificare le procedure di evacuazione rapida e l'utilizzo dei sistemi di ventilazione forzata",
-      'Simulare gli interventi di salvataggio e la cooperazione con i servizi di emergenza esterni',
+      'Richiamare i principi generali della normativa di riferimento su spazi confinati',
+      "Aggiornare l'uso delle check list per l'ingresso in spazi confinati e la valutazione della sicurezza della scena",
+      'Consolidare le tecniche di gestione del soccorso e primo soccorso, incluso il BLS',
+      "Aggiornare l'utilizzo pratico di DPI, APVR, imbracature di sicurezza, tripode e rilevatori",
     ],
     faqs: [
       {
-        domanda: "Ogni quanti anni va effettuato l'aggiornamento per gli spazi confinati?",
-        // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA - confermare la periodicità esatta di rinnovo
-        risposta: 'La periodicità del rinnovo è legata alle scadenze normative della sicurezza sul lavoro e alla qualificazione dell\'impresa ai sensi del D.P.R. 177/2011, richiedendo un richiamo periodico costante.',
+        domanda: "Ogni quanto va rinnovato l'attestato spazi confinati?",
+        risposta: "L'attestato per lavori in ambienti confinati e spazi sospetti di inquinamento va aggiornato ogni 5 anni.",
       },
       {
-        domanda: "Si può frequentare l'aggiornamento se il vecchio attestato è scaduto da molto tempo?",
-        risposta: 'In caso di scadenza prolungata, è necessario verificare la validità dei crediti pregressi con l\'ente formativo per confermare se sia sufficiente il modulo da 4 ore o se sia necessario ripetere il percorso base.',
+        domanda: "L'aggiornamento tratta anche le tecniche di primo soccorso?",
+        risposta: 'Sì, il programma include la gestione del soccorso con tecniche di primo soccorso e manovre di BLS per il recupero dell\'operatore.',
       },
       {
-        domanda: "L'aggiornamento può essere svolto interamente online in modalità e-learning?",
-        risposta: "No, date le caratteristiche operative e la necessità di mantenere l'addestramento pratico sui sistemi di recupero e salvataggio, il corso Alètheia viene erogato in modalità d'aula.",
+        domanda: "Posso fare l'aggiornamento se il mio attestato è scaduto da tempo?",
+        risposta: "Se l'attestato è scaduto da troppo tempo, l'aggiornamento da solo potrebbe non bastare ed è necessario rifare il corso base di 12 ore.",
       },
     ],
-    programmaTitle: 'Programma Aggiornamento Ambiente e Spazi Confinati · 4 ore',
+    programmaTitle: 'Programma Aggiornamento Abilitante per Lavori in Spazi Confinati · 4 ore',
+    moduli: [
+      {
+        titolo: 'MODULO UNICO - TEORICO E PRATICO',
+        durataOre: 4,
+        argomenti: [
+          'Richiamo normativo e check-list di ingresso (2 ore di teoria)',
+          'Analisi dei rischi più frequenti: anossia, fumi',
+          'Esercitazioni con DPI, APVR, imbracature e tripode (2 ore di pratica)',
+          'Gestione del soccorso con tecniche di primo soccorso e BLS',
+        ],
+      },
+    ],
     prezzo: [
       { label: 'Aula', value: '€ 160,00 + IVA' },
     ],
@@ -125,6 +148,7 @@ const CONTENUTO = {
 const corsiCorrelatiSlugs = [
   'lavori-in-quota',
   'formazione-dei-lavoratori-rischio-alto',
+  'coordinatori-cantieri-cse-csp',
 ];
 
 export default function CorsoSpaziConfinati() {
@@ -207,11 +231,6 @@ export default function CorsoSpaziConfinati() {
         @media (max-width: 560px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
 
         .cp-tabs { display: flex; gap: 0.5rem; border-bottom: 2px solid; flex-wrap: wrap; }
-
-        .cp-placeholder-block {
-          border: 1px dashed; border-radius: 0.75rem; padding: 1rem 1.25rem;
-          font-size: 0.85rem; font-style: italic;
-        }
 
         .cp-carousel-track {
           display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -389,12 +408,39 @@ export default function CorsoSpaziConfinati() {
 
                 {activeTab === 'moduli' && (
                   <div>
-                    {/* <!-- TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA --> */}
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>
                       {c.programmaTitle}
                     </h2>
-                    <div className="cp-placeholder-block text-slate-500 dark:text-gray-400 border-slate-200 dark:border-[rgba(255,255,255,0.15)]">
-                      {NOTA_MODULI_IN_AGGIORNAMENTO}
+                    <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
+                      Il corso è strutturato in {c.moduli.length} {c.moduli.length === 1 ? 'modulo' : 'moduli'} per un totale di {c.moduli.reduce((tot, m) => tot + m.durataOre, 0)} ore
+                    </p>
+                    <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <thead>
+                          <tr className="bg-slate-50 dark:bg-gray-700">
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modulo</th>
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>Durata</th>
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Argomenti</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {c.moduli.map((modulo, i) => (
+                            <tr key={i} className="border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
+                              <td className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{modulo.titolo}</td>
+                              <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>
+                                {modulo.durataOre} {modulo.durataOre === 1 ? 'ora' : 'ore'}
+                              </td>
+                              <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                                  {modulo.argomenti.map((arg, j) => (
+                                    <li key={j} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{arg}</li>
+                                  ))}
+                                </ul>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 )}
@@ -408,38 +454,7 @@ export default function CorsoSpaziConfinati() {
                 buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
                 buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Ambiente%20e%20Spazi%20Confinati"
-              >
-                {selectedTipo === 'base' && (
-                  <button
-                    type="button"
-                    onClick={() => selectTipo('aggiornamento')}
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
-                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
-                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                    }}
-                  >
-                    <span>Devi solo <strong>rinnovare</strong> l'attestato già in tuo possesso?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento</span>
-                  </button>
-                )}
-                {selectedTipo === 'aggiornamento' && (
-                  <button
-                    type="button"
-                    onClick={() => selectTipo('base')}
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
-                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
-                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                    }}
-                  >
-                    <span>Devi conseguire l'attestato <strong>per la prima volta</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso Spazi Confinati · 12 ore</span>
-                  </button>
-                )}
-              </PricingSidebar>
+              />
             </aside>
           </div>
         </div>

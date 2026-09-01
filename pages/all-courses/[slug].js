@@ -16,6 +16,8 @@ import carrelliElevatoriContent from '../../data/content/carrelli-elevatori-cont
 import carrelliElevatoriAggiornamentoContent from '../../data/content/carrelli-elevatori-aggiornamento-content';
 import trattoriAgricoliContent from '../../data/content/trattori-agricoli-content';
 import trattoriAgricoliAggiornamentoContent from '../../data/content/trattori-agricoli-aggiornamento-content';
+import pleContent from '../../data/content/ple-content';
+import pleAggiornamentoContent from '../../data/content/ple-aggiornamento-content';
 import formazioneDirigenteContent from '../../data/content/formazione-dirigente-content';
 import formazioneDirigenteAggiornamentoContent from '../../data/content/formazione-dirigente-aggiornamento-content';
 import formazioneLavoratoriContent from '../../data/content/formazione-lavoratori-content';
@@ -52,6 +54,12 @@ const EDITORIAL_CONTENT = {
   'trattori-agricoli-o-forestali': {
     corso: trattoriAgricoliContent['trattori-agricoli-o-forestali'],
     aggiornamento: trattoriAgricoliAggiornamentoContent,
+  },
+  // Famiglia "ple": un'unica pagina con switch Con Stabilizzatori / Senza Stabilizzatori / Con e Senza
+  // Stabilizzatori / Aggiornamento, sullo stesso modello di Trattori Agricoli o Forestali.
+  'ple-piattaforme-di-lavoro-mobili-elevabili': {
+    corso: pleContent.ple,
+    aggiornamento: pleAggiornamentoContent,
   },
   // Famiglia "formazione-dirigente": già raggruppata automaticamente da buildCourseFamilies (pattern
   // "modulo comune" esistente in LEVEL_PATTERNS) - un'unica pagina con switch Corso/Aggiornamento.
@@ -896,7 +904,12 @@ export const coursesDetails = {
     modality: 'Aula + Pratica',
     price: 'Da € 100,00',
     priceVariants: [
-      { label: 'Nuovo 10-16H', amount: 220 },
+      { label: 'Escavatori Idraulici 10H', amount: 200 },
+      { label: 'Escavatori A Fune 10H', amount: 200 },
+      { label: 'Pale Caricatrici Frontali 12H', amount: 200 },
+      { label: 'Terne 10H', amount: 200 },
+      { label: 'Autoribaltabili A Cingoli 10H', amount: 200 },
+      { label: 'Escavatori Idraulici Caricatori Frontali E Terne 16H', amount: 300 },
       { label: 'Aggiornamento 4H', amount: 100 },
     ],
     level: 'Specialistico',
@@ -936,6 +949,35 @@ export const coursesDetails = {
       { week: 3, title: 'Modulo pratico', hours: 4, lessons: ['Guida su percorso di prova', 'Manovre in campo aperto o su pendenza', 'Test pratico finale'] },
     ],
     learningOutcomes: ['Conoscere le caratteristiche dei trattori a ruote e a cingoli', 'Identificare e prevenire il rischio di ribaltamento', 'Condurre in sicurezza su terreno pianeggiante o in pendenza', 'Ottenere il patentino trattori valido 5 anni'],
+  },
+  // Un'unica famiglia "PLE - Piattaforme di Lavoro Mobili Elevabili" con switch Con Stabilizzatori /
+  // Senza Stabilizzatori / Con e Senza Stabilizzatori / Aggiornamento - vedi il commento sulle 4 voci raw
+  // in data/coursesRaw.js e i LEVEL_PATTERNS in data/courseFamilies.js. La chiave qui sotto deve
+  // coincidere ESATTAMENTE con family.id (slugify del famTitle), perché EDITORIAL_CONTENT[family.id] non
+  // passa per ALIAS_TO_DETAILS (a differenza del matching prezzi in courseFamilies.js).
+  'ple-piattaforme-di-lavoro-mobili-elevabili': {
+    title: 'PLE - Piattaforme di Lavoro Mobili Elevabili',
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&q=80',
+    category: 'Formazione Obbligatoria',
+    duration: '8-10 ore (aggiornamento 4 ore)',
+    modality: 'Aula',
+    price: 'Da € 80,00',
+    priceVariants: [
+      { label: 'Con Stabilizzatori 8H', amount: 200 },
+      { label: 'Senza Stabilizzatori 8H', amount: 200 },
+      { label: 'Con e Senza Stabilizzatori 10H', amount: 200 },
+      { label: 'Aggiornamento 4H', amount: 80 },
+    ],
+    level: 'Base',
+    lessons: '3 percorsi + aggiornamento',
+    students: '500+',
+    target: 'Operatori addetti alla conduzione di Piattaforme di Lavoro Mobili Elevabili (PLE) con o senza stabilizzatori',
+    overview: 'Il corso per la conduzione di Piattaforme di Lavoro Mobili Elevabili (PLE) è obbligatorio ai sensi dell\'art. 73 del D.Lgs. 81/2008 e dell\'Accordo Stato-Regioni del 17/04/2025. È disponibile in 3 percorsi base (con stabilizzatori, senza stabilizzatori o combinato) più un aggiornamento generico di 4 ore, interamente pratico, valido per chi deve rinnovare la qualifica in scadenza.',
+    curriculum: [
+      { week: 1, title: 'Modulo teorico', hours: 2, lessons: ['Normativa e responsabilità dell\'operatore', 'Tipologie di PLE e dispositivi di sicurezza', 'Controlli pre-utilizzo'] },
+      { week: 2, title: 'Modulo pratico', hours: 6, lessons: ['Manovre con e senza stabilizzatori', 'Livellamento e ancoraggio', 'Gestione delle emergenze in quota', 'Test pratico finale'] },
+    ],
+    learningOutcomes: ['Riconoscere le diverse tipologie di PLE e le relative modalità di stabilizzazione', 'Eseguire correttamente le manovre in sicurezza', 'Applicare le procedure di sicurezza e i DPI anticaduta', 'Ottenere il patentino PLE valido 5 anni'],
   },
   'pompe-calcestruzzo': {
     title: 'Pompe per Calcestruzzo',

@@ -24,6 +24,8 @@ const ALIAS_TO_DETAILS = {
   'personale-alimentarista-osa': 'sicurezza-alimentare',
   'carrelli-elevatori-semoventi-con-conduttore-a-bordo': 'carrelli-elevatori',
   'operatore-di-gru-per-autocarro': 'gru-su-autocarro',
+  // Nessun alias per "ple-piattaforme-di-lavoro-mobili-elevabili": coursesDetails/EDITORIAL_CONTENT usano
+  // già quella chiave esatta (famTitle esteso a scopo SEO/UX sulle card, stesso pattern di "trattori-agricoli-o-forestali").
   // Nessun alias per "trattori-agricoli-o-forestali": le 4 varianti (Ruote/Cingoli/Ruote e Cingoli/
   // Aggiornamento) confluiscono già in un'unica famiglia con quello slug (vedi LEVEL_PATTERNS sotto),
   // che coincide con la chiave usata in coursesDetails - nessun alias necessario.
@@ -64,6 +66,17 @@ const LEVEL_PATTERNS = [
   // "(Ruote e Cingoli)". Le parentesi non sono usate altrove nei titoli di coursesData, quindi il
   // pattern è isolato e non rischia di intercettare altre famiglie (es. "... A Cingoli" senza parentesi).
   /\((ruote e cingoli|ruote|cingoli)\)/i,
+  // Stesso pattern (parentesi) applicato alla famiglia "PLE" - es. "PLE (Con e Senza Stabilizzatori)" /
+  // "(Con Stabilizzatori)" / "(Senza Stabilizzatori)". "con e senza stabilizzatori" va prima di
+  // "con stabilizzatori" nell'alternanza per evitare un match parziale che tronchi la label.
+  /\((con e senza stabilizzatori|con stabilizzatori|senza stabilizzatori)\)/i,
+  // Stesso pattern (parentesi) applicato alla famiglia "Macchine Movimento Terra" - raggruppa le 7
+  // varianti raw (5 macchine singole + corso combinato + aggiornamento) in un'unica famiglia/pagina
+  // con switch, sullo stesso modello di Trattori Agricoli e PLE - vedi il commento sulle 7 voci raw in
+  // data/coursesRaw.js. La famiglia risultante "macchine-movimento-terra" combacia con la pagina
+  // standalone pages/all-courses/macchine-movimento-terra.js (che ha priorità di routing sul template
+  // dinamico [slug].js) e con coursesDetails['macchine-movimento-terra'] in [slug].js per i prezzi.
+  /\((escavatori idraulici, caricatori frontali e terne|escavatori idraulici|escavatori a fune|pale caricatrici frontali|autoribaltabili a cingoli|terne)\)/i,
 ];
 
 // Prefissi di riempimento da rimuovere per far combaciare titolo "corso" e "aggiornamento" della stessa famiglia

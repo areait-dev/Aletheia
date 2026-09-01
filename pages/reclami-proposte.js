@@ -12,7 +12,7 @@ function Field({ label, required, children }) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-xs font-bold tracking-wide text-gray-700 dark:text-gray-300">
-        {label}{required && <span className="text-teal-600 dark:text-teal-400 ml-0.5">*</span>}
+        {label}{required && <span className="text-primary dark:text-[#10B981] ml-0.5">*</span>}
       </label>
       {children}
     </div>
@@ -22,7 +22,7 @@ function Field({ label, required, children }) {
 const inputClass =
   'w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 dark:border-gray-700 ' +
   'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 dark:placeholder-gray-500 ' +
-  'outline-none focus:border-teal-600 dark:focus:border-teal-400 transition-colors';
+  'outline-none focus:border-primary dark:focus:border-[#10B981] transition-colors';
 
 export default function ReclamiProposte() {
   const [fields, setFields] = useState(EMPTY);
@@ -57,7 +57,7 @@ export default function ReclamiProposte() {
       <Header />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-3xl mx-auto px-6 sm:px-12 pt-40 pb-24">
-          <span className="text-teal-600 dark:text-teal-400 font-bold text-xs tracking-widest uppercase mb-4 block">
+          <span className="text-primary dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-4 block">
             Trasparenza
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-50 mb-4">
@@ -67,14 +67,14 @@ export default function ReclamiProposte() {
             Ti invitiamo a compilare il seguente form, che può essere inviato anche in forma anonima. Il tuo
             contributo ci aiuta a migliorare la qualità del nostro servizio. In alternativa, puoi scaricare il
             modulo di segnalazione e inviarlo via email a{' '}
-            <a href="mailto:segnalazioni@aletheiasrl.it" className="text-teal-600 dark:text-teal-400 underline">
+            <a href="mailto:segnalazioni@aletheiasrl.it" className="text-primary dark:text-[#10B981] underline">
               segnalazioni@aletheiasrl.it
             </a>, oppure allegarlo direttamente nel form.
           </p>
 
           {submitted ? (
             <div className="flex flex-col items-center gap-4 py-16 text-center border border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-gray-800">
-              <div className="w-16 h-16 rounded-full bg-teal-600/10 border-2 border-teal-600 flex items-center justify-center text-teal-600 dark:text-teal-400 text-2xl">
+              <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-primary dark:text-[#10B981] text-2xl">
                 <i className="fas fa-check" />
               </div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">Segnalazione inviata!</h2>
@@ -83,7 +83,7 @@ export default function ReclamiProposte() {
               </p>
               <button
                 onClick={() => { setSubmitted(false); setFields(EMPTY); setFileName(''); }}
-                className="mt-2 px-6 py-2.5 rounded-full text-sm font-semibold border border-teal-600 text-teal-600 dark:text-teal-400 dark:border-teal-400 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-400 dark:hover:text-gray-900 transition-colors"
+                className="mt-2 px-6 py-2.5 rounded-full text-sm font-semibold border border-primary text-primary dark:text-[#10B981] dark:border-[#10B981] hover:bg-primary hover:text-white dark:hover:bg-[#10B981] dark:hover:text-gray-900 transition-colors"
               >
                 Invia un&apos;altra segnalazione
               </button>
@@ -136,7 +136,7 @@ export default function ReclamiProposte() {
               <Field label="Allega il modulo (opzionale, max 100 MB)">
                 <div
                   onClick={() => fileRef.current?.click()}
-                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg cursor-pointer border border-dashed border-teal-600/40 dark:border-teal-400/40 bg-teal-600/5 dark:bg-teal-400/5 hover:border-teal-600 dark:hover:border-teal-400 transition-colors"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg cursor-pointer border border-dashed border-primary/40 dark:border-[#10B981]/40 bg-primary/5 dark:bg-[#10B981]/5 hover:border-primary dark:hover:border-[#10B981] transition-colors"
                 >
                   <span className={`text-sm ${fileName ? 'text-gray-900 dark:text-gray-50' : 'text-gray-400 dark:text-gray-500'}`}>
                     {fileName || 'Clicca per allegare un file'}
@@ -154,7 +154,7 @@ export default function ReclamiProposte() {
                 />
                 <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                   Ho letto e accetto la{' '}
-                  <a href="/privacy-cookie" className="text-teal-600 dark:text-teal-400 underline">
+                  <a href="/privacy-cookie" className="text-primary dark:text-[#10B981] underline">
                     Privacy Policy
                   </a>{' '}
                   di Alètheia S.r.l.
@@ -164,7 +164,7 @@ export default function ReclamiProposte() {
               <button
                 type="submit"
                 disabled={loading}
-                className="self-start mt-2 px-8 py-3 rounded-full font-semibold text-sm text-white bg-teal-600 hover:bg-teal-700 disabled:opacity-60 transition-colors shadow-md"
+                className="self-start mt-2 px-8 py-3 rounded-full font-semibold text-sm text-white bg-primary hover:bg-[#006B73] disabled:opacity-60 transition-colors shadow-md"
               >
                 {loading ? 'Invio in corso…' : 'Invia segnalazione'}
               </button>

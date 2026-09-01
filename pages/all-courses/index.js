@@ -228,7 +228,7 @@ export default function AllCourses() {
         <aside className="space-y-4" style={{ position: 'sticky', top: '5rem', height: 'fit-content' }}>
           {/* Search */}
           <div className="bg-white dark:bg-dark-card rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)]">
-            <div className="flex items-center gap-3 border border-slate-200 dark:border-gray-600 rounded-xl px-4 py-3 transition-all focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100">
+            <div className="flex items-center gap-3 border border-slate-200 dark:border-gray-600 rounded-xl px-4 py-3 transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
               <i className="fas fa-search text-slate-400 text-sm"></i>
               <input
                 type="text"
@@ -254,7 +254,7 @@ export default function AllCourses() {
               <li
                 onClick={resetFilters}
                 className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                  selectedCategory === '' && selectedSub === '' && !shopFilter ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                  selectedCategory === '' && selectedSub === '' && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -286,7 +286,7 @@ export default function AllCourses() {
                   key={key}
                   onClick={() => selectCategory(key)}
                   className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                    selectedCategory === key && !shopFilter ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                    selectedCategory === key && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -309,7 +309,7 @@ export default function AllCourses() {
             <p className="text-xs text-white/75 mb-4">Il nostro team è a tua disposizione</p>
             <a
               href="tel:+390932862613"
-              className="inline-block bg-white text-teal-700 text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-50 transition-colors no-underline"
+              className="inline-block bg-white text-primary text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-50 transition-colors no-underline"
             >
               <i className="fas fa-phone mr-1.5"></i> Chiamaci
             </a>
@@ -331,7 +331,7 @@ export default function AllCourses() {
             {(searchTerm || selectedCategory || selectedSub || shopFilter) && (
               <button
                 onClick={resetFilters}
-                className="text-xs text-teal-600 font-semibold hover:underline bg-transparent border-none cursor-pointer"
+                className="text-xs text-primary font-semibold hover:underline bg-transparent border-none cursor-pointer"
               >
                 Rimuovi filtri
               </button>

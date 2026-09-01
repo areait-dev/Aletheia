@@ -11,12 +11,6 @@ import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFami
 // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
 const MAPS_HREF = 'https://maps.google.com/?q=Vittoria+RG+Aletheia+Srl';
 
-// Dicitura usata esclusivamente nel tab Moduli/programma didattico dettagliato (teoria/pratica) e
-// nella nota della scheda tecnica, in attesa del programma corso ufficiale (ripartizione ore) fornito
-// da Alètheia.
-// TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA
-const NOTA_MODULI_IN_AGGIORNAMENTO = 'Dettaglio moduli in aggiornamento — La ripartizione delle ore e i moduli tecnici saranno disponibili a breve.';
-
 // Stesso pattern a pillola già usato in spazi-confinati.js, patentino-fitosanitario.js,
 // pes-pav-lavori-elettrici.js: cambia scheda tecnica, testi, FAQ e box prezzo nella sidebar in base
 // alla variante selezionata (Corso Base 12h / Aggiornamento 4h). Solo modalità Aula: Videoconferenza
@@ -27,11 +21,10 @@ const CONTENUTO = {
     titleSuffix: '· 12 ore',
     breadcrumbLabel: 'Corso Gru per Autocarro',
     titleSeo: 'Corso Gru per Autocarro – 12 ore | Alètheia',
-    metaDescription: 'Corso operatore gru per autocarro, 12 ore. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    metaDescription: 'Corso conducenti gru per autocarro, 12 ore, art. 73 D.Lgs 81/2008 allegato IV. Attestato valido in Italia. Alètheia S.r.l., Vittoria (RG).',
     schedaTecnica: [
       { icon: 'fas fa-clock', label: 'Durata', value: '12 ore' },
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da definire — aggiornamento disponibile (4 ore, pagina dedicata)' },
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Aggiornamento periodico previsto dalla normativa vigente (4 ore, pagina dedicata)' },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
@@ -71,8 +64,47 @@ const CONTENUTO = {
         domanda: 'Quali sanzioni rischia l\'azienda se impiega operatori non abilitati alla conduzione?',
         risposta: "Il datore di lavoro che adibisce alla conduzione di gru per autocarro personale privo della specifica abilitazione è soggetto alle sanzioni previste dal D.Lgs 81/2008 per la violazione degli obblighi formativi, oltre a esporre l'operatore e terzi a un rischio grave e ingiustificato di infortunio.",
       },
+      {
+        domanda: 'Quanto dura il corso per condurre una gru per autocarro?',
+        risposta: 'Il corso dura 12 ore complessive: 1 ora di modulo giuridico-normativo, 3 ore di modulo tecnico e 8 ore di modulo pratico con esercitazioni di guida.',
+      },
+      {
+        domanda: "Il corso include l'uso della segnaletica gestuale?",
+        risposta: "Sì, il modulo tecnico include l'interpretazione e l'utilizzo della segnaletica gestuale, fondamentale per coordinare in sicurezza le operazioni.",
+      },
     ],
     programmaTitle: 'Programma Corso Addetti alla Conduzione di Gru per Autocarro · 12 ore',
+    moduli: [
+      {
+        titolo: 'MODULO I - GIURIDICO-NORMATIVO',
+        durataOre: 1,
+        argomenti: [
+          'Art. 73 del D.Lgs 81/2008 e Accordo Stato-Regioni del 22 febbraio 2012',
+          'Responsabilità dell\'operatore e obblighi del datore di lavoro',
+        ],
+      },
+      {
+        titolo: 'MODULO II - TECNICO',
+        durataOre: 3,
+        argomenti: [
+          'Terminologia e caratteristiche tecniche della gru per autocarro',
+          'Condizioni di stabilità e fattori di ribaltamento',
+          'Lettura e applicazione delle tabelle e dei diagrammi di carico',
+          'Calcolo dei pesi e degli sbracci',
+        ],
+      },
+      {
+        titolo: 'MODULO III - PRATICO',
+        durataOre: 8,
+        argomenti: [
+          'Ispezione visiva e controlli pre-uso del mezzo',
+          'Piazzamento e stabilizzazione del veicolo su terreno',
+          'Esercitazioni di guida della gru su percorso di prova',
+          'Imbracatura e movimentazione dei carichi in sicurezza',
+          'Dispositivi di sicurezza e procedure di emergenza',
+        ],
+      },
+    ],
     prezzo: [
       { label: 'Aula', value: '€ 280,00 + IVA' },
     ],
@@ -83,46 +115,52 @@ const CONTENUTO = {
     title: 'Aggiornamento Addetti alla Conduzione di Gru per Autocarro',
     titleSuffix: '· 4 ore',
     breadcrumbLabel: 'Aggiornamento Operatore di Gru',
-    titleSeo: 'Aggiornamento Operatore Gru – 4h | Alètheia',
-    metaDescription: 'Aggiornamento operatore gru per autocarro, 4 ore. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).',
+    titleSeo: 'Aggiornamento Gru per Autocarro – 4h | Alètheia',
+    metaDescription: "Aggiornamento conducenti gru per autocarro, 4 ore, art. 37, 73 D.Lgs 81/2008. Attestato valido in Italia. Alètheia S.r.l., Vittoria (RG).",
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '4 ore' },
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da ripetere periodicamente — da definire' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '4 ore (interamente pratiche)' },
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: "Da ripetere periodicamente ai sensi dell'art. 37, 73 e allegato IV del D.Lgs 81/2008" },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
     descrizione: [
-      // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA - confermare la periodicità esatta di rinnovo (5 anni)
-      "Il corso di Aggiornamento Addetti alla Conduzione di Gru per Autocarro, della durata di 4 ore, è dedicato al rinnovo quinquennale obbligatorio dell'abilitazione (patentino) previsto dall'Accordo Stato-Regioni per gli operatori già in possesso della qualifica iniziale.",
-      "Il percorso punta al richiamo delle buone pratiche di movimentazione dei carichi, all'analisi delle cause più frequenti di infortunio con bracci idraulici — quali il ribaltamento del mezzo, la caduta del carico e il contatto con linee elettriche aeree — e all'aggiornamento sulle innovazioni dei sistemi elettronici di controllo del momento e di limitazione del carico installati sui modelli più moderni di gru per autocarro.",
-      "Al termine delle 4 ore di formazione viene rilasciato l'attestato di aggiornamento, che consente il mantenimento della validità dell'abilitazione alla conduzione di gru per autocarro su tutto il territorio nazionale.",
+      "Questo è il corso di aggiornamento abilitante per conducenti di gru per autocarro, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale di 12 ore e deve rinnovarlo prima della scadenza.",
+      "L'aggiornamento periodico è obbligatorio perché il datore di lavoro deve garantire che i lavoratori incaricati dell'uso di ogni attrezzatura dispongano di un'informazione e formazione costantemente adeguate.",
+      "Il corso, interamente pratico, richiama i contenuti principali del corso base: tecnologia e componenti della gru, dispositivi di comando e di sicurezza, condizioni di equilibrio, controlli, manutenzioni e guida della gru su percorso di prova.",
     ],
     aChiERivolto: [
-      "Conducenti e operatori di gru su autocarro già in possesso dell'abilitazione iniziale da 12 ore che si trovano in prossimità della scadenza dei 5 anni e devono rinnovare la propria idoneità lavorativa",
+      "Conducenti di gru per autocarro già formati (attestato di 12 ore), con formazione in scadenza",
+      'Addetti di cantiere e operatori della logistica già abilitati che devono rinnovare il patentino',
+      "Datori di lavoro che devono garantire l'aggiornamento periodico degli operatori",
     ],
     cosaImparerai: [
-      'La revisione critica degli incidenti tipici e delle manovre vietate nella conduzione di gru per autocarro',
-      "Gli aggiornamenti normativi sull'uso dei macchinari e delle attrezzature di lavoro",
-      "La check-list pre-operativa avanzata per la verifica dell'efficienza dei sistemi idraulici e di blocco",
-      'Le procedure operative di emergenza in caso di guasto o malfunzionamento del mezzo',
+      'Richiamare le tipologie e le caratteristiche dei veicoli dotati di gru per autocarro',
+      "Consolidare la conoscenza dei rischi connessi all'impiego di gru su autocarro",
+      'Esercitarsi nella guida della gru su percorso di prova: posizione, presa del carico, trasporto e sosta in sicurezza',
     ],
     faqs: [
       {
-        domanda: 'Ogni quanti anni scade il patentino per la gru su autocarro?',
-        // TODO: VERIFICARE INDIRIZZO MAPPA E VALIDITÀ CON ALÈTHEIA - confermare la periodicità esatta di rinnovo (5 anni)
-        risposta: "L'abilitazione ha validità quinquennale: ogni 5 anni deve essere rinnovata attraverso la frequenza del corso di aggiornamento da 4 ore, come previsto dall'Accordo Stato-Regioni.",
+        domanda: "L'aggiornamento include anche una parte teorica?",
+        risposta: "No, il corso è interamente pratico e si concentra sulla guida della gru su percorso di prova e sulla gestione dei rischi più frequenti.",
       },
       {
-        domanda: "Cosa succede se non si effettua l'aggiornamento prima della data esatta di scadenza dei 5 anni?",
-        risposta: "Alla scadenza dell'abilitazione l'operatore non può più essere adibito alla conduzione di gru per autocarro fino al completamento del corso di aggiornamento, data l'elevata pericolosità e responsabilità connesse a questa mansione.",
-      },
-      {
-        domanda: "L'aggiornamento da 4 ore prevede una prova pratica sul veicolo?",
-        risposta: "Sì, il corso include un richiamo pratico sulle manovre di piazzamento, stabilizzazione e movimentazione dei carichi, oltre alla revisione dei dispositivi di sicurezza e blocco della gru direttamente sul mezzo.",
+        domanda: "Posso fare l'aggiornamento se il mio attestato è scaduto da tempo?",
+        risposta: "Se l'attestato è scaduto da troppo tempo, l'aggiornamento da solo potrebbe non essere sufficiente ed è necessario rifare il corso base di 12 ore.",
       },
     ],
     programmaTitle: 'Programma Aggiornamento Addetti alla Conduzione di Gru per Autocarro · 4 ore',
+    moduli: [
+      {
+        titolo: 'MODULO UNICO - AGGIORNAMENTO PRATICO',
+        durataOre: 4,
+        argomenti: [
+          'Tecnologia e componenti della gru per autocarro',
+          'Dispositivi di comando e di sicurezza',
+          'Condizioni di equilibrio, controlli e manutenzioni',
+          'Guida della gru su percorso di prova: posizione, presa del carico, trasporto e sosta in sicurezza',
+        ],
+      },
+    ],
     prezzo: [
       { label: 'Aula', value: '€ 100,00 + IVA' },
     ],
@@ -132,7 +170,7 @@ const CONTENUTO = {
 
 const corsiCorrelatiSlugs = [
   'carrelli-elevatori-semoventi-conduttore-a-bordo',
-  'ple-su-stabilizzatori',
+  'ple-piattaforme-di-lavoro-mobili-elevabili',
 ];
 
 export default function CorsoOperatoreDiGru() {
@@ -215,11 +253,6 @@ export default function CorsoOperatoreDiGru() {
         @media (max-width: 560px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
 
         .cp-tabs { display: flex; gap: 0.5rem; border-bottom: 2px solid; flex-wrap: wrap; }
-
-        .cp-placeholder-block {
-          border: 1px dashed; border-radius: 0.75rem; padding: 1rem 1.25rem;
-          font-size: 0.85rem; font-style: italic;
-        }
 
         .cp-carousel-track {
           display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -341,17 +374,6 @@ export default function CorsoOperatoreDiGru() {
                         </div>
                       </div>
 
-                      {/* Nota Moduli Tecnici nella scheda tecnica */}
-                      {/* TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', gridColumn: '1 / -1' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-list-check" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Nota moduli tecnici</span>
-                          <span style={{ display: 'block', fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.15rem', fontStyle: 'italic' }}>{NOTA_MODULI_IN_AGGIORNAMENTO}</span>
-                        </div>
-                      </div>
                     </CourseSchedaTecnica>
 
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
@@ -409,12 +431,39 @@ export default function CorsoOperatoreDiGru() {
 
                 {activeTab === 'moduli' && (
                   <div>
-                    {/* TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA */}
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>
                       {c.programmaTitle}
                     </h2>
-                    <div className="cp-placeholder-block text-slate-500 dark:text-gray-400 border-slate-200 dark:border-[rgba(255,255,255,0.15)]">
-                      {NOTA_MODULI_IN_AGGIORNAMENTO}
+                    <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
+                      Il corso è strutturato in {c.moduli.length} {c.moduli.length === 1 ? 'modulo' : 'moduli'} per un totale di {c.moduli.reduce((tot, m) => tot + m.durataOre, 0)} ore
+                    </p>
+                    <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <thead>
+                          <tr className="bg-slate-50 dark:bg-gray-700">
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modulo</th>
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>Durata</th>
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Argomenti</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {c.moduli.map((modulo, i) => (
+                            <tr key={i} className="border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
+                              <td className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{modulo.titolo}</td>
+                              <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>
+                                {modulo.durataOre} {modulo.durataOre === 1 ? 'ora' : 'ore'}
+                              </td>
+                              <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                                  {modulo.argomenti.map((arg, j) => (
+                                    <li key={j} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{arg}</li>
+                                  ))}
+                                </ul>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 )}
@@ -428,38 +477,7 @@ export default function CorsoOperatoreDiGru() {
                 buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
                 buyLabel="Richiedi preventivo"
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Operatore%20di%20Gru%20per%20Autocarro"
-              >
-                {selectedTipo === 'base' && (
-                  <button
-                    type="button"
-                    onClick={() => selectTipo('aggiornamento')}
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
-                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
-                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                    }}
-                  >
-                    <span>Devi solo <strong>rinnovare</strong> l'abilitazione già in tuo possesso?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Aggiornamento</span>
-                  </button>
-                )}
-                {selectedTipo === 'aggiornamento' && (
-                  <button
-                    type="button"
-                    onClick={() => selectTipo('base')}
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      width: '100%', textAlign: 'left', background: 'transparent', border: '1px dashed',
-                      borderRadius: '0.6rem', padding: '0.65rem 0.85rem', fontSize: '0.8rem', cursor: 'pointer',
-                      fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                    }}
-                  >
-                    <span>Devi conseguire l'abilitazione <strong>per la prima volta</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>Corso Gru per Autocarro · 12 ore</span>
-                  </button>
-                )}
-              </PricingSidebar>
+              />
             </aside>
           </div>
         </div>

@@ -567,7 +567,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                   { icon: 'fas fa-map-marker-alt', label: 'Operativa dal 2005' },
                   { icon: 'fas fa-network-wired', label: 'PromoterGroup S.p.A.' },
                 ].map((b, i) => (
-                  <span key={i} className="text-[#008C95] dark:text-[#10B981] bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-900/40" style={{
+                  <span key={i} className="text-[#008C95] dark:text-[#10B981] bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30" style={{
                     display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                     fontSize: '0.75rem', fontWeight: 700,
                     padding: '0.35rem 0.8rem', borderRadius: '999px',

@@ -248,7 +248,7 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
 
             <a
               href={`/all-courses/${c.slug}`}
-              className="bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl text-sm transition-colors text-center"
+              className="bg-primary hover:bg-[#006B73] text-white font-semibold rounded-xl text-sm transition-colors text-center"
               style={{ padding: '0.55rem', marginTop: '0.25rem' }}
             >
               Iscriviti ora

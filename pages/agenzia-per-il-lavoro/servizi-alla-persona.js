@@ -407,7 +407,7 @@ export default function ServiziAllaPersona() {
       {/* ── MICRO-STATS ──────────────────────────────────────── */}
       <div className="bg-white dark:bg-dark-card">
         <div className="container" style={{ paddingTop: '0', paddingBottom: '2rem' }}>
-          <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-900/40" style={{
+          <div className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30" style={{
             padding: '1rem 2rem',
             borderRadius: '0.75rem',
             display: 'flex',

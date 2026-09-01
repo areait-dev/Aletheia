@@ -179,7 +179,7 @@ function RelatedCardSmall({ article }) {
     <Link href={`/news/${article.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={hovered ? 'bg-teal-50 dark:bg-gray-700' : ''}
+      className={hovered ? 'bg-[#008C95]/10 dark:bg-gray-700' : ''}
       style={{ display: 'flex', gap: '0.75rem', textDecoration: 'none', padding: '0.75rem', borderRadius: '0.75rem', transition: 'background 0.2s' }}>
       <div className="bg-slate-200 dark:bg-gray-700" style={{ flexShrink: 0, width: '72px', height: '54px', borderRadius: '0.5rem', overflow: 'hidden' }}>
         <img src={article.image} alt={article.title} loading="lazy"
@@ -206,7 +206,7 @@ function RelatedCardLarge({ article }) {
       onMouseLeave={() => setHovered(false)}
       className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
       style={{ display: 'flex', flexDirection: 'column', borderRadius: '1rem', overflow: 'hidden', textDecoration: 'none', transform: hovered ? 'translateY(-4px)' : 'translateY(0)', boxShadow: hovered ? '0 12px 32px rgba(0,0,0,0.1)' : '0 2px 8px rgba(0,0,0,0.04)', transition: 'all 0.25s ease' }}>
-      <div className="bg-teal-50 dark:bg-gray-700" style={{ position: 'relative', paddingTop: '56.25%', overflow: 'hidden' }}>
+      <div className="bg-[#008C95]/10 dark:bg-gray-700" style={{ position: 'relative', paddingTop: '56.25%', overflow: 'hidden' }}>
         <img src={article.image} alt={article.title} loading="lazy"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: hovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.4s ease' }}
           onError={(e) => { e.currentTarget.style.display = 'none'; }} />
@@ -334,7 +334,7 @@ export default function ArticlePage({ article, related }) {
       {/* ══════════════════════════════════════════════════════════
           HERO - solo gradiente, nessuna immagine. Titolo + meta.
           ══════════════════════════════════════════════════════════ */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 min-h-[320px] flex items-center pt-28 pb-12 px-5 sm:px-6 md:pt-32 md:pb-16">
+      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-[#004D52] min-h-[320px] flex items-center pt-28 pb-12 px-5 sm:px-6 md:pt-32 md:pb-16">
 
         {/* Linea accent turchese in cima */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: '#008C95' }} />
@@ -400,7 +400,7 @@ export default function ArticlePage({ article, related }) {
               )}
 
               {/* Lead / excerpt in evidenza */}
-              <p className="text-slate-600 dark:text-gray-300 bg-teal-50 dark:bg-teal-900/20" style={{
+              <p className="text-slate-600 dark:text-gray-300 bg-[#008C95]/10 dark:bg-[#10B981]/10" style={{
                 fontSize: '1.2rem', fontWeight: 500,
                 lineHeight: 1.75, borderLeft: '3px solid #008C95',
                 paddingLeft: '1.25rem', marginBottom: '2.25rem',
@@ -423,7 +423,7 @@ export default function ArticlePage({ article, related }) {
                 <div className="border-slate-100 dark:border-[rgba(255,255,255,0.08)]" style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid', display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em', marginRight: '0.25rem' }}>Tag:</span>
                   {tags.map((tag) => (
-                    <span key={tag} className="bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-900/40 text-teal-700 dark:text-teal-300" style={{ padding: '0.3rem 0.875rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span key={tag} className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30 text-primary dark:text-[#10B981]" style={{ padding: '0.3rem 0.875rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
                       {tag}
                     </span>
                   ))}
@@ -474,7 +474,7 @@ export default function ArticlePage({ article, related }) {
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
                       {tags.map((tag) => (
-                        <span key={tag} className="bg-white dark:bg-gray-700 border border-teal-100 dark:border-gray-600 text-teal-700 dark:text-teal-300" style={{ padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
+                        <span key={tag} className="bg-white dark:bg-gray-700 border border-[#008C95]/30 dark:border-gray-600 text-primary dark:text-[#10B981]" style={{ padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
                           {tag}
                         </span>
                       ))}
