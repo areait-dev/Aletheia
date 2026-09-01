@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import PricingSidebar from '../../components/PricingSidebar';
+import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
@@ -132,23 +132,24 @@ export default function AggiornamentoCoordinatoriCseCsp() {
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "top" "price" "tabs";
-          gap: 1.25rem;
+          grid-template-areas: "top" "scheda" "info" "tabs";
+          gap: 1.5rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
-            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            grid-template-areas: "top ." "tabs price";
-            column-gap: 4rem; /* gap-16: distacco netto tra contenuto e sidebar */
+            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            grid-template-areas: "top ." "scheda info" "tabs info";
+            column-gap: 3.5rem;
             row-gap: 1.25rem;
           }
         }
-        .cp-top-area { grid-area: top; }
-        .cp-tabs-area { grid-area: tabs; }
-        .cp-price-area { grid-area: price; }
+        .cp-top-area { grid-area: top; min-width: 0; }
+        .cp-scheda-area { grid-area: scheda; min-width: 0; }
+        .cp-tabs-area { grid-area: tabs; min-width: 0; }
+        .cp-info-area { grid-area: info; min-width: 0; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 */
+          .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -157,7 +158,7 @@ export default function AggiornamentoCoordinatoriCseCsp() {
         .cp-tabs { display: flex; gap: 0.5rem; border-bottom: 2px solid; flex-wrap: wrap; }
 
         .cp-carousel-track {
-          display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+          display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: none;
         }
         .cp-carousel-track::-webkit-scrollbar { display: none; }
@@ -170,6 +171,11 @@ export default function AggiornamentoCoordinatoriCseCsp() {
         :root[data-theme="dark"] .cp-carousel-arrow,
         .dark .cp-carousel-arrow { background: #1F2937; border-color: rgba(255,255,255,0.15); color: #6EE7B7; }
         .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+
+        .corso-correlato-card { flex: 0 0 260px; scroll-snap-align: start; }
+        @media (min-width: 1024px) { .corso-correlato-card { flex: 0 0 calc((100% - 3 * 1.25rem) / 4); } }
+        .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14); }
+        .dark .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       `}</style>
 
       {/* ══════════════ TAB (colonna sinistra) & BOX PREZZO STICKY (colonna destra) ══════════════ */}
@@ -194,6 +200,11 @@ export default function AggiornamentoCoordinatoriCseCsp() {
               <h1 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, lineHeight: 1.2, margin: 0 }}>
                 Aggiornamento Coordinatori della Sicurezza nelle Fasi di Progettazione ed Esecuzione dei Lavori (CSP-CSE) <span className="text-slate-400 dark:text-gray-500" style={{ fontWeight: 700 }}>· 40 ore</span>
               </h1>
+            </div>
+
+            {/* ── AREA "scheda": scheda tecnica scura, riga propria allineata alla sidebar prezzo ── */}
+            <div className="cp-scheda-area">
+              <CourseSchedaTecnica items={schedaTecnica} />
             </div>
 
             {/* ── AREA "tabs": sistema Panoramica / Moduli, allineata alla riga della sidebar prezzo ── */}
@@ -223,9 +234,6 @@ export default function AggiornamentoCoordinatoriCseCsp() {
               <div style={{ paddingTop: '2rem' }}>
                 {activeTab === 'overview' && (
                   <div>
-                    {/* SCHEDA TECNICA: apre sempre il tab Panoramica, come da standard comune a tutte le pagine corso */}
-                    <CourseSchedaTecnica items={schedaTecnica} />
-
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
                     <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>
                       Questo è il corso di aggiornamento per Coordinatori della Sicurezza nelle Fasi di Progettazione ed Esecuzione dei Lavori (CSP-CSE), della durata di 40 ore, non il corso base: è rivolto a chi ha già conseguito l&apos;attestato di formazione iniziale di 120 ore e deve rinnovarlo periodicamente, ai sensi dell&apos;art. 98 e dell&apos;Allegato XIV del D.Lgs 81/2008.
@@ -327,11 +335,10 @@ export default function AggiornamentoCoordinatoriCseCsp() {
               </div>
             </div>
 
-            {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet */}
-            <aside className="cp-price-area">
-              <PricingSidebar
-                buyHref={`/contatti?corso=${encodeURIComponent('Aggiornamento Coordinatori Cantieri CSE-CSP')}&tipo=preventivo`}
-                buyLabel="Richiedi preventivo"
+            {/* SIDEBAR PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet */}
+            <aside className="cp-info-area">
+              <CoursePricingSidebar
+                primaryHref={`/contatti?corso=${encodeURIComponent('Aggiornamento Coordinatori Cantieri CSE-CSP')}&tipo=preventivo`}
               />
             </aside>
           </div>
@@ -360,12 +367,8 @@ export default function AggiornamentoCoordinatoriCseCsp() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="corso-correlato-card group bg-white dark:bg-dark-card"
-                style={{
-                  flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
-                  scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                }}
+                className="corso-correlato-card group bg-white dark:bg-dark-card rounded-3xl overflow-hidden no-underline flex flex-col transition-all duration-300 hover:-translate-y-1"
+                style={{ boxShadow: '0 4px 16px rgba(15,23,42,0.06)' }}
               >
                 <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
                   {c.image ? (
@@ -377,7 +380,12 @@ export default function AggiornamentoCoordinatoriCseCsp() {
                       className="group-hover:scale-105"
                     />
                   ) : (
-                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }} />
+                    <div
+                      className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                      style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}
+                    >
+                      <i className="fas fa-graduation-cap" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                    </div>
                   )}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
                   <span style={{ position: 'absolute', bottom: '0.6rem', left: '0.85rem', color: '#fff', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>

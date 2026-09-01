@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import PricingSidebar from '../../components/PricingSidebar';
+import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
@@ -120,30 +120,31 @@ export default function ModuloAggiuntivoCantieriDatoreLavoro() {
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "top" "price" "tabs";
-          gap: 1.25rem;
+          grid-template-areas: "top" "scheda" "info" "tabs";
+          gap: 1.5rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
-            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            grid-template-areas: "top ." "tabs price";
-            column-gap: 4rem;
+            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            grid-template-areas: "top ." "scheda info" "tabs info";
+            column-gap: 3.5rem;
             row-gap: 1.25rem;
           }
         }
-        .cp-top-area { grid-area: top; }
-        .cp-tabs-area { grid-area: tabs; }
-        .cp-price-area { grid-area: price; }
+        .cp-top-area { grid-area: top; min-width: 0; }
+        .cp-scheda-area { grid-area: scheda; min-width: 0; }
+        .cp-tabs-area { grid-area: tabs; min-width: 0; }
+        .cp-info-area { grid-area: info; min-width: 0; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; }
+          .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         @media (max-width: 560px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
 
         .cp-carousel-track {
-          display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+          display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: none;
         }
         .cp-carousel-track::-webkit-scrollbar { display: none; }
@@ -156,6 +157,11 @@ export default function ModuloAggiuntivoCantieriDatoreLavoro() {
         :root[data-theme="dark"] .cp-carousel-arrow,
         .dark .cp-carousel-arrow { background: #1F2937; border-color: rgba(255,255,255,0.15); color: #6EE7B7; }
         .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+
+        .corso-correlato-card { flex: 0 0 260px; scroll-snap-align: start; }
+        @media (min-width: 1024px) { .corso-correlato-card { flex: 0 0 calc((100% - 3 * 1.25rem) / 4); } }
+        .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14); }
+        .dark .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       `}</style>
 
       {/* ══════════════ Contenuto (colonna sinistra) & BOX PREZZO STICKY (colonna destra) ══════════════ */}
@@ -182,12 +188,15 @@ export default function ModuloAggiuntivoCantieriDatoreLavoro() {
               </h1>
             </div>
 
+            {/* ── AREA "scheda": scheda tecnica scura, sempre visibile, allineata alla sidebar a destra.
+                Solo modalità FAD per questo corso — Aula e Videoconferenza non disponibili, coerentemente
+                col listino Alètheia. ── */}
+            <div className="cp-scheda-area">
+              <CourseSchedaTecnica items={SCHEDA_TECNICA} />
+            </div>
+
             {/* ── AREA "tabs": contenuto Panoramica unico (nessuno switch: modulo singolo) ── */}
             <div className="cp-tabs-area">
-              {/* SCHEDA TECNICA: solo modalità FAD per questo corso — Aula e Videoconferenza non
-                  disponibili, coerentemente col listino Alètheia. */}
-              <CourseSchedaTecnica items={SCHEDA_TECNICA} />
-
               <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
               {DESCRIZIONE.map((paragrafo, i) => (
                 <p key={i} className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>{paragrafo}</p>
@@ -242,39 +251,39 @@ export default function ModuloAggiuntivoCantieriDatoreLavoro() {
 
             {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet.
                 Unica riga FAD 90€ + IVA — nessuna opzione Aula/Videoconferenza per questo corso. */}
-            <aside className="cp-price-area">
-              <PricingSidebar
-                buyHref={`/contatti?corso=${encodeURIComponent('Formazione Aggiuntiva "Cantieri" per Datore di Lavoro e Dirigente')}&tipo=preventivo`}
-                buyLabel="Richiedi preventivo"
+            <aside className="cp-info-area">
+              <CoursePricingSidebar
+                primaryHref={`/contatti?corso=${encodeURIComponent('Formazione Aggiuntiva "Cantieri" per Datore di Lavoro e Dirigente')}&tipo=preventivo`}
                 whatsappHref="https://wa.me/?text=Informazioni%20Modulo%20Aggiuntivo%20Cantieri%20Datore%20di%20Lavoro%2FDirigente"
-              >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <Link
-                    href="/all-courses/datore-di-lavoro"
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                      textDecoration: 'none', border: '1px dashed', borderRadius: '0.6rem',
-                      padding: '0.65rem 0.85rem', fontSize: '0.8rem',
-                    }}
-                  >
-                    <span>Non hai ancora il corso base <strong>Datore di Lavoro</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>16 ore</span>
-                  </Link>
-                  <Link
-                    href="/all-courses/formazione-dirigente"
-                    className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
-                    style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
-                      textDecoration: 'none', border: '1px dashed', borderRadius: '0.6rem',
-                      padding: '0.65rem 0.85rem', fontSize: '0.8rem',
-                    }}
-                  >
-                    <span>Oppure ti serve il corso base <strong>Dirigente</strong>?</span>
-                    <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>12 ore</span>
-                  </Link>
-                </div>
-              </PricingSidebar>
+                customContent={
+                  <div className="flex flex-col gap-2">
+                    <Link
+                      href="/all-courses/datore-di-lavoro"
+                      className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
+                        textDecoration: 'none', border: '1px dashed', borderRadius: '0.6rem',
+                        padding: '0.65rem 0.85rem', fontSize: '0.8rem',
+                      }}
+                    >
+                      <span>Non hai ancora il corso base <strong>Datore di Lavoro</strong>?</span>
+                      <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>16 ore</span>
+                    </Link>
+                    <Link
+                      href="/all-courses/formazione-dirigente"
+                      className="text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)]"
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
+                        textDecoration: 'none', border: '1px dashed', borderRadius: '0.6rem',
+                        padding: '0.65rem 0.85rem', fontSize: '0.8rem',
+                      }}
+                    >
+                      <span>Oppure ti serve il corso base <strong>Dirigente</strong>?</span>
+                      <span style={{ fontWeight: 800, color: '#008C95', whiteSpace: 'nowrap' }}>12 ore</span>
+                    </Link>
+                  </div>
+                }
+              />
             </aside>
           </div>
         </div>
@@ -302,34 +311,35 @@ export default function ModuloAggiuntivoCantieriDatoreLavoro() {
               <Link
                 key={cc.href}
                 href={cc.href}
-                className="corso-correlato-card group bg-white dark:bg-dark-card"
-                style={{
-                  flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
-                  scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                }}
+                className="corso-correlato-card group bg-white dark:bg-dark-card rounded-3xl overflow-hidden no-underline flex flex-col transition-all duration-300 hover:-translate-y-1"
+                style={{ boxShadow: '0 4px 16px rgba(15,23,42,0.06)' }}
               >
-                <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
+                <div className="relative w-full overflow-hidden" style={{ height: '150px' }}>
                   {cc.image ? (
                     <img
                       src={cc.image}
                       alt={cc.titolo}
                       loading="lazy"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.35s ease' }}
-                      className="group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   ) : (
-                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }} />
+                    <div
+                      className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                      style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}
+                    >
+                      <i className="fas fa-graduation-cap" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                    </div>
                   )}
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
                   <span style={{ position: 'absolute', bottom: '0.6rem', left: '0.85rem', color: '#fff', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                     {cc.meta || 'Formazione Obbligatoria'}
                   </span>
                 </div>
                 <div style={{ padding: '1rem 1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{cc.titolo}</span>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: 'auto' }}>
-                    Scopri di più <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem' }}></i>
+                  <span className="text-teal-600 dark:text-[#6EE7B7] flex items-center gap-1.5 mt-auto font-bold" style={{ fontSize: '0.82rem' }}>
+                    Scopri di più
+                    <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
                   </span>
                 </div>
               </Link>

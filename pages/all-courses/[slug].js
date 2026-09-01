@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import PricingSidebar from '../../components/PricingSidebar';
+import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
@@ -18,6 +18,8 @@ import trattoriAgricoliContent from '../../data/content/trattori-agricoli-conten
 import trattoriAgricoliAggiornamentoContent from '../../data/content/trattori-agricoli-aggiornamento-content';
 import pleContent from '../../data/content/ple-content';
 import pleAggiornamentoContent from '../../data/content/ple-aggiornamento-content';
+import addettiMacchinaRaccogliFruttaContent from '../../data/content/addetti-macchina-raccogli-frutta-content';
+import dpi3CategoriaAggiornamentoContent from '../../data/content/dpi-3-categoria-aggiornamento-content';
 import formazioneDirigenteContent from '../../data/content/formazione-dirigente-content';
 import formazioneDirigenteAggiornamentoContent from '../../data/content/formazione-dirigente-aggiornamento-content';
 import formazioneLavoratoriContent from '../../data/content/formazione-lavoratori-content';
@@ -60,6 +62,18 @@ const EDITORIAL_CONTENT = {
   'ple-piattaforme-di-lavoro-mobili-elevabili': {
     corso: pleContent.ple,
     aggiornamento: pleAggiornamentoContent,
+  },
+  // Famiglia "addetti-macchina-raccogli-frutta-crf" a variante unica (tipo 'corso', 8 ore): la famiglia
+  // "addetti-macchina-raccogli-frutta-aggiornamento" è SEPARATA (non una variante "aggiornamento" di
+  // questa, vedi buildCourseFamilies) e non ha ancora contenuto editoriale proprio.
+  'addetti-macchina-raccogli-frutta-crf': {
+    corso: addettiMacchinaRaccogliFruttaContent['addetti-macchina-raccogli-frutta-crf'],
+  },
+  // Famiglia "dpi-3-categoria": un solo livello ('default') con varianti corso/aggiornamento. Solo
+  // "aggiornamento" ha contenuto editoriale (unico PDF fornito finora); il corso base (8h) mostra
+  // ancora il placeholder finché non arriva il relativo programma.
+  'dpi-3-categoria': {
+    aggiornamento: dpi3CategoriaAggiornamentoContent,
   },
   // Famiglia "formazione-dirigente": già raggruppata automaticamente da buildCourseFamilies (pattern
   // "modulo comune" esistente in LEVEL_PATTERNS) - un'unica pagina con switch Corso/Aggiornamento.
@@ -1150,6 +1164,16 @@ export default function CourseDetail() {
     window.scrollTo(0, 0);
   }, [slug]);
 
+  // Naviga da corso a corso (es. click su un "corso correlato") non smonta il componente pagina
+  // (stesso pages/all-courses/[slug].js): senza reset, selectedLivelloKey/selectedTipo restano legati
+  // al corso precedente e possono non esistere più tra i varianti del nuovo corso, con
+  // variantiLivello/varianteCorrente che risultano vuoti -> crash su varianteCorrente.prezzo.
+  useEffect(() => {
+    setSelectedLivelloKey(null);
+    setSelectedTipo('corso');
+    setOpenFaqIndex(null);
+  }, [slug]);
+
   // Inizializza il livello selezionato da ?livello= (indice 1-based, condivisibile/bookmarkabile) o dal primo disponibile
   useEffect(() => {
     if (!family || !router.isReady || selectedLivelloKey) return;
@@ -1192,7 +1216,14 @@ export default function CourseDetail() {
 
   const livelloEntries = Array.from(new Map(family.varianti.map((v) => [v.livelloKey, v.label])).entries());
   const hasMultipleLivelli = livelloEntries.length > 1;
-  const activeLivelloKey = selectedLivelloKey || livelloEntries[0]?.[0];
+  // Naviga da corso a corso (click su un "corso correlato") non smonta il componente pagina, quindi al
+  // primo render dopo il cambio di slug selectedLivelloKey è ancora quello del corso PRECEDENTE - se
+  // usato ciecamente e non presente tra i livelli della nuova famiglia, variantiLivello risulta vuoto e
+  // varianteCorrente sotto è undefined (crash su varianteCorrente.prezzo). Va quindi validato qui, in
+  // fase di render, non solo resettato via effect (che scatta troppo tardi, dopo il render che crasha).
+  const activeLivelloKey = (selectedLivelloKey && livelloEntries.some(([key]) => key === selectedLivelloKey))
+    ? selectedLivelloKey
+    : livelloEntries[0]?.[0];
   const variantiLivello = family.varianti.filter((v) => v.livelloKey === activeLivelloKey);
   const hasAggiornamento = variantiLivello.length > 1;
   const varianteCorrente = variantiLivello.find((v) => v.tipo === selectedTipo) || variantiLivello[0];
@@ -1227,14 +1258,28 @@ export default function CourseDetail() {
   // che altrimenti farebbe fallire il lookup pur avendo contenuto editoriale disponibile.
   const contenutoLivello = EDITORIAL_CONTENT[family.id]?.[varianteCorrente.tipo]?.[editorialLivelloKey] ?? null;
 
-  const corsiCorrelatiRisolti = (contenutoLivello?.corsiCorrelati || [])
+  // Corsi correlati: priorità alla curatela editoriale (contenutoLivello.corsiCorrelati, nei file
+  // data/content/*.js), con fallback automatico quando è assente o troppo corta - Regola 1: mai il
+  // corso corrente; Regola 2: stessa categoria (family.categoria); Regola 3: se ancora sotto soglia,
+  // completa con famiglie di altre categorie, fino a un minimo di 4 card totali.
+  const corsiCorrelatiCurati = (contenutoLivello?.corsiCorrelati || [])
     .map((s) => resolveRelatedCourse(s, families))
-    .filter(Boolean)
-    .map((c) => {
-      const relatedSlug = c.href.split('/').pop();
-      const relatedFamily = families.find((f) => f.slug === relatedSlug);
-      return { ...c, image: relatedFamily?.image || null };
-    });
+    .filter(Boolean);
+
+  const CORSI_CORRELATI_MIN_TOTAL = 4;
+  const corsiCorrelatiUsedSlugs = new Set([slug, ...corsiCorrelatiCurati.map((c) => c.href.split('/').pop())]);
+  const corsiCorrelatiPool = families.filter((f) => !corsiCorrelatiUsedSlugs.has(f.slug));
+  const corsiCorrelatiStessaCategoria = corsiCorrelatiPool.filter((f) => f.categoria === family.categoria);
+  const corsiCorrelatiAltraCategoria = corsiCorrelatiPool.filter((f) => f.categoria !== family.categoria);
+  const corsiCorrelatiAutoFill = [...corsiCorrelatiStessaCategoria, ...corsiCorrelatiAltraCategoria]
+    .slice(0, Math.max(0, CORSI_CORRELATI_MIN_TOTAL - corsiCorrelatiCurati.length))
+    .map((f) => ({ titolo: f.titolo, href: `/all-courses/${f.slug}` }));
+
+  const corsiCorrelatiRisolti = [...corsiCorrelatiCurati, ...corsiCorrelatiAutoFill].map((c) => {
+    const relatedSlug = c.href.split('/').pop();
+    const relatedFamily = families.find((f) => f.slug === relatedSlug);
+    return { ...c, image: relatedFamily?.image || null };
+  });
 
   // Oggetto "course" sintetizzato dalla famiglia + variante selezionata: mantiene compatibile il resto del render sottostante
   const course = {
@@ -1261,31 +1306,39 @@ export default function CourseDetail() {
       </Head>
 
       <style jsx global>{`
-        /* Standard architetturale unico per TUTTE le pagine corso (template dinamico + pagine dedicate):
-           due colonne 7fr/3fr con la sidebar prezzo sticky (top-24) staccata di gap-16 dal contenuto.
-           Il box prezzo è allineato alla riga della barra tab (Panoramica/Moduli), non al breadcrumb/
-           switch soprastanti: "top" occupa da sola la prima riga, "tabs"/"price" condividono la seconda.
-           Su mobile/tablet colonna singola con il box prezzo che precede le tab. */
+        /* Layout a due colonne asimmetriche per il template dinamico: colonna sinistra (60%) con
+           scheda tecnica scura + titolo/breadcrumb/tab/descrizione a flusso libero, colonna destra (40%)
+           con la sidebar prezzo, sticky su desktop. Su mobile/tablet colonna singola con la sidebar
+           prezzo che precede il contenuto testuale. */
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "top" "price" "tabs";
-          gap: 1.25rem;
+          grid-template-areas: "top" "scheda" "info" "tabs";
+          gap: 1.5rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
-            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            grid-template-areas: "top ." "tabs price";
-            column-gap: 4rem; /* gap-16: distacco netto tra contenuto e sidebar */
+            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            /* "info" ripetuta su due righe adiacenti nella stessa colonna = spanna entrambe le righe,
+               con l'inizio allineato alla riga "scheda" (non a "top"/breadcrumb): la sidebar parte
+               esattamente dall'altezza della scheda tecnica, come da richiesta. */
+            grid-template-areas: "top ." "scheda info" "tabs info";
+            column-gap: 3.5rem;
             row-gap: 1.25rem;
           }
         }
         .cp-top-area { grid-area: top; min-width: 0; }
+        .cp-scheda-area { grid-area: scheda; min-width: 0; }
         .cp-tabs-area { grid-area: tabs; min-width: 0; }
-        .cp-price-area { grid-area: price; min-width: 0; }
+        .cp-info-area { grid-area: info; min-width: 0; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 - il margine allinea il bordo del box al testo Panoramica/Moduli, non al bordo invisibile del padding dei bottoni */
+          /* top: 7rem - l'header è fixed con blur/glass (site-header, ~110-120px di altezza reale con
+             logo+padding); un offset più piccolo (es. 2rem) fa scorrere la sidebar SOTTO l'header,
+             nascondendo il titolo "Prezzi e iscrizione" dietro il glass. 7rem lascia margine visibile.
+             Lo sticky parte dall'altezza della riga "scheda" (vedi grid-template-areas sopra), quindi
+             la sidebar si aggancia allineata alla scheda tecnica, non al breadcrumb soprastante. */
+          .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -1295,18 +1348,31 @@ export default function CourseDetail() {
         @media (max-width: 768px) { .cp-valore-grid { grid-template-columns: 1fr; gap: 2rem; } }
 
         .cp-carousel-track {
-          display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+          display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: none;
         }
         .cp-carousel-track::-webkit-scrollbar { display: none; }
         .cp-carousel-arrow {
-          width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #E2E8F0;
-          background: #fff; color: #008C95; display: flex; align-items: center; justify-content: center;
-          cursor: pointer; font-size: 0.85rem; transition: all 0.2s ease;
+          width: 32px; height: 32px; border-radius: 9999px; border: 1px solid #E2E8F0;
+          background: #F8FAFC; color: #64748B; display: flex; align-items: center; justify-content: center;
+          cursor: pointer; font-size: 0.75rem; transition: background 0.2s ease;
         }
-        .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
-        .dark .cp-carousel-arrow { background: #1F2937; border-color: rgba(255,255,255,0.15); color: #6EE7B7; }
-        .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+        .cp-carousel-arrow:hover { background: #F1F5F9; }
+        .dark .cp-carousel-arrow { background: #0F172A; border-color: rgba(255,255,255,0.1); color: #94A3B8; }
+        .dark .cp-carousel-arrow:hover { background: rgba(255,255,255,0.05); }
+
+        /* Card corsi correlati: larghezza fissa su mobile/tablet (scroll orizzontale), a partire da
+           1024px la larghezza diventa proporzionale (4 card per riga piene, niente vuoto a destra),
+           il resto resta raggiungibile con le frecce. */
+        .corso-correlato-card {
+          flex: 0 0 260px;
+          scroll-snap-align: start;
+        }
+        @media (min-width: 1024px) {
+          .corso-correlato-card { flex: 0 0 calc((100% - 3 * 1.25rem) / 4); }
+        }
+        .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14); }
+        .dark .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       `}</style>
 
       <Header active="/all-courses" solid />
@@ -1400,6 +1466,32 @@ export default function CourseDetail() {
         )}
       </div>
 
+      {/* Scheda tecnica scura: riga propria nella colonna sinistra, allineata verticalmente alla
+          sidebar prezzo a destra (vedi .cp-info-area / grid-template-areas), sotto breadcrumb/switch
+          livello e prima delle tab. */}
+      <div className="cp-scheda-area">
+        {contenutoLivello ? (
+          <CourseSchedaTecnica
+            items={[
+              { icon: 'fas fa-clock', label: 'Durata', value: `${contenutoLivello.durataOre} ore` },
+              { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita },
+              { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita },
+              { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato },
+              { icon: 'fas fa-users', label: 'Partecipanti', value: `Max ${contenutoLivello.partecipantiMax} persone` },
+            ]}
+          />
+        ) : (
+          <CourseSchedaTecnica
+            items={[
+              { icon: 'fas fa-clock', label: 'Durata', value: course.duration },
+              { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: course.modality },
+              { icon: 'fas fa-certificate', label: 'Attestato', value: family.varianti[0]?.attestato || 'Attestato valido in tutta Italia' },
+              { icon: 'fas fa-users', label: 'Partecipanti', value: course.students ? `${course.students}` : 'Su richiesta' },
+            ]}
+          />
+        )}
+      </div>
+
       <div className="cp-tabs-area">
         {/* TABS */}
         <div className="border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ display: 'flex', gap: '0.5rem', borderBottom: '2px solid', flexWrap: 'wrap' }}>
@@ -1415,40 +1507,18 @@ export default function CourseDetail() {
 
       {/* TAB CONTENT - pilotato da contenutoLivello (data/content/*.js): null per le varianti "aggiornamento"
           o per famiglie senza materiale editoriale ancora pronto → placeholder invece di un tab vuoto/rotto.
-          La scheda tecnica (CourseSchedaTecnica) apre sempre il tab Panoramica, come da standard comune
-          a tutte le pagine corso, seguita dai testi descrittivi e infine dall'accordion FAQ. */}
+          Le caratteristiche del corso (durata/modalità/attestato/partecipanti, ex CourseSchedaTecnica) sono
+          ora dentro il box unificato nella colonna destra (vedi schedaItems più sotto). */}
       <div style={{ paddingTop: '2rem' }}>
         {!contenutoLivello ? (
-          <div>
-            {activeTab === 'overview' && (
-              <CourseSchedaTecnica
-                items={[
-                  { icon: 'fas fa-clock', label: 'Durata', value: course.duration },
-                  { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: course.modality },
-                  { icon: 'fas fa-certificate', label: 'Attestato', value: family.varianti[0]?.attestato || 'Attestato valido in tutta Italia' },
-                  { icon: 'fas fa-users', label: 'Partecipanti', value: course.students ? `${course.students}` : 'Su richiesta' },
-                ]}
-              />
-            )}
-            <div className="bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl" style={{ padding: '2.5rem', textAlign: 'center' }}>
-              <i className="fas fa-hourglass-half" style={{ fontSize: '1.5rem', color: '#94A3B8', marginBottom: '0.75rem' }}></i>
-              <p className="text-slate-500 dark:text-gray-300" style={{ margin: 0, fontSize: '0.95rem' }}>
-                Contenuto dettagliato in arrivo. Nel frattempo trovi qui sopra durata, modalità e attestato.
-              </p>
-            </div>
+          <div className="bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl" style={{ padding: '2.5rem', textAlign: 'center' }}>
+            <i className="fas fa-hourglass-half" style={{ fontSize: '1.5rem', color: '#94A3B8', marginBottom: '0.75rem' }}></i>
+            <p className="text-slate-500 dark:text-gray-300" style={{ margin: 0, fontSize: '0.95rem' }}>
+              Contenuto dettagliato in arrivo. Nel frattempo trovi qui accanto durata, modalità e attestato.
+            </p>
           </div>
         ) : activeTab === 'overview' ? (
           <div>
-            <CourseSchedaTecnica
-              items={[
-                { icon: 'fas fa-clock', label: 'Durata', value: `${contenutoLivello.durataOre} ore` },
-                { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita },
-                { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita },
-                { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato },
-                { icon: 'fas fa-users', label: 'Partecipanti', value: `Max ${contenutoLivello.partecipantiMax} persone` },
-              ]}
-            />
-
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
             {contenutoLivello.descrizione.split('\n\n').map((paragrafo, i) => (
               <p key={i} className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginBottom: '1.25rem' }}>{paragrafo}</p>
@@ -1542,92 +1612,116 @@ export default function CourseDetail() {
       </div>
           </div>
 
-          {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet,
-              subito sopra le tab. Per i corsi senza un prezzo letterale (finanziati/gratuiti) mostra
-              comunque un box con CTA di contatto, mai una sidebar vuota. */}
-          <aside className="cp-price-area">
-            {/* CASO 1 - Corso finanziato / gratuito */}
-            {/Finanziato|Gratuito/i.test(course.price) ? (
-              <PricingSidebar
-                buyHref={`/contatti?corso=${encodeURIComponent(course.title)}`}
-                buyLabel="Richiedi informazioni"
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
-              >
-                <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/40 rounded-2xl p-6" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <span style={{ display: 'inline-block', backgroundColor: '#DCFCE7', color: '#15803D', padding: '0.5rem 1.25rem', borderRadius: '50px', fontWeight: '700', fontSize: '0.9rem', width: 'fit-content' }}>
-                    <i className="fas fa-check-circle" style={{ marginRight: '0.4rem' }}></i>
-                    Corso finanziato - gratuito per i partecipanti
-                  </span>
-                  <p className="text-emerald-800 dark:text-emerald-200" style={{ fontSize: '0.875rem', lineHeight: 1.6, margin: 0 }}>
-                    Questo corso è completamente finanziato. Contattaci per verificare la tua eligibilità e avviare l&apos;iscrizione.
-                  </p>
-                </div>
-              </PricingSidebar>
+          {/* SIDEBAR PREZZO: colonna destra sticky su desktop (lg+, vedi .cp-info-area), full-width in
+              flusso su mobile/tablet, allineata alla scheda tecnica a sinistra. CoursePricingSidebar
+              (glassmorphism/SaaS minimale) copre prezzo/preventivo + CTA - mai una sidebar vuota anche
+              per i corsi senza un prezzo letterale (finanziati/gratuiti). */}
+          <aside className="cp-info-area">
+            {(() => {
+              /* CASO 1 - Corso finanziato / gratuito */
+              if (/Finanziato|Gratuito/i.test(course.price)) {
+                return (
+                  <CoursePricingSidebar
+                    primaryHref={`/contatti?corso=${encodeURIComponent(course.title)}`}
+                    primaryLabel="Richiedi informazioni"
+                    whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
+                    customContent={
+                      <div className="flex flex-col gap-2">
+                        <span className="inline-block bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-3 py-1 rounded-full font-bold text-xs w-fit">
+                          <i className="fas fa-check-circle" style={{ marginRight: '0.4rem' }}></i>
+                          Corso finanziato - gratuito
+                        </span>
+                        <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed m-0">
+                          Contattaci per verificare la tua eligibilità e avviare l&apos;iscrizione.
+                        </p>
+                      </div>
+                    }
+                  />
+                );
+              }
 
-            /* CASO 2 - Acquistabile online (ICDL/certificazioni), prezzo della variante selezionata sopra */
-            ) : course.purchasable ? (
-              <PricingSidebar
-                priceRows={[{ label: varianteCorrente.prezzoLabel, value: prezzoTesto }]}
-                onBuyClick={() => addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image })}
-                buyLabel="Aggiungi al carrello"
-              />
+              /* CASO 2 - Acquistabile online (ICDL/certificazioni), prezzo della variante selezionata sopra */
+              if (course.purchasable) {
+                return (
+                  <CoursePricingSidebar
+                    priceRows={[{ label: varianteCorrente.prezzoLabel, value: prezzoTesto }]}
+                    isPurchasable
+                    primaryLabel="Aggiungi al carrello"
+                    onPrimaryClick={(e) => { e.preventDefault(); addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image }); }}
+                  />
+                );
+              }
 
-            /* CASO 3 - Iscrizione online senza pagamento anticipato, a soglia (OSS, ASACOM,
-               Conduttore d'Impresa Agricola): il pulsante "Iscriviti" incrementa il conteggio
-               iscritti (EnrollmentProgress) invece di puntare solo a un link statico - al
-               raggiungimento di 15 iscrizioni lo staff viene avvisato per ricontattare gli
-               iscritti e avviare il corso. */
-            ) : course.enrollOnly ? (
-              <>
-                <PricingSidebar
-                  priceRows={[{ label: 'Quota di iscrizione', value: 'Su richiesta' }]}
-                  whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
-                >
-                  <EnrollmentProgress courseId={slug} courseTitle={course.title} />
-                  <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
-                    <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
-                    <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
-                      <strong>Pagamento all&apos;avvio del corso.</strong> Il corso parte al raggiungimento di 15 iscrizioni: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
+              /* CASO 3 - Iscrizione online senza pagamento anticipato, a soglia (OSS, ASACOM,
+                 Conduttore d'Impresa Agricola): il pulsante "Iscriviti" incrementa il conteggio
+                 iscritti (EnrollmentProgress) invece di puntare solo a un link statico - al
+                 raggiungimento di 15 iscrizioni lo staff viene avvisato per ricontattare gli
+                 iscritti e avviare il corso. */
+              if (course.enrollOnly) {
+                return (
+                  <>
+                    <CoursePricingSidebar
+                      whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
+                      customContent={
+                        <div className="flex flex-col gap-3">
+                          <div className="flex flex-col">
+                            <span className="text-[0.7rem] font-bold text-slate-500 dark:text-slate-400">Quota di iscrizione</span>
+                            <span className="text-emerald-600 dark:text-emerald-400 font-black text-3xl tracking-tight mt-0.5">Su richiesta</span>
+                          </div>
+                          <EnrollmentProgress courseId={slug} courseTitle={course.title} />
+                          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                            <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
+                            <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
+                              <strong>Pagamento all&apos;avvio del corso.</strong> Il corso parte al raggiungimento di 15 iscrizioni: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
+                            </p>
+                          </div>
+                        </div>
+                      }
+                    />
+                    <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: '0.75rem 0 0', textAlign: 'center' }}>
+                      Riceverai una conferma entro 24-48 ore lavorative
                     </p>
-                  </div>
-                </PricingSidebar>
-                <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: '0.75rem 0 0', textAlign: 'center' }}>
-                  Riceverai una conferma entro 24-48 ore lavorative
-                </p>
-              </>
+                  </>
+                );
+              }
 
-            /* CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
-               regione a regione, quindi niente prezzo in vetrina né carrello - solo "Richiedi
-               preventivo", come CASO 5. */
-            ) : varianteCorrente.obbligatoria ? (
-              <PricingSidebar
-                buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
-                buyLabel="Richiedi preventivo"
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
-              />
+              /* CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
+                 regione a regione, quindi niente prezzo in vetrina né carrello - solo "Richiedi
+                 preventivo", come CASO 5. */
+              if (varianteCorrente.obbligatoria) {
+                return (
+                  <CoursePricingSidebar
+                    priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
+                    primaryHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                    whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
+                  />
+                );
+              }
 
-            /* CASO 4B - Prezzo fisso noto per la variante selezionata (varianteCorrente.prezzo è un
-               numero): stesso flusso carrello di CASO 2, "Acquista ora" aggiunge al carrello e apre
-               subito il drawer (come i bottoni "Buy now" dei negozi online) invece di puntare a un
-               link statico non configurato. */
-            ) : varianteCorrente.prezzo != null ? (
-              <PricingSidebar
-                priceRows={[{ label: 'Quota di partecipazione', value: prezzoTesto }]}
-                onBuyClick={() => { addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image }); setCartOpen(true); }}
-                buyLabel="Acquista ora"
-                onAddToCartClick={() => addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image })}
-              />
+              /* CASO 4B - Prezzo fisso noto per la variante selezionata (varianteCorrente.prezzo è un
+                 numero): stesso flusso carrello di CASO 2, "Acquista ora" aggiunge al carrello e apre
+                 subito il drawer (come i bottoni "Buy now" dei negozi online) invece di puntare a un
+                 link statico non configurato. */
+              if (varianteCorrente.prezzo != null) {
+                return (
+                  <CoursePricingSidebar
+                    priceRows={[{ label: 'Quota di partecipazione', value: prezzoTesto }]}
+                    isPurchasable
+                    onPrimaryClick={(e) => { e.preventDefault(); addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image }); setCartOpen(true); }}
+                  />
+                );
+              }
 
-            /* CASO 5 - Nessun prezzo fisso (su richiesta/range/convenzioni): "Richiedi preventivo"
-               resta l'unica CTA dominante, niente più "Acquista ora" verso un link statico morto. */
-            ) : (
-              <PricingSidebar
-                priceRows={[{ label: 'Quota di partecipazione', value: course.price }]}
-                buyHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
-                buyLabel="Richiedi preventivo"
-                whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
-              />
-            )}
+              /* CASO 5 - Nessun prezzo fisso (su richiesta/range/convenzioni): "Richiedi preventivo"
+                 resta l'unica CTA dominante, niente più "Acquista ora" verso un link statico morto. */
+              return (
+                <CoursePricingSidebar
+                  priceRows={[{ label: 'Quota di partecipazione', value: course.price }]}
+                  primaryHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                  whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
+                />
+              );
+            })()}
           </aside>
         </div>
         </div>
@@ -1638,12 +1732,12 @@ export default function CourseDetail() {
       {corsiCorrelatiRisolti.length > 0 && (
         <section className="bg-white dark:bg-dark-bg border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
           <div className="container">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', gap: '1rem', flexWrap: 'wrap' }}>
+            <div className="flex items-center gap-4" style={{ marginBottom: '2rem' }}>
               <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, margin: 0 }}>
                 Corsi correlati
               </h2>
               {corsiCorrelatiRisolti.length > 3 && (
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div className="flex gap-2">
                   <button type="button" onClick={() => scrollCarousel(-1)} aria-label="Corsi precedenti" className="cp-carousel-arrow">
                     <i className="fas fa-arrow-left"></i>
                   </button>
@@ -1659,31 +1753,34 @@ export default function CourseDetail() {
                 <Link
                   key={i}
                   href={c.href}
-                  className="corso-correlato-card group bg-white dark:bg-dark-card"
-                  style={{
-                    flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
-                    scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
-                    boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                  }}
+                  className="corso-correlato-card group bg-white dark:bg-dark-card rounded-3xl overflow-hidden no-underline flex flex-col transition-all duration-300 hover:-translate-y-1"
+                  style={{ boxShadow: '0 4px 16px rgba(15,23,42,0.06)' }}
                 >
-                  <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
+                  <div className="relative w-full overflow-hidden" style={{ height: '160px' }}>
                     {c.image ? (
                       <img
                         src={c.image}
                         alt={c.titolo}
                         loading="lazy"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.35s ease' }}
-                        className="group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
-                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }} />
+                      /* Placeholder senza immagine: gradiente teal/verde petrolio coerente con la
+                         scheda tecnica (niente più rosa/viola fuori brand), icona di settore al centro. */
+                      <div
+                        className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                        style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}
+                      >
+                        <i className="fas fa-graduation-cap" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                      </div>
                     )}
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
                   </div>
-                  <div style={{ padding: '1rem 1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div className="flex-1 flex flex-col gap-2" style={{ padding: '1.1rem 1.25rem' }}>
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{c.titolo}</span>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: 'auto' }}>
-                      Scopri di più <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem' }}></i>
+                    <span className="text-teal-600 dark:text-[#6EE7B7] flex items-center gap-1.5 mt-auto font-bold" style={{ fontSize: '0.82rem' }}>
+                      Scopri di più
+                      <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
                     </span>
                   </div>
                 </Link>

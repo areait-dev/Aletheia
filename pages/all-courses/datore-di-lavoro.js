@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import PricingSidebar from '../../components/PricingSidebar';
+import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
@@ -182,7 +182,64 @@ const CONTENUTO = {
     ],
     prezzoNumerico: 90,
   },
+
+  aggiornamento: {
+    titleSuffix: '· 6 ore',
+    title: 'Aggiornamento Formazione per Datore di Lavoro',
+    schedaTecnica: [
+      { icon: 'fas fa-clock', label: 'Durata', value: '6 ore (modulo unico)' },
+      // TODO: confermare con Alètheia se la modalità è solo FAD come il corso base
+      { icon: 'fas fa-laptop', label: 'Modalità', value: 'Solo FAD (formazione a distanza asincrona) — aula e videoconferenza non disponibili' },
+      // TODO: confermare con Alètheia la periodicità esatta di rinnovo (es. "ogni 5 anni") non ancora comunicata
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Aggiornamento periodico previsto dalla normativa' },
+      { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
+      { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
+      { icon: 'fas fa-location-dot', label: 'Luogo del corso', value: 'Non applicabile — corso interamente in FAD' },
+    ],
+    descrizione: [
+      "Questo è il corso di aggiornamento per Datore di Lavoro, della durata di 6 ore, non il corso base: è rivolto a chi ha già completato la Formazione per Datore di Lavoro (16 ore) e deve rinnovarla periodicamente, ai sensi dell'art. 18 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.",
+      "L'aggiornamento periodico è obbligatorio perché il ruolo di datore di lavoro comporta responsabilità dirette in materia di salute e sicurezza che richiedono un allineamento costante alle novità normative, organizzative e di gestione del rischio introdotte nel tempo.",
+      "Il corso è pensato per chi ha già l'attestato di Formazione Datore di Lavoro in scadenza. Chi invece non ha mai conseguito la formazione di base deve frequentare il corso completo di 16 ore, non l'aggiornamento.",
+    ],
+    aChiERivolto: [
+      "Datori di lavoro già in possesso dell'attestato di Formazione Datore di Lavoro (16 ore) con formazione in scadenza",
+      "Titolari di piccole e medie imprese che devono rinnovare la propria formazione periodica",
+      "Attenzione: chi non ha mai conseguito la formazione di base deve prima frequentare il corso completo di 16 ore, non l'aggiornamento",
+    ],
+    cosaImparerai: [
+      'Aggiornare le conoscenze sul sistema legislativo in materia di salute e sicurezza dei lavoratori',
+      "Rivedere le responsabilità del datore di lavoro e le condizioni della delega di funzioni",
+      'Aggiornare le misure organizzative e gestionali di tutela previste dagli artt. 15 e 30 del D.Lgs 81/2008',
+      "Consolidare la gestione della valutazione dei rischi, del DUVRI e delle emergenze",
+    ],
+    faqs: [
+      {
+        domanda: 'Chi può fare l\'aggiornamento Datore di Lavoro?',
+        risposta: "L'aggiornamento è riservato a chi ha già conseguito l'attestato di Formazione Datore di Lavoro di 16 ore. Senza formazione di base è necessario frequentare il corso completo.",
+      },
+      {
+        domanda: 'Quanto dura l\'aggiornamento e come si articola?',
+        risposta: "L'aggiornamento dura 6 ore, erogate in un modulo unico in FAD.",
+      },
+      {
+        domanda: 'Devo fare anche il modulo cantieri se opero in cantiere?',
+        risposta: 'Sì, il modulo aggiuntivo "Cantieri" (6 ore) resta un percorso separato e integrativo, da abbinare al corso base o all\'aggiornamento in base alla propria situazione formativa.',
+      },
+    ],
+    programmaTitle: 'Programma Aggiornamento Formazione per Datore di Lavoro · 6 ore',
+    // Programma corso ufficiale non ancora fornito da Alètheia: niente moduli/i, il tab "Moduli" mostra
+    // il placeholder (stesso pattern di macchine-movimento-terra.js per le varianti senza PDF).
+    moduli: null,
+    prezzo: [
+      { label: 'FAD', value: 'Prezzo su richiesta' },
+    ],
+    prezzoNumerico: null,
+  },
 };
+
+// Dicitura placeholder per il tab Moduli quando la variante non ha ancora un programma corso
+// ufficiale (vedi CONTENUTO.aggiornamento.moduli sopra).
+const NOTA_MODULI_IN_AGGIORNAMENTO = 'Dettaglio moduli in aggiornamento — La ripartizione delle ore e i moduli tecnici saranno disponibili a breve.';
 
 export default function CorsoDatoreDiLavoro() {
   const [variante, setVariante] = useState('datore');
@@ -207,17 +264,23 @@ export default function CorsoDatoreDiLavoro() {
     return { ...r, image: fam?.image || null };
   };
 
-  // Risolto una volta e riusato sia nei correlati sotto sia nell'upsell della sidebar prezzo.
-  const aggiornamentoLink = resolveLink('aggiornamento-datore-di-lavoro');
-
   // Corsi correlati per variante: "switchTo" attiva lo switch in-pagina invece di navigare altrove,
-  // per le due varianti che coesistono su questa stessa pagina (Datore di Lavoro <-> Cantieri).
+  // per le tre varianti che coesistono su questa stessa pagina (Datore di Lavoro <-> Cantieri <->
+  // Aggiornamento) - la famiglia "datore-di-lavoro" (vedi buildCourseFamilies) raggruppa il modulo
+  // comune (16h) e l'aggiornamento (6h) sotto lo stesso slug canonico, quindi l'aggiornamento non ha
+  // un suo slug/pagina esterna risolvibile con resolveLink ed è raggiungibile solo con lo switch qui.
   const corsiCorrelati = variante === 'datore'
     ? [
-        aggiornamentoLink,
+        { titolo: 'Aggiornamento Formazione per Datore di Lavoro · 6 ore', switchTo: 'aggiornamento', meta: '6 ore' },
         { titolo: 'Formazione Aggiuntiva Cantieri per Datore di Lavoro e Dirigente · 6 ore', switchTo: 'cantieri', meta: '6 ore' },
         resolveLink('formazione-dirigente'),
         resolveLink('rspp-datore-di-lavoro-modulo-comune'),
+      ].filter(Boolean)
+    : variante === 'aggiornamento'
+    ? [
+        { titolo: 'Corso di Formazione per Datore di Lavoro · 16 ore', switchTo: 'datore', meta: '16 ore' },
+        { titolo: 'Formazione Aggiuntiva Cantieri per Datore di Lavoro e Dirigente · 6 ore', switchTo: 'cantieri', meta: '6 ore' },
+        resolveLink('formazione-dirigente'),
       ].filter(Boolean)
     : [
         { titolo: 'Corso di Formazione per Datore di Lavoro · 16 ore', switchTo: 'datore', meta: '16 ore' },
@@ -237,13 +300,15 @@ export default function CorsoDatoreDiLavoro() {
   return (
     <>
       <Head>
-        <title>{variante === 'datore' ? 'Corso Formazione Datore di Lavoro – 16h' : 'Modulo Cantieri Datore Lavoro/Dirigente – 6h'} | Alètheia</title>
+        <title>{variante === 'datore' ? 'Corso Formazione Datore di Lavoro – 16h' : variante === 'cantieri' ? 'Modulo Cantieri Datore Lavoro/Dirigente – 6h' : 'Aggiornamento Formazione Datore di Lavoro – 6h'} | Alètheia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={variante === 'datore'
             ? 'Corso formazione datore di lavoro, 16 ore in FAD, art. 18 D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).'
-            : 'Modulo aggiuntivo Cantieri per Datore di Lavoro e Dirigente, 6 ore in FAD, art. 18 D.Lgs 81/2008. Attestato valido in Italia. Alètheia, Vittoria (RG).'}
+            : variante === 'cantieri'
+            ? 'Modulo aggiuntivo Cantieri per Datore di Lavoro e Dirigente, 6 ore in FAD, art. 18 D.Lgs 81/2008. Attestato valido in Italia. Alètheia, Vittoria (RG).'
+            : 'Aggiornamento formazione datore di lavoro, 6 ore in FAD, art. 18 D.Lgs 81/2008. Attestato valido in tutta Italia. Alètheia S.r.l., Vittoria (RG).'}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -263,23 +328,24 @@ export default function CorsoDatoreDiLavoro() {
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "top" "price" "tabs";
-          gap: 1.25rem;
+          grid-template-areas: "top" "scheda" "info" "tabs";
+          gap: 1.5rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
-            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            grid-template-areas: "top ." "tabs price";
-            column-gap: 4rem; /* gap-16: distacco netto tra contenuto e sidebar */
+            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            grid-template-areas: "top ." "scheda info" "tabs info";
+            column-gap: 3.5rem;
             row-gap: 1.25rem;
           }
         }
-        .cp-top-area { grid-area: top; }
-        .cp-tabs-area { grid-area: tabs; }
-        .cp-price-area { grid-area: price; }
+        .cp-top-area { grid-area: top; min-width: 0; }
+        .cp-scheda-area { grid-area: scheda; min-width: 0; }
+        .cp-tabs-area { grid-area: tabs; min-width: 0; }
+        .cp-info-area { grid-area: info; min-width: 0; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 */
+          .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -287,8 +353,13 @@ export default function CorsoDatoreDiLavoro() {
 
         .cp-tabs { display: flex; gap: 0.5rem; border-bottom: 2px solid; flex-wrap: wrap; }
 
+        .cp-placeholder-block {
+          border: 1px dashed; border-radius: 0.75rem; padding: 1rem 1.25rem;
+          font-size: 0.85rem; font-style: italic;
+        }
+
         .cp-carousel-track {
-          display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+          display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: none;
         }
         .cp-carousel-track::-webkit-scrollbar { display: none; }
@@ -301,6 +372,11 @@ export default function CorsoDatoreDiLavoro() {
         :root[data-theme="dark"] .cp-carousel-arrow,
         .dark .cp-carousel-arrow { background: #1F2937; border-color: rgba(255,255,255,0.15); color: #6EE7B7; }
         .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+
+        .corso-correlato-card { flex: 0 0 260px; scroll-snap-align: start; }
+        @media (min-width: 1024px) { .corso-correlato-card { flex: 0 0 calc((100% - 3 * 1.25rem) / 4); } }
+        .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14); }
+        .dark .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       `}</style>
 
       {/* ══════════════ TAB (colonna sinistra) & BOX PREZZO STICKY (colonna destra) ══════════════ */}
@@ -319,16 +395,16 @@ export default function CorsoDatoreDiLavoro() {
                 <span className="text-slate-300 dark:text-gray-600">/</span>
                 <Link href="/all-courses/datore-di-lavoro" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Formazione Datore di Lavoro</Link>
                 <span className="text-slate-300 dark:text-gray-600">/</span>
-                <span className="text-slate-600 dark:text-gray-300">{variante === 'datore' ? 'Corso Datore di Lavoro' : 'Modulo Aggiuntivo Cantieri'}</span>
+                <span className="text-slate-600 dark:text-gray-300">{variante === 'datore' ? 'Corso Datore di Lavoro' : variante === 'cantieri' ? 'Modulo Aggiuntivo Cantieri' : 'Aggiornamento Datore di Lavoro'}</span>
               </nav>
 
               <h1 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, lineHeight: 1.2, marginBottom: '1.25rem' }}>
                 {c.title} <span className="text-slate-400 dark:text-gray-500" style={{ fontWeight: 700 }}>{c.titleSuffix}</span>
               </h1>
 
-              {/* SWITCH Datore di Lavoro / Modulo Cantieri - stesso pattern a pillola delle altre pagine corso */}
-              <div role="tablist" aria-label="Variante del corso" style={{ display: 'inline-flex', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
-                {['datore', 'cantieri'].map((v) => (
+              {/* SWITCH Datore di Lavoro / Modulo Cantieri / Aggiornamento - stesso pattern a pillola delle altre pagine corso */}
+              <div role="tablist" aria-label="Variante del corso" style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
+                {['datore', 'cantieri', 'aggiornamento'].map((v) => (
                   <button
                     key={v}
                     role="tab"
@@ -347,10 +423,16 @@ export default function CorsoDatoreDiLavoro() {
                       fontFamily: 'inherit',
                     }}
                   >
-                    {v === 'datore' ? 'Datore di Lavoro · 16 ore' : 'Modulo Cantieri · 6 ore'}
+                    {v === 'datore' ? 'Datore di Lavoro · 16 ore' : v === 'cantieri' ? 'Modulo Cantieri · 6 ore' : 'Aggiornamento · 6 ore'}
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* SCHEDA TECNICA: riga propria nella colonna sinistra, allineata alla sidebar prezzo a
+                destra, sotto breadcrumb/switch e prima delle tab. Cambia con la variante selezionata. */}
+            <div className="cp-scheda-area">
+              <CourseSchedaTecnica items={c.schedaTecnica} />
             </div>
 
             {/* ── AREA "tabs": tab Panoramica, allineata alla riga della sidebar prezzo ── */}
@@ -380,9 +462,6 @@ export default function CorsoDatoreDiLavoro() {
               <div style={{ paddingTop: '2rem' }}>
                 {activeTab === 'overview' && (
                 <div>
-                  {/* SCHEDA TECNICA: apre sempre il tab Panoramica, cambia con la variante selezionata */}
-                  <CourseSchedaTecnica items={c.schedaTecnica} />
-
                   <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
                   {c.descrizione.map((paragrafo, i) => (
                     <p key={i} className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>{paragrafo}</p>
@@ -453,37 +532,45 @@ export default function CorsoDatoreDiLavoro() {
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>
                       {c.programmaTitle}
                     </h2>
-                    <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
-                      Il corso è strutturato in {c.moduli.length} {c.moduli.length === 1 ? 'modulo' : 'moduli'} per un totale di {c.moduli.reduce((tot, m) => tot + m.durataOre, 0)} ore
-                    </p>
-                    <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
-                      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                        <thead>
-                          <tr className="bg-slate-50 dark:bg-gray-700">
-                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modulo</th>
-                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>Durata</th>
-                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Argomenti</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {c.moduli.map((modulo, i) => (
-                            <tr key={i} className="border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
-                              <td className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{modulo.titolo}</td>
-                              <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>
-                                {modulo.durataOre} {modulo.durataOre === 1 ? 'ora' : 'ore'}
-                              </td>
-                              <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
-                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                                  {modulo.argomenti.map((arg, j) => (
-                                    <li key={j} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{arg}</li>
-                                  ))}
-                                </ul>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+                    {!c.moduli ? (
+                      <div className="cp-placeholder-block text-slate-500 dark:text-gray-400 border-slate-200 dark:border-[rgba(255,255,255,0.15)]">
+                        {NOTA_MODULI_IN_AGGIORNAMENTO}
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
+                          Il corso è strutturato in {c.moduli.length} {c.moduli.length === 1 ? 'modulo' : 'moduli'} per un totale di {c.moduli.reduce((tot, m) => tot + m.durataOre, 0)} ore
+                        </p>
+                        <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                            <thead>
+                              <tr className="bg-slate-50 dark:bg-gray-700">
+                                <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modulo</th>
+                                <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>Durata</th>
+                                <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Argomenti</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {c.moduli.map((modulo, i) => (
+                                <tr key={i} className="border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
+                                  <td className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{modulo.titolo}</td>
+                                  <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>
+                                    {modulo.durataOre} {modulo.durataOre === 1 ? 'ora' : 'ore'}
+                                  </td>
+                                  <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
+                                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                                      {modulo.argomenti.map((arg, j) => (
+                                        <li key={j} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{arg}</li>
+                                      ))}
+                                    </ul>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -491,10 +578,10 @@ export default function CorsoDatoreDiLavoro() {
 
             {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet.
                 Cambia riga prezzo/label in base alla variante selezionata nello switch qui sopra. */}
-            <aside className="cp-price-area">
-              <PricingSidebar
-                buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
-                buyLabel="Richiedi preventivo"
+            <aside className="cp-info-area">
+              <CoursePricingSidebar
+                priceRows={c.prezzo}
+                primaryHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Formazione%20Datore%20di%20Lavoro"
               />
             </aside>
@@ -521,34 +608,33 @@ export default function CorsoDatoreDiLavoro() {
 
           <div ref={carouselRef} className="cp-carousel-track">
             {corsiCorrelati.map((cc) => {
-              const cardStyle = {
-                flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
-                scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.06)', cursor: 'pointer', border: 'none', padding: 0, textAlign: 'left', fontFamily: 'inherit',
-              };
+              const cardClassName = 'corso-correlato-card group bg-white dark:bg-dark-card rounded-3xl overflow-hidden no-underline flex flex-col transition-all duration-300 hover:-translate-y-1';
+              const cardStyle = { boxShadow: '0 4px 16px rgba(15,23,42,0.06)' };
               const inner = (
                 <>
-                  <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
+                  <div className="relative w-full overflow-hidden" style={{ height: '150px' }}>
                     {cc.image ? (
                       <img
                         src={cc.image}
                         alt={cc.titolo}
                         loading="lazy"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.35s ease' }}
-                        className="group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
-                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }} />
+                      <div className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}>
+                        <i className="fas fa-graduation-cap" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                      </div>
                     )}
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
                     <span style={{ position: 'absolute', bottom: '0.6rem', left: '0.85rem', color: '#fff', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                       {cc.meta || 'Sicurezza sul Lavoro'}
                     </span>
                   </div>
                   <div style={{ padding: '1rem 1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{cc.titolo}</span>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: 'auto' }}>
-                      Scopri di più <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem' }}></i>
+                    <span className="text-teal-600 dark:text-[#6EE7B7] flex items-center gap-1.5 mt-auto font-bold" style={{ fontSize: '0.8rem' }}>
+                      Scopri di più
+                      <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
                     </span>
                   </div>
                 </>
@@ -558,8 +644,8 @@ export default function CorsoDatoreDiLavoro() {
                   key={cc.switchTo}
                   type="button"
                   onClick={() => selectVariante(cc.switchTo)}
-                  className="corso-correlato-card group bg-white dark:bg-dark-card"
-                  style={cardStyle}
+                  className={cardClassName}
+                  style={{ ...cardStyle, cursor: 'pointer', border: 'none', padding: 0, textAlign: 'left', fontFamily: 'inherit' }}
                 >
                   {inner}
                 </button>
@@ -567,7 +653,7 @@ export default function CorsoDatoreDiLavoro() {
                 <Link
                   key={cc.href}
                   href={cc.href}
-                  className="corso-correlato-card group bg-white dark:bg-dark-card"
+                  className={cardClassName}
                   style={cardStyle}
                 >
                   {inner}

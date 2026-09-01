@@ -3,21 +3,21 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import PricingSidebar from '../../components/PricingSidebar';
+import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 
-// TODO: VERIFICARE AGGIORNAMENTO, CADENZA, INDIRIZZO MAPPA CON ALÈTHEIA
+// TODO: VERIFICARE CADENZA AGGIORNAMENTO E INDIRIZZO MAPPA CON ALÈTHEIA
 const MAPS_HREF = 'https://maps.google.com/?q=Vittoria+RG+Aletheia+Srl';
 
-// Dicitura usata esclusivamente nella nota della scheda tecnica e nel tab Moduli, in attesa del
-// programma corso ufficiale (ripartizione ore/teoria-pratica) fornito da Alètheia.
-// TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA
-const NOTA_MODULI_IN_AGGIORNAMENTO = 'Dettaglio moduli in aggiornamento — La ripartizione delle ore e i moduli tecnici saranno disponibili a breve.';
-
+// Contenuti reali tratti dal programma corso ufficiale Alètheia: "CORSO DI FORMAZIONE PER PREPOSTI AI
+// LAVORI SU STRADA - POSIZIONAMENTO DELLA SEGNALETICA STRADALE IN PRESENZA DI TRAFFICO VEICOLARE
+// [14 ore]" (D.Lgs. 81/2008 s.m.i., D.Lgs. 295 30/04/92, D.P.R. 495 16/12/92, D.M. 22/01/2019 -
+// Allegati I e II).
+//
 // Stessa architettura a switch usata in pompe-per-calcestruzzo.js, spazi-confinati.js, ecc., ma
-// attualmente popolata con la sola configurazione "base" (Corso Lavoratori Addetti · 12 ore): non
+// attualmente popolata con la sola configurazione "base" (Corso Lavoratori Addetti · 14 ore): non
 // risulta ad oggi in listino un corso di aggiornamento dedicato per questa categoria. L'oggetto
 // CONTENUTO e il componente restano pronti ad accogliere un'eventuale seconda chiave (es.
 // "aggiornamento") senza modifiche strutturali — lo switcher a pillola si attiva automaticamente
@@ -25,19 +25,99 @@ const NOTA_MODULI_IN_AGGIORNAMENTO = 'Dettaglio moduli in aggiornamento — La r
 const CONTENUTO = {
   base: {
     title: "Corso Lavoratori Addetti all'Attività di Apposizione, Integrazione e Rimozione della Segnaletica Stradale",
-    titleSuffix: '· 12 ore',
+    titleSuffix: '· 14 ore',
     breadcrumbLabel: 'Corso Segnaletica Stradale',
-    titleSeo: 'Corso Addetti Segnaletica Stradale – 12h | Alètheia',
-    metaDescription: 'Corso lavoratori addetti apposizione e rimozione segnaletica stradale, 12 ore. Attestato valido in Italia. Alètheia S.r.l., Vittoria (RG).',
+    titleSeo: 'Corso Addetti Segnaletica Stradale – 14h | Alètheia',
+    metaDescription: 'Corso lavoratori addetti apposizione e rimozione segnaletica stradale, 14 ore, D.M. 22/01/2019. Attestato valido in Italia. Alètheia S.r.l., Vittoria (RG).',
     schedaTecnica: [
-      { icon: 'fas fa-clock', label: 'Durata', value: '12 ore' },
-      // TODO: VERIFICARE AGGIORNAMENTO, CADENZA, INDIRIZZO MAPPA CON ALÈTHEIA
-      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Da definire' },
+      { icon: 'fas fa-clock', label: 'Durata', value: '14 ore' },
+      // TODO: VERIFICARE CADENZA AGGIORNAMENTO CON ALÈTHEIA
+      { icon: 'fas fa-calendar-check', label: 'Validità', value: 'Aggiornamento periodico previsto dalla normativa' },
       { icon: 'fas fa-certificate', label: 'Attestato', value: 'Valido in tutta Italia' },
       { icon: 'fas fa-users', label: 'Partecipanti', value: 'Max 30 persone' },
     ],
-    faqPlaceholderCount: 3,
-    programmaTitle: "Programma Corso Lavoratori Addetti all'Attività di Apposizione, Integrazione e Rimozione della Segnaletica Stradale · 12 ore",
+    descrizione: [
+      "Il Corso di Formazione per Preposti ai Lavori su Strada - Posizionamento della Segnaletica Stradale in Presenza di Traffico Veicolare, della durata di 14 ore, è rivolto ai preposti che coordinano l'esecuzione di lavori su strada, ai sensi del D.Lgs. 81/2008 s.m.i., del D.Lgs. 295 del 30/04/1992, del D.P.R. 495 del 16/12/1992 e del D.M. 22/01/2019 (Allegati I e II).",
+      "Il corso fornisce le competenze giuridico-normative sul Codice della Strada e sulla legislazione di sicurezza nei cantieri temporanei e mobili in presenza di traffico, e quelle tecniche sugli schemi segnaletici differenziati per categoria di strada, sui dispositivi di protezione individuale (indumenti ad alta visibilità) e sull'organizzazione del lavoro in squadra.",
+      "Il percorso si articola in un modulo giuridico-normativo (3 ore), un modulo tecnico (5 ore), una prova di verifica intermedia a risposta multipla (1 ora, da svolgere prima del modulo pratico), un modulo pratico (4 ore) con simulazioni di installazione e rimozione della segnaletica su diverse categorie di strada, e una prova di verifica finale pratica (1 ora).",
+    ],
+    aChiERivolto: [
+      'Lavoratori designati come preposti ai lavori su strada in presenza di traffico veicolare',
+      'Addetti all\'apposizione, integrazione e rimozione della segnaletica stradale nei cantieri temporanei e mobili',
+      'Datori di lavoro che devono garantire la formazione dei propri preposti ai sensi del D.M. 22/01/2019',
+    ],
+    cosaImparerai: [
+      'Conoscere gli articoli del Codice della Strada relativi a opere, depositi e apertura di cantieri stradali',
+      'Analizzare i rischi per i lavoratori e per gli utenti della strada in presenza di traffico',
+      'Applicare gli schemi segnaletici differenziati per categoria di strada (A, B, C, D, E, F)',
+      'Utilizzare correttamente i dispositivi di protezione individuale ad alta visibilità',
+      'Organizzare il lavoro in squadra e gestire la comunicazione tra gli operatori',
+      'Installare e rimuovere in sicurezza la segnaletica per cantieri fissi e cantieri mobili',
+      'Gestire interventi in sicurezza in situazioni di emergenza',
+      'Superare la prova di verifica intermedia e la prova pratica finale',
+    ],
+    faqs: [
+      {
+        domanda: 'Chi deve seguire questo corso sulla segnaletica stradale?',
+        risposta: "Il corso è rivolto ai preposti ai lavori su strada e agli addetti all'apposizione, integrazione e rimozione della segnaletica stradale nei cantieri in presenza di traffico veicolare, ai sensi del D.M. 22/01/2019.",
+      },
+      {
+        domanda: 'Quanto dura il corso e come si articola?',
+        risposta: 'Il corso dura 14 ore complessive: modulo giuridico-normativo (3 ore), modulo tecnico (5 ore), prova di verifica intermedia (1 ora), modulo pratico (4 ore) e prova di verifica finale pratica (1 ora).',
+      },
+      {
+        domanda: 'Sono previste prove di verifica durante il corso?',
+        risposta: 'Sì, il programma prevede una prova intermedia a questionario a risposta multipla prima del modulo pratico e una prova pratica di verifica finale.',
+      },
+    ],
+    programmaTitle: "Programma Corso Lavoratori Addetti all'Attività di Apposizione, Integrazione e Rimozione della Segnaletica Stradale · 14 ore",
+    moduli: [
+      {
+        titolo: 'MODULO I - GIURIDICO NORMATIVO',
+        durataOre: 3,
+        argomenti: [
+          "Articoli del Codice della Strada e del regolamento di attuazione su esecuzione di opere, depositi e apertura di cantieri",
+          'Legislazione generale di sicurezza nei cantieri temporanei e mobili in presenza di traffico',
+          "Analisi dei rischi per i lavoratori in presenza di traffico e per gli utenti della strada",
+          'Statistiche degli infortuni e delle violazioni delle norme nei cantieri stradali',
+        ],
+      },
+      {
+        titolo: 'MODULO II - TECNICO',
+        durataOre: 5,
+        argomenti: [
+          'Disciplinare tecnico sugli schemi segnaletici differenziati per categoria di strada',
+          'Dispositivi di protezione individuale: indumenti ad alta visibilità',
+          'Organizzazione del lavoro in squadra, compiti degli operatori e modalità di comunicazione',
+          'Norme operative e comportamentali per interventi programmati e di emergenza (Allegato I D.M. 22/01/2019)',
+        ],
+      },
+      {
+        titolo: 'PROVA INTERMEDIA - QUESTIONARIO A RISPOSTA MULTIPLA',
+        durataOre: 1,
+        argomenti: [
+          'Prova di verifica intermedia, da effettuarsi prima del modulo pratico',
+        ],
+      },
+      {
+        titolo: 'MODULO III - PRATICO',
+        durataOre: 4,
+        argomenti: [
+          'Tecniche di installazione e rimozione della segnaletica su strade di tipo A, B, D (autostrade, extraurbane principali, urbane di scorrimento)',
+          'Tecniche su strade di tipo C, F (extraurbane secondarie e locali extraurbane)',
+          'Tecniche su strade di tipo E, F (urbane di quartiere e locali urbane)',
+          'Tecniche di intervento mediante "cantieri mobili"',
+          'Tecniche di intervento in sicurezza per situazioni di emergenza',
+        ],
+      },
+      {
+        titolo: 'PROVA DI VERIFICA FINALE - PROVA PRATICA',
+        durataOre: 1,
+        argomenti: [
+          'Prova pratica di verifica finale',
+        ],
+      },
+    ],
     prezzo: [
       { label: 'Aula', value: '€ 150,00 + IVA' },
     ],
@@ -47,7 +127,7 @@ const CONTENUTO = {
 
 // Etichette pillola per lo switcher; usata solo se/quando CONTENUTO avrà più di una chiave.
 const PILL_LABEL = {
-  base: 'Corso Lavoratori Addetti · 12 ore',
+  base: 'Corso Lavoratori Addetti · 14 ore',
 };
 const ORDINE_SWITCH = Object.keys(CONTENUTO);
 
@@ -112,23 +192,24 @@ export default function CorsoSegnaleticaStradale() {
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "top" "price" "tabs";
-          gap: 1.25rem;
+          grid-template-areas: "top" "scheda" "info" "tabs";
+          gap: 1.5rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
-            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            grid-template-areas: "top ." "tabs price";
-            column-gap: 4rem;
+            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            grid-template-areas: "top ." "scheda info" "tabs info";
+            column-gap: 3.5rem;
             row-gap: 1.25rem;
           }
         }
-        .cp-top-area { grid-area: top; }
-        .cp-tabs-area { grid-area: tabs; }
-        .cp-price-area { grid-area: price; }
+        .cp-top-area { grid-area: top; min-width: 0; }
+        .cp-scheda-area { grid-area: scheda; min-width: 0; }
+        .cp-tabs-area { grid-area: tabs; min-width: 0; }
+        .cp-info-area { grid-area: info; min-width: 0; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; }
+          .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -142,7 +223,7 @@ export default function CorsoSegnaleticaStradale() {
         }
 
         .cp-carousel-track {
-          display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+          display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: none;
         }
         .cp-carousel-track::-webkit-scrollbar { display: none; }
@@ -155,6 +236,11 @@ export default function CorsoSegnaleticaStradale() {
         :root[data-theme="dark"] .cp-carousel-arrow,
         .dark .cp-carousel-arrow { background: #1F2937; border-color: rgba(255,255,255,0.15); color: #6EE7B7; }
         .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+
+        .corso-correlato-card { flex: 0 0 260px; scroll-snap-align: start; }
+        @media (min-width: 1024px) { .corso-correlato-card { flex: 0 0 calc((100% - 3 * 1.25rem) / 4); } }
+        .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14); }
+        .dark .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       `}</style>
 
       {/* ══════════════ TAB (colonna sinistra) & BOX PREZZO STICKY (colonna destra) ══════════════ */}
@@ -209,6 +295,36 @@ export default function CorsoSegnaleticaStradale() {
               )}
             </div>
 
+            {/* ── AREA "scheda": scheda tecnica scura, sotto il titolo/switch, allineata alla sidebar ── */}
+            <div className="cp-scheda-area">
+              {/* Solo modalità Aula: Videoconferenza e FAD non sono attive/selezionabili per questo corso. */}
+              <CourseSchedaTecnica items={c.schedaTecnica}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
+                  </div>
+                  <div>
+                    <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
+                    <span style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7', marginTop: '0.15rem' }}>Aula</span>
+                    <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>Videoconferenza e FAD non attive per questo corso</span>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
+                  </div>
+                  <div>
+                    <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
+                    {/* TODO: VERIFICARE AGGIORNAMENTO, CADENZA, INDIRIZZO MAPPA CON ALÈTHEIA */}
+                    <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
+                      Sede Alètheia S.r.l., Vittoria (RG) <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
+                    </a>
+                  </div>
+                </div>
+              </CourseSchedaTecnica>
+            </div>
+
             {/* ── AREA "tabs": sistema Panoramica / Moduli, allineata alla riga della sidebar prezzo ── */}
             <div className="cp-tabs-area">
               <div className="cp-tabs border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
@@ -236,90 +352,50 @@ export default function CorsoSegnaleticaStradale() {
               <div style={{ paddingTop: '2rem' }}>
                 {activeTab === 'overview' && (
                   <div>
-                    {/* SCHEDA TECNICA: apre sempre il tab Panoramica. Solo modalità Aula: Videoconferenza
-                        e FAD non sono attive/selezionabili per questo corso. */}
-                    <CourseSchedaTecnica items={c.schedaTecnica}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
-                          <span style={{ display: 'block', fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7', marginTop: '0.15rem' }}>Aula</span>
-                          <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>Videoconferenza e FAD non attive per questo corso</span>
-                        </div>
-                      </div>
-
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
-                          {/* TODO: VERIFICARE AGGIORNAMENTO, CADENZA, INDIRIZZO MAPPA CON ALÈTHEIA */}
-                          <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
-                            Sede Alètheia S.r.l., Vittoria (RG) <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
-                          </a>
-                        </div>
-                      </div>
-
-                      {/* Nota Moduli Tecnici nella scheda tecnica */}
-                      {/* TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', gridColumn: '1 / -1' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-list-check" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Nota moduli tecnici</span>
-                          <span style={{ display: 'block', fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.15rem', fontStyle: 'italic' }}>{NOTA_MODULI_IN_AGGIORNAMENTO}</span>
-                        </div>
-                      </div>
-                    </CourseSchedaTecnica>
-
-                    {/* <!-- TODO: COMPLETARE COPYWRITING PANORAMICA CON PDF ALÈTHEIA --> */}
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
-                    <p className="cp-placeholder-block text-slate-500 dark:text-gray-400 border-slate-200 dark:border-[rgba(255,255,255,0.15)]" style={{ marginBottom: '2rem' }}>
-                      [DA COMPLETARE quando disponibile il programma corso — descrizione 300-400 parole basata sui contenuti reali dei moduli]
-                    </p>
+                    {c.descrizione.map((paragrafo, i) => (
+                      <p key={i} className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>{paragrafo}</p>
+                    ))}
 
-                    {/* <!-- TODO: COMPLETARE COPYWRITING PANORAMICA CON PDF ALÈTHEIA --> */}
-                    <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>A chi è rivolto</h2>
+                    <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
                     <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                        <i className="fas fa-user-check" style={{ color: '#008C95', marginTop: '0.2rem', opacity: 0.4 }}></i>
-                        <span className="text-slate-400 dark:text-gray-500" style={{ fontStyle: 'italic' }}>[DA COMPLETARE quando disponibile il programma corso — elenco preciso delle figure obbligate, in base ai moduli forniti]</span>
-                      </li>
+                      {c.aChiERivolto.map((riga) => (
+                        <li key={riga} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                          <i className="fas fa-user-check" style={{ color: '#008C95', marginTop: '0.2rem' }}></i>
+                          <span className="text-slate-600 dark:text-gray-300">{riga}</span>
+                        </li>
+                      ))}
                     </ul>
 
-                    {/* <!-- TODO: COMPLETARE COPYWRITING PANORAMICA CON PDF ALÈTHEIA --> */}
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Cosa imparerai</h2>
                     <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                        <i className="fas fa-check-circle" style={{ color: '#008C95', marginTop: '0.2rem', opacity: 0.4 }}></i>
-                        <span className="text-slate-400 dark:text-gray-500" style={{ fontStyle: 'italic' }}>[DA COMPLETARE quando disponibile il programma corso — competenze operative reali desunte dal programma]</span>
-                      </li>
+                      {c.cosaImparerai.map((riga) => (
+                        <li key={riga} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                          <i className="fas fa-check-circle" style={{ color: '#008C95', marginTop: '0.2rem' }}></i>
+                          <span className="text-slate-600 dark:text-gray-300">{riga}</span>
+                        </li>
+                      ))}
                     </ul>
 
-                    {/* <!-- TODO: COMPLETARE COPYWRITING PANORAMICA CON PDF ALÈTHEIA --> */}
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Domande frequenti</h2>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                      {Array.from({ length: c.faqPlaceholderCount }).map((_, i) => {
+                      {c.faqs.map((item, i) => {
                         const isOpen = openFaqIndex === i;
                         return (
-                          <div key={i} className="bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
+                          <div key={item.domanda} className="bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
                             <button
                               type="button"
                               aria-expanded={isOpen}
                               onClick={() => setOpenFaqIndex(isOpen ? null : i)}
-                              className="text-slate-400 dark:text-gray-500"
-                              style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', cursor: 'pointer', fontWeight: 700, fontSize: '0.95rem', fontFamily: 'inherit', fontStyle: 'italic' }}
+                              className="text-slate-900 dark:text-white"
+                              style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', cursor: 'pointer', fontWeight: 700, fontSize: '0.95rem', fontFamily: 'inherit' }}
                             >
-                              <span>Domanda in fase di redazione</span>
-                              <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: '#008C95', flexShrink: 0, opacity: 0.4 }}></i>
+                              <span>{item.domanda}</span>
+                              <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: '#008C95', flexShrink: 0 }}></i>
                             </button>
                             {isOpen && (
-                              <p className="text-slate-400 dark:text-gray-500" style={{ margin: 0, padding: '0 1.25rem 1.25rem', lineHeight: 1.75, fontSize: '0.9rem', fontStyle: 'italic' }}>
-                                [DA COMPLETARE quando disponibile il programma corso — domande specifiche basate sui contenuti tecnici del corso]
+                              <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, padding: '0 1.25rem 1.25rem', lineHeight: 1.75, fontSize: '0.9rem' }}>
+                                {item.risposta}
                               </p>
                             )}
                           </div>
@@ -331,23 +407,48 @@ export default function CorsoSegnaleticaStradale() {
 
                 {activeTab === 'moduli' && (
                   <div>
-                    {/* <!-- TODO: SPECIFICARE ORE MODULI CON PDF ALÈTHEIA --> */}
-                    <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>
+                    <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.5rem' }}>
                       {c.programmaTitle}
                     </h2>
-                    <div className="cp-placeholder-block text-slate-500 dark:text-gray-400 border-slate-200 dark:border-[rgba(255,255,255,0.15)]">
-                      {NOTA_MODULI_IN_AGGIORNAMENTO}
+                    <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
+                      Il corso è strutturato in {c.moduli.length} moduli/prove.
+                    </p>
+                    <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <thead>
+                          <tr className="bg-slate-50 dark:bg-gray-700">
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modulo</th>
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>Durata</th>
+                            <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Argomenti</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {c.moduli.map((m) => (
+                            <tr key={m.titolo} className="border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
+                              <td className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{m.titolo}</td>
+                              <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>{m.durataOre} ore</td>
+                              <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                                  {m.argomenti.map((a) => (
+                                    <li key={a} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{a}</li>
+                                  ))}
+                                </ul>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet. */}
-            <aside className="cp-price-area">
-              <PricingSidebar
-                buyHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
-                buyLabel="Richiedi preventivo"
+            {/* SIDEBAR PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su
+                mobile/tablet, allineata alla scheda tecnica. */}
+            <aside className="cp-info-area">
+              <CoursePricingSidebar
+                primaryHref={`/contatti?corso=${encodeURIComponent(c.title)}&tipo=preventivo`}
                 whatsappHref="https://wa.me/?text=Informazioni%20corso%20Segnaletica%20Stradale"
               />
             </aside>
@@ -377,12 +478,8 @@ export default function CorsoSegnaleticaStradale() {
               <Link
                 key={cc.href}
                 href={cc.href}
-                className="corso-correlato-card group bg-white dark:bg-dark-card"
-                style={{
-                  flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
-                  scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                }}
+                className="corso-correlato-card group bg-white dark:bg-dark-card rounded-3xl overflow-hidden no-underline flex flex-col transition-all duration-300 hover:-translate-y-1"
+                style={{ boxShadow: '0 4px 16px rgba(15,23,42,0.06)' }}
               >
                 <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
                   {cc.image ? (
@@ -394,7 +491,9 @@ export default function CorsoSegnaleticaStradale() {
                       className="group-hover:scale-105"
                     />
                   ) : (
-                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }} />
+                    <div className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}>
+                      <i className="fas fa-graduation-cap" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                    </div>
                   )}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
                   <span style={{ position: 'absolute', bottom: '0.6rem', left: '0.85rem', color: '#fff', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>

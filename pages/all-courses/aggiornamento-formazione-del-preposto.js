@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import PricingSidebar from '../../components/PricingSidebar';
+import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
@@ -133,23 +133,24 @@ export default function AggiornamentoFormazionePreposto() {
         .cp-page-grid {
           display: grid;
           grid-template-columns: 1fr;
-          grid-template-areas: "top" "price" "tabs";
-          gap: 1.25rem;
+          grid-template-areas: "top" "scheda" "info" "tabs";
+          gap: 1.5rem;
           align-items: start;
         }
         @media (min-width: 992px) {
           .cp-page-grid {
-            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-            grid-template-areas: "top ." "tabs price";
-            column-gap: 4rem; /* gap-16: distacco netto tra contenuto e sidebar */
+            grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            grid-template-areas: "top ." "scheda info" "tabs info";
+            column-gap: 3.5rem;
             row-gap: 1.25rem;
           }
         }
-        .cp-top-area { grid-area: top; }
-        .cp-tabs-area { grid-area: tabs; }
-        .cp-price-area { grid-area: price; }
+        .cp-top-area { grid-area: top; min-width: 0; }
+        .cp-scheda-area { grid-area: scheda; min-width: 0; }
+        .cp-tabs-area { grid-area: tabs; min-width: 0; }
+        .cp-info-area { grid-area: info; min-width: 0; }
         @media (min-width: 992px) {
-          .cp-price-area { position: sticky; top: 6rem; align-self: start; margin-top: 1.5rem; } /* top-24 - il margine allinea il bordo del box al testo Panoramica/Moduli, non al bordo invisibile del padding dei bottoni */
+          .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -158,7 +159,7 @@ export default function AggiornamentoFormazionePreposto() {
         .cp-tabs { display: flex; gap: 0.5rem; border-bottom: 2px solid; flex-wrap: wrap; }
 
         .cp-carousel-track {
-          display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+          display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: none;
         }
         .cp-carousel-track::-webkit-scrollbar { display: none; }
@@ -171,6 +172,11 @@ export default function AggiornamentoFormazionePreposto() {
         :root[data-theme="dark"] .cp-carousel-arrow,
         .dark .cp-carousel-arrow { background: #1F2937; border-color: rgba(255,255,255,0.15); color: #6EE7B7; }
         .dark .cp-carousel-arrow:hover { background: #008C95; border-color: #008C95; color: #fff; }
+
+        .corso-correlato-card { flex: 0 0 260px; scroll-snap-align: start; }
+        @media (min-width: 1024px) { .corso-correlato-card { flex: 0 0 calc((100% - 3 * 1.25rem) / 4); } }
+        .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14); }
+        .dark .corso-correlato-card:hover { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
       `}</style>
 
       {/* ══════════════ TAB (colonna sinistra) & BOX PREZZO STICKY (colonna destra) ══════════════ */}
@@ -187,6 +193,55 @@ export default function AggiornamentoFormazionePreposto() {
                 <span className="text-slate-300 dark:text-gray-600">/</span>
                 <span className="text-slate-600 dark:text-gray-300">Aggiornamento</span>
               </nav>
+            </div>
+
+            {/* ── AREA "scheda": scheda tecnica scura, riga propria allineata alla sidebar prezzo ── */}
+            <div className="cp-scheda-area">
+              <CourseSchedaTecnica items={schedaTecnica}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
+                  </div>
+                  <div>
+                    <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
+                    <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.15rem' }}>
+                      {[
+                        { key: 'aula', label: 'Aula' },
+                        { key: 'videoconferenza', label: 'Videoconferenza' },
+                      ].map((m) => (
+                        <button
+                          key={m.key}
+                          type="button"
+                          onClick={() => setModalitaSelezionata(m.key)}
+                          style={{
+                            fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
+                            color: modalitaSelezionata === m.key ? '#6EE7B7' : 'rgba(255,255,255,0.5)',
+                            background: 'none', border: 'none', padding: 0,
+                            textDecoration: modalitaSelezionata === m.key ? 'underline' : 'none',
+                          }}
+                        >
+                          {m.label}{m.key !== 'videoconferenza' ? ' ·' : ''}
+                        </button>
+                      ))}
+                    </div>
+                    <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>FAD non disponibile per questo corso</span>
+                  </div>
+                </div>
+
+                {modalitaSelezionata === 'aula' && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
+                    </div>
+                    <div>
+                      <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
+                      <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
+                        Sede Alètheia, Vittoria (RG) <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </CourseSchedaTecnica>
             </div>
 
             {/* ── AREA "tabs": sistema Panoramica / Moduli, allineata alla riga della sidebar prezzo ── */}
@@ -216,53 +271,6 @@ export default function AggiornamentoFormazionePreposto() {
               <div style={{ paddingTop: '2rem' }}>
                 {activeTab === 'overview' && (
                   <div>
-                    {/* SCHEDA TECNICA: apre sempre il tab Panoramica, come da standard comune a tutte le pagine corso */}
-                    <CourseSchedaTecnica items={schedaTecnica}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-chalkboard-user" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                        </div>
-                        <div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Modalità</span>
-                          <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.15rem' }}>
-                            {[
-                              { key: 'aula', label: 'Aula' },
-                              { key: 'videoconferenza', label: 'Videoconferenza' },
-                            ].map((m) => (
-                              <button
-                                key={m.key}
-                                type="button"
-                                onClick={() => setModalitaSelezionata(m.key)}
-                                style={{
-                                  fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
-                                  color: modalitaSelezionata === m.key ? '#6EE7B7' : 'rgba(255,255,255,0.5)',
-                                  background: 'none', border: 'none', padding: 0,
-                                  textDecoration: modalitaSelezionata === m.key ? 'underline' : 'none',
-                                }}
-                              >
-                                {m.label}{m.key !== 'videoconferenza' ? ' ·' : ''}
-                              </button>
-                            ))}
-                          </div>
-                          <span style={{ display: 'block', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.2rem' }}>FAD non disponibile per questo corso</span>
-                        </div>
-                      </div>
-
-                      {modalitaSelezionata === 'aula' && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <i className="fas fa-location-dot" style={{ color: '#6EE7B7', fontSize: '0.9rem' }}></i>
-                          </div>
-                          <div>
-                            <span style={{ display: 'block', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Luogo del corso</span>
-                            <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#6EE7B7' }}>
-                              Sede Alètheia, Vittoria (RG) <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.68rem' }}></i>
-                            </a>
-                          </div>
-                        </div>
-                      )}
-                    </CourseSchedaTecnica>
-
                     <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
                     <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>
                       Questo è il corso di aggiornamento per preposti, della durata di 6 ore, non il corso base: è rivolto a chi ha già completato la formazione iniziale di 12 ore e deve rinnovarla periodicamente, ai sensi dell&apos;art. 37 del D.Lgs 81/2008 e dell&apos;Accordo Stato Regioni del 17 aprile 2025.
@@ -364,11 +372,10 @@ export default function AggiornamentoFormazionePreposto() {
               </div>
             </div>
 
-            {/* BOX PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet */}
-            <aside className="cp-price-area">
-              <PricingSidebar
-                buyHref={`/contatti?corso=${encodeURIComponent('Aggiornamento Formazione del Preposto')}&tipo=preventivo`}
-                buyLabel="Richiedi preventivo"
+            {/* SIDEBAR PREZZO: colonna destra sticky su desktop (lg+), full-width in flusso su mobile/tablet */}
+            <aside className="cp-info-area">
+              <CoursePricingSidebar
+                primaryHref={`/contatti?corso=${encodeURIComponent('Aggiornamento Formazione del Preposto')}&tipo=preventivo`}
               />
             </aside>
           </div>
@@ -397,12 +404,8 @@ export default function AggiornamentoFormazionePreposto() {
               <Link
                 key={c.href}
                 href={c.href}
-                className="corso-correlato-card group bg-white dark:bg-dark-card"
-                style={{
-                  flex: '0 0 260px', borderRadius: '1.25rem', overflow: 'hidden', textDecoration: 'none',
-                  scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                }}
+                className="corso-correlato-card group bg-white dark:bg-dark-card rounded-3xl overflow-hidden no-underline flex flex-col transition-all duration-300 hover:-translate-y-1"
+                style={{ boxShadow: '0 4px 16px rgba(15,23,42,0.06)' }}
               >
                 <div style={{ position: 'relative', width: '100%', height: '150px', overflow: 'hidden' }}>
                   {c.image ? (
@@ -414,7 +417,12 @@ export default function AggiornamentoFormazionePreposto() {
                       className="group-hover:scale-105"
                     />
                   ) : (
-                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }} />
+                    <div
+                      className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                      style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}
+                    >
+                      <i className="fas fa-graduation-cap" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                    </div>
                   )}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
                   <span style={{ position: 'absolute', bottom: '0.6rem', left: '0.85rem', color: '#fff', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
