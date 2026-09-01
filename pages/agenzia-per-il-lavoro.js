@@ -123,6 +123,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
     return () => clearTimeout(t);
   }, []);
 
+  const [locationFilter, setLocationFilter] = useState(null);
+  const jobLocations = [...new Set(jobs.map((j) => j.location).filter(Boolean))];
+  const filteredJobs = locationFilter ? jobs.filter((j) => j.location === locationFilter) : jobs;
+
   const candidatiExtra = [
     'Migliaia di offerte di lavoro aggiornate',
     'Supporto CV e colloquio incluso',
@@ -194,12 +198,20 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           z-index: 0;
           display: block;
           pointer-events: none;
+          transition: transform 0.6s ease;
+        }
+        .hero-panel:hover .panel-bg {
+          transform: scale(1.05);
         }
         .panel-overlay {
           position: absolute;
           inset: 0;
           z-index: 1;
           pointer-events: none;
+          transition: background 0.4s ease;
+        }
+        .hero-panel:hover .panel-overlay {
+          background: rgba(0,0,0,0.12);
         }
         .panel-content {
           position: relative;
@@ -208,16 +220,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           flex-direction: column;
           align-items: center;
           gap: 1rem;
-        }
-        .panel-extra {
-          max-height: 0;
-          overflow: hidden;
-          opacity: 0;
-          transition: max-height 0.45s ease, opacity 0.35s ease;
-        }
-        .panel-extra.open {
-          max-height: 200px;
-          opacity: 1;
         }
         .panel-cta-btn {
           display: inline-flex;
@@ -254,24 +256,58 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
         @media (max-width: 768px) {
           .hero-wrap { flex-direction: column; }
           .hero-panel { padding: 3.5rem 2rem; flex: none !important; }
-          .panel-extra.open { max-height: 300px; }
         }
 
-        .stat-card {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 0.25rem;
+        .trust-bar-wrap {
+          background: linear-gradient(135deg, #0F172A 0%, #134E4A 100%);
         }
         .trust-bar {
           display: flex;
-          gap: 3rem;
-          justify-content: center;
           flex-wrap: wrap;
-          padding: 2.25rem 1rem;
-          background: rgba(255,255,255,0.04);
-          border-top: 1px solid rgba(255,255,255,0.06);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          justify-content: center;
+          padding: 3rem 2rem;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+        .trust-card {
+          display: flex;
+          align-items: center;
+          gap: 0.85rem;
+          padding: 0 2.5rem;
+          border-left: 1px solid rgba(255,255,255,0.12);
+        }
+        .trust-card:first-child {
+          border-left: none;
+          padding-left: 0;
+        }
+        .trust-icon-glow {
+          font-size: 1.5rem;
+          color: #10B981;
+          filter: drop-shadow(0 0 6px rgba(16,185,129,0.3));
+          flex-shrink: 0;
+        }
+        .trust-text {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+        .trust-label {
+          font-size: 0.9rem;
+          font-weight: 800;
+          color: #fff;
+          line-height: 1.3;
+          white-space: nowrap;
+        }
+        .trust-sub {
+          font-size: 0.72rem;
+          font-weight: 400;
+          color: #94A3B8;
+        }
+        @media (max-width: 900px) {
+          .trust-card { border-left: none; padding: 0 1.25rem; }
+        }
+        @media (max-width: 640px) {
+          .trust-label { white-space: normal; }
         }
       `}</style>
 
@@ -282,13 +318,9 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           {/* ─── PANNELLO CANDIDATI ─── */}
           <div
             className="hero-panel"
-            style={{
-              flex: panelFlex('candidati'),
-              background: '#0F172A',
-            }}
+            style={{ flex: panelFlex('candidati'), background: '#0F172A' }}
             onMouseEnter={() => setHoveredPanel('candidati')}
             onMouseLeave={() => setHoveredPanel(null)}
-            onClick={() => setHoveredPanel((p) => (p === 'candidati' ? null : 'candidati'))}
           >
             <Image
               className="panel-bg"
@@ -340,7 +372,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 style={{
                   fontSize: '1rem',
                   color: 'rgba(255,255,255,0.65)',
-                  maxWidth: '320px',
+                  maxWidth: '360px',
                   lineHeight: 1.6,
                   margin: 0,
                 }}
@@ -348,35 +380,32 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 Trova opportunità di lavoro in Sicilia e in tutta Italia. Ti affianchiamo in ogni fase: dalla ricerca al colloquio, fino all'inserimento.
               </p>
 
-              {/* Extra content on hover */}
-              <div className={`panel-extra${hoveredPanel === 'candidati' ? ' open' : ''}`}>
-                <ul
-                  style={{
-                    listStyle: 'none',
-                    padding: 0,
-                    margin: '0.5rem 0 1rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.45rem',
-                  }}
-                >
-                  {candidatiExtra.map((item, i) => (
-                    <li
-                      key={i}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        fontSize: '0.82rem',
-                        color: 'rgba(255,255,255,0.75)',
-                      }}
-                    >
-                      <i className="fas fa-check-circle" style={{ color: '#7DD3FC', fontSize: '0.7rem' }}></i>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul
+                style={{
+                  listStyle: 'none',
+                  padding: 0,
+                  margin: '0.25rem 0 0.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                }}
+              >
+                {candidatiExtra.map((item, i) => (
+                  <li
+                    key={i}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      fontSize: '0.85rem',
+                      color: 'rgba(255,255,255,0.8)',
+                    }}
+                  >
+                    <i className="fas fa-check-circle" style={{ color: '#10B981', fontSize: '0.75rem' }}></i>
+                    {item}
+                  </li>
+                ))}
+              </ul>
 
               <a href="/agenzia-per-il-lavoro/servizi-alla-persona" className="panel-cta-btn btn-candidati">
                 <i className="fas fa-user-check" style={{ fontSize: '0.75rem' }}></i>
@@ -388,13 +417,9 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           {/* ─── PANNELLO AZIENDE ─── */}
           <div
             className="hero-panel"
-            style={{
-              flex: panelFlex('aziende'),
-              background: '#0F172A',
-            }}
+            style={{ flex: panelFlex('aziende'), background: '#0F172A' }}
             onMouseEnter={() => setHoveredPanel('aziende')}
             onMouseLeave={() => setHoveredPanel(null)}
-            onClick={() => setHoveredPanel((p) => (p === 'aziende' ? null : 'aziende'))}
           >
             <Image
               className="panel-bg"
@@ -446,7 +471,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 style={{
                   fontSize: '1rem',
                   color: 'rgba(255,255,255,0.65)',
-                  maxWidth: '320px',
+                  maxWidth: '360px',
                   lineHeight: 1.6,
                   margin: 0,
                 }}
@@ -454,35 +479,32 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 Gestiamo per te la ricerca, selezione e somministrazione del personale. Soluzioni flessibili e conformi alla normativa vigente.
               </p>
 
-              {/* Extra content on hover */}
-              <div className={`panel-extra${hoveredPanel === 'aziende' ? ' open' : ''}`}>
-                <ul
-                  style={{
-                    listStyle: 'none',
-                    padding: 0,
-                    margin: '0.5rem 0 1rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.45rem',
-                  }}
-                >
-                  {aziendeExtra.map((item, i) => (
-                    <li
-                      key={i}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        fontSize: '0.82rem',
-                        color: 'rgba(255,255,255,0.75)',
-                      }}
-                    >
-                      <i className="fas fa-check-circle" style={{ color: '#6EE7B7', fontSize: '0.7rem' }}></i>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul
+                style={{
+                  listStyle: 'none',
+                  padding: 0,
+                  margin: '0.25rem 0 0.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                }}
+              >
+                {aziendeExtra.map((item, i) => (
+                  <li
+                    key={i}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      fontSize: '0.85rem',
+                      color: 'rgba(255,255,255,0.8)',
+                    }}
+                  >
+                    <i className="fas fa-check-circle" style={{ color: '#10B981', fontSize: '0.75rem' }}></i>
+                    {item}
+                  </li>
+                ))}
+              </ul>
 
               <a href="/agenzia-per-il-lavoro/servizi-alle-imprese" className="panel-cta-btn btn-aziende">
                 <i className="fas fa-building" style={{ fontSize: '0.75rem' }}></i>
@@ -493,18 +515,23 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
         </div>
 
         {/* Trust bar */}
-        <div className="trust-bar">
-          {[
-            { icon: 'fas fa-certificate', label: 'Autorizzata ANPAL', sub: 'DDS Nr 1.100/2019' },
-            { icon: 'fas fa-map-marker-alt', label: 'Radicata in Sicilia', sub: 'Dal 2005' },
-            { icon: 'fas fa-users', label: 'Migliaia di candidati', sub: 'Inseriti con successo' },
-            { icon: 'fas fa-shield-alt', label: 'Contratti garantiti', sub: 'Conformità normativa' },
-          ].map((item, i) => (
-            <div key={i} className="stat-card">
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>{item.label}</span>
-              <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)' }}>{item.sub}</span>
-            </div>
-          ))}
+        <div className="trust-bar-wrap">
+          <div className="trust-bar">
+            {[
+              { icon: 'fas fa-certificate', label: 'Autorizzata ANPAL', sub: 'DDS Nr 1.100/2019' },
+              { icon: 'fas fa-map-marker-alt', label: 'Radicata in Sicilia', sub: 'Dal 2005' },
+              { icon: 'fas fa-users', label: 'Migliaia di candidati', sub: 'Inseriti con successo' },
+              { icon: 'fas fa-shield-alt', label: 'Contratti garantiti', sub: 'Conformità normativa' },
+            ].map((item, i) => (
+              <div key={i} className="trust-card">
+                <i className={`${item.icon} trust-icon-glow`}></i>
+                <div className="trust-text">
+                  <span className="trust-label">{item.label}</span>
+                  <span className="trust-sub">{item.sub}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -524,77 +551,109 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               </span>
               <h2 className="text-slate-900 dark:text-white" style={{
                 fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900,
-                marginBottom: '1.5rem', lineHeight: 1.25,
+                marginBottom: '1rem', lineHeight: 1.25,
               }}>
                 Alètheia APL -{' '}
                 <span style={{ color: '#008C95' }}>Autorizzata ANPAL</span>
               </h2>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-                <p className="text-slate-800 dark:text-gray-200" style={{ fontSize: '1.05rem', fontWeight: 500, lineHeight: 1.8, margin: 0, borderLeft: '3px solid #008C95', paddingLeft: '1.25rem' }}>
+              {/* badge accrediti — spostati subito sotto il titolo */}
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                {[
+                  { icon: 'fas fa-certificate', label: 'DDS Nr. 1.100/2019' },
+                  { icon: 'fas fa-map-marker-alt', label: 'Operativa dal 2005' },
+                  { icon: 'fas fa-network-wired', label: 'PromoterGroup S.p.A.' },
+                ].map((b, i) => (
+                  <span
+                    key={i}
+                    className="bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                      fontSize: '0.7rem', fontWeight: 600,
+                      padding: '0.3rem 0.7rem', borderRadius: '999px',
+                    }}
+                  >
+                    <i className={b.icon} style={{ fontSize: '0.65rem', color: '#008C95' }}></i>
+                    {b.label}
+                  </span>
+                ))}
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <p className="text-slate-900 dark:text-gray-100" style={{ fontSize: '1.2rem', fontWeight: 600, lineHeight: 1.65, margin: 0 }}>
                   Alethèia S.r.l. offre un servizio attento e preciso: ricerca e seleziona personale qualificato
                   per l'inserimento in azienda e aiuta le persone nella ricerca del lavoro. Compito dell'agenzia
                   per il lavoro è agevolare l'incontro tra persone in cerca di lavoro e imprese in cerca di lavoratori.
                 </p>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
+                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
                   In un mercato sempre più veloce e competitivo, Alethèia S.r.l., Agenzia per il Lavoro è in grado
                   di offrire una consulenza integrata nel campo delle Risorse Umane e di anticipare le esigenze
                   organizzative, formare e riqualificare le competenze necessarie per determinati ruoli e posizioni,
                   sviluppare un accurato processo di ricerca e selezione del personale e contribuire all'incontro
                   tra domanda e offerta di lavoro.
                 </p>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
+                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
                   Alethèia S.r.l. desidera ampliare e potenziare il proprio ruolo di leva del sistema economico e
                   sociale, ed essere riconosciuta e apprezzata come agenzia di sviluppo ed intermediazione
                   domanda-offerta di lavoro: l'impresa che <em>"è"</em> in termini di competenze ed esperienze, e
                   l'impresa <em>"che fa"</em> ovvero che è capace di tradurre i progetti d'impresa e di lavoro in
                   realizzazioni concrete e solide, a beneficio della collettività.
                 </p>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
+                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
                   Attraverso Alethèia S.r.l., ente accreditato quale Agenzia per il Lavoro,{' '}
                   <strong className="text-slate-900 dark:text-white">PromoterGroup S.p.A.</strong> desidera ampliare il proprio
                   ruolo di leva del sistema economico e sociale. Alethèia S.r.l., Agenzia per il Lavoro, mette la
                   professionalità dei propri consulenti al servizio di candidati e aziende.
                 </p>
               </div>
-
-              {/* badge accrediti */}
-              <div style={{
-                display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '2rem',
-              }}>
-                {[
-                  { icon: 'fas fa-certificate', label: 'DDS Nr. 1.100/2019' },
-                  { icon: 'fas fa-map-marker-alt', label: 'Operativa dal 2005' },
-                  { icon: 'fas fa-network-wired', label: 'PromoterGroup S.p.A.' },
-                ].map((b, i) => (
-                  <span key={i} className="text-[#008C95] dark:text-[#10B981] bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30" style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                    fontSize: '0.75rem', fontWeight: 700,
-                    padding: '0.35rem 0.8rem', borderRadius: '999px',
-                  }}>
-                    {b.label}
-                  </span>
-                ))}
-              </div>
             </Reveal>
 
             {/* Colonna immagine */}
             <Reveal delay={100} className="flex-[2_1_260px] pt-8">
-              <div style={{
-                position: 'relative',
-                borderRadius: '1.5rem',
-                overflow: 'hidden',
-                aspectRatio: '4/3',
-                boxShadow: '0 24px 60px rgba(0,0,0,0.13)',
-              }}>
-                <Image
-                  src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Team Alètheia al lavoro"
-                  fill
-                  sizes="(min-width: 768px) 40vw, 100vw"
-                  loading="lazy"
-                  style={{ objectFit: 'cover' }}
-                />
+              <div style={{ position: 'relative', paddingBottom: '2.5rem', paddingRight: '2rem' }}>
+                <div
+                  className="shadow-xl shadow-slate-300/50 dark:shadow-none"
+                  style={{
+                    position: 'relative',
+                    zIndex: 1,
+                    borderRadius: '1.5rem',
+                    overflow: 'hidden',
+                    aspectRatio: '4/3',
+                  }}
+                >
+                  <Image
+                    src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Team Alètheia al lavoro"
+                    fill
+                    sizes="(min-width: 768px) 40vw, 100vw"
+                    loading="lazy"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+
+                {/* Immagine secondaria sfalsata, sborda dall'angolo in basso a destra */}
+                <div
+                  className="shadow-xl shadow-slate-300/50 dark:shadow-none border-4 border-white dark:border-dark-card"
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    width: '55%',
+                    aspectRatio: '4/3',
+                    borderRadius: '1.1rem',
+                    overflow: 'hidden',
+                    zIndex: 2,
+                  }}
+                >
+                  <Image
+                    src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Colloquio di lavoro Alètheia"
+                    fill
+                    sizes="(min-width: 768px) 22vw, 55vw"
+                    loading="lazy"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </div>
             </Reveal>
 
@@ -613,22 +672,61 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           }}>
             {/* Left: header */}
             <div>
-              <span style={{
-                display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
-                letterSpacing: '0.1em', textTransform: 'uppercase',
-                color: '#008C95', marginBottom: '0.6rem',
-              }}>
-                Posizioni aperte
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.6rem' }}>
+                <span style={{
+                  display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
+                  letterSpacing: '0.1em', textTransform: 'uppercase',
+                  color: '#008C95',
+                }}>
+                  Posizioni aperte
+                </span>
+                {!jobsLoading && jobs.length > 0 && (
+                  <span
+                    className="bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#008C95] dark:text-[#10B981]"
+                    style={{
+                      fontSize: '0.68rem', fontWeight: 800,
+                      padding: '0.15rem 0.55rem', borderRadius: '999px',
+                    }}
+                  >
+                    {jobs.length}
+                  </span>
+                )}
+              </div>
               <h2 className="text-slate-900 dark:text-white" style={{
                 fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 900,
                 marginBottom: '0.75rem', lineHeight: 1.2,
               }}>
                 Offerte di lavoro
               </h2>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '360px', marginBottom: '1.75rem' }}>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '360px', marginBottom: '1.25rem' }}>
                 Consulta le nostre offerte di lavoro attive e candidati direttamente online.
               </p>
+
+              {!jobsLoading && jobLocations.length > 1 && (
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+                  <button
+                    onClick={() => setLocationFilter(null)}
+                    className={locationFilter === null
+                      ? 'bg-[#008C95] text-white'
+                      : 'bg-white dark:bg-dark-card text-slate-600 dark:text-gray-300 border border-slate-200 dark:border-[rgba(255,255,255,0.08)]'}
+                    style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.35rem 0.9rem', borderRadius: '999px', cursor: 'pointer' }}
+                  >
+                    Tutte
+                  </button>
+                  {jobLocations.map((loc) => (
+                    <button
+                      key={loc}
+                      onClick={() => setLocationFilter(loc)}
+                      className={locationFilter === loc
+                        ? 'bg-[#008C95] text-white'
+                        : 'bg-white dark:bg-dark-card text-slate-600 dark:text-gray-300 border border-slate-200 dark:border-[rgba(255,255,255,0.08)]'}
+                      style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.35rem 0.9rem', borderRadius: '999px', cursor: 'pointer' }}
+                    >
+                      {loc}
+                    </button>
+                  ))}
+                </div>
+              )}
               <a
                 href="https://aletheia4job.it/"
                 target="_blank"
@@ -660,10 +758,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {Array.from({ length: 3 }).map((_, i) => <JobSkeleton key={i} />)}
               </div>
-            ) : jobs.length > 0 ? (
+            ) : filteredJobs.length > 0 ? (
               <motion.div layout style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <AnimatePresence mode="popLayout">
-                  {jobs.map((job, i) => (
+                  {filteredJobs.map((job, i) => (
                     <Reveal key={job.id} delay={i * 80}>
                     <motion.a
                       layout
@@ -706,6 +804,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                   ))}
                 </AnimatePresence>
               </motion.div>
+            ) : jobs.length > 0 ? (
+              <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
+                Nessuna offerta trovata per questo filtro.
+              </p>
             ) : (
               <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
                 Nessuna offerta disponibile al momento. Consulta tutte le posizioni su{' '}
@@ -809,7 +911,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               fontWeight: 800,
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              color: '#6EE7B7',
+              color: '#10B981',
               marginBottom: '1rem',
             }}
           >

@@ -59,7 +59,12 @@ const LEVEL_PATTERNS = [
   /\bmodulo\s+(?:comune|[a-e]\b|\d+\s*-?\s*[a-zàèéìòù,\s]*)/i,
   /\bparte\s+generale\b/i,
   /\bsotto\s+tensione\b/i,
-  /\bin\s+prossimit(?:a|à)\b/i,
+  // NOTA: niente \b finale dopo "à" - in JS regex (senza flag /u su \w) le lettere accentate come "à"
+  // non sono "word char", quindi un \b subito dopo non trova mai un confine reale (non-word seguito da
+  // non-word, es. lo spazio) e il pattern non avrebbe mai fatto match su "... In Prossimità" con la
+  // à accentata (bug scoperto durante la migrazione di pes-pav-lavori-elettrici.js in [slug].js, che
+  // impediva a questa variante di raggrupparsi con "... Sotto Tensione" nella stessa famiglia).
+  /\bin\s+prossimit(?:a|à)/i,
   /\besterno\b/i,
   // Descrittore tra parentesi (gruppo di cattura 1) usato per raggruppare varianti che altrimenti
   // non condividerebbero un famTitle pulito - es. "Trattori Agricoli o Forestali (Ruote)" / "(Cingoli)" /

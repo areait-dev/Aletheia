@@ -36,6 +36,31 @@ import rsppDatoreLavoroContent from '../../data/content/rspp-datore-lavoro-conte
 import rsppDatoreLavoroAggiornamentoContent from '../../data/content/rspp-datore-lavoro-aggiornamento-content';
 import rsppAsppContent from '../../data/content/rspp-aspp-content';
 import rsppAsppAggiornamentoContent from '../../data/content/rspp-aspp-aggiornamento-content';
+// Corsi consolidati dal sistema di pagine isolate (ex pages/all-courses/*.js) nel registro EDITORIAL_CONTENT.
+import spaziConfinatiContent from '../../data/content/spazi-confinati-content';
+import spaziConfinatiAggiornamentoContent from '../../data/content/spazi-confinati-aggiornamento-content';
+import datoreDiLavoroContent from '../../data/content/datore-di-lavoro-content';
+import datoreDiLavoroAggiornamentoContent from '../../data/content/datore-di-lavoro-aggiornamento-content';
+import moduloAggiuntivoCantieriDatoreDiLavoroContent from '../../data/content/modulo-aggiuntivo-cantieri-datore-di-lavoro-content';
+import formazioneDelPrepostoContent from '../../data/content/formazione-del-preposto-content';
+import formazioneDelPrepostoAggiornamentoContent from '../../data/content/formazione-del-preposto-aggiornamento-content';
+import coordinatoriCantieriCseCspContent from '../../data/content/coordinatori-cantieri-cse-csp-content';
+import coordinatoriCantieriCseCspAggiornamentoContent from '../../data/content/coordinatori-cantieri-cse-csp-aggiornamento-content';
+import addettiCarriponteContent from '../../data/content/addetti-alla-conduzione-di-carriponte-content';
+import addettiCarriponteAggiornamentoContent from '../../data/content/addetti-alla-conduzione-di-carriponte-aggiornamento-content';
+import addettiCaricatoriCmmContent from '../../data/content/addetti-caricatori-movimentazione-di-materiali-cmm-content';
+import lavoratoriSegnaleticaStradaleContent from '../../data/content/lavoratori-addetti-segnaletica-stradale-content';
+import macchineMovimentoTerraContent from '../../data/content/macchine-movimento-terra-content';
+import macchineMovimentoTerraAggiornamentoContent from '../../data/content/macchine-movimento-terra-aggiornamento-content';
+import operatoreDiGruContent from '../../data/content/operatore-di-gru-per-autocarro-content';
+import operatoreDiGruAggiornamentoContent from '../../data/content/operatore-di-gru-per-autocarro-aggiornamento-content';
+import patentinoFitosanitarioContent from '../../data/content/patentino-fitosanitario-content';
+import patentinoFitosanitarioAggiornamentoContent from '../../data/content/patentino-fitosanitario-aggiornamento-content';
+import personaleAlimentaristaOsaContent from '../../data/content/personale-alimentarista-osa-content';
+import personaleAlimentaristaOsaAggiornamentoContent from '../../data/content/personale-alimentarista-osa-aggiornamento-content';
+import pesPavLavoriElettriciContent from '../../data/content/pes-pav-lavori-elettrici-content';
+import pompePerCalcestruzzoContent from '../../data/content/pompe-per-calcestruzzo-content';
+import pompePerCalcestruzzoAggiornamentoContent from '../../data/content/pompe-per-calcestruzzo-aggiornamento-content';
 
 // Registro dei contenuti editoriali completi (descrizione/FAQ/moduli) per famiglia, separati per tipo
 // ("corso" vs "aggiornamento", perché i due materiali sono scritti/pubblicati in tempi diversi).
@@ -126,6 +151,73 @@ const EDITORIAL_CONTENT = {
   'rspp-aspp': {
     corso: rsppAsppContent['rspp-aspp'],
     aggiornamento: rsppAsppAggiornamentoContent,
+  },
+  // Famiglie consolidate dalle pagine isolate (ex pages/all-courses/*.js) nel sistema a registro
+  // contenuti di questo template dinamico. Vedi i commenti nei singoli file data/content/*.js per il
+  // dettaglio di come family.id e le chiavi posizionali 'livello-N' sono state derivate da
+  // buildCourseFamilies/data/coursesRaw.js in ciascun caso.
+  'spazi-confinati': {
+    corso: spaziConfinatiContent['spazi-confinati'],
+    aggiornamento: spaziConfinatiAggiornamentoContent,
+  },
+  // Famiglia "datore-di-lavoro": 2 livelli posizionali distinti ('modulo-comune' per il corso 16h,
+  // 'default' per l'aggiornamento 6h) anziché un solo livello con switch corso/aggiornamento - vedi
+  // datore-di-lavoro-content.js.
+  'datore-di-lavoro': {
+    corso: datoreDiLavoroContent['datore-di-lavoro'],
+    aggiornamento: datoreDiLavoroAggiornamentoContent,
+  },
+  // Famiglia indipendente (non annidata sotto "datore-di-lavoro") - vedi il commento in
+  // modulo-aggiuntivo-cantieri-datore-di-lavoro-content.js.
+  'modulo-aggiuntivo-cantieri-per-datore-di-lavoro': {
+    corso: moduloAggiuntivoCantieriDatoreDiLavoroContent['modulo-aggiuntivo-cantieri-per-datore-di-lavoro'],
+  },
+  'formazione-del-preposto': {
+    corso: formazioneDelPrepostoContent['formazione-del-preposto'],
+    aggiornamento: formazioneDelPrepostoAggiornamentoContent,
+  },
+  'coordinatori-cantieri-cse-csp': {
+    corso: coordinatoriCantieriCseCspContent['coordinatori-cantieri-cse-csp'],
+    aggiornamento: coordinatoriCantieriCseCspAggiornamentoContent,
+  },
+  'addetti-alla-conduzione-di-carriponte': {
+    corso: addettiCarriponteContent['addetti-alla-conduzione-di-carriponte'],
+    aggiornamento: addettiCarriponteAggiornamentoContent,
+  },
+  // Solo "corso": la variante "aggiornamento" non aveva contenuto editoriale nella pagina isolata
+  // originale (solo scheda tecnica + placeholder) - vedi addetti-caricatori-movimentazione-di-materiali-cmm-content.js.
+  'addetti-caricatori-movimentazione-di-materiali-cmm': {
+    corso: addettiCaricatoriCmmContent['addetti-caricatori-movimentazione-di-materiali-cmm'],
+  },
+  // Nessun aggiornamento raw corrispondente per questa famiglia.
+  'lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale': {
+    corso: lavoratoriSegnaleticaStradaleContent['lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale'],
+  },
+  // Famiglia "macchine-movimento-terra": 6 livelli 'corso' (5 macchine singole + combinato) + 1 livello
+  // 'aggiornamento' - vedi macchine-movimento-terra-content.js/-aggiornamento-content.js.
+  'macchine-movimento-terra': {
+    corso: macchineMovimentoTerraContent['macchine-movimento-terra'],
+    aggiornamento: macchineMovimentoTerraAggiornamentoContent,
+  },
+  'operatore-di-gru-per-autocarro': {
+    corso: operatoreDiGruContent['operatore-di-gru-per-autocarro'],
+    aggiornamento: operatoreDiGruAggiornamentoContent,
+  },
+  'patentino-fitosanitario': {
+    corso: patentinoFitosanitarioContent['patentino-fitosanitario'],
+    aggiornamento: patentinoFitosanitarioAggiornamentoContent,
+  },
+  'personale-alimentarista-osa': {
+    corso: personaleAlimentaristaOsaContent['personale-alimentarista-osa'],
+    aggiornamento: personaleAlimentaristaOsaAggiornamentoContent,
+  },
+  // Nessun aggiornamento raw corrispondente per questa famiglia (2 livelli: Sotto Tensione/In Prossimità).
+  'pes-pav-lavori-elettrici': {
+    corso: pesPavLavoriElettriciContent['pes-pav-lavori-elettrici'],
+  },
+  'pompe-per-calcestruzzo': {
+    corso: pompePerCalcestruzzoContent['pompe-per-calcestruzzo'],
+    aggiornamento: pompePerCalcestruzzoAggiornamentoContent,
   },
 };
 
