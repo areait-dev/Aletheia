@@ -90,7 +90,7 @@ function ContattoECMForm() {
         <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.75rem' }}>
           Richiesta inviata!
         </h3>
-        <p className="text-slate-500 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
+        <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
           Grazie per averci contattato. Il nostro team ti fornirà a breve tutte le informazioni sui corsi ECM.
         </p>
         <button
@@ -168,7 +168,7 @@ function ContattoECMForm() {
         Invia richiesta
       </button>
 
-      <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>
+      <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>
         I tuoi dati sono al sicuro e non verranno condivisi con terze parti.
       </p>
     </form>
@@ -190,7 +190,6 @@ export default function FormazioneECM() {
           content="Corsi ECM accreditati per medici, infermieri, fisioterapisti e OSS. Alètheia, provider ECM accreditato dalla Regione Siciliana."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />
@@ -327,7 +326,7 @@ export default function FormazioneECM() {
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
               Corsi ECM in aula e in FAD, in tutta la Sicilia
             </h2>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '960px' }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '960px' }}>
               Alètheia organizza attività formative accreditate in diverse modalità, per adattarsi ai tempi e alle esigenze dei professionisti sanitari:
             </p>
           </div>
@@ -395,7 +394,7 @@ export default function FormazioneECM() {
             <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
               Vuoi saperne di più sui corsi ECM?
             </h3>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
               Il nostro team è a disposizione per fornirti tutte le informazioni sui corsi ECM disponibili e sui crediti formativi acquisibili.
             </p>
           </div>

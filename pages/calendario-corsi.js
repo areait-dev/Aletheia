@@ -92,7 +92,6 @@ export default function CalendarioCorsi() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Scopri le date dei prossimi corsi in partenza e iscriviti." />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/calendario-corsi" solid />
@@ -132,7 +131,7 @@ export default function CalendarioCorsi() {
 
               {/* Filtro categoria */}
               <div className="mb-5">
-                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider mb-2">
                   Categoria
                 </label>
                 <div className="flex flex-col gap-1">
@@ -177,7 +176,7 @@ export default function CalendarioCorsi() {
           {/* LISTA CORSI */}
           <main>
             <div className="flex items-center justify-between mb-6">
-              <p className="text-sm text-slate-500 dark:text-gray-400">
+              <p className="text-sm text-slate-600 dark:text-gray-400">
                 <span className="font-bold text-slate-800 dark:text-gray-100">{corsiFiltrati.length}</span>{' '}
                 {corsiFiltrati.length === 1 ? 'corso in programma' : 'corsi in programma'}
               </p>
@@ -186,8 +185,8 @@ export default function CalendarioCorsi() {
             {corsiFiltrati.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <i className="far fa-calendar-xmark text-4xl text-slate-300 dark:text-gray-600 mb-3" />
-                <p className="text-slate-500 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
-                <p className="text-slate-400 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
+                <p className="text-slate-600 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
+                <p className="text-slate-600 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
               </div>
             ) : (
               <div className="flex flex-col gap-4">
@@ -222,14 +221,14 @@ export default function CalendarioCorsi() {
                             <h3 className="text-slate-900 dark:text-gray-50 font-extrabold text-base leading-snug">
                               {MESI[m]} {y}
                             </h3>
-                            <p className="text-slate-500 dark:text-gray-400 text-sm">
+                            <p className="text-slate-600 dark:text-gray-400 text-sm">
                               {corsi.length === 0 ? 'Nessun corso in programma' : `${corsi.length} ${corsi.length === 1 ? 'corso in programma' : 'corsi in programma'}`}
                             </p>
                           </div>
                         </div>
                         {corsi.length > 0 && (
                           <i
-                            className="fas fa-chevron-down text-slate-400 dark:text-gray-500 transition-transform flex-shrink-0"
+                            className="fas fa-chevron-down text-slate-600 dark:text-gray-500 transition-transform flex-shrink-0"
                             style={{ transform: aperto ? 'rotate(180deg)' : 'rotate(0deg)' }}
                           />
                         )}
@@ -241,7 +240,7 @@ export default function CalendarioCorsi() {
                           {gruppiPerMese(corsi).map(([data, corsiDelGiorno]) => (
                             <div key={data} className="mt-6">
                               {/* Intestazione data gruppo */}
-                              <h4 className="text-sm font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider mb-3 pl-1">
+                              <h4 className="text-sm font-bold text-slate-600 dark:text-gray-500 uppercase tracking-wider mb-3 pl-1">
                                 {formatLongDate(data)}
                               </h4>
 

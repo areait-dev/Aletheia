@@ -139,10 +139,6 @@ export default function NewsPage() {
           content="Notizie e aggiornamenti su formazione, lavoro e opportunità professionali in Sicilia. Il blog di Alètheia Srl."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
       </Head>
 
       <Header active="/news" />

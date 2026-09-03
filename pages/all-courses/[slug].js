@@ -1394,7 +1394,6 @@ export default function CourseDetail() {
         <title>{course.title} - Alètheia Srl</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
       </Head>
 
       <style jsx global>{`
@@ -1479,7 +1478,7 @@ export default function CourseDetail() {
 
       <div className="cp-top-area">
         <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-          <Link href="/all-courses" className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
+          <Link href="/all-courses" className="text-slate-600 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
           <span className="text-slate-300 dark:text-gray-600">/</span>
           <span className="text-slate-600 dark:text-gray-300">{course.title}</span>
         </nav>
@@ -1605,7 +1604,7 @@ export default function CourseDetail() {
         {!contenutoLivello ? (
           <div className="bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl" style={{ padding: '2.5rem', textAlign: 'center' }}>
             <i className="fas fa-hourglass-half" style={{ fontSize: '1.5rem', color: '#94A3B8', marginBottom: '0.75rem' }}></i>
-            <p className="text-slate-500 dark:text-gray-300" style={{ margin: 0, fontSize: '0.95rem' }}>
+            <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, fontSize: '0.95rem' }}>
               Contenuto dettagliato in arrivo. Nel frattempo trovi qui accanto durata, modalità e attestato.
             </p>
           </div>
@@ -1666,7 +1665,7 @@ export default function CourseDetail() {
         ) : (
           <div>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Programma Formativo</h2>
-            <p className="text-slate-500 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
               Il corso è strutturato in {contenutoLivello.moduli.length} moduli per un totale di {contenutoLivello.durataOre} ore
             </p>
             <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
@@ -1723,7 +1722,7 @@ export default function CourseDetail() {
                           <i className="fas fa-check-circle" style={{ marginRight: '0.4rem' }}></i>
                           Corso finanziato - gratuito
                         </span>
-                        <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed m-0">
+                        <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed m-0">
                           Contattaci per verificare la tua eligibilità e avviare l&apos;iscrizione.
                         </p>
                       </div>
@@ -1757,7 +1756,7 @@ export default function CourseDetail() {
                       customContent={
                         <div className="flex flex-col gap-3">
                           <div className="flex flex-col">
-                            <span className="text-[0.7rem] font-bold text-slate-500 dark:text-slate-400">Quota di iscrizione</span>
+                            <span className="text-[0.7rem] font-bold text-slate-600 dark:text-slate-400">Quota di iscrizione</span>
                             <span className="text-emerald-600 dark:text-emerald-400 font-black text-3xl tracking-tight mt-0.5">Su richiesta</span>
                           </div>
                           <EnrollmentProgress courseId={slug} courseTitle={course.title} />
@@ -1770,7 +1769,7 @@ export default function CourseDetail() {
                         </div>
                       }
                     />
-                    <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: '0.75rem 0 0', textAlign: 'center' }}>
+                    <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: '0.75rem 0 0', textAlign: 'center' }}>
                       Riceverai una conferma entro 24-48 ore lavorative
                     </p>
                   </>

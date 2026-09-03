@@ -34,13 +34,13 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
           <h2 className="text-gray-900 dark:text-gray-50" style={{ fontWeight: 700, fontSize: '1.1rem' }}>
             Il tuo carrello {cart.length > 0 && `(${cart.reduce((s: number, i: any) => s + i.qty, 0)})`}
           </h2>
-          <button onClick={onClose} className="text-gray-500 dark:text-gray-400" style={{ background: 'none', border: 'none', fontSize: '1.25rem', cursor: 'pointer' }}><i className="fas fa-times"></i></button>
+          <button onClick={onClose} aria-label="Chiudi carrello" className="text-gray-500 dark:text-gray-400" style={{ background: 'none', border: 'none', fontSize: '1.25rem', cursor: 'pointer' }}><i className="fas fa-times"></i></button>
         </div>
 
         {/* Items */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
           {cart.length === 0 ? (
-            <div className="text-gray-400 dark:text-gray-400" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+            <div className="text-gray-500 dark:text-gray-400" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
               <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}><i className="fas fa-shopping-cart"></i></p>
               <p>Il carrello è vuoto</p>
             </div>
@@ -54,7 +54,8 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                 </p>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="text-red-400 hover:text-red-600"
+                  aria-label={`Rimuovi ${item.title} dal carrello`}
+                  className="text-red-500 hover:text-red-600"
                   style={{ background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0, fontSize: '0.85rem', padding: 0 }}
                 >
                   <i className="fas fa-times"></i>
@@ -63,7 +64,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
 
               {/* Riga 2: variante */}
               {item.variant && (
-                <p className="text-xs text-slate-500 dark:text-gray-400" style={{ margin: '0 0 0.5rem 0' }}>
+                <p className="text-xs text-slate-600 dark:text-gray-400" style={{ margin: '0 0 0.5rem 0' }}>
                   {item.variant}
                 </p>
               )}
@@ -73,7 +74,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                 <p className="font-bold text-primary dark:text-[#10B981]" style={{ margin: 0, fontSize: '0.95rem' }}>
                   € {(item.price * item.qty).toLocaleString('it-IT')}
                   {item.qty > 1 && (
-                    <span className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.75rem', fontWeight: 400, marginLeft: '0.35rem' }}>
+                    <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.75rem', fontWeight: 400, marginLeft: '0.35rem' }}>
                       (€ {item.price} × {item.qty})
                     </span>
                   )}
@@ -81,6 +82,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <button
                     onClick={() => updateQty(item.id, item.qty - 1)}
+                    aria-label={`Diminuisci quantità di ${item.title}`}
                     className="text-slate-700 dark:text-gray-200 bg-slate-50 dark:bg-dark-card border border-slate-200 dark:border-gray-600"
                     style={{ width: '26px', height: '26px', borderRadius: '9999px', cursor: 'pointer', fontWeight: 700, fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
@@ -91,6 +93,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                   </span>
                   <button
                     onClick={() => updateQty(item.id, item.qty + 1)}
+                    aria-label={`Aumenta quantità di ${item.title}`}
                     className="text-slate-700 dark:text-gray-200 bg-slate-50 dark:bg-dark-card border border-slate-200 dark:border-gray-600"
                     style={{ width: '26px', height: '26px', borderRadius: '9999px', cursor: 'pointer', fontWeight: 700, fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >

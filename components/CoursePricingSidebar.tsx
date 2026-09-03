@@ -37,12 +37,12 @@ export default function CoursePricingSidebar({
 
       {/* Intestazione Prezzo Minimale */}
       <div className="flex flex-col gap-1.5">
-        <span className="text-[0.6rem] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
+        <span className="text-[0.6rem] font-black uppercase tracking-widest text-slate-600 dark:text-slate-500">
           Iscrizione e Tariffe
         </span>
         {customContent ?? (priceRows?.map((row, i) => (
           <div key={row.label} className="flex flex-col">
-            <span className="text-[0.7rem] font-bold text-slate-500 dark:text-slate-400">{row.label}</span>
+            <span className="text-[0.7rem] font-bold text-slate-600 dark:text-slate-400">{row.label}</span>
             <span className="text-emerald-600 dark:text-emerald-400 font-black text-3xl tracking-tight mt-0.5">{row.value}</span>
           </div>
         )))}
@@ -70,7 +70,7 @@ export default function CoursePricingSidebar({
       </div>
 
       {/* Trust Badges in stile Apple Micro-copy */}
-      <div className="flex justify-between items-center text-[0.65rem] font-semibold text-slate-400 dark:text-slate-500 px-1 pt-1">
+      <div className="flex justify-between items-center text-[0.65rem] font-semibold text-slate-600 dark:text-slate-500 px-1 pt-1">
         <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-emerald-500"></i> Preventivo gratuito</span>
         <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-emerald-500"></i> Risposta in 24h</span>
       </div>

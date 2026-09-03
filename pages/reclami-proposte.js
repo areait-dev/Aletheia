@@ -138,7 +138,7 @@ export default function ReclamiProposte() {
                   onClick={() => fileRef.current?.click()}
                   className="flex items-center gap-3 px-4 py-2.5 rounded-lg cursor-pointer border border-dashed border-primary/40 dark:border-[#10B981]/40 bg-primary/5 dark:bg-[#10B981]/5 hover:border-primary dark:hover:border-[#10B981] transition-colors"
                 >
-                  <span className={`text-sm ${fileName ? 'text-gray-900 dark:text-gray-50' : 'text-gray-400 dark:text-gray-500'}`}>
+                  <span className={`text-sm ${fileName ? 'text-gray-900 dark:text-gray-50' : 'text-gray-500 dark:text-gray-500'}`}>
                     {fileName || 'Clicca per allegare un file'}
                   </span>
                 </div>

@@ -62,7 +62,7 @@ export default function CookieConsent() {
       <p className="text-gray-600 dark:text-gray-300" style={{ margin: 0, fontSize: '0.85rem', maxWidth: '640px', flex: '1 1 320px' }}>
         Utilizziamo cookie tecnici e, previo consenso, cookie non tecnici per migliorare l&apos;esperienza sul sito.
         Consulta la nostra{' '}
-        <a href="/privacy-cookie" className="text-[#008C95] dark:text-[#10B981]" style={{ fontWeight: 700, textDecoration: 'underline' }}>
+        <a href="/privacy-cookie" className="text-[#006B73] dark:text-[#10B981]" style={{ fontWeight: 700, textDecoration: 'underline' }}>
           Privacy e Cookie Policy
         </a>{' '}
         per maggiori informazioni.

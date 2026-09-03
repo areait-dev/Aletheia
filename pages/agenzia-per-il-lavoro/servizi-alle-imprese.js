@@ -231,7 +231,6 @@ export default function ServiziAlleImprese() {
           content="Alètheia Srl - Consulenza HR integrata per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/agenzia-per-il-lavoro" />

@@ -143,7 +143,6 @@ export default function Contatti() {
         <title>{PAGE_TITLE}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
         <SeoHead title={PAGE_TITLE} description={PAGE_DESCRIPTION} url="/contatti" />
       </Head>
 
@@ -390,7 +389,7 @@ export default function Contatti() {
                     <i className={`${item.icon} text-[#008C95] dark:text-[#10B981]`} style={{ fontSize: '1rem' }}></i>
                   </div>
                   <div>
-                    <p className="text-slate-400 dark:text-gray-500" style={{ margin: '0 0 0.2rem', fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                    <p className="text-slate-600 dark:text-gray-500" style={{ margin: '0 0 0.2rem', fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                       {item.label}
                     </p>
                     <p className="text-slate-900 dark:text-white" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.4 }}>
@@ -407,7 +406,7 @@ export default function Contatti() {
 
               {/* Sedi - griglia 2×2 */}
               <div>
-                <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 0.65rem' }}>
+                <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 0.65rem' }}>
                   Le nostre sedi
                 </p>
                 <div className="sedi-grid">
@@ -429,7 +428,7 @@ export default function Contatti() {
                           {sede.città}
                         </span>
                       </div>
-                      <p className="text-slate-500 dark:text-gray-400" style={{ margin: 0, fontSize: '0.75rem', lineHeight: 1.45, paddingLeft: '1.3rem' }}>
+                      <p className="text-slate-600 dark:text-gray-400" style={{ margin: 0, fontSize: '0.75rem', lineHeight: 1.45, paddingLeft: '1.3rem' }}>
                         {sede.indirizzo}
                       </p>
                       {activeSede === i && (
@@ -513,7 +512,7 @@ export default function Contatti() {
                   <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.75rem' }}>
                     Messaggio inviato!
                   </h3>
-                  <p className="text-slate-500 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
+                  <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
                     Grazie per averci contattato. Ti risponderemo al più presto all&apos;indirizzo email indicato.
                   </p>
                   <button
@@ -529,7 +528,7 @@ export default function Contatti() {
                   <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.4rem' }}>
                     Inviaci un messaggio
                   </h2>
-                  <p className="text-slate-500 dark:text-gray-300" style={{ fontSize: '0.85rem', marginBottom: '2rem', lineHeight: 1.6 }}>
+                  <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem', marginBottom: '2rem', lineHeight: 1.6 }}>
                     Compila il modulo e ti ricontatteremo al più presto.
                   </p>
 
@@ -609,7 +608,7 @@ export default function Contatti() {
                       )}
                     </button>
 
-                    <p className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>
+                    <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>
                       I tuoi dati sono al sicuro e non verranno condivisi con terze parti.
                     </p>
 

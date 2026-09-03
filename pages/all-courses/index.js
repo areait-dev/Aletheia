@@ -199,7 +199,6 @@ export default function AllCourses() {
         <title>Tutti i Corsi - Alètheia Srl</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
         <SeoHead
           title="Tutti i Corsi - Alètheia Srl"
           description="Scopri il catalogo completo dei corsi di formazione Alètheia Srl: sicurezza sul lavoro, fitosanitario, sicurezza alimentare, formazione finanziata e certificazioni digitali."
@@ -235,16 +234,16 @@ export default function AllCourses() {
           {/* Search */}
           <div className="bg-white dark:bg-dark-card rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)]">
             <div className="flex items-center gap-3 border border-slate-200 dark:border-gray-600 rounded-xl px-4 py-3 transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-              <i className="fas fa-search text-slate-400 text-sm"></i>
+              <i className="fas fa-search text-slate-600 text-sm"></i>
               <input
                 type="text"
                 placeholder="Cerca corsi..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="flex-1 border-none outline-none text-sm text-slate-700 dark:text-gray-200 bg-transparent placeholder:text-slate-400"
+                className="flex-1 border-none outline-none text-sm text-slate-700 dark:text-gray-200 bg-transparent placeholder:text-slate-600"
               />
               {searchTerm && (
-                <button onClick={() => setSearchTerm('')} className="text-slate-400 hover:text-slate-600 bg-transparent border-none cursor-pointer">
+                <button onClick={() => setSearchTerm('')} aria-label="Cancella ricerca" className="text-slate-600 hover:text-slate-600 bg-transparent border-none cursor-pointer">
                   <i className="fas fa-times text-xs"></i>
                 </button>
               )}
@@ -253,7 +252,7 @@ export default function AllCourses() {
 
           {/* Categories */}
           <div className="bg-white dark:bg-dark-card rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)]">
-            <h2 className="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider mb-4">
+            <h2 className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider mb-4">
               Categorie
             </h2>
             <ul className="space-y-1">
@@ -266,7 +265,7 @@ export default function AllCourses() {
                 <span className="flex items-center gap-2">
                   Tutti i corsi
                 </span>
-                <span className="text-xs bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-300 px-2 py-0.5 rounded-full font-semibold">
+                <span className="text-xs bg-slate-100 dark:bg-gray-700 text-slate-600 dark:text-gray-300 px-2 py-0.5 rounded-full font-semibold">
                   {coursesData.length}
                 </span>
               </li>
@@ -298,7 +297,7 @@ export default function AllCourses() {
                   <span className="flex items-center gap-2">
                     {cat.name}
                   </span>
-                  <span className="text-xs bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-300 px-2 py-0.5 rounded-full font-semibold">
+                  <span className="text-xs bg-slate-100 dark:bg-gray-700 text-slate-600 dark:text-gray-300 px-2 py-0.5 rounded-full font-semibold">
                     {categoryCounts[key] || 0}
                   </span>
                 </li>
@@ -327,7 +326,7 @@ export default function AllCourses() {
         <main ref={gridRef} style={{ scrollMarginTop: '100px' }}>
           {/* Result header */}
           <div className="flex items-center justify-between mb-6">
-            <p className="text-sm text-slate-500 dark:text-gray-400">
+            <p className="text-sm text-slate-600 dark:text-gray-400">
               <span className="font-bold text-slate-800 dark:text-gray-100">{filteredFamilies.length}</span>{' '}
               {filteredFamilies.length === 1 ? 'corso trovato' : 'corsi trovati'}
               {shopFilter && ' in "Shop"'}
@@ -352,8 +351,8 @@ export default function AllCourses() {
             </div>
           ) : filteredFamilies.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-              <p className="text-slate-500 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
-              <p className="text-slate-400 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
+              <p className="text-slate-600 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
+              <p className="text-slate-600 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
             </div>
           ) : mounted ? (
             <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">

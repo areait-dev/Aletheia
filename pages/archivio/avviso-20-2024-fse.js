@@ -34,7 +34,6 @@ export default function Avviso202024Fse() {
           content="Avviso 20/2024 FSE+: percorso gratuito per la qualifica di Assistente Familiare, rivolto a disoccupati e inoccupati in Sicilia. Alètheia Srl, ente accreditato."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />
@@ -132,7 +131,7 @@ export default function Avviso202024Fse() {
           </section>
 
           <div className="border-t border-gray-200 dark:border-gray-700" style={{ marginTop: '2.5rem', paddingTop: '1.5rem', fontSize: '0.85rem' }}>
-            <p className="text-slate-500 dark:text-gray-400" style={{ margin: 0 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ margin: 0 }}>
               Per informazioni: <a href="mailto:info@aletheiasrl.it" style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}>info@aletheiasrl.it</a> — Tel. <a href="tel:+390932862613" style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}>+39 0932 862613</a>
             </p>
           </div>

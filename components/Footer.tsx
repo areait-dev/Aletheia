@@ -42,7 +42,7 @@ export default function Footer() {
                 </svg>
                 info@aletheiasrl.it
               </a>
-              <span className="flex items-center gap-2.5 text-xs text-slate-500 dark:text-slate-500 pt-1">
+              <span className="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-500 pt-1">
                 <svg className="text-primary dark:text-[#10B981] shrink-0 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 6v6l4 2" />
@@ -51,18 +51,18 @@ export default function Footer() {
               </span>
             </div>
 
-            <div className="mt-6 flex gap-4 text-slate-400 dark:text-slate-500 text-lg">
+            <div className="mt-6 flex gap-4 text-slate-600 dark:text-slate-500 text-lg">
               <a href="https://www.facebook.com/aletheiasrl.it/?locale=it_IT" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-facebook-f" /></a>
               <a href="https://www.instagram.com/aletheiasrl/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-instagram" /></a>
               <a href="https://it.linkedin.com/company/al%C3%A9theia-srl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-linkedin-in" /></a>
               <a href="https://t.me/alethiaapl" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="hover:text-slate-800 dark:hover:text-white transition-colors"><i className="fab fa-telegram" /></a>
             </div>
 
-            <div className="flex flex-col gap-1.5 mt-6 text-xs text-slate-500 dark:text-slate-500">
-              <a href="/privacy-cookie" className="hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Privacy e Cookie</a>
-              <a href="/reclami-proposte" className="hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Reclami e Proposte</a>
-              <a href="/aiuti-di-stato-2023" className="hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2023</a>
-              <a href="/aiuti-di-stato-2024" className="hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2024</a>
+            <div className="flex flex-col gap-1 mt-6 text-xs text-slate-600 dark:text-slate-500">
+              <a href="/privacy-cookie" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Privacy e Cookie</a>
+              <a href="/reclami-proposte" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Reclami e Proposte</a>
+              <a href="/aiuti-di-stato-2023" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2023</a>
+              <a href="/aiuti-di-stato-2024" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2024</a>
             </div>
           </div>
 
@@ -96,7 +96,7 @@ export default function Footer() {
           <div>
             <span className="text-slate-900 dark:text-white font-bold text-xs tracking-widest uppercase mb-6 block">Accreditamenti e certificazioni</span>
 
-            <div className="text-xs text-slate-500 dark:text-slate-500 space-y-2 leading-relaxed">
+            <div className="text-xs text-slate-600 dark:text-slate-500 space-y-2 leading-relaxed">
               <p>Accreditamento APL D.D.S n. 1100 del 26/04/2019</p>
               <p>Test Center AICA n. AKHF0001</p>
               <p>UNI ISO 29992:2019</p>
@@ -133,7 +133,7 @@ export default function Footer() {
 
         {/* Barra inferiore */}
         <div className="border-t border-slate-200/80 dark:border-slate-900 pt-6 mt-12">
-          <div className="flex flex-col md:flex-row md:justify-between items-center text-[11px] text-slate-500 dark:text-slate-500 gap-2">
+          <div className="flex flex-col md:flex-row md:justify-between items-center text-[11px] text-slate-600 dark:text-slate-500 gap-2">
             <span>© 2026 Alètheia S.r.l. · P.IVA 01524530894 · aletheiasrl@legalmail.it</span>
             <span>
               Ente di{' '}
@@ -141,7 +141,7 @@ export default function Footer() {
                 href="https://www.promotergroup.eu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary dark:text-[#10B981] hover:text-[#006B73] dark:hover:text-[#059669] transition-colors underline"
+                className="text-[#006B73] dark:text-[#10B981] hover:text-[#005259] dark:hover:text-[#059669] transition-colors underline"
               >
                 Promotergroup S.p.A.
               </a>

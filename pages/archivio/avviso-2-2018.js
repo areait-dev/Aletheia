@@ -36,7 +36,7 @@ export default function Avviso22018() {
                     className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 hover:border-[#008C95] transition-colors"
                   >
                     <span className="text-gray-900 dark:text-gray-50 font-medium">{titolo}</span>
-                    <i className="fa-solid fa-chevron-right text-gray-400" />
+                    <i className="fa-solid fa-chevron-right text-gray-500" />
                   </a>
                 </li>
               ))}

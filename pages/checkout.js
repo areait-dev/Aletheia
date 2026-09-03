@@ -167,7 +167,7 @@ export default function Checkout() {
               <p className="text-gray-600 dark:text-gray-300" style={{ marginBottom: '0.25rem' }}>
                 Grazie {form.nome}, il tuo ordine è stato ricevuto.
               </p>
-              <p className="text-gray-400 dark:text-gray-400" style={{ fontSize: '0.85rem', marginBottom: '1.75rem' }}>
+              <p className="text-gray-500 dark:text-gray-400" style={{ fontSize: '0.85rem', marginBottom: '1.75rem' }}>
                 Numero ordine <strong>{orderId}</strong> — conferma inviata a {form.email}
               </p>
               <Link
@@ -218,17 +218,17 @@ export default function Checkout() {
                           <p style={{ fontWeight: 700, fontSize: '0.9rem', margin: '0 0 0.2rem 0', color: '#0F172A' }}>{item.title}</p>
                           {item.variant && <p style={{ fontSize: '0.78rem', color: '#6B7280', margin: '0 0 0.4rem 0' }}>{item.variant}</p>}
                         </div>
-                        <button onClick={() => removeFromCart(item.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444', fontSize: '0.85rem', flexShrink: 0, padding: '0 0 0 0.5rem' }}>✕</button>
+                        <button onClick={() => removeFromCart(item.id)} aria-label={`Rimuovi ${item.title} dal carrello`} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444', fontSize: '0.85rem', flexShrink: 0, padding: '0 0 0 0.5rem' }}>✕</button>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <button onClick={() => updateQty(item.id, item.qty - 1)} style={{ width: '24px', height: '24px', borderRadius: '9999px', border: '1px solid #E5E7EB', background: '#F9FAFB', cursor: 'pointer', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>−</button>
+                          <button onClick={() => updateQty(item.id, item.qty - 1)} aria-label={`Diminuisci quantità di ${item.title}`} style={{ width: '24px', height: '24px', borderRadius: '9999px', border: '1px solid #E5E7EB', background: '#F9FAFB', cursor: 'pointer', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>−</button>
                           <span style={{ fontWeight: 600, minWidth: '18px', textAlign: 'center', fontSize: '0.875rem' }}>{item.qty}</span>
-                          <button onClick={() => updateQty(item.id, item.qty + 1)} style={{ width: '24px', height: '24px', borderRadius: '9999px', border: '1px solid #E5E7EB', background: '#F9FAFB', cursor: 'pointer', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>+</button>
+                          <button onClick={() => updateQty(item.id, item.qty + 1)} aria-label={`Aumenta quantità di ${item.title}`} style={{ width: '24px', height: '24px', borderRadius: '9999px', border: '1px solid #E5E7EB', background: '#F9FAFB', cursor: 'pointer', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>+</button>
                         </div>
                         <p style={{ fontWeight: 700, color: '#008C95', margin: 0, fontSize: '0.95rem' }}>
                           € {(item.price * item.qty).toLocaleString('it-IT')}
-                          {item.qty > 1 && <span style={{ fontSize: '0.72rem', color: '#9CA3AF', fontWeight: 400, marginLeft: '0.3rem' }}>(€ {item.price} × {item.qty})</span>}
+                          {item.qty > 1 && <span style={{ fontSize: '0.72rem', color: '#6B7280', fontWeight: 400, marginLeft: '0.3rem' }}>(€ {item.price} × {item.qty})</span>}
                         </p>
                       </div>
                     </div>
@@ -382,7 +382,7 @@ export default function Checkout() {
                     </>
                   )}
                 </button>
-                <p className="text-gray-400 dark:text-gray-400" style={{ fontSize: '0.8rem', marginTop: '0.75rem', textAlign: 'center' }}>
+                <p className="text-gray-500 dark:text-gray-400" style={{ fontSize: '0.8rem', marginTop: '0.75rem', textAlign: 'center' }}>
                   Pagamento simulato a scopo dimostrativo — nessun addebito reale.
                 </p>
               </form>

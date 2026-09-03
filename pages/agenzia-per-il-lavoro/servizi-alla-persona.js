@@ -168,10 +168,6 @@ export default function ServiziAllaPersona() {
           content="Alètheia Srl - Servizi alla persona: ricerca del lavoro, orientamento professionale, Programma G.O.L., Garanzia Giovani e outplacement in Sicilia."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
       </Head>
 
       <Header active="/agenzia-per-il-lavoro" />

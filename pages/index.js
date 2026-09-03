@@ -260,7 +260,7 @@ function CorsiCalendarTabs({ giorni }) {
 
             {/* Testi */}
             <div className="flex-grow px-2 flex flex-col gap-1 w-full">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
                 <span className={`font-semibold px-2 py-0.5 rounded-full ${CATEGORIA_BADGE[corso.categoria] || 'bg-slate-50 text-slate-700 border border-slate-200'}`}>
                   {CATEGORIA_LABEL[corso.categoria]}
                 </span>
@@ -353,6 +353,7 @@ function HeroSearch() {
 
         <ul
           role="listbox"
+          aria-label="Categoria di ricerca"
           style={{ zIndex: 9999 }}
           className={`absolute left-0 sm:right-0 sm:left-auto top-full mt-3 w-full sm:w-64 bg-white dark:bg-dark-card rounded-2xl shadow-xl p-2 z-[9999] origin-top transition-all duration-200 ease-out ${
             open
@@ -361,7 +362,7 @@ function HeroSearch() {
           }`}
         >
           {SEARCH_CATEGORIES.map((cat) => (
-            <li key={cat.value}>
+            <li key={cat.value} role="presentation">
               <button
                 type="button"
                 role="option"
@@ -389,7 +390,7 @@ function HeroSearch() {
 
       <button
         type="button"
-        className="px-8 py-2.5 bg-[#008C95] hover:bg-[#006B73] dark:bg-[#10B981] dark:hover:bg-[#059669] text-white font-bold rounded-full transition-all duration-200 whitespace-nowrap"
+        className="px-8 py-2.5 bg-[#008C95] hover:bg-[#006B73] dark:bg-[#10B981] dark:hover:bg-[#059669] text-white font-bold text-xl rounded-full transition-all duration-200 whitespace-nowrap"
       >
         Cerca
       </button>
@@ -406,10 +407,6 @@ export default function Home() {
         <title>Alètheia Srl - Formazione Professionale</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
         <SeoHead
           title="Alètheia Srl - Formazione Professionale"
           description="Alètheia Srl: ente di formazione professionale e Agenzia per il Lavoro a Vittoria (RG). Corsi finanziati, formazione obbligatoria, certificazioni e inserimento lavorativo."
@@ -445,7 +442,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 justify-center mt-8">
               <a
                 href="/all-courses"
-                className="inline-flex items-center gap-2 bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-base"
+                className="inline-flex items-center gap-2 bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-xl"
               >
                 Scopri i corsi
               </a>
@@ -504,7 +501,7 @@ export default function Home() {
             <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">
               Trova il percorso giusto per il tuo futuro professionale
             </h2>
-            <p className="mt-3 text-slate-500 dark:text-gray-300 text-lg max-w-4xl mx-auto">
+            <p className="mt-3 text-slate-600 dark:text-gray-300 text-lg max-w-4xl mx-auto">
               Dalla formazione finanziata alle certificazioni professionali, fino ai corsi obbligatori per aziende e lavoratori: sviluppiamo competenze richieste dal mercato e spendibili nel mondo del lavoro.
             </p>
           </Reveal>
@@ -522,7 +519,7 @@ export default function Home() {
               href="/all-courses"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                fontSize: '0.95rem', fontWeight: 700, color: '#008C95',
+                fontSize: '0.95rem', fontWeight: 700, color: '#006B73',
                 textDecoration: 'none',
               }}
             >
@@ -742,13 +739,13 @@ export default function Home() {
                 </div>
                 {/* Testo */}
                 <div className="flex flex-col flex-1 p-5">
-                  <time dateTime={item.date} className="text-xs text-slate-400 dark:text-gray-500 font-medium mb-2">
+                  <time dateTime={item.date} className="text-xs text-slate-600 dark:text-gray-500 font-medium mb-2">
                     {formatDateItalian(item.date)}
                   </time>
                   <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 group-hover:text-[#008C95] dark:group-hover:text-[#10B981] transition-colors">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-slate-500 dark:text-gray-300 text-sm line-clamp-2 flex-1">
+                  <p className="mt-2 text-slate-600 dark:text-gray-300 text-sm line-clamp-2 flex-1">
                     {item.excerpt}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-[#008C95] dark:text-[#10B981] font-semibold text-sm group-hover:gap-3 transition-all duration-200">
@@ -786,7 +783,7 @@ export default function Home() {
                 aria-hidden={i >= clientiLoghi.length}
               >
                 {/* Placeholder logo - sostituire con <img src="/images/clienti/..." className="grayscale opacity-70 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 transition-all duration-300" /> */}
-                <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap text-slate-400 dark:text-white/70 grayscale opacity-80 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:text-[#008C95] dark:group-hover/logo:text-[#10B981] transition-all duration-300">
+                <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap text-slate-700 dark:text-white/70 grayscale opacity-100 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:text-[#008C95] dark:group-hover/logo:text-[#10B981] transition-all duration-300">
                   <i className={`${logo.icon} text-2xl`} aria-hidden="true" />
                   {logo.name}
                 </span>
@@ -826,7 +823,7 @@ export default function Home() {
           <div className="pt-4">
             <a
               href="/contatti"
-              className="inline-block bg-primary hover:bg-[#10B981] text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-[250ms] shadow-lg shadow-[#008C95]/10 hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-block bg-primary hover:bg-[#10B981] text-white font-bold px-8 py-4 rounded-xl text-xl transition-all duration-[250ms] shadow-lg shadow-[#008C95]/10 hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0"
             >
               Contattaci
             </a>

@@ -123,7 +123,6 @@ export default function FormazioneFinanziataSicilia() {
           content="Corsi gratuiti in Sicilia finanziati da Regione Siciliana, Fondi Interprofessionali e Fondo Nuove Competenze. Alètheia: ente di formazione accreditato."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />
@@ -263,7 +262,7 @@ export default function FormazioneFinanziataSicilia() {
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
               Scegli il percorso di formazione più adatto alle tue esigenze
             </h2>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
               Ogni opportunità di finanziamento risponde a esigenze diverse. Seleziona il percorso dedicato a te e scopri come accedere ai corsi disponibili.
             </p>
           </div>

@@ -262,7 +262,6 @@ export default function CorsiPA() {
           content="Formazione per Comuni, enti locali e aziende pubbliche, attivabile tramite MEPA. Alètheia, ente accreditato Regione Siciliana con 20+ anni di esperienza nella formazione della PA."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />
@@ -486,7 +485,7 @@ export default function CorsiPA() {
             {[...entiLoghi, ...entiLoghi, ...entiLoghi].map((logo, i) => (
               <div
                 key={i}
-                className="flex items-center justify-center h-12 px-10 shrink-0 text-slate-400 dark:text-white/70"
+                className="flex items-center justify-center h-12 px-10 shrink-0 text-slate-600 dark:text-white/70"
                 aria-hidden={i >= entiLoghi.length}
               >
                 <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap">
@@ -541,7 +540,7 @@ export default function CorsiPA() {
             <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
               Vuoi un piano formativo per il tuo ente?
             </h3>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
               Progettiamo insieme un percorso su misura, facilmente attivabile anche tramite MEPA, per accompagnare la crescita delle competenze e l&apos;innovazione della tua amministrazione.
             </p>
           </div>

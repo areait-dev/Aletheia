@@ -35,7 +35,6 @@ export default function Avviso12026Poc() {
           content="Avviso pubblico n. 1/2026 POC Sicilia 2014-2020: catalogo regionale dell'offerta formativa, percorsi di qualificazione gratuiti per disoccupati e inoccupati in Sicilia."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />

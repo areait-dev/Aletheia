@@ -149,10 +149,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
         <title>Agenzia per il Lavoro - Alètheia Srl</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
         <SeoHead
           title="Agenzia per il Lavoro - Alètheia Srl"
           description="Alètheia Srl - Agenzia per il Lavoro autorizzata. Servizi di somministrazione, ricerca e selezione, outplacement e formazione professionale in Sicilia."
@@ -805,11 +801,11 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 </AnimatePresence>
               </motion.div>
             ) : jobs.length > 0 ? (
-              <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
+              <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
                 Nessuna offerta trovata per questo filtro.
               </p>
             ) : (
-              <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
+              <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
                 Nessuna offerta disponibile al momento. Consulta tutte le posizioni su{' '}
                 <a
                   href="https://aletheia4job.it/"

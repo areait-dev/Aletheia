@@ -64,7 +64,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
           <i className={icon}></i>
         </div>
         <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">{title}</h3>
-        <p className="text-sm text-slate-500 dark:text-gray-400 mb-5 flex-1">{subtitle}</p>
+        <p className="text-sm text-slate-600 dark:text-gray-400 mb-5 flex-1">{subtitle}</p>
         <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#0B4A52] dark:text-[#10B981] border border-slate-200 dark:border-[rgba(255,255,255,0.15)] rounded-full px-4 py-2 transition-all duration-300 group-hover:border-[#10B981] dark:group-hover:border-[#10B981]/40">
           Scopri i dettagli
           <i className="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1" style={{ fontSize: '9px' }}></i>
@@ -82,7 +82,8 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
           >
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-slate-400 dark:text-gray-500 hover:text-primary dark:hover:text-[#10B981] transition-colors text-xl bg-transparent border-none cursor-pointer"
+              aria-label="Chiudi finestra"
+              className="absolute top-4 right-4 text-slate-600 dark:text-gray-400 hover:text-primary dark:hover:text-[#10B981] transition-colors text-xl bg-transparent border-none cursor-pointer"
             >
               <i className="fas fa-times"></i>
             </button>
@@ -188,7 +189,6 @@ export default function ChiSiamo() {
         <title>Chi Siamo - Alètheia Srl</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
         <SeoHead
           title="Chi Siamo - Alètheia Srl"
           description="Alètheia Srl: mission, vision e valori di un ente di formazione professionale e Agenzia per il Lavoro attivo dal 2005 a Vittoria (RG), parte del gruppo Promotergroup."
@@ -332,7 +332,7 @@ export default function ChiSiamo() {
                         <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
                         <div>
                           <strong className="block text-slate-900 dark:text-white mb-1 text-sm">{item.key}</strong>
-                          <p className="text-slate-500 dark:text-gray-300 leading-relaxed text-sm m-0">{item.desc}</p>
+                          <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-sm m-0">{item.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -362,7 +362,7 @@ export default function ChiSiamo() {
             percorsi per affrontare le sfide di domani.
           </p>
 
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6 block">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-600 mb-6 block">
             I nostri punti di forza
           </span>
 
@@ -383,7 +383,7 @@ export default function ChiSiamo() {
                     <span className={`w-1.5 h-4 rounded-full inline-block ${card.accent}`} />
                     {card.titolo}
                   </h3>
-                  <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
+                  <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed">
                     {card.desc}
                   </p>
                 </div>
@@ -436,7 +436,7 @@ export default function ChiSiamo() {
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
               La qualità che si verifica, non si dichiara.
             </h2>
-            <p className="text-slate-500 dark:text-gray-300 text-sm leading-relaxed">
+            <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed">
               Le certificazioni ISO e UNI PdR attestano standard di qualità, inclusione e
               misurabilità dei processi formativi. Non sono dichiarazioni di intenti, ma
               verifiche ufficiali riconosciute. Una garanzia per chi sceglie Alètheia come

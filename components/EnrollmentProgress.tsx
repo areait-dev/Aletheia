@@ -68,7 +68,7 @@ export default function EnrollmentProgress({ courseId, courseTitle }: Enrollment
         {soglaRaggiunta ? 'Corso confermato' : 'Iscriviti'}
       </button>
 
-      <div className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.78rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.78rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <div className="bg-slate-100 dark:bg-gray-700" style={{ flex: 1, height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
           <div
             style={{
@@ -87,11 +87,11 @@ export default function EnrollmentProgress({ courseId, courseTitle }: Enrollment
           Soglia di {SOGLIA_AVVIO} iscrizioni raggiunta: il corso partirà a breve, il nostro staff ricontatterà gli iscritti per calendarizzarlo.
         </p>
       ) : justEnrolled ? (
-        <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.78rem', margin: 0 }}>
+        <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.78rem', margin: 0 }}>
           Iscrizione registrata. Ti ricontatteremo per avviare il corso al raggiungimento di {SOGLIA_AVVIO} iscritti.
         </p>
       ) : (
-        <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.78rem', margin: 0 }}>
+        <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.78rem', margin: 0 }}>
           Il corso parte al raggiungimento di {SOGLIA_AVVIO} iscrizioni.
         </p>
       )}

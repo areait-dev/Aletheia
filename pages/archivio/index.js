@@ -24,7 +24,7 @@ function AccordionFamiglia({ famiglia, sottovoci, aperta, onToggle }) {
         className="w-full flex items-center justify-between px-4 py-3 text-left hover:text-[#008C95] transition-colors"
       >
         <span className="text-gray-900 dark:text-gray-50 font-medium">{famiglia.titolo}</span>
-        <i className={`fa-solid fa-chevron-down text-gray-400 transition-transform ${aperta ? 'rotate-180' : ''}`} />
+        <i className={`fa-solid fa-chevron-down text-gray-500 transition-transform ${aperta ? 'rotate-180' : ''}`} />
       </button>
 
       {aperta && (
@@ -35,7 +35,7 @@ function AccordionFamiglia({ famiglia, sottovoci, aperta, onToggle }) {
               className="flex items-center justify-between px-4 py-3 pl-8 hover:text-[#008C95] transition-colors"
             >
               <span className="text-gray-600 dark:text-gray-300">{famiglia.panoramica}</span>
-              <i className="fa-solid fa-chevron-right text-gray-400" />
+              <i className="fa-solid fa-chevron-right text-gray-500" />
             </a>
           </li>
           {sottovoci.map(({ slug, titolo }) => (
@@ -45,7 +45,7 @@ function AccordionFamiglia({ famiglia, sottovoci, aperta, onToggle }) {
                 className="flex items-center justify-between px-4 py-3 pl-8 hover:text-[#008C95] transition-colors"
               >
                 <span className="text-gray-600 dark:text-gray-300">{titolo}</span>
-                <i className="fa-solid fa-chevron-right text-gray-400" />
+                <i className="fa-solid fa-chevron-right text-gray-500" />
               </a>
             </li>
           ))}
@@ -93,7 +93,7 @@ export default function ArchivioIndex() {
                   <span className="text-gray-900 dark:text-gray-50 font-medium">
                     {titoloFromSlug(slug)}
                   </span>
-                  <i className="fa-solid fa-chevron-right text-gray-400" />
+                  <i className="fa-solid fa-chevron-right text-gray-500" />
                 </a>
               </li>
             ))}

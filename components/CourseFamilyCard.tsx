@@ -59,7 +59,7 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
             {family.titolo}
           </h3>
 
-          <p className="text-[14px] text-slate-400 dark:text-gray-400 leading-relaxed line-clamp-2">{family.provider}</p>
+          <p className="text-[14px] text-slate-600 dark:text-gray-400 leading-relaxed line-clamp-2">{family.provider}</p>
 
           <hr className="my-4 border-t border-slate-100 dark:border-[rgba(255,255,255,0.08)]" />
 

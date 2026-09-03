@@ -117,7 +117,7 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
           <img src={image} alt={imageAlt || title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
 
-        <span className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 700 }}>
+        <span className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 700 }}>
           {logo}
         </span>
 
@@ -143,7 +143,7 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
               Scopri {durata ? 'il corso' : 'i corsi'}
             </span>
           ) : (
-            <span className="text-slate-400 dark:text-gray-500" style={{ fontSize: '0.78rem', fontWeight: 700 }}>
+            <span className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.78rem', fontWeight: 700 }}>
               Prossimamente
             </span>
           )}
@@ -166,7 +166,6 @@ export default function FormazioneRegionale() {
           content="Percorsi di formazione regionale finanziati dalla Regione Siciliana: FSE+, POC Sicilia, Garanzia Giovani e Programma G.O.L. Spesso gratuiti per i partecipanti."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />
@@ -367,7 +366,7 @@ export default function FormazioneRegionale() {
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
               Scegli il programma di finanziamento più adatto a te
             </h2>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
               Ogni avviso pubblico finanzia specifici percorsi di formazione destinati a categorie differenti di partecipanti. Seleziona il programma che ti interessa e consulta corsi disponibili, requisiti di accesso e modalità di iscrizione.
             </p>
           </div>
@@ -422,7 +421,7 @@ export default function FormazioneRegionale() {
         <div className="container">
           <div style={{ marginBottom: '2.5rem' }}>
             <span className="section-badge">Domande frequenti sulla formazione regionale in Sicilia</span>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', margin: 0, lineHeight: 1.7 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', margin: 0, lineHeight: 1.7 }}>
               Hai dubbi? Leggi le risposte alle domande che riceviamo più spesso.
             </p>
           </div>

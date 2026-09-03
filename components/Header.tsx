@@ -324,6 +324,8 @@ export default function Header({ active, solid = false }: HeaderProps) {
                     <button
                       className="sub-dropdown-toggle-icon text-[#008C95] dark:text-[#10B981]"
                       onClick={() => toggleSubDropdown(group.key)}
+                      aria-label={`Espandi sottomenu ${group.title}`}
+                      aria-expanded={!!subDropdowns[group.key]}
                       style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem' }}
                     >
                       ▾

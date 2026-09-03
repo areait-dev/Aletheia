@@ -100,11 +100,11 @@ function CourseCard({ title, icon, description, misura, target }) {
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-          <span className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <i className="fas fa-tag" style={{ color: '#10B981', fontSize: '0.65rem' }}></i>
             {misura}
           </span>
-          <span className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <i className="fas fa-users" style={{ color: '#10B981', fontSize: '0.65rem' }}></i>
             {target}
           </span>
@@ -144,7 +144,6 @@ export default function ProgrammaGOL() {
           content="Alètheia Srl è operatore accreditato del Programma G.O.L. (Garanzia di Occupabilità dei Lavoratori). Percorsi gratuiti di orientamento, formazione e reinserimento professionale in Sicilia."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" />

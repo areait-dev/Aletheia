@@ -27,7 +27,7 @@ export default function CourseHero({ breadcrumb = [], badge, title, titleSuffix 
           <span key={crumb.label} style={{ display: 'contents' }}>
             {i > 0 && <span className="text-slate-300 dark:text-gray-600">/</span>}
             {crumb.href ? (
-              <Link href={crumb.href} className="text-slate-500 dark:text-gray-400" style={{ textDecoration: 'none' }}>
+              <Link href={crumb.href} className="text-slate-600 dark:text-gray-400" style={{ textDecoration: 'none' }}>
                 {crumb.label}
               </Link>
             ) : (

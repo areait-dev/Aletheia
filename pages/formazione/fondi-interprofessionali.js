@@ -46,7 +46,6 @@ export default function FondiInterprofessionali() {
           content="Trasforma i contributi INPS che la tua azienda versa già in formazione gratuita per i dipendenti attraverso i Fondi Paritetici Interprofessionali. Alètheia gestisce tutto il processo."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />
@@ -251,7 +250,7 @@ export default function FondiInterprofessionali() {
               {partner.map((p) => (
                 <div
                   key={p}
-                  className="bg-white dark:bg-dark-card border-slate-200 dark:border-[rgba(255,255,255,0.1)] text-slate-400 dark:text-gray-500"
+                  className="bg-white dark:bg-dark-card border-slate-200 dark:border-[rgba(255,255,255,0.1)] text-slate-600 dark:text-gray-500"
                   style={{
                     flex: '0 0 220px',
                     height: '120px',
@@ -277,7 +276,7 @@ export default function FondiInterprofessionali() {
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: '0 0 0.5rem', lineHeight: 1.25 }}>
               Domande frequenti
             </h2>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', margin: 0, lineHeight: 1.7 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', margin: 0, lineHeight: 1.7 }}>
               FAQ sui Fondi Interprofessionali per le aziende
             </p>
           </div>

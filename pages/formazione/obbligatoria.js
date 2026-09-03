@@ -428,7 +428,6 @@ export default function FormazioneObbligatoria() {
           content="Corsi obbligatori per legge conformi al D.Lgs. 81/08: sicurezza sul lavoro, attrezzature, fitosanitario, HACCP. Attestati validi in tutta Italia. Alètheia S.r.l."
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
       </Head>
 
       <Header active="/" solid />
@@ -586,7 +585,7 @@ export default function FormazioneObbligatoria() {
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
               Tutti i corsi obbligatori per la tua azienda, in un unico ente accreditato
             </h2>
-            <p className="text-slate-500 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
               Ogni obbligo di legge ha il suo corso. Seleziona l&apos;area che ti riguarda e scopri corsi, date, modalità e costi.
             </p>
           </div>
