@@ -64,37 +64,8 @@ function MyApp({ Component, pageProps }) {
       `}} />
       <ThemeProvider>
         <CartProvider>
-          {/* Font Awesome: non-blocking (media=print + onLoad) per non ritardare FCP/LCP */}
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossOrigin="anonymous"
-            referrerPolicy="no-referrer"
-            media="print"
-            onLoad="this.media='all'"
-          />
-          <noscript>
-            <link
-              rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-              integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-              crossOrigin="anonymous"
-              referrerPolicy="no-referrer"
-            />
-          </noscript>
-          {/* Viga caricato via CDN (evita il fetch a build-time di next/font), reso non-blocking */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Viga&display=swap"
-            media="print"
-            onLoad="this.media='all'"
-          />
-          <noscript>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Viga&display=swap" />
-          </noscript>
+          {/* Font Awesome e Viga sono caricati in _document.js (HTML statico lato server):
+              lì il trucco onLoad="this.media='all'" funziona come markup HTML grezzo. */}
           {/* La variabile --font-viga viene resa disponibile a tutta l'app */}
           <div style={{ '--font-viga': "'Viga', sans-serif", display: 'contents' }}>
             <Component {...pageProps} />
