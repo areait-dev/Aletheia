@@ -64,8 +64,8 @@ function MyApp({ Component, pageProps }) {
       `}} />
       <ThemeProvider>
         <CartProvider>
-          {/* Font Awesome e Viga sono caricati in _document.js (HTML statico lato server):
-              lì il trucco onLoad="this.media='all'" funziona come markup HTML grezzo. */}
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+          {/* Viga caricato via _document.js (evita il fetch a build-time di next/font) */}
           {/* La variabile --font-viga viene resa disponibile a tutta l'app */}
           <div style={{ '--font-viga': "'Viga', sans-serif", display: 'contents' }}>
             <Component {...pageProps} />
