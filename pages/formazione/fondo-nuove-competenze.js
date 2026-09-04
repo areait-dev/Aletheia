@@ -212,6 +212,7 @@ export default function FondoNuoveCompetenze() {
           grid-auto-flow: column;
           grid-template-rows: repeat(2, auto);
           gap: 0.85rem 1.5rem;
+          align-items: start;
         }
         @media (max-width: 768px) {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }

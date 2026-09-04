@@ -19,8 +19,8 @@ const avvisi = [
   {
     badge: 'Disoccupati, NASpI, ADI',
     logo: 'UE · Ministero del Lavoro · GOL',
-    title: 'Avviso 6/2025 GOL – Garanzia di Occupabilità dei Lavoratori',
-    text: 'Il Programma GOL – Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.',
+    title: 'Avviso 6/2025 GOL',
+    text: 'Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.',
     modalita: 'Aula (o variabile)',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80',
     imageAlt: 'Persona in colloquio di lavoro per il reinserimento occupazionale',
@@ -39,7 +39,7 @@ const avvisi = [
     badge: 'Assistente Familiare',
     logo: 'Coesione Italia · Cofinanziato UE · Ministero',
     title: 'Avviso n. 20/2024 FSE+',
-    text: 'Percorso finanziato dedicato alla formazione della figura professionale di Assistente Familiare, sempre più richiesta nel settore socio-assistenziale. Il corso comprende formazione teorica, attività pratiche e rilascio della qualifica professionale.',
+    text: 'Percorso finanziato dedicato alla formazione della figura professionale di Assistente Familiare. Il corso prevede formazione teorica, attività pratiche e rilascio della qualifica professionale.',
     durata: '300 ore',
     modalita: 'Aula + Stage',
     href: '/archivio/avviso-20-2024-fse',
@@ -102,6 +102,7 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
         textDecoration: 'none',
         display: 'flex',
         flexDirection: 'column',
+        height: '100%',
         transition: 'transform 0.25s ease, box-shadow 0.25s ease',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         boxShadow: hovered ? '0 16px 40px rgba(0,0,0,0.1)' : '0 2px 12px rgba(0,0,0,0.05)',
@@ -201,6 +202,7 @@ export default function FormazioneRegionale() {
           grid-auto-flow: column;
           grid-template-rows: repeat(2, auto);
           gap: 0.85rem 1.5rem;
+          align-items: start;
         }
         @media (max-width: 768px) {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
@@ -307,7 +309,7 @@ export default function FormazioneRegionale() {
             fontWeight: 900,
             color: '#fff',
             lineHeight: 1.15,
-            marginBottom: '1.25rem',
+            marginBottom: '2.5rem',
           }}>
             Formazione regionale{' '}
             <span style={{
@@ -318,17 +320,8 @@ export default function FormazioneRegionale() {
             }}>
               gratuita
             </span>{' '}
-            in Sicilia con qualifica riconosciuta.
+            con qualifica riconosciuta
           </h1>
-
-          <p className="fade-up fade-up-2" style={{
-            fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-            color: 'rgba(255,255,255,0.68)',
-            lineHeight: 1.75,
-            marginBottom: '2.5rem',
-          }}>
-            Alètheia Srl è ente accreditato dalla Regione Siciliana (DDG n. 78/2017). Eroga percorsi formativi finanziati attraverso FSE+, Programma GOL, POC Sicilia e altri programmi regionali, rivolti a disoccupati, inoccupati e persone in cerca di nuove opportunità professionali. I corsi sono gratuiti con qualifica riconosciuta, indennità di frequenza e stage in azienda, per trasformare la formazione in un&apos;opportunità concreta di lavoro.
-          </p>
 
           <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="#avvisi" className="cta-btn-primary">Scopri gli avvisi</a>
@@ -365,7 +358,6 @@ export default function FormazioneRegionale() {
       <section id="avvisi" className="bg-white dark:bg-dark-card" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '760px' }}>
-            <span className="section-badge">Avvisi della Regione Siciliana</span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
               Scegli il programma di finanziamento più adatto a te
             </h2>
@@ -376,7 +368,7 @@ export default function FormazioneRegionale() {
 
           <div className="avvisi-grid">
             {avvisi.map((a, i) => (
-              <Reveal key={a.title} delay={(i % 3) * 90}>
+              <Reveal key={a.title} delay={(i % 3) * 90} className="h-full">
                 <AvvisoCard {...a} />
               </Reveal>
             ))}

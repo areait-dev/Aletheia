@@ -5,11 +5,11 @@ import Footer from '../../components/Footer';
 import FormAzienda from '../../components/FormAzienda';
 
 const vantaggi = [
-  'Formazione a costo zero (o quasi): i corsi sono finanziati dal Fondo, non dal bilancio aziendale',
-  'Percorsi su misura: progettati sui reali fabbisogni della tua azienda, non corsi standard',
-  'Dipendenti più competenti e aggiornati, senza dover trovare budget extra',
-  'Più produttività e competitività, con un investimento che non pesa sui costi correnti',
-  'Valorizzare risorse che altrimenti resterebbero inutilizzate',
+  { icon: 'fa-sack-dollar', text: 'Formazione a costo zero (o quasi): i corsi sono finanziati dal Fondo, non dal bilancio aziendale' },
+  { icon: 'fa-puzzle-piece', text: 'Percorsi su misura: progettati sui reali fabbisogni della tua azienda, non corsi standard' },
+  { icon: 'fa-user-graduate', text: 'Dipendenti più competenti e aggiornati, senza dover trovare budget extra' },
+  { icon: 'fa-chart-line', text: 'Più produttività e competitività, con un investimento che non pesa sui costi correnti' },
+  { icon: 'fa-coins', text: 'Valorizzare risorse che altrimenti resterebbero inutilizzate' },
 ];
 
 const partner = ['Fondimpresa', 'Fon.Ter', 'For.Agri'];
@@ -135,6 +135,7 @@ export default function FondiInterprofessionali() {
           grid-auto-flow: column;
           grid-template-rows: repeat(2, auto);
           gap: 0.85rem 1.5rem;
+          align-items: start;
         }
         @media (max-width: 768px) {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
@@ -182,11 +183,7 @@ export default function FondiInterprofessionali() {
             per i tuoi dipendenti
           </h1>
 
-          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Ogni azienda versa già lo 0,30% dei contributi INPS destinato alla formazione continua. Attraverso i Fondi Interprofessionali quelle risorse diventano percorsi formativi senza costi aggiuntivi per l&apos;impresa. Alètheia ti accompagna in ogni fase del processo: analizziamo i fabbisogni formativi, individuiamo il Fondo più adatto, progettiamo il piano formativo e gestiamo tutta la parte amministrativa fino alla rendicontazione finale.
-          </p>
-
-          <div className="fade-up fade-up-3">
+          <div className="fade-up fade-up-3" style={{ marginTop: '2.5rem' }}>
             <a href="/contatti" className="cta-btn-primary">Contattaci</a>
           </div>
         </div>
@@ -216,14 +213,23 @@ export default function FondiInterprofessionali() {
               Utilizzare i Fondi Interprofessionali significa trasformare un contributo già versato in un&apos;opportunità concreta di crescita. I vantaggi per le aziende che aderiscono ai Fondi Interprofessionali sono:
             </p>
 
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
               {vantaggi.map((v) => (
-                <li key={v} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <i className="fas fa-check-circle" style={{ color: '#10B981', marginTop: '0.25rem', flexShrink: 0 }}></i>
-                  <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.7 }}>{v}</span>
-                </li>
+                <div
+                  key={v.text}
+                  className="bg-slate-50 dark:bg-dark-bg border border-slate-100 dark:border-[rgba(255,255,255,0.08)]"
+                  style={{ borderRadius: '1rem', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
+                >
+                  <span
+                    className="bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#008C95] dark:text-[#10B981]"
+                    style={{ width: '2.5rem', height: '2.5rem', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <i className={`fas ${v.icon}`}></i>
+                  </span>
+                  <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.65 }}>{v.text}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -310,20 +316,10 @@ export default function FondiInterprofessionali() {
         </div>
       </section>
 
-      {/* ══════════════ CTA FINALE ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', padding: '5rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>
-            Non sai da dove iniziare?
-          </h3>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', maxWidth: '680px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-            Non tutti i fondi sono uguali e non tutti i percorsi fanno per te. Raccontaci la tua situazione, in pochi minuti selezioniamo il fondo da attivare e i corsi disponibili per la tua azienda.
-          </p>
-          <a href="/contatti" className="cta-btn-primary">Richiedi una consulenza gratuita</a>
-        </div>
-      </section>
-
-      <FormAzienda />
+      <FormAzienda
+        title="Non sai da dove iniziare?"
+        subtitle="Non tutti i fondi sono uguali e non tutti i percorsi fanno per te. Compila il form il nostro team ti contatterà il prima possibile per una consulenza gratuita."
+      />
 
       </main>
       <Footer />

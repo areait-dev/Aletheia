@@ -109,7 +109,17 @@ const selectStyle = (hasError: boolean, isDark: boolean): CSSProperties => ({
 const focusOn  = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.target.style.borderColor = '#10B981'; };
 const focusOff = (hasErr: boolean, isDark: boolean) => (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.target.style.borderColor = hasErr ? '#F87171' : isDark ? 'rgba(148,163,184,0.2)' : 'rgba(255,255,255,0.12)'; };
 
-export default function FormAzienda() {
+interface FormAziendaProps {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+export default function FormAzienda({
+  badge = 'Contatto aziendale',
+  title = 'Parliamo delle tue esigenze',
+  subtitle = 'Compila il form, ti risponderemo entro 24 ore',
+}: FormAziendaProps = {}) {
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
   const [fields, setFields] = useState<FormFields>(EMPTY);
@@ -181,16 +191,16 @@ export default function FormAzienda() {
             letterSpacing: '0.12em', textTransform: 'uppercase',
             color: isDark ? '#86EFAC' : '#6EE7B7', marginBottom: '0.6rem',
           }}>
-            Contatto aziendale
+            {badge}
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 900,
             color: '#fff', marginBottom: '0.6rem', lineHeight: 1.2,
           }}>
-            Parliamo delle tue esigenze
+            {title}
           </h2>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
-            Compila il form, ti risponderemo entro 24 ore
+          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', margin: 0, maxWidth: '680px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7 }}>
+            {subtitle}
           </p>
         </div>
 
@@ -203,15 +213,6 @@ export default function FormAzienda() {
 
           {/* ── Colonna sinistra: info ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', marginBottom: '0.4rem' }}>
-                Consulenza su misura
-              </h3>
-              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, margin: 0 }}>
-                Il nostro team HR è a disposizione per analizzare le tue esigenze e proporti la soluzione più adatta. Primo contatto gratuito e senza impegno.
-              </p>
-            </div>
-
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {INFO_ITEMS.map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem' }}>

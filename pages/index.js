@@ -17,7 +17,7 @@ const categorie = [
     badge: 'Gratuito',
     badgeColor: '#10B981',
     title: 'Formazione Finanziata',
-    description: 'Percorsi finanziati da fondi regionali, europei e interprofessionali per acquisire nuove competenze, ottenere qualifiche professionali e aumentare le opportunità di inserimento lavorativo.',
+    description: 'Percorsi finanziati da fondi regionali, europei e interprofessionali per acquisire nuove competenze e ottenere qualifiche professionali.',
     color: '#008C95',
     image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
     imageAlt: 'Persone che collaborano durante un percorso di formazione finanziata',
@@ -37,7 +37,7 @@ const categorie = [
     badge: 'Certificazioni riconosciute',
     badgeColor: '#6366F1',
     title: 'Formazione professionale',
-    description: 'Certificazioni ICDL, corsi con qualifica professionale, formazione continua e percorsi per la Pubblica Amministrazione. I corsi che potenziano il tuo curriculum.',
+    description: 'Certificazioni ICDL, corsi con qualifica professionale, formazione continua e percorsi per la Pubblica Amministrazione.',
     color: '#008C95',
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
     imageAlt: 'Persona che sostiene un esame di certificazione al computer',
@@ -117,9 +117,10 @@ const gruppoLoghi = [
   { name: 'Promotergroup', src: '/images/gruppo/Logo Promotergroup (R).png' },
   { name: 'Promosan', src: '/images/gruppo/logo_promosan.png' },
   { name: 'Promoter Soc. Coop.', src: '/images/gruppo/Promoter Soc. Coop800.png' },
-  { name: 'Promoter Srl', src: '/images/gruppo/promoter-srl.svg' },
-  { name: 'Promoteragri', src: '/images/gruppo/promoteragri.svg' },
+  { name: 'Promoter Srl', src: '/images/gruppo/promoter-srl.png' },
+  { name: 'Promoteragri', src: '/images/gruppo/promoteragri.png' },
   { name: 'Iside', src: '/images/gruppo/Risorsa 8.png' },
+  { name: 'Promesys', src: '/images/gruppo/promesys.png' },
 ];
 
 const newsItems = [
@@ -502,12 +503,9 @@ export default function Home() {
             <span className="inline-block bg-[#008C95]/10 text-[#006066] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
               I nostri percorsi formativi
             </span>
-            <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">
+            <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto mb-2">
               Trova il percorso giusto per il tuo futuro professionale
             </h2>
-            <p className="mt-3 text-slate-600 dark:text-gray-300 text-lg max-w-4xl mx-auto">
-              Dalla formazione finanziata alle certificazioni professionali, fino ai corsi obbligatori per aziende e lavoratori: sviluppiamo competenze richieste dal mercato e spendibili nel mondo del lavoro.
-            </p>
           </Reveal>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="courses-cat-grid">
@@ -559,14 +557,9 @@ export default function Home() {
             <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
               Cosa facciamo
             </span>
-            <h2 id="cosa-facciamo-heading" className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            <h2 id="cosa-facciamo-heading" className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">
               Formazione e lavoro.<br />Un unico interlocutore.
             </h2>
-            <p className="text-slate-600 dark:text-gray-300 text-base mt-3 max-w-4xl mx-auto leading-relaxed">
-              Alètheia è il punto d&apos;incontro tra formazione e lavoro. Accompagniamo
-              persone e imprese nello sviluppo delle competenze, nell&apos;orientamento
-              professionale e nell&apos;inserimento occupazionale.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
@@ -619,7 +612,7 @@ export default function Home() {
                   <p className="text-slate-200 text-sm leading-relaxed max-w-md">
                     Siamo Agenzia per il Lavoro autorizzata. Supportiamo giovani, lavoratori
                     e aziende nei processi di orientamento e selezione, creando la connessione
-                    perfetta tra profili e imprese.
+                    perfetta tra persone e imprese.
                   </p>
                   <a
                     href="/agenzia-per-il-lavoro"
@@ -659,7 +652,7 @@ export default function Home() {
               <div
                 key={i}
                 aria-hidden={i >= gruppoLoghi.length * 3}
-                className="flex items-center justify-center h-16 mx-8 shrink-0"
+                className="flex items-center justify-center h-16 mx-7 shrink-0"
               >
                 {/* <img> nativo intenzionale: il marquee ripete questi loghi 6x (36 istanze
                     simultanee) per il loop continuo - convertirli a next/image moltiplica
@@ -671,9 +664,7 @@ export default function Home() {
                   src={logo.src}
                   alt={logo.name}
                   loading="lazy"
-                  width="160"
-                  height="40"
-                  className="max-h-10 w-auto object-contain shrink-0 brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300"
+                  className="h-10 w-auto max-w-[170px] object-contain shrink-0 brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const el = e.currentTarget;
                     el.style.display = 'none';

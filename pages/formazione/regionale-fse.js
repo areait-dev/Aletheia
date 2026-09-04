@@ -240,16 +240,12 @@ export default function FormazioneFinanziataSicilia() {
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="hero-badge fade-up">Formarsi senza costi</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 900, color: '#fff', lineHeight: 1.12, marginBottom: '1.25rem', maxWidth: '760px' }}>
+          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 900, color: '#fff', lineHeight: 1.12, marginBottom: '2.5rem', maxWidth: '760px' }}>
             Formazione{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Finanziata in Sicilia
             </span>
           </h1>
-
-          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '820px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Fondi regionali, europei e interprofessionali esistono per questo. Ogni anno restano inutilizzati, noi ti aiutiamo ad attivarli e trasformarli in formazione concreta, a costo zero. Alètheia è un Ente di Formazione accreditato dalla Regione Siciliana e soggetto attuatore presso i principali Fondi Paritetici Interprofessionali nazionali.
-          </p>
 
           <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="#offerta" className="cta-btn-primary">Scopri i percorsi</a>

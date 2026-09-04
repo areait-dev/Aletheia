@@ -36,28 +36,16 @@ export default function Document() {
           <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet" />
         </noscript>
 
-        {/* Font Awesome: preload+swap non-bloccante (stessa versione/icone, solo caricamento
-            differito). Va qui e non in _app.js: come HTML statico l'onLoad inline funziona
-            davvero, mentre dentro il JSX del componente resterebbe comunque un <link>
-            sincrono nel body. */}
+        {/* Font Awesome: link sincrono. Il precedente pattern preload+onLoad non
+            attivava sempre lo swap a rel="stylesheet" (icone mancanti in alcuni
+            browser), quindi si carica direttamente come stylesheet. */}
         <link
-          rel="preload"
-          as="style"
+          rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
-          onLoad="this.onload=null;this.rel='stylesheet'"
         />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossOrigin="anonymous"
-            referrerPolicy="no-referrer"
-          />
-        </noscript>
       </Head>
       <body>
         <Main />

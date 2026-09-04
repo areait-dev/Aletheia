@@ -228,8 +228,7 @@ export default function ChiSiamo() {
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
             Alètheia è Ente di Formazione accreditato e Agenzia per il Lavoro autorizzata dalla
-            Regione Siciliana. Progettiamo percorsi formativi che trasformano competenze in
-            opportunità per le persone e per le imprese.
+            Regione Siciliana.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
             <a
@@ -368,26 +367,25 @@ export default function ChiSiamo() {
             I nostri punti di forza
           </span>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { accent: 'bg-primary', titolo: 'Sistema formazione-lavoro integrato', desc: "Due ruoli, un obiettivo solo: trasformare ogni competenza acquisita in un'opportunità concreta di inserimento o crescita professionale." },
-              { accent: 'bg-indigo-500', titolo: 'Affidabilità certificata', desc: 'Accreditamento regionale, iscrizione ANPAL e certificazioni ISO: garanzie ufficiali che attestano qualità e trasparenza.' },
-              { accent: 'bg-primary', titolo: 'Esperti in formazione finanziata', desc: "Oltre 100 progetti gestiti con fondi FSE, PSR, FEAMP e Fondi Interprofessionali. Seguiamo l'intero processo, dall'analisi dei fabbisogni alla rendicontazione finale." },
-              { accent: 'bg-indigo-500', titolo: 'Certificazioni riconosciute', desc: 'Percorsi qualificanti e certificazioni spendibili nel mercato del lavoro e nei concorsi pubblici. Siamo anche Test Center AICA.' },
-              { accent: 'bg-primary', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
-              { accent: 'bg-indigo-500', titolo: 'La forza di un gruppo', desc: 'Alètheia è l’ente di formazione di Promotergroup S.p.A., un ecosistema che integra formazione, consulenza aziendale, salute e sicurezza, comunicazione. Scegliere Alètheia significa accedere a una rete di competenze che va ben oltre la formazione.' },
+              { icon: 'fa-network-wired', titolo: 'Sistema formazione-lavoro integrato', desc: "Due ruoli, un obiettivo solo: trasformare ogni competenza acquisita in un'opportunità concreta di inserimento o crescita professionale." },
+              { icon: 'fa-shield-halved', titolo: 'Affidabilità certificata', desc: 'Accreditamento regionale, iscrizione ANPAL e certificazioni ISO: garanzie ufficiali che attestano qualità e trasparenza.' },
+              { icon: 'fa-graduation-cap', titolo: 'Esperti in formazione finanziata', desc: "Oltre 100 progetti gestiti con fondi FSE, PSR, FEAMP e Fondi Interprofessionali. Seguiamo l'intero processo, dall'analisi dei fabbisogni alla rendicontazione finale." },
+              { icon: 'fa-award', titolo: 'Certificazioni riconosciute', desc: 'Percorsi qualificanti e certificazioni spendibili nel mercato del lavoro e nei concorsi pubblici. Siamo anche Test Center AICA.' },
+              { icon: 'fa-chart-line', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
+              { icon: 'fa-people-group', titolo: 'La forza di un gruppo', desc: 'Alètheia è l’ente di formazione di Promotergroup S.p.A., un ecosistema che integra formazione, consulenza aziendale, salute e sicurezza, comunicazione. Scegliere Alètheia significa accedere a una rete di competenze che va ben oltre la formazione.' },
             ].map((card, i) => (
-              <Reveal key={card.titolo} delay={(i % 4) * 80} className="h-full">
+              <Reveal key={card.titolo} delay={(i % 3) * 80} className="h-full">
                 <div
                   className="group h-full bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                 >
-                  <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 flex items-center gap-2 normal-case tracking-normal">
-                    <span className={`w-1.5 h-4 rounded-full inline-block ${card.accent}`} />
+                  <h3 className="text-slate-900 dark:text-white font-bold text-lg flex items-center gap-3 normal-case tracking-normal">
+                    <span className="w-9 h-9 shrink-0 rounded-full bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#008C95] dark:text-[#10B981] flex items-center justify-center">
+                      <i className={`fas ${card.icon} text-sm`} />
+                    </span>
                     {card.titolo}
                   </h3>
-                  <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed">
-                    {card.desc}
-                  </p>
                 </div>
               </Reveal>
             ))}
