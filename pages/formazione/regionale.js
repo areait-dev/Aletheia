@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -113,8 +114,8 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
           {badge}
         </span>
 
-        <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '140px' }}>
-          <img src={image} alt={imageAlt || title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '140px', position: 'relative' }}>
+          <Image src={image} alt={imageAlt || title} fill sizes="(max-width: 768px) 100vw, 340px" style={{ objectFit: 'cover' }} />
         </div>
 
         <span className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 700 }}>
@@ -169,6 +170,8 @@ export default function FormazioneRegionale() {
       </Head>
 
       <Header active="/" solid />
+
+      <main>
 
       <style jsx>{`
         @keyframes fadeUp {
@@ -469,6 +472,7 @@ export default function FormazioneRegionale() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </>
   );

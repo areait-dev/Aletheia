@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -132,12 +133,13 @@ function AreaCard({ badge, icon, title, text, cta, href, image, imageAlt }) {
         boxShadow: hovered ? '0 20px 48px rgba(0,0,0,0.22)' : '0 4px 18px rgba(0,0,0,0.1)',
       }}
     >
-      <img
+      <Image
         src={image}
         alt={imageAlt}
-        loading="lazy"
+        fill
+        sizes="(max-width: 768px) 100vw, 500px"
         style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+          objectFit: 'cover',
           transform: hovered ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.5s ease',
         }}
       />
@@ -216,12 +218,11 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
             }}
           >
             <div className="w-full h-36 rounded-xl overflow-hidden relative shrink-0">
-              <img
+              <Image
                 src={`/images/courses/${(c.id % 3) + 1}.jpg`}
                 alt={c.titolo}
-                loading="lazy"
-                width="400"
-                height="144"
+                width={400}
+                height={144}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.currentTarget.src = 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&q=80';
@@ -433,6 +434,8 @@ export default function FormazioneObbligatoria() {
       </Head>
 
       <Header active="/" solid />
+
+      <main>
 
       <style jsx global>{`
         @keyframes fadeUp {
@@ -795,6 +798,7 @@ export default function FormazioneObbligatoria() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </>
   );

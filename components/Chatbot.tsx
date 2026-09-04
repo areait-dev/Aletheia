@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
@@ -561,12 +562,14 @@ export default function Chatbot() {
         } as CSSProperties}
       >
         <div className="chatbot-icon-size" style={{ position: 'relative' }}>
-          <img
+          <Image
             src="/images/logo/pittogramma-white.png"
             alt=""
             aria-hidden="true"
+            fill
+            sizes="26px"
             className={`chatbot-toggle-mark${open ? ' is-open' : ''}${hasOpenedOnce ? ' no-breathe' : ''}`}
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }}
+            style={{ objectFit: 'contain' }}
           />
           <i
             className={`fas fa-times chatbot-toggle-close${open ? ' is-open' : ''}`}

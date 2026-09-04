@@ -198,6 +198,8 @@ export default function ChiSiamo() {
 
       <Header active="/chi-siamo" />
 
+      <main>
+
       <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(6px); }
@@ -612,6 +614,7 @@ export default function ChiSiamo() {
       </section>
 
       {/* FOOTER */}
+      </main>
       <Footer />
     </>
   );

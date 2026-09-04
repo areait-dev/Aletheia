@@ -194,6 +194,8 @@ export default function FormazioneECM() {
 
       <Header active="/" solid />
 
+      <main>
+
       <style jsx global>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -465,6 +467,7 @@ export default function FormazioneECM() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </>
   );

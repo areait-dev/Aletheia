@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -74,12 +75,13 @@ function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt 
         boxShadow: hovered ? '0 20px 48px rgba(0,0,0,0.22)' : '0 4px 18px rgba(0,0,0,0.1)',
       }}
     >
-      <img
+      <Image
         src={image}
         alt={imageAlt}
-        loading="lazy"
+        fill
+        sizes="(max-width: 768px) 100vw, 500px"
         style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+          objectFit: 'cover',
           transform: hovered ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.5s ease',
         }}
       />
@@ -126,6 +128,8 @@ export default function FormazioneFinanziataSicilia() {
       </Head>
 
       <Header active="/" solid />
+
+      <main>
 
       <style jsx>{`
         @keyframes fadeUp {
@@ -313,6 +317,7 @@ export default function FormazioneFinanziataSicilia() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </>
   );

@@ -177,6 +177,8 @@ export default function FormazioneProfessionaleSpecialistica() {
 
       <Header active="/" solid />
 
+      <main>
+
       <style jsx global>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -306,6 +308,7 @@ export default function FormazioneProfessionaleSpecialistica() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </>
   );

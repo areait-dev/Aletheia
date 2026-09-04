@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -181,9 +182,9 @@ function RelatedCardSmall({ article }) {
       onMouseLeave={() => setHovered(false)}
       className={hovered ? 'bg-[#008C95]/10 dark:bg-gray-700' : ''}
       style={{ display: 'flex', gap: '0.75rem', textDecoration: 'none', padding: '0.75rem', borderRadius: '0.75rem', transition: 'background 0.2s' }}>
-      <div className="bg-slate-200 dark:bg-gray-700" style={{ flexShrink: 0, width: '72px', height: '54px', borderRadius: '0.5rem', overflow: 'hidden' }}>
-        <img src={article.image} alt={article.title} loading="lazy"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+      <div className="bg-slate-200 dark:bg-gray-700" style={{ flexShrink: 0, width: '72px', height: '54px', borderRadius: '0.5rem', overflow: 'hidden', position: 'relative' }}>
+        <Image src={article.image} alt={article.title} fill sizes="72px"
+          style={{ objectFit: 'cover' }}
           onError={(e) => { e.currentTarget.style.display = 'none'; }} />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
@@ -207,8 +208,8 @@ function RelatedCardLarge({ article }) {
       className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
       style={{ display: 'flex', flexDirection: 'column', borderRadius: '1rem', overflow: 'hidden', textDecoration: 'none', transform: hovered ? 'translateY(-4px)' : 'translateY(0)', boxShadow: hovered ? '0 12px 32px rgba(0,0,0,0.1)' : '0 2px 8px rgba(0,0,0,0.04)', transition: 'all 0.25s ease' }}>
       <div className="bg-[#008C95]/10 dark:bg-gray-700" style={{ position: 'relative', paddingTop: '56.25%', overflow: 'hidden' }}>
-        <img src={article.image} alt={article.title} loading="lazy"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: hovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.4s ease' }}
+        <Image src={article.image} alt={article.title} fill sizes="(max-width: 768px) 100vw, 340px"
+          style={{ objectFit: 'cover', transform: hovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.4s ease' }}
           onError={(e) => { e.currentTarget.style.display = 'none'; }} />
       </div>
       <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
@@ -388,11 +389,13 @@ export default function ArticlePage({ article, related }) {
             <main>
               {/* Immagine articolo - allineata esattamente alla colonna di testo */}
               {article.image && (
-                <div style={{ marginBottom: '2rem' }}>
-                  <img
+                <div style={{ marginBottom: '2rem', position: 'relative', width: '100%', aspectRatio: '16 / 9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }}>
+                  <Image
                     src={article.image}
                     alt={article.title}
-                    style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: '16px', display: 'block', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 700px"
+                    style={{ objectFit: 'cover' }}
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
                 </div>

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
@@ -131,6 +132,8 @@ export default function Checkout() {
 
       <Header active="/checkout" solid />
 
+      <main>
+
       {/* Banner modalità demo: questa pagina è raggiungibile pubblicamente e non ha
           alcun gateway di pagamento reale collegato — lo segnaliamo esplicitamente
           all'utente prima che inserisca dati di una carta. */}
@@ -201,9 +204,9 @@ export default function Checkout() {
                   <div key={item.id} style={{ display: 'flex', gap: '0.75rem', padding: '0.75rem 0', borderBottom: '1px solid #F3F4F6', alignItems: 'flex-start' }}>
 
                     {/* Thumbnail */}
-                    <div style={{ width: '64px', height: '64px', borderRadius: '0.5rem', overflow: 'hidden', flexShrink: 0, background: '#F0FDFA' }}>
+                    <div style={{ width: '64px', height: '64px', borderRadius: '0.5rem', overflow: 'hidden', flexShrink: 0, background: '#F0FDFA', position: 'relative' }}>
                       {item.image ? (
-                        <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <Image src={item.image} alt={item.title} fill sizes="64px" style={{ objectFit: 'cover' }} />
                       ) : (
                         <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #008C95, #10B981)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '1.25rem' }}>
                           📚
@@ -391,6 +394,7 @@ export default function Checkout() {
         </div>
       </div>
 
+      </main>
       <Footer />
     </>
   );

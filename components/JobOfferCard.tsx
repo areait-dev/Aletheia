@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface Offerta {
   titolo: string;
@@ -54,13 +55,13 @@ export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
       }}
     >
       {/* ── Background image ── */}
-      <img
+      <Image
         src={offerta.image || 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80'}
         alt=""
         aria-hidden="true"
+        fill
+        sizes="(max-width: 768px) 100vw, 340px"
         style={{
-          position: 'absolute', inset: 0,
-          width: '100%', height: '100%',
           objectFit: 'cover',
           transition: 'transform 0.5s ease',
           transform: hovered ? 'scale(1.05)' : 'scale(1)',
@@ -93,9 +94,11 @@ export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'auto' }}>
           {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-            <img
+            <Image
               src="/logo.png"
               alt="Alètheia APL"
+              width={56}
+              height={36}
               style={{
                 height: '36px',
                 width: 'auto',

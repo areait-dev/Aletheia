@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Image from 'next/image';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CoursePricingSidebar from '../../components/CoursePricingSidebar';
@@ -1468,6 +1469,7 @@ export default function CourseDetail() {
 
       <Header active="/all-courses" solid />
 
+      <main>
       {/* LAYOUT A DUE COLONNE: colonna sinistra (tabs) 70-75% + sidebar destra (prezzo) 25-30%, sticky su
           desktop. Su mobile/tablet il box prezzo passa a larghezza intera e si posiziona subito sopra le
           tab (grid-template-areas "price" "tabs"), stessa struttura .container di tutte le pagine corso
@@ -1849,11 +1851,12 @@ export default function CourseDetail() {
                 >
                   <div className="relative w-full overflow-hidden" style={{ height: '160px' }}>
                     {c.image ? (
-                      <img
+                      <Image
                         src={c.image}
                         alt={c.titolo}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 300px"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
                       /* Placeholder senza immagine: gradiente teal/verde petrolio coerente con la
@@ -1880,6 +1883,7 @@ export default function CourseDetail() {
           </div>
         </section>
       )}
+      </main>
 
       <Footer />
     </>

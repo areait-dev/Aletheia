@@ -50,6 +50,8 @@ export default function FondiInterprofessionali() {
 
       <Header active="/" solid />
 
+      <main>
+
       <style jsx>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -323,6 +325,7 @@ export default function FondiInterprofessionali() {
 
       <FormAzienda />
 
+      </main>
       <Footer />
     </>
   );

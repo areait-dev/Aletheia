@@ -41,16 +41,13 @@ function NewsCard({ news }) {
       {/* Immagine */}
       <div style={{ position: 'relative', paddingTop: '56.25%', background: '#F0FDFA', overflow: 'hidden' }}>
         {!imgError ? (
-          <img
+          <Image
             src={news.image}
             alt={news.title}
-            loading="lazy"
+            fill
+            sizes="(max-width: 768px) 100vw, 380px"
             onError={() => setImgError(true)}
-            style={{
-              position: 'absolute', inset: 0,
-              width: '100%', height: '100%',
-              objectFit: 'cover', display: 'block',
-            }}
+            style={{ objectFit: 'cover' }}
           />
         ) : (
           <div style={{
@@ -157,6 +154,8 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
       </Head>
 
       <Header active="/agenzia-per-il-lavoro" />
+
+      <main>
 
       <style jsx>{`
         @keyframes fadeUp {
@@ -1011,6 +1010,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
       </section>
 
       {/* ── FOOTER ───────────────────────────────────────────── */}
+      </main>
       <Footer />
     </>
   );

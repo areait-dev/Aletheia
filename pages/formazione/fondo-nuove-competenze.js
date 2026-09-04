@@ -94,6 +94,8 @@ export default function FondoNuoveCompetenze() {
 
       <Header active="/" solid />
 
+      <main>
+
       <style jsx>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -428,6 +430,7 @@ export default function FondoNuoveCompetenze() {
 
       <FormAzienda />
 
+      </main>
       <Footer />
     </>
   );

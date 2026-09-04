@@ -148,6 +148,8 @@ export default function Contatti() {
 
       <Header active="/contatti" />
 
+      <main>
+
       <style jsx>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -620,6 +622,7 @@ export default function Contatti() {
           </div>
         </div>
       </section>
+      </main>
       <Footer />
     </>
   );

@@ -52,11 +52,12 @@ function CategoriaCard({ href, badge, badgeColor, title, description, image, ima
       style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
     >
       {/* Immagine di sfondo */}
-      <img
+      <Image
         src={image}
         alt={imageAlt}
-        loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        fill
+        sizes="(max-width: 768px) 100vw, 420px"
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/10" />
 
@@ -247,12 +248,11 @@ function CorsiCalendarTabs({ giorni }) {
           >
             {/* Immagine di anteprima */}
             <div className="w-full md:w-32 h-24 rounded-xl overflow-hidden relative shrink-0">
-              <img
+              <Image
                 src={`/images/courses/${(corso.id % 3) + 1}.jpg`}
                 alt={corso.titolo}
-                loading="lazy"
-                width="128"
-                height="96"
+                width={128}
+                height={96}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.currentTarget.src = CATEGORIA_THUMB[corso.categoria] || CATEGORIA_THUMB['professionale'];
@@ -417,6 +417,8 @@ export default function Home() {
       </Head>
 
       <Header active="/" />
+
+      <main>
 
       {/* ── 1 · HERO ─────────────────────────────────────── */}
       <section className="hero" style={{ overflow: 'visible' }}>
@@ -659,6 +661,12 @@ export default function Home() {
                 aria-hidden={i >= gruppoLoghi.length * 3}
                 className="flex items-center justify-center h-16 mx-8 shrink-0"
               >
+                {/* <img> nativo intenzionale: il marquee ripete questi loghi 6x (36 istanze
+                    simultanee) per il loop continuo - convertirli a next/image moltiplica
+                    l'overhead client (observer/mount per istanza) e degrada il TBT sotto
+                    CPU throttled, misurato con un calo di Performance mobile (82->72). I
+                    file sono già piccoli (PNG/SVG del gruppo), quindi l'ottimizzazione di
+                    next/image non porta beneficio reale qui. */}
                 <img
                   src={logo.src}
                   alt={logo.name}
@@ -733,11 +741,12 @@ export default function Home() {
               >
                 {/* Immagine 16/9 */}
                 <div className="relative aspect-video bg-slate-200 dark:bg-gray-700 overflow-hidden">
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 380px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
                 </div>
@@ -836,6 +845,7 @@ export default function Home() {
       </section>
 
       {/* ── 5 · FOOTER ───────────────────────────────────── */}
+      </main>
       <Footer />
     </>
   );

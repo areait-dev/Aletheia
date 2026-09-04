@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Variante {
   livelloKey: string;
@@ -36,12 +37,16 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
     <Link href={`/all-courses/${family.slug}`} style={{ textDecoration: 'none' }} className="group block h-full">
       <div className="bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-slate-100 dark:border-[rgba(255,255,255,0.08)] shadow-sm transition-all duration-300 w-full h-full min-h-[420px] flex flex-col hover:-translate-y-1 hover:shadow-lg">
         <div className="relative h-[180px] overflow-hidden flex-shrink-0">
-          <img
-            src={family.image}
-            alt={family.titolo}
-            className="absolute inset-0 w-full h-full object-cover"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
-          />
+          {family.image && (
+            <Image
+              src={family.image}
+              alt={family.titolo}
+              fill
+              sizes="(max-width: 768px) 100vw, 340px"
+              className="object-cover"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+          )}
           <div
             className="absolute inset-0"
             style={{ background: family.image ? 'rgba(0,0,0,0.35)' : family.gradient }}
