@@ -64,7 +64,9 @@ function MyApp({ Component, pageProps }) {
       `}} />
       <ThemeProvider>
         <CartProvider>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+          {/* Font Awesome caricato non-bloccante via _document.js (preload+swap):
+              qui in _app.js sarebbe HTML statico ma un <link> in mezzo al JSX del body
+              resta comunque render-blocking per il browser, oltre a finire fuori posto. */}
           {/* Viga caricato via _document.js (evita il fetch a build-time di next/font) */}
           {/* La variabile --font-viga viene resa disponibile a tutta l'app */}
           <div style={{ '--font-viga': "'Viga', sans-serif", display: 'contents' }}>
