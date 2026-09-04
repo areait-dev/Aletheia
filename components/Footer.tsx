@@ -61,8 +61,8 @@ export default function Footer() {
             <div className="flex flex-col gap-1 mt-6 text-xs text-slate-600 dark:text-slate-500">
               <a href="/privacy-cookie" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Privacy e Cookie</a>
               <a href="/reclami-proposte" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Reclami e Proposte</a>
-              <a href="/aiuti-di-stato-2023" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2023</a>
-              <a href="/aiuti-di-stato-2024" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2024</a>
+              <a href="/aiuti-di-stato/2023" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2023</a>
+              <a href="/aiuti-di-stato/2024" className="py-1 hover:text-slate-800 dark:hover:text-slate-300 transition-colors">Obblighi di pubblicazione per i beneficiari di contributi 2024</a>
             </div>
           </div>
 

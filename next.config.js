@@ -55,6 +55,19 @@ function buildCourseRedirects() {
   return redirects;
 }
 
+/**
+ * Redirect 301 dalle vecchie pagine isolate /aiuti-di-stato-2023 e /aiuti-di-stato-2024
+ * (migrate al template dinamico pages/aiuti-di-stato/[anno].js) verso i nuovi percorsi,
+ * per non rompere link già indicizzati o condivisi.
+ */
+function buildAiutiDiStatoRedirects() {
+  return ['2023', '2024'].map((anno) => ({
+    source: `/aiuti-di-stato-${anno}`,
+    destination: `/aiuti-di-stato/${anno}`,
+    permanent: true,
+  }));
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -62,7 +75,7 @@ const nextConfig = {
     domains: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com'],
   },
   async redirects() {
-    return buildCourseRedirects();
+    return [...buildCourseRedirects(), ...buildAiutiDiStatoRedirects()];
   },
 };
 
