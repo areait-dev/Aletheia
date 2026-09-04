@@ -139,7 +139,9 @@ export default function Checkout() {
           all'utente prima che inserisca dati di una carta. */}
       <div
         className="bg-amber-50 dark:bg-amber-900/20 border-b border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200"
-        style={{ paddingTop: '5.5rem', paddingBottom: '0.85rem', paddingLeft: '1.5rem', paddingRight: '1.5rem', textAlign: 'center' }}
+        /* paddingTop copre l'header fisso (site-header: 2 * 0.75rem di padding + 80px di logo = 6.5rem)
+           più un piccolo margine di respiro, altrimenti la prima riga di testo finisce dietro l'header. */
+        style={{ paddingTop: '6.75rem', paddingBottom: '0.85rem', paddingLeft: '1.5rem', paddingRight: '1.5rem', textAlign: 'center' }}
       >
         <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
           <i className="fas fa-triangle-exclamation" aria-hidden="true"></i>

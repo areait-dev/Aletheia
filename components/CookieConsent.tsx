@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const COOKIE_CONSENT_KEY = 'cookie-consent';
 
@@ -21,10 +21,31 @@ export function getCookieConsent(): string | null {
  */
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!getCookieConsent()) setVisible(true);
   }, []);
+
+  // Comunica l'altezza reale del banner (varia con il wrap del testo su schermi stretti)
+  // al chatbot tramite una CSS custom property, così il FAB si sposta sopra il banner
+  // invece di restarci nascosto dietro.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (!visible || !bannerRef.current) {
+      root.style.setProperty('--cookie-banner-height', '0px');
+      return;
+    }
+    const el = bannerRef.current;
+    const update = () => root.style.setProperty('--cookie-banner-height', `${el.offsetHeight}px`);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      root.style.setProperty('--cookie-banner-height', '0px');
+    };
+  }, [visible]);
 
   const choose = (value: 'accepted' | 'rejected') => {
     try {
@@ -40,6 +61,7 @@ export default function CookieConsent() {
 
   return (
     <div
+      ref={bannerRef}
       role="dialog"
       aria-live="polite"
       aria-label="Consenso cookie"

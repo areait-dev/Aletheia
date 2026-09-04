@@ -187,20 +187,24 @@ export default function Chatbot() {
       <style jsx>{`
         .chatbot-root {
           position: fixed;
-          bottom: 2rem;
+          /* Il banner cookie (CookieConsent.tsx) alza --cookie-banner-height alla propria
+             altezza reale mentre è visibile, così il FAB resta sempre sopra e non finisce
+             nascosto dietro il banner su nessuna dimensione di schermo. */
+          bottom: calc(2rem + var(--cookie-banner-height, 0px));
           right: 2rem;
           z-index: 9999;
           display: flex;
           flex-direction: column;
           align-items: flex-end;
           pointer-events: none;
+          transition: bottom 0.25s ease;
         }
         /* Su tablet/mobile il bottone flottante ha più probabilità di finire sopra
            contenuti di pagina (card, tab, CTA) proprio nel primo schermo utile:
            lo rimpiccioliamo e lo avviciniamo all'angolo per ridurre l'area coperta. */
         @media (max-width: 1024px) {
           .chatbot-root {
-            bottom: 0.75rem;
+            bottom: calc(0.75rem + var(--cookie-banner-height, 0px));
             right: 0.75rem;
           }
         }
