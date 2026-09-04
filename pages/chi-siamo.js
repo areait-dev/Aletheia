@@ -60,7 +60,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
         onClick={() => setShowModal(true)}
         className="h-full bg-white dark:bg-dark-card rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-2 hover:shadow-lg flex flex-col items-center group"
       >
-        <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-primary dark:text-[#10B981] transition-colors duration-300 group-hover:bg-[#008C95]/15 dark:group-hover:bg-[#10B981]/20">
+        <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-[#006066] dark:text-[#10B981] transition-colors duration-300 group-hover:bg-[#008C95]/15 dark:group-hover:bg-[#10B981]/20">
           <i className={icon}></i>
         </div>
         <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">{title}</h3>
@@ -88,7 +88,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
               <i className="fas fa-times"></i>
             </button>
 
-            <div className="w-20 h-20 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl text-primary dark:text-[#10B981]">
+            <div className="w-20 h-20 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl text-[#006066] dark:text-[#10B981]">
               <i className={icon}></i>
             </div>
 
@@ -251,7 +251,7 @@ export default function ChiSiamo() {
         <div className="py-20 px-6 sm:px-12 max-w-7xl mx-auto">
           {/* Testo a tutta larghezza */}
           <div>
-            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
               La nostra storia
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
@@ -347,7 +347,7 @@ export default function ChiSiamo() {
       {/* I NOSTRI PUNTI DI FORZA */}
       <section className="bg-slate-50 dark:bg-dark-bg py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-12">
-          <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+          <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
             Perché scegliere Alètheia
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -397,7 +397,7 @@ export default function ChiSiamo() {
       <section className="bg-light dark:bg-dark-bg">
         <div className="max-w-7xl mx-auto py-20 px-6 sm:px-12">
           <div className="mb-16">
-            <span className="bg-[#008C95]/10 text-primary dark:bg-[#004D52]/50 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="bg-[#008C95]/10 text-[#006066] dark:bg-[#004D52]/50 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
               Le nostre Expertise
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight uppercase">
@@ -552,7 +552,7 @@ export default function ChiSiamo() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch py-20 px-6 sm:px-12 max-w-7xl mx-auto">
           {/* Colonna sede */}
           <Reveal>
-            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
               La nostra sede
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">

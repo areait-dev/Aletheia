@@ -138,7 +138,7 @@ export default function CalendarioCorsi() {
                   <button
                     onClick={() => setCategoriaFiltro('')}
                     className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      categoriaFiltro === '' ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                      categoriaFiltro === '' ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                     }`}
                   >
                     Tutte le categorie
@@ -148,7 +148,7 @@ export default function CalendarioCorsi() {
                       key={cat.key}
                       onClick={() => setCategoriaFiltro(cat.key)}
                       className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        categoriaFiltro === cat.key ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                        categoriaFiltro === cat.key ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                       }`}
                     >
                       <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: categoryColor[cat.key], flexShrink: 0 }} />

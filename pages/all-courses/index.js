@@ -259,7 +259,7 @@ export default function AllCourses() {
               <li
                 onClick={resetFilters}
                 className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                  selectedCategory === '' && selectedSub === '' && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                  selectedCategory === '' && selectedSub === '' && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -291,7 +291,7 @@ export default function AllCourses() {
                   key={key}
                   onClick={() => selectCategory(key)}
                   className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                    selectedCategory === key && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-primary dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                    selectedCategory === key && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                   }`}
                 >
                   <span className="flex items-center gap-2">

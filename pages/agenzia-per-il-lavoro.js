@@ -678,7 +678,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 </span>
                 {!jobsLoading && jobs.length > 0 && (
                   <span
-                    className="bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#008C95] dark:text-[#10B981]"
+                    className="bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]"
                     style={{
                       fontSize: '0.68rem', fontWeight: 800,
                       padding: '0.15rem 0.55rem', borderRadius: '999px',

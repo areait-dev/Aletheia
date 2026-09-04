@@ -220,6 +220,8 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
                 src={`/images/courses/${(c.id % 3) + 1}.jpg`}
                 alt={c.titolo}
                 loading="lazy"
+                width="400"
+                height="144"
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.currentTarget.src = 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&q=80';

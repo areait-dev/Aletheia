@@ -251,6 +251,8 @@ function CorsiCalendarTabs({ giorni }) {
                 src={`/images/courses/${(corso.id % 3) + 1}.jpg`}
                 alt={corso.titolo}
                 loading="lazy"
+                width="128"
+                height="96"
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.currentTarget.src = CATEGORIA_THUMB[corso.categoria] || CATEGORIA_THUMB['professionale'];
@@ -377,7 +379,7 @@ function HeroSearch() {
                 }}
                 className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   selected === cat.value
-                    ? 'bg-[#008C95]/10 text-[#008C95] dark:text-[#10B981]'
+                    ? 'bg-[#008C95]/10 text-[#006066] dark:text-[#10B981]' /* WCAG AA 4.5:1 su sfondo tinta */
                     : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5'
                 }`}
               >
@@ -464,7 +466,7 @@ export default function Home() {
       <Reveal as="section" className="pt-16 pb-24 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
               Calendario corsi
             </span>
             <h2 id="calendario-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -495,7 +497,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <Reveal className="text-center mb-12">
-            <span className="inline-block bg-[#008C95]/10 text-[#008C95] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-[#008C95]/10 text-[#006066] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
               I nostri percorsi formativi
             </span>
             <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">
@@ -552,7 +554,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
-            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
               Cosa facciamo
             </span>
             <h2 id="cosa-facciamo-heading" className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
@@ -661,6 +663,8 @@ export default function Home() {
                   src={logo.src}
                   alt={logo.name}
                   loading="lazy"
+                  width="160"
+                  height="40"
                   className="max-h-10 w-auto object-contain shrink-0 brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const el = e.currentTarget;
@@ -701,7 +705,7 @@ export default function Home() {
           {/* Header sezione */}
           <Reveal className="flex items-end justify-between mb-10">
             <div>
-              <span className="inline-block bg-[#008C95]/10 text-[#008C95] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block bg-[#008C95]/10 text-[#006066] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
                 News
               </span>
               <h2 id="news-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
@@ -764,7 +768,7 @@ export default function Home() {
       <section className="py-24 bg-light dark:bg-dark-bg" aria-labelledby="clienti-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-primary dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
               Clienti
             </span>
             <h2 id="clienti-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">

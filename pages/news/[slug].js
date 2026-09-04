@@ -422,7 +422,7 @@ export default function ArticlePage({ article, related }) {
                 <div className="border-slate-100 dark:border-[rgba(255,255,255,0.08)]" style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid', display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em', marginRight: '0.25rem' }}>Tag:</span>
                   {tags.map((tag) => (
-                    <span key={tag} className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30 text-primary dark:text-[#10B981]" style={{ padding: '0.3rem 0.875rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span key={tag} className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30 text-[#006066] dark:text-[#10B981]" style={{ padding: '0.3rem 0.875rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
                       {tag}
                     </span>
                   ))}
