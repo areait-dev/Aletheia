@@ -250,38 +250,6 @@ export default function ChiSiamo() {
         </div>
       </section>
 
-      {/* ALÈTHEIA APL - ECOSISTEMA PER IL LAVORO */}
-      <section className="bg-white dark:bg-dark-card">
-        <div className="py-20 px-6 sm:px-12 max-w-5xl mx-auto">
-          <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
-            Alètheia APL
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
-            Non solo un&rsquo;agenzia. Un ecosistema per il lavoro.
-          </h2>
-          <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed mb-4">
-            Alètheia è Agenzia per il Lavoro autorizzata dalla Regione Siciliana e iscritta
-            all&rsquo;Albo delle Agenzie per il Lavoro del Ministero del Lavoro e delle Politiche
-            Sociali. Accreditata per i servizi per il lavoro generali e obbligatori (SGO) e per i
-            servizi specialistici facoltativi (SSF).
-          </p>
-          <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed mb-4">
-            Quello che ci distingue è semplice ma raro: siamo anche ente di formazione
-            accreditato. Quando un candidato ha un gap di competenze, non ci limitiamo a
-            segnalarlo, lo colmiamo. Quando un&rsquo;azienda trova il profilo giusto ma ha
-            bisogno di formarlo, siamo già lì. Formazione e lavoro nella stessa rete, senza
-            passaggi di mano e senza perdita di tempo.
-          </p>
-          <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed">
-            Non siamo un portale annunci. Siamo un&rsquo;agenzia che conosce il mercato del
-            lavoro locale, orienta le persone e le accompagna dal primo contatto fino
-            all&rsquo;inserimento, mettendo la professionalità dei propri consulenti al servizio
-            di un unico obiettivo: trasformare ogni incontro tra persona e impresa in
-            un&rsquo;opportunità concreta.
-          </p>
-        </div>
-      </section>
-
       {/* LA NOSTRA STORIA */}
       <section className="bg-light dark:bg-dark-bg">
         <div className="py-20 px-6 sm:px-12 max-w-7xl mx-auto">
