@@ -292,11 +292,7 @@ export default function FormazioneECM() {
             {' '}per professionisti sanitari
           </h1>
 
-          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '960px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Formazione continua accreditata per medici, infermieri, fisioterapisti e operatori sociosanitari. Ottieni i Crediti ECM.
-          </p>
-
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
             <a href="#corsi" className="cta-btn-primary-ecm">Vedi i corsi</a>
             <a href="/contatti" className="cta-btn-outline-ecm">Contattaci</a>
           </div>
@@ -421,7 +417,7 @@ export default function FormazioneECM() {
                   Provider ECM accreditato
                 </h4>
                 <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: '0 0 1.75rem' }}>
-                  Vuoi saperne di più sui corsi ECM? Il nostro team è a disposizione per fornirti tutte le informazioni sui corsi in programma, le modalità disponibili e i crediti acquisibili in base al tuo profilo professionale.
+                  Il nostro team è a disposizione per fornirti tutte le informazioni sui corsi in programma, le modalità disponibili e i crediti acquisibili in base al tuo profilo professionale.
                 </p>
 
                 <div className="ecm-info-row">

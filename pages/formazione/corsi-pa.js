@@ -28,11 +28,11 @@ const aree = [
 ];
 
 const mepaElenco = [
-  'Iscrizione al MEPA',
-  'Gestione completa della documentazione amministrativa',
-  'Supporto nelle procedure di acquisto',
-  'Progettazione di percorsi personalizzati',
-  'Formazione in presenza, online o in modalità blended',
+  { icon: 'fas fa-file-contract', text: 'Iscrizione al MEPA' },
+  { icon: 'fas fa-file-lines', text: 'Gestione completa della documentazione amministrativa' },
+  { icon: 'fas fa-handshake', text: 'Supporto nelle procedure di acquisto' },
+  { icon: 'fas fa-sliders', text: 'Progettazione di percorsi personalizzati' },
+  { icon: 'fas fa-display', text: 'Formazione in presenza, online o in modalità blended' },
 ];
 
 const entiLoghi = [
@@ -309,8 +309,55 @@ export default function CorsiPA() {
         }
         .cta-btn-outline-pa:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
-        .partner-grid-pa { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; }
+        .partner-grid-pa { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: stretch; }
         @media (max-width: 900px) { .partner-grid-pa { grid-template-columns: 1fr; } }
+
+        /* Punti di forza: vero bento grid (prima card a piena larghezza, le altre due affiancate) */
+        .pa-strength-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: auto; padding-top: 1.75rem; }
+        @media (max-width: 640px) { .pa-strength-grid { grid-template-columns: 1fr; } }
+        .pa-strength-card {
+          display: flex; flex-direction: column; gap: 0.65rem;
+          padding: 1.25rem; border-radius: 1rem;
+          background: #fff; border: 1px solid #E2E8F0;
+          font-size: 0.85rem; font-weight: 600; line-height: 1.5; color: #334155;
+        }
+        .dark .pa-strength-card { background: #1f2937; border-color: rgba(255,255,255,0.08); color: #E2E8F0; }
+        .pa-strength-card.featured {
+          grid-column: 1 / -1;
+          flex-direction: row;
+          align-items: center;
+          gap: 1rem;
+          font-size: 0.95rem;
+        }
+        .pa-strength-card.featured i { font-size: 1.4rem; flex-shrink: 0; }
+        @media (max-width: 640px) { .pa-strength-card.featured { grid-column: 1; } }
+
+        /* Card MEPA istituzionale: nessun bordo verde, sfondo premium tenue, ombra impercettibile */
+        .pa-mepa-card {
+          background: #F8FAFC; border-radius: 24px; overflow: hidden;
+          box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+        }
+        .dark .pa-mepa-card { background: #1f2937; box-shadow: none; }
+        .pa-mepa-item {
+          display: flex; align-items: flex-start; gap: 0.75rem;
+        }
+        .pa-mepa-item .pa-mepa-icon {
+          width: 32px; height: 32px; min-width: 32px; border-radius: 9px;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(0,140,149,0.08); color: #008C95;
+        }
+        .dark .pa-mepa-item .pa-mepa-icon { background: rgba(16,185,129,0.12); color: #6EE7B7; }
+        .pa-mepa-item span { font-size: 0.87rem; line-height: 1.6; color: #334155; padding-top: 0.4rem; }
+        .dark .pa-mepa-item span { color: #E2E8F0; }
+
+        .cta-btn-mepa {
+          display: flex; align-items: center; justify-content: center; gap: 0.55rem;
+          width: 100%; padding: 0.9rem 2rem; border-radius: 12px; box-sizing: border-box;
+          background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
+          font-weight: 700; font-size: 0.95rem; text-decoration: none;
+          transition: filter 0.2s ease, transform 0.2s ease; border: none; cursor: pointer; font-family: inherit;
+        }
+        .cta-btn-mepa:hover { filter: brightness(1.12); transform: translateY(-1px); }
 
         .aree-grid-pa { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
         @media (max-width: 1100px) { .aree-grid-pa { grid-template-columns: repeat(2, 1fr); } }
@@ -322,8 +369,9 @@ export default function CorsiPA() {
         .pa-form-row { grid-template-columns: 1fr 1fr; }
         @media (max-width: 560px) { .pa-form-row { grid-template-columns: 1fr !important; } }
 
-        .pa-contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 2rem; align-items: stretch; }
-        @media (max-width: 900px) { .pa-contact-grid { grid-template-columns: 1fr; } }
+        /* Banner + form: due colonne affiancate su desktop (5/12 testo, 7/12 form), 1 colonna su mobile */
+        .pa-contact-grid-2col { display: grid; grid-template-columns: 5fr 7fr; gap: 3rem; align-items: start; }
+        @media (max-width: 900px) { .pa-contact-grid-2col { grid-template-columns: 1fr; gap: 2rem; } }
 
         /* Marquee loghi enti */
         .marquee-mask-pa {
@@ -353,13 +401,8 @@ export default function CorsiPA() {
             </span>
           </h1>
 
-          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '960px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Percorsi su misura per Comuni, enti locali e aziende pubbliche, attivabili tramite MEPA. Alètheia affianca le pubbliche amministrazioni con programmi formativi progettati sulle reali esigenze degli uffici, nel rispetto della normativa vigente e degli obiettivi di modernizzazione della PA. L&apos;iscrizione al MEPA semplifica le procedure di affidamento dei servizi formativi.
-          </p>
-
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
             <a href="#contatti" className="cta-btn-primary-pa">Richiedi informazioni</a>
-            <a href="/contatti" className="cta-btn-outline-pa">Contattaci</a>
           </div>
         </div>
       </section>
@@ -368,14 +411,6 @@ export default function CorsiPA() {
       <section className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-            {/* Blocco principale: Iscrizione al MEPA - larghezza intera, sfondo di accento */}
-            <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-[rgba(0,140,149,0.07)] dark:bg-[rgba(0,140,149,0.16)] border border-[#008C95]/30 dark:border-[#008C95]/40 rounded-3xl p-6 md:p-8 flex flex-col gap-2">
-              <h3 className="text-slate-900 dark:text-white text-lg md:text-xl font-black mb-1">Iscrizione al MEPA</h3>
-              <p className="text-slate-600 dark:text-gray-300 text-sm md:text-base leading-relaxed m-0">
-                Affidamento dei servizi tramite piattaforma ufficiale
-              </p>
-            </div>
-
             {/* Blocchi numerici: contatori dominanti */}
             <div className="col-span-1 bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-6 flex flex-col gap-2">
               <span className="text-4xl lg:text-5xl font-black text-[#008C95] leading-none">20+</span>
@@ -408,44 +443,67 @@ export default function CorsiPA() {
         <div className="container">
           <div className="partner-grid-pa">
             {/* Blocco esperienza */}
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
               <span className="section-badge-pa">Esperienza al servizio delle Istituzioni</span>
               <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
                 Il partner che conosce le esigenze della PA
               </h2>
               <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: 0 }}>
-                Da oltre vent&apos;anni Alètheia affianca enti pubblici, amministrazioni locali, aziende partecipate e organismi pubblici nella progettazione e realizzazione di percorsi formativi. La differenza sta nella conoscenza del contesto: comprendiamo i processi della Pubblica Amministrazione, le esigenze organizzative degli uffici, le modalità di affidamento e gli obblighi normativi che accompagnano la formazione del personale pubblico. Questo ci permette di proporre percorsi non solo qualificati, ma anche coerenti con le procedure e i vincoli dell&apos;ente. Il nostro curriculum comprende collaborazioni con amministrazioni comunali, enti territoriali e aziende pubbliche per attività di formazione, aggiornamento professionale, progettazione finanziata e sviluppo delle competenze. Ogni percorso è costruito sulle reali esigenze dell&apos;ente, con docenti qualificati, contenuti aggiornati e modalità di erogazione flessibili.
+                Da oltre vent&apos;anni Alètheia affianca enti pubblici, amministrazioni locali, aziende partecipate e organismi pubblici nella progettazione e realizzazione di percorsi formativi. La differenza sta nella conoscenza del contesto: comprendiamo i processi della Pubblica Amministrazione, le esigenze organizzative degli uffici, le modalità di affidamento e gli obblighi normativi che accompagnano la formazione del personale pubblico. Questo ci permette di proporre percorsi non solo qualificati, ma anche coerenti con le procedure e i vincoli dell&apos;ente. Svolgiamo attività di formazione, aggiornamento professionale, progettazione finanziata e sviluppo delle competenze.
               </p>
+
+              <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : '#008C95', margin: '1.5rem 0 0.85rem' }}>
+                Il nostro curriculum comprende collaborazioni con
+              </span>
+              <ul style={{ listStyle: 'none', margin: '0 0 1.5rem', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                {['Amministrazioni comunali', 'Enti territoriali', 'Aziende pubbliche'].map((voce) => (
+                  <li key={voce} className="text-slate-700 dark:text-gray-200" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontSize: '0.87rem', lineHeight: 1.6 }}>
+                    <i className="fas fa-circle-check" style={{ color: '#008C95', fontSize: '0.85rem', marginTop: '0.2rem', flexShrink: 0 }}></i>
+                    {voce}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pa-strength-grid">
+                {[
+                  { icon: 'fas fa-bullseye', text: 'Ogni percorso è costruito sulle reali esigenze dell\'ente', featured: true },
+                  { icon: 'fas fa-graduation-cap', text: 'Docenti qualificati' },
+                  { icon: 'fas fa-sliders', text: 'Modalità di erogazione flessibili' },
+                ].map((item) => (
+                  <div key={item.text} className={`pa-strength-card${item.featured ? ' featured' : ''}`}>
+                    <i className={item.icon} style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.1rem' }}></i>
+                    <span>{item.text}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Blocco MEPA */}
-            <div
-              className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
-              style={{ borderRadius: '1.25rem', overflow: 'hidden' }}
-            >
-              <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)' }} />
+            <div className="pa-mepa-card">
               <div style={{ padding: '2rem' }}>
                 <span className="section-badge-pa">Affidamento semplice e conforme</span>
-                <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.5rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
+                <h2 style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.5rem)', fontWeight: 900, color: isDark ? '#F8FAFC' : '#0f172a', marginBottom: '1rem', lineHeight: 1.25 }}>
                   Alètheia è iscritta al MEPA
                 </h2>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+                <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: isDark ? '#CBD5E1' : '#576574', marginBottom: '1.5rem' }}>
                   Alètheia è presente sul Mercato Elettronico della Pubblica Amministrazione (MEPA), la piattaforma ufficiale di acquisto della Pubblica Amministrazione. Gli enti possono così affidare i servizi formativi tramite una procedura ufficiale, riducendo i tempi amministrativi e semplificando l&apos;iter di acquisto, nel pieno rispetto della normativa sugli appalti.
                 </p>
 
                 <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : '#008C95', marginBottom: '0.85rem' }}>
                   Con Alètheia puoi contare su
                 </span>
-                <ul style={{ listStyle: 'none', margin: '0 0 1.75rem', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.75rem' }}>
                   {mepaElenco.map((voce) => (
-                    <li key={voce} className="text-slate-700 dark:text-gray-200" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontSize: '0.87rem', lineHeight: 1.6 }}>
-                      <i className="fas fa-circle-check" style={{ color: '#008C95', fontSize: '0.85rem', marginTop: '0.2rem', flexShrink: 0 }}></i>
-                      {voce}
-                    </li>
+                    <div key={voce.text} className="pa-mepa-item">
+                      <span className="pa-mepa-icon" aria-hidden="true">
+                        <i className={voce.icon} style={{ fontSize: '0.85rem' }}></i>
+                      </span>
+                      <span>{voce.text}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
-                <a href="#contatti" className="cta-btn-primary-pa" style={{ width: '100%', justifyContent: 'center', boxSizing: 'border-box' }}>
+                <a href="#contatti" className="cta-btn-mepa">
                   Contattaci per ricevere supporto
                 </a>
               </div>
@@ -537,38 +595,18 @@ export default function CorsiPA() {
       {/* ══════════════ BANNER + FORM ISTITUZIONALE PA ══════════════ */}
       <section id="contatti" className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div style={{ marginBottom: '2.5rem', maxWidth: '820px' }}>
-            <span className="section-badge-pa">Parliamone</span>
-            <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
-              Vuoi un piano formativo per il tuo ente?
-            </h3>
-            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
-              Progettiamo insieme un percorso su misura, facilmente attivabile anche tramite MEPA, per accompagnare la crescita delle competenze e l&apos;innovazione della tua amministrazione.
-            </p>
-          </div>
+          <div className="pa-contact-grid-2col">
+            {/* Colonna sinistra: testo introduttivo */}
+            <div>
+              <span className="section-badge-pa">Parliamone</span>
+              <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
+                Vuoi un piano formativo per il tuo ente?
+              </h3>
+              <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
+                Progettiamo insieme un percorso su misura, facilmente attivabile anche tramite MEPA, per accompagnare la crescita delle competenze e l&apos;innovazione della tua amministrazione.
+              </p>
 
-          <div className="pa-contact-grid">
-            {/* Colonna informativa */}
-            <div
-              style={{
-                background: isDark ? 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' : '#fff',
-                border: isDark ? 'none' : '1px solid #E2E8F0',
-                borderRadius: '1.5rem', padding: '2.25rem', color: isDark ? '#fff' : '#0F172A', position: 'relative', overflow: 'hidden',
-                boxShadow: isDark ? 'none' : '0 4px 30px rgba(0,0,0,0.05)',
-              }}
-            >
-              <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: isDark ? 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(0,140,149,0.18) 0%, transparent 70%)' : 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(0,140,149,0.06) 0%, transparent 70%)' }} />
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '13px', background: isDark ? 'rgba(0,140,149,0.18)' : 'rgba(0,140,149,0.08)', border: isDark ? '1px solid rgba(0,140,149,0.35)' : '1px solid rgba(0,140,149,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
-                  <i className="fas fa-landmark" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.2rem' }}></i>
-                </div>
-                <h4 className="text-slate-900 dark:text-white" style={{ fontSize: '1.15rem', fontWeight: 800, margin: '0 0 0.6rem' }}>
-                  Ente accreditato Regione Siciliana
-                </h4>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: '0 0 1.75rem' }}>
-                  Rispondiamo entro 24 ore lavorative con una proposta di piano formativo su misura per il tuo ente, attivabile anche tramite MEPA.
-                </p>
-
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem' }}>
                   <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="fas fa-phone" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
@@ -578,7 +616,7 @@ export default function CorsiPA() {
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>+39 0932 862613</span>
                   </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem', marginTop: '1.25rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem' }}>
                   <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="fas fa-envelope" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
                   </div>
@@ -588,9 +626,18 @@ export default function CorsiPA() {
                   </div>
                 </div>
               </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '1.75rem', paddingTop: '1.5rem', borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #E2E8F0' }}>
+                <i className="fas fa-landmark" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.85rem', fontWeight: 600 }}>Ente accreditato Regione Siciliana</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.75rem' }}>
+                <i className="fas fa-clock" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.85rem', fontWeight: 600 }}>Rispondiamo entro 24 ore lavorative</span>
+              </div>
             </div>
 
-            {/* Colonna form */}
+            {/* Colonna destra: form */}
             <div
               className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
               style={{ borderRadius: '1.5rem', overflow: 'hidden', boxShadow: '0 4px 30px rgba(0,0,0,0.05)' }}

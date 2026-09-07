@@ -444,26 +444,6 @@ export const coursesDetails = {
     curriculum: [{ week: 1, title: 'Moduli personalizzabili', hours: 0, lessons: ['Competenze digitali', 'Lingue', 'Management', 'Leadership', 'Comunicazione'] }],
     learningOutcomes: ['Aggiornare competenze', 'Crediti formativi', 'Crescita professionale', 'Opportunità carriera']
   },
-  'corsi-qualificati': {
-    title: 'Corsi qualificati e Certificazione competenze',
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&q=80',
-    category: 'Formazione Professionale',
-    duration: '100-500 ore',
-    modality: 'Aula + Stage',
-    price: '€ 1.500 - € 5.000',
-    level: 'Specialistico',
-    lessons: 'Varie',
-    students: '800+',
-    target: 'Professionisti',
-    overview: 'Percorsi accreditati Regione Siciliana per qualifiche professionali.',
-    curriculum: [
-      { week: 1, title: 'Teoria', hours: 60, lessons: ['Nozioni fondamentali', 'Approfondimenti', 'Casi pratici', 'Simulazioni'] },
-      { week: 2, title: 'Laboratori', hours: 80, lessons: ['Esercitazioni', 'Progetti', 'Gruppi', 'Feedback'] },
-      { week: 3, title: 'Stage', hours: 120, lessons: ['Inserimento', 'Attività', 'Tutoraggio', 'Valutazione'] },
-      { week: 4, title: 'Esame', hours: 40, lessons: ['Preparazione', 'Teoria', 'Pratica', 'Rilascio qualifica'] }
-    ],
-    learningOutcomes: ['Competenze professionali', 'Qualifica riconosciuta', 'Certificazione', 'Occupabilità']
-  },
   'corsi-pa': {
     title: 'Corsi per la PA',
     image: 'https://images.unsplash.com/photo-1568992688065-536aad8a12f6?w=400&q=80',
@@ -1780,12 +1760,14 @@ export default function CourseDetail() {
 
               /* CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
                  regione a regione, quindi niente prezzo in vetrina né carrello - solo "Richiedi
-                 preventivo", come CASO 5. */
+                 preventivo". A differenza del CASO 5, qui puntiamo al form in fondo a
+                 /formazione/obbligatoria (stesse 4 categorie: sicurezza lavoro, attrezzature,
+                 fitosanitario, alimentare) invece che alla pagina Contatti generica. */
               if (varianteCorrente.obbligatoria) {
                 return (
                   <CoursePricingSidebar
                     priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
-                    primaryHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                    primaryHref="/formazione/obbligatoria#form-contatto"
                     whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                   />
                 );

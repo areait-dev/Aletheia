@@ -28,7 +28,7 @@ const valori = [
     icon: 'fas fa-bullseye',
     title: 'Percorsi su misura',
     text: (
-      <>Soluzioni flessibili per <strong className="text-slate-900 dark:text-white font-bold">privati, aziende e Pubblica Amministrazione</strong>. Corsi in aula, online o direttamente presso il tuo ente.</>
+      <>Soluzioni flessibili per <strong className="text-slate-900 dark:text-white font-bold">privati e Pubblica Amministrazione</strong>. Corsi in aula, online o direttamente presso il tuo ente.</>
     ),
   },
 ];
@@ -36,12 +36,12 @@ const valori = [
 const verticali = [
   {
     color: 'blue',
-    sopratitolo: 'Certificazioni digitali',
+    sopratitolo: 'Riconosciute in più di 150 paesi',
     title: 'Certificazioni Informatiche ICDL',
     bullets: [
-      'Standard europeo per le competenze digitali richiesto nei concorsi pubblici.',
-      'Test Center AICA qualificato con esami direttamente in sede a Vittoria.',
-      'Percorsi flessibili per studenti, professionisti e docenti.',
+      'Standard europeo per le competenze digitali richiesto nei concorsi pubblici',
+      'Test Center AICA qualificato con esami direttamente in sede a Vittoria',
+      'Percorsi flessibili per studenti, professionisti e docenti',
     ],
     icon: 'fas fa-laptop-code',
     cta: 'Scopri le certificazioni',
@@ -52,9 +52,9 @@ const verticali = [
     sopratitolo: 'Crescita professionale',
     title: 'Corsi Qualificati',
     bullets: [
-      'Percorsi di qualifica e riqualificazione per nuove opportunità lavorative.',
-      'Qualifiche ufficiali inserite nel Repertorio Nazionale e spendibili sul mercato.',
-      'Certificazione delle competenze acquisite con titoli riconosciuti.',
+      'Percorsi di qualifica e riqualificazione per nuove opportunità lavorative',
+      'Qualifiche ufficiali inserite nel Repertorio Nazionale e spendibili sul mercato',
+      'Certificazione delle competenze acquisite con titoli riconosciuti',
     ],
     icon: 'fas fa-certificate',
     cta: 'Scopri i corsi qualificati',
@@ -62,12 +62,12 @@ const verticali = [
   },
   {
     color: 'teal',
-    sopratitolo: 'Educazione sanitaria',
+    sopratitolo: 'Educazione continua in medicina',
     title: 'Corsi ECM',
     bullets: [
-      'Crediti formativi obbligatori ogni anno per tutti i professionisti della salute.',
-      'Provider ECM accreditato con contenuti scientifici sempre aggiornati.',
-      'Modalità di fruizione flessibili studiate per chi già lavora in corsia.',
+      'Crediti formativi obbligatori ogni anno per tutti i professionisti della salute',
+      'Provider ECM accreditato con contenuti scientifici sempre aggiornati e crediti certificati',
+      'Modalità di fruizione flessibili studiate per chi già lavora in corsia',
     ],
     icon: 'fas fa-user-doctor',
     cta: 'Scopri i corsi ECM',
@@ -78,9 +78,9 @@ const verticali = [
     sopratitolo: 'Per enti pubblici',
     title: 'Formazione per la PA',
     bullets: [
-      'Piani formativi mirati su digitalizzazione, anticorruzione e trasparenza.',
-      'Corsi erogabili direttamente in sede o in modalità dedicate.',
-      'Docenti altamente specializzati e orientati alle esigenze della PA.',
+      'Piani formativi mirati su digitalizzazione, anticorruzione e trasparenza',
+      'Corsi erogabili direttamente in sede o in modalità dedicate',
+      'Docenti altamente specializzati e orientati alle esigenze della PA',
     ],
     icon: 'fas fa-landmark',
     cta: 'Scopri la formazione PA',
@@ -239,11 +239,7 @@ export default function FormazioneProfessionaleSpecialistica() {
             </span>
           </h1>
 
-          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '960px', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Corsi qualificati, certificazioni riconosciute e percorsi formativi per persone, aziende e Pubblica Amministrazione. Dalle certificazioni ICDL ai corsi ECM, dai percorsi qualificati alla formazione su misura per la PA, un unico partner per sviluppare competenze concrete, riconosciute e immediatamente spendibili.
-          </p>
-
-          <div className="fade-up fade-up-3">
+          <div className="fade-up fade-up-3" style={{ marginTop: '2.5rem' }}>
             <a href="#aree" className="cta-btn-primary-fps">Scopri i nostri corsi</a>
           </div>
         </div>

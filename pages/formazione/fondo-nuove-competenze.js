@@ -27,33 +27,63 @@ const vantaggi = [
   {
     title: 'Nessun blocco della produzione',
     text: 'La rimodulazione dell\'orario si progetta sulle esigenze reali dell\'azienda.',
-    area: 'a',
+    icon: <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" />,
   },
   {
     title: 'Competenze allineate al mercato',
     text: 'Percorsi su misura su digitale, sostenibilità e organizzazione, non corsi standard.',
-    area: 'b',
+    icon: <path d="M12 2a10 10 0 1 0 10 10M22 2 12 12M16 2h6v6" />,
   },
   {
     title: 'Personale più motivato e trattenuto',
     text: 'Investire sulle persone riduce il turnover e rafforza il senso di appartenenza.',
-    area: 'c',
+    icon: <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" />,
   },
   {
     title: 'Un investimento sostenibile',
     text: 'Cresci sul capitale umano senza intaccare la liquidità aziendale.',
-    area: 'd',
+    icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />,
   },
 ];
 
 const servizi = [
-  'Analisi dei fabbisogni aziendali',
-  'Verifica dei requisiti di accesso',
-  'Progettazione del piano formativo',
-  'Supporto nella predisposizione degli accordi previsti dalla misura',
-  'Gestione della domanda',
-  'Coordinamento delle attività formative',
-  'Monitoraggio e rendicontazione finale',
+  {
+    bold: 'Analisi',
+    rest: ' dei fabbisogni aziendali',
+    icon: <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-4.35-4.35" />,
+  },
+  {
+    bold: 'Verifica',
+    rest: ' dei requisiti di accesso',
+    icon: <path d="m9 12 2 2 4-4M12 3a9 9 0 0 0-8 4.7V17a9 9 0 0 0 16 0V7.7A9 9 0 0 0 12 3Z" />,
+  },
+  {
+    bold: 'Progettazione',
+    rest: ' del piano formativo',
+    icon: <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5Z" />,
+    featured: true,
+  },
+  {
+    bold: 'Supporto',
+    rest: ' nella predisposizione degli accordi previsti dalla misura',
+    icon: <path d="M9 12h6M9 16h6M8 3h8a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 0 1 2-2Z" />,
+  },
+  {
+    bold: 'Gestione',
+    rest: ' della domanda',
+    icon: <path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2m18 0v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8m18 0-9 6-9-6" />,
+  },
+  {
+    bold: 'Coordinamento',
+    rest: ' delle attività formative',
+    icon: <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm10 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />,
+  },
+  {
+    bold: 'Monitoraggio',
+    rest: ' e rendicontazione finale',
+    icon: <path d="M3 3v18h18M7 15l4-4 3 3 5-6" />,
+    featured: true,
+  },
 ];
 
 const faqs = [
@@ -183,39 +213,208 @@ export default function FondoNuoveCompetenze() {
           .target-grid { grid-template-columns: 1fr; }
         }
 
-        /* Bento grid vantaggi (asimmetrica) */
-        .bento-vantaggi {
+        /* Vantaggi: layout minimale a 4 colonne, senza card/bordi/ombre */
+        .vantaggi-row {
           display: grid;
-          grid-template-columns: 1.3fr 1fr 1fr;
-          grid-template-rows: auto auto;
-          grid-template-areas:
-            "a b b"
-            "a c d";
-          gap: 1.25rem;
-          margin-top: 2.5rem;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 2.5rem;
+          margin-top: 3rem;
+          position: relative;
         }
-        .bento-vantaggi .area-a { grid-area: a; }
-        .bento-vantaggi .area-b { grid-area: b; }
-        .bento-vantaggi .area-c { grid-area: c; }
-        .bento-vantaggi .area-d { grid-area: d; }
+        /* Linea sottile che collega le icone, come un "percorso" */
+        .vantaggi-row::before {
+          content: '';
+          position: absolute;
+          top: 1.375rem;
+          left: calc(12.5% + 1.375rem);
+          right: calc(12.5% + 1.375rem);
+          height: 1px;
+          background: #e2e8f0;
+          z-index: 0;
+        }
+        .vantaggio-item {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.85rem;
+          position: relative;
+          z-index: 1;
+        }
+        .vantaggio-icon {
+          width: 2.75rem;
+          height: 2.75rem;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0, 140, 149, 0.1);
+          color: #008C95;
+          flex-shrink: 0;
+        }
+        .vantaggio-icon svg {
+          width: 1.4rem;
+          height: 1.4rem;
+          stroke: currentColor;
+          fill: none;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .vantaggio-item h3 {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #0f172a;
+          margin: 0;
+          line-height: 1.3;
+        }
+        .vantaggio-item p {
+          font-size: 0.9rem;
+          font-weight: 400;
+          color: #64748b;
+          margin: 0;
+          line-height: 1.75;
+        }
+        :global(.dark) .vantaggi-row::before {
+          background: rgba(255, 255, 255, 0.08);
+        }
+        :global(.dark) .vantaggio-item h3 {
+          color: #F8FAFC;
+        }
+        :global(.dark) .vantaggio-item p {
+          color: #CBD5E1;
+        }
         @media (max-width: 900px) {
-          .bento-vantaggi {
-            grid-template-columns: 1fr;
-            grid-template-areas: "a" "b" "c" "d";
-          }
+          .vantaggi-row { grid-template-columns: 1fr; gap: 2rem; }
+          .vantaggi-row::before { display: none; }
         }
 
-        /* FAQ a 2 colonne */
-        .faq-grid {
+        /* Bento grid servizi */
+        .bento-servizi {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-auto-flow: column;
-          grid-template-rows: repeat(2, auto);
-          gap: 0.85rem 1.5rem;
-          align-items: start;
+          grid-template-columns: repeat(4, 1fr);
+          grid-auto-rows: 1fr;
+          align-items: stretch;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
+        }
+        .bento-card {
+          --card-border: #e2e8f0;
+          background: #ffffff;
+          border: 1px solid var(--card-border);
+          border-radius: 20px;
+          padding: 1.5rem;
+          box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.03);
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          justify-content: flex-start;
+          height: 100%;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+          grid-column: span 1;
+        }
+        .bento-card:hover {
+          transform: translateY(-4px);
+          border-color: #10B981;
+          box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        }
+        .bento-card.featured {
+          grid-column: span 2;
+          background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 60%);
+        }
+        /* "Coordinamento" (6° card nel DOM) chiude la griglia a piena larghezza */
+        .bento-card:nth-child(6) {
+          order: 7;
+          grid-column: span 4;
+        }
+        /* "Monitoraggio" (7° card, featured) si sposta prima, a chiudere la 2° riga */
+        .bento-card:nth-child(7) {
+          order: 6;
+        }
+        .bento-card .bento-icon {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(16, 185, 129, 0.1);
+          color: #10B981;
+          flex-shrink: 0;
+        }
+        .bento-card .bento-icon svg {
+          width: 1.25rem;
+          height: 1.25rem;
+          stroke: currentColor;
+          fill: none;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .bento-card p {
+          margin: 0;
+          font-size: 0.95rem;
+          line-height: 1.65;
+          color: #475569;
+        }
+        .bento-card p b {
+          color: #0f172a;
+          font-weight: 800;
+        }
+        :global(.dark) .bento-card {
+          --card-border: rgba(255,255,255,0.08);
+          background: #1f2937;
+        }
+        :global(.dark) .bento-card.featured {
+          background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, #1f2937 60%);
+        }
+        :global(.dark) .bento-card p {
+          color: #CBD5E1;
+        }
+        :global(.dark) .bento-card p b {
+          color: #F8FAFC;
+        }
+        @media (max-width: 900px) {
+          .bento-servizi { grid-template-columns: repeat(2, 1fr); }
+          .bento-card.featured,
+          .bento-card:nth-child(6) { grid-column: span 2; }
+        }
+        @media (max-width: 640px) {
+          .bento-servizi { grid-template-columns: 1fr; }
+          .bento-card.featured,
+          .bento-card:nth-child(6) { grid-column: span 1; order: initial; }
+        }
+
+        /* FAQ a 2 colonne indipendenti: ogni colonna impila le proprie card
+           senza sincronizzare l'altezza di riga, così aprire una domanda
+           non "spinge" o lascia buchi accanto alle altre */
+        .faq-grid {
+          column-count: 2;
+          column-gap: 1.5rem;
+        }
+        .faq-item {
+          break-inside: avoid;
+          margin-bottom: 0.85rem;
+        }
+        .faq-answer-wrap {
+          display: grid;
+          grid-template-rows: 0fr;
+          transition: grid-template-rows 0.28s ease;
+        }
+        .faq-answer-wrap.open {
+          grid-template-rows: 1fr;
+        }
+        .faq-answer-inner {
+          overflow: hidden;
+          min-height: 0;
+        }
+        .faq-chevron {
+          transition: transform 0.25s ease;
+        }
+        .faq-chevron.open {
+          transform: rotate(180deg);
         }
         @media (max-width: 768px) {
-          .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
+          .faq-grid { column-count: 1; }
         }
       `}</style>
 
@@ -252,11 +451,7 @@ export default function FondoNuoveCompetenze() {
             </span>
           </h1>
 
-          <p className="fade-up fade-up-2" style={{ fontSize: 'clamp(1rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            Il Fondo Nuove Competenze è una misura ANPAL che permette alle imprese di destinare parte dell&apos;orario di lavoro alla formazione, ottenendo il rimborso delle ore dedicate all&apos;aggiornamento professionale. Pensato per accompagnare le aziende nella digitalizzazione, nella transizione ecologica e nell&apos;innovazione organizzativa senza rallentare il business. Con Alètheia verifichi i requisiti, progetti il percorso e gestisci l&apos;intera domanda con un unico partner.
-          </p>
-
-          <div className="fade-up fade-up-3">
+          <div className="fade-up fade-up-3" style={{ marginTop: '2.5rem' }}>
             <a href="/contatti" className="cta-btn-primary">
               Verifica se la tua azienda può accedere
               <i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
@@ -274,7 +469,7 @@ export default function FondoNuoveCompetenze() {
               Pensato per le aziende che vogliono crescere senza fermarsi
             </h2>
             <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', marginTop: '1rem', lineHeight: 1.85 }}>
-              Il Fondo Nuove Competenze è rivolto alle imprese che desiderano preparare il proprio personale alle nuove esigenze del mercato. È particolarmente indicato per chi affronta:
+              Il Fondo Nuove Competenze è una misura ANPAL che permette alle imprese di destinare parte dell&apos;orario di lavoro alla formazione, ottenendo il rimborso delle ore dedicate all&apos;aggiornamento professionale. È particolarmente indicato per chi affronta:
             </p>
           </div>
 
@@ -300,8 +495,8 @@ export default function FondoNuoveCompetenze() {
         </div>
       </section>
 
-      {/* ══════════════ VANTAGGI (BENTO GRID) ══════════════ */}
-      <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
+      {/* ══════════════ VANTAGGI (layout minimale, no card) ══════════════ */}
+      <section className="dark:bg-dark-bg" style={{ padding: '5rem 0', background: isDark ? undefined : '#f4f6f9' }}>
         <div className="container">
           <div>
             <span className="section-badge">I vantaggi per la tua azienda</span>
@@ -313,15 +508,14 @@ export default function FondoNuoveCompetenze() {
             </p>
           </div>
 
-          <div className="bento-vantaggi">
+          <div className="vantaggi-row">
             {vantaggi.map((v) => (
-              <div
-                key={v.title}
-                className={`area-${v.area} bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]`}
-                style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0.6rem' }}
-              >
-                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, lineHeight: 1.3 }}>{v.title}</h3>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.75, margin: 0 }}>{v.text}</p>
+              <div key={v.title} className="vantaggio-item">
+                <span className="vantaggio-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">{v.icon}</svg>
+                </span>
+                <h3>{v.title}</h3>
+                <p>{v.text}</p>
               </div>
             ))}
           </div>
@@ -341,40 +535,22 @@ export default function FondoNuoveCompetenze() {
             </p>
           </div>
 
-          <div className="bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1.25rem', padding: '2.5rem', marginTop: '2.5rem' }}>
-            <span className="section-badge">Ci occupiamo di</span>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {servizi.map((s) => (
-                <li key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <i className="fas fa-check-circle" style={{ color: '#10B981', marginTop: '0.25rem', flexShrink: 0 }}></i>
-                  <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.7 }}>{s}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div style={{ marginTop: '2.5rem' }}>
+            <span className="hero-badge" style={{ color: '#059669', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>Servizi</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 1.9rem)', fontWeight: 900, margin: 0 }}>
+              Ci occupiamo di
+            </h2>
 
-          <div style={{
-            borderRadius: '1.25rem',
-            padding: '2.5rem',
-            marginTop: '2rem',
-            background: isDark ? '#1f2937' : 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-            border: isDark ? '1px solid rgba(255,255,255,0.08)' : 'none',
-            borderLeft: isDark ? '3px solid #10B981' : 'none',
-            display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'flex-start',
-          }}>
-            <p style={{
-              fontSize: 'clamp(1.15rem, 2.2vw, 1.4rem)',
-              fontWeight: 800,
-              color: '#fff',
-              lineHeight: 1.5,
-              margin: 0,
-            }}>
-              Tu definisci gli obiettivi della tua impresa. Noi trasformiamo il progetto in un&apos;opportunità di finanziamento.
-            </p>
-            <a href="/contatti" className="cta-btn-primary">
-              Parla con il nostro Team
-              <i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
-            </a>
+            <div className="bento-servizi">
+              {servizi.map((s) => (
+                <div key={s.bold} className={`bento-card${s.featured ? ' featured' : ''}`}>
+                  <span className="bento-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">{s.icon}</svg>
+                  </span>
+                  <p><b>{s.bold}</b>{s.rest}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -393,7 +569,7 @@ export default function FondoNuoveCompetenze() {
             {faqs.map((item, i) => {
               const isOpen = openFaqIndex === i;
               return (
-                <div key={item.domanda} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
+                <div key={item.domanda} className="faq-item bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
                   <button
                     type="button"
                     aria-expanded={isOpen}
@@ -402,13 +578,15 @@ export default function FondoNuoveCompetenze() {
                     style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '1.1rem 1.4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', cursor: 'pointer', fontWeight: 700, fontSize: '0.95rem' }}
                   >
                     <span>{item.domanda}</span>
-                    <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: '#008C95', flexShrink: 0 }}></i>
+                    <i className={`fas fa-chevron-down faq-chevron${isOpen ? ' open' : ''}`} style={{ color: '#008C95', flexShrink: 0 }}></i>
                   </button>
-                  {isOpen && (
-                    <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, padding: '0 1.4rem 1.4rem', lineHeight: 1.75, fontSize: '0.9rem' }}>
-                      {item.risposta}
-                    </p>
-                  )}
+                  <div className={`faq-answer-wrap${isOpen ? ' open' : ''}`}>
+                    <div className="faq-answer-inner">
+                      <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, padding: '0 1.4rem 1.4rem', lineHeight: 1.75, fontSize: '0.9rem' }}>
+                        {item.risposta}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -416,20 +594,10 @@ export default function FondoNuoveCompetenze() {
         </div>
       </section>
 
-      {/* ══════════════ CTA FINALE ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', padding: '5rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>
-            Hai i requisiti? Verifichiamolo insieme
-          </h3>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', maxWidth: '680px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-            Raccontaci il tuo progetto: analizzeremo gratuitamente la situazione della tua impresa, verificheremo i requisiti previsti dall&apos;avviso e ti indichiamo se il Fondo Nuove Competenze è lo strumento più adatto per finanziare la formazione dei tuoi dipendenti.
-          </p>
-          <a href="/contatti" className="cta-btn-primary">Richiedi una consulenza gratuita</a>
-        </div>
-      </section>
-
-      <FormAzienda />
+      <FormAzienda
+        title={<>Tu definisci gli obiettivi della tua impresa.<br />Noi trasformiamo il progetto in un&apos;opportunità di finanziamento.</>}
+        subtitle="Compila il form e raccontaci il tuo progetto. Il nostro Team analizzerà gratuitamente la situazione della tua impresa."
+      />
 
       </main>
       <Footer />

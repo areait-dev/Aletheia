@@ -179,8 +179,8 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
-          padding: 6rem 4rem;
+          justify-content: flex-start;
+          padding: 8rem 4rem 6rem;
           text-align: center;
         }
         .panel-bg {
@@ -257,9 +257,9 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           background: linear-gradient(135deg, #0F172A 0%, #134E4A 100%);
         }
         .trust-bar {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem 2rem;
           padding: 3rem 2rem;
           max-width: 1200px;
           margin: 0 auto;
@@ -268,8 +268,9 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           display: flex;
           align-items: center;
           gap: 0.85rem;
-          padding: 0 2.5rem;
+          padding: 0 1.5rem;
           border-left: 1px solid rgba(255,255,255,0.12);
+          min-width: 0;
         }
         .trust-card:first-child {
           border-left: none;
@@ -285,13 +286,13 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           display: flex;
           flex-direction: column;
           gap: 0.2rem;
+          min-width: 0;
         }
         .trust-label {
           font-size: 0.9rem;
           font-weight: 800;
           color: #fff;
           line-height: 1.3;
-          white-space: nowrap;
         }
         .trust-sub {
           font-size: 0.72rem;
@@ -299,10 +300,11 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           color: #94A3B8;
         }
         @media (max-width: 900px) {
+          .trust-bar { grid-template-columns: repeat(2, 1fr); }
           .trust-card { border-left: none; padding: 0 1.25rem; }
         }
         @media (max-width: 640px) {
-          .trust-label { white-space: normal; }
+          .trust-bar { grid-template-columns: 1fr; }
         }
       `}</style>
 
@@ -362,18 +364,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               >
                 Cerchi lavoro?
               </h2>
-
-              <p
-                style={{
-                  fontSize: '1rem',
-                  color: 'rgba(255,255,255,0.65)',
-                  maxWidth: '360px',
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                Trova opportunità di lavoro in Sicilia e in tutta Italia. Ti affianchiamo in ogni fase: dalla ricerca al colloquio, fino all'inserimento.
-              </p>
 
               <ul
                 style={{
@@ -462,18 +452,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 Cerchi personale?
               </h2>
 
-              <p
-                style={{
-                  fontSize: '1rem',
-                  color: 'rgba(255,255,255,0.65)',
-                  maxWidth: '360px',
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                Gestiamo per te la ricerca, selezione e somministrazione del personale. Soluzioni flessibili e conformi alla normativa vigente.
-              </p>
-
               <ul
                 style={{
                   listStyle: 'none',
@@ -513,7 +491,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
         <div className="trust-bar-wrap">
           <div className="trust-bar">
             {[
-              { icon: 'fas fa-certificate', label: 'Autorizzata ANPAL', sub: 'DDS Nr 1.100/2019' },
+              { icon: 'fas fa-certificate', label: 'Autorizzata dal Ministero del Lavoro', sub: 'D.D.S. n. 1100/2019' },
               { icon: 'fas fa-map-marker-alt', label: 'Radicata in Sicilia', sub: 'Dal 2005' },
               { icon: 'fas fa-users', label: 'Migliaia di candidati', sub: 'Inseriti con successo' },
               { icon: 'fas fa-shield-alt', label: 'Contratti garantiti', sub: 'Conformità normativa' },
@@ -549,13 +527,13 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 marginBottom: '1rem', lineHeight: 1.25,
               }}>
                 Alètheia APL -{' '}
-                <span style={{ color: '#008C95' }}>Autorizzata ANPAL</span>
+                <span style={{ color: '#008C95' }}>Non solo un&apos;agenzia. Un ecosistema per il lavoro</span>
               </h2>
 
               {/* badge accrediti — spostati subito sotto il titolo */}
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
                 {[
-                  { icon: 'fas fa-certificate', label: 'DDS Nr. 1.100/2019' },
+                  { icon: 'fas fa-certificate', label: 'D.D.S. n. 1100/2019' },
                   { icon: 'fas fa-map-marker-alt', label: 'Operativa dal 2005' },
                   { icon: 'fas fa-network-wired', label: 'PromoterGroup S.p.A.' },
                 ].map((b, i) => (

@@ -111,7 +111,7 @@ const focusOff = (hasErr: boolean, isDark: boolean) => (e: React.FocusEvent<HTML
 
 interface FormAziendaProps {
   badge?: string;
-  title?: string;
+  title?: React.ReactNode;
   subtitle?: string;
 }
 
