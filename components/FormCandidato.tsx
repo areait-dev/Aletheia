@@ -179,16 +179,16 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
             letterSpacing: '0.12em', textTransform: 'uppercase',
             color: '#6EE7B7', marginBottom: '0.6rem',
           }}>
-            Candidati
+            Affidati a noi
           </span>
           <h2 style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 900,
             color: '#fff', marginBottom: '0.6rem', lineHeight: 1.2,
           }}>
-            Contattaci
+            Sei pronto a iniziare?
           </h2>
           <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
-            Compila il form, ti risponderemo entro 24 ore
+            Contattaci direttamente o compila il modulo. Uno dei nostri consulenti ti risponderà nel più breve tempo possibile.
           </p>
         </div>
 
@@ -204,14 +204,6 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
 
           {/* ── Colonna sinistra: info ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', marginBottom: '0.4rem' }}>
-                Siamo qui per aiutarti
-              </h3>
-              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, margin: 0 }}>
-                Contattaci direttamente o compila il modulo. Uno dei nostri consulenti ti risponderà nel più breve tempo possibile.
-              </p>
-            </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {INFO_ITEMS.map((item, i) => (

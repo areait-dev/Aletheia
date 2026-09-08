@@ -1,8 +1,28 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Footer from '../../components/Footer';
-import { useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import FormCandidato from '../../components/FormCandidato';
+import { getLenis } from '../../lib/lenis';
+
+// Scroll fluido (Lenis) verso il form candidato, con fallback nativo se Lenis
+// non è ancora inizializzato (retry limitato per non ciclare all'infinito).
+function scrollToContattaCandidato() {
+  const target = document.getElementById('contatta-candidato');
+  if (!target) return;
+  let attempts = 0;
+  const tryScroll = () => {
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -80 });
+    } else if (attempts++ < 20) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(tryScroll, 150);
+    }
+  };
+  tryScroll();
+}
 
 const SERVICES = [
   {
@@ -12,6 +32,8 @@ const SERVICES = [
       'Ti supportiamo nella ricerca di opportunità lavorative in linea con il tuo profilo, le tue competenze e le tue aspirazioni. Analizziamo il mercato e ti mettiamo in contatto con le aziende giuste.',
     tag: 'Placement',
     color: '#008C95',
+    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Persona che consulta offerte di lavoro al computer',
   },
   {
     icon: 'fas fa-compass',
@@ -20,6 +42,8 @@ const SERVICES = [
       'Offriamo sessioni di orientamento individuale per aiutarti a definire il tuo percorso professionale, valorizzare le tue competenze e affrontare con sicurezza il mercato del lavoro.',
     tag: 'Orientamento',
     color: '#10B981',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Consulente in sessione di orientamento professionale',
   },
   {
     icon: 'fas fa-comments',
@@ -28,6 +52,8 @@ const SERVICES = [
       'Ti prepariamo al colloquio di lavoro con simulazioni pratiche, consigli personalizzati e tecniche per valorizzare al meglio le tue esperienze e competenze.',
     tag: 'Coaching',
     color: '#008C95',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Simulazione di colloquio di lavoro',
   },
   {
     icon: 'fas fa-briefcase',
@@ -37,6 +63,8 @@ const SERVICES = [
     tag: 'Piano Nazionale',
     color: '#10B981',
     href: '/programma-gol',
+    image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Percorso di reinserimento lavorativo finanziato',
   },
   {
     icon: 'fas fa-star',
@@ -45,6 +73,8 @@ const SERVICES = [
       'Supportiamo i giovani NEET (under 30 non occupati e non in formazione) con percorsi di orientamento, formazione e tirocinio finanziati dalla Regione Siciliana.',
     tag: 'Under 30',
     color: '#008C95',
+    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Giovani professionisti in formazione',
   },
   {
     icon: 'fas fa-road',
@@ -53,10 +83,12 @@ const SERVICES = [
       'Accompagniamo le persone in transizione professionale con coaching individuale, aggiornamento del CV e strategie efficaci di ricerca attiva del lavoro.',
     tag: 'Transizione',
     color: '#10B981',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
+    imageAlt: 'Coaching per la transizione professionale',
   },
 ];
 
-function ServiceCard({ icon, title, description, tag, color, index, href }) {
+function ServiceCard({ icon, title, description, tag, color, index, href, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
   const Wrapper = href ? 'a' : 'div';
 
@@ -65,52 +97,62 @@ function ServiceCard({ icon, title, description, tag, color, index, href }) {
       href={href || undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="bg-white dark:bg-dark-card"
       style={{
         borderRadius: '1.25rem',
-        padding: '2rem',
+        height: '320px',
         boxShadow: hovered
-          ? `0 20px 50px rgba(0,140,149,0.13), 0 0 0 2px ${color}`
-          : '0 4px 20px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)',
+          ? `0 20px 50px rgba(0,140,149,0.18), 0 0 0 2px ${color}`
+          : '0 4px 20px rgba(0,0,0,0.1)',
         transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
-        transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.9rem',
+        transition: 'box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1)',
         cursor: href ? 'pointer' : 'default',
         position: 'relative',
         overflow: 'hidden',
         textDecoration: 'none',
+        display: 'block',
       }}
     >
-      {/* top accent line */}
-      <div
+      {/* immagine a piena card, leggero zoom in hover */}
+      <Image
+        src={image}
+        alt={imageAlt || title}
+        fill
+        sizes="(max-width: 768px) 100vw, 340px"
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '3px',
-          background: `linear-gradient(90deg, ${color}, ${color === '#008C95' ? '#10B981' : '#008C95'})`,
-          opacity: hovered ? 1 : 0,
-          transition: 'opacity 0.3s ease',
+          objectFit: 'cover',
+          transform: hovered ? 'scale(1.06)' : 'scale(1)',
+          transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
         }}
       />
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      {/* overlay scuro: leggero sempre (leggibilità badge), più marcato in hover (leggibilità testo) */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: hovered
+            ? 'linear-gradient(180deg, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0.92) 100%)'
+            : 'linear-gradient(180deg, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0.15) 40%, rgba(15,23,42,0.55) 100%)',
+          transition: 'background 0.3s ease',
+        }}
+      />
+
+      {/* badge + icona: sempre visibili, per incuriosire */}
+      <div style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.65rem', zIndex: 1 }}>
         <div
           style={{
-            width: '52px',
-            height: '52px',
-            borderRadius: '14px',
-            background: hovered ? color : `${color}12`,
+            width: '42px',
+            height: '42px',
+            borderRadius: '12px',
+            background: color,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '1.25rem',
-            color: hovered ? '#fff' : color,
-            transition: 'all 0.3s ease',
+            fontSize: '1.05rem',
+            color: '#fff',
             flexShrink: 0,
+            boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
           }}
         >
           <i className={icon}></i>
@@ -121,9 +163,10 @@ function ServiceCard({ icon, title, description, tag, color, index, href }) {
             fontWeight: 800,
             letterSpacing: '0.09em',
             textTransform: 'uppercase',
-            color,
-            background: `${color}12`,
-            padding: '0.22rem 0.6rem',
+            color: '#fff',
+            background: 'rgba(255,255,255,0.18)',
+            backdropFilter: 'blur(4px)',
+            padding: '0.3rem 0.7rem',
             borderRadius: '999px',
           }}
         >
@@ -131,33 +174,41 @@ function ServiceCard({ icon, title, description, tag, color, index, href }) {
         </span>
       </div>
 
-      <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, lineHeight: 1.3 }}>
-        {title}
-      </h3>
-      <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.875rem', lineHeight: 1.75, margin: 0, flexGrow: 1 }}>
-        {description}
-      </p>
-
+      {/* titolo + descrizione: appaiono in hover */}
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.4rem',
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          color,
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          padding: '1.5rem',
+          zIndex: 1,
           opacity: hovered ? 1 : 0,
-          transform: hovered ? 'translateX(0)' : 'translateX(-6px)',
-          transition: 'opacity 0.25s ease, transform 0.25s ease',
+          transform: hovered ? 'translateY(0)' : 'translateY(10px)',
+          transition: 'opacity 0.3s ease, transform 0.3s ease',
         }}
       >
-        Scopri di più <span aria-hidden="true">→</span>
+        <h3 style={{ color: '#fff', fontSize: '1.05rem', fontWeight: 800, margin: '0 0 0.5rem', lineHeight: 1.3 }}>
+          {title}
+        </h3>
+        <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', lineHeight: 1.65, margin: 0 }}>
+          {description}
+        </p>
       </div>
     </Wrapper>
   );
 }
 
 export default function ServiziAllaPersona() {
+  // Al mount, se si arriva con #contatta-candidato nell'URL (es. da un'altra pagina):
+  // Lenis riporta lo scroll a 0 all'inizializzazione, quindi il salto nativo del
+  // browser all'anchor viene annullato se non lo rifacciamo qui dopo il mount.
+  useEffect(() => {
+    if (typeof window === 'undefined' || window.location.hash !== '#contatta-candidato') return;
+    const timer = setTimeout(scrollToContattaCandidato, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <Head>
@@ -194,6 +245,13 @@ export default function ServiziAllaPersona() {
         }
         @media (max-width: 600px) {
           .services-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Il bottone chat flottante (fixed, angolo in basso a destra) su mobile si
+           sovrappone alle ultime righe del paragrafo "Chi siamo": stesso breakpoint
+           (1024px) usato da .chatbot-root per restringersi in quell'angolo. */
+        @media (max-width: 1024px) {
+          .chi-siamo-section { padding-bottom: 5.5rem !important; }
         }
 
         .hero-badge {
@@ -341,13 +399,49 @@ export default function ServiziAllaPersona() {
 
           <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="https://aletheia4job.it/" target="_blank" rel="noopener noreferrer" className="cta-btn-primary">Vedi le offerte</a>
-            <a href="#contatti" className="cta-btn-outline">Contattaci</a>
+            <a
+              href="#contatta-candidato"
+              className="cta-btn-outline"
+              onClick={(e) => { e.preventDefault(); scrollToContattaCandidato(); }}
+            >
+              Contattaci
+            </a>
           </div>
         </div>
       </section>
 
+      {/* ── TRUST BAR ─────────────────────────────────────────── */}
+      {/* Fascia di transizione full-width tra hero (scura) e "Chi siamo" (chiara):
+          niente più box arrotondato "sospeso" a fondo sezione, ma una striscia
+          a contatto diretto con l'hero, con un bordo inferiore sottile a fare
+          da cerniera visiva con la sezione successiva. */}
+      <div
+        className="bg-[#6EE7B7]/20 dark:bg-[#6EE7B7]/10 border-b border-[#10B981]/25 dark:border-[#6EE7B7]/20"
+        style={{ padding: '1.1rem 0' }}
+      >
+        <div
+          className="container"
+          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '1.5rem' }}
+        >
+          {[
+            { icon: 'fas fa-compass', label: 'Orientamento gratuito' },
+            { icon: 'fas fa-star', label: 'Garanzia Giovani under 30' },
+          ].map((stat, i, arr) => (
+            <Fragment key={i}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <i className={stat.icon} style={{ color: '#059669', fontSize: '1rem' }}></i>
+                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#059669' }}>{stat.label}</span>
+              </div>
+              {i < arr.length - 1 && (
+                <span aria-hidden="true" style={{ width: '1px', height: '1.1rem', background: 'rgba(5,150,105,0.35)' }} />
+              )}
+            </Fragment>
+          ))}
+        </div>
+      </div>
+
       {/* ── INTRO ─────────────────────────────────────────────── */}
-      <section className="bg-light dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
+      <section className="chi-siamo-section bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '4rem 0' }}>
         <div className="container">
           <div
             style={{
@@ -401,31 +495,6 @@ export default function ServiziAllaPersona() {
           </div>
         </div>
       </section>
-
-      {/* ── MICRO-STATS ──────────────────────────────────────── */}
-      <div className="bg-white dark:bg-dark-card">
-        <div className="container" style={{ paddingTop: '0', paddingBottom: '2rem' }}>
-          <div className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30" style={{
-            padding: '1rem 2rem',
-            borderRadius: '0.75rem',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '2rem',
-          }}>
-            {[
-              { icon: 'fas fa-compass', label: 'Orientamento gratuito' },
-              { icon: 'fas fa-check-circle', label: 'Programma G.O.L. attivo' },
-              { icon: 'fas fa-star', label: 'Garanzia Giovani under 30' },
-            ].map((stat, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className={stat.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
-                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#008C95' }}>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* ── SERVIZI ───────────────────────────────────────────── */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
@@ -502,90 +571,6 @@ export default function ServiziAllaPersona() {
                 <strong className="text-slate-900 dark:text-white">Operatore Garanzia Giovani</strong> - Regione Siciliana
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA FINALE ────────────────────────────────────────── */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-          padding: '5rem 0',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute', top: '-80px', right: '-80px',
-            width: '380px', height: '380px', borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(16,185,129,0.14) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute', bottom: '-60px', left: '-60px',
-            width: '280px', height: '280px', borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(0,140,149,0.12) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-
-        <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-          <span
-            style={{
-              display: 'inline-block',
-              fontSize: '0.7rem',
-              fontWeight: 800,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#6EE7B7',
-              marginBottom: '1rem',
-            }}
-          >
-            Inizia ora
-          </span>
-
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
-              fontWeight: 900,
-              color: '#fff',
-              marginBottom: '1rem',
-              lineHeight: 1.2,
-            }}
-          >
-            Pronto a{' '}
-            <span
-              style={{
-                background: 'linear-gradient(90deg, #10B981, #008C95)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              iniziare?
-            </span>
-          </h2>
-
-          <p
-            style={{
-              fontSize: '1.05rem',
-              color: 'rgba(255,255,255,0.65)',
-              maxWidth: '760px',
-              margin: '0 auto 2.5rem',
-              lineHeight: 1.7,
-            }}
-          >
-            Consulta le nostre offerte di lavoro attive o contattaci per una consulenza gratuita.
-          </p>
-
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://aletheia4job.it/" target="_blank" rel="noopener noreferrer" className="cta-btn-primary">Vedi le offerte</a>
-            <a href="#contatti" className="cta-btn-outline">Contattaci</a>
           </div>
         </div>
       </section>

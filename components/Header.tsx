@@ -22,7 +22,7 @@ const FORMAZIONE_GROUPS: { key: SubDropdownKey; href: string; title: string; ite
     href: '/formazione/regionale-fse',
     title: 'Formazione Finanziata',
     items: [
-      { label: 'Formazione Regionale', href: 'https://aletheiasrl.vercel.app/formazione/regionale' },
+      { label: 'Formazione Regionale', href: '/formazione/regionale' },
       { label: 'Fondi Interprofessionali', href: '/formazione/fondi-interprofessionali' },
       { label: 'Fondo Nuove Competenze', href: '/formazione/fondo-nuove-competenze' },
     ],
@@ -193,6 +193,15 @@ export default function Header({ active, solid = false }: HeaderProps) {
                 </a>
               );
             })}
+            <a
+              href="https://aletheia4job.it/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="navbar-mobile-cta"
+              onClick={() => { setMenuOpen(false); setFormazioneOpen(false); }}
+            >
+              Sei un docente? Candidati
+            </a>
           </div>
 
           {/* Sotto-schermata "Formazione": solo mobile, sostituisce la lista
@@ -241,6 +250,17 @@ export default function Header({ active, solid = false }: HeaderProps) {
         {/* HEADER RIGHT */}
         <div className="header-right">
           <ThemeToggle color={iconColor} />
+          <a
+            href="https://aletheia4job.it/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-nav-btn-outline"
+            style={{ color: iconColor, borderColor: iconColor }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = iconColor; e.currentTarget.style.color = isLight ? '#fff' : '#0F172A'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = iconColor; }}
+          >
+            Sei un docente? Candidati
+          </a>
           <div className="cta-dropdown" ref={dropdownRef}>
             <button className="cta-nav-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
               Piattaforma

@@ -49,12 +49,12 @@ const avvisi = [
 ];
 
 const requisiti = [
-  'Residenti o domiciliati in Sicilia',
-  'Persone tra i 18 e i 65 anni (salvo requisiti specifici)',
-  'Disoccupati, inoccupati, inattivi o beneficiari di misure di sostegno al reddito',
-  'Utenti presi in carico dal Centro per l\'Impiego quando previsto',
-  'Cittadini extra UE con permesso di soggiorno valido',
-  'Candidati in possesso del titolo di studio richiesto dal corso',
+  { icon: 'fas fa-map-marker-alt', text: 'Residenti o domiciliati in Sicilia' },
+  { icon: 'fas fa-id-card', text: 'Persone tra i 18 e i 65 anni (salvo requisiti specifici)' },
+  { icon: 'fas fa-user-clock', text: 'Disoccupati, inoccupati, inattivi o beneficiari di misure di sostegno al reddito' },
+  { icon: 'fas fa-building', text: 'Utenti presi in carico dal Centro per l\'Impiego quando previsto' },
+  { icon: 'fas fa-passport', text: 'Cittadini extra UE con permesso di soggiorno valido' },
+  { icon: 'fas fa-graduation-cap', text: 'Candidati in possesso del titolo di studio richiesto dal corso' },
 ];
 
 const puntiDiForza = [
@@ -206,10 +206,6 @@ export default function FormazioneRegionale() {
         }
         @media (max-width: 768px) {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
-        }
-
-        @media (max-width: 640px) {
-          .requisiti-list { grid-template-columns: 1fr !important; }
         }
 
         .section-badge {
@@ -379,33 +375,91 @@ export default function FormazioneRegionale() {
       {/* ══════════════ REQUISITI & VALORE ALÈTHEIA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div style={{ maxWidth: '860px', margin: '0 auto' }}>
-            {/* Requisiti di accesso */}
-            <div>
-              <span className="section-badge">Requisiti di accesso</span>
-              <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.3 }}>
-                Hai i requisiti? Scoprilo subito
-              </h2>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.92rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
-                I requisiti cambiano in base al bando, ma generalmente possono partecipare:
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.75rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', columnGap: '1.5rem', rowGap: '0.65rem' }} className="requisiti-list">
-                {requisiti.map((r) => (
-                  <li key={r} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                    <i className="fas fa-check-circle" style={{ color: '#10B981', marginTop: '0.2rem', flexShrink: 0 }}></i>
-                    <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.92rem', lineHeight: 1.6 }}>{r}</span>
-                  </li>
-                ))}
-              </ul>
+          <div style={{ maxWidth: '760px', margin: '0 auto 2.5rem', textAlign: 'center' }}>
+            <span className="section-badge">Requisiti di accesso</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, margin: '0 0 0.75rem', lineHeight: 1.3 }}>
+              Hai i requisiti? Scoprilo subito
+            </h2>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
+              I requisiti cambiano in base al bando, ma generalmente possono partecipare:
+            </p>
+          </div>
 
-              <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1rem', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
-                  Non sai se possiedi i requisiti? Contattaci, verifichiamo insieme la tua situazione in pochi minuti e ti indichiamo il percorso più adatto.
-                </p>
-                <a href="/contatti" style={{ fontSize: '0.88rem', fontWeight: 700, color: '#008C95', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', width: 'fit-content' }}>
-                  Verifica i tuoi requisiti <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
-                </a>
+          {/* Layout asimmetrico: elenco editoriale a sinistra (senza card/box né divisori),
+              riepilogo scuro con CTA integrata a destra. */}
+          <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: '2.5rem', alignItems: 'stretch' }}>
+            {/* Colonna sinistra — elenco testuale, 7/12 */}
+            <ul className="lg:col-span-7" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+              {requisiti.map((r, i) => (
+                <Reveal key={r.text} delay={i * 45}>
+                  <li
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '1.1rem',
+                      padding: '0.9rem 0',
+                    }}
+                  >
+                    <i className={r.icon} style={{ color: '#008C95', fontSize: '1.05rem', width: '1.4rem', textAlign: 'center', marginTop: '0.1rem', flexShrink: 0 }}></i>
+                    <span className="text-slate-800 dark:text-gray-200" style={{ fontSize: '1rem', fontWeight: 500, lineHeight: 1.6 }}>{r.text}</span>
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
+
+            {/* Colonna destra — card scura di riepilogo con CTA integrata, 5/12 */}
+            <div className="lg:col-span-5" style={{
+              borderRadius: '1.25rem',
+              padding: '2.5rem 2rem',
+              background: 'linear-gradient(160deg, #0F172A 0%, #134E4A 100%)',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem',
+              boxShadow: '0 12px 32px rgba(0,0,0,0.25)',
+            }}>
+              <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(16,185,129,0.18) 0%, transparent 70%)' }} />
+
+              <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)' }}>
+                <i className="fas fa-clipboard-check" style={{ color: '#6EE7B7', fontSize: '1.4rem' }}></i>
               </div>
+
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <p style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fff', margin: '0 0 0.6rem', lineHeight: 1.4 }}>
+                  Non sai se possiedi i requisiti?
+                </p>
+                <p style={{ fontSize: '0.92rem', color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.75 }}>
+                  Raccontaci la tua situazione: in pochi minuti verifichiamo insieme quali bandi puoi seguire e ti indichiamo il percorso più adatto.
+                </p>
+              </div>
+
+              <a
+                href="/contatti"
+                className="hover:bg-[#10B981]"
+                style={{
+                  fontSize: '0.92rem',
+                  fontWeight: 700,
+                  color: '#fff',
+                  background: '#008C95',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  padding: '0.9rem 1.5rem',
+                  borderRadius: '999px',
+                  boxShadow: '0 4px 14px rgba(0,140,149,0.35)',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  position: 'relative',
+                  zIndex: 1,
+                  marginTop: 'auto',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                Verifica i tuoi requisiti <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
+              </a>
             </div>
           </div>
         </div>
@@ -457,10 +511,13 @@ export default function FormazioneRegionale() {
           <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 900, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>
             Non sai quale corso scegliere?
           </h2>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', maxWidth: '720px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-            Raccontaci la tua situazione, in pochi minuti ti diciamo se hai i requisiti, quale avviso fa per te e come candidarti. Il servizio di orientamento è gratuito.
+          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', maxWidth: '720px', margin: '0 auto 2rem', lineHeight: 1.75 }}>
+            Che tu stia cercando lavoro o la persona giusta per la tua azienda, contattaci.
           </p>
-          <a href="/contatti" className="cta-btn-primary">Contattaci</a>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
+            <a href="/contatti" className="cta-btn-primary">Contattaci</a>
+            <a href="/agenzia-per-il-lavoro/servizi-alle-imprese#contatta-azienda" className="cta-btn-outline">Contatta un consulente</a>
+          </div>
         </div>
       </section>
 

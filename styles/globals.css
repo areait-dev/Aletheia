@@ -333,6 +333,13 @@ html.dark .site-header.scrolled .header-phone {
   margin-right: auto;
 }
 
+/* CTA "Sei un docente? Candidati": solo mobile (su desktop l'equivalente vive in
+   .header-right come .cta-nav-btn-outline). Nascosto di default, mostrato solo
+   dentro il menu mobile a schermo intero (vedi media query sotto). */
+.navbar-mobile-cta {
+  display: none;
+}
+
 /* Wrapper della lista principale dentro .navbar: su desktop deve sparire dal
    flusso (i link restano flex-item diretti di .navbar, layout identico a
    prima); su mobile diventa la lista verticale a schermo intero (vedi @media
@@ -451,6 +458,40 @@ html.dark .site-header.scrolled .header-phone {
 .cta-nav-btn:hover {
   background: #004D52;
   transform: translateY(-1px);
+}
+
+/* CTA "Sei un docente? Candidati" (desktop): outline per distinguerla dal
+   pulsante primario "Piattaforma", punta a un annuncio generico su
+   aletheia4job.it invece di creare un albo/database docenti separato. */
+.cta-nav-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: #008C95;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  border: 1.5px solid #008C95;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-nav-btn-outline:hover {
+  background: #008C95;
+  color: #fff;
+}
+
+html.dark .cta-nav-btn-outline {
+  color: #6EE7B7;
+  border-color: #6EE7B7;
+}
+
+html.dark .cta-nav-btn-outline:hover {
+  background: #6EE7B7;
+  color: #0F172A;
 }
 
 .cta-dropdown {
@@ -2451,6 +2492,27 @@ html.dark .elearning p {
     color: #6EE7B7;
   }
 
+  .navbar-mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff !important;
+    background: #008C95;
+    text-decoration: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    margin-top: 1.75rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .navbar.navbar-screen-formazione .navbar-mobile-cta {
+    display: none;
+  }
+
   .navbar-formazione-calendar {
     display: inline-flex;
     align-items: center;
@@ -2489,6 +2551,30 @@ html.dark .elearning p {
     color: #6EE7B7 !important;
   }
   .navbar-open .navbar-formazione-calendar {
+    color: #6EE7B7 !important;
+  }
+
+  /* .site-header--solid .navbar a (0,2,1) batte .navbar-open a (0,1,1) anche con
+     !important: su pagine con header solid (es. formazione/regionale) il testo
+     del menu mobile restava scuro sopra l'overlay scuro. Selettori più specifici
+     per rivincere il conflitto. */
+  .site-header--solid.mobile-nav-open .navbar a {
+    color: var(--white) !important;
+  }
+  .site-header--solid.mobile-nav-open .navbar a:hover,
+  .site-header--solid.mobile-nav-open .navbar a:focus-visible,
+  .site-header--solid.mobile-nav-open .navbar a.active {
+    color: #6EE7B7 !important;
+  }
+  .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a {
+    color: rgba(255,255,255,0.65) !important;
+  }
+  .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a:hover,
+  .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a:focus-visible,
+  .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a:active {
+    color: #6EE7B7 !important;
+  }
+  .site-header--solid.mobile-nav-open .navbar-formazione-calendar {
     color: #6EE7B7 !important;
   }
 

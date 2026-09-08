@@ -166,6 +166,7 @@ export default function FormAzienda({
         padding: '5rem 0',
         position: 'relative',
         overflow: 'hidden',
+        scrollMarginTop: '100px',
       }}
     >
       {/* blobs decorativi */}
@@ -259,7 +260,7 @@ export default function FormAzienda({
                 Perché sceglierci
               </p>
               {[
-                'Autorizzati ANPAL - DDS Nr. 1.100/2019',
+                'Autorizzati dal Ministero del Lavoro e delle Politiche Sociali',
                 'Operativi in Sicilia dal 2005',
                 'Parte del network PromoterGroup S.p.A.',
               ].map((t, i) => (
