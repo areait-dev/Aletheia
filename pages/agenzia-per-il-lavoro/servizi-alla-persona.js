@@ -551,36 +551,6 @@ export default function ServiziAllaPersona() {
               <ServiceCard key={i} index={i} {...s} />
             ))}
           </div>
-
-          {/* accreditation strip */}
-          <div
-            className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
-            style={{
-              marginTop: '3rem',
-              padding: '1.25rem 2rem',
-              borderRadius: '1rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              textAlign: 'center',
-            }}
-          >
-            <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, fontSize: '0.85rem', lineHeight: 1.6 }}>
-              <strong className="text-slate-900 dark:text-white">Agenzia per il Lavoro autorizzata</strong> dal Ministero del
-              Lavoro (DDS Nr. 1.100/2019) - Operatore accreditato{' '}
-              <strong className="text-slate-900 dark:text-white">Programma G.O.L.</strong> e{' '}
-              <strong className="text-slate-900 dark:text-white">Garanzia Giovani</strong> Regione Siciliana.
-            </p>
-            {/* second badge: Garanzia Giovani */}
-            <div className="bg-slate-200 dark:bg-gray-700" style={{ width: '1px', height: '2rem', flexShrink: 0 }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, fontSize: '0.85rem', lineHeight: 1.6 }}>
-                <strong className="text-slate-900 dark:text-white">Operatore Garanzia Giovani</strong> - Regione Siciliana
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
