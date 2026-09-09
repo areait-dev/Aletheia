@@ -41,7 +41,7 @@ const SERVICES = [
     icon: 'fas fa-graduation-cap',
     title: 'Formazione Aziendale',
     description:
-      'Progettiamo percorsi formativi su misura per sviluppare le competenze del tuo personale e adeguarle alle evoluzioni tecnologiche e organizzative del mercato. Gestiamo anche l\'accesso ai Fondi Interprofessionali.',
+      'Progettiamo percorsi di upskilling e reskilling su misura per sviluppare le competenze del tuo personale, attrarre nuovi talenti e mantenere la tua azienda competitiva. Gestiamo l\'accesso ai Fondi Interprofessionali e supportiamo i processi di riorganizzazione con programmi di riqualificazione finanziati, valorizzando il capitale umano e riducendo i costi di turnover.',
     tag: 'Upskilling',
     color: '#10B981',
     image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
@@ -49,9 +49,9 @@ const SERVICES = [
   },
   {
     icon: 'fas fa-arrows-left-right',
-    title: 'Intermediazione Lavoro',
+    title: 'Attivazione Tirocini',
     description:
-      'Favoriamo l\'incontro tra domanda e offerta di lavoro nel territorio siciliano e nazionale. Gestiamo l\'intero processo di intermediazione nel pieno rispetto della normativa vigente.',
+      'Offriamo alle aziende un canale concreto per conoscere e inserire nuove risorse. Individuiamo i profili più adatti, curiamo l\'attivazione del tirocinio e seguiamo l\'intero percorso, trasformando un\'esperienza formativa in una possibile opportunità di inserimento.',
     tag: 'Matching',
     color: '#008C95',
     image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80',
@@ -59,9 +59,9 @@ const SERVICES = [
   },
   {
     icon: 'fas fa-rotate',
-    title: 'Riqualificazione e Upskilling',
+    title: 'Politiche Attive per il Lavoro',
     description:
-      'Supportiamo le aziende nei processi di riorganizzazione con programmi di riqualificazione professionale finanziati, per valorizzare il capitale umano esistente e ridurre i costi di turnover.',
+      'Mettiamo a disposizione delle imprese strumenti e misure per favorire l\'occupazione, facilitando l\'incontro con persone in cerca di lavoro, in fase di reinserimento o interessate a un nuovo percorso professionale. Individuiamo le opportunità più adatte e accompagniamo l\'azienda nella loro attivazione.',
     tag: 'Finanziato',
     color: '#10B981',
     image: 'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=600&q=80',
@@ -72,7 +72,7 @@ const SERVICES = [
 const WHY_US = [
   {
     icon: 'fas fa-certificate',
-    title: 'Autorizzati ANPAL',
+    title: 'Autorizzati dal Ministero del Lavoro e delle Politiche Sociali',
     description: 'Agenzia per il Lavoro autorizzata dal Ministero del Lavoro con decreto DDS Nr. 1.100/2019, iscritta all\'Albo Nazionale delle Agenzie per il Lavoro.',
     detail: 'DDS Nr. 1.100/2019',
   },
