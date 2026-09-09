@@ -174,7 +174,7 @@ function ServiceCard({ icon, title, description, tag, color, index, href, image,
         </span>
       </div>
 
-      {/* titolo + descrizione: appaiono in hover */}
+      {/* titolo: sempre visibile; descrizione: appare in hover */}
       <div
         style={{
           position: 'absolute',
@@ -183,15 +183,24 @@ function ServiceCard({ icon, title, description, tag, color, index, href, image,
           bottom: 0,
           padding: '1.5rem',
           zIndex: 1,
-          opacity: hovered ? 1 : 0,
-          transform: hovered ? 'translateY(0)' : 'translateY(10px)',
-          transition: 'opacity 0.3s ease, transform 0.3s ease',
         }}
       >
-        <h3 style={{ color: '#fff', fontSize: '1.05rem', fontWeight: 800, margin: '0 0 0.5rem', lineHeight: 1.3 }}>
+        <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 900, margin: 0, lineHeight: 1.3, textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
           {title}
         </h3>
-        <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', lineHeight: 1.65, margin: 0 }}>
+        <p
+          style={{
+            color: 'rgba(255,255,255,0.85)',
+            fontSize: '0.85rem',
+            lineHeight: 1.65,
+            margin: 0,
+            maxHeight: hovered ? '160px' : '0px',
+            opacity: hovered ? 1 : 0,
+            marginTop: hovered ? '0.5rem' : 0,
+            overflow: 'hidden',
+            transition: 'max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease',
+          }}
+        >
           {description}
         </p>
       </div>
