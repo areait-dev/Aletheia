@@ -474,7 +474,7 @@ html.dark .site-header.scrolled .header-phone {
   font-size: 0.8rem;
   white-space: nowrap;
   letter-spacing: 0.02em;
-  border: 1.5px solid #008C95;
+  border: 1px solid rgba(0, 140, 149, 0.45);
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -486,7 +486,7 @@ html.dark .site-header.scrolled .header-phone {
 
 html.dark .cta-nav-btn-outline {
   color: #6EE7B7;
-  border-color: #6EE7B7;
+  border-color: rgba(110, 231, 183, 0.45);
 }
 
 html.dark .cta-nav-btn-outline:hover {

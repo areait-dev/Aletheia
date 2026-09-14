@@ -255,14 +255,20 @@ export default function Header({ active, solid = false }: HeaderProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="cta-nav-btn-outline"
-            style={{ color: iconColor, borderColor: iconColor }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = iconColor; e.currentTarget.style.color = isLight ? '#fff' : '#0F172A'; }}
+            style={{ color: iconColor }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = isLight ? '#027F87' : iconColor; e.currentTarget.style.color = '#fff'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = iconColor; }}
           >
             Sei un docente? Candidati
           </a>
           <div className="cta-dropdown" ref={dropdownRef}>
-            <button className="cta-nav-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+            <button
+              className="cta-nav-btn-outline"
+              style={{ color: iconColor }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = isLight ? '#027F87' : iconColor; e.currentTarget.style.color = '#fff'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = iconColor; }}
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
               Piattaforma
             </button>
             {dropdownOpen && (
