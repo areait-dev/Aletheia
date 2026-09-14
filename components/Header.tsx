@@ -256,7 +256,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
             rel="noopener noreferrer"
             className="cta-nav-btn-outline"
             style={{ color: iconColor }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = isLight ? '#027F87' : iconColor; e.currentTarget.style.color = '#fff'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#027F87'; e.currentTarget.style.color = '#fff'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = iconColor; }}
           >
             Sei un docente? Candidati
@@ -265,7 +265,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
             <button
               className="cta-nav-btn-outline"
               style={{ color: iconColor }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = isLight ? '#027F87' : iconColor; e.currentTarget.style.color = '#fff'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = '#027F87'; e.currentTarget.style.color = '#fff'; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = iconColor; }}
               onClick={() => setDropdownOpen(!dropdownOpen)}
             >
