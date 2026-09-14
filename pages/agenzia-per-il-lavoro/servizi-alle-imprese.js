@@ -356,7 +356,8 @@ export default function ServiziAlleImprese() {
         }
         .cta-btn-primary {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
+          white-space: nowrap;
           background: linear-gradient(90deg, #008C95, #10B981);
           color: #fff; font-weight: 700; font-size: 0.95rem;
           text-decoration: none; font-family: inherit;
@@ -423,7 +424,7 @@ export default function ServiziAlleImprese() {
               href="tel:+390932862613"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.55rem',
-                padding: '0.9rem 2rem', borderRadius: '999px',
+                padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)',
                 color: 'rgba(255,255,255,0.8)', fontWeight: 700, fontSize: '0.95rem',
                 textDecoration: 'none', border: '2px solid rgba(255,255,255,0.2)',
                 transition: 'all 0.2s ease',

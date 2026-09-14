@@ -198,7 +198,8 @@ export default function FormazioneProfessionaleSpecialistica() {
         }
         .cta-btn-primary-fps {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
+          white-space: nowrap;
           background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           box-shadow: 0 4px 24px rgba(0,140,149,0.38);

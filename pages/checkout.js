@@ -370,7 +370,7 @@ export default function Checkout() {
                   disabled={step === 'processing'}
                   style={{
                     width: '100%', marginTop: '1.25rem', background: 'linear-gradient(90deg, #008C95, #10B981)', color: '#fff',
-                    padding: '0.9rem', borderRadius: '9999px', fontWeight: 700, border: 'none',
+                    minHeight: 'var(--btn-height-lg)', padding: '0 2rem', borderRadius: 'var(--btn-radius)', fontWeight: 700, border: 'none', whiteSpace: 'nowrap',
                     cursor: step === 'processing' ? 'default' : 'pointer', opacity: step === 'processing' ? 0.75 : 1,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
                   }}

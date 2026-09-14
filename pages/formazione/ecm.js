@@ -219,7 +219,8 @@ export default function FormazioneECM() {
         .dark .section-badge-ecm { color: #6EE7B7; }
         .cta-btn-primary-ecm {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
+          white-space: nowrap;
           background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           box-shadow: 0 4px 24px rgba(0,140,149,0.38);
@@ -229,7 +230,8 @@ export default function FormazioneECM() {
         .cta-btn-primary-ecm:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
         .cta-btn-outline-ecm {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px; background: transparent;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); background: transparent;
+          white-space: nowrap;
           color: rgba(255,255,255,0.85); font-weight: 700; font-size: 0.95rem; text-decoration: none;
           border: 2px solid rgba(255,255,255,0.22); transition: all 0.2s ease;
           font-family: inherit; cursor: pointer;
@@ -259,7 +261,8 @@ export default function FormazioneECM() {
         .field textarea { resize: vertical; min-height: 120px; }
         .submit-btn {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.9rem 2.25rem; border-radius: 999px;
+          padding: 0 2.25rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
+          white-space: nowrap;
           background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
           font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer;
           box-shadow: 0 4px 24px rgba(0,140,149,0.35);

@@ -116,14 +116,14 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
             <Link
               href="/checkout"
               onClick={onClose}
-              style={{ display: 'block', width: '100%', textAlign: 'center', background: 'linear-gradient(90deg, #008C95, #10B981)', color: '#fff', padding: '0.85rem', borderRadius: '9999px', fontWeight: 700, textDecoration: 'none', marginBottom: '0.75rem' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', textAlign: 'center', background: 'linear-gradient(90deg, #008C95, #10B981)', color: '#fff', padding: '0 1.5rem', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', fontWeight: 700, textDecoration: 'none', marginBottom: '0.75rem', boxSizing: 'border-box' }}
             >
               Procedi all&apos;ordine
             </Link>
             <button
               onClick={clearCart}
               className="border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300"
-              style={{ width: '100%', background: 'none', borderRadius: '9999px', padding: '0.75rem', cursor: 'pointer', fontWeight: 500 }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', background: 'none', borderRadius: 'var(--btn-radius)', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', padding: '0 1.5rem', cursor: 'pointer', fontWeight: 500, boxSizing: 'border-box' }}
             >
               Svuota carrello
             </button>

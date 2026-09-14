@@ -253,8 +253,9 @@ export default function Contatti() {
           display: inline-flex;
           align-items: center;
           gap: 0.55rem;
-          padding: 0.9rem 2.25rem;
-          border-radius: 999px;
+          height: var(--btn-height-lg);
+          padding: 0 2.25rem;
+          border-radius: var(--btn-radius);
           background: linear-gradient(90deg, #008C95, #10B981);
           color: #fff;
           font-weight: 700;

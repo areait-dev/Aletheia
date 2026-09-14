@@ -314,7 +314,7 @@ export default function AllCourses() {
             <p className="text-xs text-white/75 mb-4">Il nostro team è a tua disposizione</p>
             <a
               href="tel:+390932862613"
-              className="inline-block bg-white text-primary text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-50 transition-colors no-underline"
+              className="inline-flex items-center justify-center bg-white text-primary text-xs font-bold px-4 min-h-9 rounded-full hover:bg-slate-50 transition-colors no-underline whitespace-nowrap"
             >
               <i className="fas fa-phone mr-1.5"></i> Chiamaci
             </a>

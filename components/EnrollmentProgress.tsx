@@ -56,7 +56,7 @@ export default function EnrollmentProgress({ courseId, courseTitle }: Enrollment
         type="button"
         onClick={iscriviti}
         disabled={soglaRaggiunta}
-        className="w-full text-center text-white rounded-xl py-3 px-6 no-underline transition-transform !m-0"
+        className="w-full text-center text-white rounded-full min-h-[44px] flex items-center justify-center px-6 no-underline transition-transform !m-0 whitespace-nowrap"
         style={{
           background: soglaRaggiunta ? '#9CA3AF' : 'linear-gradient(90deg, #0d9488, #10b981)',
           fontWeight: 700, fontSize: '0.95rem', border: 'none',

@@ -323,7 +323,7 @@ function ConsulenzaForm({ isDark }) {
         </p>
         <button
           onClick={() => { setSubmitted(false); setFields(EMPTY_FORM); }}
-          style={{ marginTop: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '999px', background: 'rgba(0,140,149,0.12)', border: '1.5px solid rgba(0,140,149,0.35)', color: '#008C95', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit' }}
+          style={{ marginTop: '0.5rem', padding: '0 1.5rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', background: 'rgba(0,140,149,0.12)', border: '1.5px solid rgba(0,140,149,0.35)', color: '#008C95', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit' }}
         >
           Invia una nuova richiesta
         </button>
@@ -419,7 +419,7 @@ function ConsulenzaForm({ isDark }) {
         type="submit"
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
-          width: '100%', padding: '1.1rem 3rem', borderRadius: '999px', border: 'none',
+          width: '100%', padding: '0 3rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', border: 'none',
           background: 'linear-gradient(90deg, #008C95, #10B981)',
           color: '#fff', fontWeight: 700, fontSize: '1.05rem', cursor: 'pointer',
           fontFamily: 'inherit', boxShadow: '0 4px 20px rgba(0,140,149,0.35)',
@@ -485,7 +485,8 @@ export default function FormazioneObbligatoria() {
         }
         .cta-btn-primary {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
+          white-space: nowrap;
           background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           box-shadow: 0 4px 24px rgba(0,140,149,0.38);
@@ -495,7 +496,8 @@ export default function FormazioneObbligatoria() {
         .cta-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
         .cta-btn-outline {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px; background: transparent;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); background: transparent;
+          white-space: nowrap;
           color: rgba(255,255,255,0.85); font-weight: 700; font-size: 0.95rem; text-decoration: none;
           border: 2px solid rgba(255,255,255,0.22); transition: all 0.2s ease;
           font-family: inherit; cursor: pointer;
@@ -755,8 +757,13 @@ export default function FormazioneObbligatoria() {
         }
         .corso-row-cta {
           flex-shrink: 0;
-          padding: 0.6rem 1.25rem;
-          border-radius: 999px;
+          padding: 0 1.25rem;
+          min-height: var(--btn-height-sm);
+          white-space: nowrap;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: var(--btn-radius);
         }
         @media (max-width: 992px) {
           .calendario-form-grid2 { grid-template-columns: 1fr; }
@@ -968,7 +975,7 @@ export default function FormazioneObbligatoria() {
                   href="/calendario-corsi"
                   style={{
                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.55rem',
-                    padding: '0.85rem 2rem', borderRadius: '999px', background: 'transparent',
+                    padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', background: 'transparent',
                     color: isDark ? 'rgba(255,255,255,0.85)' : '#334155', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
                     border: isDark ? '2px solid rgba(255,255,255,0.22)' : '2px solid #CBD5E1', boxSizing: 'border-box',
                   }}

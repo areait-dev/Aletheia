@@ -58,7 +58,7 @@ export default function AvvisoMisuraPsr11AmmodernamentoAziendeAgricole() {
                         href={doc.percorsoLocale}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-white font-medium"
+                        className="inline-flex items-center justify-center gap-2 px-4 min-h-9 whitespace-nowrap rounded-full text-white font-medium text-sm"
                         style={{ backgroundColor: '#008C95' }}
                       >
                         <i className="fa-solid fa-download" />

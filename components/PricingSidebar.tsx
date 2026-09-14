@@ -86,7 +86,7 @@ export default function PricingSidebar({
             <a
               href={buyHref || '#'}
               onClick={onBuyClick}
-              className="w-full text-center text-white rounded-xl py-3 px-6 no-underline transition-transform !m-0 !mb-0 !mt-0"
+              className="w-full text-center text-white rounded-full min-h-[44px] flex items-center justify-center px-6 no-underline transition-transform !m-0 !mb-0 !mt-0 whitespace-nowrap"
               style={{
                 background: 'linear-gradient(90deg, #0d9488, #10b981)', fontWeight: 700, fontSize: '0.95rem',
                 boxShadow: '0 2px 6px rgba(13,148,136,0.25)', boxSizing: 'border-box',
@@ -104,7 +104,7 @@ export default function PricingSidebar({
             <button
               type="button"
               onClick={onAddToCartClick}
-              className="w-full text-center rounded-xl py-2.5 px-6 border border-gray-300 dark:border-[rgba(255,255,255,0.15)] text-gray-600 dark:text-gray-300 !m-0 !mb-0 !mt-0"
+              className="w-full text-center rounded-full min-h-9 flex items-center justify-center px-6 border border-gray-300 dark:border-[rgba(255,255,255,0.15)] text-gray-600 dark:text-gray-300 !m-0 !mb-0 !mt-0 whitespace-nowrap"
               style={{
                 fontWeight: 600, fontSize: '0.85rem', background: 'transparent', boxSizing: 'border-box',
                 cursor: 'pointer', fontFamily: 'inherit', paddingTop: '10px', paddingBottom: '10px',
@@ -119,7 +119,7 @@ export default function PricingSidebar({
           {quoteHref && (
             <a
               href={quoteHref}
-              className="w-full text-center rounded-xl py-2.5 px-6 no-underline border border-primary/60 text-[#006B73] dark:border-[#10B981]/50 dark:text-[#6EE7B7] !m-0 !mb-0 !mt-0"
+              className="w-full text-center rounded-full min-h-9 flex items-center justify-center px-6 no-underline border border-primary/60 text-[#006B73] dark:border-[#10B981]/50 dark:text-[#6EE7B7] !m-0 !mb-0 !mt-0 whitespace-nowrap"
               style={{
                 fontWeight: 600, fontSize: '0.95rem', background: 'transparent', boxSizing: 'border-box',
                 paddingTop: '10px', paddingBottom: '10px', margin: 0, marginBottom: 0, marginTop: 0,
@@ -135,7 +135,7 @@ export default function PricingSidebar({
               href={whatsappHref}
               target={whatsappHref !== '#' ? '_blank' : undefined}
               rel={whatsappHref !== '#' ? 'noopener noreferrer' : undefined}
-              className="w-full text-center rounded-xl py-2.5 px-6 no-underline border border-emerald-600/60 text-emerald-600 dark:border-emerald-400/50 dark:text-emerald-400 !m-0 !mb-0 !mt-0"
+              className="w-full text-center rounded-full min-h-9 flex items-center justify-center px-6 no-underline border border-emerald-600/60 text-emerald-600 dark:border-emerald-400/50 dark:text-emerald-400 !m-0 !mb-0 !mt-0 whitespace-nowrap"
               style={{
                 fontWeight: 600, fontSize: '0.95rem', background: 'transparent', boxSizing: 'border-box',
                 paddingTop: '10px', paddingBottom: '10px', margin: 0, marginBottom: 0, marginTop: 0,

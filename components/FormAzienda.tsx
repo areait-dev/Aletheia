@@ -332,7 +332,7 @@ export default function FormAzienda({
                 <button
                   onClick={() => { setSubmitted(false); setFields(EMPTY); }}
                   style={{
-                    marginTop: '0.5rem', padding: '0.65rem 1.75rem', borderRadius: '999px',
+                    marginTop: '0.5rem', padding: '0 1.75rem', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--btn-radius)',
                     background: 'rgba(0,140,149,0.12)', border: '1.5px solid rgba(0,140,149,0.35)',
                     color: '#008C95', fontWeight: 700, fontSize: '0.875rem',
                     cursor: 'pointer', fontFamily: 'inherit',
@@ -474,7 +474,7 @@ export default function FormAzienda({
                   disabled={loading}
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
-                    padding: '0.9rem 2rem', borderRadius: '999px', border: 'none',
+                    padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', border: 'none',
                     background: loading ? 'rgba(0,140,149,0.35)' : 'linear-gradient(90deg, #008C95, #10B981)',
                     color: '#fff', fontWeight: 700, fontSize: '0.95rem',
                     cursor: loading ? 'not-allowed' : 'pointer',

@@ -339,7 +339,7 @@ export default function Chatbot() {
                         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                         background: theme === 'dark' ? '#10B981' : '#008C95',
                         color: '#fff', fontWeight: 700, fontSize: '0.76rem',
-                        padding: '0.5rem 0.9rem', borderRadius: '9999px', textDecoration: 'none',
+                        padding: '0 0.9rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', textDecoration: 'none',
                       }}
                     >
                       <i className="fas fa-phone" style={{ fontSize: '0.7rem' }}></i>
@@ -353,7 +353,7 @@ export default function Chatbot() {
                         border: theme === 'dark' ? '1px solid #10B981' : '1px solid #008C95',
                         color: theme === 'dark' ? '#10B981' : '#008C95',
                         fontWeight: 700, fontSize: '0.76rem',
-                        padding: '0.5rem 0.9rem', borderRadius: '9999px', textDecoration: 'none',
+                        padding: '0 0.9rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', textDecoration: 'none',
                       }}
                     >
                       <i className="fas fa-envelope" style={{ fontSize: '0.7rem' }}></i>

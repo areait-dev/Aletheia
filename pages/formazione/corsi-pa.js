@@ -292,7 +292,8 @@ export default function CorsiPA() {
 
         .cta-btn-primary-pa {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
+          white-space: nowrap;
           background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           box-shadow: 0 4px 24px rgba(0,140,149,0.38);
@@ -302,7 +303,8 @@ export default function CorsiPA() {
         .cta-btn-primary-pa:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
         .cta-btn-outline-pa {
           display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0.85rem 2rem; border-radius: 999px; background: transparent;
+          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); background: transparent;
+          white-space: nowrap;
           color: rgba(255,255,255,0.85); font-weight: 700; font-size: 0.95rem; text-decoration: none;
           border: 2px solid rgba(255,255,255,0.22); transition: all 0.2s ease;
           font-family: inherit; cursor: pointer;
@@ -352,7 +354,8 @@ export default function CorsiPA() {
 
         .cta-btn-mepa {
           display: flex; align-items: center; justify-content: center; gap: 0.55rem;
-          width: 100%; padding: 0.9rem 2rem; border-radius: 12px; box-sizing: border-box;
+          width: 100%; padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); box-sizing: border-box;
+          white-space: nowrap;
           background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           transition: filter 0.2s ease, transform 0.2s ease; border: none; cursor: pointer; font-family: inherit;

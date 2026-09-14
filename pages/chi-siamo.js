@@ -112,7 +112,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
                 href={pdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full py-3 bg-primary dark:bg-[#008C95] hover:bg-[#006B73] dark:hover:bg-[#006B73] text-white font-semibold rounded-xl transition-all duration-200 text-sm no-underline"
+                className="flex items-center justify-center gap-3 w-full h-[44px] bg-primary dark:bg-[#008C95] hover:bg-[#006B73] dark:hover:bg-[#006B73] text-white font-semibold rounded-full transition-all duration-200 text-sm no-underline"
               >
                 <i className="fas fa-file-pdf"></i> Visualizza Certificato
               </a>
@@ -126,7 +126,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full py-3 bg-white dark:bg-transparent border border-primary dark:border-[#10B981] text-primary dark:text-[#10B981] hover:bg-[#008C95]/10 dark:hover:bg-[#10B981]/10 font-semibold rounded-xl transition-all duration-200 text-sm no-underline"
+                    className="flex items-center justify-center gap-3 w-full h-[44px] bg-white dark:bg-transparent border border-primary dark:border-[#10B981] text-primary dark:text-[#10B981] hover:bg-[#008C95]/10 dark:hover:bg-[#10B981]/10 font-semibold rounded-full transition-all duration-200 text-sm no-underline"
                   >
                     <i className="fas fa-file-pdf"></i> {link.label}
                   </a>
@@ -236,13 +236,13 @@ export default function ChiSiamo() {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
             <a
               href="#cosa-facciamo"
-              className="bg-primary hover:bg-[#10B981] text-white font-bold px-6 py-3 rounded-xl text-sm transition-all"
+              className="inline-flex items-center justify-center h-[44px] bg-primary hover:bg-[#10B981] text-white font-bold px-6 rounded-full text-sm transition-all"
             >
               Scopri cosa facciamo
             </a>
             <a
               href="/contatti"
-              className="bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 px-6 py-3 rounded-xl text-sm transition-all"
+              className="inline-flex items-center justify-center h-[44px] bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 px-6 rounded-full text-sm transition-all"
             >
               Contattaci
             </a>
@@ -606,7 +606,7 @@ export default function ChiSiamo() {
             </p>
             <a
               href="/contatti"
-              className="inline-block text-center bg-primary hover:bg-[#10B981] text-white font-extrabold px-6 py-3.5 rounded-xl text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
+              className="inline-flex items-center justify-center text-center h-[52px] bg-primary hover:bg-[#10B981] text-white font-extrabold px-8 rounded-full text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
             >
               Richiedi consulenza gratuita
             </a>

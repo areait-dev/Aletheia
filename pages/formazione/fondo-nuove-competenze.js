@@ -164,8 +164,10 @@ export default function FondoNuoveCompetenze() {
           display: inline-flex;
           align-items: center;
           gap: 0.55rem;
-          padding: 0.85rem 2rem;
-          border-radius: 999px;
+          padding: 0 2rem;
+          min-height: var(--btn-height-lg);
+          white-space: nowrap;
+          border-radius: var(--btn-radius);
           background: linear-gradient(90deg, #008C95, #10B981);
           color: #fff;
           font-weight: 700;
@@ -185,8 +187,10 @@ export default function FondoNuoveCompetenze() {
           display: inline-flex;
           align-items: center;
           gap: 0.55rem;
-          padding: 0.85rem 2rem;
-          border-radius: 999px;
+          padding: 0 2rem;
+          min-height: var(--btn-height-lg);
+          white-space: nowrap;
+          border-radius: var(--btn-radius);
           background: transparent;
           color: rgba(255,255,255,0.85);
           font-weight: 700;

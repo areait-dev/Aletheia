@@ -93,15 +93,16 @@ export default function CookieConsent() {
         <button
           onClick={() => choose('rejected')}
           className="text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700"
-          style={{ padding: '0.55rem 1.1rem', borderRadius: '9999px', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}
+          style={{ padding: '0 1.1rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}
         >
           Rifiuta
         </button>
         <button
           onClick={() => choose('accepted')}
           style={{
-            padding: '0.55rem 1.1rem',
-            borderRadius: '9999px',
+            padding: '0 1.1rem',
+            minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap',
+            borderRadius: 'var(--btn-radius)',
             fontWeight: 700,
             fontSize: '0.85rem',
             cursor: 'pointer',

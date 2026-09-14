@@ -394,7 +394,7 @@ function HeroSearch() {
 
       <button
         type="button"
-        className="px-8 py-2.5 bg-[#008C95] hover:bg-[#006B73] dark:bg-[#10B981] dark:hover:bg-[#059669] text-white font-bold text-xl rounded-full transition-all duration-200 whitespace-nowrap"
+        className="px-8 min-h-[44px] inline-flex items-center justify-center bg-[#008C95] hover:bg-[#006B73] dark:bg-[#10B981] dark:hover:bg-[#059669] text-white font-bold text-sm rounded-full transition-all duration-200 whitespace-nowrap"
       >
         Cerca
       </button>
@@ -448,7 +448,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 justify-center mt-8">
               <a
                 href="/all-courses"
-                className="inline-flex items-center gap-2 bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-xl"
+                className="inline-flex items-center justify-center gap-2 min-h-[52px] whitespace-nowrap bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-base"
               >
                 Scopri i corsi
               </a>
@@ -456,7 +456,7 @@ export default function Home() {
                 href="https://aletheia4job.it/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-200 text-base"
+                className="inline-flex items-center justify-center gap-2 min-h-[52px] whitespace-nowrap bg-white/10 backdrop-blur-sm text-white font-bold px-8 rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-200 text-base"
               >
                 <i className="fas fa-briefcase text-sm" aria-hidden="true" />
                 Vedi offerte di lavoro
@@ -587,7 +587,7 @@ export default function Home() {
                   </p>
                   <a
                     href="/all-courses"
-                    className="mt-5 self-start bg-primary hover:bg-[#10B981] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
+                    className="mt-5 self-start inline-flex items-center justify-center min-h-9 whitespace-nowrap bg-primary hover:bg-[#10B981] text-white font-bold px-5 rounded-full text-xs transition-colors duration-200"
                   >
                     Scopri di più →
                   </a>
@@ -617,7 +617,7 @@ export default function Home() {
                   </p>
                   <a
                     href="/agenzia-per-il-lavoro"
-                    className="mt-5 self-start bg-indigo-500 hover:bg-indigo-400 text-indigo-950 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors duration-200"
+                    className="mt-5 self-start inline-flex items-center justify-center min-h-9 whitespace-nowrap bg-indigo-500 hover:bg-indigo-400 text-indigo-950 font-bold px-5 rounded-full text-xs transition-colors duration-200"
                   >
                     Scopri di più →
                   </a>
@@ -828,7 +828,7 @@ export default function Home() {
           <div className="pt-4">
             <a
               href="/contatti"
-              className="inline-block bg-primary hover:bg-[#10B981] text-white font-bold px-8 py-4 rounded-xl text-xl transition-all duration-[250ms] shadow-lg shadow-[#008C95]/10 hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center justify-center min-h-[60px] whitespace-nowrap bg-primary hover:bg-[#10B981] text-white font-bold px-8 rounded-full text-base transition-all duration-[250ms] shadow-lg shadow-[#008C95]/10 hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0"
             >
               Contattaci
             </a>

@@ -309,14 +309,14 @@ export default function CalendarioCorsi() {
                                         {esaurito ? (
                                           <a
                                             href={`/contatti?corso=${encodeURIComponent(corso.titolo)}&intento=lista-attesa`}
-                                            className="inline-flex items-center gap-2 bg-slate-200 dark:bg-gray-700 text-slate-600 dark:text-gray-300 font-bold text-sm px-5 py-2.5 rounded-xl no-underline hover:bg-slate-300 dark:hover:bg-gray-600 transition-colors whitespace-nowrap"
+                                            className="inline-flex items-center justify-center gap-2 bg-slate-200 dark:bg-gray-700 text-slate-600 dark:text-gray-300 font-bold text-sm px-5 min-h-[44px] rounded-full no-underline hover:bg-slate-300 dark:hover:bg-gray-600 transition-colors whitespace-nowrap"
                                           >
                                             <i className="fas fa-clock-rotate-left" /> Lista d'attesa
                                           </a>
                                         ) : (
                                           <a
                                             href={`/all-courses/${corso.slug}`}
-                                            className="text-white font-bold text-sm px-6 py-2.5 rounded-xl no-underline transition-colors whitespace-nowrap"
+                                            className="inline-flex items-center justify-center text-white font-bold text-sm px-6 min-h-[44px] rounded-full no-underline transition-colors whitespace-nowrap"
                                             style={{ background: '#008C95' }}
                                             onMouseEnter={(e) => (e.currentTarget.style.background = '#006B73')}
                                             onMouseLeave={(e) => (e.currentTarget.style.background = '#008C95')}

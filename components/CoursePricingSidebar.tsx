@@ -53,7 +53,7 @@ export default function CoursePricingSidebar({
         <a
           href={primaryHref || '#'}
           onClick={onPrimaryClick}
-          className="w-full text-center text-white rounded-2xl py-3.5 px-6 font-bold no-underline bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-emerald-600/20 dark:shadow-none group"
+          className="w-full text-center text-white rounded-full min-h-[52px] px-6 font-bold no-underline bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-emerald-600/20 dark:shadow-none group whitespace-nowrap"
         >
           {label}
           <i className={`${icon} text-xs transition-transform group-hover:translate-x-1`}></i>

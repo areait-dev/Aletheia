@@ -220,8 +220,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.7rem 1.75rem;
-          border-radius: 999px;
+          padding: 0 1.75rem;
+          min-height: var(--btn-height-md);
+          white-space: nowrap;
+          border-radius: var(--btn-radius);
           font-size: 0.875rem;
           font-weight: 700;
           text-decoration: none;
@@ -962,8 +964,9 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.6rem',
-                padding: '0.85rem 2rem',
-                borderRadius: '999px',
+                padding: '0 2rem',
+                minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap',
+                borderRadius: 'var(--btn-radius)',
                 background: 'transparent',
                 color: 'rgba(255,255,255,0.8)',
                 fontWeight: 700,

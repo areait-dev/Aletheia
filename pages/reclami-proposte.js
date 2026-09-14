@@ -83,7 +83,7 @@ export default function ReclamiProposte() {
               </p>
               <button
                 onClick={() => { setSubmitted(false); setFields(EMPTY); setFileName(''); }}
-                className="mt-2 px-6 py-2.5 rounded-full text-sm font-semibold border border-primary text-primary dark:text-[#10B981] dark:border-[#10B981] hover:bg-primary hover:text-white dark:hover:bg-[#10B981] dark:hover:text-gray-900 transition-colors"
+                className="mt-2 inline-flex items-center justify-center px-6 min-h-9 whitespace-nowrap rounded-full text-sm font-semibold border border-primary text-primary dark:text-[#10B981] dark:border-[#10B981] hover:bg-primary hover:text-white dark:hover:bg-[#10B981] dark:hover:text-gray-900 transition-colors"
               >
                 Invia un&apos;altra segnalazione
               </button>
@@ -164,7 +164,7 @@ export default function ReclamiProposte() {
               <button
                 type="submit"
                 disabled={loading}
-                className="self-start mt-2 px-8 py-3 rounded-full font-semibold text-sm text-white bg-primary hover:bg-[#006B73] disabled:opacity-60 transition-colors shadow-md"
+                className="self-start mt-2 inline-flex items-center justify-center px-8 min-h-[44px] whitespace-nowrap rounded-full font-semibold text-sm text-white bg-primary hover:bg-[#006B73] disabled:opacity-60 transition-colors shadow-md"
               >
                 {loading ? 'Invio in corso…' : 'Invia segnalazione'}
               </button>
