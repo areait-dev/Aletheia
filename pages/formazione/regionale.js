@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Reveal from '../../components/Reveal';
@@ -58,10 +58,10 @@ const requisiti = [
 ];
 
 const puntiDiForza = [
-  { icon: 'fas fa-euro-sign', text: 'Formazione completamente gratuita' },
-  { icon: 'fas fa-chalkboard-teacher', text: 'Docenti qualificati e materiale incluso' },
-  { icon: 'fas fa-briefcase', text: 'Stage in azienda' },
-  { icon: 'fas fa-certificate', text: 'Qualifiche riconosciute a livello regionale e nazionale' },
+  { text: 'Formazione gratuita' },
+  { text: 'Docenti qualificati' },
+  { text: 'Stage in azienda' },
+  { text: 'Qualifiche certificate' },
 ];
 
 const faqs = [
@@ -284,7 +284,7 @@ export default function FormazioneRegionale() {
       <section style={{
         background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
         paddingTop: '120px',
-        paddingBottom: '5rem',
+        paddingBottom: '3.25rem',
         position: 'relative',
         overflow: 'hidden',
       }}>
@@ -292,7 +292,7 @@ export default function FormazioneRegionale() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+          <nav aria-label="Breadcrumb" className="text-left justify-start" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
             <a href="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Home</a>
             <span aria-hidden="true">›</span>
             <a href="/formazione/regionale-fse" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Formazione Finanziata</a>
@@ -300,55 +300,51 @@ export default function FormazioneRegionale() {
             <span style={{ color: '#6EE7B7' }}>Formazione Regionale</span>
           </nav>
 
-          <div className="hero-badge fade-up">
-            Formazione Finanziata
-          </div>
+          {/* Contenuto principale centrato, sotto la breadcrumb allineata a sinistra */}
+          <div className="text-center flex flex-col items-center justify-center w-full">
+            <div className="hero-badge fade-up self-start">
+              Formazione Finanziata
+            </div>
 
-          <h1 className="fade-up fade-up-1" style={{
-            fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)',
-            fontWeight: 900,
-            color: '#fff',
-            lineHeight: 1.15,
-            marginBottom: '2.5rem',
-          }}>
-            Formazione regionale{' '}
-            <span style={{
-              background: 'linear-gradient(90deg, #10B981, #008C95)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+            <h1 className="fade-up fade-up-1 text-center justify-center mx-auto" style={{
+              fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)',
+              fontWeight: 900,
+              color: '#fff',
+              lineHeight: 1.15,
+              marginBottom: '0.75rem',
+              maxWidth: '780px',
             }}>
-              gratuita
-            </span>{' '}
-            con qualifica riconosciuta
-          </h1>
+              Formazione regionale{' '}
+              <span style={{
+                background: 'linear-gradient(90deg, #10B981, #008C95)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
+                gratuita
+              </span>{' '}
+              con qualifica riconosciuta
+            </h1>
 
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a href="#avvisi" className="cta-btn-primary">Scopri gli avvisi</a>
-            <a href="/contatti" className="cta-btn-outline">Contattaci</a>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════ PERCHÉ SCEGLIERE LA FORMAZIONE FINANZIATA ══════════════ */}
-      <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
-        <div className="container">
-          <div>
-            <span className="section-badge">Perché scegliere la formazione finanziata</span>
-            <p className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.15rem, 2vw, 1.4rem)', fontWeight: 800, margin: '0 0 1.5rem', lineHeight: 1.4 }}>
-              Gratuita. Certificata. Spendibile nel mondo del lavoro.
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+            {/* TRUST BAR CON EFFETTO GLASSMORPHISM, CENTRATA, CON DIVISORI VERTICALI */}
+            <div className="inline-flex flex-wrap md:flex-nowrap items-center justify-center gap-x-6 gap-y-3 mt-0 mb-5 p-3 px-6 text-center bg-white/5 border border-white/10 rounded-xl backdrop-blur-md mx-auto">
               {puntiDiForza.map((p, i) => (
-                <Reveal key={p.text} delay={(i % 4) * 80}>
-                  <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.85rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                    <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <i className={p.icon} style={{ color: '#008C95', fontSize: '1rem' }}></i>
+                <Fragment key={p.text}>
+                  <span className="text-white text-xs font-bold tracking-widest uppercase whitespace-nowrap">
+                    {p.text}
+                  </span>
+                  {i < puntiDiForza.length - 1 && (
+                    <div className="hidden md:block text-white/20 font-light select-none text-xs" aria-hidden="true">
+                      |
                     </div>
-                    <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{p.text}</span>
-                  </div>
-                </Reveal>
+                  )}
+                </Fragment>
               ))}
+            </div>
+
+            <div className="fade-up fade-up-3 justify-center mx-auto" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href="#avvisi" className="cta-btn-primary">Scopri gli avvisi</a>
+              <a href="/contatti" className="cta-btn-outline">Contattaci</a>
             </div>
           </div>
         </div>
@@ -357,8 +353,8 @@ export default function FormazioneRegionale() {
       {/* ══════════════ AVVISI DELLA REGIONE SICILIANA ══════════════ */}
       <section id="avvisi" className="bg-white dark:bg-dark-card" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div style={{ marginBottom: '3rem', maxWidth: '760px' }}>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
+          <div style={{ marginBottom: '3rem' }}>
+            <h2 className="text-slate-900 dark:text-white md:whitespace-nowrap" style={{ fontSize: 'clamp(1.35rem, 2.6vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
               Scegli il programma di finanziamento più adatto a te
             </h2>
             <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>

@@ -88,9 +88,6 @@ function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt 
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(4,15,20,0.92) 10%, rgba(4,15,20,0.6) 55%, rgba(4,15,20,0.12) 100%)' }} />
 
       <div style={{ position: 'relative', zIndex: 1, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1, justifyContent: 'flex-end' }}>
-        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <i className={icon} style={{ fontSize: '1.05rem', color: '#6EE7B7' }}></i>
-        </div>
         <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6EE7B7', width: 'fit-content' }}>
           {badge}
         </span>

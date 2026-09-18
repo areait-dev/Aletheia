@@ -58,7 +58,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
     <>
       <div
         onClick={() => setShowModal(true)}
-        className="h-full bg-white dark:bg-dark-card rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-2 hover:shadow-lg flex flex-col items-center group"
+        className="h-full bg-slate-50 dark:bg-dark-bg rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 border border-slate-200 dark:border-[rgba(255,255,255,0.1)] hover:-translate-y-2 hover:border-[#008C95] dark:hover:border-[#10B981] flex flex-col items-center group"
       >
         <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-[#006066] dark:text-[#10B981] transition-colors duration-300 group-hover:bg-[#008C95]/15 dark:group-hover:bg-[#10B981]/20">
           <i className={icon}></i>
@@ -370,29 +370,42 @@ export default function ChiSiamo() {
             I nostri punti di forza
           </span>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Reveal className="relative grid grid-cols-1 sm:grid-cols-[repeat(3,minmax(0,1fr))] gap-0 bg-transparent border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden">
+            {/* Dot Grid: micro-texture a puntini in Ottanio brand a bassissima opacità,
+                assolutamente posizionata così esce dal flusso della grid (non conta come cella)
+                e resta dietro il reticolo di linee — dettaglio elegante, non invasivo per la lettura. */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(circle, rgba(0,140,149,0.12) 1px, transparent 1px)',
+                backgroundSize: '18px 18px',
+              }}
+            />
             {[
-              { icon: 'fa-network-wired', titolo: 'Sistema formazione-lavoro integrato', desc: "Due ruoli, un obiettivo solo: trasformare ogni competenza acquisita in un'opportunità concreta di inserimento o crescita professionale." },
-              { icon: 'fa-shield-halved', titolo: 'Affidabilità certificata', desc: 'Accreditamento regionale, iscrizione ANPAL e certificazioni ISO: garanzie ufficiali che attestano qualità e trasparenza.' },
-              { icon: 'fa-graduation-cap', titolo: 'Esperti in formazione finanziata', desc: "Oltre 100 progetti gestiti con fondi FSE, PSR, FEAMP e Fondi Interprofessionali. Seguiamo l'intero processo, dall'analisi dei fabbisogni alla rendicontazione finale." },
-              { icon: 'fa-award', titolo: 'Certificazioni riconosciute', desc: 'Percorsi qualificanti e certificazioni spendibili nel mercato del lavoro e nei concorsi pubblici. Siamo anche Test Center AICA.' },
-              { icon: 'fa-chart-line', titolo: 'Competenze verticali', desc: 'Esperienza consolidata nei settori agricoltura, agroalimentare, sanità, servizi, sicurezza e pubblica amministrazione.' },
-              { icon: 'fa-people-group', titolo: 'La forza di un gruppo', desc: 'Alètheia è l’ente di formazione di Promotergroup S.p.A., un ecosistema che integra formazione, consulenza aziendale, salute e sicurezza, comunicazione. Scegliere Alètheia significa accedere a una rete di competenze che va ben oltre la formazione.' },
-            ].map((card, i) => (
-              <Reveal key={card.titolo} delay={(i % 3) * 80} className="h-full">
-                <div
-                  className="group h-full bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              // Riga 1: spazio 1 (span 2) + spazio 2 (span 1, ultima colonna).
+              { titolo: 'Sistema formazione-lavoro integrato', span: 'sm:col-span-2', big: true, borders: 'border-b sm:border-r' },
+              { titolo: 'Affidabilità certificata', span: 'sm:col-span-1', big: false, borders: 'border-b' },
+              // Riga 2: tre spazi da 1 colonna.
+              { titolo: 'Esperti in formazione finanziata', span: 'sm:col-span-1', big: false, borders: 'border-b sm:border-r' },
+              { titolo: 'Certificazioni riconosciute', span: 'sm:col-span-1', big: false, borders: 'border-b sm:border-r' },
+              { titolo: 'Competenze verticali', span: 'sm:col-span-1', big: false, borders: 'border-b' },
+              // Riga 3: spazio 6, riga intera, nessun bordo residuo (ultimo blocco).
+              { titolo: 'La forza di un gruppo', span: 'sm:col-span-3', big: true, borders: '' },
+            ].map((card) => (
+              <div
+                key={card.titolo}
+                className={`${card.span} ${card.borders} border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.1)] flex items-start justify-start text-left p-8`}
+              >
+                <h3
+                  className={`text-[#006066] dark:text-[#10B981] normal-case tracking-normal leading-snug ${
+                    card.big ? '!font-bold !text-2xl' : '!font-semibold !text-lg'
+                  }`}
                 >
-                  <h3 className="text-slate-900 dark:text-white font-bold text-lg flex items-center gap-3 normal-case tracking-normal">
-                    <span className="w-9 h-9 shrink-0 rounded-full bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#008C95] dark:text-[#10B981] flex items-center justify-center">
-                      <i className={`fas ${card.icon} text-sm`} />
-                    </span>
-                    {card.titolo}
-                  </h3>
-                </div>
-              </Reveal>
+                  {card.titolo}
+                </h3>
+              </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Reveal from '../../components/Reveal';
@@ -11,21 +12,18 @@ const heroBadges = [
 
 const valori = [
   {
-    icon: 'fas fa-lightbulb',
     title: 'Contenuti aggiornati',
     text: (
       <>Programmi progettati con <strong className="text-slate-900 dark:text-white font-bold">docenti professionisti</strong>: non teoria fine a sé stessa, ma <strong className="text-slate-900 dark:text-white font-bold">competenze pratiche</strong> spendibili sul lavoro.</>
     ),
   },
   {
-    icon: 'fas fa-file-circle-check',
     title: 'Certificazioni riconosciute',
     text: (
       <><strong className="text-slate-900 dark:text-white font-bold">ICDL, qualifiche regionali e crediti ECM</strong>. Titoli validi per il mercato privato, concorsi pubblici e graduatorie scolastiche.</>
     ),
   },
   {
-    icon: 'fas fa-bullseye',
     title: 'Percorsi su misura',
     text: (
       <>Soluzioni flessibili per <strong className="text-slate-900 dark:text-white font-bold">privati e Pubblica Amministrazione</strong>. Corsi in aula, online o direttamente presso il tuo ente.</>
@@ -35,7 +33,6 @@ const valori = [
 
 const verticali = [
   {
-    color: 'blue',
     sopratitolo: 'Riconosciute in più di 150 paesi',
     title: 'Certificazioni Informatiche ICDL',
     bullets: [
@@ -43,12 +40,14 @@ const verticali = [
       'Test Center AICA qualificato con esami direttamente in sede a Vittoria',
       'Percorsi flessibili per studenti, professionisti e docenti',
     ],
-    icon: 'fas fa-laptop-code',
     cta: 'Scopri le certificazioni',
     href: '/all-courses?categoria=certificazioni-informatiche',
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Certificazioni Informatiche ICDL',
+    gradient: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
+    span: 5,
   },
   {
-    color: 'amber',
     sopratitolo: 'Crescita professionale',
     title: 'Corsi Qualificati',
     bullets: [
@@ -56,12 +55,14 @@ const verticali = [
       'Qualifiche ufficiali inserite nel Repertorio Nazionale e spendibili sul mercato',
       'Certificazione delle competenze acquisite con titoli riconosciuti',
     ],
-    icon: 'fas fa-certificate',
     cta: 'Scopri i corsi qualificati',
     href: '/all-courses?categoria=certificazione',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Corsi Qualificati',
+    gradient: 'linear-gradient(135deg, #0F172A 0%, #008C95 100%)',
+    span: 7,
   },
   {
-    color: 'teal',
     sopratitolo: 'Educazione continua in medicina',
     title: 'Corsi ECM',
     bullets: [
@@ -69,12 +70,14 @@ const verticali = [
       'Provider ECM accreditato con contenuti scientifici sempre aggiornati e crediti certificati',
       'Modalità di fruizione flessibili studiate per chi già lavora in corsia',
     ],
-    icon: 'fas fa-user-doctor',
     cta: 'Scopri i corsi ECM',
     href: '/formazione/ecm',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Corsi ECM',
+    gradient: 'linear-gradient(135deg, #134E4A 0%, #10B981 100%)',
+    span: 7,
   },
   {
-    color: 'indigo',
     sopratitolo: 'Per enti pubblici',
     title: 'Formazione per la PA',
     bullets: [
@@ -82,79 +85,59 @@ const verticali = [
       'Corsi erogabili direttamente in sede o in modalità dedicate',
       'Docenti altamente specializzati e orientati alle esigenze della PA',
     ],
-    icon: 'fas fa-landmark',
     cta: 'Scopri la formazione PA',
     href: '/formazione/corsi-pa',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80',
+    imageAlt: 'Formazione per la PA',
+    gradient: 'linear-gradient(135deg, #008C95 0%, #0F172A 100%)',
+    span: 5,
   },
 ];
 
-// Classi statiche (necessarie per Tailwind JIT: niente interpolazione dinamica di classi colore)
-const COLOR_STYLES = {
-  blue: {
-    iconBg: 'bg-blue-50 dark:bg-blue-900/20',
-    iconText: 'text-blue-600 dark:text-blue-300',
-    sopratitolo: 'text-blue-600 dark:text-blue-300',
-    topBorder: 'bg-blue-600',
-    bullet: 'text-blue-600 dark:text-blue-300',
-    btn: 'border-blue-600 text-blue-600 dark:border-blue-300 dark:text-blue-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-300 dark:hover:text-slate-900',
-  },
-  amber: {
-    iconBg: 'bg-amber-50 dark:bg-amber-900/20',
-    iconText: 'text-amber-600 dark:text-amber-300',
-    sopratitolo: 'text-amber-600 dark:text-amber-300',
-    topBorder: 'bg-amber-600',
-    bullet: 'text-amber-600 dark:text-amber-300',
-    btn: 'border-amber-600 text-amber-600 dark:border-amber-300 dark:text-amber-300 hover:bg-amber-600 hover:text-white dark:hover:bg-amber-300 dark:hover:text-slate-900',
-  },
-  teal: {
-    iconBg: 'bg-[#008C95]/10 dark:bg-[#10B981]/10',
-    iconText: 'text-primary dark:text-[#10B981]',
-    sopratitolo: 'text-primary dark:text-[#10B981]',
-    topBorder: 'bg-primary',
-    bullet: 'text-primary dark:text-[#10B981]',
-    btn: 'border-primary text-primary dark:border-[#10B981] dark:text-[#10B981] hover:bg-primary hover:text-white dark:hover:bg-[#10B981] dark:hover:text-slate-900',
-  },
-  indigo: {
-    iconBg: 'bg-indigo-50 dark:bg-indigo-900/20',
-    iconText: 'text-indigo-900 dark:text-indigo-300',
-    sopratitolo: 'text-indigo-900 dark:text-indigo-300',
-    topBorder: 'bg-indigo-900',
-    bullet: 'text-indigo-900 dark:text-indigo-300',
-    btn: 'border-indigo-900 text-indigo-900 dark:border-indigo-300 dark:text-indigo-300 hover:bg-indigo-900 hover:text-white dark:hover:bg-indigo-300 dark:hover:text-slate-900',
-  },
-};
+function ImgCourse({ src, alt }) {
+  return (
+    // object-fit: cover a piena tela, foto edge-to-edge: il "montaggio" con margine
+    // e contain sembrava un ritaglio incollato, non una card fotografica vera.
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <Image src={src} alt={alt} fill sizes="(max-width: 800px) 100vw, 50vw" style={{ objectFit: 'cover', objectPosition: 'center top' }} />
+    </div>
+  );
+}
 
-function VerticaleCard({ color, sopratitolo, title, bullets, icon, cta, href }) {
-  const c = COLOR_STYLES[color];
+// Card verticale unica: stesso stile per tutte e 4 le aree (niente più un colore diverso per
+// categoria, niente più icona). Foto a piena tela in testa a ogni card; il peso visivo cambia
+// solo tramite lo span di griglia assegnato in "verticali".
+function VerticaleCard({ sopratitolo, title, bullets, cta, href, image, imageAlt }) {
   return (
     <a
       href={href}
-      className="h-full bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] flex flex-col overflow-hidden no-underline transition-all duration-300 hover:-translate-y-2 hover:shadow-md rounded-2xl"
+      className="group h-full no-underline flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
     >
-      <div className={`h-1 ${c.topBorder}`} />
-      <div className="p-8 flex flex-col gap-3 flex-1">
-        <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${c.iconBg}`}>
-          <i className={`${icon} ${c.iconText}`} style={{ fontSize: '1.35rem' }}></i>
-        </div>
-
-        <span className={`text-xs font-extrabold uppercase tracking-widest ${c.sopratitolo}`}>
+      <div style={{ height: '220px', position: 'relative' }}>
+        {image && <ImgCourse src={image} alt={imageAlt} />}
+        {/* Sopratitolo come badge sovrapposto, stesso stile verde dei badge nella hero. */}
+        <span
+          className="absolute left-4 bottom-4 text-[0.68rem] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-full"
+          style={{ color: '#6EE7B7', background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.4)', backdropFilter: 'blur(2px)' }}
+        >
           {sopratitolo}
         </span>
-
-        <h3 className="text-slate-900 dark:text-white text-xl font-extrabold leading-snug m-0">
+      </div>
+      <div className="px-7 pb-7 pt-6 flex flex-col gap-3 flex-1">
+        <h3 className="text-xl font-extrabold leading-snug m-0 text-slate-900 dark:text-white">
           {title}
         </h3>
 
         <ul className="list-none m-0 p-0 space-y-2 flex-1">
           {bullets.map((b, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-slate-600 dark:text-gray-300 leading-relaxed">
-              <i className={`fas fa-check text-xs mt-1 shrink-0 ${c.bullet}`}></i>
+            <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-slate-600 dark:text-gray-300">
+              <i className="fas fa-check text-xs mt-1 shrink-0 text-primary dark:text-[#10B981]"></i>
               <span>{b}</span>
             </li>
           ))}
         </ul>
 
-        <span className={`mt-auto inline-flex items-center justify-center gap-2 text-sm font-bold rounded-full border-2 px-5 py-2.5 transition-all duration-300 ${c.btn}`}>
+        <span className="mt-auto inline-flex items-center gap-2 text-sm font-bold rounded-full border-2 px-5 py-2.5 transition-all duration-300 border-primary text-primary dark:border-[#10B981] dark:text-[#10B981] hover:bg-primary hover:text-white dark:hover:bg-[#10B981] dark:hover:text-slate-900">
           {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
         </span>
       </div>
@@ -210,12 +193,35 @@ export default function FormazioneProfessionaleSpecialistica() {
 
         .fps-badges-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
 
-        /* Blocco compatto 3 colonne sotto la hero */
-        .valori-grid-fps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        @media (max-width: 800px) { .valori-grid-fps { grid-template-columns: 1fr; } }
+        /* Blocco "Formazione che crea valore": editoriale, senza box/bordi (per non
+           somigliare alla griglia di card fotografiche delle aree sotto). Divisori
+           verticali sottili tra le colonne, niente sfondo. */
+        .valori-grid-fps {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 0;
+        }
+        .valori-item-fps {
+          padding: 0 2.25rem;
+          border-left: 1px solid #E2E8F0;
+        }
+        .valori-item-fps:first-child { padding-left: 0; border-left: none; }
+        :global(.dark) .valori-item-fps { border-color: rgba(255,255,255,0.1); }
+        @media (max-width: 800px) {
+          .valori-grid-fps { grid-template-columns: 1fr; gap: 2rem; }
+          .valori-item-fps {
+            padding: 0 0 0 1.5rem;
+            border-left: 1px solid #E2E8F0;
+          }
+          :global(.dark) .valori-item-fps { border-color: rgba(255,255,255,0.1); }
+        }
 
-        .aree-grid-fps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; align-items: stretch; }
-        @media (max-width: 800px) { .aree-grid-fps { grid-template-columns: 1fr; } }
+        /* Aree formative: grid a 12 colonne, pesi diversi per card (7/5/5/7), non più
+           una griglia 2x2 perfettamente simmetrica con un colore diverso per categoria. */
+        .aree-grid-fps { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+        @media (max-width: 900px) {
+          .aree-grid-fps > * { grid-column: span 12 !important; }
+        }
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
@@ -252,18 +258,16 @@ export default function FormazioneProfessionaleSpecialistica() {
           <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '2.5rem', textAlign: 'center' }}>
             Formazione che crea valore, non solo attestati
           </h3>
-          <div className="valori-grid-fps items-stretch">
+          <div className="valori-grid-fps">
             {valori.map((v, i) => (
-              <Reveal key={v.title} delay={(i % 4) * 80} className="h-full">
-                <div
-                  className="h-full bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] rounded-xl p-8 flex flex-col items-start text-left gap-3"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-[#008C95]/10 dark:bg-[#10B981]/10 flex items-center justify-center">
-                    <i className={`${v.icon} text-primary dark:text-[#10B981]`} style={{ fontSize: '1.3rem' }}></i>
-                  </div>
-                  <span className="text-slate-900 dark:text-white text-lg font-extrabold">{v.title}</span>
-                  <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed m-0">{v.text}</p>
-                </div>
+              <Reveal key={v.title} delay={(i % 4) * 80} className="valori-item-fps">
+                <span className="text-primary dark:text-[#10B981] font-black block mb-2" style={{ fontSize: '1.6rem', opacity: 0.35 }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="font-extrabold text-slate-900 dark:text-white text-lg block mb-2">
+                  {v.title}
+                </span>
+                <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed m-0">{v.text}</p>
               </Reveal>
             ))}
           </div>
@@ -286,11 +290,21 @@ export default function FormazioneProfessionaleSpecialistica() {
           </div>
 
           <div className="aree-grid-fps">
-            {verticali.map((v, i) => (
-              <Reveal key={v.title} delay={(i % 3) * 90} className="h-full">
-                <VerticaleCard {...v} />
-              </Reveal>
-            ))}
+            {/* Righe invertite rispetto a prima: sopra stretta+larga, sotto larga+stretta.
+                Classi scritte per esteso (non interpolate): la scansione statica di
+                Tailwind non genera CSS per classi arbitrarie composte a runtime. */}
+            <Reveal delay={0} className="h-full [grid-column:span_5]">
+              <VerticaleCard {...verticali[0]} />
+            </Reveal>
+            <Reveal delay={90} className="h-full [grid-column:span_7]">
+              <VerticaleCard {...verticali[1]} />
+            </Reveal>
+            <Reveal delay={180} className="h-full [grid-column:span_7]">
+              <VerticaleCard {...verticali[2]} />
+            </Reveal>
+            <Reveal delay={270} className="h-full [grid-column:span_5]">
+              <VerticaleCard {...verticali[3]} />
+            </Reveal>
           </div>
         </div>
       </section>

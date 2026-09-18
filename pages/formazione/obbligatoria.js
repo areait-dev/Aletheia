@@ -84,7 +84,7 @@ const puntiForza = [
 const faqs = [
   {
     domanda: 'Quali corsi di formazione sono obbligatori per la mia azienda?',
-    risposta: 'Dipende dal settore, dalle mansioni dei lavoratori e dalle attrezzature utilizzate. In linea generale, ogni azienda deve garantire almeno: formazione generale e specifica per tutti i lavoratori, formazione per preposti e dirigenti, designazione e formazione degli addetti antincendio e primo soccorso, formazione RSPP. Contattaci — verifichiamo insieme gli obblighi specifici per la tua realtà aziendale.',
+    risposta: 'Dipende dal settore, dalle mansioni dei lavoratori e dalle attrezzature utilizzate. In linea generale, ogni azienda deve garantire almeno: formazione generale e specifica per tutti i lavoratori, formazione per preposti e dirigenti, designazione e formazione degli addetti antincendio e primo soccorso, formazione RSPP. Contattaci: verifichiamo insieme gli obblighi specifici per la tua realtà aziendale.',
   },
   {
     domanda: 'Cosa succede se non effettuo la formazione obbligatoria?',
@@ -92,7 +92,7 @@ const faqs = [
   },
   {
     domanda: 'Gli attestati rilasciati da Alètheia sono validi in tutta Italia?',
-    risposta: "Sì. Tutti gli attestati rilasciati al termine dei corsi sono validi su tutto il territorio nazionale, in conformità con il D.Lgs. 81/08 e l'Accordo Stato-Regioni 2025. Alètheia è ente accreditato dalla Regione Siciliana — DDG n. 78 del 20/01/2017.",
+    risposta: "Sì. Tutti gli attestati rilasciati al termine dei corsi sono validi su tutto il territorio nazionale, in conformità con il D.Lgs. 81/08 e l'Accordo Stato-Regioni 2025. Alètheia è ente accreditato dalla Regione Siciliana (DDG n. 78 del 20/01/2017).",
   },
   {
     domanda: 'È possibile organizzare i corsi direttamente in azienda?',
@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     domanda: 'I corsi di formazione obbligatoria possono essere svolti online?',
-    risposta: 'Alcuni sì, altri no. La formazione generale per i lavoratori, alcuni moduli RSPP e la parte tecnica di molti corsi sono disponibili in FAD o videoconferenza. La parte pratica — antincendio, primo soccorso, attrezzature — deve essere svolta obbligatoriamente in presenza. Ti indichiamo noi la modalità corretta per ogni corso.',
+    risposta: 'Alcuni sì, altri no. La formazione generale per i lavoratori, alcuni moduli RSPP e la parte tecnica di molti corsi sono disponibili in FAD o videoconferenza. La parte pratica (antincendio, primo soccorso, attrezzature) deve essere svolta obbligatoriamente in presenza. Ti indichiamo noi la modalità corretta per ogni corso.',
   },
   {
     domanda: 'Con quale frequenza va rinnovata la formazione obbligatoria?',
@@ -179,9 +179,20 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
   const corsiFiltrati = selectedDate === 'all' ? corsi : corsi.filter((c) => c.data === selectedDate);
 
   return (
-    <div>
-      {/* Pillole data: orizzontali, scrollabili, "Vedi tutte" per rimuovere il filtro */}
-      <div className="corsi-date-pills">
+    <>
+      {/* Sidebar date: colonna verticale a sinistra, terza colonna della grid
+          .calendario-form-grid2 (solo desktop/tablet, 992px+). Sotto i 992px lo
+          scroll orizzontale nascosto era di difficile scoperta su mobile: al suo
+          posto un menu a tendina nativo, compatto e senza interazioni nascoste. */}
+      <aside className="corsi-date-sidebar" aria-label="Filtra per data">
+        <button
+          type="button"
+          onClick={() => setSelectedDate('all')}
+          aria-pressed={selectedDate === 'all'}
+          className={`corso-date-pill${selectedDate === 'all' ? ' active' : ''}`}
+        >
+          Vedi tutte
+        </button>
         {giorni.map(({ data }) => {
           const [y, m, d] = data.split('-').map(Number);
           const mese = MONTHS_IT_SHORT[m - 1];
@@ -198,17 +209,40 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
             </button>
           );
         })}
-        <button
-          type="button"
-          onClick={() => setSelectedDate('all')}
-          aria-pressed={selectedDate === 'all'}
-          className={`corso-date-pill${selectedDate === 'all' ? ' active' : ''}`}
-        >
-          Vedi tutte
-        </button>
-      </div>
+      </aside>
 
-      <div className="corsi-catalog-list">
+      <label className="corsi-date-select-label" htmlFor="corsi-date-select">
+        Filtra per data
+        <select
+          id="corsi-date-select"
+          className="corsi-date-select"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+        >
+          <option value="all">Vedi tutte le date</option>
+          {giorni.map(({ data }) => {
+            const [y, m, d] = data.split('-').map(Number);
+            const mese = MONTHS_IT_SHORT[m - 1];
+            return (
+              <option key={data} value={data}>
+                {d} {mese}
+              </option>
+            );
+          })}
+        </select>
+      </label>
+
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '1.5rem' }}>
+          <div style={{ width: '40px', height: '40px', minWidth: '40px', borderRadius: '11px', background: 'rgba(0,140,149,0.15)', border: '1px solid rgba(0,140,149,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <i className="fas fa-calendar-days" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1rem' }}></i>
+          </div>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: isDark ? '#fff' : '#0F172A', margin: 0, lineHeight: 1.3 }}>
+            Corsi in partenza
+          </h3>
+        </div>
+
+        <div className="corsi-catalog-list">
         {corsiFiltrati.map((c) => {
           const [y, m, d] = c.data.split('-').map(Number);
           const mese = MONTHS_IT_SHORT[m - 1];
@@ -262,8 +296,23 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
             Nessun corso in partenza per questa data.
           </p>
         )}
+        </div>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <a
+            href="/calendario-corsi"
+            style={{
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.55rem',
+              padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', background: 'transparent',
+              color: isDark ? 'rgba(255,255,255,0.85)' : '#334155', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              border: isDark ? '2px solid rgba(255,255,255,0.22)' : '2px solid #CBD5E1', boxSizing: 'border-box',
+            }}
+          >
+            Vedi tutto il calendario
+          </a>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -664,59 +713,131 @@ export default function FormazioneObbligatoria() {
         .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem 1.5rem; align-items: start; }
         @media (max-width: 800px) { .faq-grid { grid-template-columns: 1fr; } }
 
-        /* Corsi (sinistra) / Form (destra): sidebar destra sticky durante lo scroll dei corsi */
+        /* Date (sidebar) / Corsi / Form: tre colonne, la destra sticky durante lo
+           scroll dei corsi. minmax(0, ...) impedisce alle colonne fr di crescere
+           oltre la propria quota quando il contenuto (es. .corso-row-thumb a
+           larghezza fissa) supera lo spazio disponibile: senza, la colonna spinge
+           le altre fuori schermo in tablet (~1024px), causando overflow orizzontale. */
         .calendario-form-grid2 {
           display: grid;
-          grid-template-columns: 3fr 7fr;
-          gap: 48px;
+          grid-template-columns: minmax(0, 150px) minmax(0, 3fr) minmax(0, 7fr);
+          gap: 32px;
           align-items: start;
           width: 100%;
         }
         .colonna-destra-form {
           position: sticky;
-          top: 40px;
+          /* 110px, non 40px: l'header del sito è fixed (~100-120px con logo e
+             padding) e senza clearance ci copriva la parte alta del box durante
+             lo scroll. */
+          top: 110px;
           align-self: start;
         }
+        /* Allinea l'inizio del form al top delle card corsi (non all'header
+           "Corsi in partenza" sopra di esse): 64px = altezza icona+titolo+margine
+           della colonna corsi. Solo nel layout a 3 colonne (992px+); su mobile il
+           form segue semplicemente il flusso, senza offset. */
+        @media (min-width: 993px) {
+          .colonna-destra-form { margin-top: 64px; }
+          /* Sticky anche per la sidebar date: quando i corsi sono molti e la lista
+             supera l'altezza della sidebar, questa segue lo scroll così le date
+             restano sempre selezionabili senza dover risalire alla pagina. */
+          .corsi-date-sidebar { position: sticky; top: 110px; align-self: start; }
+        }
 
-        /* Selettore date: pillole orizzontali, scrollabili su overflow */
-        .corsi-date-pills {
+        /* Selettore date: sidebar verticale, colonna dedicata della grid (992px+).
+           Sotto i 992px la grid collassa a 1 colonna e la sidebar lascia il posto
+           al menu a tendina .corsi-date-select (vedi media query più sotto):
+           su mobile lo scroll orizzontale nascosto era di difficile scoperta. */
+        .corsi-date-select-label { display: none; }
+        .corsi-date-select { display: none; }
+        .corsi-date-sidebar {
           display: flex;
-          gap: 12px;
-          overflow-x: auto;
-          padding-bottom: 16px;
+          flex-direction: column;
+          gap: 8px;
         }
         .corso-date-pill {
+          width: 100%;
           flex-shrink: 0;
-          padding: 0.5rem 1.1rem;
-          border-radius: 999px;
-          border: none;
-          background: #F1F5F9;
+          padding: 0.55rem 1rem;
+          border-radius: 10px;
+          /* Sfondo bianco + bordo sottile invece di #F1F5F9: la sezione ha lo
+             stesso colore di sfondo, quindi le pillole inattive risultavano
+             pressoché invisibili senza un contrasto proprio. */
+          border: 1px solid #E2E8F0;
+          background: #ffffff;
           color: #475569;
           font-size: 0.82rem;
           font-weight: 700;
+          text-align: left;
           white-space: nowrap;
           cursor: pointer;
           font-family: inherit;
           transition: all 0.2s ease;
         }
         :global(.dark) .corso-date-pill {
+          border-color: rgba(255,255,255,0.1);
           background: rgba(255,255,255,0.06);
           color: rgba(255,255,255,0.65);
         }
         .corso-date-pill.active {
           background: #008C95;
+          border-color: #008C95;
           color: #ffffff;
         }
         :global(.dark) .corso-date-pill.active {
           background: #008C95;
+          border-color: #008C95;
           color: #ffffff;
         }
+        /* Sotto i 992px: nasconde la sidebar verticale e mostra al suo posto un
+           menu a tendina nativo, full width, compatto e senza scroll nascosto. */
+        @media (max-width: 992px) {
+          .corsi-date-sidebar { display: none; }
+          .corsi-date-select-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #475569;
+            margin-bottom: 1.25rem;
+          }
+          :global(.dark) .corsi-date-select-label {
+            color: rgba(255,255,255,0.6);
+          }
+          .corsi-date-select {
+            display: block;
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+            background: #ffffff;
+            color: #0F172A;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+          }
+          :global(.dark) .corsi-date-select {
+            border-color: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+          }
+        }
 
-        /* Catalogo corsi: card orizzontali compatte, una sotto l'altra */
+        /* Catalogo corsi: card orizzontali compatte, una sotto l'altra.
+           container-type: inline-size abilita la container query sotto: il wrap
+           delle card dipende dalla larghezza REALE della colonna (che cambia con
+           il rapporto della grid, non solo col viewport), non da una soglia fissa
+           legata al viewport che può risultare sbagliata a seconda del rapporto. */
         .corsi-catalog-list {
           display: flex;
           flex-direction: column;
           gap: 16px;
+          container-type: inline-size;
+          container-name: corsi-list;
         }
         .corso-row-card {
           display: flex;
@@ -726,6 +847,10 @@ export default function FormazioneObbligatoria() {
           gap: 20px;
           padding: 16px;
           border-radius: 16px;
+        }
+        @container corsi-list (max-width: 380px) {
+          .corso-row-card { flex-wrap: wrap; }
+          .corso-row-cta { width: 100%; text-align: center; }
         }
         .corso-row-thumb {
           position: relative;
@@ -766,12 +891,20 @@ export default function FormazioneObbligatoria() {
           border-radius: var(--btn-radius);
         }
         @media (max-width: 992px) {
-          .calendario-form-grid2 { grid-template-columns: 1fr; }
+          /* minmax(0, 1fr) e non il semplice "1fr": senza il floor a 0 la colonna
+             cresce oltre il container quando il contenuto interno (es. le pillole
+             date con overflow-x) ha un min-content più largo dello spazio disponibile. */
+          .calendario-form-grid2 { grid-template-columns: minmax(0, 1fr); }
           .colonna-destra-form { position: static; top: auto; }
         }
+        /* Padding interno del form contatto: 3.25rem è troppo su schermi stretti
+           (mangia ~100px di larghezza), rendendo la colonna innaturalmente stretta. */
+        .colonna-destra-form-inner { padding: 3.25rem; }
         @media (max-width: 640px) {
-          .corso-row-card { flex-wrap: wrap; }
-          .corso-row-cta { width: 100%; text-align: center; }
+          .colonna-destra-form-inner { padding: 1.75rem; }
+        }
+        @media (max-width: 400px) {
+          .colonna-destra-form-inner { padding: 1.25rem; }
         }
       `}</style>
 
@@ -957,35 +1090,12 @@ export default function FormazioneObbligatoria() {
           </div>
 
           <div className="calendario-form-grid2">
-            {/* Colonna sinistra: catalogo corsi in partenza, card orizzontali compatte */}
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '1.5rem' }}>
-                <div style={{ width: '40px', height: '40px', minWidth: '40px', borderRadius: '11px', background: 'rgba(0,140,149,0.15)', border: '1px solid rgba(0,140,149,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className="fas fa-calendar-days" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1rem' }}></i>
-                </div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: isDark ? '#fff' : '#0F172A', margin: 0, lineHeight: 1.3 }}>
-                  Corsi in partenza
-                </h3>
-              </div>
+            {/* Sidebar date + catalogo corsi in partenza: due colonne rese da
+                CorsiObbligatoriTabs (Fragment con <aside> e <div> come figli
+                diretti della grid, così ciascuno ottiene la propria colonna). */}
+            <CorsiObbligatoriTabs giorni={giorniObbligatoria} isDark={isDark} />
 
-              <CorsiObbligatoriTabs giorni={giorniObbligatoria} isDark={isDark} />
-
-              <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                <a
-                  href="/calendario-corsi"
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.55rem',
-                    padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', background: 'transparent',
-                    color: isDark ? 'rgba(255,255,255,0.85)' : '#334155', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
-                    border: isDark ? '2px solid rgba(255,255,255,0.22)' : '2px solid #CBD5E1', boxSizing: 'border-box',
-                  }}
-                >
-                  Vedi tutto il calendario
-                </a>
-              </div>
-            </div>
-
-            {/* Colonna destra: form contatto, sticky durante lo scroll — sfondo grigio/azzurro chiarissimo, nessun bordo */}
+            {/* Colonna destra: form contatto, sticky durante lo scroll, sfondo grigio/azzurro chiarissimo, nessun bordo */}
             <div
               className="colonna-destra-form"
               style={{
@@ -993,7 +1103,7 @@ export default function FormazioneObbligatoria() {
                 borderRadius: '1.5rem', overflow: 'hidden',
               }}
             >
-              <div style={{ padding: '3.25rem' }}>
+              <div className="colonna-destra-form-inner">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
                   <div style={{ width: '52px', height: '52px', minWidth: '52px', borderRadius: '14px', background: 'rgba(0,140,149,0.15)', border: '1px solid rgba(0,140,149,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="fas fa-calendar-check" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.3rem' }}></i>

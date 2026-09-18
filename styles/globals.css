@@ -77,6 +77,11 @@ html {
 
 html {
   scroll-behavior: smooth;
+  /* overflow-x: clip (non "hidden"): impedisce lo scroll orizzontale senza il
+     side-effect di "hidden", che forza anche overflow-y ad "auto" su html/body
+     — trasformandoli in scroll container propri e rompendo position:sticky nei
+     discendenti (es. il form calendario) in Chrome/WebKit. */
+  overflow-x: clip;
 }
 
 * {
@@ -94,6 +99,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+  /* overflow-x: clip, non "hidden" — stesso motivo di html sopra: evita di
+     rompere position:sticky nei discendenti. Il pannello off-canvas del menu
+     mobile (Header) è posizionato oltre il viewport: senza questo, allarga lo
+     scrollWidth della pagina e gli elementi a larghezza 100% (es. card) ne
+     risultano schiacciati/tagliati su mobile. */
+  overflow-x: clip;
 }
 
 
