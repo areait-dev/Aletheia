@@ -45,7 +45,6 @@ const verticali = [
     image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80',
     imageAlt: 'Certificazioni Informatiche ICDL',
     gradient: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-    span: 5,
   },
   {
     sopratitolo: 'Crescita professionale',
@@ -60,7 +59,6 @@ const verticali = [
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80',
     imageAlt: 'Corsi Qualificati',
     gradient: 'linear-gradient(135deg, #0F172A 0%, #008C95 100%)',
-    span: 7,
   },
   {
     sopratitolo: 'Educazione continua in medicina',
@@ -75,7 +73,6 @@ const verticali = [
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80',
     imageAlt: 'Corsi ECM',
     gradient: 'linear-gradient(135deg, #134E4A 0%, #10B981 100%)',
-    span: 7,
   },
   {
     sopratitolo: 'Per enti pubblici',
@@ -90,7 +87,6 @@ const verticali = [
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80',
     imageAlt: 'Formazione per la PA',
     gradient: 'linear-gradient(135deg, #008C95 0%, #0F172A 100%)',
-    span: 5,
   },
 ];
 
@@ -105,20 +101,22 @@ function ImgCourse({ src, alt }) {
 }
 
 // Card verticale unica: stesso stile per tutte e 4 le aree (niente più un colore diverso per
-// categoria, niente più icona). Foto a piena tela in testa a ogni card; il peso visivo cambia
-// solo tramite lo span di griglia assegnato in "verticali".
+// categoria, niente più icona). Foto a piena tela in testa a ogni card, aspect-ratio fisso
+// così il taglio resta coerente in qualunque larghezza di colonna.
 function VerticaleCard({ sopratitolo, title, bullets, cta, href, image, imageAlt }) {
   return (
     <a
       href={href}
       className="group h-full no-underline flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg rounded-2xl bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
     >
-      <div style={{ height: '220px', position: 'relative' }}>
+      <div style={{ aspectRatio: '4 / 3', position: 'relative' }}>
         {image && <ImgCourse src={image} alt={imageAlt} />}
-        {/* Sopratitolo come badge sovrapposto, stesso stile verde dei badge nella hero. */}
+        {/* Sopratitolo come badge sovrapposto alla foto: sfondo scuro solido (non il verde
+           trasparente della hero) perché sopra foto chiare il testo verde chiaro spariva
+           per mancanza di contrasto. */}
         <span
           className="absolute left-4 bottom-4 text-[0.68rem] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-full"
-          style={{ color: '#6EE7B7', background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.4)', backdropFilter: 'blur(2px)' }}
+          style={{ color: '#6EE7B7', background: 'rgba(4,15,20,0.82)', border: '1px solid rgba(110,231,183,0.4)', backdropFilter: 'blur(3px)' }}
         >
           {sopratitolo}
         </span>
@@ -216,11 +214,16 @@ export default function FormazioneProfessionaleSpecialistica() {
           :global(.dark) .valori-item-fps { border-color: rgba(255,255,255,0.1); }
         }
 
-        /* Aree formative: grid a 12 colonne, pesi diversi per card (7/5/5/7), non più
-           una griglia 2x2 perfettamente simmetrica con un colore diverso per categoria. */
-        .aree-grid-fps { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
-        @media (max-width: 900px) {
-          .aree-grid-fps > * { grid-column: span 12 !important; }
+        /* Aree formative: le 4 aree hanno contenuto omogeneo (stesso numero di bullet,
+           stesso peso informativo), quindi griglia simmetrica invece di pesi arbitrari.
+           4 colonne su desktop (card compatte, una riga sola) evitano che con 2 colonne
+           le card diventino enormi. */
+        .aree-grid-fps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        @media (max-width: 1100px) {
+          .aree-grid-fps { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+          .aree-grid-fps { grid-template-columns: 1fr; }
         }
       `}</style>
 
@@ -290,21 +293,11 @@ export default function FormazioneProfessionaleSpecialistica() {
           </div>
 
           <div className="aree-grid-fps">
-            {/* Righe invertite rispetto a prima: sopra stretta+larga, sotto larga+stretta.
-                Classi scritte per esteso (non interpolate): la scansione statica di
-                Tailwind non genera CSS per classi arbitrarie composte a runtime. */}
-            <Reveal delay={0} className="h-full [grid-column:span_5]">
-              <VerticaleCard {...verticali[0]} />
-            </Reveal>
-            <Reveal delay={90} className="h-full [grid-column:span_7]">
-              <VerticaleCard {...verticali[1]} />
-            </Reveal>
-            <Reveal delay={180} className="h-full [grid-column:span_7]">
-              <VerticaleCard {...verticali[2]} />
-            </Reveal>
-            <Reveal delay={270} className="h-full [grid-column:span_5]">
-              <VerticaleCard {...verticali[3]} />
-            </Reveal>
+            {verticali.map((v, i) => (
+              <Reveal key={v.title} delay={i * 90} className="h-full">
+                <VerticaleCard {...v} />
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

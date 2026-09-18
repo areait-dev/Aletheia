@@ -1,23 +1,31 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useTheme } from '../../context/ThemeContext';
+import { CALENDARIO } from '../../data/calendario';
+
+// Aggiornamenti ECM futuri, ordinati per data. Se CALENDARIO non contiene eventi con
+// categoria 'ecm' con data futura, la lista risulta vuota e la sezione mostra lo stato
+// "nessun evento".
+const oggi = new Date();
+const oggiIso = oggi.toISOString().slice(0, 10);
+const PROSSIMI_ECM = CALENDARIO
+  .filter((c) => c.categoria === 'ecm' && c.data >= oggiIso)
+  .sort((a, b) => a.data.localeCompare(b.data));
 
 const modalita = [
   {
-    icon: 'fas fa-chalkboard-user',
-    title: 'Formazione residenziale (RES)',
+    title: 'Residenziale (RES)',
     text: 'Corsi, convegni e congressi in aula presso le nostre sedi o presso strutture sanitarie.',
   },
   {
-    icon: 'fas fa-laptop-medical',
-    title: 'Formazione a distanza (FAD)',
+    title: 'A distanza (FAD)',
     text: 'Percorsi online fruibili in autonomia, compatibili con i turni di lavoro.',
   },
   {
-    icon: 'fas fa-hospital-user',
-    title: 'Formazione sul campo e su commessa',
+    title: 'Sul campo e su commessa',
     text: 'Progetti formativi su misura per strutture sanitarie, poliambulatori, RSA ed enti del territorio.',
   },
 ];
@@ -177,6 +185,7 @@ function ContattoECMForm() {
 
 export default function FormazioneECM() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [activeModalita, setActiveModalita] = useState(0);
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
 
@@ -217,6 +226,17 @@ export default function FormazioneECM() {
           text-transform: uppercase; color: #008C95; margin-bottom: 0.6rem;
         }
         .dark .section-badge-ecm { color: #6EE7B7; }
+        /* Hero a due colonne: testo + card agenda in glassmorphism. */
+        .hero-ecm-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; }
+        @media (max-width: 900px) { .hero-ecm-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+        .hero-ecm-glass {
+          background: rgba(255,255,255,0.06);
+          backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255,255,255,0.15);
+          border-radius: 1.5rem; padding: 1.75rem;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
         .cta-btn-primary-ecm {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
@@ -238,8 +258,19 @@ export default function FormazioneECM() {
         }
         .cta-btn-outline-ecm:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
-        .modalita-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        @media (max-width: 900px) { .modalita-grid { grid-template-columns: 1fr; } }
+        /* Proposta formativa: tab selezionabili in riga, un solo blocco di testo
+           visibile alla volta — non card ripetute (pattern già usato ovunque nel sito). */
+        .modalita-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid #E2E8F0; margin-bottom: 1.75rem; }
+        :global(.dark) .modalita-tabs { border-color: rgba(255,255,255,0.1); }
+        .modalita-tab {
+          background: none; border: none; cursor: pointer; font-family: inherit;
+          font-weight: 700; font-size: 0.95rem; padding: 0.85rem 0.25rem; margin-right: 1.75rem;
+          color: #94A3B8; border-bottom: 2px solid transparent; margin-bottom: -1px;
+          transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        :global(.dark) .modalita-tab { color: rgba(255,255,255,0.4); }
+        .modalita-tab.active { color: #008C95; border-color: #008C95; }
+        :global(.dark) .modalita-tab.active { color: #10B981; border-color: #10B981; }
 
         .faq-grid-ecm { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem 1.5rem; align-items: start; }
         @media (max-width: 800px) { .faq-grid-ecm { grid-template-columns: 1fr; } }
@@ -271,12 +302,20 @@ export default function FormazioneECM() {
         }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
 
-        /* Contatti + Form: layout a due colonne per evitare la card isolata nel vuoto */
-        .ecm-contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 2rem; align-items: stretch; }
-        @media (max-width: 900px) { .ecm-contact-grid { grid-template-columns: 1fr; } }
-        .ecm-contact-info { display: flex; flex-direction: column; height: 100%; }
-        .ecm-info-row { display: flex; align-items: flex-start; gap: 0.85rem; }
-        .ecm-info-row + .ecm-info-row { margin-top: 1.25rem; }
+        /* Contatti + Form: un'unica card divisa in due colonne (foto+testo, form),
+           non due box separati di altezza diversa che lasciano spazio vuoto ai lati.
+           La foto è piena (tocca i bordi della colonna), non inserita nel padding. */
+        .ecm-contact-card { display: grid; grid-template-columns: 0.9fr 1.1fr; }
+        @media (max-width: 800px) { .ecm-contact-card { grid-template-columns: 1fr; } }
+        .ecm-contact-card-col {
+          display: flex; flex-direction: column;
+          background: #F8FAFC; border-right: 1px solid #E2E8F0;
+        }
+        :global(.dark) .ecm-contact-card-col { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
+        @media (max-width: 800px) { .ecm-contact-card-col { border-right: none; border-bottom: 1px solid #E2E8F0; } }
+        .ecm-contact-card-photo { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+        .ecm-contact-card-info { padding: 2.5rem; }
+        .ecm-contact-card-form { padding: 2.5rem; }
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
@@ -284,71 +323,121 @@ export default function FormazioneECM() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-badge-ecm fade-up">Educazione Continua in Medicina</div>
+        <div className="container hero-ecm-grid" style={{ position: 'relative', zIndex: 1 }}>
+          <div>
+            <div className="hero-badge-ecm fade-up">Educazione Continua in Medicina</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem', maxWidth: '900px' }}>
-            Corsi{' '}
-            <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              ECM
+            <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem' }}>
+              Corsi{' '}
+              <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                ECM
+              </span>
+              {' '}per professionisti sanitari
+            </h1>
+
+            <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
+              <a href="#corsi" className="cta-btn-primary-ecm">Vedi i corsi</a>
+              <a href="/contatti" className="cta-btn-outline-ecm">Contattaci</a>
+            </div>
+          </div>
+
+          {/* Agenda in stile glassmorphism, direttamente nella hero invece che in una
+             sezione separata sotto. */}
+          <div className="hero-ecm-glass fade-up fade-up-3">
+            <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6EE7B7' }}>
+              Agenda · Prossimi aggiornamenti
             </span>
-            {' '}per professionisti sanitari
-          </h1>
 
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
-            <a href="#corsi" className="cta-btn-primary-ecm">Vedi i corsi</a>
-            <a href="/contatti" className="cta-btn-outline-ecm">Contattaci</a>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', margin: '1rem 0' }}>
+              <div style={{ width: '52px', minWidth: '52px', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.15)', textAlign: 'center' }}>
+                <div style={{ background: 'rgba(16,185,129,0.35)', color: '#fff', fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase', padding: '0.15rem 0' }}>
+                  {oggi.toLocaleDateString('it-IT', { month: 'short' }).replace('.', '')}
+                </div>
+                <div style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', fontSize: '1.25rem', fontWeight: 900, padding: '0.2rem 0' }}>
+                  {oggi.getDate()}
+                </div>
+              </div>
+              <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem' }}>
+                Oggi, {oggi.toLocaleDateString('it-IT', { weekday: 'long' })}
+              </span>
+            </div>
+
+            {PROSSIMI_ECM.length === 0 ? (
+              <>
+                <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', lineHeight: 1.7, margin: '0 0 1.5rem' }}>
+                  Al momento non ci sono aggiornamenti ECM con data confermata. Iscriviti per essere avvisato.
+                </p>
+                <a href="#contatti-ecm" className="cta-btn-primary-ecm" style={{ display: 'inline-flex', width: '100%', justifyContent: 'center' }}>
+                  Iscriviti per essere avvisato
+                </a>
+              </>
+            ) : (
+              <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                {PROSSIMI_ECM.slice(0, 3).map((ev) => (
+                  <div key={ev.id} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: '0.85rem' }}>
+                    <span style={{ display: 'block', color: '#fff', fontWeight: 800, fontSize: '0.92rem' }}>{ev.titolo}</span>
+                    <span style={{ display: 'block', color: 'rgba(255,255,255,0.6)', fontSize: '0.78rem', marginTop: '0.2rem' }}>
+                      {ev.data} · {ev.orario}
+                      {ev.creditiEcm ? ` · ${ev.creditiEcm} crediti ECM` : ''}
+                    </span>
+                  </div>
+                ))}
+                <a href="#contatti-ecm" className="cta-btn-primary-ecm" style={{ display: 'inline-flex', width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}>
+                  Iscriviti
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* ══════════════ IL VALORE DEL PROVIDER ACCREDITATO ══════════════ */}
-      <section className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
+      <section id="corsi" className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
           <span className="section-badge-ecm">Provider ECM accreditato · Regione Siciliana</span>
           <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '960px' }}>
             Formazione continua per i professionisti della sanità
           </h2>
-          <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '1.5rem' }}>
-            Alètheia S.r.l. è provider ECM accreditato dalla Regione Siciliana, abilitato alla progettazione e realizzazione di attività formative rivolte ai professionisti sanitari e al rilascio diretto dei crediti ECM. Non tutti gli enti che erogano formazione sanitaria possono assegnare crediti ECM: solo un provider accreditato è autorizzato dal sistema nazionale a farlo. Scegliere Alètheia significa affidarsi a un ente che risponde ai requisiti di qualità, trasparenza e appropriatezza scientifica previsti dalla normativa ECM. Come provider accreditato, Alètheia è abilitato a organizzare corsi, convegni, congressi e altre attività formative finalizzate all&apos;acquisizione dei crediti ECM obbligatori, garantendo che ogni percorso sia progettato secondo criteri di qualità dei contenuti e reale validità professionale.
+          <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, maxWidth: '960px', margin: '0 0 1.5rem' }}>
+            Alètheia S.r.l. è provider ECM accreditato dalla Regione Siciliana, abilitato alla progettazione e realizzazione di attività formative rivolte ai professionisti sanitari. Non tutti gli enti che erogano formazione sanitaria possono assegnare crediti ECM.
           </p>
-          <a href="/all-courses?categoria=ecm" id="corsi" style={{ fontSize: '0.9rem', fontWeight: 700, color: '#008C95', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-            Consulta i corsi ECM disponibili <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
-          </a>
+          <p className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 700, lineHeight: 1.7, maxWidth: '960px', margin: 0, borderLeft: '3px solid #008C95', paddingLeft: '1.25rem' }}>
+            Alètheia rilascia direttamente i crediti ECM al termine delle attività, secondo le regole del sistema nazionale.
+          </p>
         </div>
       </section>
 
       {/* ══════════════ TARGET & PROPOSTA FORMATIVA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          {/* Modalità */}
-          <div style={{ marginBottom: '2.5rem' }}>
-            <span className="section-badge-ecm">La proposta formativa</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-              Corsi ECM in aula e in FAD, in tutta la Sicilia
-            </h2>
-            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '960px' }}>
-              Alètheia organizza attività formative accreditate in diverse modalità, per adattarsi ai tempi e alle esigenze dei professionisti sanitari:
-            </p>
-          </div>
+          <span className="section-badge-ecm">La proposta formativa</span>
+          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
+            Corsi ECM in aula e in FAD, in tutta la Sicilia
+          </h2>
+          <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '760px', marginBottom: '2rem' }}>
+            Alètheia organizza attività formative accreditate in diverse modalità, per adattarsi ai tempi e alle esigenze dei professionisti sanitari.
+          </p>
 
-          <div className="modalita-grid" style={{ marginBottom: '2.5rem' }}>
-            {modalita.map((m) => (
-              <div key={m.title} className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className={m.icon} style={{ color: '#008C95', fontSize: '1.2rem' }}></i>
-                </div>
-                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>{m.title}</h3>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.7, margin: 0 }}>{m.text}</p>
-              </div>
+          <div className="modalita-tabs">
+            {modalita.map((m, i) => (
+              <button
+                key={m.title}
+                type="button"
+                onClick={() => setActiveModalita(i)}
+                className={`modalita-tab ${activeModalita === i ? 'active' : ''}`}
+              >
+                {m.title}
+              </button>
             ))}
           </div>
 
-          <div className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30" style={{ borderRadius: '1rem', padding: '1.25rem 1.75rem' }}>
-            <p className="text-[#004D52] dark:text-[#10B981]" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.7 }}>
-              Grazie all&apos;esperienza e alla rete di docenti qualificati di Promotergroup, Alètheia affianca aziende sanitarie e singoli professionisti nella pianificazione del proprio percorso di aggiornamento.
-            </p>
-          </div>
+          <p className="text-slate-700 dark:text-gray-300" style={{ fontSize: '1rem', lineHeight: 1.85, maxWidth: '760px', margin: 0 }}>
+            {modalita[activeModalita].text}
+          </p>
+
+          <p className="text-slate-700 dark:text-gray-300" style={{ margin: '3rem 0 0', fontSize: '1rem', fontStyle: 'italic', lineHeight: 1.8, borderLeft: '3px solid #008C95', paddingLeft: '1.25rem', maxWidth: '860px' }}>
+            Grazie all&apos;esperienza e alla rete di docenti qualificati di Promotergroup, Alètheia affianca aziende sanitarie e singoli professionisti nella pianificazione del proprio percorso di aggiornamento.
+          </p>
         </div>
       </section>
 
@@ -388,79 +477,46 @@ export default function FormazioneECM() {
       </section>
 
       {/* ══════════════ CONTATTI & FORM ══════════════ */}
-      <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
+      <section id="contatti-ecm" className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div style={{ marginBottom: '2.5rem', maxWidth: '900px' }}>
-            <span className="section-badge-ecm">Parliamone</span>
-            <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
-              Vuoi saperne di più sui corsi ECM?
-            </h3>
-            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: 0 }}>
-              Il nostro team è a disposizione per fornirti tutte le informazioni sui corsi ECM disponibili e sui crediti formativi acquisibili.
-            </p>
-          </div>
+          <div
+            className="ecm-contact-card bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+            style={{ borderRadius: '1.5rem', overflow: 'hidden', boxShadow: '0 4px 30px rgba(0,0,0,0.05)' }}
+          >
+            <div className="ecm-contact-card-col">
+              <div className="ecm-contact-card-photo">
+                <Image
+                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80"
+                  alt="Corsi ECM per professionisti sanitari"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 35vw"
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
 
-          <div className="ecm-contact-grid">
-            {/* Colonna informativa: dà contesto al form ed evita lo spazio vuoto */}
-            <div
-              className="ecm-contact-info"
-              style={{
-                background: isDark ? 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' : '#fff',
-                border: isDark ? 'none' : '1px solid #E2E8F0',
-                borderRadius: '1.5rem', padding: '2.25rem', color: isDark ? '#fff' : '#0F172A', position: 'relative', overflow: 'hidden',
-                boxShadow: isDark ? 'none' : '0 4px 30px rgba(0,0,0,0.05)',
-              }}
-            >
-              <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: isDark ? 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(16,185,129,0.18) 0%, transparent 70%)' : 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(0,140,149,0.06) 0%, transparent 70%)' }} />
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '13px', background: isDark ? 'rgba(16,185,129,0.15)' : 'rgba(0,140,149,0.08)', border: isDark ? '1px solid rgba(16,185,129,0.3)' : '1px solid rgba(0,140,149,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
-                  <i className="fas fa-user-doctor" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.2rem' }}></i>
-                </div>
-                <h4 className="text-slate-900 dark:text-white" style={{ fontSize: '1.15rem', fontWeight: 800, margin: '0 0 0.6rem' }}>
-                  Provider ECM accreditato
-                </h4>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.87rem', lineHeight: 1.75, margin: '0 0 1.75rem' }}>
-                  Il nostro team è a disposizione per fornirti tutte le informazioni sui corsi in programma, le modalità disponibili e i crediti acquisibili in base al tuo profilo professionale.
+              <div className="ecm-contact-card-info">
+                <span className="section-badge-ecm">Parliamone</span>
+                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
+                  Vuoi saperne di più sui corsi ECM?
+                </h3>
+                <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, margin: '0 0 1.75rem' }}>
+                  Il nostro team è a disposizione per fornirti tutte le informazioni sui corsi ECM disponibili e sui crediti formativi acquisibili.
                 </p>
 
-                <div className="ecm-info-row">
-                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-phone" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
-                  </div>
-                  <div>
-                    <span className="dark:text-gray-500" style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Telefono</span>
-                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>+39 0932 862613</span>
-                  </div>
-                </div>
-                <div className="ecm-info-row">
-                  <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-envelope" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
-                  </div>
-                  <div>
-                    <span className="dark:text-gray-500" style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Email</span>
-                    <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>info@aletheiasrl.it</span>
-                  </div>
-                </div>
+                <a href="tel:+390932862613" className="text-slate-900 dark:text-white" style={{ display: 'block', fontSize: '1.25rem', fontWeight: 800, textDecoration: 'none', marginBottom: '0.5rem' }}>
+                  +39 0932 862613
+                </a>
+                <a href="mailto:info@aletheiasrl.it" className="text-[#008C95] dark:text-[#10B981]" style={{ display: 'block', fontSize: '1rem', fontWeight: 700, textDecoration: 'none' }}>
+                  info@aletheiasrl.it
+                </a>
               </div>
             </div>
 
-            {/* Colonna form */}
-            <div
-              className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
-              style={{ borderRadius: '1.5rem', overflow: 'hidden', boxShadow: '0 4px 30px rgba(0,0,0,0.05)' }}
-            >
-              <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)' }} />
-              <div style={{ padding: '2.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1.75rem' }}>
-                  <div style={{ width: '44px', height: '44px', minWidth: '44px', borderRadius: '12px', background: 'rgba(0,140,149,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-paper-plane" style={{ color: '#008C95', fontSize: '1.1rem' }}></i>
-                  </div>
-                  <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, lineHeight: 1.3 }}>
-                    Richiedi informazioni
-                  </h3>
-                </div>
-                <ContattoECMForm />
-              </div>
+            <div className="ecm-contact-card-form">
+              <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, margin: '0 0 1.75rem', lineHeight: 1.3 }}>
+                Richiedi informazioni
+              </h3>
+              <ContattoECMForm />
             </div>
           </div>
         </div>

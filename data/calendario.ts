@@ -14,7 +14,7 @@
  *   professionale  -> professionale
  */
 
-export type CategoriaCorso = 'regionale-fse' | 'obbligatoria' | 'professionale';
+export type CategoriaCorso = 'regionale-fse' | 'obbligatoria' | 'professionale' | 'ecm';
 
 export interface CorsoCalendario {
   id: number;
@@ -27,6 +27,9 @@ export interface CorsoCalendario {
   durata: string; // es. "8 ore"
   posti: number;
   postiDisponibili: number;
+  // Campi opzionali, usati solo dagli aggiornamenti ECM (categoria: 'ecm')
+  relatore?: string;
+  creditiEcm?: number;
 }
 
 // Etichette leggibili per le categorie
@@ -34,6 +37,7 @@ export const CATEGORIE: { key: CategoriaCorso; label: string }[] = [
   { key: 'regionale-fse', label: 'Regionale FSE' },
   { key: 'obbligatoria', label: 'Obbligatoria' },
   { key: 'professionale', label: 'Professionale' },
+  { key: 'ecm', label: 'ECM' },
 ];
 
 export const CALENDARIO: CorsoCalendario[] = [

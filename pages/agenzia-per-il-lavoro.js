@@ -568,67 +568,34 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                   tra domanda e offerta di lavoro.
                 </p>
                 <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
-                  Alethèia S.r.l. desidera ampliare e potenziare il proprio ruolo di leva del sistema economico e
-                  sociale, ed essere riconosciuta e apprezzata come agenzia di sviluppo ed intermediazione
-                  domanda-offerta di lavoro: l'impresa che <em>"è"</em> in termini di competenze ed esperienze, e
-                  l'impresa <em>"che fa"</em> ovvero che è capace di tradurre i progetti d'impresa e di lavoro in
-                  realizzazioni concrete e solide, a beneficio della collettività.
-                </p>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
                   Attraverso Alethèia S.r.l., ente accreditato quale Agenzia per il Lavoro,{' '}
-                  <strong className="text-slate-900 dark:text-white">PromoterGroup S.p.A.</strong> desidera ampliare il proprio
-                  ruolo di leva del sistema economico e sociale. Alethèia S.r.l., Agenzia per il Lavoro, mette la
-                  professionalità dei propri consulenti al servizio di candidati e aziende.
+                  <strong className="text-slate-900 dark:text-white">PromoterGroup S.p.A.</strong> amplia il proprio
+                  ruolo di leva del sistema economico e sociale, mettendo la professionalità dei propri consulenti
+                  al servizio di candidati e aziende.
                 </p>
               </div>
             </Reveal>
 
-            {/* Colonna immagine */}
+            {/* Colonna immagine: una sola foto, più grande, niente doppia foto sfalsata
+               (due stock generiche appesantivano la sezione senza aggiungere valore). */}
             <Reveal delay={100} className="flex-[2_1_260px] pt-8">
-              <div style={{ position: 'relative', paddingBottom: '2.5rem', paddingRight: '2rem' }}>
-                <div
-                  className="shadow-xl shadow-slate-300/50 dark:shadow-none"
-                  style={{
-                    position: 'relative',
-                    zIndex: 1,
-                    borderRadius: '1.5rem',
-                    overflow: 'hidden',
-                    aspectRatio: '4/3',
-                  }}
-                >
-                  <Image
-                    src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Team Alètheia al lavoro"
-                    fill
-                    sizes="(min-width: 768px) 40vw, 100vw"
-                    loading="lazy"
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-
-                {/* Immagine secondaria sfalsata, sborda dall'angolo in basso a destra */}
-                <div
-                  className="shadow-xl shadow-slate-300/50 dark:shadow-none border-4 border-white dark:border-dark-card"
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    right: 0,
-                    width: '55%',
-                    aspectRatio: '4/3',
-                    borderRadius: '1.1rem',
-                    overflow: 'hidden',
-                    zIndex: 2,
-                  }}
-                >
-                  <Image
-                    src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="Colloquio di lavoro Alètheia"
-                    fill
-                    sizes="(min-width: 768px) 22vw, 55vw"
-                    loading="lazy"
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
+              <div
+                className="shadow-xl shadow-slate-300/50 dark:shadow-none"
+                style={{
+                  position: 'relative',
+                  borderRadius: '1.5rem',
+                  overflow: 'hidden',
+                  aspectRatio: '4/3',
+                }}
+              >
+                <Image
+                  src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Team Alètheia al lavoro"
+                  fill
+                  sizes="(min-width: 768px) 40vw, 100vw"
+                  loading="lazy"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
             </Reveal>
 
