@@ -26,7 +26,6 @@ const categoryMeta = {
   digitali:              { name: 'Certificazioni Digitali', icon: 'fas fa-laptop-code' },
   agricolo:              { name: 'Settore Agricolo', icon: 'fas fa-seedling' },
   gol:                   { name: 'Programma GOL', icon: 'fas fa-rocket' },
-  shop:                  { name: 'Shop', icon: 'fas fa-shopping-cart' },
 };
 
 // Sotto-categorie granulari: corrispondono ai query param ?categoria= usati nel mega menu di Formazione (Header.js)
@@ -51,8 +50,6 @@ export default function AllCourses() {
   const [selectedCategory, setSelectedCategory] = useState('');
   // Filtro granulare attivato dal mega menu via ?categoria=<slug>
   const [selectedSub, setSelectedSub] = useState('');
-  // Filtro Shop: mostra solo i corsi con shop: true
-  const [shopFilter, setShopFilter] = useState(false);
   // Riferimento alla griglia corsi: usato per riportare in cima ai primi corsi al cambio categoria
   const gridRef = useRef(null);
 
@@ -64,7 +61,7 @@ export default function AllCourses() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
-  // Skeleton di cortesia sui cambi di filtro "macro" (categoria/sotto-categoria/shop),
+  // Skeleton di cortesia sui cambi di filtro "macro" (categoria/sotto-categoria),
   // non sulla ricerca testuale: digitare deve restare istantaneo.
   const [isFiltering, setIsFiltering] = useState(false);
   const filterMountRef = useRef(true);
@@ -76,7 +73,7 @@ export default function AllCourses() {
     setIsFiltering(true);
     const t = setTimeout(() => setIsFiltering(false), 350);
     return () => clearTimeout(t);
-  }, [selectedCategory, selectedSub, shopFilter]);
+  }, [selectedCategory, selectedSub]);
 
   // Riporta in cima alla pagina in modo ISTANTANEO. Lo scroll fluido qui è
   // controproducente: partendo dal fondo, mentre la lista si accorcia il browser
@@ -131,7 +128,7 @@ export default function AllCourses() {
       clearTimeout(release);
       window.removeEventListener('scroll', pinTop);
     };
-  }, [selectedCategory, selectedSub, shopFilter]);
+  }, [selectedCategory, selectedSub]);
 
   // Al mount (o quando cambia la query) leggo ?categoria= e imposto il filtro granulare corrispondente
   useEffect(() => {
@@ -149,7 +146,6 @@ export default function AllCourses() {
     setSearchTerm('');
     setSelectedCategory('');
     setSelectedSub('');
-    setShopFilter(false);
     if (router.query.categoria) {
       router.replace('/all-courses', undefined, { shallow: true });
     }
@@ -158,13 +154,7 @@ export default function AllCourses() {
   // Selezione di una macro-categoria dalla sidebar: azzera gli altri filtri
   const selectCategory = (key) => {
     scrollToCourses();
-    if (key === 'shop') {
-      setShopFilter(true);
-      setSelectedCategory('');
-    } else {
-      setShopFilter(false);
-      setSelectedCategory(key);
-    }
+    setSelectedCategory(key);
     setSelectedSub('');
     if (router.query.categoria) {
       router.replace('/all-courses', undefined, { shallow: true });
@@ -178,7 +168,6 @@ export default function AllCourses() {
   coursesData.forEach((c) => {
     categoryCounts[c.categoryKey] = (categoryCounts[c.categoryKey] || 0) + 1;
   });
-  const shopCount = coursesData.filter((c) => c.shop).length;
 
   const filteredFamilies = courseFamilies.filter((family) => {
     const matchSearch =
@@ -189,8 +178,7 @@ export default function AllCourses() {
     const matchSub = selectedSub === '' ||
       family.subKey === selectedSub ||
       (selectedSub === 'certificazioni-informatiche' && family.subKey === 'icdl');
-    const matchShop = !shopFilter || family.shop === true;
-    return matchSearch && matchCategory && matchSub && matchShop;
+    return matchSearch && matchCategory && matchSub;
   });
 
   return (
@@ -259,7 +247,7 @@ export default function AllCourses() {
               <li
                 onClick={resetFilters}
                 className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                  selectedCategory === '' && selectedSub === '' && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                  selectedCategory === '' && selectedSub === '' ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -269,29 +257,14 @@ export default function AllCourses() {
                   {coursesData.length}
                 </span>
               </li>
-              {/* Shop - voce speciale con badge distinto */}
-              <li
-                onClick={() => selectCategory('shop')}
-                className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                  shopFilter ? 'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  <i className="fas fa-shopping-cart" style={{ fontSize: '0.75rem', color: shopFilter ? '#D97706' : undefined }}></i>
-                  Shop
-                </span>
-                <span className="text-xs bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full font-semibold">
-                  {shopCount}
-                </span>
-              </li>
               {/* Separatore */}
               <li className="border-t border-slate-100 dark:border-gray-700 my-1.5 pointer-events-none" />
-              {Object.entries(categoryMeta).filter(([key]) => key !== 'shop').map(([key, cat]) => (
+              {Object.entries(categoryMeta).map(([key, cat]) => (
                 <li
                   key={key}
                   onClick={() => selectCategory(key)}
                   className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                    selectedCategory === key && !shopFilter ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                    selectedCategory === key ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -329,11 +302,10 @@ export default function AllCourses() {
             <p className="text-sm text-slate-600 dark:text-gray-400">
               <span className="font-bold text-slate-800 dark:text-gray-100">{filteredFamilies.length}</span>{' '}
               {filteredFamilies.length === 1 ? 'corso trovato' : 'corsi trovati'}
-              {shopFilter && ' in "Shop"'}
-              {!shopFilter && selectedCategory && ` in "${categoryMeta[selectedCategory]?.name}"`}
+              {selectedCategory && ` in "${categoryMeta[selectedCategory]?.name}"`}
               {selectedSub && ` in "${subCategoryMeta[selectedSub]}"`}
             </p>
-            {(searchTerm || selectedCategory || selectedSub || shopFilter) && (
+            {(searchTerm || selectedCategory || selectedSub) && (
               <button
                 onClick={resetFilters}
                 className="text-xs text-primary font-semibold hover:underline bg-transparent border-none cursor-pointer"

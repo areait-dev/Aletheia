@@ -25,7 +25,7 @@ const categorie = [
   {
     href: '/formazione/obbligatoria',
     badge: 'Obbligatorio',
-    badgeColor: '#F59E0B',
+    badgeColor: '#008C95',
     title: 'Formazione obbligatoria',
     description: 'Corsi obbligatori conformi al D.Lgs. 81/08. Sicurezza sul lavoro, Decreto Attrezzature, Fitosanitario e Sicurezza alimentare. Metti a norma la tua azienda.',
     color: '#008C95',
@@ -35,7 +35,7 @@ const categorie = [
   {
     href: '/formazione/professionale-specialistica',
     badge: 'Certificazioni riconosciute',
-    badgeColor: '#6366F1',
+    badgeColor: '#64748B',
     title: 'Formazione professionale',
     description: 'Certificazioni ICDL, corsi con qualifica professionale, formazione continua e percorsi per la Pubblica Amministrazione.',
     color: '#008C95',
@@ -606,9 +606,9 @@ export default function Home() {
                   loading="lazy"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/95 via-indigo-950/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#004D52]/95 via-[#004D52]/70 to-transparent" />
                 <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
-                  <p className="font-black tracking-wider text-xs text-indigo-300 uppercase mb-2">Orientamento e inserimento</p>
+                  <p className="font-black tracking-wider text-xs text-[#10B981] uppercase mb-2">Orientamento e inserimento</p>
                   <h3 className="text-2xl font-bold text-white mb-3">Agenzia per il Lavoro</h3>
                   <p className="text-slate-200 text-sm leading-relaxed max-w-md">
                     Siamo Agenzia per il Lavoro autorizzata. Supportiamo giovani, lavoratori
@@ -617,7 +617,7 @@ export default function Home() {
                   </p>
                   <a
                     href="/agenzia-per-il-lavoro"
-                    className="mt-5 self-start inline-flex items-center justify-center min-h-9 whitespace-nowrap bg-indigo-500 hover:bg-indigo-400 text-indigo-950 font-bold px-5 rounded-full text-xs transition-colors duration-200"
+                    className="mt-5 self-start inline-flex items-center justify-center min-h-9 whitespace-nowrap bg-primary hover:bg-[#10B981] text-white font-bold px-5 rounded-full text-xs transition-colors duration-200"
                   >
                     Scopri di più →
                   </a>
@@ -766,6 +766,12 @@ export default function Home() {
       </section>
 
       {/* ── 4a · LOGHI CLIENTI ───────────────────────────── */}
+      {/* TODO: riattivare con loghi reali dopo consenso clienti — vedi nota.
+          Disattivata con {false && (...)} anziché rimossa: il blocco contiene
+          già un commento JSX annidato, che non può stare dentro un altro
+          commento a blocco. Le sezioni sopra/sotto hanno padding verticale
+          proprio (py-24 / py-20), quindi la rimozione non lascia vuoti. */}
+      {false && (
       <section className="py-24 bg-light dark:bg-dark-bg" aria-labelledby="clienti-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
@@ -814,6 +820,7 @@ export default function Home() {
           }
         `}</style>
       </section>
+      )}
 
       {/* ── 4b · CTA FINALE ──────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-[#003134] to-slate-950 text-white border-t border-slate-900">

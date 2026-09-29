@@ -22,8 +22,8 @@ const SOCIAL = [
 
 const CONTRACT_COLORS: Record<string, { bg: string; text: string }> = {
   'Tempo indeterminato': { bg: '#008C95', text: '#fff' },
-  'Tempo determinato':   { bg: '#6366F1', text: '#fff' },
-  'Somministrazione':    { bg: '#F59E0B', text: '#0F172A' },
+  'Tempo determinato':   { bg: '#10B981', text: '#fff' },
+  'Somministrazione':    { bg: '#64748B', text: '#fff' },
 };
 
 export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
@@ -210,7 +210,7 @@ export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
             background: hovered
-              ? 'linear-gradient(90deg, #008C95, #10B981)'
+              ? '#008C95'
               : 'rgba(0,140,149,0.78)',
             backdropFilter: 'blur(4px)',
             borderRadius: '999px',

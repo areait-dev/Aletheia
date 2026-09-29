@@ -3,7 +3,6 @@ import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTheme } from '../context/ThemeContext';
-import { useCart } from '../context/CartContext';
 
 interface Faq {
   q: string;
@@ -16,7 +15,7 @@ const FAQ_FORMAZIONE: Faq[] = [
   { q: "Ci sono corsi gratuiti disponibili?", a: "Sì! Gestiamo corsi finanziati attraverso il Programma G.O.L., l'Avviso FSE+ e altri bandi regionali. Contattaci per scoprire se hai i requisiti per accedere gratuitamente." },
   { q: "Rilasciate attestati e certificazioni?", a: "Sì, al termine di ogni corso rilasciamo attestati riconosciuti. Per i corsi ECDL/ICDL siamo Test Center AICA accreditato. Per i corsi sulla sicurezza rilasciamo attestati conformi alla normativa vigente." },
   { q: "Quanto durano i corsi?", a: "La durata varia in base al corso: dai corsi sulla sicurezza di poche ore, ai corsi professionalizzanti di centinaia di ore. Ogni corso ha la durata indicata nella sua scheda." },
-  { q: "Dove si trova la vostra sede?", a: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG). Siamo aperti dal lunedì al venerdì, 9:00-18:00." },
+  { q: "Dove si trova la vostra sede?", a: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG). Siamo aperti dal lunedì al venerdì, 9:00-13:00 / 14:00-18:00." },
   { q: "Cos'è il corso ECDL/ICDL?", a: "È la certificazione informatica più diffusa al mondo, riconosciuta a livello internazionale. Siamo Test Center AICA accreditato e offriamo percorsi Base, Standard, Full Standard e DigComp 2.2." },
   { q: "Come posso pagare un corso?", a: "Contattaci direttamente per conoscere le modalità di pagamento disponibili: bonifico bancario, rateizzazione o finanziamenti agevolati. Chiamaci al +39 0932 862613." },
 ];
@@ -36,7 +35,7 @@ const FAQ_GENERALE: Faq[] = [
   { q: "Chi è Alètheia S.r.l.?", a: "Alètheia S.r.l. è un ente di formazione professionale e agenzia per il lavoro con sede a Vittoria (RG), operativo dal 2005 in Sicilia. Facciamo parte del gruppo PromoterGroup S.p.A." },
   { q: "Quali servizi offrite?", a: "Offriamo formazione professionale (corsi obbligatori, ECDL/ICDL, corsi finanziati), servizi di agenzia per il lavoro (ricerca personale, somministrazione, orientamento) e supporto alle imprese." },
   { q: "Avete corsi sulla sicurezza sul lavoro?", a: "Sì, siamo specializzati in formazione obbligatoria sulla sicurezza: corsi per lavoratori, preposti, dirigenti e datori di lavoro, conformi all'Accordo Stato-Regioni." },
-  { q: "Come posso contattarvi?", a: "Puoi chiamarci al +39 0932 862613, scriverci a info@aletheiasrl.it, o visitarci in Via del Carrubo, snc - Vittoria (RG). Siamo disponibili dal lunedì al venerdì, 9:00-18:00." },
+  { q: "Come posso contattarvi?", a: "Puoi chiamarci al +39 0932 862613, scriverci a info@aletheiasrl.it, o visitarci in Via del Carrubo, snc - Vittoria (RG). Siamo disponibili dal lunedì al venerdì, 9:00-13:00 / 14:00-18:00." },
   { q: "Dove si trova la vostra sede?", a: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG), in Sicilia." },
   { q: "Siete accreditati dalla Regione Siciliana?", a: "Sì, siamo accreditati dalla Regione Siciliana per la formazione professionale (DDG n 78/2017) e autorizzati come Agenzia per il Lavoro (DDS Nr. 1.100/2019)." },
   { q: "Cosa sono i corsi FSE+?", a: "Sono corsi professionalizzanti co-finanziati dal Fondo Sociale Europeo, spesso gratuiti per i partecipanti. Gestiamo diversi avvisi FSE+ per la Regione Siciliana." },
@@ -65,19 +64,26 @@ function tokenize(str: string): string[] {
     .filter((w) => w.length > 2);
 }
 
+/** Vero se la domanda contiene almeno una parola chiave pertinente al sito.
+ *  Usato sia dal matching locale sia come filtro prima di chiamare Gemini. */
+function isOnTopic(question: string): boolean {
+  const qNorm = question.toLowerCase();
+  return SITE_KEYWORDS.some((kw) => qNorm.includes(kw));
+}
+
 /** Cerca tra tutte le FAQ del sito la risposta più pertinente alla domanda libera
  *  dell'utente. Ritorna null se la domanda non tocca nessun argomento del sito
  *  (l'assistente non deve rispondere a temi non pertinenti). */
 function findBestAnswer(question: string): Faq | null {
-  const qNorm = question.toLowerCase();
-  const isOnTopic = SITE_KEYWORDS.some((kw) => qNorm.includes(kw));
-  if (!isOnTopic) return null;
+  if (!isOnTopic(question)) return null;
 
   const qTokens = new Set(tokenize(question));
   let best: Faq | null = null;
   let bestScore = 0;
   for (const faq of ALL_FAQ) {
-    const faqTokens = tokenize(faq.q + ' ' + faq.a);
+    // Set, non array: una parola ripetuta più volte nella risposta (es. "corso")
+    // non deve pesare più di una parola pertinente citata una sola volta.
+    const faqTokens = Array.from(new Set(tokenize(faq.q + ' ' + faq.a)));
     let score = 0;
     for (const t of faqTokens) if (qTokens.has(t)) score += 1;
     if (score > bestScore) {
@@ -85,7 +91,13 @@ function findBestAnswer(question: string): Faq | null {
       best = faq;
     }
   }
-  return bestScore > 0 ? best : null;
+  // Richiede almeno 2 parole in comune: un singolo termine generico (es. "corso",
+  // presente in quasi tutte le FAQ) non basta a garantire un match pertinente e
+  // porterebbe a risposte fuorvianti (es. "che prezzo ha il corso rspp" abbinata
+  // per errore a "quanto durano i corsi?"). Sotto soglia si lascia il compito al
+  // fallback AI (Gemini), che ha contesto sufficiente per rispondere correttamente
+  // o dichiarare di non saperlo.
+  return bestScore >= 2 ? best : null;
 }
 
 function useFAQ(): Faq[] {
@@ -98,12 +110,18 @@ function useFAQ(): Faq[] {
 
 // Invia in modo silenzioso (fire-and-forget) le domande senza risposta all'endpoint
 // di log: un fallimento qui non deve mai interrompere l'esperienza dell'utente.
-function logUnanswered(question: string, page: string) {
+// 'off-topic': la domanda non ha superato il filtro keyword, o Gemini l'ha
+// giudicata fuori tema. 'ai-error': il fallback AI non era configurato, ha
+// dato errore o è andato in timeout. Distinguerle nel log aiuta a capire se
+// mancano contenuti/FAQ (off-topic) oppure c'è un problema col servizio AI.
+type UnansweredReason = 'off-topic' | 'ai-error';
+
+function logUnanswered(question: string, page: string, reason: UnansweredReason) {
   try {
     fetch('/api/chatbot-unanswered', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question, page }),
+      body: JSON.stringify({ question, page, reason }),
     }).catch(() => {});
   } catch {
     // no-op: il logging non è mai bloccante
@@ -112,12 +130,40 @@ function logUnanswered(question: string, page: string) {
 
 const CHATBOT_OPENED_KEY = 'chatbot-opened';
 
+interface AiResult {
+  answer: string | null;
+  reason: UnansweredReason | null;
+}
+
+// Chiama il fallback AI (Gemini) lato server. answer è null se la risposta non
+// è pertinente o se la chiamata fallisce/va in timeout: in entrambi i casi il
+// chiamante deve mostrare il fallback contatti già esistente; reason indica il
+// motivo per il logging.
+async function askAI(question: string, page: string, faqs: Faq[]): Promise<AiResult> {
+  try {
+    const resp = await fetch('/api/chatbot-ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question, page, faqs }),
+    });
+    const data = await resp.json().catch(() => null);
+    if (resp.ok && data?.pertinent && typeof data.answer === 'string' && data.answer.trim()) {
+      return { answer: data.answer.trim(), reason: null };
+    }
+    const reason: UnansweredReason = data?.reason === 'off-topic' ? 'off-topic' : 'ai-error';
+    return { answer: null, reason };
+  } catch {
+    return { answer: null, reason: 'ai-error' };
+  }
+}
+
 export default function Chatbot() {
   const { theme } = useTheme() || { theme: 'light' };
-  const { cartOpen } = useCart() || {};
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Faq | null>(null);
+  const [aiAnswer, setAiAnswer] = useState<string | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
   const [notPertinent, setNotPertinent] = useState(false);
   const [query, setQuery] = useState('');
   const [btnHover, setBtnHover] = useState(false);
@@ -135,31 +181,54 @@ export default function Chatbot() {
   const bodyRef = useRef<HTMLDivElement>(null);
   const faqs = useFAQ();
 
-  const handleAsk = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAsk = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const q = query.trim();
     if (!q) return;
+    setQuery('');
+    setAiAnswer(null);
+
     const match = findBestAnswer(q);
     if (match) {
       setSelected(match);
       setNotPertinent(false);
-    } else {
-      setSelected(null);
-      setNotPertinent(true);
-      logUnanswered(q, router.pathname);
+      return;
     }
-    setQuery('');
+
+    setSelected(null);
+
+    if (!isOnTopic(q)) {
+      setNotPertinent(true);
+      logUnanswered(q, router.pathname, 'off-topic');
+      return;
+    }
+
+    // Domanda pertinente ma senza match locale: prova il fallback AI prima di
+    // arrendersi al fallback contatti (ultima rete di sicurezza).
+    setAiLoading(true);
+    const { answer, reason } = await askAI(q, router.pathname, faqs);
+    setAiLoading(false);
+
+    if (answer) {
+      setAiAnswer(answer);
+      setNotPertinent(false);
+    } else {
+      setNotPertinent(true);
+      logUnanswered(q, router.pathname, reason ?? 'ai-error');
+    }
   };
 
   useEffect(() => {
-    if ((selected || notPertinent) && bodyRef.current) {
+    if ((selected || notPertinent || aiAnswer || aiLoading) && bodyRef.current) {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
-  }, [selected, notPertinent]);
+  }, [selected, notPertinent, aiAnswer, aiLoading]);
 
   const handleOpen = () => {
     setOpen(true);
     setSelected(null);
+    setAiAnswer(null);
+    setAiLoading(false);
     setNotPertinent(false);
     if (!hasOpenedOnce) {
       setHasOpenedOnce(true);
@@ -175,12 +244,10 @@ export default function Chatbot() {
   const handleClose = () => {
     setOpen(false);
     setSelected(null);
+    setAiAnswer(null);
+    setAiLoading(false);
     setNotPertinent(false);
   };
-
-  // Nascondi il chatbot mentre il carrello è aperto: si sovrappone ai pulsanti
-  // del footer del drawer (stesso angolo in basso a destra).
-  if (cartOpen) return null;
 
   return (
     <div className="chatbot-root">
@@ -236,8 +303,9 @@ export default function Chatbot() {
           height: 56px;
         }
         .chatbot-icon-size {
-          width: 26px;
-          height: 26px;
+          width: 30px;
+          height: 30px;
+          filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25));
         }
         /* Bottone più piccolo su tablet/mobile: riduce l'area che può finire sopra
            contenuti di pagina nel primo schermo utile (vedi .chatbot-root sopra). */
@@ -248,8 +316,8 @@ export default function Chatbot() {
             height: 44px;
           }
           .chatbot-icon-size {
-            width: 20px;
-            height: 20px;
+            width: 23px;
+            height: 23px;
           }
         }
         .chatbot-toggle-close {
@@ -261,12 +329,59 @@ export default function Chatbot() {
           transform: rotate(0deg) scale(1);
           opacity: 1;
         }
+        .chatbot-toggle-wrap {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+        .chatbot-toggle-label {
+          position: absolute;
+          right: calc(100% + 0.6rem);
+          white-space: nowrap;
+          padding: 0.4rem 0.8rem;
+          border-radius: 999px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          opacity: 0;
+          transform: translateX(6px);
+          transition: opacity 0.18s ease, transform 0.18s ease;
+          pointer-events: none;
+        }
+        .chatbot-toggle-label.is-visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        /* L'etichetta ha senso solo con un puntatore preciso (mouse): sui
+           dispositivi touch onMouseEnter/Leave può restare "bloccato" dopo un
+           tap, quindi la nascondiamo del tutto dove non c'è vero hover. */
+        @media (hover: none) {
+          .chatbot-toggle-label {
+            display: none;
+          }
+        }
+        .chatbot-window {
+          width: 360px;
+          max-width: calc(100vw - 2rem);
+        }
+        .chatbot-body {
+          padding: 1rem;
+        }
+        /* Su schermi stretti la finestra si avvicina troppo ai bordi con lo
+           scarto fisso di 2rem: lo riduciamo e stringiamo leggermente il
+           padding interno per guadagnare spazio utile al testo. */
+        @media (max-width: 380px) {
+          .chatbot-window {
+            max-width: calc(100vw - 1.5rem);
+          }
+          .chatbot-body,
+          .chatbot-footer {
+            padding: 0.75rem;
+          }
+        }
       `}</style>
 
       {/* Finestra chat */}
-      <div style={{
-        width: '360px',
-        maxWidth: 'calc(100vw - 2rem)',
+      <div className="chatbot-window" style={{
         borderRadius: '1.25rem',
         boxShadow: theme === 'dark' ? '0 20px 60px rgba(0,0,0,0.4)' : '0 20px 60px rgba(0,0,0,0.18)',
         overflow: 'hidden',
@@ -309,16 +424,63 @@ export default function Chatbot() {
         </div>
 
         {/* Body */}
-        <div ref={bodyRef} style={{
+        <div ref={bodyRef} className="chatbot-body" style={{
           background: theme === 'dark' ? '#004d52' : '#fff',
-          padding: '1rem',
           overflowY: 'auto',
           maxHeight: '380px',
           display: 'flex',
           flexDirection: 'column',
           gap: '0.6rem',
         }}>
-          {notPertinent ? (
+          {aiLoading ? (
+            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <div style={{
+                background: theme === 'dark' ? '#374151' : '#fff',
+                border: theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0',
+                borderRadius: '1rem 1rem 1rem 0.25rem',
+                padding: '0.75rem 1rem',
+                fontSize: '0.82rem',
+                color: theme === 'dark' ? '#9CA3AF' : '#64748B',
+                maxWidth: '90%',
+              }}>
+                <i className="fas fa-circle-notch fa-spin" style={{ marginRight: '0.4rem' }}></i>
+                Sto cercando una risposta...
+              </div>
+            </div>
+          ) : aiAnswer !== null ? (
+            <>
+              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div style={{
+                  background: theme === 'dark' ? '#374151' : '#fff',
+                  border: theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0',
+                  borderRadius: '1rem 1rem 1rem 0.25rem',
+                  padding: '0.75rem 1rem',
+                  fontSize: '0.82rem',
+                  color: theme === 'dark' ? '#E2E8F0' : '#334155',
+                  maxWidth: '90%',
+                  lineHeight: 1.6,
+                }}>
+                  {aiAnswer}
+                  <div style={{ marginTop: '0.6rem', borderTop: theme === 'dark' ? '1px solid #4B5563' : '1px solid #F1F5F9', paddingTop: '0.5rem' }}>
+                    <a href="/#contatti" style={{ fontSize: '0.76rem', color: theme === 'dark' ? '#10B981' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>
+                      Contattaci per saperne di più →
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setAiAnswer(null)}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  color: theme === 'dark' ? '#9CA3AF' : '#64748B', fontSize: '0.78rem', fontWeight: 600,
+                  padding: '0.25rem 0', textAlign: 'left', marginTop: '0.25rem',
+                  display: 'flex', alignItems: 'center', gap: '0.35rem',
+                }}
+              >
+                ← Torna alle domande
+              </button>
+            </>
+          ) : notPertinent ? (
             <>
               <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <div style={{
@@ -500,7 +662,7 @@ export default function Chatbot() {
         </div>
 
         {/* Footer — barra per formulare una domanda libera (risposte solo su temi del sito) */}
-        <form onSubmit={handleAsk} style={{
+        <form onSubmit={handleAsk} className="chatbot-footer" style={{
           background: theme === 'dark' ? '#374151' : '#fff',
           borderTop: theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0',
           padding: '0.75rem',
@@ -528,7 +690,7 @@ export default function Chatbot() {
             type="submit"
             aria-label="Invia domanda"
             style={{
-              background: 'linear-gradient(135deg, #008C95, #10B981)',
+              background: theme === 'dark' ? '#10B981' : '#008C95',
               border: 'none',
               borderRadius: '50%',
               width: '38px', height: '38px',
@@ -543,7 +705,20 @@ export default function Chatbot() {
       </div>
 
       {/* Pulsante toggle */}
-      <button
+      <div className="chatbot-toggle-wrap">
+        {!open && (
+          <span
+            className={`chatbot-toggle-label${btnHover ? ' is-visible' : ''}`}
+            style={{
+              background: theme === 'dark' ? '#1f2937' : '#fff',
+              color: theme === 'dark' ? '#F8FAFC' : '#0F172A',
+              boxShadow: theme === 'dark' ? '0 4px 16px rgba(0,0,0,0.4)' : '0 4px 16px rgba(0,0,0,0.15)',
+            }}
+          >
+            Chiedi
+          </span>
+        )}
+        <button
         onClick={open ? handleClose : handleOpen}
         onMouseEnter={() => setBtnHover(true)}
         onMouseLeave={() => setBtnHover(false)}
@@ -552,7 +727,7 @@ export default function Chatbot() {
         style={{
           position: 'relative',
           borderRadius: '50%',
-          background: theme === 'dark' ? 'linear-gradient(135deg, #10B981, #34D399)' : 'linear-gradient(135deg, #008C95, #10B981)',
+          background: theme === 'dark' ? '#10B981' : '#008C95',
           border: 'none',
           cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -580,20 +755,8 @@ export default function Chatbot() {
             style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '1.3rem' }}
           ></i>
         </div>
-        {!open && (
-          <span style={{
-            position: 'absolute', top: '-4px', right: '-4px',
-            width: '20px', height: '20px', borderRadius: '50%',
-            background: '#EF4444',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '0.65rem', fontWeight: 800, color: '#fff',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-            border: '2px solid #fff',
-          }}>
-            ?
-          </span>
-        )}
-      </button>
+        </button>
+      </div>
     </div>
   );
 }

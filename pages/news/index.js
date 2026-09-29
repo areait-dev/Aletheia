@@ -216,15 +216,16 @@ export default function NewsPage() {
           box-shadow: 0 0 0 3px rgba(0,140,149,0.1);
         }
         .search-input::placeholder { color: #94A3B8; }
+        :global(.dark) .search-input::placeholder { color: #9aa8a6; }
         :global(.dark) .search-input {
-          background: #374151;
+          background: #1c2423;
           color: #F8FAFC;
-          border-color: #374151;
+          border-color: #2a3433;
         }
         :global(.dark) .year-select {
-          background-color: #374151;
+          background-color: #1c2423;
           color: #F8FAFC;
-          border-color: #374151;
+          border-color: #2a3433;
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2310B981' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
         }
 
@@ -346,7 +347,7 @@ export default function NewsPage() {
                     fontFamily: 'inherit',
                     cursor: 'pointer',
                     border: isActive ? 'none' : '1px solid',
-                    background: isActive ? 'linear-gradient(90deg, #008C95, #10B981)' : 'transparent',
+                    background: isActive ? '#008C95' : 'transparent',
                     color: isActive ? '#fff' : undefined,
                     transition: 'all 0.2s ease',
                   }}
@@ -450,7 +451,7 @@ export default function NewsPage() {
                   marginTop: '0.5rem',
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   padding: '0.7rem 1.75rem', borderRadius: '999px',
-                  background: 'linear-gradient(90deg, #008C95, #10B981)',
+                  background: '#008C95',
                   color: '#fff', fontWeight: 700, fontSize: '0.875rem',
                   border: 'none', cursor: 'pointer', fontFamily: 'inherit',
                   boxShadow: '0 4px 16px rgba(0,140,149,0.3)',

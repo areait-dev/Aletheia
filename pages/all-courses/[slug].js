@@ -8,7 +8,6 @@ import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { useCart } from '../../context/CartContext';
 import { coursesData } from '../../data/coursesRaw';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 import antincendioContent from '../../data/content/antincendio-content';
@@ -1089,7 +1088,6 @@ export const coursesDetails = {
     learningOutcomes: ['Conoscere le caratteristiche tecniche delle pompe per calcestruzzo', 'Eseguire il posizionamento e la stabilizzazione in sicurezza', 'Operare correttamente durante il pompaggio', 'Ottenere il patentino pompe calcestruzzo valido 5 anni'],
   },
   'icdl-base': {
-    purchasable: true,
     title: 'ICDL Base',
     image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80',
     category: 'Certificazioni Digitali',
@@ -1113,7 +1111,6 @@ export const coursesDetails = {
     learningOutcomes: ['Utilizzare il computer e i sistemi operativi', 'Navigare in internet e usare la posta elettronica', 'Creare documenti di testo con Word', 'Ottenere la Certificazione ICDL Base riconosciuta internazionalmente'],
   },
   'icdl-standard': {
-    purchasable: true,
     title: 'ICDL Standard',
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=80',
     category: 'Certificazioni Digitali',
@@ -1135,7 +1132,6 @@ export const coursesDetails = {
     learningOutcomes: ['Padroneggiare i principali strumenti Microsoft Office', 'Acquisire competenze digitali avanzate', 'Ottenere la certificazione riconosciuta nei concorsi pubblici', 'Aumentare le opportunità nel mercato del lavoro'],
   },
   'icdl-update': {
-    purchasable: true,
     title: 'ICDL Update',
     image: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&q=80',
     category: 'Certificazioni Digitali',
@@ -1208,12 +1204,37 @@ export const coursesDetails = {
       'Ottenere la qualifica ASACOM riconosciuta dalla Regione Siciliana',
     ],
   },
+  'blsd-basic-life-support-defibrillation': {
+    enrollOnly: true,
+    title: 'BLSD - Basic Life Support and Defibrillation',
+    image: 'https://images.unsplash.com/photo-1587556930799-8dca6fad6d41?w=400&q=80',
+    category: 'Formazione Professionale',
+    duration: '5 ore',
+    modality: 'Aula + Pratica su manichino',
+    price: 'Su richiesta',
+    level: 'Attestato di abilitazione',
+    lessons: '4 moduli',
+    students: '200+',
+    target: 'Personale non sanitario: addetti al primo soccorso aziendale, istruttori sportivi, personale di scuole e strutture aperte al pubblico',
+    overview: 'Il corso BLSD (Basic Life Support and Defibrillation), della durata di 5 ore, è rivolto al personale non sanitario e insegna a riconoscere un arresto cardiaco e a intervenire con le manovre di rianimazione cardiopolmonare e con l\'uso del defibrillatore semiautomatico esterno (DAE). Il percorso alterna teoria e ampie esercitazioni pratiche su manichino, e si conclude con la verifica delle competenze e il rilascio dell\'attestato di abilitazione.',
+    curriculum: [
+      { week: 1, title: 'Arresto cardiaco e catena della sopravvivenza', hours: 1, lessons: ['Riconoscere un arresto cardiaco', 'La catena della sopravvivenza', 'Chiamata al 112/118'] },
+      { week: 2, title: 'Rianimazione cardiopolmonare (RCP)', hours: 2, lessons: ['Compressioni toraciche e ventilazioni', 'RCP su adulto, bambino e lattante', 'Manovre di disostruzione delle vie aeree'] },
+      { week: 3, title: 'Uso del defibrillatore (DAE)', hours: 1, lessons: ['Come funziona un DAE', 'Applicazione delle piastre e sicurezza della scena', 'Sequenza BLSD completa'] },
+      { week: 4, title: 'Verifica finale', hours: 1, lessons: ['Prova pratica su manichino', 'Test di valutazione', 'Rilascio dell\'attestato'] },
+    ],
+    learningOutcomes: [
+      'Riconoscere tempestivamente un arresto cardiaco',
+      'Eseguire correttamente la rianimazione cardiopolmonare su adulto e in età pediatrica',
+      'Utilizzare in sicurezza il defibrillatore semiautomatico esterno (DAE)',
+      'Ottenere l\'attestato di abilitazione BLSD',
+    ],
+  },
 };
 
 export default function CourseDetail() {
   const router = useRouter();
   const { slug } = router.query;
-  const { addToCart, setCartOpen } = useCart();
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'moduli' - indipendente da livello/tipo, non si resetta al cambio
   const [selectedLivelloKey, setSelectedLivelloKey] = useState(null);
   const [selectedTipo, setSelectedTipo] = useState('corso');
@@ -1364,7 +1385,6 @@ export default function CourseDetail() {
     price: prezzoTesto,
     level: family.level,
     students: family.students,
-    purchasable: family.purchasable,
     enrollOnly: family.enrollOnly,
     priceVariants: null,
   };
@@ -1713,18 +1733,6 @@ export default function CourseDetail() {
                 );
               }
 
-              /* CASO 2 - Acquistabile online (ICDL/certificazioni), prezzo della variante selezionata sopra */
-              if (course.purchasable) {
-                return (
-                  <CoursePricingSidebar
-                    priceRows={[{ label: varianteCorrente.prezzoLabel, value: prezzoTesto }]}
-                    isPurchasable
-                    primaryLabel="Aggiungi al carrello"
-                    onPrimaryClick={(e) => { e.preventDefault(); addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image }); }}
-                  />
-                );
-              }
-
               /* CASO 3 - Iscrizione online senza pagamento anticipato, a soglia (OSS, ASACOM,
                  Conduttore d'Impresa Agricola): il pulsante "Iscriviti" incrementa il conteggio
                  iscritti (EnrollmentProgress) invece di puntare solo a un link statico - al
@@ -1759,7 +1767,7 @@ export default function CourseDetail() {
               }
 
               /* CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
-                 regione a regione, quindi niente prezzo in vetrina né carrello - solo "Richiedi
+                 regione a regione, quindi niente prezzo in vetrina - solo "Richiedi
                  preventivo". A differenza del CASO 5, qui puntiamo al form in fondo a
                  /formazione/obbligatoria (stesse 4 categorie: sicurezza lavoro, attrezzature,
                  fitosanitario, alimentare) invece che alla pagina Contatti generica. */
@@ -1773,22 +1781,8 @@ export default function CourseDetail() {
                 );
               }
 
-              /* CASO 4B - Prezzo fisso noto per la variante selezionata (varianteCorrente.prezzo è un
-                 numero): stesso flusso carrello di CASO 2, "Acquista ora" aggiunge al carrello e apre
-                 subito il drawer (come i bottoni "Buy now" dei negozi online) invece di puntare a un
-                 link statico non configurato. */
-              if (varianteCorrente.prezzo != null) {
-                return (
-                  <CoursePricingSidebar
-                    priceRows={[{ label: 'Quota di partecipazione', value: prezzoTesto }]}
-                    isPurchasable
-                    onPrimaryClick={(e) => { e.preventDefault(); addToCart({ id: `${slug}-${varianteCorrente.id}`, slug, title: course.title, variant: varianteCorrente.label, price: varianteCorrente.prezzo, image: course.image }); setCartOpen(true); }}
-                  />
-                );
-              }
-
-              /* CASO 5 - Nessun prezzo fisso (su richiesta/range/convenzioni): "Richiedi preventivo"
-                 resta l'unica CTA dominante, niente più "Acquista ora" verso un link statico morto. */
+              /* CASO 5 - Nessun prezzo fisso (su richiesta/range/convenzioni/prezzo fisso): "Richiedi preventivo"
+                 è l'unica CTA, i corsi non si acquistano online. */
               return (
                 <CoursePricingSidebar
                   priceRows={[{ label: 'Quota di partecipazione', value: course.price }]}

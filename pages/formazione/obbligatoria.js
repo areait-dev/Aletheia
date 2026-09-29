@@ -469,7 +469,7 @@ function ConsulenzaForm({ isDark }) {
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
           width: '100%', padding: '0 3rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', border: 'none',
-          background: 'linear-gradient(90deg, #008C95, #10B981)',
+          background: '#008C95',
           color: '#fff', fontWeight: 700, fontSize: '1.05rem', cursor: 'pointer',
           fontFamily: 'inherit', boxShadow: '0 4px 20px rgba(0,140,149,0.35)',
           marginTop: '0.5rem', boxSizing: 'border-box',
@@ -536,7 +536,7 @@ export default function FormazioneObbligatoria() {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
           white-space: nowrap;
-          background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
+          background: #008C95; color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           box-shadow: 0 4px 24px rgba(0,140,149,0.38);
           transition: transform 0.2s ease, box-shadow 0.2s ease;

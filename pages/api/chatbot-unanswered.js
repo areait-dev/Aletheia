@@ -15,7 +15,7 @@ export default function handler(req, res) {
     return res.status(405).json({ error: 'Metodo non consentito' });
   }
 
-  const { question, page } = req.body || {};
+  const { question, page, reason } = req.body || {};
   if (typeof question !== 'string' || !question.trim()) {
     return res.status(400).json({ error: 'Domanda mancante' });
   }
@@ -23,6 +23,9 @@ export default function handler(req, res) {
   const entry = {
     question: question.trim().slice(0, 500),
     page: typeof page === 'string' ? page.slice(0, 200) : '',
+    // 'off-topic': filtro keyword o Gemini ha giudicato la domanda fuori tema.
+    // 'ai-error': Gemini non configurato/in errore/timeout (matching locale non trovato).
+    reason: reason === 'ai-error' ? 'ai-error' : 'off-topic',
     timestamp: new Date().toISOString(),
   };
 

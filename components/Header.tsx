@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useTheme } from '../context/ThemeContext';
-import { useCart } from '../context/CartContext';
-import CartDrawer from './CartDrawer';
 import ThemeToggle from './ThemeToggle';
 
 interface HeaderProps {
@@ -54,10 +52,6 @@ const FORMAZIONE_GROUPS: { key: SubDropdownKey; href: string; title: string; ite
 export default function Header({ active, solid = false }: HeaderProps) {
   const themeCtx = useTheme();
   const theme = themeCtx?.theme;
-  const cartCtx = useCart();
-  const count = cartCtx?.count ?? 0;
-  const cartOpen = cartCtx?.cartOpen ?? false;
-  const setCartOpen = cartCtx?.setCartOpen || (() => {});
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [formazioneOpen, setFormazioneOpen] = useState(false);
@@ -284,29 +278,6 @@ export default function Header({ active, solid = false }: HeaderProps) {
               </div>
             )}
           </div>
-          {/* CARRELLO */}
-          <button
-            onClick={() => setCartOpen(true)}
-            aria-label="Apri carrello"
-            title="Carrello"
-            style={{ position: 'relative', background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem', flexShrink: 0 }}
-          >
-            <i
-              className="fas fa-shopping-cart"
-              style={{ fontSize: '1.2rem', color: iconColor, transition: 'color 0.3s ease' }}
-            ></i>
-            {count > 0 && (
-              <span style={{
-                position: 'absolute', top: 0, right: 0,
-                background: '#008C95', color: '#fff',
-                fontSize: '0.65rem', fontWeight: 700,
-                width: '18px', height: '18px', borderRadius: '9999px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                {count}
-              </span>
-            )}
-          </button>
         </div>
 
         {/* HAMBURGER */}
@@ -387,8 +358,6 @@ export default function Header({ active, solid = false }: HeaderProps) {
       )}
     </header>
 
-    {/* CartDrawer fuori da <header> per evitare il containment di position:fixed */}
-    <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
 }

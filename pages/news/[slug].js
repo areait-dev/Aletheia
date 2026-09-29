@@ -437,7 +437,7 @@ export default function ArticlePage({ article, related }) {
                 <Link href="/news" className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] text-slate-700 dark:text-gray-200" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.65rem 1.4rem', borderRadius: '999px', fontWeight: 700, fontSize: '0.875rem', textDecoration: 'none', transition: 'all 0.2s' }}>
                   ← Torna alle notizie
                 </Link>
-                <a href="/contatti" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.65rem 1.5rem', borderRadius: '999px', background: 'linear-gradient(90deg, #008C95, #10B981)', color: '#fff', fontWeight: 700, fontSize: '0.875rem', textDecoration: 'none', boxShadow: '0 4px 16px rgba(0,140,149,0.28)', transition: 'all 0.2s' }}
+                <a href="/contatti" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.65rem 1.5rem', borderRadius: '999px', background: '#008C95', color: '#fff', fontWeight: 700, fontSize: '0.875rem', textDecoration: 'none', boxShadow: '0 4px 16px rgba(0,140,149,0.28)', transition: 'all 0.2s' }}
                   onMouseEnter={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(-2px)', boxShadow: '0 8px 24px rgba(0,140,149,0.45)' })}
                   onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: '0 4px 16px rgba(0,140,149,0.28)' })}>
                   Contattaci
@@ -497,7 +497,7 @@ export default function ArticlePage({ article, related }) {
                   <p style={{ margin: '0 0 1.25rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.55 }}>
                     Il nostro team è a tua disposizione per rispondere a qualsiasi domanda.
                   </p>
-                  <a href="/contatti" style={{ display: 'block', padding: '0.7rem 1rem', borderRadius: '999px', background: 'linear-gradient(90deg, #008C95, #10B981)', color: '#fff', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', boxShadow: '0 4px 16px rgba(0,140,149,0.4)', transition: 'all 0.2s' }}
+                  <a href="/contatti" style={{ display: 'block', padding: '0.7rem 1rem', borderRadius: '999px', background: '#008C95', color: '#fff', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', boxShadow: '0 4px 16px rgba(0,140,149,0.4)', transition: 'all 0.2s' }}
                     onMouseEnter={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(-2px)', boxShadow: '0 8px 24px rgba(0,140,149,0.55)' })}
                     onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: '0 4px 16px rgba(0,140,149,0.4)' })}>
                     Contattaci ora
@@ -534,7 +534,7 @@ export default function ArticlePage({ article, related }) {
 
           {/* Bottone "Torna alle notizie" ben visibile */}
           <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
-            <Link href="/news" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', padding: '0.875rem 2.25rem', borderRadius: '999px', background: 'linear-gradient(90deg, #008C95, #10B981)', color: '#fff', fontWeight: 700, fontSize: '1rem', textDecoration: 'none', boxShadow: '0 4px 20px rgba(0,140,149,0.3)', transition: 'all 0.2s' }}
+            <Link href="/news" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', padding: '0.875rem 2.25rem', borderRadius: '999px', background: '#008C95', color: '#fff', fontWeight: 700, fontSize: '1rem', textDecoration: 'none', boxShadow: '0 4px 20px rgba(0,140,149,0.3)', transition: 'all 0.2s' }}
               onMouseEnter={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(-3px)', boxShadow: '0 10px 30px rgba(0,140,149,0.45)' })}
               onMouseLeave={(e) => Object.assign(e.currentTarget.style, { transform: 'translateY(0)', boxShadow: '0 4px 20px rgba(0,140,149,0.3)' })}>
               ← Torna alle notizie

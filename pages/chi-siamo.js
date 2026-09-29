@@ -20,12 +20,17 @@ function scrollToCertificazioni() {
   }
 }
 
-function AccreditamentoCard({ logo, logoAlt, title, code, logoScale }) {
+function AccreditamentoCard({ logo, logoAlt, title, code, logoScale, icon }) {
   return (
     <article className="group h-full bg-white dark:bg-dark-card rounded-xl p-6 sm:p-7 flex flex-col transition-all duration-300 shadow-sm border border-slate-200 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-1 hover:shadow-md">
       {/* Logo */}
       <div className="relative w-full h-20 max-w-[70%] flex items-center justify-start">
-        <Image
+        {!logo && icon && (
+          <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center text-3xl text-[#006066] dark:text-[#10B981]" role="img" aria-label={logoAlt}>
+            <i className={icon}></i>
+          </div>
+        )}
+        {logo && <Image
           src={logo}
           alt={logoAlt}
           fill
@@ -33,11 +38,11 @@ function AccreditamentoCard({ logo, logoAlt, title, code, logoScale }) {
           loading="lazy"
           className="object-contain object-left"
           style={logoScale ? { transform: `scale(${logoScale})`, transformOrigin: 'left center' } : undefined}
-        />
+        />}
       </div>
 
       {/* Titolo */}
-      <h3 className="text-lg font-bold text-[#0B2E45] dark:text-white leading-snug mt-6 mb-3">
+      <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-snug mt-6 mb-3">
         {title}
       </h3>
 
@@ -242,7 +247,7 @@ export default function ChiSiamo() {
             </a>
             <a
               href="/contatti"
-              className="inline-flex items-center justify-center h-[44px] bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 px-6 rounded-full text-sm transition-all"
+              className="inline-flex items-center justify-center h-[44px] bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 hover:bg-white/20 hover:border-white/50 px-6 rounded-full text-sm transition-all"
             >
               Contattaci
             </a>
@@ -424,11 +429,11 @@ export default function ChiSiamo() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
             {[
               { n: '01', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Sicurezza sul lavoro', desc: 'Oltre 5.000 lavoratori formati. Corsi conformi al D.Lgs. 81/08 per aziende e PA.' },
-              { n: '02', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Agricoltura e agroalimentare', desc: "Vantiamo una specifica esperienza nel settore agricolo e agroalimentare. Percorsi PSR, FEAMP, fitosanitario, conduzione d'impresa agricola, innovazione in agricoltura." },
+              { n: '02', accent: 'text-[#10B981]/30 dark:text-[#008C95]/20', titolo: 'Agricoltura e agroalimentare', desc: "Vantiamo una specifica esperienza nel settore agricolo e agroalimentare. Percorsi PSR, FEAMP, fitosanitario, conduzione d'impresa agricola, innovazione in agricoltura." },
               { n: '03', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Formazione finanziata', desc: "FSE+, Fondi Interprofessionali, Fondo Nuove Competenze, POC Sicilia. Gestione completa: dall'analisi dei fabbisogni alla rendicontazione." },
-              { n: '04', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Sanità e welfare', desc: 'Percorsi per operatori socio-sanitari, assistenti familiari e operatori socio-assistenziali.' },
+              { n: '04', accent: 'text-[#10B981]/30 dark:text-[#008C95]/20', titolo: 'Sanità e welfare', desc: 'Percorsi per operatori socio-sanitari, assistenti familiari e operatori socio-assistenziali.' },
               { n: '05', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Competenze digitali', desc: 'Certificazioni ICDL e percorsi AICA per scuola, imprese e pubblica amministrazione.' },
-              { n: '06', accent: 'text-indigo-500/30 dark:text-indigo-400/20', titolo: 'Pubblica Amministrazione', desc: 'Percorsi su misura per enti locali, assessorati e operatori del settore pubblico. Formazione che rispetta i tempi e le esigenze della PA.' },
+              { n: '06', accent: 'text-[#10B981]/30 dark:text-[#008C95]/20', titolo: 'Pubblica Amministrazione', desc: 'Percorsi su misura per enti locali, assessorati e operatori del settore pubblico. Formazione che rispetta i tempi e le esigenze della PA.' },
             ].map((s, i) => (
               <Reveal key={s.n} delay={(i % 3) * 90}>
                 <div>
@@ -525,7 +530,7 @@ export default function ChiSiamo() {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
               <Reveal delay={0} className="h-full">
                 <AccreditamentoCard
                   logo="/images/accreditamenti/regione.svg"
@@ -556,6 +561,14 @@ export default function ChiSiamo() {
                   logoAlt="ECM - Educazione Continua in Medicina"
                   title="Provider ECM – Educazione Continua in Medicina"
                   code="Provider Accreditato Ministero della Salute"
+                />
+              </Reveal>
+              <Reveal delay={320} className="h-full">
+                <AccreditamentoCard
+                  logo="/images/accreditamenti/isors.png"
+                  logoAlt="Rete ISORS"
+                  title="Partner Rete ISORS"
+                  code="Rete di partner"
                 />
               </Reveal>
             </div>
@@ -613,7 +626,7 @@ export default function ChiSiamo() {
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
               Vuoi costruire il tuo percorso professionale?
             </h3>
-            <p className="text-indigo-200/90 text-sm leading-relaxed mb-6">
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
               Contattaci per una consulenza gratuita. Ti aiutiamo a capire qual è il percorso
               giusto per te o per la tua azienda.
             </p>

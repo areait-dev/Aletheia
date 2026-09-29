@@ -286,7 +286,7 @@ export default function ServiziAllaPersona() {
           min-height: var(--btn-height-lg);
           white-space: nowrap;
           border-radius: var(--btn-radius);
-          background: linear-gradient(90deg, #008C95, #10B981);
+          background: #008C95;
           color: #fff;
           font-weight: 700;
           font-size: 0.95rem;

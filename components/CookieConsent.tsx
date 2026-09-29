@@ -108,7 +108,7 @@ export default function CookieConsent() {
             cursor: 'pointer',
             border: 'none',
             color: '#fff',
-            background: 'linear-gradient(90deg, #008C95, #10B981)',
+            background: '#008C95',
           }}
         >
           Accetta

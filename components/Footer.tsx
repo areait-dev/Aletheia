@@ -136,14 +136,14 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row md:justify-between items-center text-[11px] text-slate-600 dark:text-slate-500 gap-2">
             <span>© 2026 Alètheia S.r.l. · P.IVA 01524530894 · aletheiasrl@legalmail.it</span>
             <span>
-              Ente di{' '}
+              Ente della rete di imprese{' '}
               <a
                 href="https://www.promotergroup.eu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#006B73] dark:text-[#10B981] hover:text-[#005259] dark:hover:text-[#059669] transition-colors underline"
               >
-                Promotergroup S.p.A.
+                Promotergroup
               </a>
             </span>
           </div>

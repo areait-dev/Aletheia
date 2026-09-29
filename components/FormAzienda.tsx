@@ -30,7 +30,7 @@ const INFO_ITEMS = [
   { icon: 'fas fa-phone',         label: 'Telefono', value: '+39 0932 862613',   href: 'tel:+390932862613' },
   { icon: 'fas fa-envelope',      label: 'Email',    value: 'info@aletheiasrl.it', href: 'mailto:info@aletheiasrl.it' },
   { icon: 'fas fa-map-marker-alt',label: 'Sede',     value: 'Via del Carrubo, snc - 97019 Vittoria (RG)', href: null as string | null },
-  { icon: 'fas fa-clock',         label: 'Orari',    value: 'Lun-Ven: 9:00-13:00 / 15:00-18:00', href: null as string | null },
+  { icon: 'fas fa-clock',         label: 'Orari',    value: 'Lun-Ven: 9:00-13:00 / 14:00-18:00', href: null as string | null },
 ];
 
 interface FormFields {
@@ -475,7 +475,7 @@ export default function FormAzienda({
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
                     padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', border: 'none',
-                    background: loading ? 'rgba(0,140,149,0.35)' : 'linear-gradient(90deg, #008C95, #10B981)',
+                    background: loading ? 'rgba(0,140,149,0.35)' : '#008C95',
                     color: '#fff', fontWeight: 700, fontSize: '0.95rem',
                     cursor: loading ? 'not-allowed' : 'pointer',
                     fontFamily: 'inherit',

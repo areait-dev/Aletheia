@@ -199,13 +199,11 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
         provider: course.provider,
         image: course.image,
         gradient: course.gradient,
-        shop: false,
         varianti: [],
       });
     }
 
     const family = families.get(familyKey);
-    if (course.shop) family.shop = true;
     family.varianti.push({
       id: `${levelKeyFromLabel(levelLabel)}-${isAggiornamento ? 'aggiornamento' : 'corso'}`,
       livelloKey: levelKeyFromLabel(levelLabel),
@@ -237,7 +235,6 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
     family.level = details?.level || null;
     family.students = details?.students || null;
     family.priceLabel = details?.price || null; // stringa grezza (es. "Finanziato", "Gratuito") per CTA
-    family.purchasable = details?.purchasable || false;
     family.enrollOnly = details?.enrollOnly || false;
     if (!family.image && details?.image) family.image = details.image;
 

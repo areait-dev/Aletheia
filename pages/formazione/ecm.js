@@ -1,19 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useTheme } from '../../context/ThemeContext';
-import { CALENDARIO } from '../../data/calendario';
-
-// Aggiornamenti ECM futuri, ordinati per data. Se CALENDARIO non contiene eventi con
-// categoria 'ecm' con data futura, la lista risulta vuota e la sezione mostra lo stato
-// "nessun evento".
-const oggi = new Date();
-const oggiIso = oggi.toISOString().slice(0, 10);
-const PROSSIMI_ECM = CALENDARIO
-  .filter((c) => c.categoria === 'ecm' && c.data >= oggiIso)
-  .sort((a, b) => a.data.localeCompare(b.data));
 
 const modalita = [
   {
@@ -56,132 +45,6 @@ const faqs = [
     risposta: 'Alètheia organizza corsi ECM in tutta la Sicilia come provider accreditato, con attività in aula presso le proprie sedi in provincia di Ragusa, presso strutture sanitarie e in modalità FAD online.',
   },
 ];
-
-const EMPTY_FORM = {
-  nome: '', cognome: '', professione: '', ordine: '', email: '', telefono: '', messaggio: '', privacy: false,
-};
-
-function ContattoECMForm() {
-  const [form, setForm] = useState(EMPTY_FORM);
-  const [errors, setErrors] = useState({});
-  const [sent, setSent] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((p) => ({ ...p, [name]: type === 'checkbox' ? checked : value }));
-  };
-
-  function validate() {
-    const err = {};
-    if (!form.nome.trim()) err.nome = 'Campo obbligatorio';
-    if (!form.cognome.trim()) err.cognome = 'Campo obbligatorio';
-    if (!form.email.trim()) err.email = 'Campo obbligatorio';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) err.email = 'Email non valida';
-    if (!form.privacy) err.privacy = 'Devi accettare la Privacy Policy';
-    return err;
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const err = validate();
-    if (Object.keys(err).length) { setErrors(err); return; }
-    setErrors({});
-    setSent(true);
-  }
-
-  if (sent) {
-    return (
-      <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-        <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: 'linear-gradient(135deg, #008C95, #10B981)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', boxShadow: '0 8px 24px rgba(0,140,149,0.3)' }}>
-          <i className="fas fa-check" style={{ color: '#fff', fontSize: '1.75rem' }}></i>
-        </div>
-        <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.75rem' }}>
-          Richiesta inviata!
-        </h3>
-        <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
-          Grazie per averci contattato. Il nostro team ti fornirà a breve tutte le informazioni sui corsi ECM.
-        </p>
-        <button
-          onClick={() => { setSent(false); setForm(EMPTY_FORM); }}
-          className="text-[#008C95] dark:text-[#10B981] border border-[#008C95] dark:border-[#10B981]"
-          style={{ background: 'none', borderRadius: '999px', padding: '0.6rem 1.5rem', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit' }}
-        >
-          Invia una nuova richiesta
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <div className="form-row">
-        <div className="field">
-          <label htmlFor="nome" className="text-slate-700 dark:text-gray-300">Nome <span style={{ color: '#EF4444' }}>*</span></label>
-          <input id="nome" name="nome" type="text" placeholder="Mario" value={form.nome} onChange={handleChange} className={`${errors.nome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
-          {errors.nome && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.nome}</p>}
-        </div>
-        <div className="field">
-          <label htmlFor="cognome" className="text-slate-700 dark:text-gray-300">Cognome <span style={{ color: '#EF4444' }}>*</span></label>
-          <input id="cognome" name="cognome" type="text" placeholder="Rossi" value={form.cognome} onChange={handleChange} className={`${errors.cognome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
-          {errors.cognome && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.cognome}</p>}
-        </div>
-      </div>
-
-      <div className="form-row">
-        <div className="field">
-          <label htmlFor="professione" className="text-slate-700 dark:text-gray-300">Professione sanitaria</label>
-          <input id="professione" name="professione" type="text" placeholder="Es. Infermiere, Medico, Fisioterapista…" value={form.professione} onChange={handleChange} className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400" />
-        </div>
-        <div className="field">
-          <label htmlFor="ordine" className="text-slate-700 dark:text-gray-300">Ordine / Albo di iscrizione</label>
-          <input id="ordine" name="ordine" type="text" placeholder="Es. OPI Ragusa" value={form.ordine} onChange={handleChange} className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400" />
-        </div>
-      </div>
-
-      <div className="form-row">
-        <div className="field">
-          <label htmlFor="email" className="text-slate-700 dark:text-gray-300">Email <span style={{ color: '#EF4444' }}>*</span></label>
-          <input id="email" name="email" type="email" placeholder="mario@esempio.it" value={form.email} onChange={handleChange} className={`${errors.email ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
-          {errors.email && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.email}</p>}
-        </div>
-        <div className="field">
-          <label htmlFor="telefono" className="text-slate-700 dark:text-gray-300">Telefono</label>
-          <input id="telefono" name="telefono" type="tel" placeholder="+39 000 0000000" value={form.telefono} onChange={handleChange} className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400" />
-        </div>
-      </div>
-
-      <div className="field">
-        <label htmlFor="messaggio" className="text-slate-700 dark:text-gray-300">Messaggio</label>
-        <textarea id="messaggio" name="messaggio" placeholder="Scrivi qui la tua richiesta…" value={form.messaggio} onChange={handleChange} className="bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400" />
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-        <input
-          id="privacy"
-          name="privacy"
-          type="checkbox"
-          checked={form.privacy}
-          onChange={handleChange}
-          style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#008C95', flexShrink: 0, cursor: 'pointer' }}
-        />
-        <label htmlFor="privacy" className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer' }}>
-          Ho letto e accetto la{' '}
-          <a href="/privacy-cookie" className="text-[#008C95] dark:text-[#10B981]" style={{ fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
-          {' '}e acconsento al trattamento dei miei dati personali ai sensi del GDPR. <span style={{ color: '#EF4444' }}>*</span>
-        </label>
-      </div>
-      {errors.privacy && <p className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.privacy}</p>}
-
-      <button type="submit" className="submit-btn">
-        Invia richiesta
-      </button>
-
-      <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>
-        I tuoi dati sono al sicuro e non verranno condivisi con terze parti.
-      </p>
-    </form>
-  );
-}
 
 export default function FormazioneECM() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -226,22 +89,12 @@ export default function FormazioneECM() {
           text-transform: uppercase; color: #008C95; margin-bottom: 0.6rem;
         }
         .dark .section-badge-ecm { color: #6EE7B7; }
-        /* Hero a due colonne: testo + card agenda in glassmorphism. */
-        .hero-ecm-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; }
-        @media (max-width: 900px) { .hero-ecm-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
-        .hero-ecm-glass {
-          background: rgba(255,255,255,0.06);
-          backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255,255,255,0.15);
-          border-radius: 1.5rem; padding: 1.75rem;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-        }
-
+        
         .cta-btn-primary-ecm {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
           white-space: nowrap;
-          background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
+          background: #008C95; color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           box-shadow: 0 4px 24px rgba(0,140,149,0.38);
           transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -275,47 +128,7 @@ export default function FormazioneECM() {
         .faq-grid-ecm { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem 1.5rem; align-items: start; }
         @media (max-width: 800px) { .faq-grid-ecm { grid-template-columns: 1fr; } }
 
-        /* Form (stesso pattern di pages/contatti.js) */
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
-        .field label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.4rem; }
-        .field input, .field textarea {
-          width: 100%; padding: 0.7rem 1rem; border: 1.5px solid #E2E8F0; border-radius: 0.75rem;
-          font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-          font-family: inherit; box-sizing: border-box;
-        }
-        .field input:focus, .field textarea:focus {
-          border-color: #008C95; box-shadow: 0 0 0 3px rgba(0,140,149,0.12);
-        }
-        .field input.error, .field textarea.error { border-color: #EF4444; }
-        .field .err-msg { font-size: 0.73rem; color: #EF4444; margin-top: 0.25rem; display: flex; align-items: center; gap: 0.3rem; }
-        .field textarea { resize: vertical; min-height: 120px; }
-        .submit-btn {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2.25rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
-          white-space: nowrap;
-          background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
-          font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.35);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          font-family: inherit; width: 100%; justify-content: center;
-        }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
-
-        /* Contatti + Form: un'unica card divisa in due colonne (foto+testo, form),
-           non due box separati di altezza diversa che lasciano spazio vuoto ai lati.
-           La foto è piena (tocca i bordi della colonna), non inserita nel padding. */
-        .ecm-contact-card { display: grid; grid-template-columns: 0.9fr 1.1fr; }
-        @media (max-width: 800px) { .ecm-contact-card { grid-template-columns: 1fr; } }
-        .ecm-contact-card-col {
-          display: flex; flex-direction: column;
-          background: #F8FAFC; border-right: 1px solid #E2E8F0;
-        }
-        :global(.dark) .ecm-contact-card-col { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
-        @media (max-width: 800px) { .ecm-contact-card-col { border-right: none; border-bottom: 1px solid #E2E8F0; } }
-        .ecm-contact-card-photo { position: relative; width: 100%; aspect-ratio: 16 / 9; }
         .ecm-contact-card-info { padding: 2.5rem; }
-        .ecm-contact-card-form { padding: 2.5rem; }
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
@@ -323,7 +136,7 @@ export default function FormazioneECM() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
-        <div className="container hero-ecm-grid" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div>
             <div className="hero-badge-ecm fade-up">Educazione Continua in Medicina</div>
 
@@ -336,58 +149,10 @@ export default function FormazioneECM() {
             </h1>
 
             <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
-              <a href="#corsi" className="cta-btn-primary-ecm">Vedi i corsi</a>
               <a href="/contatti" className="cta-btn-outline-ecm">Contattaci</a>
             </div>
           </div>
 
-          {/* Agenda in stile glassmorphism, direttamente nella hero invece che in una
-             sezione separata sotto. */}
-          <div className="hero-ecm-glass fade-up fade-up-3">
-            <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6EE7B7' }}>
-              Agenda · Prossimi aggiornamenti
-            </span>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', margin: '1rem 0' }}>
-              <div style={{ width: '52px', minWidth: '52px', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.15)', textAlign: 'center' }}>
-                <div style={{ background: 'rgba(16,185,129,0.35)', color: '#fff', fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase', padding: '0.15rem 0' }}>
-                  {oggi.toLocaleDateString('it-IT', { month: 'short' }).replace('.', '')}
-                </div>
-                <div style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', fontSize: '1.25rem', fontWeight: 900, padding: '0.2rem 0' }}>
-                  {oggi.getDate()}
-                </div>
-              </div>
-              <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem' }}>
-                Oggi, {oggi.toLocaleDateString('it-IT', { weekday: 'long' })}
-              </span>
-            </div>
-
-            {PROSSIMI_ECM.length === 0 ? (
-              <>
-                <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', lineHeight: 1.7, margin: '0 0 1.5rem' }}>
-                  Al momento non ci sono aggiornamenti ECM con data confermata. Iscriviti per essere avvisato.
-                </p>
-                <a href="#contatti-ecm" className="cta-btn-primary-ecm" style={{ display: 'inline-flex', width: '100%', justifyContent: 'center' }}>
-                  Iscriviti per essere avvisato
-                </a>
-              </>
-            ) : (
-              <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                {PROSSIMI_ECM.slice(0, 3).map((ev) => (
-                  <div key={ev.id} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: '0.85rem' }}>
-                    <span style={{ display: 'block', color: '#fff', fontWeight: 800, fontSize: '0.92rem' }}>{ev.titolo}</span>
-                    <span style={{ display: 'block', color: 'rgba(255,255,255,0.6)', fontSize: '0.78rem', marginTop: '0.2rem' }}>
-                      {ev.data} · {ev.orario}
-                      {ev.creditiEcm ? ` · ${ev.creditiEcm} crediti ECM` : ''}
-                    </span>
-                  </div>
-                ))}
-                <a href="#contatti-ecm" className="cta-btn-primary-ecm" style={{ display: 'inline-flex', width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}>
-                  Iscriviti
-                </a>
-              </div>
-            )}
-          </div>
         </div>
       </section>
 
@@ -480,20 +245,10 @@ export default function FormazioneECM() {
       <section id="contatti-ecm" className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div
-            className="ecm-contact-card bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+            className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
             style={{ borderRadius: '1.5rem', overflow: 'hidden', boxShadow: '0 4px 30px rgba(0,0,0,0.05)' }}
           >
-            <div className="ecm-contact-card-col">
-              <div className="ecm-contact-card-photo">
-                <Image
-                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80"
-                  alt="Corsi ECM per professionisti sanitari"
-                  fill
-                  sizes="(max-width: 900px) 100vw, 35vw"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-
+            <div>
               <div className="ecm-contact-card-info">
                 <span className="section-badge-ecm">Parliamone</span>
                 <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
@@ -509,15 +264,11 @@ export default function FormazioneECM() {
                 <a href="mailto:info@aletheiasrl.it" className="text-[#008C95] dark:text-[#10B981]" style={{ display: 'block', fontSize: '1rem', fontWeight: 700, textDecoration: 'none' }}>
                   info@aletheiasrl.it
                 </a>
+
+                <a href="/contatti" className="cta-btn-primary-ecm" style={{ marginTop: '1.75rem' }}>Contattaci</a>
               </div>
             </div>
 
-            <div className="ecm-contact-card-form">
-              <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, margin: '0 0 1.75rem', lineHeight: 1.3 }}>
-                Richiedi informazioni
-              </h3>
-              <ContattoECMForm />
-            </div>
           </div>
         </div>
       </section>

@@ -125,7 +125,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
   const filteredJobs = locationFilter ? jobs.filter((j) => j.location === locationFilter) : jobs;
 
   const candidatiExtra = [
-    'Migliaia di offerte di lavoro aggiornate',
+    'Nuove offerte di lavoro pubblicate regolarmente',
     'Supporto CV e colloquio incluso',
     'Percorsi di riqualificazione professionale',
   ];
@@ -345,11 +345,11 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                   fontWeight: 800,
                   letterSpacing: '0.12em',
                   textTransform: 'uppercase',
-                  color: '#7DD3FC',
-                  background: 'rgba(125,211,252,0.12)',
+                  color: '#5FD4DC',
+                  background: 'rgba(0,140,149,0.15)',
                   padding: '0.25rem 0.75rem',
                   borderRadius: '999px',
-                  border: '1px solid rgba(125,211,252,0.25)',
+                  border: '1px solid rgba(0,140,149,0.3)',
                 }}
               >
                 Candidati
@@ -556,19 +556,19 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <p className="text-slate-900 dark:text-gray-100" style={{ fontSize: '1.2rem', fontWeight: 600, lineHeight: 1.65, margin: 0 }}>
-                  Alethèia S.r.l. offre un servizio attento e preciso: ricerca e seleziona personale qualificato
+                  Alètheia S.r.l. offre un servizio attento e preciso: ricerca e seleziona personale qualificato
                   per l'inserimento in azienda e aiuta le persone nella ricerca del lavoro. Compito dell'agenzia
                   per il lavoro è agevolare l'incontro tra persone in cerca di lavoro e imprese in cerca di lavoratori.
                 </p>
                 <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
-                  In un mercato sempre più veloce e competitivo, Alethèia S.r.l., Agenzia per il Lavoro è in grado
+                  In un mercato sempre più veloce e competitivo, Alètheia S.r.l., Agenzia per il Lavoro è in grado
                   di offrire una consulenza integrata nel campo delle Risorse Umane e di anticipare le esigenze
                   organizzative, formare e riqualificare le competenze necessarie per determinati ruoli e posizioni,
                   sviluppare un accurato processo di ricerca e selezione del personale e contribuire all'incontro
                   tra domanda e offerta di lavoro.
                 </p>
                 <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
-                  Attraverso Alethèia S.r.l., ente accreditato quale Agenzia per il Lavoro,{' '}
+                  Attraverso Alètheia S.r.l., ente accreditato quale Agenzia per il Lavoro,{' '}
                   <strong className="text-slate-900 dark:text-white">PromoterGroup S.p.A.</strong> amplia il proprio
                   ruolo di leva del sistema economico e sociale, mettendo la professionalità dei propri consulenti
                   al servizio di candidati e aziende.
@@ -676,7 +676,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.55rem',
                   padding: '0.8rem 1.75rem', borderRadius: '999px',
-                  background: 'linear-gradient(90deg, #008C95, #10B981)',
+                  background: '#008C95',
                   color: '#fff', fontWeight: 700, fontSize: '0.9rem',
                   textDecoration: 'none',
                   boxShadow: '0 4px 20px rgba(0,140,149,0.35)',
@@ -905,7 +905,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 gap: '0.6rem',
                 padding: '0.85rem 2.25rem',
                 borderRadius: '999px',
-                background: 'linear-gradient(90deg, #008C95, #10B981)',
+                background: '#008C95',
                 color: '#fff',
                 fontWeight: 700,
                 fontSize: '0.95rem',

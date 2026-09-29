@@ -32,7 +32,7 @@ const INFO_ITEMS = [
   {
     icon: 'fas fa-clock',
     label: 'Orari',
-    value: 'Lun-Ven: 9:00-13:00 / 15:00-18:00',
+    value: 'Lun-Ven: 9:00-13:00 / 14:00-18:00',
     href: null as string | null,
   },
 ];
@@ -493,7 +493,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
                     padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', border: 'none',
-                    background: loading ? 'rgba(16,185,129,0.4)' : 'linear-gradient(90deg, #008C95, #10B981)',
+                    background: loading ? 'rgba(16,185,129,0.4)' : '#008C95',
                     color: '#fff', fontWeight: 700, fontSize: '0.95rem',
                     cursor: loading ? 'not-allowed' : 'pointer',
                     fontFamily: 'inherit',

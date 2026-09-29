@@ -5,14 +5,14 @@ import Footer from '../../components/Footer';
 import FormAzienda from '../../components/FormAzienda';
 
 const vantaggi = [
-  { icon: 'fa-sack-dollar', text: 'Formazione a costo zero (o quasi): i corsi sono finanziati dal Fondo, non dal bilancio aziendale' },
-  { icon: 'fa-puzzle-piece', text: 'Percorsi su misura: progettati sui reali fabbisogni della tua azienda, non corsi standard' },
-  { icon: 'fa-user-graduate', text: 'Dipendenti più competenti e aggiornati, senza dover trovare budget extra' },
-  { icon: 'fa-chart-line', text: 'Più produttività e competitività, con un investimento che non pesa sui costi correnti' },
-  { icon: 'fa-coins', text: 'Valorizzare risorse che altrimenti resterebbero inutilizzate' },
+  'Formazione a costo zero (o quasi): i corsi sono finanziati dal Fondo, non dal bilancio aziendale',
+  'Percorsi su misura: progettati sui reali fabbisogni della tua azienda, non corsi standard',
+  'Dipendenti più competenti e aggiornati, senza dover trovare budget extra',
+  'Più produttività e competitività, con un investimento che non pesa sui costi correnti',
+  'Valorizzare risorse che altrimenti resterebbero inutilizzate',
 ];
 
-const partner = ['Fondimpresa', 'Fon.Ter', 'For.Agri'];
+const partner = ['Fondimpresa', 'Fon.Ter', 'For.Agri', 'Fon.Ar.Com.', 'Fondoforte', 'Fondartigianato', 'Fondoconoscenze', 'Formazienda', 'For.Te.'];
 
 const faqs = [
   {
@@ -94,7 +94,7 @@ export default function FondiInterprofessionali() {
           min-height: var(--btn-height-lg);
           white-space: nowrap;
           border-radius: var(--btn-radius);
-          background: linear-gradient(90deg, #008C95, #10B981);
+          background: #008C95;
           color: #fff;
           font-weight: 700;
           font-size: 0.95rem;
@@ -147,14 +147,13 @@ export default function FondiInterprofessionali() {
 
         /* Loghi partner scorrevoli */
         .partner-row {
-          display: flex;
+          display: grid;
           gap: 1.25rem;
-          overflow-x: auto;
-          padding-bottom: 0.5rem;
-          scrollbar-width: thin;
+          grid-template-columns: repeat(2, 1fr);
         }
-        .partner-row::-webkit-scrollbar { height: 6px; }
-        .partner-row::-webkit-scrollbar-thumb { background: rgba(0,140,149,0.25); border-radius: 999px; }
+        @media (min-width: 640px) { .partner-row { grid-template-columns: repeat(3, 1fr); } }
+        /* 5 colonne desktop: 9 fondi su due file (5 + 4) */
+        @media (min-width: 1024px) { .partner-row { grid-template-columns: repeat(5, 1fr); } }
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
@@ -217,23 +216,14 @@ export default function FondiInterprofessionali() {
               Utilizzare i Fondi Interprofessionali significa trasformare un contributo già versato in un&apos;opportunità concreta di crescita. I vantaggi per le aziende che aderiscono ai Fondi Interprofessionali sono:
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem 2rem' }}>
               {vantaggi.map((v) => (
-                <div
-                  key={v.text}
-                  className="bg-slate-50 dark:bg-dark-bg border border-slate-100 dark:border-[rgba(255,255,255,0.08)]"
-                  style={{ borderRadius: '1rem', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
-                >
-                  <span
-                    className="bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#008C95] dark:text-[#10B981]"
-                    style={{ width: '2.5rem', height: '2.5rem', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                  >
-                    <i className={`fas ${v.icon}`}></i>
-                  </span>
-                  <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.65 }}>{v.text}</span>
-                </div>
+                <li key={v} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                  <i className="fas fa-check text-primary dark:text-[#10B981]" style={{ fontSize: '0.8rem', marginTop: '0.3rem', flexShrink: 0 }}></i>
+                  <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.65 }}>{v}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>
@@ -264,8 +254,7 @@ export default function FondiInterprofessionali() {
                   key={p}
                   className="bg-white dark:bg-dark-card border-slate-200 dark:border-[rgba(255,255,255,0.1)] text-slate-600 dark:text-gray-500"
                   style={{
-                    flex: '0 0 220px',
-                    height: '120px',
+                                        height: '120px',
                     border: '1px dashed',
                     borderRadius: '1rem',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',

@@ -36,12 +36,10 @@ const mepaElenco = [
 ];
 
 const entiLoghi = [
-  { name: 'Comune di Vittoria', icon: 'fas fa-landmark' },
-  { name: 'Comune di Ragusa', icon: 'fas fa-building-columns' },
-  { name: 'Comune di Comiso', icon: 'fas fa-landmark' },
-  { name: 'Comune di Modica', icon: 'fas fa-building-columns' },
-  { name: 'Ente Regionale', icon: 'fas fa-landmark-dome' },
-  { name: 'Azienda Partecipata', icon: 'fas fa-city' },
+  { name: 'Comune di Vittoria' },
+  { name: 'Comune di Ragusa' },
+  { name: 'Comune di Comiso' },
+  { name: 'Comune di Modica' },
 ];
 
 const faqs = [
@@ -234,7 +232,7 @@ function ConsulenzaPAForm({ isDark }) {
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
           width: '100%', padding: '0.95rem 2rem', borderRadius: '999px', border: 'none',
-          background: 'linear-gradient(90deg, #008C95, #10B981)',
+          background: '#008C95',
           color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
           fontFamily: 'inherit', boxShadow: '0 4px 20px rgba(0,140,149,0.35)',
           marginTop: '0.25rem', boxSizing: 'border-box',
@@ -294,7 +292,7 @@ export default function CorsiPA() {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
           white-space: nowrap;
-          background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
+          background: #008C95; color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           box-shadow: 0 4px 24px rgba(0,140,149,0.38);
           transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -356,7 +354,7 @@ export default function CorsiPA() {
           display: flex; align-items: center; justify-content: center; gap: 0.55rem;
           width: 100%; padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); box-sizing: border-box;
           white-space: nowrap;
-          background: linear-gradient(90deg, #008C95, #10B981); color: #fff;
+          background: #008C95; color: #fff;
           font-weight: 700; font-size: 0.95rem; text-decoration: none;
           transition: filter 0.2s ease, transform 0.2s ease; border: none; cursor: pointer; font-family: inherit;
         }
@@ -451,8 +449,17 @@ export default function CorsiPA() {
               <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
                 Il partner che conosce le esigenze della PA
               </h2>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: 0 }}>
-                Da oltre vent&apos;anni Alètheia affianca enti pubblici, amministrazioni locali, aziende partecipate e organismi pubblici nella progettazione e realizzazione di percorsi formativi. La differenza sta nella conoscenza del contesto: comprendiamo i processi della Pubblica Amministrazione, le esigenze organizzative degli uffici, le modalità di affidamento e gli obblighi normativi che accompagnano la formazione del personale pubblico. Questo ci permette di proporre percorsi non solo qualificati, ma anche coerenti con le procedure e i vincoli dell&apos;ente. Svolgiamo attività di formazione, aggiornamento professionale, progettazione finanziata e sviluppo delle competenze.
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>
+                Da oltre vent&apos;anni Alètheia affianca enti pubblici, amministrazioni locali, aziende partecipate e organismi pubblici nella progettazione e realizzazione di percorsi formativi. La differenza sta nella conoscenza del contesto: comprendiamo i processi della Pubblica Amministrazione, le esigenze organizzative degli uffici, le modalità di affidamento e gli obblighi normativi che accompagnano la formazione del personale pubblico.
+              </p>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>
+                Questo ci permette di proporre percorsi non solo qualificati, ma coerenti con le procedure e i vincoli dell&apos;ente, dalla progettazione alla rendicontazione, nel rispetto dei tempi e delle modalità previste dalla normativa vigente.
+              </p>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>
+                Operiamo attraverso affidamenti diretti, procedure negoziate e gare d&apos;appalto, con esperienza consolidata nella partecipazione a bandi pubblici per la fornitura di servizi formativi. Siamo iscritti al MEPA, Mercato Elettronico della Pubblica Amministrazione, che semplifica le procedure di acquisizione dei servizi da parte degli enti e garantisce la massima trasparenza nell&apos;affidamento.
+              </p>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0' }}>
+                Svolgiamo attività di formazione, aggiornamento professionale, progettazione finanziata e sviluppo delle competenze per il personale della PA.
               </p>
 
               <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : '#008C95', margin: '1.5rem 0 0.85rem' }}>
@@ -552,7 +559,6 @@ export default function CorsiPA() {
                 aria-hidden={i >= entiLoghi.length}
               >
                 <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap">
-                  <i className={`${logo.icon} text-2xl`} aria-hidden="true" />
                   {logo.name}
                 </span>
               </div>

@@ -212,7 +212,7 @@ export default function ProgrammaGOL() {
           min-height: var(--btn-height-lg);
           white-space: nowrap;
           border-radius: var(--btn-radius);
-          background: linear-gradient(90deg, #10B981, #008C95);
+          background: #008C95;
           color: #fff;
           font-weight: 700;
           font-size: 0.95rem;

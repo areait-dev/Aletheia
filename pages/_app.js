@@ -3,7 +3,6 @@ import 'lenis/dist/lenis.css';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { ThemeProvider } from '../context/ThemeContext';
-import { CartProvider } from '../context/CartContext';
 import { initLenis, destroyLenis } from '../lib/lenis';
 import { SITE_NAME, SITE_URL } from '../components/SeoHead';
 import CookieConsent from '../components/CookieConsent';
@@ -63,7 +62,6 @@ function MyApp({ Component, pageProps }) {
         })()
       `}} />
       <ThemeProvider>
-        <CartProvider>
           {/* Font Awesome caricato non-bloccante via _document.js (preload+swap):
               qui in _app.js sarebbe HTML statico ma un <link> in mezzo al JSX del body
               resta comunque render-blocking per il browser, oltre a finire fuori posto. */}
@@ -74,7 +72,6 @@ function MyApp({ Component, pageProps }) {
             <Chatbot />
             <CookieConsent />
           </div>
-        </CartProvider>
       </ThemeProvider>
     </>
   );

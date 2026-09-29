@@ -55,7 +55,7 @@ const INFO_ITEMS = [
   {
     icon: 'fas fa-clock',
     label: 'Orari',
-    value: 'Lun - Ven: 9:00 - 18:00',
+    value: 'Lun - Ven: 9:00-13:00 / 14:00-18:00',
     href: null,
     linkLabel: null,
   },
@@ -256,7 +256,7 @@ export default function Contatti() {
           height: var(--btn-height-lg);
           padding: 0 2.25rem;
           border-radius: var(--btn-radius);
-          background: linear-gradient(90deg, #008C95, #10B981);
+          background: #008C95;
           color: #fff;
           font-weight: 700;
           font-size: 0.95rem;
@@ -372,7 +372,7 @@ export default function Contatti() {
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 900, margin: '0 0 0.5rem', lineHeight: 1.25 }}>
               Vieni a trovarci
             </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.88rem', lineHeight: 1.7, margin: 0 }}>
+            <p className="text-slate-600 dark:text-[#9aa8a6]" style={{ fontSize: '0.88rem', lineHeight: 1.7, margin: 0 }}>
               Siamo presenti in quattro sedi in provincia di Ragusa. Puoi contattarci telefonicamente, via email o compilando il modulo.
             </p>
           </div>
@@ -384,7 +384,7 @@ export default function Contatti() {
 
               {/* Info cards: telefono, email, orari */}
               {INFO_ITEMS.map((item, i) => (
-                <div key={i} className="info-card bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700">
+                <div key={i} className="info-card bg-white dark:bg-[#1c2423] border border-slate-200 dark:border-[#2a3433]">
                   <div className="bg-[#008C95]/10 dark:bg-[#10B981]/10" style={{
                     width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -417,7 +417,7 @@ export default function Contatti() {
                     <button
                       key={sede.città}
                       onClick={() => setActiveSede(i)}
-                      className={`sede-card ${activeSede === i ? 'active bg-[#008C95]/8 dark:bg-[#10B981]/10 border-[#008C95] dark:border-[#10B981]' : 'bg-white dark:bg-gray-800 border-slate-200 dark:border-gray-700 hover:border-[#008C95]/50 dark:hover:border-[#10B981]/50'}`}
+                      className={`sede-card ${activeSede === i ? 'active bg-[#008C95]/8 dark:bg-[#10B981]/10 border-[#008C95] dark:border-[#10B981]' : 'bg-white dark:bg-[#1c2423] border-slate-200 dark:border-[#2a3433] hover:border-[#008C95]/50 dark:hover:border-[#10B981]/50'}`}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
                         <i
@@ -431,7 +431,7 @@ export default function Contatti() {
                           {sede.città}
                         </span>
                       </div>
-                      <p className="text-slate-600 dark:text-gray-400" style={{ margin: 0, fontSize: '0.75rem', lineHeight: 1.45, paddingLeft: '1.3rem' }}>
+                      <p className="text-slate-600 dark:text-[#9aa8a6]" style={{ margin: 0, fontSize: '0.75rem', lineHeight: 1.45, paddingLeft: '1.3rem' }}>
                         {sede.indirizzo}
                       </p>
                       {activeSede === i && (
@@ -452,7 +452,7 @@ export default function Contatti() {
               </div>
 
               {/* Mappa embed - aggiornata in base alla sede selezionata */}
-              <div className="border border-slate-200 dark:border-gray-700" style={{ flex: 1, minHeight: '200px', borderRadius: '1.25rem', overflow: 'hidden' }}>
+              <div className="border border-slate-200 dark:border-[#2a3433]" style={{ flex: 1, minHeight: '200px', borderRadius: '1.25rem', overflow: 'hidden' }}>
                 {mapsConsent ? (
                   <iframe
                     key={activeSede}
@@ -467,7 +467,7 @@ export default function Contatti() {
                   />
                 ) : (
                   <div
-                    className="bg-slate-50 dark:bg-gray-800 text-slate-600 dark:text-gray-300"
+                    className="bg-slate-50 dark:bg-[#1c2423] text-slate-600 dark:text-[#9aa8a6]"
                     style={{ width: '100%', height: '100%', minHeight: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', padding: '1.5rem', textAlign: 'center' }}
                   >
                     <i className="fas fa-map-location-dot" style={{ fontSize: '1.5rem', color: '#008C95' }}></i>
@@ -484,7 +484,7 @@ export default function Contatti() {
                       style={{
                         padding: '0.5rem 1.1rem', borderRadius: '9999px', fontWeight: 700, fontSize: '0.8rem',
                         cursor: 'pointer', border: 'none', color: '#fff',
-                        background: 'linear-gradient(90deg, #008C95, #10B981)',
+                        background: '#008C95',
                       }}
                     >
                       Accetta i cookie per visualizzare la mappa
@@ -515,7 +515,7 @@ export default function Contatti() {
                   <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.75rem' }}>
                     Messaggio inviato!
                   </h3>
-                  <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
+                  <p className="text-slate-600 dark:text-[#9aa8a6]" style={{ fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto 2rem' }}>
                     Grazie per averci contattato. Ti risponderemo al più presto all&apos;indirizzo email indicato.
                   </p>
                   <button
@@ -531,7 +531,7 @@ export default function Contatti() {
                   <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.4rem' }}>
                     Inviaci un messaggio
                   </h2>
-                  <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem', marginBottom: '2rem', lineHeight: 1.6 }}>
+                  <p className="text-slate-600 dark:text-[#9aa8a6]" style={{ fontSize: '0.85rem', marginBottom: '2rem', lineHeight: 1.6 }}>
                     Compila il modulo e ti ricontatteremo al più presto.
                   </p>
 
@@ -539,34 +539,34 @@ export default function Contatti() {
 
                     <div className="form-row">
                       <div className="field">
-                        <label htmlFor="nome" className="text-slate-700 dark:text-gray-300">Nome <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="nome" name="nome" type="text" placeholder="Mario" value={form.nome} onChange={handleChange} aria-invalid={!!errors.nome} aria-describedby={errors.nome ? 'nome-error' : undefined} className={`${errors.nome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        <label htmlFor="nome" className="text-slate-700 dark:text-[#9aa8a6]">Nome <span style={{ color: '#EF4444' }}>*</span></label>
+                        <input id="nome" name="nome" type="text" placeholder="Mario" value={form.nome} onChange={handleChange} aria-invalid={!!errors.nome} aria-describedby={errors.nome ? 'nome-error' : undefined} className={`${errors.nome ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.nome && <p id="nome-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.nome}</p>}
                       </div>
                       <div className="field">
-                        <label htmlFor="cognome" className="text-slate-700 dark:text-gray-300">Cognome <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="cognome" name="cognome" type="text" placeholder="Rossi" value={form.cognome} onChange={handleChange} aria-invalid={!!errors.cognome} aria-describedby={errors.cognome ? 'cognome-error' : undefined} className={`${errors.cognome ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        <label htmlFor="cognome" className="text-slate-700 dark:text-[#9aa8a6]">Cognome <span style={{ color: '#EF4444' }}>*</span></label>
+                        <input id="cognome" name="cognome" type="text" placeholder="Rossi" value={form.cognome} onChange={handleChange} aria-invalid={!!errors.cognome} aria-describedby={errors.cognome ? 'cognome-error' : undefined} className={`${errors.cognome ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.cognome && <p id="cognome-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.cognome}</p>}
                       </div>
                     </div>
 
                     <div className="form-row">
                       <div className="field">
-                        <label htmlFor="email" className="text-slate-700 dark:text-gray-300">Email <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="email" name="email" type="email" placeholder="mario@esempio.it" value={form.email} onChange={handleChange} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} className={`${errors.email ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        <label htmlFor="email" className="text-slate-700 dark:text-[#9aa8a6]">Email <span style={{ color: '#EF4444' }}>*</span></label>
+                        <input id="email" name="email" type="email" placeholder="mario@esempio.it" value={form.email} onChange={handleChange} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} className={`${errors.email ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.email && <p id="email-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.email}</p>}
                       </div>
                       <div className="field">
-                        <label htmlFor="telefono" className="text-slate-700 dark:text-gray-300">Telefono</label>
-                        <input id="telefono" name="telefono" type="tel" placeholder="+39 000 0000000" value={form.telefono} onChange={handleChange} aria-invalid={!!errors.telefono} aria-describedby={errors.telefono ? 'telefono-error' : undefined} className={`${errors.telefono ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                        <label htmlFor="telefono" className="text-slate-700 dark:text-[#9aa8a6]">Telefono</label>
+                        <input id="telefono" name="telefono" type="tel" placeholder="+39 000 0000000" value={form.telefono} onChange={handleChange} aria-invalid={!!errors.telefono} aria-describedby={errors.telefono ? 'telefono-error' : undefined} className={`${errors.telefono ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.telefono && <p id="telefono-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.telefono}</p>}
                       </div>
                     </div>
 
                     <div className="field">
-                      <label htmlFor="motivo" className="text-slate-700 dark:text-gray-300">Oggetto della richiesta <span style={{ color: '#EF4444' }}>*</span></label>
+                      <label htmlFor="motivo" className="text-slate-700 dark:text-[#9aa8a6]">Oggetto della richiesta <span style={{ color: '#EF4444' }}>*</span></label>
                       <div className="field-select-wrap">
-                        <select id="motivo" name="motivo" value={form.motivo} onChange={handleChange} aria-invalid={!!errors.motivo} aria-describedby={errors.motivo ? 'motivo-error' : undefined} className={`${errors.motivo ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white`}>
+                        <select id="motivo" name="motivo" value={form.motivo} onChange={handleChange} aria-invalid={!!errors.motivo} aria-describedby={errors.motivo ? 'motivo-error' : undefined} className={`${errors.motivo ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white`}>
                           <option value="">Seleziona l&apos;oggetto della richiesta…</option>
                           {MOTIVI.map((m) => <option key={m} value={m}>{m}</option>)}
                         </select>
@@ -575,8 +575,8 @@ export default function Contatti() {
                     </div>
 
                     <div className="field">
-                      <label htmlFor="messaggio" className="text-slate-700 dark:text-gray-300">Messaggio <span style={{ color: '#EF4444' }}>*</span></label>
-                      <textarea id="messaggio" name="messaggio" placeholder="Scrivi il tuo messaggio…" value={form.messaggio} onChange={handleChange} aria-invalid={!!errors.messaggio} aria-describedby={errors.messaggio ? 'messaggio-error' : undefined} className={`${errors.messaggio ? 'error' : ''} bg-white dark:bg-gray-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400`} />
+                      <label htmlFor="messaggio" className="text-slate-700 dark:text-[#9aa8a6]">Messaggio <span style={{ color: '#EF4444' }}>*</span></label>
+                      <textarea id="messaggio" name="messaggio" placeholder="Scrivi il tuo messaggio…" value={form.messaggio} onChange={handleChange} aria-invalid={!!errors.messaggio} aria-describedby={errors.messaggio ? 'messaggio-error' : undefined} className={`${errors.messaggio ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                       {errors.messaggio && <p id="messaggio-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.messaggio}</p>}
                     </div>
 
@@ -592,7 +592,7 @@ export default function Contatti() {
                         aria-describedby={errors.privacy ? 'privacy-error' : undefined}
                         style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#008C95', flexShrink: 0, cursor: 'pointer' }}
                       />
-                      <label htmlFor="privacy" className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer' }}>
+                      <label htmlFor="privacy" className="text-slate-600 dark:text-[#9aa8a6]" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer' }}>
                         Ho letto e accetto la{' '}
                         <a href="/privacy-cookie" className="text-[#008C95] dark:text-[#10B981]" style={{ fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
                         {' '}e acconsento al trattamento dei miei dati personali ai sensi del GDPR. <span style={{ color: '#EF4444' }}>*</span>
