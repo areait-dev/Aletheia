@@ -168,21 +168,6 @@ export default function NewsPage() {
         .breadcrumb a:hover { color: #6EE7B7; }
         .breadcrumb span { color: rgba(255,255,255,0.3); }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.7rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #6EE7B7;
-          background: rgba(16,185,129,0.12);
-          border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.25rem;
-        }
 
         .news-grid {
           display: grid;
@@ -200,9 +185,11 @@ export default function NewsPage() {
 
         .search-input {
           width: 100%;
-          padding: 0.75rem 1rem 0.75rem 2.75rem;
+          min-height: var(--btn-height-sm);
+          padding: 0 1rem 0 2.75rem;
+          box-sizing: border-box;
           border: 1px solid #E2E8F0;
-          border-radius: 999px;
+          border-radius: var(--btn-radius);
           font-size: 0.9rem;
           color: #0F172A;
           background: #fff;
@@ -230,10 +217,11 @@ export default function NewsPage() {
         }
 
         .year-select {
-          padding: 0.75rem 1.5rem;
-          padding-right: 2.75rem;
+          min-height: var(--btn-height-sm);
+          box-sizing: border-box;
+          padding: 0 2.75rem 0 1.5rem;
           border: 1px solid #E2E8F0;
-          border-radius: 999px;
+          border-radius: var(--btn-radius);
           font-size: 0.9rem;
           color: #0F172A;
           background-color: #fff;
@@ -282,7 +270,7 @@ export default function NewsPage() {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-          <div className="hero-badge fade-up">
+          <div className="page-hero-badge fade-up">
             News
           </div>
 
@@ -340,8 +328,11 @@ export default function NewsPage() {
                   aria-pressed={isActive}
                   className={isActive ? '' : 'text-slate-600 dark:text-gray-300 border-slate-200 dark:border-[rgba(255,255,255,0.15)]'}
                   style={{
-                    padding: '0.5rem 1.1rem',
-                    borderRadius: '999px',
+                    padding: '0 1.1rem',
+                    minHeight: 'var(--btn-height-sm)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    borderRadius: 'var(--btn-radius)',
                     fontSize: '0.82rem',
                     fontWeight: 700,
                     fontFamily: 'inherit',
@@ -404,7 +395,7 @@ export default function NewsPage() {
           </div>
 
           {/* Contatore risultati */}
-          <p style={{ margin: '0.75rem 0 0', fontSize: '0.82rem', color: '#94A3B8' }}>
+          <p style={{ margin: '0.75rem 0 0', fontSize: '0.82rem', color: 'var(--muted-text)' }}>
             <strong style={{ color: '#008C95' }}>{filtered.length}</strong>{' '}
             {filtered.length === 1 ? 'notizia trovata' : 'notizie trovate'}
           </p>
@@ -417,7 +408,7 @@ export default function NewsPage() {
           {filtered.length > 0 ? (
             <div className="news-grid">
               {filtered.map((news, i) => (
-                <Reveal key={news.id} delay={(i % 6) * 80} className="h-full">
+                <Reveal key={news.id} delay={(i % 6) * 80} className="h-full news-grid-item">
                   <NewsCard news={news} />
                 </Reveal>
               ))}

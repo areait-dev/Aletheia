@@ -41,7 +41,7 @@ export default function CourseHero({ breadcrumb = [], badge, title, titleSuffix 
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.14) 0%, transparent 70%)' }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
           {badge && (
-            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6EE7B7', background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)', padding: '0.35rem 0.9rem', borderRadius: '999px', marginBottom: '1.1rem' }}>
+            <span className="page-hero-badge">
               {badge}
             </span>
           )}

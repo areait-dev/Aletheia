@@ -263,21 +263,6 @@ export default function ServiziAllaPersona() {
           .chi-siamo-section { padding-bottom: 5.5rem !important; }
         }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.7rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #6EE7B7;
-          background: rgba(16,185,129,0.12);
-          border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.25rem;
-        }
         .cta-btn-primary {
           display: inline-flex;
           align-items: center;
@@ -342,15 +327,7 @@ export default function ServiziAllaPersona() {
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0F172A 100%)',
-          paddingTop: '120px',
-          paddingBottom: '5rem',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
+      <section className="page-hero page-hero--dark page-hero--left">
         {/* decorative blobs */}
         <div
           aria-hidden="true"
@@ -369,21 +346,11 @@ export default function ServiziAllaPersona() {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-          <div className="hero-badge fade-up">
+          <div className="page-hero-badge fade-up">
             Per i Candidati
           </div>
 
-          <h1
-            className="fade-up fade-up-1"
-            style={{
-              fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',
-              fontWeight: 900,
-              color: '#fff',
-              lineHeight: 1.12,
-              marginBottom: '1.25rem',
-              maxWidth: '700px',
-            }}
-          >
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '700px' }}>
             Servizi alla{' '}
             <span
               style={{
@@ -397,20 +364,11 @@ export default function ServiziAllaPersona() {
             </span>
           </h1>
 
-          <p
-            className="fade-up fade-up-2"
-            style={{
-              fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-              color: 'rgba(255,255,255,0.68)',
-              maxWidth: '820px',
-              lineHeight: 1.75,
-              marginBottom: '2.5rem',
-            }}
-          >
+          <p className="fade-up fade-up-2" style={{ maxWidth: '820px', lineHeight: 1.7 }}>
             Ti affianchiamo in ogni fase del tuo percorso professionale: dalla ricerca del lavoro all'inserimento in azienda.
           </p>
 
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="https://aletheia4job.it/" target="_blank" rel="noopener noreferrer" className="cta-btn-primary">Vedi le offerte</a>
             <a
               href="#contatta-candidato"
@@ -472,7 +430,7 @@ export default function ServiziAllaPersona() {
                   fontWeight: 800,
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  color: '#008C95',
+                  color: 'var(--primary-text)',
                   marginBottom: '0.5rem',
                 }}
               >
@@ -520,7 +478,7 @@ export default function ServiziAllaPersona() {
                 fontWeight: 800,
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: '#008C95',
+                color: 'var(--primary-text)',
                 marginBottom: '0.5rem',
               }}
             >

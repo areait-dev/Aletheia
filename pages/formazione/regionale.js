@@ -208,31 +208,7 @@ export default function FormazioneRegionale() {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
         }
 
-        .section-badge {
-          display: inline-block;
-          font-size: 0.68rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #008C95;
-          margin-bottom: 0.6rem;
-        }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.7rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #6EE7B7;
-          background: rgba(16,185,129,0.12);
-          border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.25rem;
-        }
         .cta-btn-primary {
           display: inline-flex;
           align-items: center;
@@ -281,13 +257,7 @@ export default function FormazioneRegionale() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-        paddingTop: '120px',
-        paddingBottom: '3.25rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section className="page-hero page-hero--dark">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
@@ -302,18 +272,11 @@ export default function FormazioneRegionale() {
 
           {/* Contenuto principale centrato, sotto la breadcrumb allineata a sinistra */}
           <div className="text-center flex flex-col items-center justify-center w-full">
-            <div className="hero-badge fade-up self-start">
+            <div className="page-hero-badge fade-up self-start">
               Formazione Finanziata
             </div>
 
-            <h1 className="fade-up fade-up-1 text-center justify-center mx-auto" style={{
-              fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)',
-              fontWeight: 900,
-              color: '#fff',
-              lineHeight: 1.15,
-              marginBottom: '0.75rem',
-              maxWidth: '780px',
-            }}>
+            <h1 className="fade-up fade-up-1 text-center justify-center mx-auto" style={{ maxWidth: '780px' }}>
               Formazione regionale{' '}
               <span style={{
                 background: 'linear-gradient(90deg, #10B981, #008C95)',

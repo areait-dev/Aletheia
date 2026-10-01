@@ -86,18 +86,35 @@ Il sito usa Tailwind CSS con la strategia `class` per la dark mode (classe `dark
 Token colore standard da usare su tutto il sito:
 Ruolo	Light	Dark
 Sfondo pagina	`bg-white`	`dark:bg-gray-900` (`#111827`)
-Sfondo sezioni alternate	`bg-gray-50`	`dark:bg-gray-900`
+Sfondo sezioni alternate	`bg-gray-50`	`dark:bg-gray-950` (`#030712`) — distinto da "Sfondo pagina"; card `gray-800` restano leggibili sopra
 Sfondo card / pannelli	`bg-white`	`dark:bg-gray-800` (`#1f2937`)
 Sfondo input	`bg-white`	`dark:bg-gray-700` (`#374151`)
 Testo primario	`text-gray-900`	`dark:text-gray-50` (`#F8FAFC`)
 Testo secondario	`text-gray-600`	`dark:text-gray-300` (`#CBD5E1`)
-Testo muted	`text-gray-400`	`dark:text-gray-400` (`#9CA3AF`)
+Testo muted	`text-gray-500` (`#6B7280`, 4,83:1 su bianco)	`dark:text-gray-400` (`#9CA3AF`, 6,99:1 su gray-900)
 Bordi e separatori	`border-gray-200`	`dark:border-gray-700` (`#374151`)
+Bordo input	`border-gray-300`	`dark:border-gray-500` (`#6B7280`, 3,04:1 su card gray-800 / 3,67:1 su gray-900) — NON gray-700: coincide con lo sfondo input e il contorno sparisce
 Placeholder input	`placeholder-gray-400`	`dark:placeholder-gray-500`
 Regole:
 Mai colori hardcodati inline senza la corrispettiva variante dark
 Mai `bg-white` senza `dark:bg-gray-800` (o equivalente)
 Mai `text-gray-900` senza `dark:text-gray-50` (o equivalente)
 Il colore brand turchese `#008C95` rimane invariato in entrambi i temi
-Contrasto minimo WCAG AA: 4.5:1 per testo normale, 3:1 per testo grande (>18px bold o >24px regular)
+Contrasto minimo WCAG AA: 4.5:1 per testo normale, 3:1 per testo grande (≥18,66px bold o ≥24px regular) e per i bordi dei controlli (input)
+Verificare sempre il rapporto con un calcolatore (o misurandolo nel browser), mai a occhio
 La homepage (`index.js`) è il riferimento corretto — se un componente non sa come implementare la dark mode, guarda lì
+Note sui token (valori reali del sito)
+Nel codice le pagine usano i token del Design System in `tailwind.config.js`, non i `gray-*` della tabella: sezioni `bg-white dark:bg-dark-card` (`#004d52`, card/pannelli) alternate a `bg-light dark:bg-dark-bg` (`#F2F2F2` / `#161C1A`); queste due alternano già visivamente. La tabella vale per nuovo codice Tailwind "puro"; per coerenza con la homepage preferire i token DS.
+`text-gray-500` (#6B7280) su `bg-light` (#F2F2F2) fa solo 4,32:1: su quello sfondo usare `text-gray-600` (6,75:1).
+Placeholder: `placeholder-gray-400` fa 2,54:1 su bianco e `dark:placeholder-gray-500` 2,13:1 su input `gray-700`: sotto soglia, da rivedere (aperto).
+Token derivati per il contrasto (`styles/globals.css`)
+`#008C95` resta fisso (bottoni pieni, icone, bordi, focus) ma come TESTO su chiaro fa 4,05:1 su bianco e 3,62:1 su `#F2F2F2`. Per testo piccolo su sfondo chiaro usare:
+`text-primary-text` (= `var(--primary-text-on-light)`, `#006B73`: 6,27:1 su bianco, 5,60:1 su #F2F2F2), sempre in coppia con `dark:text-[#10B981]`
+`var(--primary-text)` negli stili inline/CSS: `#006B73` in light, `#10B981` in dark (nessuna variante dark da scrivere a mano)
+`var(--muted-text)` per testo muted inline/CSS: `#6B7280` in light, `#9CA3AF` in dark
+Testo bianco su `#10B981` = 2,54:1, vietato: sul verde usare testo scuro `#0F172A` (7,04:1). Bianco su `#008C95` fa 4,05:1: accettabile solo per testo grande/bold ≥18,66px
+Non usare `#94A3B8` / `text-*-400` come testo su sfondo chiaro (2,4-2,5:1)
+Componenti condivisi di layout (`styles/globals.css`) — non ridefinirli nelle pagine
+Hero pagine interne: `.page-hero` (+ `--dark` gradiente scuro, `--left` testo a sinistra, `.page-hero-actions` per i bottoni). La hero espansa (`.hero`) è solo in `index.js`
+Badge, uno stile per ruolo: `.page-hero-badge` (eyebrow sopra l'H1), `.section-badge` (eyebrow sopra gli H2), `.badge-overlay` (etichette sopra le foto, con `.badge-overlay-dot`), `.badge-solid` (stato/tipologia a tinta piena, colori via `--badge-bg`/`--badge-fg`), `.badge-chip` (micro-tag di livello)
+Ogni pagina deve avere un solo H1 presente nell'HTML pre-renderizzato (le pagine dinamiche usano getStaticPaths/getStaticProps)

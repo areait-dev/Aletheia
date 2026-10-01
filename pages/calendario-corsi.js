@@ -259,7 +259,7 @@ export default function CalendarioCorsi() {
                                         <span style={{ fontSize: '2.25rem', fontWeight: 900, color: '#008C95', lineHeight: 1 }}>
                                           {String(d).padStart(2, '0')}
                                         </span>
-                                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#008C95', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--primary-text)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                                           {MESI_ABBR[meseCorso]}
                                         </span>
                                       </div>

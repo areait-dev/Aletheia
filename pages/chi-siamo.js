@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Footer from '../components/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Header from '../components/Header';
 import SeoHead from '../components/SeoHead';
 import { getLenis } from '../lib/lenis';
@@ -23,22 +24,28 @@ function scrollToCertificazioni() {
 function AccreditamentoCard({ logo, logoAlt, title, code, logoScale, icon }) {
   return (
     <article className="group h-full bg-white dark:bg-dark-card rounded-xl p-6 sm:p-7 flex flex-col transition-all duration-300 shadow-sm border border-slate-200 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-1 hover:shadow-md">
-      {/* Logo */}
+      {/* Logo — base bianca dietro l'immagine solo in dark mode: i loghi reali (Regione
+          Siciliana, ECM, ecc.) sono pensati per sfondo chiaro e sparirebbero/stonerebbero
+          sul teal scuro della card (dark-card = #004d52). */}
       <div className="relative w-full h-20 max-w-[70%] flex items-center justify-start">
         {!logo && icon && (
           <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center text-3xl text-[#006066] dark:text-[#10B981]" role="img" aria-label={logoAlt}>
             <i className={icon}></i>
           </div>
         )}
-        {logo && <Image
-          src={logo}
-          alt={logoAlt}
-          fill
-          sizes="200px"
-          loading="lazy"
-          className="object-contain object-left"
-          style={logoScale ? { transform: `scale(${logoScale})`, transformOrigin: 'left center' } : undefined}
-        />}
+        {logo && (
+          <div className="relative w-full h-full dark:bg-white dark:rounded-lg dark:p-2.5" style={{ maxWidth: '200px' }}>
+            <Image
+              src={logo}
+              alt={logoAlt}
+              fill
+              sizes="200px"
+              loading="lazy"
+              className="object-contain object-left dark:object-center"
+              style={logoScale ? { transform: `scale(${logoScale})`, transformOrigin: 'left center' } : undefined}
+            />
+          </div>
+        )}
       </div>
 
       {/* Titolo */}
@@ -59,25 +66,43 @@ function AccreditamentoCard({ logo, logoAlt, title, code, logoScale, icon }) {
 function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraLinks }) {
   const [showModal, setShowModal] = useState(false);
 
+  // Esc chiude il modale (solo mentre è aperto)
+  useEffect(() => {
+    if (!showModal) return;
+    const onKey = (e) => { if (e.key === 'Escape') setShowModal(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [showModal]);
+
   return (
     <>
+      {/* Card cliccabile E raggiungibile da tastiera (Tab + Invio/Spazio) */}
       <div
+        role="button"
+        tabIndex={0}
+        aria-haspopup="dialog"
         onClick={() => setShowModal(true)}
-        className="h-full bg-slate-50 dark:bg-dark-bg rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 border border-slate-200 dark:border-[rgba(255,255,255,0.1)] hover:-translate-y-2 hover:border-[#008C95] dark:hover:border-[#10B981] flex flex-col items-center group"
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowModal(true); } }}
+        className="h-full bg-slate-50 dark:bg-dark-bg rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 border border-slate-200 dark:border-[rgba(255,255,255,0.1)] hover:-translate-y-2 hover:border-[#008C95] dark:hover:border-[#10B981] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008C95] flex flex-col items-center group"
       >
-        <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-[#006066] dark:text-[#10B981] transition-colors duration-300 group-hover:bg-[#008C95]/15 dark:group-hover:bg-[#10B981]/20">
+        <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-[#006066] dark:text-[#10B981] transition-colors duration-300 group-hover:bg-[#008C95]/15 dark:group-hover:bg-[#10B981]/20" aria-hidden="true">
           <i className={icon}></i>
         </div>
         <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">{title}</h3>
-        <p className="text-sm text-slate-600 dark:text-gray-400 mb-5 flex-1">{subtitle}</p>
+        <p className="text-sm text-slate-600 dark:text-gray-300 mb-5 flex-1">{subtitle}</p>
         <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#0B4A52] dark:text-[#10B981] border border-slate-200 dark:border-[rgba(255,255,255,0.15)] rounded-full px-4 py-2 transition-all duration-300 group-hover:border-[#10B981] dark:group-hover:border-[#10B981]/40">
           Scopri i dettagli
           <i className="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1" style={{ fontSize: '9px' }}></i>
         </span>
       </div>
 
-      {showModal && (
+      {/* Modale in un portal su document.body (non annidato nella card). showModal diventa true solo
+          dopo un click, quindi document esiste sempre (nessun problema SSR). */}
+      {showModal && createPortal(
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={title}
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-[1000] backdrop-blur-sm"
           onClick={() => setShowModal(false)}
         >
@@ -98,7 +123,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
             </div>
 
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-1">{title}</h3>
-            <p className="text-primary dark:text-[#10B981] font-semibold text-center mb-6">{subtitle}</p>
+            <p className="text-primary-text dark:text-[#10B981] font-semibold text-center mb-6">{subtitle}</p>
             <p className="text-slate-600 dark:text-gray-300 leading-relaxed mb-6 text-sm">{description}</p>
 
             {benefits && benefits.length > 0 && (
@@ -139,7 +164,8 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
@@ -157,8 +183,6 @@ const ecoLoghi = [
 ];
 
 export default function ChiSiamo() {
-  const [activeTab, setActiveTab] = useState('Missione');
-
   const content = {
     missione: {
       titolo: 'MISSIONE',
@@ -183,12 +207,12 @@ export default function ChiSiamo() {
     },
   };
 
+  const [activeTab, setActiveTab] = useState('Missione');
   const tabs = [
     { key: 'Missione', data: content.missione },
     { key: 'Visione', data: content.visione },
     { key: 'I Nostri Valori', data: content.valori },
   ];
-
   const activeData = tabs.find((t) => t.key === activeTab)?.data;
 
   return (
@@ -227,7 +251,8 @@ export default function ChiSiamo() {
         }
       `}</style>
 
-      {/* HERO */}
+      {/* HERO — gradiente pieno, coerente con homepage e le altre pagine interne (formazione,
+          agenzia-per-il-lavoro): niente intestazione "compatta" isolata su questa sola pagina. */}
       <section className="page-hero">
         <div className="container">
           <div className="page-hero-badge">Dal 2005 al fianco di persone e imprese</div>
@@ -238,7 +263,7 @@ export default function ChiSiamo() {
             Alètheia è Ente di Formazione accreditato e Agenzia per il Lavoro autorizzata dalla
             Regione Siciliana.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+          <div className="page-hero-actions flex-col sm:flex-row items-center">
             <a
               href="#cosa-facciamo"
               className="inline-flex items-center justify-center h-[44px] bg-primary hover:bg-[#10B981] text-white font-bold px-6 rounded-full text-sm transition-all"
@@ -255,108 +280,113 @@ export default function ChiSiamo() {
         </div>
       </section>
 
-      {/* LA NOSTRA STORIA */}
-      <section className="bg-light dark:bg-dark-bg">
-        <div className="py-20 px-6 sm:px-12 max-w-7xl mx-auto">
-          {/* Testo a tutta larghezza */}
-          <div>
-            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+      {/* LA NOSTRA STORIA — timeline invece di un unico blocco di testo. Le date 2017/2019
+          corrispondono agli accreditamenti reali citati più sotto in pagina (DDG n. 78 del
+          20/01/2017 - Regione Siciliana; DDS n. 1100 del 26/04/2019 - Agenzia per il Lavoro),
+          non sono aggiunte inventate. */}
+      <section className="bg-light dark:bg-dark-bg" aria-labelledby="storia-heading">
+        {/* Due colonne da lg (titolo | tappe), come la sezione "sede" più sotto: prima la timeline
+            occupava solo 640px lasciando vuota metà della riga. Stesso py-20/px del resto della pagina. */}
+        <div className="py-20 px-6 sm:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-x-12 gap-y-10 items-start">
+          <div style={{ maxWidth: '640px' }}>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
               La nostra storia
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
+            <h2 id="storia-heading" className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Nati per formare. Cresciuti per andare oltre
             </h2>
-            <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed mb-4">
-              Alètheia nasce nel <span className="font-semibold">2005</span> a Vittoria, in
-              provincia di Ragusa, con un obiettivo preciso: trasformare la formazione in uno
-              strumento concreto di crescita professionale e occupazionale.
-            </p>
-            <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed mb-4">
-              Nel tempo abbiamo ampliato il nostro ruolo, affiancando ai servizi formativi
-              l&rsquo;orientamento, l&rsquo;accompagnamento al lavoro e il supporto alle imprese
-              nella ricerca e valorizzazione dei talenti.
-            </p>
-            <p className="text-slate-600 dark:text-gray-300 text-base leading-relaxed">
-              Oggi facciamo parte di <span className="font-semibold">Promotergroup S.p.A.</span>,
-              un ecosistema integrato che unisce formazione, consulenza e servizi alle imprese.
-              La nostra formazione è un punto di partenza, non un punto di arrivo. Far parte di
-              questo ecosistema significa poter offrire ai corsisti e alle aziende clienti un
-              accesso concreto a competenze che vanno ben oltre la formazione in aula.
-            </p>
+          </div>
+
+          <div style={{ maxWidth: '640px' }}>
+            {[
+              { anno: '2005', titolo: 'Fondazione', desc: 'Alètheia nasce a Vittoria (RG) con un obiettivo preciso: trasformare la formazione in crescita professionale e occupazionale concreta.' },
+              { anno: '2017', titolo: 'Accreditamento regionale', desc: 'Diventiamo Ente di Formazione accreditato dalla Regione Siciliana (DDG n. 78 del 20/01/2017).' },
+              { anno: '2019', titolo: 'Agenzia per il Lavoro', desc: 'Otteniamo l’autorizzazione ministeriale come Agenzia per il Lavoro (DDS n. 1100 del 26/04/2019), ampliando i servizi a candidati e imprese.' },
+              { anno: 'Oggi', titolo: 'Parte di Promotergroup', desc: 'Facciamo parte di Promotergroup S.p.A., un ecosistema che unisce formazione, consulenza e servizi alle imprese, offrendo accesso a competenze oltre l’aula.' },
+            ].map((step, i, arr) => (
+              <Reveal key={step.anno} delay={i * 90}>
+                <div className="flex gap-5" style={{ paddingBottom: i === arr.length - 1 ? 0 : '1.75rem' }}>
+                  <div className="flex flex-col items-center" style={{ width: '3.5rem', flexShrink: 0 }}>
+                    {/* Cerchio con bordo brand e testo scuro: prima testo bianco su #008C95 (3.9:1) e su
+                        #10B981 in dark (2.5:1), sotto WCAG AA 4.5:1. Ora #006B73 su bianco 6.4:1 e
+                        #10B981 su #161C1A 7:1; il turchese brand resta invariato nel bordo. */}
+                    <span className="flex items-center justify-center rounded-full bg-white dark:bg-dark-bg border-2 border-[#008C95] dark:border-[#10B981] text-[#006B73] dark:text-[#10B981] font-bold" style={{ width: '3.5rem', height: '3.5rem', fontSize: '0.8rem' }}>
+                      {step.anno}
+                    </span>
+                    {i < arr.length - 1 && (
+                      <span className="bg-[#008C95]/40 dark:bg-[#10B981]/40" style={{ width: '2px', flex: 1, marginTop: '0.4rem' }} />
+                    )}
+                  </div>
+                  <div style={{ paddingTop: '0.5rem' }}>
+                    <h3 className="text-slate-900 dark:text-white font-bold text-base mb-1">{step.titolo}</h3>
+                    <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
       {/* SEZIONE PRINCIPALE */}
       <section id="cosa-facciamo" className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary dark:text-[#10B981] mb-2">
+        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-[#10B981] mb-2">
           Ciò che guida ogni nostro progetto
         </span>
         <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-10">
           Formazione che genera <span className="text-primary dark:text-[#10B981]">impatto</span>
         </h2>
 
-        {/* TAB NAV - fuori dalle colonne, sopra entrambe */}
-        <div className="flex flex-wrap border-b-2 border-slate-200 dark:border-[rgba(255,255,255,0.08)] mb-6">
-          {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              style={{
-                background: 'none',
-                border: 'none',
-                borderBottom: activeTab === tab.key ? '3px solid #008C95' : '3px solid transparent',
-                marginBottom: '-2px',
-                padding: '0.65rem 1.25rem',
-                fontSize: '0.9rem',
-                fontFamily: 'inherit',
-                fontWeight: activeTab === tab.key ? '700' : '600',
-                color: activeTab === tab.key ? '#008C95' : '#64748b',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {tab.key}
-            </button>
-          ))}
+        {/* Tab Missione / Visione / Valori: un solo blocco alla volta. Il testo sta direttamente sullo
+            sfondo della sezione (niente riquadro): il sito è già pieno di card, tre schede affiancate
+            ne aggiungevano altre. */}
+        <div role="tablist" aria-label="Missione, visione e valori" className="flex flex-wrap border-b-2 border-slate-200 dark:border-[rgba(255,255,255,0.12)] mb-8">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                role="tab"
+                id={`tab-${tab.key}`}
+                aria-selected={isActive}
+                aria-controls="tabpanel-missione"
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => setActiveTab(tab.key)}
+                onKeyDown={(e) => {
+                  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+                  const i = tabs.findIndex((t) => t.key === activeTab);
+                  const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+                  setActiveTab(next.key);
+                  document.getElementById(`tab-${next.key}`)?.focus();
+                }}
+                className={`-mb-0.5 px-5 py-2.5 text-sm whitespace-nowrap bg-transparent border-0 border-b-[3px] cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-[#008C95] ${
+                  isActive
+                    ? 'font-bold border-[#008C95] dark:border-[#10B981] text-primary-text dark:text-[#10B981]'
+                    : 'font-semibold border-transparent text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                {tab.key}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Card testo a tutta larghezza */}
-        <div className="flex">
-
-          {/* CARD TESTO */}
-          <div className="w-full flex flex-col">
-            <div className="bg-white dark:bg-dark-card rounded-2xl border border-slate-200 dark:border-[rgba(255,255,255,0.08)] p-6 shadow-sm flex-1">
-              {activeData && (
-                <div className="animate-fadeIn">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{activeData.titolo}</h3>
-                  <p className="text-primary dark:text-[#10B981] font-medium mb-6 text-sm">{activeData.sottotitolo}</p>
-                  <div className="space-y-5">
-                    {activeData.punti.map((item, idx) => (
-                      <div key={idx} className="flex gap-3">
-                        <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                        <div>
-                          <strong className="block text-slate-900 dark:text-white mb-1 text-sm">{item.key}</strong>
-                          <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-sm m-0">{item.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+        <div role="tabpanel" id="tabpanel-missione" aria-labelledby={`tab-${activeTab}`}>
+          {activeData && (
+            <div key={activeTab} className="animate-fadeIn">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{activeData.titolo}</h3>
+              <p className="text-primary-text dark:text-[#10B981] font-medium mb-4 text-sm">{activeData.sottotitolo}</p>
+              <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-base m-0">{activeData.punti[0].desc}</p>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
       {/* I NOSTRI PUNTI DI FORZA */}
       <section className="bg-slate-50 dark:bg-dark-bg py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-12">
-          <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
             Perché scegliere Alètheia
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -418,7 +448,7 @@ export default function ChiSiamo() {
       <section className="bg-light dark:bg-dark-bg">
         <div className="max-w-7xl mx-auto py-20 px-6 sm:px-12">
           <div className="mb-16">
-            <span className="bg-[#008C95]/10 text-[#006066] dark:bg-[#004D52]/50 dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
               Le nostre Expertise
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight uppercase">
@@ -437,7 +467,8 @@ export default function ChiSiamo() {
             ].map((s, i) => (
               <Reveal key={s.n} delay={(i % 3) * 90}>
                 <div>
-                  <span className={`text-4xl font-black ${s.accent} mb-2 block tracking-tight`}>{s.n}</span>
+                  {/* Numero puramente decorativo (opacità bassa): nascosto agli screen reader */}
+                  <span aria-hidden="true" className={`text-4xl font-black ${s.accent} mb-2 block tracking-tight`}>{s.n}</span>
                   <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 normal-case tracking-normal">{s.titolo}</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{s.desc}</p>
                 </div>
@@ -451,7 +482,7 @@ export default function ChiSiamo() {
       <section id="certificazioni" className="bg-slate-50 dark:bg-dark-bg" style={{ scrollMarginTop: '80px' }}>
         <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
           <div className="text-left mb-12">
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary dark:text-[#10B981] mb-2">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-[#10B981] mb-2">
               Certificazioni e accreditamenti
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
@@ -468,53 +499,53 @@ export default function ChiSiamo() {
           <div className="flex flex-wrap justify-center gap-5">
             <Reveal delay={0} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
-                icon="fas fa-certificate"
-                title="ISO 9001"
-                subtitle="Sistemi di gestione per la qualità"
-                description="La certificazione ISO 9001:2015 attesta che Alètheia s.r.l. adotta un sistema di gestione della qualità conforme agli standard internazionali, garantendo processi efficienti, miglioramento continuo e soddisfazione del cliente."
-                benefits={['Servizi di formazione e consulenza di qualità', 'Processi standardizzati e tracciabili', 'Miglioramento continuo delle performance']}
-                pdfUrl="/pdf/certificati/ALTH2572Q1901_-certificate-release_ISO9001_20220408.pdf"
+              icon="fas fa-certificate"
+              title="ISO 9001"
+              subtitle="Sistemi di gestione per la qualità"
+              description="La certificazione ISO 9001:2015 attesta che Alètheia s.r.l. adotta un sistema di gestione della qualità conforme agli standard internazionali, garantendo processi efficienti, miglioramento continuo e soddisfazione del cliente."
+              benefits={['Servizi di formazione e consulenza di qualità', 'Processi standardizzati e tracciabili', 'Miglioramento continuo delle performance']}
+              pdfUrl="/pdf/certificati/ALTH2572Q1901_-certificate-release_ISO9001_20220408.pdf"
               />
             </Reveal>
             <Reveal delay={80} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
-                icon="fas fa-venus-mars"
-                title="UNI PDR 125:2022"
-                subtitle="Parità di genere"
-                description="La prassi di riferimento UNI/PdR 125:2022 certifica l'impegno di Alètheia s.r.l. per la parità di genere, garantendo politiche aziendali inclusive e trasparenti, riconosciute dal PNRR."
-                benefits={['Pari opportunità di carriera', 'Trasparenza retributiva', 'Ambienti di lavoro inclusivi', 'Agevolazioni fiscali e premialità nei bandi']}
-                pdfUrl="/pdf/certificati/2023_ALETHEIA_paritdigenere.pdf"
-                extraLinks={[{ label: 'Politica Aziendale', url: '/pdf/certificati/ALL1--POLITICA-PDR-125-Aletheia.pdf' }]}
+              icon="fas fa-venus-mars"
+              title="UNI PDR 125:2022"
+              subtitle="Parità di genere"
+              description="La prassi di riferimento UNI/PdR 125:2022 certifica l'impegno di Alètheia s.r.l. per la parità di genere, garantendo politiche aziendali inclusive e trasparenti, riconosciute dal PNRR."
+              benefits={['Pari opportunità di carriera', 'Trasparenza retributiva', 'Ambienti di lavoro inclusivi', 'Agevolazioni fiscali e premialità nei bandi']}
+              pdfUrl="/pdf/certificati/2023_ALETHEIA_paritdigenere.pdf"
+              extraLinks={[{ label: 'Politica Aziendale', url: '/pdf/certificati/ALL1--POLITICA-PDR-125-Aletheia.pdf' }]}
               />
             </Reveal>
             <Reveal delay={160} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
-                icon="fas fa-school"
-                title="UNI ISO 21001:2019"
-                subtitle="Sistema di Gestione per Organizzazioni Educative"
-                description="Certificazione specifica per le organizzazioni educative, garantisce che Alètheia s.r.l. eroga servizi formativi di alta qualità, centrati sull'apprendimento e il miglioramento continuo."
-                benefits={['Processi formativi standardizzati', 'Focalizzazione sui bisogni dei discenti', "Valutazione dell'efficacia dell'apprendimento"]}
-                pdfUrl="/pdf/certificati/ALTH2572A2002_certificate-release_ISO21001_20240322.pdf"
+              icon="fas fa-school"
+              title="UNI ISO 21001:2019"
+              subtitle="Sistema di Gestione per Organizzazioni Educative"
+              description="Certificazione specifica per le organizzazioni educative, garantisce che Alètheia s.r.l. eroga servizi formativi di alta qualità, centrati sull'apprendimento e il miglioramento continuo."
+              benefits={['Processi formativi standardizzati', 'Focalizzazione sui bisogni dei discenti', "Valutazione dell'efficacia dell'apprendimento"]}
+              pdfUrl="/pdf/certificati/ALTH2572A2002_certificate-release_ISO21001_20240322.pdf"
               />
             </Reveal>
             <Reveal delay={240} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
-                icon="fas fa-chalkboard-user"
-                title="UNI ISO 29993:2019"
-                subtitle="Servizi di formazione professionale non formale"
-                description="La norma definisce i requisiti per i servizi di formazione professionale non formale, garantendo trasparenza, coerenza e qualità nell'offerta formativa."
-                benefits={["Trasparenza nell'offerta formativa", 'Qualità dei contenuti e dei materiali', 'Gestione efficace dei processi di erogazione']}
-                pdfUrl="/pdf/certificati/ALTH2572A2003_certificate-release_ISO29993_20240322.pdf"
+              icon="fas fa-chalkboard-user"
+              title="UNI ISO 29993:2019"
+              subtitle="Servizi di formazione professionale non formale"
+              description="La norma definisce i requisiti per i servizi di formazione professionale non formale, garantendo trasparenza, coerenza e qualità nell'offerta formativa."
+              benefits={["Trasparenza nell'offerta formativa", 'Qualità dei contenuti e dei materiali', 'Gestione efficace dei processi di erogazione']}
+              pdfUrl="/pdf/certificati/ALTH2572A2003_certificate-release_ISO29993_20240322.pdf"
               />
             </Reveal>
             <Reveal delay={320} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
               <CertCard
-                icon="fas fa-clipboard-list"
-                title="UNI ISO 29992:2019"
-                subtitle="Valutazione dei risultati dell'apprendimento"
-                description="La norma garantisce l'adozione di metodi rigorosi per la valutazione dei risultati dell'apprendimento, assicurando l'efficacia dei percorsi formativi."
-                benefits={["Valutazione oggettiva delle competenze", "Monitoraggio continuo dell'apprendimento", 'Certificazione delle competenze acquisite']}
-                pdfUrl="/pdf/certificati/ALTH2572A2404_certificate-release_ISO29992_20240322.pdf"
+              icon="fas fa-clipboard-list"
+              title="UNI ISO 29992:2019"
+              subtitle="Valutazione dei risultati dell'apprendimento"
+              description="La norma garantisce l'adozione di metodi rigorosi per la valutazione dei risultati dell'apprendimento, assicurando l'efficacia dei percorsi formativi."
+              benefits={["Valutazione oggettiva delle competenze", "Monitoraggio continuo dell'apprendimento", 'Certificazione delle competenze acquisite']}
+              pdfUrl="/pdf/certificati/ALTH2572A2404_certificate-release_ISO29992_20240322.pdf"
               />
             </Reveal>
           </div>
@@ -522,7 +553,7 @@ export default function ChiSiamo() {
           {/* Accreditamenti istituzionali */}
           <div className="mt-16 pt-12 border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
             <div className="text-left mb-10">
-              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary dark:text-[#10B981] mb-2">
+              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-[#10B981] mb-2">
                 Accreditamenti
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -581,7 +612,7 @@ export default function ChiSiamo() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch py-20 px-6 sm:px-12 max-w-7xl mx-auto">
           {/* Colonna sede */}
           <Reveal>
-            <span className="bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
               La nostra sede
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">

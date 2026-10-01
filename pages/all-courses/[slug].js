@@ -1232,9 +1232,21 @@ export const coursesDetails = {
   },
 };
 
-export default function CourseDetail() {
+// Pre-render statico di ogni famiglia: senza questo, Next.js genera l'HTML con router.query vuoto e il
+// markup servito (crawler, screen reader senza JS) non contiene H1 né contenuto del corso. Gli slug non
+// presenti restano gestiti dal ramo "Corso non trovato" (fallback 'blocking').
+export async function getStaticPaths() {
+  const families = buildCourseFamilies(coursesData, coursesDetails, { quiet: true });
+  return { paths: families.map((f) => ({ params: { slug: f.slug } })), fallback: 'blocking' };
+}
+
+export async function getStaticProps({ params }) {
+  return { props: { slug: params.slug } };
+}
+
+export default function CourseDetail({ slug: slugProp }) {
   const router = useRouter();
-  const { slug } = router.query;
+  const slug = slugProp ?? router.query.slug;
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'moduli' - indipendente da livello/tipo, non si resetta al cambio
   const [selectedLivelloKey, setSelectedLivelloKey] = useState(null);
   const [selectedTipo, setSelectedTipo] = useState('corso');
@@ -1479,16 +1491,35 @@ export default function CourseDetail() {
         <div className="cp-page-grid">
 
       <div className="cp-top-area">
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
           <Link href="/all-courses" className="text-slate-600 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
           <span className="text-slate-300 dark:text-gray-600">/</span>
-          <span className="text-slate-600 dark:text-gray-300">{course.title}</span>
+          <span className="text-slate-600 dark:text-gray-300">{course.category}</span>
         </nav>
+
+        <h1 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 900, lineHeight: 1.2, margin: '0 0 0.9rem' }}>
+          {course.title}
+        </h1>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', marginBottom: '1.25rem' }}>
+          {(contenutoLivello?.durataOre ?? course.duration) && (
+            <span className="text-slate-600 dark:text-gray-300" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', fontWeight: 600 }}>
+              <i className="fas fa-clock" style={{ color: '#008C95' }}></i>
+              {contenutoLivello?.durataOre ? `${contenutoLivello.durataOre} ore` : course.duration}
+            </span>
+          )}
+          {(contenutoLivello?.modalita ?? course.modality) && (
+            <span className="text-slate-600 dark:text-gray-300" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', fontWeight: 600 }}>
+              <i className="fas fa-chalkboard-user" style={{ color: '#008C95' }}></i>
+              {Array.isArray(contenutoLivello?.modalita) ? contenutoLivello.modalita.join(' · ') : (contenutoLivello?.modalita ?? course.modality)}
+            </span>
+          )}
+        </div>
 
         {(hasMultipleLivelli || hasAggiornamento) && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem' }}>
           {hasAggiornamento && (
-            <div role="tablist" aria-label="Corso o aggiornamento" style={{ display: 'inline-flex', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
+            <div role="tablist" aria-label="Corso o aggiornamento" className="bg-slate-100 dark:bg-[#1c2423]" style={{ display: 'inline-flex', gap: '0.25rem', borderRadius: '9999px', padding: '0.25rem' }}>
               {['corso', 'aggiornamento'].map((tipo) => {
                 const durataTipo = variantiLivello.find((v) => v.tipo === tipo)?.durataOre;
                 return (
@@ -1498,12 +1529,13 @@ export default function CourseDetail() {
                   type="button"
                   aria-selected={selectedTipo === tipo}
                   onClick={() => selectTipo(tipo)}
+                  className={selectedTipo === tipo ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}
                   style={{
                     padding: '0.5rem 1.1rem',
                     borderRadius: '9999px',
                     border: 'none',
                     background: selectedTipo === tipo ? '#008C95' : 'transparent',
-                    color: selectedTipo === tipo ? '#fff' : '#334155',
+                    color: selectedTipo === tipo ? '#fff' : undefined,
                     fontWeight: 700,
                     fontSize: '0.85rem',
                     cursor: 'pointer',
@@ -1516,7 +1548,7 @@ export default function CourseDetail() {
             </div>
           )}
           {hasMultipleLivelli && (
-            <div role="tablist" aria-label="Livello del corso" style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.25rem', background: '#F1F5F9', borderRadius: '9999px', padding: '0.25rem' }}>
+            <div role="tablist" aria-label="Livello del corso" className="bg-slate-100 dark:bg-[#1c2423]" style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.25rem', borderRadius: '9999px', padding: '0.25rem' }}>
               {(() => {
                 // Livelli "solo aggiornamento" (nessuna variante corso su quel livello) - la loro label
                 // grezza è spesso poco leggibile in un pulsante di switch (fallback sul titolo famiglia
@@ -1537,12 +1569,13 @@ export default function CourseDetail() {
                     type="button"
                     aria-selected={activeLivelloKey === key}
                     onClick={() => selectLivello(key)}
+                    className={activeLivelloKey === key ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}
                     style={{
                       padding: '0.5rem 1.1rem',
                       borderRadius: '9999px',
                       border: 'none',
                       background: activeLivelloKey === key ? '#008C95' : 'transparent',
-                      color: activeLivelloKey === key ? '#fff' : '#334155',
+                      color: activeLivelloKey === key ? '#fff' : undefined,
                       fontWeight: 700,
                       fontSize: '0.85rem',
                       cursor: 'pointer',
@@ -1841,7 +1874,7 @@ export default function CourseDetail() {
                         className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
                         style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}
                       >
-                        <i className="fas fa-graduation-cap" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                        <i className="fas fa-shield-halved" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
                       </div>
                     )}
                     <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />

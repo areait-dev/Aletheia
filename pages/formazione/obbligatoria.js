@@ -522,16 +522,6 @@ export default function FormazioneObbligatoria() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .hero-badge {
-          display: inline-flex; align-items: center; gap: 0.5rem;
-          font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-          color: #6EE7B7; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.25rem;
-        }
-        .section-badge {
-          display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
-          text-transform: uppercase; color: #008C95; margin-bottom: 0.6rem;
-        }
         .cta-btn-primary {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
@@ -909,21 +899,21 @@ export default function FormazioneObbligatoria() {
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', paddingTop: '120px', paddingBottom: '5rem', position: 'relative', overflow: 'hidden' }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-badge fade-up">Corsi conformi al D.Lgs. 81/08 · Accordo Stato-Regioni</div>
+          <div className="page-hero-badge fade-up">Corsi conformi al D.Lgs. 81/08 · Accordo Stato-Regioni</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem', maxWidth: '760px' }}>
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '760px' }}>
             Formazione obbligatoria per la{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               sicurezza sul lavoro
             </span>
           </h1>
 
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="#corsi" className="cta-btn-primary">Scopri i corsi</a>
             <a href="#form-contatto" className="cta-btn-outline">Contattaci</a>
           </div>

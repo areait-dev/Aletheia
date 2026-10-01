@@ -156,30 +156,6 @@ export default function FormazioneFinanziataSicilia() {
           .calendario-orientamento-grid { grid-template-columns: 1fr; }
         }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.7rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #6EE7B7;
-          background: rgba(16,185,129,0.12);
-          border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.25rem;
-        }
-        .section-badge {
-          display: inline-block;
-          font-size: 0.68rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #008C95;
-          margin-bottom: 0.6rem;
-        }
         .cta-btn-primary {
           display: inline-flex;
           align-items: center;
@@ -228,27 +204,21 @@ export default function FormazioneFinanziataSicilia() {
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-        paddingTop: '120px',
-        paddingBottom: '5rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-badge fade-up">Formarsi senza costi</div>
+          <div className="page-hero-badge fade-up">Formarsi senza costi</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 900, color: '#fff', lineHeight: 1.12, marginBottom: '2.5rem', maxWidth: '760px' }}>
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '760px' }}>
             Formazione{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Finanziata in Sicilia
             </span>
           </h1>
 
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="#offerta" className="cta-btn-primary">Scopri i percorsi</a>
             <a href="/contatti" className="cta-btn-outline">Contattaci</a>
           </div>

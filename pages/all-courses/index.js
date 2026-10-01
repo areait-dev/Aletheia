@@ -164,9 +164,13 @@ export default function AllCourses() {
   // Corsi raggruppati per famiglia (es. Antincendio Livello 1/2/3 + Aggiornamenti = 1 sola card)
   const courseFamilies = buildCourseFamilies(coursesData);
 
+  // Conta le famiglie raggruppate (una card = una famiglia), non i corsi grezzi:
+  // coursesData.length include separatamente ogni corso/aggiornamento che invece
+  // viene mostrato come un'unica card, causando in sidebar un totale ("102") che
+  // non corrispondeva al numero di card realmente in griglia ("51").
   const categoryCounts = {};
-  coursesData.forEach((c) => {
-    categoryCounts[c.categoryKey] = (categoryCounts[c.categoryKey] || 0) + 1;
+  courseFamilies.forEach((f) => {
+    categoryCounts[f.categoryKey] = (categoryCounts[f.categoryKey] || 0) + 1;
   });
 
   const filteredFamilies = courseFamilies.filter((family) => {
@@ -197,20 +201,14 @@ export default function AllCourses() {
       <Header active="/all-courses" />
 
       {/* HERO */}
-      <div
-        style={{ background: 'linear-gradient(135deg, #0F172A 0%, #0a4f54 60%, #008C95 100%)' }}
-        className="text-white pt-36 pb-16 px-6"
-      >
-        <div className="max-w-6xl mx-auto">
-          <span className="inline-block bg-white/15 backdrop-blur-sm border border-white/20 px-5 py-2 rounded-full text-sm font-semibold mb-5">
-            Catalogo completo
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Tutti i Corsi</h1>
-          <p className="text-lg text-white/75 max-w-xl leading-relaxed">
-            Scopri la nostra offerta formativa completa e scegli il corso che fa per te
-          </p>
+      {/* Hero compatta comune (.page-hero in globals.css): stesso gradiente teal di prima */}
+      <section className="page-hero page-hero--left">
+        <div className="container">
+          <div className="page-hero-badge">Catalogo completo</div>
+          <h1>Tutti i Corsi</h1>
+          <p>Scopri la nostra offerta formativa completa e scegli il corso che fa per te</p>
         </div>
-      </div>
+      </section>
 
       {/* MAIN CONTENT - wrapper full width con margine laterale DS (120px ≥1280px) */}
       <div className="dark:bg-dark-bg xl:px-[120px]">
@@ -254,7 +252,7 @@ export default function AllCourses() {
                   Tutti i corsi
                 </span>
                 <span className="text-xs bg-slate-100 dark:bg-gray-700 text-slate-600 dark:text-gray-300 px-2 py-0.5 rounded-full font-semibold">
-                  {coursesData.length}
+                  {courseFamilies.length}
                 </span>
               </li>
               {/* Separatore */}
@@ -326,41 +324,59 @@ export default function AllCourses() {
               <p className="text-slate-600 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
               <p className="text-slate-600 dark:text-gray-500 text-sm mt-1">Prova a modificare i filtri di ricerca</p>
             </div>
-          ) : mounted ? (
-            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-              <AnimatePresence mode="popLayout">
-                {filteredFamilies.map((family, i) => (
-                  <motion.div
-                    key={family.slug}
-                    layout
-                    className="h-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      layout: GRID_SPRING,
-                      opacity: { duration: 0.25, ease: 'easeOut', delay: Math.min(i, 8) * 0.03 },
-                    }}
-                  >
-                    <Reveal className="h-full">
-                      <CourseFamilyCard family={family} />
-                    </Reveal>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
           ) : (
-            // Prerendering (SSG) e primo paint prima dell'hydration: stessa griglia,
-            // senza framer-motion (vedi commento su `mounted` sopra).
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-              {filteredFamilies.map((family) => (
-                <div key={family.slug} className="h-full">
-                  <Reveal className="h-full">
-                    <CourseFamilyCard family={family} />
-                  </Reveal>
+            // Raggruppa per categoria (nell'ordine di categoryMeta) con un'intestazione di
+            // sezione per gruppo, invece di un'unica griglia indistinta. Quando è attivo un
+            // filtro di categoria specifico il risultato è un solo gruppo, quindi
+            // l'intestazione è comunque coerente col titolo mostrato sopra.
+            Object.entries(categoryMeta)
+              .map(([key, meta]) => ({ key, meta, items: filteredFamilies.filter((f) => f.categoryKey === key) }))
+              .filter((g) => g.items.length > 0)
+              .map((group) => (
+                <div key={group.key} className="mb-10 last:mb-0">
+                  <h2 className="flex items-center gap-2.5 text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1.1rem' }}>
+                    <i className={`${group.meta.icon} text-[#008C95] dark:text-[#10B981]`} style={{ fontSize: '0.95rem' }} aria-hidden="true"></i>
+                    {group.meta.name}
+                    <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.85rem', fontWeight: 600 }}>({group.items.length})</span>
+                  </h2>
+                  {mounted ? (
+                    <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+                      <AnimatePresence mode="popLayout">
+                        {group.items.map((family, i) => (
+                          <motion.div
+                            key={family.slug}
+                            layout
+                            className="h-full"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{
+                              layout: GRID_SPRING,
+                              opacity: { duration: 0.25, ease: 'easeOut', delay: Math.min(i, 8) * 0.03 },
+                            }}
+                          >
+                            <Reveal className="h-full">
+                              <CourseFamilyCard family={family} />
+                            </Reveal>
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
+                    </motion.div>
+                  ) : (
+                    // Prerendering (SSG) e primo paint prima dell'hydration: stessa griglia,
+                    // senza framer-motion (vedi commento su `mounted` sopra).
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+                      {group.items.map((family) => (
+                        <div key={family.slug} className="h-full">
+                          <Reveal className="h-full">
+                            <CourseFamilyCard family={family} />
+                          </Reveal>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
+              ))
           )}
         </main>
       </div>

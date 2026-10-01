@@ -251,7 +251,7 @@ function WhyCard({ icon, title, description, detail, index }) {
           <i className={icon}></i>
         </div>
         <div>
-          <p style={{ margin: 0, fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#008C95' }}>
+          <p style={{ margin: 0, fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary-text)' }}>
             {detail}
           </p>
           <h3 className="text-slate-900 dark:text-white" style={{ margin: 0, fontSize: '1rem', fontWeight: 800, lineHeight: 1.3 }}>
@@ -348,12 +348,6 @@ export default function ServiziAlleImprese() {
         .breadcrumb a:hover { color: #6EE7B7; }
         .breadcrumb span { color: rgba(255,255,255,0.3); }
 
-        .hero-badge {
-          display: inline-flex; align-items: center; gap: 0.5rem;
-          font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-          color: #6EE7B7; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.25rem;
-        }
         .cta-btn-primary {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
@@ -371,15 +365,7 @@ export default function ServiziAlleImprese() {
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #0a4f54 60%, #003134 100%)',
-          paddingTop: '120px',
-          paddingBottom: '5rem',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,140,149,0.14) 0%, transparent 70%)',
@@ -391,18 +377,11 @@ export default function ServiziAlleImprese() {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-          <div className="hero-badge fade-up">
+          <div className="page-hero-badge fade-up">
             Ricerca. Selezione. Somministrazione
           </div>
 
-          <h1
-            className="fade-up delay-1"
-            style={{
-              fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',
-              fontWeight: 900, color: '#fff',
-              lineHeight: 1.12, marginBottom: '1.25rem', maxWidth: '700px',
-            }}
-          >
+          <h1 className="fade-up delay-1" style={{ maxWidth: '700px' }}>
             Servizi alle{' '}
             <span style={{
               background: 'linear-gradient(90deg, #008C95, #10B981)',
@@ -412,7 +391,7 @@ export default function ServiziAlleImprese() {
             </span>
           </h1>
 
-          <div className="fade-up delay-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+          <div className="page-hero-actions fade-up delay-3">
             <a
               href="#contatta-azienda"
               className="cta-btn-primary"
@@ -453,7 +432,7 @@ export default function ServiziAlleImprese() {
               <span style={{
                 display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
                 letterSpacing: '0.1em', textTransform: 'uppercase',
-                color: '#008C95', marginBottom: '0.5rem',
+                color: 'var(--primary-text)', marginBottom: '0.5rem',
               }}>
                 La nostra proposta
               </span>
@@ -502,7 +481,7 @@ export default function ServiziAlleImprese() {
             <span style={{
               display: 'inline-block', fontSize: '0.7rem', fontWeight: 800,
               letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: '#008C95', marginBottom: '0.5rem',
+              color: 'var(--primary-text)', marginBottom: '0.5rem',
             }}>
               Cosa offriamo
             </span>
@@ -550,7 +529,7 @@ export default function ServiziAlleImprese() {
             <span style={{
               display: 'inline-block', fontSize: '0.7rem', fontWeight: 800,
               letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: '#008C95', marginBottom: '0.5rem',
+              color: 'var(--primary-text)', marginBottom: '0.5rem',
             }}>
               I nostri punti di forza
             </span>

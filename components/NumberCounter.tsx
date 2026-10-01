@@ -7,6 +7,8 @@ interface NumberCounterProps {
   duration?: number;
   prefix?: string;
   valueClassName?: string;
+  /** Label sotto il numero: sempre secondaria (piccola, maiuscola, attenuata); il protagonista può usare una taglia sopra. */
+  labelClassName?: string;
 }
 
 export default function NumberCounter({
@@ -16,6 +18,7 @@ export default function NumberCounter({
   duration = 2000,
   prefix = '',
   valueClassName = 'text-5xl font-extrabold text-emerald-400 tracking-tight tabular-nums leading-none',
+  labelClassName = 'text-xs', // WCAG AA: bianco 75% su sfondo scuro > 4.5:1
 }: NumberCounterProps) {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
@@ -53,13 +56,16 @@ export default function NumberCounter({
 
   const suffix = target.toString().includes('+') ? '+' : target.toString().includes('%') ? '%' : '';
   const displayValue = prefix + count.toLocaleString('it-IT') + suffix;
+  // Valore finale per gli screen reader: il contatore animato esporrebbe numeri intermedi (0, 340, ...)
+  const finalValue = prefix + Number(target.toString().replace(/[^0-9]/g, '')).toLocaleString('it-IT') + suffix;
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-3 px-4 py-6">
-      <div className={valueClassName}>
+      <div className={valueClassName} aria-hidden="true">
         {displayValue}
       </div>
-      <div className="text-white/75 font-semibold text-xs uppercase tracking-[0.12em]">
+      <span className="sr-only">{finalValue}</span>
+      <div className={`text-white/75 font-semibold uppercase tracking-[0.12em] ${labelClassName}`}>
         {label}
       </div>
     </div>

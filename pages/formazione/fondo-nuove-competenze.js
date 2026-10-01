@@ -136,30 +136,6 @@ export default function FondoNuoveCompetenze() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.7rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #6EE7B7;
-          background: rgba(16,185,129,0.12);
-          border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.25rem;
-        }
-        .section-badge {
-          display: inline-block;
-          font-size: 0.68rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #008C95;
-          margin-bottom: 0.6rem;
-        }
         .cta-btn-primary {
           display: inline-flex;
           align-items: center;
@@ -423,18 +399,12 @@ export default function FondoNuoveCompetenze() {
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-        paddingTop: '120px',
-        paddingBottom: '5rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1rem', flexWrap: 'wrap' }}>
             <a href="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Home</a>
             <span aria-hidden="true">›</span>
             <a href="/formazione/regionale-fse" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Formazione Finanziata</a>
@@ -446,16 +416,16 @@ export default function FondoNuoveCompetenze() {
             Fondo Nuove Competenze
           </span>
 
-          <div className="hero-badge fade-up fade-up-1">Formazione senza costi retributivi</div>
+          <div className="page-hero-badge fade-up fade-up-1">Formazione senza costi retributivi</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem' }}>
+          <h1 className="fade-up fade-up-1">
             Fondo{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Nuove Competenze
             </span>
           </h1>
 
-          <div className="fade-up fade-up-3" style={{ marginTop: '2.5rem' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="/contatti" className="cta-btn-primary">
               Verifica se la tua azienda può accedere
               <i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
@@ -540,7 +510,7 @@ export default function FondoNuoveCompetenze() {
           </div>
 
           <div style={{ marginTop: '2.5rem' }}>
-            <span className="hero-badge" style={{ color: '#059669', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>Servizi</span>
+            <span className="page-hero-badge" style={{ color: '#059669', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>Servizi</span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 1.9rem)', fontWeight: 900, margin: 0 }}>
               Ci occupiamo di
             </h2>

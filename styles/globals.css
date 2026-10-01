@@ -10,6 +10,17 @@
   --primary-hover: #004D52;  /* hover = primary dark */
   --secondary: #10B981;
 
+  /* Testo brand LEGGIBILE (WCAG AA 4.5:1). #008C95 resta fisso per bottoni, icone e bordi, ma come
+     testo normale fa solo 4,05:1 su #FFFFFF e 3,62:1 su #F2F2F2 (bg-light).
+     #006B73: 6,27:1 su bianco, 5,60:1 su #F2F2F2. Uso: SOLO testo piccolo su sfondo chiaro. */
+  --primary-text-on-light: #006B73;
+  /* Come sopra ma segue il tema: per stili inline senza variante dark (#10B981 su #161C1A: 7:1) */
+  --primary-text: #006B73;
+
+  /* Testo muted per stili inline/CSS (equivale al token Tailwind text-gray-500 / dark:text-gray-400):
+     #6B7280 = 4,83:1 su bianco (WCAG AA). Il vecchio #94A3B8 faceva 2,45:1. */
+  --muted-text: #6B7280;
+
   /* Green scale ufficiale */
   --green-100: #CCE8EA;
   --green-200: #99D1D5;
@@ -63,6 +74,8 @@
 
 html.dark {
   color-scheme: dark;
+  --primary-text: #10B981;
+  --muted-text: #9CA3AF; /* 6,99:1 su #111827 */
 }
 
 html {
@@ -855,18 +868,34 @@ html.dark .cta-dropdown-item:hover {
   transform: translateY(-3px);
 }
 
-/* ===== PAGE HERO ===== */
+/* ===== PAGE HERO =====
+   Hero COMPATTA per tutte le pagine di secondo livello (chi-siamo, contatti, formazione/*,
+   agenzia-per-il-lavoro/servizi-*, programma-gol). La hero espansa resta solo in index.js (.hero).
+   Modificatori: --dark (gradiente slate/teal scuro delle pagine formazione), --left (testo a sinistra). */
 .page-hero {
-  padding: 12rem 0 6rem;
+  /* 8rem = 128px: header fixed (~104px in stato solido) + ~24px di respiro; non ridurre oltre.
+     Sotto 2.5rem (era 5-6rem): la hero non deve dominare la pagina. */
+  padding: 8rem 0 2.5rem;
   text-align: center;
   background: linear-gradient(135deg, #0F172A 0%, #0a4f54 60%, #008C95 100%);
   color: var(--white);
   position: relative;
+  overflow: hidden;
+}
+
+.page-hero--dark {
+  background: linear-gradient(135deg, #0F172A 0%, #134E4A 100%);
+}
+
+.page-hero--left {
+  text-align: left;
 }
 
 .page-hero h1 {
-  font-size: 3rem;
-  font-weight: 800;
+  /* Stessa scala di CourseHero (pagine corso): max 2.5rem, era 3-3.5rem */
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--white);
   margin-bottom: 1rem;
 }
 
@@ -875,25 +904,124 @@ html.dark .cta-dropdown-item:hover {
 }
 
 .page-hero p {
-  font-size: 1.15rem;
-  color: rgba(255,255,255,0.8);
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.8); /* WCAG AA su gradiente scuro */
   max-width: 550px;
   margin: 0 auto;
 }
 
+.page-hero--left p {
+  margin-left: 0;
+  max-width: 640px;
+}
+
+/* Riga CTA sotto il titolo: distanza unica (era 2-2.5rem inline pagina per pagina) */
+.page-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.page-hero:not(.page-hero--left) .page-hero-actions {
+  justify-content: center;
+}
+
+/* ===== BADGE — un solo stile per ruolo semantico =====
+   1) .page-hero-badge  → eyebrow sopra l'H1 delle hero interne (pill smeraldo su fondo scuro)
+   2) .section-badge    → eyebrow testuale sopra gli H2 di sezione
+   3) .badge-overlay    → etichetta (categoria / tipologia / contratto) sopra le foto delle card
+   4) .badge-chip       → micro-tag di livello dentro le card (L1 · L2 · L3)
+   Prima ogni pagina ridefiniva .hero-badge/.section-badge in styled-jsx con valori leggermente
+   diversi (0.68/0.7/0.72rem, padding 0.25-0.5rem, radius pillola/btn-radius): non ridefinirli più. */
 .page-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  color: #FFFFFF; /* WCAG AA: Ensures 4.5:1+ contrast on overlay */
-  font-weight: 600;
-  font-size: 0.85rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: var(--btn-radius);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6EE7B7; /* WCAG AA: 10:1 su #0F172A */
+  background: rgba(16,185,129,0.12);
+  border: 1px solid rgba(16,185,129,0.25);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
   margin-bottom: 1.25rem;
-  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.section-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary-text-on-light); /* WCAG AA: 6,27:1 su bianco (#008C95 faceva 4,05:1) */
+  margin-bottom: 0.6rem;
+}
+html.dark .section-badge {
+  color: #6EE7B7; /* WCAG AA su #111827 */
+}
+
+.badge-overlay {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  color: #0F172A; /* WCAG AA: 17:1 sul bianco del badge, indipendente dal colore semantico */
+  background: rgba(255,255,255,0.95);
+}
+/* Pallino del colore semantico (Gratuito, Obbligatorio, ...): sostituisce il testo colorato,
+   che con #10B981 su bianco non raggiungeva 4.5:1 */
+.badge-overlay-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--badge-dot, #008C95);
+  flex-shrink: 0;
+}
+
+/* Stato / tipologia a tinta piena (news "In evidenza", tipo contratto delle offerte di lavoro).
+   Colori per singolo valore via --badge-bg / --badge-fg (default bianco su #008C95).
+   Su sfondi chiari come #10B981 il testo deve essere scuro (#0F172A 7:1; il bianco farebbe 2,54:1). */
+.badge-solid {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  color: var(--badge-fg, #FFFFFF);
+  background: var(--badge-bg, #008C95);
+}
+
+.badge-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  color: #006B73; /* WCAG AA su bianco (6.4:1) */
+  background: rgba(0,140,149,0.1);
+}
+html.dark .badge-chip {
+  color: #10B981;
+  background: rgba(16,185,129,0.1);
 }
 
 /* ===== HERO DECORATIONS ===== */

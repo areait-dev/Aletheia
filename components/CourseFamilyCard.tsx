@@ -5,6 +5,8 @@ interface Variante {
   livelloKey: string;
   label: string;
   attestato?: string;
+  durataOre?: string | null;
+  modalita?: string;
 }
 
 interface Family {
@@ -51,7 +53,7 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
             className="absolute inset-0"
             style={{ background: family.image ? 'rgba(0,0,0,0.35)' : family.gradient }}
           />
-          <span className="absolute top-3 left-3 inline-flex items-center h-6 px-3 bg-white/90 backdrop-blur-sm text-slate-800 text-[12px] font-bold rounded-full z-10 uppercase tracking-wide">
+          <span className="badge-overlay absolute top-3 left-3 z-10">
             {family.badge}
           </span>
         </div>
@@ -64,17 +66,27 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
             {family.titolo}
           </h3>
 
-          <p className="text-[14px] text-slate-600 dark:text-gray-400 leading-relaxed line-clamp-2">{family.provider}</p>
+          <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-[13px] text-slate-600 dark:text-gray-400">
+            {family.varianti[0]?.durataOre && (
+              <span className="inline-flex items-center gap-1.5">
+                <i className="fas fa-clock text-[12px] text-[#008C95] dark:text-[#10B981]" aria-hidden="true" />
+                {family.varianti[0].durataOre}
+              </span>
+            )}
+            {family.varianti[0]?.modalita && (
+              <span className="inline-flex items-center gap-1.5">
+                <i className="fas fa-chalkboard-user text-[12px] text-[#008C95] dark:text-[#10B981]" aria-hidden="true" />
+                {family.varianti[0].modalita}
+              </span>
+            )}
+          </div>
 
           <hr className="my-4 border-t border-slate-100 dark:border-[rgba(255,255,255,0.08)]" />
 
           {hasMultipleLivelli && (
             <div className="flex flex-wrap items-center gap-1.5 mb-3" aria-label="Livelli disponibili">
               {livelli.map((l) => (
-                <span
-                  key={l}
-                  className="inline-flex items-center h-5 px-2 bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#008C95] dark:text-[#10B981] text-[11px] font-bold rounded-full"
-                >
+                <span key={l} className="badge-chip">
                   {shortLevelLabel(l)}
                 </span>
               ))}
@@ -83,7 +95,7 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
 
           <div className="flex items-center gap-2 text-[12px] text-slate-600 dark:text-gray-300 mb-3 mt-auto">
             <i className="fas fa-circle-check fa-fw text-[16px] text-[#008C95]" aria-hidden="true" />
-            <span>{family.varianti[0]?.attestato}</span>
+            <span className="line-clamp-1">{family.varianti[0]?.attestato}</span>
           </div>
         </div>
       </div>

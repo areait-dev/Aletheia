@@ -62,30 +62,6 @@ export default function FondiInterprofessionali() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.7rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #6EE7B7;
-          background: rgba(16,185,129,0.12);
-          border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.25rem;
-        }
-        .section-badge {
-          display: inline-block;
-          font-size: 0.68rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #008C95;
-          margin-bottom: 0.6rem;
-        }
         .cta-btn-primary {
           display: inline-flex;
           align-items: center;
@@ -157,13 +133,7 @@ export default function FondiInterprofessionali() {
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-        paddingTop: '120px',
-        paddingBottom: '5rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
@@ -176,9 +146,9 @@ export default function FondiInterprofessionali() {
             <span style={{ color: '#6EE7B7' }}>Fondi Interprofessionali</span>
           </nav>
 
-          <div className="hero-badge fade-up">Formazione finanziata per le aziende</div>
+          <div className="page-hero-badge fade-up">Formazione finanziata per le aziende</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem', maxWidth: '820px' }}>
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '820px' }}>
             Trasforma i contributi che versi in{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               formazione gratuita
@@ -186,7 +156,7 @@ export default function FondiInterprofessionali() {
             per i tuoi dipendenti
           </h1>
 
-          <div className="fade-up fade-up-3" style={{ marginTop: '2.5rem' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="/contatti" className="cta-btn-primary">Contattaci</a>
           </div>
         </div>

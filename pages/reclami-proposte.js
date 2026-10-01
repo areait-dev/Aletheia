@@ -20,7 +20,7 @@ function Field({ label, required, children }) {
 }
 
 const inputClass =
-  'w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 dark:border-gray-700 ' +
+  'w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 dark:border-gray-500 ' +
   'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 dark:placeholder-gray-500 ' +
   'outline-none focus:border-primary dark:focus:border-[#10B981] transition-colors';
 
@@ -57,7 +57,7 @@ export default function ReclamiProposte() {
       <Header />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-3xl mx-auto px-6 sm:px-12 pt-40 pb-24">
-          <span className="text-primary dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-4 block">
+          <span className="text-primary-text dark:text-[#10B981] font-bold text-xs tracking-widest uppercase mb-4 block">
             Trasparenza
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-50 mb-4">

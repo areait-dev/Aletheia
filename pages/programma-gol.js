@@ -172,21 +172,6 @@ export default function ProgrammaGOL() {
           .courses-grid { grid-template-columns: 1fr; }
         }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.7rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #6EE7B7;
-          background: rgba(16,185,129,0.12);
-          border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.25rem;
-        }
         .breadcrumb {
           display: flex;
           align-items: center;
@@ -261,13 +246,7 @@ export default function ProgrammaGOL() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #064E3B 100%)',
-        paddingTop: '120px',
-        paddingBottom: '5rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.15) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
@@ -282,18 +261,11 @@ export default function ProgrammaGOL() {
             <span style={{ color: 'rgba(255,255,255,0.75)' }}>Programma G.O.L.</span>
           </nav>
 
-          <div className="hero-badge fade-up">
+          <div className="page-hero-badge fade-up">
             Piano Nazionale - 100% Finanziato
           </div>
 
-          <h1 className="fade-up fade-up-1" style={{
-            fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',
-            fontWeight: 900,
-            color: '#fff',
-            lineHeight: 1.12,
-            marginBottom: '1.25rem',
-            maxWidth: '750px',
-          }}>
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '750px' }}>
             Programma{' '}
             <span style={{
               background: 'linear-gradient(90deg, #6EE7B7, #10B981)',
@@ -309,17 +281,11 @@ export default function ProgrammaGOL() {
             </span>
           </h1>
 
-          <p className="fade-up fade-up-2" style={{
-            fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-            color: 'rgba(255,255,255,0.68)',
-            maxWidth: '820px',
-            lineHeight: 1.75,
-            marginBottom: '2.5rem',
-          }}>
+          <p className="fade-up fade-up-2" style={{ maxWidth: '820px', lineHeight: 1.7 }}>
             Alètheia Srl è operatore accreditato del Programma G.O.L., il piano nazionale finanziato dal PNRR per il reinserimento lavorativo. Percorsi gratuiti e personalizzati di orientamento, formazione e ricollocazione professionale in Sicilia.
           </p>
 
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="#percorsi" className="cta-btn-primary">
               <i className="fas fa-rocket"></i>
               Scopri i percorsi

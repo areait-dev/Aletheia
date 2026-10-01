@@ -26,7 +26,7 @@ export default function PricingHeader({
       className={`flex flex-col items-center text-center px-6 py-24 md:py-32 ${className}`}
     >
       {eyebrow && (
-        <span className="text-ds-span uppercase tracking-widest font-semibold text-primary dark:text-brand-200 mb-4">
+        <span className="text-ds-span uppercase tracking-widest font-semibold text-primary-text dark:text-brand-200 mb-4">
           {eyebrow}
         </span>
       )}

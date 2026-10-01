@@ -22,7 +22,7 @@ const SOCIAL = [
 
 const CONTRACT_COLORS: Record<string, { bg: string; text: string }> = {
   'Tempo indeterminato': { bg: '#008C95', text: '#fff' },
-  'Tempo determinato':   { bg: '#10B981', text: '#fff' },
+  'Tempo determinato':   { bg: '#10B981', text: '#0F172A' }, // testo scuro: bianco su #10B981 = 2,54:1, scuro 7,04:1,
   'Somministrazione':    { bg: '#64748B', text: '#fff' },
 };
 
@@ -110,19 +110,10 @@ export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
           </div>
 
           {/* Tipo contratto badge */}
-          <span style={{
-            fontSize: '0.6rem',
-            fontWeight: 900,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: contractColor.text,
-            background: contractColor.bg,
-            padding: '0.28rem 0.65rem',
-            borderRadius: '999px',
-            backdropFilter: 'blur(4px)',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
-            whiteSpace: 'nowrap',
-          }}>
+          <span
+            className="badge-solid"
+            style={{ '--badge-bg': contractColor.bg, '--badge-fg': contractColor.text, boxShadow: '0 2px 8px rgba(0,0,0,0.25)' } as React.CSSProperties}
+          >
             {offerta.tipoContratto}
           </span>
         </div>

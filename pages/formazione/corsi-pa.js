@@ -276,17 +276,6 @@ export default function CorsiPA() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .hero-badge-pa {
-          display: inline-flex; align-items: center; gap: 0.5rem;
-          font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-          color: #6EE7B7; background: rgba(0,140,149,0.14); border: 1px solid rgba(0,140,149,0.3);
-          padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.25rem;
-        }
-        .section-badge-pa {
-          display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
-          text-transform: uppercase; color: #008C95; margin-bottom: 0.6rem;
-        }
-        .dark .section-badge-pa { color: #6EE7B7; }
 
         .cta-btn-primary-pa {
           display: inline-flex; align-items: center; gap: 0.55rem;
@@ -388,21 +377,21 @@ export default function CorsiPA() {
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', paddingTop: '120px', paddingBottom: '5rem', position: 'relative', overflow: 'hidden' }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,140,149,0.14) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-badge-pa fade-up">Formazione per Enti Pubblici · Iscritti al MEPA</div>
+          <div className="page-hero-badge fade-up">Formazione per Enti Pubblici · Iscritti al MEPA</div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem', maxWidth: '820px' }}>
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '820px' }}>
             Formazione per la{' '}
             <span style={{ background: 'linear-gradient(90deg, #6EE7B7, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Pubblica Amministrazione
             </span>
           </h1>
 
-          <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="#contatti" className="cta-btn-primary-pa">Richiedi informazioni</a>
           </div>
         </div>
@@ -427,12 +416,12 @@ export default function CorsiPA() {
 
             {/* Blocchi di completamento */}
             <div className="col-span-1 bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-6 flex flex-col justify-center gap-2">
-              <span className="text-lg lg:text-xl font-black text-[#008C95] leading-tight uppercase">Ente accreditato</span>
+              <span className="text-lg lg:text-xl font-black text-primary-text dark:text-[#10B981] leading-tight uppercase">Ente accreditato</span>
               <span className="text-slate-600 dark:text-gray-300 text-sm leading-snug">Regione Siciliana</span>
             </div>
 
             <div className="col-span-1 bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-6 flex flex-col justify-center gap-2">
-              <span className="text-lg lg:text-xl font-black text-[#008C95] leading-tight uppercase">Percorsi personalizzabili</span>
+              <span className="text-lg lg:text-xl font-black text-primary-text dark:text-[#10B981] leading-tight uppercase">Percorsi personalizzabili</span>
               <span className="text-slate-600 dark:text-gray-300 text-sm leading-snug">progettati sulle esigenze della PA</span>
             </div>
           </div>
@@ -445,7 +434,7 @@ export default function CorsiPA() {
           <div className="partner-grid-pa">
             {/* Blocco esperienza */}
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <span className="section-badge-pa">Esperienza al servizio delle Istituzioni</span>
+              <span className="section-badge">Esperienza al servizio delle Istituzioni</span>
               <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
                 Il partner che conosce le esigenze della PA
               </h2>
@@ -462,7 +451,7 @@ export default function CorsiPA() {
                 Svolgiamo attività di formazione, aggiornamento professionale, progettazione finanziata e sviluppo delle competenze per il personale della PA.
               </p>
 
-              <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : '#008C95', margin: '1.5rem 0 0.85rem' }}>
+              <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : 'var(--primary-text-on-light)', margin: '1.5rem 0 0.85rem' }}>
                 Il nostro curriculum comprende collaborazioni con
               </span>
               <ul style={{ listStyle: 'none', margin: '0 0 1.5rem', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -491,7 +480,7 @@ export default function CorsiPA() {
             {/* Blocco MEPA */}
             <div className="pa-mepa-card">
               <div style={{ padding: '2rem' }}>
-                <span className="section-badge-pa">Affidamento semplice e conforme</span>
+                <span className="section-badge">Affidamento semplice e conforme</span>
                 <h2 style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.5rem)', fontWeight: 900, color: isDark ? '#F8FAFC' : '#0f172a', marginBottom: '1rem', lineHeight: 1.25 }}>
                   Alètheia è iscritta al MEPA
                 </h2>
@@ -499,7 +488,7 @@ export default function CorsiPA() {
                   Alètheia è presente sul Mercato Elettronico della Pubblica Amministrazione (MEPA), la piattaforma ufficiale di acquisto della Pubblica Amministrazione. Gli enti possono così affidare i servizi formativi tramite una procedura ufficiale, riducendo i tempi amministrativi e semplificando l&apos;iter di acquisto, nel pieno rispetto della normativa sugli appalti.
                 </p>
 
-                <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : '#008C95', marginBottom: '0.85rem' }}>
+                <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : 'var(--primary-text-on-light)', marginBottom: '0.85rem' }}>
                   Con Alètheia puoi contare su
                 </span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.75rem' }}>
@@ -526,7 +515,7 @@ export default function CorsiPA() {
       <section className="bg-white dark:bg-dark-card" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '820px' }}>
-            <span className="section-badge-pa">Competenze per accompagnare il cambiamento</span>
+            <span className="section-badge">Competenze per accompagnare il cambiamento</span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
               Le nostre aree formative
             </h2>
@@ -607,7 +596,7 @@ export default function CorsiPA() {
           <div className="pa-contact-grid-2col">
             {/* Colonna sinistra: testo introduttivo */}
             <div>
-              <span className="section-badge-pa">Parliamone</span>
+              <span className="section-badge">Parliamone</span>
               <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
                 Vuoi un piano formativo per il tuo ente?
               </h3>
@@ -621,7 +610,7 @@ export default function CorsiPA() {
                     <i className="fas fa-phone" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
                   </div>
                   <div>
-                    <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Telefono</span>
+                    <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : 'var(--muted-text)' }}>Telefono</span>
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>+39 0932 862613</span>
                   </div>
                 </div>
@@ -630,7 +619,7 @@ export default function CorsiPA() {
                     <i className="fas fa-envelope" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
                   </div>
                   <div>
-                    <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : '#94A3B8' }}>Email</span>
+                    <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : 'var(--muted-text)' }}>Email</span>
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.9rem', fontWeight: 700 }}>info@aletheiasrl.it</span>
                   </div>
                 </div>

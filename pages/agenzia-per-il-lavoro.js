@@ -169,7 +169,18 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
 
         .hero-wrap {
           display: flex;
-          min-height: calc(100vh - 80px);
+        }
+        /* Da md in su: altezza minima adattiva (era calc(100vh - 80px)) che lascia visibile la striscia
+           credenziali sotto i pannelli. Su mobile i pannelli sono impilati e l'altezza la decide il contenuto.
+           769px e non 768px: a 768px scatta già il layout in colonna (media query sotto). */
+        @media (min-width: 769px) {
+          .hero-wrap {
+            min-height: clamp(460px, 70vh, 640px);
+          }
+          /* svh: ignora la barra indirizzi dinamica dei browser; dove supportato sostituisce vh */
+          @supports (height: 1svh) {
+            .hero-wrap { min-height: clamp(460px, 70svh, 640px); }
+          }
         }
         .hero-panel {
           position: relative;
@@ -179,8 +190,8 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: flex-start;
-          padding: 8rem 4rem 6rem;
+          justify-content: center;
+          padding: 3.5rem 4rem;
           text-align: center;
         }
         .panel-bg {
@@ -252,66 +263,66 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
 
         @media (max-width: 768px) {
           .hero-wrap { flex-direction: column; }
-          .hero-panel { padding: 3.5rem 2rem; flex: none !important; }
+          .hero-panel { padding: 2.5rem 2rem; flex: none !important; }
         }
 
-        .trust-bar-wrap {
+        /* Striscia credenziali sotto lo split: una sola riga (~48px) con il dato ufficiale
+           (le 4 voci originali). Sostituisce la barra a 4 blocchi alta ~155px. */
+        .trust-strip {
           background: linear-gradient(135deg, #0F172A 0%, #134E4A 100%);
+          border-top: 1px solid rgba(255,255,255,0.08);
         }
-        .trust-bar {
+        .trust-strip-inner {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 1.5rem 2rem;
-          padding: 3rem 2rem;
+          gap: 0.75rem 1.5rem;
+          padding: 1rem 2rem;
           max-width: 1200px;
           margin: 0 auto;
         }
-        .trust-card {
+        .trust-strip-item {
           display: flex;
           align-items: center;
-          gap: 0.85rem;
-          padding: 0 1.5rem;
-          border-left: 1px solid rgba(255,255,255,0.12);
           min-width: 0;
+          padding: 0 1.5rem;
+          border-left: 1px solid rgba(255,255,255,0.12); /* separatore verticale tra le voci */
         }
-        .trust-card:first-child {
+        .trust-strip-item:first-child {
           border-left: none;
           padding-left: 0;
         }
-        .trust-icon-glow {
-          font-size: 1.5rem;
-          color: #10B981;
-          filter: drop-shadow(0 0 6px rgba(16,185,129,0.3));
-          flex-shrink: 0;
-        }
-        .trust-text {
+        .trust-strip-text {
           display: flex;
           flex-direction: column;
-          gap: 0.2rem;
+          gap: 0.1rem;
           min-width: 0;
         }
-        .trust-label {
-          font-size: 0.9rem;
+        .trust-strip-text strong {
+          color: #fff; /* WCAG AA su #0F172A: 17:1 */
+          font-size: 0.85rem;
           font-weight: 800;
-          color: #fff;
-          line-height: 1.3;
+          line-height: 1.25;
         }
-        .trust-sub {
+        .trust-strip-sub {
+          color: #94A3B8; /* WCAG AA su #0F172A: 6,9:1 */
           font-size: 0.72rem;
-          font-weight: 400;
-          color: #94A3B8;
         }
         @media (max-width: 900px) {
-          .trust-bar { grid-template-columns: repeat(2, 1fr); }
-          .trust-card { border-left: none; padding: 0 1.25rem; }
+          .trust-strip-inner { grid-template-columns: repeat(2, 1fr); }
+          .trust-strip-item { border-left: none; padding: 0 1rem; }
+          .trust-strip-item:first-child { padding-left: 1rem; }
         }
-        @media (max-width: 640px) {
-          .trust-bar { grid-template-columns: 1fr; }
+        @media (max-width: 520px) {
+          .trust-strip-inner { grid-template-columns: 1fr; padding: 1rem 1.25rem; }
+          .trust-strip-item, .trust-strip-item:first-child { padding: 0; }
         }
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section style={{ background: '#0F172A', paddingTop: '80px' }}>
+        {/* H1 semantico ma visivamente nascosto: i due pannelli (H2 "Cerchi lavoro?" / "Cerchi
+            personale?") non lasciano spazio a un titolo unico senza alterare il design. */}
+        <h1 className="sr-only">Agenzia per il Lavoro Alètheia: servizi per candidati e per imprese</h1>
         <div className="hero-wrap">
 
           {/* ─── PANNELLO CANDIDATI ─── */}
@@ -410,7 +421,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           >
             <Image
               className="panel-bg"
-              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
               alt=""
               aria-hidden="true"
               fill
@@ -489,22 +500,21 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           </div>
         </div>
 
-        {/* Trust bar */}
-        <div className="trust-bar-wrap">
-          <div className="trust-bar">
+        {/* Striscia credenziali: le 4 voci originali, su una riga sola (~50px invece di ~155px) */}
+        <div className="trust-strip">
+          <div className="trust-strip-inner">
             {[
-              { icon: 'fas fa-certificate', label: 'Autorizzata dal Ministero del Lavoro', sub: 'D.D.S. n. 1100/2019' },
-              { icon: 'fas fa-map-marker-alt', label: 'Radicata in Sicilia', sub: 'Dal 2005' },
-              { icon: 'fas fa-users', label: 'Migliaia di candidati', sub: 'Inseriti con successo' },
-              { icon: 'fas fa-shield-alt', label: 'Contratti garantiti', sub: 'Conformità normativa' },
+              { label: 'Autorizzata dal Ministero del Lavoro', sub: 'D.D.S. n. 1100/2019' },
+              { label: 'Radicata in Sicilia', sub: 'Dal 2005' },
+              { label: 'Migliaia di candidati', sub: 'Inseriti con successo' },
+              { label: 'Contratti garantiti', sub: 'Conformità normativa' },
             ].map((item, i) => (
-              <div key={i} className="trust-card">
-                <i className={`${item.icon} trust-icon-glow`}></i>
-                <div className="trust-text">
-                  <span className="trust-label">{item.label}</span>
-                  <span className="trust-sub">{item.sub}</span>
-                </div>
-              </div>
+              <span key={i} className="trust-strip-item">
+                <span className="trust-strip-text">
+                  <strong>{item.label}</strong>
+                  <span className="trust-strip-sub">{item.sub}</span>
+                </span>
+              </span>
             ))}
           </div>
         </div>
@@ -520,7 +530,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               <span style={{
                 display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
                 letterSpacing: '0.1em', textTransform: 'uppercase',
-                color: '#008C95', marginBottom: '0.6rem',
+                color: 'var(--primary-text)', marginBottom: '0.6rem',
               }}>
                 Chi siamo
               </span>
@@ -528,31 +538,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900,
                 marginBottom: '1rem', lineHeight: 1.25,
               }}>
-                Alètheia APL -{' '}
-                <span style={{ color: '#008C95' }}>Non solo un&apos;agenzia. Un ecosistema per il lavoro</span>
+                Alètheia APL - Non solo un&apos;agenzia. Un{' '}
+                {/* Colore solo sulla parola chiave; token con variante dark (#008C95 faceva 2,37:1 su dark-card) */}
+                <span className="text-primary-text dark:text-[#10B981]">ecosistema per il lavoro</span>
               </h2>
-
-              {/* badge accrediti — spostati subito sotto il titolo */}
-              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                {[
-                  { icon: 'fas fa-certificate', label: 'D.D.S. n. 1100/2019' },
-                  { icon: 'fas fa-map-marker-alt', label: 'Operativa dal 2005' },
-                  { icon: 'fas fa-network-wired', label: 'PromoterGroup S.p.A.' },
-                ].map((b, i) => (
-                  <span
-                    key={i}
-                    className="bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                      fontSize: '0.7rem', fontWeight: 600,
-                      padding: '0.3rem 0.7rem', borderRadius: '999px',
-                    }}
-                  >
-                    <i className={b.icon} style={{ fontSize: '0.65rem', color: '#008C95' }}></i>
-                    {b.label}
-                  </span>
-                ))}
-              </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <p className="text-slate-900 dark:text-gray-100" style={{ fontSize: '1.2rem', fontWeight: 600, lineHeight: 1.65, margin: 0 }}>
@@ -618,7 +607,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 <span style={{
                   display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
                   letterSpacing: '0.1em', textTransform: 'uppercase',
-                  color: '#008C95',
+                  color: 'var(--primary-text)',
                 }}>
                   Posizioni aperte
                 </span>

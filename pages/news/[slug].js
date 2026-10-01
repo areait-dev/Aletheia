@@ -145,7 +145,7 @@ function ShareBar() {
   return (
     <div className="border-slate-100 dark:border-[rgba(255,255,255,0.08)] bg-slate-50 dark:bg-gray-800/60"
       style={{ marginTop: '2.5rem', padding: '1.25rem 1.5rem', borderRadius: '1rem', border: '1px solid', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
-      <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.1em', marginRight: '0.25rem', flexShrink: 0 }}>
+      <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.1em', marginRight: '0.25rem', flexShrink: 0 }}>
         Condividi:
       </span>
 
@@ -344,12 +344,11 @@ export default function ArticlePage({ article, related }) {
 
           {/* Badge categoria */}
           <div className="hero-animate hero-animate-1" style={{ marginBottom: '1rem' }}>
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-              padding: '0.3rem 0.875rem', borderRadius: '999px',
+            {/* Stessa geometria dell'eyebrow delle altre hero; solo i colori seguono la categoria */}
+            <span className="page-hero-badge" style={{
+              marginBottom: 0,
               background: `${category.color}28`,
               border: `1px solid ${category.color}60`,
-              fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
               color: category.color,
             }}>
               {category.label}
@@ -423,7 +422,8 @@ export default function ArticlePage({ article, related }) {
               {/* Tag */}
               {tags.length > 0 && (
                 <div className="border-slate-100 dark:border-[rgba(255,255,255,0.08)]" style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid', display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em', marginRight: '0.25rem' }}>Tag:</span>
+                  {/* gray-600: la sezione poggia su bg-light (#F2F2F2), dove gray-500 farebbe solo 4,32:1 */}
+                  <span className="text-gray-600 dark:text-gray-400" style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginRight: '0.25rem' }}>Tag:</span>
                   {tags.map((tag) => (
                     <span key={tag} className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30 text-[#006066] dark:text-[#10B981]" style={{ padding: '0.3rem 0.875rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
                       {tag}
@@ -516,7 +516,7 @@ export default function ArticlePage({ article, related }) {
         <div className="container">
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
             <div>
-              <p style={{ margin: '0 0 0.35rem', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#008C95' }}>Continua a leggere</p>
+              <p style={{ margin: '0 0 0.35rem', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--primary-text)' }}>Continua a leggere</p>
               <h2 className="text-slate-900 dark:text-white" style={{ margin: 0, fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 900, lineHeight: 1.2 }}>
                 Potrebbe interessarti
               </h2>

@@ -11,8 +11,9 @@ const SEDI = [
     città: 'Vittoria',
     indirizzo: 'Via del Carrubo, snc',
     cap: '97019 Vittoria (RG)',
-    mapsHref: 'https://maps.google.com/?q=Via+del+Carrubo+Vittoria+RG',
-    mapsEmbed: 'https://www.google.com/maps?q=Via+del+Carrubo+snc+Vittoria+RG&output=embed',
+    // Link e embed puntano allo stesso luogo Google (pin "PROMOTERGROUP S.p.A.", 36.9676, 14.5558): stesso ftid dell'embed
+    mapsHref: 'https://www.google.com/maps?ftid=0x1311a473afdcbf41:0x2f2626c2fa9958be',
+    mapsEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3187.767471209099!2d14.555755176275595!3d36.96760995824408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1311a473afdcbf41%3A0x2f2626c2fa9958be!2sPROMOTERGROUP%20S.p.A.!5e0!3m2!1sit!2sit!4v1790761569752!5m2!1sit!2sit',
   },
   {
     città: 'Ragusa',
@@ -316,29 +317,16 @@ export default function Contatti() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-        paddingTop: '120px',
-        paddingBottom: '5rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-badge fade-up">
+          <div className="page-hero-badge fade-up">
             Siamo qui per te
           </div>
 
-          <h1 className="fade-up fade-up-1" style={{
-            fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',
-            fontWeight: 900,
-            color: '#fff',
-            lineHeight: 1.12,
-            marginBottom: '1.25rem',
-            maxWidth: '650px',
-          }}>
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '650px' }}>
             Parliamo del tuo{' '}
             <span style={{
               background: 'linear-gradient(90deg, #10B981, #008C95)',
@@ -366,7 +354,7 @@ export default function Contatti() {
         <div className="container">
           {/* Titolo FUORI dal flex container */}
           <div style={{ marginBottom: '2rem' }}>
-            <span className="text-[#008C95] dark:text-[#10B981]" style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+            <span className="text-primary-text dark:text-[#10B981]" style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
               Dove siamo
             </span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 900, margin: '0 0 0.5rem', lineHeight: 1.25 }}>

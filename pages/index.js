@@ -64,21 +64,8 @@ function CategoriaCard({ href, badge, badgeColor, title, description, image, ima
       {/* Contenuto sovrapposto */}
       <div className="absolute inset-0 z-10 p-7 flex flex-col justify-end h-full text-white">
         {/* Badge */}
-        <span style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.35rem',
-          alignSelf: 'flex-start',
-          fontSize: '0.68rem',
-          fontWeight: 800,
-          letterSpacing: '0.07em',
-          textTransform: 'uppercase',
-          color: badgeColor,
-          background: 'rgba(255,255,255,0.95)',
-          padding: '0.25rem 0.75rem',
-          borderRadius: '999px',
-          marginBottom: '0.85rem',
-        }}>
+        <span className="badge-overlay" style={{ marginBottom: '0.85rem' }}>
+          <span className="badge-overlay-dot" style={{ '--badge-dot': badgeColor }} aria-hidden="true" />
           {badge}
         </span>
 
@@ -174,11 +161,11 @@ function formatDateItalian(dateStr) {
 // Etichetta leggibile della categoria a partire dalla key
 const CATEGORIA_LABEL = Object.fromEntries(CATEGORIE.map((c) => [c.key, c.label]));
 
-// Stile pill pastello per categoria
+// Stile pill pastello per categoria (solo tinte brand #008C95/#10B981 + un neutro)
 const CATEGORIA_BADGE = {
-  'obbligatoria': 'bg-amber-50 text-amber-800 border border-amber-200',
-  'regionale-fse': 'bg-emerald-50 text-emerald-800 border border-emerald-200',
-  'professionale': 'bg-indigo-50 text-indigo-800 border border-indigo-200',
+  'obbligatoria': 'bg-[#008C95]/8 text-[#006066] border border-[#008C95]/25 dark:bg-[#10B981]/10 dark:text-[#6EE7B7] dark:border-[#10B981]/30',
+  'regionale-fse': 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-[#10B981]/10 dark:text-[#6EE7B7] dark:border-[#10B981]/30',
+  'professionale': 'bg-slate-50 text-slate-700 border border-slate-200 dark:bg-white/5 dark:text-gray-200 dark:border-white/15',
 };
 
 // Thumbnail placeholder per categoria (sostituibili con immagini reali)
@@ -264,7 +251,7 @@ function CorsiCalendarTabs({ giorni }) {
 
             {/* Testi */}
             <div className="flex-grow px-2 flex flex-col gap-1 w-full">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500 dark:text-gray-300">
                 <span className={`font-semibold px-2 py-0.5 rounded-full ${CATEGORIA_BADGE[corso.categoria] || 'bg-slate-50 text-slate-700 border border-slate-200'}`}>
                   {CATEGORIA_LABEL[corso.categoria]}
                 </span>
@@ -470,7 +457,7 @@ export default function Home() {
       <Reveal as="section" className="pt-16 pb-24 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
               Calendario corsi
             </span>
             <h2 id="calendario-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -501,7 +488,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <Reveal className="text-center mb-12">
-            <span className="inline-block bg-[#008C95]/10 text-[#006066] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
               I nostri percorsi formativi
             </span>
             <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto mb-2">
@@ -522,7 +509,7 @@ export default function Home() {
               href="/all-courses"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                fontSize: '0.95rem', fontWeight: 700, color: '#006B73',
+                fontSize: '0.95rem', fontWeight: 700, color: 'var(--primary-text)',
                 textDecoration: 'none',
               }}
             >
@@ -533,21 +520,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3 · STATS / NUMERI ───────────────────────────── */}
+      {/* ── 3 · STATS / NUMERI ───────────────────────────────────
+          Un numero protagonista (persone formate, il dato più rappresentativo)
+          più grande, con gli altri tre di contorno più piccoli, invece di 4
+          statistiche identiche senza gerarchia visiva. */}
       <section className="numbers-section">
         <div className="container">
           <div className="text-center mb-10">
-            <span className="inline-block bg-white/10 text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#10B981]">
               Alètheia in numeri
             </span>
           </div>
-          <div className="numbers-grid">
-            <NumberCounter target="+20"   label="Anni di esperienza" icon="fas fa-user-graduate" />
-            <NumberCounter target="+100"  label="Progetti formativi realizzati" icon="fas fa-chalkboard" />
-            <NumberCounter target="+10000" label="Persone formate" icon="fas fa-star" />
-            <NumberCounter target="+200"  label="Aziende clienti" icon="fas fa-chalkboard-teacher" />
+          <div className="numbers-hero-grid">
+            <div className="numbers-hero-main">
+              <NumberCounter
+                target="+10000"
+                label="Persone formate dal 2005"
+                valueClassName="text-6xl sm:text-7xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none"
+                labelClassName="text-sm"
+              />
+            </div>
+            <div className="numbers-hero-side">
+              <NumberCounter target="+20"  label="Anni di esperienza" valueClassName="text-3xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none" />
+              <NumberCounter target="+100" label="Progetti formativi realizzati" valueClassName="text-3xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none" />
+              <NumberCounter target="+200" label="Aziende clienti" valueClassName="text-3xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none" />
+            </div>
           </div>
         </div>
+        <style jsx>{`
+          .numbers-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+          }
+          .numbers-hero-main {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+          }
+          .numbers-hero-side {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            padding-top: 1.5rem;
+          }
+          @media (min-width: 900px) {
+            .numbers-hero-grid {
+              grid-template-columns: auto 1fr;
+              gap: 3rem;
+            }
+            .numbers-hero-side {
+              border-top: none;
+              border-left: 1px solid rgba(255,255,255,0.12);
+              padding-top: 0;
+              padding-left: 3rem;
+            }
+          }
+        `}</style>
       </section>
 
       {/* ── 3b · COSA FACCIAMO ───────────────────────────── */}
@@ -555,7 +586,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
-            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
               Cosa facciamo
             </span>
             <h2 id="cosa-facciamo-heading" className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">
@@ -633,7 +664,7 @@ export default function Home() {
       <section className="pt-20 pb-24 bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block bg-white/10 text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#10B981] mb-3">
               Parte del Gruppo
             </span>
             <h2 id="gruppo-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-white text-balance max-w-3xl mx-auto">
@@ -664,8 +695,8 @@ export default function Home() {
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  loading="lazy"
-                  className="h-10 w-auto max-w-[170px] object-contain shrink-0 brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300"
+                  decoding="sync"
+                  className="h-10 w-auto max-w-[170px] object-contain shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const el = e.currentTarget;
                     el.style.display = 'none';
@@ -705,7 +736,7 @@ export default function Home() {
           {/* Header sezione */}
           <Reveal className="flex items-end justify-between mb-10">
             <div>
-              <span className="inline-block bg-[#008C95]/10 text-[#006066] dark:bg-[#008C95]/20 dark:text-[#10B981] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
                 News
               </span>
               <h2 id="news-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
@@ -775,7 +806,7 @@ export default function Home() {
       <section className="py-24 bg-light dark:bg-dark-bg" aria-labelledby="clienti-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="inline-block bg-[#008C95]/10 dark:bg-[#008C95]/20 text-[#006066] dark:text-[#10B981] text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
               Clienti
             </span>
             <h2 id="clienti-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">

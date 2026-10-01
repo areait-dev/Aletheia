@@ -256,7 +256,7 @@ export default function FormAzienda({
               display: 'flex', flexDirection: 'column', gap: '0.65rem',
               marginTop: '0.5rem',
             }}>
-              <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#008C95' }}>
+              <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary-text)' }}>
                 Perché sceglierci
               </p>
               {[

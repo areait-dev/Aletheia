@@ -171,12 +171,6 @@ export default function FormazioneProfessionaleSpecialistica() {
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
         .fade-up-4 { animation-delay: 0.38s; opacity: 0; }
 
-        .hero-badge-fps {
-          display: inline-flex; align-items: center; gap: 0.45rem;
-          font-size: 0.72rem; font-weight: 800; letter-spacing: 0.03em;
-          color: #6EE7B7; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.4rem 0.9rem; border-radius: 999px;
-        }
         .cta-btn-primary-fps {
           display: inline-flex; align-items: center; gap: 0.55rem;
           padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
@@ -228,28 +222,28 @@ export default function FormazioneProfessionaleSpecialistica() {
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', paddingTop: '120px', paddingBottom: '4rem', position: 'relative', overflow: 'hidden' }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="fps-badges-row fade-up">
             {heroBadges.map((b) => (
-              <span key={b.label} className="hero-badge-fps">
+              <span key={b.label} className="page-hero-badge">
                 <i className={b.icon} style={{ fontSize: '0.8rem' }}></i>
                 {b.label}
               </span>
             ))}
           </div>
 
-          <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem', maxWidth: '900px' }}>
+          <h1 className="fade-up fade-up-1" style={{ maxWidth: '900px' }}>
             Formazione professionale e corsi per la{' '}
             <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Pubblica Amministrazione
             </span>
           </h1>
 
-          <div className="fade-up fade-up-3" style={{ marginTop: '2.5rem' }}>
+          <div className="page-hero-actions fade-up fade-up-3">
             <a href="#aree" className="cta-btn-primary-fps">Scopri i nostri corsi</a>
           </div>
         </div>
@@ -281,7 +275,7 @@ export default function FormazioneProfessionaleSpecialistica() {
       <section id="aree" className="bg-slate-50 dark:bg-dark-bg border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '760px' }}>
-            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#008C95', marginBottom: '0.6rem' }}>
+            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--primary-text)', marginBottom: '0.6rem' }}>
               Le aree della formazione
             </span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>

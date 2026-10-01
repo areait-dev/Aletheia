@@ -78,17 +78,6 @@ export default function FormazioneECM() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .hero-badge-ecm {
-          display: inline-flex; align-items: center; gap: 0.5rem;
-          font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-          color: #6EE7B7; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
-          padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.25rem;
-        }
-        .section-badge-ecm {
-          display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
-          text-transform: uppercase; color: #008C95; margin-bottom: 0.6rem;
-        }
-        .dark .section-badge-ecm { color: #6EE7B7; }
         
         .cta-btn-primary-ecm {
           display: inline-flex; align-items: center; gap: 0.55rem;
@@ -118,7 +107,7 @@ export default function FormazioneECM() {
         .modalita-tab {
           background: none; border: none; cursor: pointer; font-family: inherit;
           font-weight: 700; font-size: 0.95rem; padding: 0.85rem 0.25rem; margin-right: 1.75rem;
-          color: #94A3B8; border-bottom: 2px solid transparent; margin-bottom: -1px;
+          color: var(--muted-text); border-bottom: 2px solid transparent; margin-bottom: -1px;
           transition: color 0.2s ease, border-color 0.2s ease;
         }
         :global(.dark) .modalita-tab { color: rgba(255,255,255,0.4); }
@@ -132,15 +121,15 @@ export default function FormazioneECM() {
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', paddingTop: '120px', paddingBottom: '5rem', position: 'relative', overflow: 'hidden' }}>
+      <section className="page-hero page-hero--dark page-hero--left">
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div>
-            <div className="hero-badge-ecm fade-up">Educazione Continua in Medicina</div>
+            <div className="page-hero-badge fade-up">Educazione Continua in Medicina</div>
 
-            <h1 className="fade-up fade-up-1" style={{ fontSize: 'clamp(2.1rem, 4.6vw, 3.3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '1.25rem' }}>
+            <h1 className="fade-up fade-up-1">
               Corsi{' '}
               <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 ECM
@@ -148,7 +137,7 @@ export default function FormazioneECM() {
               {' '}per professionisti sanitari
             </h1>
 
-            <div className="fade-up fade-up-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
+            <div className="page-hero-actions fade-up fade-up-3">
               <a href="/contatti" className="cta-btn-outline-ecm">Contattaci</a>
             </div>
           </div>
@@ -159,7 +148,7 @@ export default function FormazioneECM() {
       {/* ══════════════ IL VALORE DEL PROVIDER ACCREDITATO ══════════════ */}
       <section id="corsi" className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <span className="section-badge-ecm">Provider ECM accreditato · Regione Siciliana</span>
+          <span className="section-badge">Provider ECM accreditato · Regione Siciliana</span>
           <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '960px' }}>
             Formazione continua per i professionisti della sanità
           </h2>
@@ -175,7 +164,7 @@ export default function FormazioneECM() {
       {/* ══════════════ TARGET & PROPOSTA FORMATIVA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <span className="section-badge-ecm">La proposta formativa</span>
+          <span className="section-badge">La proposta formativa</span>
           <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
             Corsi ECM in aula e in FAD, in tutta la Sicilia
           </h2>
@@ -209,7 +198,7 @@ export default function FormazioneECM() {
       {/* ══════════════ FAQ ══════════════ */}
       <section className="bg-white dark:bg-dark-card border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <span className="section-badge-ecm">FAQ</span>
+          <span className="section-badge">FAQ</span>
           <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '2rem', lineHeight: 1.25 }}>
             Domande frequenti sui corsi ECM
           </h2>
@@ -250,7 +239,7 @@ export default function FormazioneECM() {
           >
             <div>
               <div className="ecm-contact-card-info">
-                <span className="section-badge-ecm">Parliamone</span>
+                <span className="section-badge">Parliamone</span>
                 <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
                   Vuoi saperne di più sui corsi ECM?
                 </h3>
