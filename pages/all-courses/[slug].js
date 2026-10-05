@@ -1753,7 +1753,7 @@ export default function CourseDetail({ slug: slugProp }) {
                     whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                     customContent={
                       <div className="flex flex-col gap-2">
-                        <span className="inline-block bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-3 py-1 rounded-full font-bold text-xs w-fit">
+                        <span className="inline-block bg-brand-100 dark:bg-brand-600/40 text-brand-500 dark:text-primary-on-dark px-3 py-1 rounded-full font-bold text-xs w-fit">
                           <i className="fas fa-check-circle" style={{ marginRight: '0.4rem' }}></i>
                           Corso finanziato - gratuito
                         </span>
@@ -1780,7 +1780,7 @@ export default function CourseDetail({ slug: slugProp }) {
                         <div className="flex flex-col gap-3">
                           <div className="flex flex-col">
                             <span className="text-[0.7rem] font-bold text-slate-600 dark:text-slate-400">Quota di iscrizione</span>
-                            <span className="text-emerald-600 dark:text-emerald-400 font-black text-3xl tracking-tight mt-0.5">Su richiesta</span>
+                            <span className="text-brand-500 dark:text-primary-on-dark font-black text-3xl tracking-tight mt-0.5">Su richiesta</span>
                           </div>
                           <EnrollmentProgress courseId={slug} courseTitle={course.title} />
                           <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
@@ -1881,7 +1881,7 @@ export default function CourseDetail({ slug: slugProp }) {
                   </div>
                   <div className="flex-1 flex flex-col gap-2" style={{ padding: '1.1rem 1.25rem' }}>
                     <span className="text-slate-900 dark:text-white" style={{ fontSize: '0.92rem', fontWeight: 800, lineHeight: 1.3 }}>{c.titolo}</span>
-                    <span className="text-primary dark:text-[#6EE7B7] flex items-center gap-1.5 mt-auto font-bold" style={{ fontSize: '0.82rem' }}>
+                    <span className="text-primary dark:text-[#5FC2C8] flex items-center gap-1.5 mt-auto font-bold" style={{ fontSize: '0.82rem' }}>
                       Scopri di più
                       <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
                     </span>

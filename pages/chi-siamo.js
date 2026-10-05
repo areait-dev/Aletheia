@@ -29,7 +29,7 @@ function AccreditamentoCard({ logo, logoAlt, title, code, logoScale, icon }) {
           sul teal scuro della card (dark-card = #004d52). */}
       <div className="relative w-full h-20 max-w-[70%] flex items-center justify-start">
         {!logo && icon && (
-          <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center text-3xl text-[#006066] dark:text-[#10B981]" role="img" aria-label={logoAlt}>
+          <div className="w-16 h-16 bg-[#018891]/10 dark:bg-[#018891]/10 rounded-full flex items-center justify-center text-3xl text-[#006066] dark:text-primary-on-dark" role="img" aria-label={logoAlt}>
             <i className={icon}></i>
           </div>
         )}
@@ -55,7 +55,7 @@ function AccreditamentoCard({ logo, logoAlt, title, code, logoScale, icon }) {
 
       {/* Badge accreditamento */}
       {code && (
-        <span className="inline-block self-start mt-auto text-xs font-bold uppercase tracking-wide text-[#0B4A52] dark:text-[#10B981] bg-[#0B4A52]/8 dark:bg-[#10B981]/10 px-3 py-1.5 rounded-lg">
+        <span className="inline-block self-start mt-auto text-xs font-bold uppercase tracking-wide text-[#0B4A52] dark:text-primary-on-dark bg-[#0B4A52]/8 dark:bg-[#018891]/10 px-3 py-1.5 rounded-lg">
           {code}
         </span>
       )}
@@ -83,14 +83,14 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
         aria-haspopup="dialog"
         onClick={() => setShowModal(true)}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowModal(true); } }}
-        className="h-full bg-slate-50 dark:bg-dark-bg rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 border border-slate-200 dark:border-[rgba(255,255,255,0.1)] hover:-translate-y-2 hover:border-[#008C95] dark:hover:border-[#10B981] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008C95] flex flex-col items-center group"
+        className="h-full bg-slate-50 dark:bg-dark-bg rounded-2xl p-7 text-center cursor-pointer transition-all duration-300 border border-slate-200 dark:border-[rgba(255,255,255,0.1)] hover:-translate-y-2 hover:border-[#018891] dark:hover:border-primary-on-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#018891] flex flex-col items-center group"
       >
-        <div className="w-16 h-16 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-[#006066] dark:text-[#10B981] transition-colors duration-300 group-hover:bg-[#008C95]/15 dark:group-hover:bg-[#10B981]/20" aria-hidden="true">
+        <div className="w-16 h-16 bg-[#018891]/10 dark:bg-[#018891]/10 rounded-full flex items-center justify-center mb-4 text-3xl text-[#006066] dark:text-primary-on-dark transition-colors duration-300 group-hover:bg-[#018891]/15 dark:group-hover:bg-[#006B73]/20" aria-hidden="true">
           <i className={icon}></i>
         </div>
         <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">{title}</h3>
         <p className="text-sm text-slate-600 dark:text-gray-300 mb-5 flex-1">{subtitle}</p>
-        <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#0B4A52] dark:text-[#10B981] border border-slate-200 dark:border-[rgba(255,255,255,0.15)] rounded-full px-4 py-2 transition-all duration-300 group-hover:border-[#10B981] dark:group-hover:border-[#10B981]/40">
+        <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#0B4A52] dark:text-primary-on-dark border border-slate-200 dark:border-[rgba(255,255,255,0.15)] rounded-full px-4 py-2 transition-all duration-300 group-hover:border-[#018891] dark:group-hover:border-[#018891]/40">
           Scopri i dettagli
           <i className="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1" style={{ fontSize: '9px' }}></i>
         </span>
@@ -113,24 +113,24 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
             <button
               onClick={() => setShowModal(false)}
               aria-label="Chiudi finestra"
-              className="absolute top-4 right-4 text-slate-600 dark:text-gray-400 hover:text-primary dark:hover:text-[#10B981] transition-colors text-xl bg-transparent border-none cursor-pointer"
+              className="absolute top-4 right-4 text-slate-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-on-dark transition-colors text-xl bg-transparent border-none cursor-pointer"
             >
               <i className="fas fa-times"></i>
             </button>
 
-            <div className="w-20 h-20 bg-[#008C95]/10 dark:bg-[#10B981]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl text-[#006066] dark:text-[#10B981]">
+            <div className="w-20 h-20 bg-[#018891]/10 dark:bg-[#018891]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl text-[#006066] dark:text-primary-on-dark">
               <i className={icon}></i>
             </div>
 
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-1">{title}</h3>
-            <p className="text-primary-text dark:text-[#10B981] font-semibold text-center mb-6">{subtitle}</p>
+            <p className="text-primary-text dark:text-primary-on-dark font-semibold text-center mb-6">{subtitle}</p>
             <p className="text-slate-600 dark:text-gray-300 leading-relaxed mb-6 text-sm">{description}</p>
 
             {benefits && benefits.length > 0 && (
               <div className="bg-slate-50 dark:bg-gray-700 rounded-xl p-4 mb-6 space-y-2">
                 {benefits.map((benefit, i) => (
                   <p key={i} className="text-slate-700 dark:text-gray-300 text-sm flex items-start gap-2">
-                    <i className="fas fa-check-circle text-primary dark:text-[#10B981] mt-0.5 flex-shrink-0"></i>
+                    <i className="fas fa-check-circle text-primary dark:text-primary-on-dark mt-0.5 flex-shrink-0"></i>
                     {benefit}
                   </p>
                 ))}
@@ -156,7 +156,7 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full h-[44px] bg-white dark:bg-transparent border border-primary dark:border-[#10B981] text-primary dark:text-[#10B981] hover:bg-[#008C95]/10 dark:hover:bg-[#10B981]/10 font-semibold rounded-full transition-all duration-200 text-sm no-underline"
+                    className="flex items-center justify-center gap-3 w-full h-[44px] bg-white dark:bg-transparent border border-primary dark:border-primary-on-dark text-primary dark:text-primary-on-dark hover:bg-[#018891]/10 dark:hover:bg-primary-on-dark/10 font-semibold rounded-full transition-all duration-200 text-sm no-underline"
                   >
                     <i className="fas fa-file-pdf"></i> {link.label}
                   </a>
@@ -266,7 +266,7 @@ export default function ChiSiamo() {
           <div className="page-hero-actions flex-col sm:flex-row items-center">
             <a
               href="#cosa-facciamo"
-              className="inline-flex items-center justify-center h-[44px] bg-primary hover:bg-[#10B981] text-white font-bold px-6 rounded-full text-sm transition-all"
+              className="inline-flex items-center justify-center h-[44px] bg-primary hover:bg-[#006B73] text-white font-bold px-6 rounded-full text-sm transition-all"
             >
               Scopri cosa facciamo
             </a>
@@ -289,7 +289,7 @@ export default function ChiSiamo() {
             occupava solo 640px lasciando vuota metà della riga. Stesso py-20/px del resto della pagina. */}
         <div className="py-20 px-6 sm:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-x-12 gap-y-10 items-start">
           <div style={{ maxWidth: '640px' }}>
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
               La nostra storia
             </span>
             <h2 id="storia-heading" className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -308,13 +308,13 @@ export default function ChiSiamo() {
                 <div className="flex gap-5" style={{ paddingBottom: i === arr.length - 1 ? 0 : '1.75rem' }}>
                   <div className="flex flex-col items-center" style={{ width: '3.5rem', flexShrink: 0 }}>
                     {/* Cerchio con bordo brand e testo scuro: prima testo bianco su #008C95 (3.9:1) e su
-                        #10B981 in dark (2.5:1), sotto WCAG AA 4.5:1. Ora #006B73 su bianco 6.4:1 e
-                        #10B981 su #161C1A 7:1; il turchese brand resta invariato nel bordo. */}
-                    <span className="flex items-center justify-center rounded-full bg-white dark:bg-dark-bg border-2 border-[#008C95] dark:border-[#10B981] text-[#006B73] dark:text-[#10B981] font-bold" style={{ width: '3.5rem', height: '3.5rem', fontSize: '0.8rem' }}>
+                        #018891 in dark (2.5:1), sotto WCAG AA 4.5:1. Ora #006B73 su bianco 6.4:1 e
+                        #018891 su #161C1A 7:1; il turchese brand resta invariato nel bordo. */}
+                    <span className="flex items-center justify-center rounded-full bg-white dark:bg-dark-bg border-2 border-[#018891] dark:border-primary-on-dark text-[#04767D] dark:text-primary-on-dark font-bold" style={{ width: '3.5rem', height: '3.5rem', fontSize: '0.8rem' }}>
                       {step.anno}
                     </span>
                     {i < arr.length - 1 && (
-                      <span className="bg-[#008C95]/40 dark:bg-[#10B981]/40" style={{ width: '2px', flex: 1, marginTop: '0.4rem' }} />
+                      <span className="bg-[#018891]/40 dark:bg-[#018891]/40" style={{ width: '2px', flex: 1, marginTop: '0.4rem' }} />
                     )}
                   </div>
                   <div style={{ paddingTop: '0.5rem' }}>
@@ -330,11 +330,11 @@ export default function ChiSiamo() {
 
       {/* SEZIONE PRINCIPALE */}
       <section id="cosa-facciamo" className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-[#10B981] mb-2">
+        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-primary-on-dark mb-2">
           Ciò che guida ogni nostro progetto
         </span>
         <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-10">
-          Formazione che genera <span className="text-primary dark:text-[#10B981]">impatto</span>
+          Formazione che genera <span className="text-primary dark:text-primary-on-dark">impatto</span>
         </h2>
 
         {/* Tab Missione / Visione / Valori: un solo blocco alla volta. Il testo sta direttamente sullo
@@ -362,7 +362,7 @@ export default function ChiSiamo() {
                 }}
                 className={`-mb-0.5 px-5 py-2.5 text-sm whitespace-nowrap bg-transparent border-0 border-b-[3px] cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-[#008C95] ${
                   isActive
-                    ? 'font-bold border-[#008C95] dark:border-[#10B981] text-primary-text dark:text-[#10B981]'
+                    ? 'font-bold border-[#018891] dark:border-primary-on-dark text-primary-text dark:text-primary-on-dark'
                     : 'font-semibold border-transparent text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
@@ -376,7 +376,7 @@ export default function ChiSiamo() {
           {activeData && (
             <div key={activeTab} className="animate-fadeIn">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{activeData.titolo}</h3>
-              <p className="text-primary-text dark:text-[#10B981] font-medium mb-4 text-sm">{activeData.sottotitolo}</p>
+              <p className="text-primary-text dark:text-primary-on-dark font-medium mb-4 text-sm">{activeData.sottotitolo}</p>
               <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-base m-0">{activeData.punti[0].desc}</p>
             </div>
           )}
@@ -386,7 +386,7 @@ export default function ChiSiamo() {
       {/* I NOSTRI PUNTI DI FORZA */}
       <section className="bg-slate-50 dark:bg-dark-bg py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-12">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
             Perché scegliere Alètheia
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -432,7 +432,7 @@ export default function ChiSiamo() {
                 className={`${card.span} ${card.borders} border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.1)] flex items-start justify-start text-left p-8`}
               >
                 <h3
-                  className={`text-[#006066] dark:text-[#10B981] normal-case tracking-normal leading-snug ${
+                  className={`text-[#006066] dark:text-primary-on-dark normal-case tracking-normal leading-snug ${
                     card.big ? '!font-bold !text-2xl' : '!font-semibold !text-lg'
                   }`}
                 >
@@ -448,7 +448,7 @@ export default function ChiSiamo() {
       <section className="bg-light dark:bg-dark-bg">
         <div className="max-w-7xl mx-auto py-20 px-6 sm:px-12">
           <div className="mb-16">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
               Le nostre Expertise
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight uppercase">
@@ -458,12 +458,12 @@ export default function ChiSiamo() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
             {[
-              { n: '01', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Sicurezza sul lavoro', desc: 'Oltre 5.000 lavoratori formati. Corsi conformi al D.Lgs. 81/08 per aziende e PA.' },
-              { n: '02', accent: 'text-[#10B981]/30 dark:text-[#008C95]/20', titolo: 'Agricoltura e agroalimentare', desc: "Vantiamo una specifica esperienza nel settore agricolo e agroalimentare. Percorsi PSR, FEAMP, fitosanitario, conduzione d'impresa agricola, innovazione in agricoltura." },
-              { n: '03', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Formazione finanziata', desc: "FSE+, Fondi Interprofessionali, Fondo Nuove Competenze, POC Sicilia. Gestione completa: dall'analisi dei fabbisogni alla rendicontazione." },
-              { n: '04', accent: 'text-[#10B981]/30 dark:text-[#008C95]/20', titolo: 'Sanità e welfare', desc: 'Percorsi per operatori socio-sanitari, assistenti familiari e operatori socio-assistenziali.' },
-              { n: '05', accent: 'text-[#008C95]/30 dark:text-[#10B981]/20', titolo: 'Competenze digitali', desc: 'Certificazioni ICDL e percorsi AICA per scuola, imprese e pubblica amministrazione.' },
-              { n: '06', accent: 'text-[#10B981]/30 dark:text-[#008C95]/20', titolo: 'Pubblica Amministrazione', desc: 'Percorsi su misura per enti locali, assessorati e operatori del settore pubblico. Formazione che rispetta i tempi e le esigenze della PA.' },
+              { n: '01', accent: 'text-[#018891]/30 dark:text-primary-on-dark/20', titolo: 'Sicurezza sul lavoro', desc: 'Oltre 5.000 lavoratori formati. Corsi conformi al D.Lgs. 81/08 per aziende e PA.' },
+              { n: '02', accent: 'text-[#018891]/30 dark:text-[#018891]/20', titolo: 'Agricoltura e agroalimentare', desc: "Vantiamo una specifica esperienza nel settore agricolo e agroalimentare. Percorsi PSR, FEAMP, fitosanitario, conduzione d'impresa agricola, innovazione in agricoltura." },
+              { n: '03', accent: 'text-[#018891]/30 dark:text-primary-on-dark/20', titolo: 'Formazione finanziata', desc: "FSE+, Fondi Interprofessionali, Fondo Nuove Competenze, POC Sicilia. Gestione completa: dall'analisi dei fabbisogni alla rendicontazione." },
+              { n: '04', accent: 'text-[#018891]/30 dark:text-[#018891]/20', titolo: 'Sanità e welfare', desc: 'Percorsi per operatori socio-sanitari, assistenti familiari e operatori socio-assistenziali.' },
+              { n: '05', accent: 'text-[#018891]/30 dark:text-primary-on-dark/20', titolo: 'Competenze digitali', desc: 'Certificazioni ICDL e percorsi AICA per scuola, imprese e pubblica amministrazione.' },
+              { n: '06', accent: 'text-[#018891]/30 dark:text-[#018891]/20', titolo: 'Pubblica Amministrazione', desc: 'Percorsi su misura per enti locali, assessorati e operatori del settore pubblico. Formazione che rispetta i tempi e le esigenze della PA.' },
             ].map((s, i) => (
               <Reveal key={s.n} delay={(i % 3) * 90}>
                 <div>
@@ -482,7 +482,7 @@ export default function ChiSiamo() {
       <section id="certificazioni" className="bg-slate-50 dark:bg-dark-bg" style={{ scrollMarginTop: '80px' }}>
         <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
           <div className="text-left mb-12">
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-[#10B981] mb-2">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-primary-on-dark mb-2">
               Certificazioni e accreditamenti
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
@@ -553,7 +553,7 @@ export default function ChiSiamo() {
           {/* Accreditamenti istituzionali */}
           <div className="mt-16 pt-12 border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
             <div className="text-left mb-10">
-              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-[#10B981] mb-2">
+              <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-primary-on-dark mb-2">
                 Accreditamenti
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -612,7 +612,7 @@ export default function ChiSiamo() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch py-20 px-6 sm:px-12 max-w-7xl mx-auto">
           {/* Colonna sede */}
           <Reveal>
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-4">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
               La nostra sede
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
@@ -626,7 +626,7 @@ export default function ChiSiamo() {
 
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <svg className="text-primary dark:text-[#10B981] shrink-0 w-5 h-5 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="text-primary dark:text-primary-on-dark shrink-0 w-5 h-5 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
@@ -636,14 +636,14 @@ export default function ChiSiamo() {
                     href="https://www.google.com/maps/search/?api=1&query=Via+del+Carrubo+Vittoria+RG"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary hover:text-[#006B73] dark:text-[#10B981] dark:hover:text-[#059669] text-xs font-bold transition-colors block mt-0.5 cursor-pointer"
+                    className="text-primary hover:text-[#04767D] dark:text-primary-on-dark dark:hover:text-[#99D1D5] text-xs font-bold transition-colors block mt-0.5 cursor-pointer"
                   >
                     Vedi su Google Maps →
                   </a>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <svg className="text-primary dark:text-[#10B981] shrink-0 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="text-primary dark:text-primary-on-dark shrink-0 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 6v6l4 2" />
                 </svg>
@@ -663,7 +663,7 @@ export default function ChiSiamo() {
             </p>
             <a
               href="/contatti"
-              className="inline-flex items-center justify-center text-center h-[52px] bg-primary hover:bg-[#10B981] text-white font-extrabold px-8 rounded-full text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
+              className="inline-flex items-center justify-center text-center h-[52px] bg-primary hover:bg-[#006B73] text-white font-extrabold px-8 rounded-full text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#018891]/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
             >
               Richiedi consulenza gratuita
             </a>

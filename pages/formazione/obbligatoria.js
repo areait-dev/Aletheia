@@ -146,10 +146,11 @@ function AreaCard({ badge, icon, title, text, cta, href, image, imageAlt }) {
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.3) 100%)' }} />
 
       <div style={{ position: 'relative', zIndex: 1, padding: '1.6rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, justifyContent: 'flex-start' }}>
-        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16,185,129,0.18)', border: '1px solid rgba(16,185,129,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(1,136,145,0.18)', border: '1px solid rgba(1,136,145,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <i className={icon} style={{ fontSize: '1.05rem', color: '#6EE7B7' }}></i>
         </div>
-        <span style={{ fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.07em', textTransform: 'uppercase', color: '#6EE7B7', width: 'fit-content' }}>
+        <span className="badge-overlay">
+          <span className="badge-overlay-dot" aria-hidden="true" />
           {badge}
         </span>
         <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, lineHeight: 1.3, color: '#fff' }}>{title}</h3>
@@ -235,7 +236,7 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '1.5rem' }}>
           <div style={{ width: '40px', height: '40px', minWidth: '40px', borderRadius: '11px', background: 'rgba(0,140,149,0.15)', border: '1px solid rgba(0,140,149,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <i className="fas fa-calendar-days" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1rem' }}></i>
+            <i className="fas fa-calendar-days" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontSize: '1rem' }}></i>
           </div>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: isDark ? '#fff' : '#0F172A', margin: 0, lineHeight: 1.3 }}>
             Corsi in partenza
@@ -320,7 +321,7 @@ function FormField({ label, required, children, isDark }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <label style={{ fontSize: '0.85rem', fontWeight: 700, color: isDark ? 'rgba(255,255,255,0.75)' : '#334155', letterSpacing: '0.02em' }}>
-        {label}{required && <span style={{ color: '#10B981', marginLeft: '2px' }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
     </div>
@@ -351,7 +352,7 @@ function ConsulenzaForm({ isDark }) {
   const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
   const setCheck = (e) => setFields((p) => ({ ...p, privacy: e.target.checked }));
   const inputStyle = getInputStyle(isDark);
-  const groupLabelColor = isDark ? 'rgba(110,231,183,0.8)' : '#008C95';
+  const groupLabelColor = isDark ? 'rgba(95,194,200,0.8)' : '#008C95';
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -458,7 +459,7 @@ function ConsulenzaForm({ isDark }) {
         />
         <label htmlFor="obb-privacy" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer', color: isDark ? 'rgba(255,255,255,0.65)' : '#475569' }}>
           Ho letto e accetto la{' '}
-          <a href="/privacy-cookie" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
+          <a href="/privacy-cookie" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
           {' '}e acconsento al trattamento dei dati ai sensi del GDPR. <span style={{ color: '#008C95' }}>*</span>
         </label>
       </div>
@@ -522,26 +523,6 @@ export default function FormazioneObbligatoria() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .cta-btn-primary {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
-          white-space: nowrap;
-          background: #008C95; color: #fff;
-          font-weight: 700; font-size: 0.95rem; text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none; cursor: pointer; font-family: inherit;
-        }
-        .cta-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
-        .cta-btn-outline {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); background: transparent;
-          white-space: nowrap;
-          color: rgba(255,255,255,0.85); font-weight: 700; font-size: 0.95rem; text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22); transition: all 0.2s ease;
-          font-family: inherit; cursor: pointer;
-        }
-        .cta-btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
         .aree-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
         @media (max-width: 1100px) { .aree-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -643,8 +624,8 @@ export default function FormazioneObbligatoria() {
           height: 56px;
           min-width: 56px;
           border-radius: 12px;
-          background: rgba(110, 231, 183, 0.15);
-          border: 1px solid rgba(110, 231, 183, 0.3);
+          background: rgba(95,194,200, 0.15);
+          border: 1px solid rgba(95,194,200, 0.3);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -859,7 +840,7 @@ export default function FormazioneObbligatoria() {
           font-weight: 700;
           padding: 0.2rem 0.5rem;
           border-radius: 999px;
-          background: rgba(16,185,129,0.92);
+          background: rgba(1,136,145,0.92);
           color: #fff;
           backdrop-filter: blur(2px);
         }
@@ -914,8 +895,8 @@ export default function FormazioneObbligatoria() {
           </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#corsi" className="cta-btn-primary">Scopri i corsi</a>
-            <a href="#form-contatto" className="cta-btn-outline">Contattaci</a>
+            <a href="#corsi" className="btn btn-lg btn-light">Scopri i corsi</a>
+            <a href="#form-contatto" className="btn btn-lg btn-ghost-light">Contattaci</a>
           </div>
         </div>
       </section>
@@ -1096,7 +1077,7 @@ export default function FormazioneObbligatoria() {
               <div className="colonna-destra-form-inner">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
                   <div style={{ width: '52px', height: '52px', minWidth: '52px', borderRadius: '14px', background: 'rgba(0,140,149,0.15)', border: '1px solid rgba(0,140,149,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-calendar-check" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.3rem' }}></i>
+                    <i className="fas fa-calendar-check" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontSize: '1.3rem' }}></i>
                   </div>
                   <div>
                     <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: isDark ? '#fff' : '#0F172A', margin: 0, lineHeight: 1.3 }}>

@@ -319,7 +319,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
                       {group.title}
                     </a>
                     <button
-                      className="sub-dropdown-toggle-icon text-[#008C95] dark:text-[#10B981]"
+                      className="sub-dropdown-toggle-icon text-[#018891] dark:text-primary-on-dark"
                       onClick={() => toggleSubDropdown(group.key)}
                       aria-label={`Espandi sottomenu ${group.title}`}
                       aria-expanded={!!subDropdowns[group.key]}
@@ -347,7 +347,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
               <a
                 href="/all-courses"
                 onClick={() => setFormazioneOpen(false)}
-                className="text-[#008C95] dark:text-[#10B981]"
+                className="text-[#018891] dark:text-primary-on-dark"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.85rem', fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none' }}
               >
                 Scopri tutti i corsi <span aria-hidden="true">→</span>

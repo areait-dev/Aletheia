@@ -52,7 +52,7 @@ export default function Avviso202024Fse() {
             <span aria-hidden="true">›</span>
             <span style={{ color: '#6EE7B7' }}>Avviso 20/2024 FSE+</span>
           </nav>
-          <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6EE7B7', background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)', padding: '0.35rem 0.9rem', borderRadius: '999px', marginBottom: '1.25rem' }}>
+          <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', background: 'rgba(1,136,145,0.12)', border: '1px solid rgba(1,136,145,0.25)', padding: '0.35rem 0.9rem', borderRadius: '999px', marginBottom: '1.25rem' }}>
             Assistente Familiare
           </span>
           <h1 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.75rem)', fontWeight: 900, color: '#fff', lineHeight: 1.2, marginBottom: '1rem', maxWidth: '820px' }}>
@@ -83,7 +83,7 @@ export default function Avviso202024Fse() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {REQUISITI.map((r) => (
                 <li key={r} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                  <i className="fas fa-check-circle" style={{ color: '#10B981', marginTop: '0.2rem', flexShrink: 0 }}></i>
+                  <i className="fas fa-check-circle" style={{ color: '#018891', marginTop: '0.2rem', flexShrink: 0 }}></i>
                   <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.92rem', lineHeight: 1.6 }}>{r}</span>
                 </li>
               ))}

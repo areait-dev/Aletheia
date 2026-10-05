@@ -8,14 +8,17 @@
   --primary: #008C95;        /* Green 400 — primario brand */
   --primary-dark: #004D52;   /* Green 600 — primario scuro */
   --primary-hover: #004D52;  /* hover = primary dark */
-  --secondary: #10B981;
+  --secondary: #10B981; /* accento verde su hero scure (h1 span): invariato come in origine */
 
   /* Testo brand LEGGIBILE (WCAG AA 4.5:1). #008C95 resta fisso per bottoni, icone e bordi, ma come
      testo normale fa solo 4,05:1 su #FFFFFF e 3,62:1 su #F2F2F2 (bg-light).
-     #006B73: 6,27:1 su bianco, 5,60:1 su #F2F2F2. Uso: SOLO testo piccolo su sfondo chiaro. */
-  --primary-text-on-light: #006B73;
-  /* Come sopra ma segue il tema: per stili inline senza variante dark (#10B981 su #161C1A: 7:1) */
-  --primary-text: #006B73;
+     #04767D: 5,38:1 su bianco, 4,81:1 su #F2F2F2. Uso: SOLO testo piccolo su sfondo chiaro. */
+  --primary-text-on-light: #04767D;
+  /* Tint teal per TESTO su sfondo scuro (hero, banner, dark mode). Derivato dalla scala DS tra green-300 e green-200:
+     #5FC2C8 = 4,6:1 su #004d52 (dark-card), 8,2:1 su #161C1A (dark-bg), 8,6:1 su #0F172A. Sostituisce lo smeraldo #008C95 / menta #5FC2C8 */
+  --primary-on-dark: #5FC2C8;
+  /* Come sopra ma segue il tema: per stili inline senza variante dark */
+  --primary-text: #04767D;
 
   /* Testo muted per stili inline/CSS (equivale al token Tailwind text-gray-500 / dark:text-gray-400):
      #6B7280 = 4,83:1 su bianco (WCAG AA). Il vecchio #94A3B8 faceva 2,45:1. */
@@ -74,7 +77,7 @@
 
 html.dark {
   color-scheme: dark;
-  --primary-text: #10B981;
+  --primary-text: #5FC2C8; /* = --primary-on-dark */
   --muted-text: #9CA3AF; /* 6,99:1 su #111827 */
 }
 
@@ -256,6 +259,41 @@ html.dark .btn-outline {
 }
 html.dark .btn-outline:hover {
   background: rgba(255,255,255,0.08);
+}
+
+/* ── Varianti per sfondi SCURI (hero, banner CTA, card su foto) ──
+   Su fondo scuro il primario è bianco con testo scuro: testo #0F172A su
+   #fff ≈ 17:1 (WCAG AA/AAA); hover teal brand #008C95 con testo bianco = 4,05:1
+   (sullo smeraldo #008C95 mai testo bianco, qui si usa il teal). Secondario: contorno bianco, bordo ≥3:1.
+   Su sfondo CHIARO usare .btn-primary / .btn-outline. ── */
+.btn-light {
+  background: #fff;
+  color: #0F172A;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.btn-light:hover {
+  background: #018891; /* verde Alètheia, invariato in light e dark */
+  color: #fff;         /* bianco su #018891 = 4,26:1: ok solo per testo bold grande; per AA pieno usare #04767D (5,38:1) */
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(1, 136, 145, 0.4);
+}
+.btn-ghost-light {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.4); /* ≥3:1 per il bordo del controllo */
+}
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+.btn-light:focus-visible,
+.btn-ghost-light:focus-visible { outline: 3px solid #5FC2C8; outline-offset: 3px; }
+/* Freccia opzionale che scorre in hover (<i class="fas fa-arrow-right btn-arrow">) */
+.btn-arrow { font-size: 0.8rem; transition: transform 0.25s ease; }
+.btn:hover .btn-arrow { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) {
+  .btn-arrow { transition: none; }
+  .btn-light:hover { transform: none; }
 }
 
 ::selection {
@@ -574,12 +612,12 @@ html.dark .site-header.scrolled .header-phone {
 }
 
 html.dark .cta-nav-btn-outline {
-  color: #6EE7B7;
-  border-color: rgba(110, 231, 183, 0.45);
+  color: #5FC2C8;
+  border-color: rgba(95,194,200, 0.45);
 }
 
 html.dark .cta-nav-btn-outline:hover {
-  background: #6EE7B7;
+  background: #5FC2C8;
   color: #0F172A;
 }
 
@@ -941,7 +979,7 @@ html.dark .cta-dropdown-item:hover {
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6EE7B7; /* WCAG AA: 10:1 su #0F172A */
+  color: #fff; /* eyebrow su fondo scuro: bianco, 17:1 su #0F172A */
   background: rgba(16,185,129,0.12);
   border: 1px solid rgba(16,185,129,0.25);
   padding: 0.35rem 0.9rem;
@@ -955,11 +993,11 @@ html.dark .cta-dropdown-item:hover {
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--primary-text-on-light); /* WCAG AA: 6,27:1 su bianco (#008C95 faceva 4,05:1) */
+  color: var(--primary-text-on-light); /* WCAG AA: 5,38:1 su bianco (#008C95 faceva 4,05:1) */
   margin-bottom: 0.6rem;
 }
 html.dark .section-badge {
-  color: #6EE7B7; /* WCAG AA su #111827 */
+  color: #5FC2C8; /* WCAG AA su #111827 */
 }
 
 .badge-overlay {
@@ -979,7 +1017,7 @@ html.dark .section-badge {
   background: rgba(255,255,255,0.95);
 }
 /* Pallino del colore semantico (Gratuito, Obbligatorio, ...): sostituisce il testo colorato,
-   che con #10B981 su bianco non raggiungeva 4.5:1 */
+   che con #018891 su bianco non raggiungeva 4.5:1 */
 .badge-overlay-dot {
   width: 0.45rem;
   height: 0.45rem;
@@ -990,7 +1028,7 @@ html.dark .section-badge {
 
 /* Stato / tipologia a tinta piena (news "In evidenza", tipo contratto delle offerte di lavoro).
    Colori per singolo valore via --badge-bg / --badge-fg (default bianco su #008C95).
-   Su sfondi chiari come #10B981 il testo deve essere scuro (#0F172A 7:1; il bianco farebbe 2,54:1). */
+   Su sfondi chiari come #018891 il testo deve essere scuro (#0F172A 7:1; il bianco farebbe 2,54:1). */
 .badge-solid {
   display: inline-flex;
   align-items: center;
@@ -1016,12 +1054,12 @@ html.dark .section-badge {
   white-space: nowrap;
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
-  color: #006B73; /* WCAG AA su bianco (6.4:1) */
+  color: #04767D; /* WCAG AA su bianco (6.4:1) */
   background: rgba(0,140,149,0.1);
 }
 html.dark .badge-chip {
-  color: #10B981;
-  background: rgba(16,185,129,0.1);
+  color: #5FC2C8;
+  background: rgba(1,136,145,0.1);
 }
 
 /* ===== HERO DECORATIONS ===== */
@@ -1634,7 +1672,7 @@ html.dark .search-categories label {
 }
 
 .search-categories label:hover {
-  color: #006B73; /* WCAG AA: 5.2:1 contrast on light background */
+  color: #04767D; /* WCAG AA: 5.2:1 contrast on light background */
 }
 
 html.dark .search-categories label:hover {
@@ -2029,7 +2067,7 @@ html.dark .category-card p {
 .category-count {
   display: inline-block;
   background: #E0F7F6; /* WCAG AA: Light teal background for better contrast */
-  color: #006B73; /* WCAG AA: Dark teal text (6.5:1 contrast) */
+  color: #04767D; /* WCAG AA: Dark teal text (6.5:1 contrast) */
   padding: 0.4rem 1rem;
   border-radius: var(--btn-radius);
   font-size: 0.8rem;
@@ -2598,17 +2636,17 @@ html.dark .elearning p {
     color: var(--white);
   }
 
-  /* Hover/focus/active nel colore brand: #6EE7B7 (già usato per "Calendario Corsi"
+  /* Hover/focus/active nel colore brand: #5FC2C8 (già usato per "Calendario Corsi"
      nel pannello Formazione qui sotto) invece del teal pieno #008C95, che contro
      questo sfondo scuro (navy → teal → verde scuro) ha un contrasto troppo basso. */
   .navbar a:hover,
   .navbar a:focus-visible,
   .navbar a.active {
-    color: #6EE7B7;
+    color: #5FC2C8;
   }
 
   .navbar a::after {
-    background: #6EE7B7;
+    background: #5FC2C8;
     bottom: -4px;
   }
 
@@ -2688,7 +2726,7 @@ html.dark .elearning p {
 
   .navbar-formazione-group > a:hover,
   .navbar-formazione-group > a:focus-visible {
-    color: #6EE7B7;
+    color: #5FC2C8;
   }
 
   .navbar-formazione-sublinks {
@@ -2708,7 +2746,7 @@ html.dark .elearning p {
   .navbar-formazione-sublinks a:hover,
   .navbar-formazione-sublinks a:focus-visible,
   .navbar-formazione-sublinks a:active {
-    color: #6EE7B7;
+    color: #5FC2C8;
   }
 
   .navbar-mobile-cta {
@@ -2738,7 +2776,7 @@ html.dark .elearning p {
     gap: 0.5rem;
     font-size: 0.92rem;
     font-weight: 700;
-    color: #6EE7B7;
+    color: #5FC2C8;
     text-decoration: none;
     padding-top: 0.5rem;
     border-top: 1px solid rgba(255,255,255,0.12);
@@ -2759,7 +2797,7 @@ html.dark .elearning p {
   .navbar-open a:hover,
   .navbar-open a:focus-visible,
   .navbar-open a.active {
-    color: #6EE7B7 !important;
+    color: #5FC2C8 !important;
   }
   .navbar-open .navbar-formazione-sublinks a {
     color: rgba(255,255,255,0.65) !important;
@@ -2767,10 +2805,10 @@ html.dark .elearning p {
   .navbar-open .navbar-formazione-sublinks a:hover,
   .navbar-open .navbar-formazione-sublinks a:focus-visible,
   .navbar-open .navbar-formazione-sublinks a:active {
-    color: #6EE7B7 !important;
+    color: #5FC2C8 !important;
   }
   .navbar-open .navbar-formazione-calendar {
-    color: #6EE7B7 !important;
+    color: #5FC2C8 !important;
   }
 
   /* .site-header--solid .navbar a (0,2,1) batte .navbar-open a (0,1,1) anche con
@@ -2783,7 +2821,7 @@ html.dark .elearning p {
   .site-header--solid.mobile-nav-open .navbar a:hover,
   .site-header--solid.mobile-nav-open .navbar a:focus-visible,
   .site-header--solid.mobile-nav-open .navbar a.active {
-    color: #6EE7B7 !important;
+    color: #5FC2C8 !important;
   }
   .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a {
     color: rgba(255,255,255,0.65) !important;
@@ -2791,10 +2829,10 @@ html.dark .elearning p {
   .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a:hover,
   .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a:focus-visible,
   .site-header--solid.mobile-nav-open .navbar-formazione-sublinks a:active {
-    color: #6EE7B7 !important;
+    color: #5FC2C8 !important;
   }
   .site-header--solid.mobile-nav-open .navbar-formazione-calendar {
-    color: #6EE7B7 !important;
+    color: #5FC2C8 !important;
   }
 
   .header-right {
@@ -2939,7 +2977,7 @@ html.dark .mega-col-info p {
 }
 
 .mega-calendar-btn:hover {
-  background-color: #006B73;
+  background-color: #04767D;
 }
 
 /* Colonne sottomenu */
@@ -2985,7 +3023,7 @@ html.dark .sub-dropdown-toggle {
 }
 
 .sub-dropdown-toggle:hover {
-  color: #006B73 !important; /* WCAG AA: 5.2:1 on light bg */
+  color: #04767D !important; /* WCAG AA: 5.2:1 on light bg */
   background-color: rgba(0, 140, 149, 0.08);
 }
 
@@ -3037,7 +3075,7 @@ html.dark .sub-dropdown-menu a {
 }
 
 .sub-dropdown-menu a:hover {
-  color: #006B73 !important; /* WCAG AA: 5.2:1 on light background */
+  color: #04767D !important; /* WCAG AA: 5.2:1 on light background */
   background-color: rgba(0, 140, 149, 0.08);
 }
 
@@ -3065,4 +3103,69 @@ html.dark .sub-dropdown-menu a:hover {
 }
 @media (min-width: 640px) and (max-width: 1024px) {
   .courses-cat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ── CTA finale di pagina (.cta-final) ─────────────────────────
+   Sezione scura fissa in light e dark (come hero e altre sezioni scure).
+   Contrasti misurati: testo #fff su #0F172A ≈ 17:1; eyebrow #5FC2C8 su
+   #0F172A ≈ 12:1; bottone primario #0F172A su #fff ≈ 17:1, in hover teal
+   #018891 con testo bianco = 4,26:1 (vedi .btn-light). ── */
+.cta-final {
+  position: relative;
+  overflow: hidden;
+  padding: 5.5rem 0;
+  background: var(--cta-final-bg, linear-gradient(135deg, #0F172A 0%, #134E4A 100%)); /* personalizzabile via prop `background` */
+  border-top: 1px solid rgba(95,194,200, 0.18); /* filo accento, decorativo */
+}
+.cta-final-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cta-final-glow--a {
+  top: -120px; right: -100px; width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(0, 140, 149, 0.28) 0%, transparent 70%); /* decorativo */
+}
+.cta-final-glow--b {
+  bottom: -100px; left: -80px; width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 70%); /* decorativo */
+}
+.cta-final .container { position: relative; z-index: 1; }
+.cta-final-inner { text-align: center; max-width: 820px; margin: 0 auto; }
+.cta-final-eyebrow {
+  display: inline-block;
+  margin-bottom: 1.1rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--btn-radius);
+  border: 1px solid rgba(110,231,183, 0.35);
+  background: rgba(16,185,129, 0.1);
+  color: #fff; /* eyebrow su fondo scuro: bianco, ≈17:1 su #0F172A */
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cta-final-title {
+  margin: 0 0 1rem;
+  color: #fff;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.2;
+}
+.cta-final-text {
+  max-width: 720px;
+  margin: 0 auto 2.25rem;
+  color: rgba(255, 255, 255, 0.78); /* ≥ 9:1 su #0F172A */
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.cta-final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+@media (max-width: 640px) {
+  .cta-final { padding: 4rem 0; }
+  .cta-final-actions .btn { width: 100%; }
 }

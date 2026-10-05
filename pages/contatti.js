@@ -354,7 +354,7 @@ export default function Contatti() {
         <div className="container">
           {/* Titolo FUORI dal flex container */}
           <div style={{ marginBottom: '2rem' }}>
-            <span className="text-primary-text dark:text-[#10B981]" style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+            <span className="text-primary-text dark:text-primary-on-dark" style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
               Dove siamo
             </span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 900, margin: '0 0 0.5rem', lineHeight: 1.25 }}>
@@ -373,11 +373,11 @@ export default function Contatti() {
               {/* Info cards: telefono, email, orari */}
               {INFO_ITEMS.map((item, i) => (
                 <div key={i} className="info-card bg-white dark:bg-[#1c2423] border border-slate-200 dark:border-[#2a3433]">
-                  <div className="bg-[#008C95]/10 dark:bg-[#10B981]/10" style={{
+                  <div className="bg-[#018891]/10 dark:bg-[#018891]/10" style={{
                     width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
-                    <i className={`${item.icon} text-[#008C95] dark:text-[#10B981]`} style={{ fontSize: '1rem' }}></i>
+                    <i className={`${item.icon} text-[#018891] dark:text-primary-on-dark`} style={{ fontSize: '1rem' }}></i>
                   </div>
                   <div>
                     <p className="text-slate-600 dark:text-gray-500" style={{ margin: '0 0 0.2rem', fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
@@ -387,7 +387,7 @@ export default function Contatti() {
                       {item.value}
                     </p>
                     {item.href && (
-                      <a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="text-[#008C95] dark:text-[#10B981] hover:text-[#006B73] dark:hover:text-[#059669]" style={{ fontSize: '0.78rem', fontWeight: 700, textDecoration: 'none', marginTop: '0.2rem', display: 'inline-block' }}>
+                      <a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="text-[#018891] dark:text-primary-on-dark hover:text-[#04767D] dark:hover:text-[#99D1D5]" style={{ fontSize: '0.78rem', fontWeight: 700, textDecoration: 'none', marginTop: '0.2rem', display: 'inline-block' }}>
                         {item.linkLabel} →
                       </a>
                     )}
@@ -405,7 +405,7 @@ export default function Contatti() {
                     <button
                       key={sede.città}
                       onClick={() => setActiveSede(i)}
-                      className={`sede-card ${activeSede === i ? 'active bg-[#008C95]/8 dark:bg-[#10B981]/10 border-[#008C95] dark:border-[#10B981]' : 'bg-white dark:bg-[#1c2423] border-slate-200 dark:border-[#2a3433] hover:border-[#008C95]/50 dark:hover:border-[#10B981]/50'}`}
+                      className={`sede-card ${activeSede === i ? 'active bg-[#018891]/8 dark:bg-[#018891]/10 border-[#018891] dark:border-primary-on-dark' : 'bg-white dark:bg-[#1c2423] border-slate-200 dark:border-[#2a3433] hover:border-[#018891]/50 dark:hover:border-primary-on-dark/50'}`}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
                         <i
@@ -413,7 +413,7 @@ export default function Contatti() {
                           style={{ fontSize: '0.8rem', color: activeSede === i ? '#008C95' : '#94a3b8', flexShrink: 0, transition: 'color 0.2s' }}
                         ></i>
                         <span
-                          className={activeSede === i ? 'text-[#008C95] dark:text-[#10B981]' : 'text-slate-900 dark:text-white'}
+                          className={activeSede === i ? 'text-[#018891] dark:text-primary-on-dark' : 'text-slate-900 dark:text-white'}
                           style={{ fontWeight: 800, fontSize: '0.88rem', transition: 'color 0.2s' }}
                         >
                           {sede.città}
@@ -428,7 +428,7 @@ export default function Contatti() {
                           target="_blank"
                           rel="noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="text-[#008C95] dark:text-[#10B981]"
+                          className="text-[#018891] dark:text-primary-on-dark"
                           style={{ fontSize: '0.7rem', fontWeight: 700, textDecoration: 'none', display: 'inline-block', marginTop: '0.4rem', paddingLeft: '1.3rem' }}
                         >
                           Apri in Maps →
@@ -508,7 +508,7 @@ export default function Contatti() {
                   </p>
                   <button
                     onClick={() => { setSent(false); setForm({ nome: '', cognome: '', email: '', telefono: '', motivo: '', messaggio: '', privacy: false }); }}
-                    className="text-[#008C95] dark:text-[#10B981] border border-[#008C95] dark:border-[#10B981]"
+                    className="text-[#018891] dark:text-primary-on-dark border border-[#018891] dark:border-primary-on-dark"
                     style={{ background: 'none', borderRadius: '999px', padding: '0.6rem 1.5rem', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s' }}
                   >
                     Invia un altro messaggio
@@ -582,7 +582,7 @@ export default function Contatti() {
                       />
                       <label htmlFor="privacy" className="text-slate-600 dark:text-[#9aa8a6]" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer' }}>
                         Ho letto e accetto la{' '}
-                        <a href="/privacy-cookie" className="text-[#008C95] dark:text-[#10B981]" style={{ fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
+                        <a href="/privacy-cookie" className="text-[#018891] dark:text-primary-on-dark" style={{ fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
                         {' '}e acconsento al trattamento dei miei dati personali ai sensi del GDPR. <span style={{ color: '#EF4444' }}>*</span>
                       </label>
                     </div>

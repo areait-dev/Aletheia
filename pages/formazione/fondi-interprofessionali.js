@@ -62,51 +62,6 @@ export default function FondiInterprofessionali() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .cta-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: #008C95;
-          color: #fff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none;
-          cursor: pointer;
-          font-family: inherit;
-        }
-        .cta-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0,140,149,0.5);
-        }
-        .cta-btn-outline {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: transparent;
-          color: rgba(255,255,255,0.85);
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22);
-          transition: all 0.2s ease;
-          font-family: inherit;
-          cursor: pointer;
-        }
-        .cta-btn-outline:hover {
-          background: rgba(255,255,255,0.08);
-          border-color: rgba(255,255,255,0.5);
-        }
 
         /* FAQ a 2 colonne */
         .faq-grid {
@@ -157,7 +112,7 @@ export default function FondiInterprofessionali() {
           </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="/contatti" className="cta-btn-primary">Contattaci</a>
+            <a href="/contatti" className="btn btn-lg btn-light">Contattaci</a>
           </div>
         </div>
       </section>
@@ -189,7 +144,7 @@ export default function FondiInterprofessionali() {
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem 2rem' }}>
               {vantaggi.map((v) => (
                 <li key={v} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                  <i className="fas fa-check text-primary dark:text-[#10B981]" style={{ fontSize: '0.8rem', marginTop: '0.3rem', flexShrink: 0 }}></i>
+                  <i className="fas fa-check text-primary dark:text-primary-on-dark" style={{ fontSize: '0.8rem', marginTop: '0.3rem', flexShrink: 0 }}></i>
                   <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.9rem', lineHeight: 1.65 }}>{v}</span>
                 </li>
               ))}

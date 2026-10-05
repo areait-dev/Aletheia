@@ -22,7 +22,7 @@ const SOCIAL = [
 
 const CONTRACT_COLORS: Record<string, { bg: string; text: string }> = {
   'Tempo indeterminato': { bg: '#008C95', text: '#fff' },
-  'Tempo determinato':   { bg: '#10B981', text: '#0F172A' }, // testo scuro: bianco su #10B981 = 2,54:1, scuro 7,04:1,
+  'Tempo determinato':   { bg: '#5FC2C8', text: '#0F172A' }, // tint teal (distinto dall'indeterminato) con testo scuro: 8,6:1,
   'Somministrazione':    { bg: '#64748B', text: '#fff' },
 };
 
@@ -123,7 +123,7 @@ export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
           {/* Label "RICERCA:" */}
           <p style={{
             margin: 0,
-            color: '#10B981',
+            color: '#018891',
             fontSize: '0.62rem',
             fontWeight: 900,
             letterSpacing: '0.2em',
@@ -149,7 +149,7 @@ export default function JobOfferCard({ offerta, onApply }: JobOfferCardProps) {
 
           {/* Sede */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            <i className="fas fa-map-marker-alt" style={{ color: '#10B981', fontSize: '0.8rem', flexShrink: 0 }}></i>
+            <i className="fas fa-map-marker-alt" style={{ color: '#018891', fontSize: '0.8rem', flexShrink: 0 }}></i>
             <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 700, textShadow: '0 1px 4px rgba(0,0,0,0.6)', lineHeight: 1.3 }}>
               <span style={{ color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.58rem' }}>
                 SEDE DI LAVORO:{' '}

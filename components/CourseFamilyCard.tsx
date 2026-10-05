@@ -60,7 +60,7 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
 
         <div className="p-5 flex flex-col flex-1 overflow-hidden">
           <h3
-            className="font-viga uppercase text-[18px] text-slate-900 dark:text-white leading-snug mt-1 mb-1 group-hover:text-[#006B73] dark:group-hover:text-[#059669] transition-colors line-clamp-3"
+            className="font-viga uppercase text-[18px] text-slate-900 dark:text-white leading-snug mt-1 mb-1 group-hover:text-[#04767D] dark:group-hover:text-primary-on-dark transition-colors line-clamp-3"
             style={{ fontSynthesis: 'none' }}
           >
             {family.titolo}
@@ -69,13 +69,13 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
           <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-[13px] text-slate-600 dark:text-gray-400">
             {family.varianti[0]?.durataOre && (
               <span className="inline-flex items-center gap-1.5">
-                <i className="fas fa-clock text-[12px] text-[#008C95] dark:text-[#10B981]" aria-hidden="true" />
+                <i className="fas fa-clock text-[12px] text-[#018891] dark:text-primary-on-dark" aria-hidden="true" />
                 {family.varianti[0].durataOre}
               </span>
             )}
             {family.varianti[0]?.modalita && (
               <span className="inline-flex items-center gap-1.5">
-                <i className="fas fa-chalkboard-user text-[12px] text-[#008C95] dark:text-[#10B981]" aria-hidden="true" />
+                <i className="fas fa-chalkboard-user text-[12px] text-[#018891] dark:text-primary-on-dark" aria-hidden="true" />
                 {family.varianti[0].modalita}
               </span>
             )}

@@ -67,7 +67,7 @@ export default function PricingSidebar({
                   {row.label}
                 </span>
                 <span
-                  className="text-primary dark:text-[#10B981]"
+                  className="text-primary dark:text-primary-on-dark"
                   style={{ fontSize: i === 0 ? '1.85rem' : '1.15rem', fontWeight: 800, lineHeight: 1 }}
                 >
                   {row.value}
@@ -119,7 +119,7 @@ export default function PricingSidebar({
           {quoteHref && (
             <a
               href={quoteHref}
-              className="w-full text-center rounded-full min-h-9 flex items-center justify-center px-6 no-underline border border-primary/60 text-[#006B73] dark:border-[#10B981]/50 dark:text-[#6EE7B7] !m-0 !mb-0 !mt-0 whitespace-nowrap"
+              className="w-full text-center rounded-full min-h-9 flex items-center justify-center px-6 no-underline border border-primary/60 text-[#04767D] dark:border-primary-on-dark/50 dark:text-[#5FC2C8] !m-0 !mb-0 !mt-0 whitespace-nowrap"
               style={{
                 fontWeight: 600, fontSize: '0.95rem', background: 'transparent', boxSizing: 'border-box',
                 paddingTop: '10px', paddingBottom: '10px', margin: 0, marginBottom: 0, marginTop: 0,
@@ -135,7 +135,7 @@ export default function PricingSidebar({
               href={whatsappHref}
               target={whatsappHref !== '#' ? '_blank' : undefined}
               rel={whatsappHref !== '#' ? 'noopener noreferrer' : undefined}
-              className="w-full text-center rounded-full min-h-9 flex items-center justify-center px-6 no-underline border border-emerald-600/60 text-emerald-600 dark:border-emerald-400/50 dark:text-emerald-400 !m-0 !mb-0 !mt-0 whitespace-nowrap"
+              className="w-full text-center rounded-full min-h-9 flex items-center justify-center px-6 no-underline border border-brand-500/60 text-brand-500 dark:border-primary-on-dark/50 dark:text-primary-on-dark !m-0 !mb-0 !mt-0 whitespace-nowrap"
               style={{
                 fontWeight: 600, fontSize: '0.95rem', background: 'transparent', boxSizing: 'border-box',
                 paddingTop: '10px', paddingBottom: '10px', margin: 0, marginBottom: 0, marginTop: 0,

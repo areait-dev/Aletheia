@@ -79,26 +79,6 @@ export default function FormazioneECM() {
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
         
-        .cta-btn-primary-ecm {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
-          white-space: nowrap;
-          background: #008C95; color: #fff;
-          font-weight: 700; font-size: 0.95rem; text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none; cursor: pointer; font-family: inherit;
-        }
-        .cta-btn-primary-ecm:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
-        .cta-btn-outline-ecm {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); background: transparent;
-          white-space: nowrap;
-          color: rgba(255,255,255,0.85); font-weight: 700; font-size: 0.95rem; text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22); transition: all 0.2s ease;
-          font-family: inherit; cursor: pointer;
-        }
-        .cta-btn-outline-ecm:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
         /* Proposta formativa: tab selezionabili in riga, un solo blocco di testo
            visibile alla volta — non card ripetute (pattern già usato ovunque nel sito). */
@@ -112,7 +92,7 @@ export default function FormazioneECM() {
         }
         :global(.dark) .modalita-tab { color: rgba(255,255,255,0.4); }
         .modalita-tab.active { color: #008C95; border-color: #008C95; }
-        :global(.dark) .modalita-tab.active { color: #10B981; border-color: #10B981; }
+        :global(.dark) .modalita-tab.active { color: #018891; border-color: #018891; }
 
         .faq-grid-ecm { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem 1.5rem; align-items: start; }
         @media (max-width: 800px) { .faq-grid-ecm { grid-template-columns: 1fr; } }
@@ -138,7 +118,7 @@ export default function FormazioneECM() {
             </h1>
 
             <div className="page-hero-actions fade-up fade-up-3">
-              <a href="/contatti" className="cta-btn-outline-ecm">Contattaci</a>
+              <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
             </div>
           </div>
 
@@ -216,7 +196,7 @@ export default function FormazioneECM() {
                     style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '1.1rem 1.4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', cursor: 'pointer', fontWeight: 700, fontSize: '0.95rem' }}
                   >
                     <span>{item.domanda}</span>
-                    <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: isDark ? '#6EE7B7' : '#008C95', flexShrink: 0 }}></i>
+                    <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: isDark ? '#5FC2C8' : '#008C95', flexShrink: 0 }}></i>
                   </button>
                   {isOpen && (
                     <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, padding: '0 1.4rem 1.4rem', lineHeight: 1.75, fontSize: '0.9rem' }}>
@@ -250,11 +230,11 @@ export default function FormazioneECM() {
                 <a href="tel:+390932862613" className="text-slate-900 dark:text-white" style={{ display: 'block', fontSize: '1.25rem', fontWeight: 800, textDecoration: 'none', marginBottom: '0.5rem' }}>
                   +39 0932 862613
                 </a>
-                <a href="mailto:info@aletheiasrl.it" className="text-[#008C95] dark:text-[#10B981]" style={{ display: 'block', fontSize: '1rem', fontWeight: 700, textDecoration: 'none' }}>
+                <a href="mailto:info@aletheiasrl.it" className="text-[#018891] dark:text-primary-on-dark" style={{ display: 'block', fontSize: '1rem', fontWeight: 700, textDecoration: 'none' }}>
                   info@aletheiasrl.it
                 </a>
 
-                <a href="/contatti" className="cta-btn-primary-ecm" style={{ marginTop: '1.75rem' }}>Contattaci</a>
+                <a href="/contatti" className="btn btn-lg btn-primary" style={{ marginTop: '1.75rem' }}>Contattaci</a>
               </div>
             </div>
 

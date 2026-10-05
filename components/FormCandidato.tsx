@@ -73,7 +73,7 @@ function Field({ label, required, error, children }: FieldProps) {
         color: error ? '#F87171' : 'rgba(255,255,255,0.75)',
         letterSpacing: '0.02em',
       }}>
-        {label}{required && <span style={{ color: '#10B981', marginLeft: '2px' }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
       {error && (
@@ -177,7 +177,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
           <span style={{
             display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
             letterSpacing: '0.12em', textTransform: 'uppercase',
-            color: '#6EE7B7', marginBottom: '0.6rem',
+            color: '#fff', marginBottom: '0.6rem',
           }}>
             Affidati a noi
           </span>
@@ -210,9 +210,9 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                 <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem' }}>
                   <div style={{
                     width: '40px', height: '40px', borderRadius: '10px', flexShrink: 0,
-                    background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)',
+                    background: 'rgba(1,136,145,0.1)', border: '1px solid rgba(1,136,145,0.2)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '0.9rem', color: '#10B981',
+                    fontSize: '0.9rem', color: '#018891',
                   }}>
                     <i className={item.icon}></i>
                   </div>
@@ -255,9 +255,9 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                   textDecoration: 'none', transition: 'all 0.2s ease',
                 }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(16,185,129,0.15)';
-                    e.currentTarget.style.color = '#10B981';
-                    e.currentTarget.style.borderColor = 'rgba(16,185,129,0.3)';
+                    e.currentTarget.style.background = 'rgba(1,136,145,0.15)';
+                    e.currentTarget.style.color = '#018891';
+                    e.currentTarget.style.borderColor = 'rgba(1,136,145,0.3)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
@@ -285,9 +285,9 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
               }}>
                 <div style={{
                   width: '72px', height: '72px', borderRadius: '50%',
-                  background: 'rgba(16,185,129,0.15)', border: '2px solid #10B981',
+                  background: 'rgba(1,136,145,0.15)', border: '2px solid #018891',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '2rem', color: '#10B981',
+                  fontSize: '2rem', color: '#018891',
                 }}>
                   <i className="fas fa-check"></i>
                 </div>
@@ -301,8 +301,8 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                   onClick={() => { setSubmitted(false); setFields(EMPTY); setFileName(''); }}
                   style={{
                     marginTop: '0.5rem', padding: '0 1.75rem', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--btn-radius)',
-                    background: 'rgba(16,185,129,0.15)', border: '1.5px solid rgba(16,185,129,0.4)',
-                    color: '#10B981', fontWeight: 700, fontSize: '0.875rem',
+                    background: 'rgba(1,136,145,0.15)', border: '1.5px solid rgba(1,136,145,0.4)',
+                    color: 'var(--primary-text)', fontWeight: 700, fontSize: '0.875rem',
                     cursor: 'pointer', fontFamily: 'inherit',
                   }}
                 >
@@ -319,7 +319,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       type="text" value={fields.nome} onChange={set('nome')}
                       placeholder="Mario"
                       style={inputStyle(!!errors.nome)}
-                      onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                      onFocus={(e) => e.target.style.borderColor = '#018891'}
                       onBlur={(e) => e.target.style.borderColor = errors.nome ? '#F87171' : 'rgba(255,255,255,0.12)'}
                     />
                   </Field>
@@ -328,7 +328,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       type="text" value={fields.cognome} onChange={set('cognome')}
                       placeholder="Rossi"
                       style={inputStyle(!!errors.cognome)}
-                      onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                      onFocus={(e) => e.target.style.borderColor = '#018891'}
                       onBlur={(e) => e.target.style.borderColor = errors.cognome ? '#F87171' : 'rgba(255,255,255,0.12)'}
                     />
                   </Field>
@@ -341,7 +341,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       type="email" value={fields.email} onChange={set('email')}
                       placeholder="mario@esempio.it"
                       style={inputStyle(!!errors.email)}
-                      onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                      onFocus={(e) => e.target.style.borderColor = '#018891'}
                       onBlur={(e) => e.target.style.borderColor = errors.email ? '#F87171' : 'rgba(255,255,255,0.12)'}
                     />
                   </Field>
@@ -350,7 +350,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       type="tel" value={fields.telefono} onChange={set('telefono')}
                       placeholder="+39 333 1234567"
                       style={inputStyle(false)}
-                      onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                      onFocus={(e) => e.target.style.borderColor = '#018891'}
                       onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
                     />
                   </Field>
@@ -362,7 +362,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     <input
                       type="date" value={fields.dataNascita} onChange={set('dataNascita')}
                       style={{ ...inputStyle(false), colorScheme: 'dark' }}
-                      onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                      onFocus={(e) => e.target.style.borderColor = '#018891'}
                       onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
                     />
                   </Field>
@@ -371,7 +371,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       type="text" value={fields.comune} onChange={set('comune')}
                       placeholder="Vittoria"
                       style={inputStyle(!!errors.comune)}
-                      onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                      onFocus={(e) => e.target.style.borderColor = '#018891'}
                       onBlur={(e) => e.target.style.borderColor = errors.comune ? '#F87171' : 'rgba(255,255,255,0.12)'}
                     />
                   </Field>
@@ -390,7 +390,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       paddingRight: '2.5rem',
                       cursor: 'pointer',
                     }}
-                    onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                    onFocus={(e) => e.target.style.borderColor = '#018891'}
                     onBlur={(e) => e.target.style.borderColor = errors.servizio ? '#F87171' : 'rgba(255,255,255,0.12)'}
                   >
                     <option value="" style={{ background: '#0F172A' }}>Seleziona un servizio…</option>
@@ -407,17 +407,17 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     style={{
                       display: 'flex', alignItems: 'center', gap: '0.75rem',
                       padding: '0.7rem 1rem', borderRadius: '10px', cursor: 'pointer',
-                      border: '1.5px dashed rgba(16,185,129,0.35)',
-                      background: 'rgba(16,185,129,0.04)',
+                      border: '1.5px dashed rgba(1,136,145,0.35)',
+                      background: 'rgba(1,136,145,0.04)',
                       transition: 'border-color 0.2s, background 0.2s',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'rgba(16,185,129,0.7)';
-                      e.currentTarget.style.background = 'rgba(16,185,129,0.08)';
+                      e.currentTarget.style.borderColor = 'rgba(1,136,145,0.7)';
+                      e.currentTarget.style.background = 'rgba(1,136,145,0.08)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'rgba(16,185,129,0.35)';
-                      e.currentTarget.style.background = 'rgba(16,185,129,0.04)';
+                      e.currentTarget.style.borderColor = 'rgba(1,136,145,0.35)';
+                      e.currentTarget.style.background = 'rgba(1,136,145,0.04)';
                     }}
                   >
                     <span style={{ fontSize: '0.875rem', color: fileName ? '#fff' : 'rgba(255,255,255,0.4)' }}>
@@ -444,7 +444,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       minHeight: '100px',
                       lineHeight: 1.6,
                     }}
-                    onFocus={(e) => e.target.style.borderColor = '#10B981'}
+                    onFocus={(e) => e.target.style.borderColor = '#018891'}
                     onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
                   />
                 </Field>
@@ -461,8 +461,8 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       />
                       <div style={{
                         width: '18px', height: '18px', borderRadius: '5px',
-                        border: `2px solid ${errors.privacy ? '#F87171' : fields.privacy ? '#10B981' : 'rgba(255,255,255,0.2)'}`,
-                        background: fields.privacy ? '#10B981' : 'transparent',
+                        border: `2px solid ${errors.privacy ? '#F87171' : fields.privacy ? '#018891' : 'rgba(255,255,255,0.2)'}`,
+                        background: fields.privacy ? '#018891' : 'transparent',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         transition: 'all 0.2s ease',
                       }}>
@@ -471,11 +471,11 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     </div>
                     <span style={{ fontSize: '0.825rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
                       Ho letto e accetto la{' '}
-                      <a href="/privacy-cookie" style={{ color: '#10B981', textDecoration: 'underline' }}>
+                      <a href="/privacy-cookie" style={{ color: 'var(--primary-text)', textDecoration: 'underline' }}>
                         Privacy Policy
                       </a>{' '}
                       di Alètheia S.r.l.
-                      <span style={{ color: '#10B981', marginLeft: '2px' }}>*</span>
+                      <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>
                     </span>
                   </label>
                   {errors.privacy && (
@@ -493,7 +493,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
                     padding: '0 2rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', border: 'none',
-                    background: loading ? 'rgba(16,185,129,0.4)' : '#008C95',
+                    background: loading ? 'rgba(1,136,145,0.4)' : '#018891',
                     color: '#fff', fontWeight: 700, fontSize: '0.95rem',
                     cursor: loading ? 'not-allowed' : 'pointer',
                     fontFamily: 'inherit',

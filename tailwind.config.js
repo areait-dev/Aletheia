@@ -62,8 +62,10 @@ module.exports = {
         'btn-primary': '#016A71',
         'btn-secondary': '#9AD2D6',
 
-        // Testo brand su sfondo chiaro (WCAG AA). Usare sempre in coppia con dark:text-[#10B981]
+        // Testo brand su sfondo chiaro (WCAG AA). Usare sempre in coppia con dark:text-primary-on-dark
         'primary-text': 'var(--primary-text-on-light)',
+        // Testo brand su sfondo scuro: 4,6:1 su #004d52, 8,2:1 su #161C1A (sostituisce smeraldo/menta)
+        'primary-on-dark': '#5FC2C8',
 
         // Sfondo dark mode — pagina = DS background dark, card/pannelli = brand
         'dark-bg': '#161C1A',

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Footer from '../components/Footer';
+import CtaFinale from '../components/CtaFinale';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -227,39 +228,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           align-items: center;
           gap: 1rem;
         }
-        .panel-cta-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0 1.75rem;
-          min-height: var(--btn-height-md);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          font-size: 0.875rem;
-          font-weight: 700;
-          text-decoration: none;
-          transition: all 0.25s ease;
-          border: 2px solid;
-          cursor: pointer;
-          background: none;
-          font-family: inherit;
-        }
-        .btn-candidati {
-          color: #fff;
-          border-color: rgba(255,255,255,0.45);
-        }
-        .btn-candidati:hover {
-          background: rgba(255,255,255,0.12);
-          border-color: rgba(255,255,255,0.75);
-        }
-        .btn-aziende {
-          color: #10B981;
-          border-color: rgba(16,185,129,0.5);
-        }
-        .btn-aziende:hover {
-          background: rgba(16,185,129,0.12);
-          border-color: #10B981;
-        }
 
         @media (max-width: 768px) {
           .hero-wrap { flex-direction: column; }
@@ -344,25 +312,14 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               className="panel-overlay"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(15,23,42,0.55) 0%, rgba(10,79,84,0.45) 60%, rgba(0,140,149,0.5) 100%)',
+                  'linear-gradient(180deg, rgba(15,23,42,0.5) 0%, rgba(15,23,42,0.64) 100%)',
               }}
             />
 
             <div className="panel-content">
               {/* Badge */}
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: '#5FD4DC',
-                  background: 'rgba(0,140,149,0.15)',
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '999px',
-                  border: '1px solid rgba(0,140,149,0.3)',
-                }}
-              >
+              <span className="badge-overlay">
+                <span className="badge-overlay-dot" aria-hidden="true" />
                 Candidati
               </span>
 
@@ -399,13 +356,13 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                       color: 'rgba(255,255,255,0.8)',
                     }}
                   >
-                    <i className="fas fa-check-circle" style={{ color: '#10B981', fontSize: '0.75rem' }}></i>
+                    <i className="fas fa-check-circle" style={{ color: '#018891', fontSize: '0.75rem' }}></i>
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <a href="/agenzia-per-il-lavoro/servizi-alla-persona" className="panel-cta-btn btn-candidati">
+              <a href="/agenzia-per-il-lavoro/servizi-alla-persona" className="btn btn-md btn-ghost-light">
                 <i className="fas fa-user-check" style={{ fontSize: '0.75rem' }}></i>
                 Servizi alla Persona
               </a>
@@ -431,25 +388,14 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               className="panel-overlay"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(15,23,42,0.55) 0%, rgba(10,79,84,0.45) 60%, rgba(0,140,149,0.5) 100%)',
+                  'linear-gradient(180deg, rgba(15,23,42,0.5) 0%, rgba(15,23,42,0.64) 100%)',
               }}
             />
 
             <div className="panel-content">
               {/* Badge */}
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: '#6EE7B7',
-                  background: 'rgba(16,185,129,0.12)',
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '999px',
-                  border: '1px solid rgba(16,185,129,0.3)',
-                }}
-              >
+              <span className="badge-overlay">
+                <span className="badge-overlay-dot" aria-hidden="true" />
                 Aziende
               </span>
 
@@ -486,13 +432,13 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                       color: 'rgba(255,255,255,0.8)',
                     }}
                   >
-                    <i className="fas fa-check-circle" style={{ color: '#10B981', fontSize: '0.75rem' }}></i>
+                    <i className="fas fa-check-circle" style={{ color: '#018891', fontSize: '0.75rem' }}></i>
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <a href="/agenzia-per-il-lavoro/servizi-alle-imprese" className="panel-cta-btn btn-aziende">
+              <a href="/agenzia-per-il-lavoro/servizi-alle-imprese" className="btn btn-md btn-ghost-light">
                 <i className="fas fa-building" style={{ fontSize: '0.75rem' }}></i>
                 Servizi alle Imprese
               </a>
@@ -540,7 +486,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
               }}>
                 Alètheia APL - Non solo un&apos;agenzia. Un{' '}
                 {/* Colore solo sulla parola chiave; token con variante dark (#008C95 faceva 2,37:1 su dark-card) */}
-                <span className="text-primary-text dark:text-[#10B981]">ecosistema per il lavoro</span>
+                <span className="text-primary-text dark:text-primary-on-dark">ecosistema per il lavoro</span>
               </h2>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -613,7 +559,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 </span>
                 {!jobsLoading && jobs.length > 0 && (
                   <span
-                    className="bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]"
+                    className="bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark"
                     style={{
                       fontSize: '0.68rem', fontWeight: 800,
                       padding: '0.15rem 0.55rem', borderRadius: '999px',
@@ -798,66 +744,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
       )}
 
       {/* ── CTA FINALE ───────────────────────────────────────── */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-          padding: '5rem 0',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Decorative circles */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            top: '-80px',
-            right: '-80px',
-            width: '360px',
-            height: '360px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(0,140,149,0.15) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            bottom: '-60px',
-            left: '-60px',
-            width: '280px',
-            height: '280px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-
-        <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-          <span
-            style={{
-              display: 'inline-block',
-              fontSize: '0.7rem',
-              fontWeight: 800,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#10B981',
-              marginBottom: '1rem',
-            }}
-          >
-            Inizia oggi
-          </span>
-
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
-              fontWeight: 900,
-              color: '#fff',
-              marginBottom: '1rem',
-              lineHeight: 1.2,
-            }}
-          >
+      <CtaFinale
+        eyebrow="Inizia oggi"
+        title={
+          <>
             Inizia oggi il tuo{' '}
             <span
               style={{
@@ -869,82 +759,12 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             >
               percorso
             </span>
-          </h2>
-
-          <p
-            style={{
-              fontSize: '1.05rem',
-              color: 'rgba(255,255,255,0.65)',
-              maxWidth: '480px',
-              margin: '0 auto 2.5rem',
-              lineHeight: 1.7,
-            }}
-          >
-            Che tu stia cercando lavoro o il candidato giusto per la tua azienda, siamo pronti ad aiutarti.
-          </p>
-
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a
-              href="https://aletheia4job.it/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                padding: '0.85rem 2.25rem',
-                borderRadius: '999px',
-                background: '#008C95',
-                color: '#fff',
-                fontWeight: 700,
-                fontSize: '0.95rem',
-                textDecoration: 'none',
-                boxShadow: '0 4px 24px rgba(0,140,149,0.4)',
-                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,140,149,0.5)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,140,149,0.4)';
-              }}
-            >
-              Candidati ora
-            </a>
-
-            <a
-              href="#contatti"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                padding: '0 2rem',
-                minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap',
-                borderRadius: 'var(--btn-radius)',
-                background: 'transparent',
-                color: 'rgba(255,255,255,0.8)',
-                fontWeight: 700,
-                fontSize: '0.95rem',
-                textDecoration: 'none',
-                border: '2px solid rgba(255,255,255,0.2)',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-              }}
-            >
-              Contatta un consulente
-            </a>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+        text="Che tu stia cercando lavoro o il candidato giusto per la tua azienda, siamo pronti ad aiutarti."
+        primary={{ label: 'Candidati ora', href: 'https://aletheia4job.it/', external: true }}
+        secondary={{ label: 'Contatta un consulente', href: '#contatti' }}
+      />
 
       {/* ── FOOTER ───────────────────────────────────────────── */}
       </main>

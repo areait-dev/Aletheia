@@ -11,7 +11,7 @@ const MESI = [
 const MESI_ABBR = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
 
 const categoryColor = {
-  'regionale-fse': '#10B981',
+  'regionale-fse': '#018891',
   'obbligatoria': '#F59E0B',
   'professionale': '#6366F1',
 };
@@ -33,7 +33,7 @@ function formatLongDate(s) {
 function postiStyle(postiDisponibili) {
   if (postiDisponibili === 0) return { color: '#DC2626', label: 'Posti esauriti', icon: 'fa-circle-xmark' };
   if (postiDisponibili <= 3) return { color: '#F59E0B', label: `${postiDisponibili} posti rimasti`, icon: 'fa-triangle-exclamation' };
-  return { color: '#10B981', label: `${postiDisponibili} posti disponibili`, icon: 'fa-circle-check' };
+  return { color: 'var(--primary-text)', label: `${postiDisponibili} posti disponibili`, icon: 'fa-circle-check' };
 }
 
 export default function CalendarioCorsi() {
@@ -105,7 +105,7 @@ export default function CalendarioCorsi() {
             padding: '0.3rem 0.875rem', borderRadius: '999px',
             background: 'rgba(0,140,149,0.16)', border: '1px solid rgba(0,140,149,0.38)',
             fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
-            color: '#6EE7B7', marginBottom: '1rem',
+            color: '#fff', marginBottom: '1rem',
           }}>
             Formazione
           </span>
@@ -138,7 +138,7 @@ export default function CalendarioCorsi() {
                   <button
                     onClick={() => setCategoriaFiltro('')}
                     className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      categoriaFiltro === '' ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                      categoriaFiltro === '' ? 'bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                     }`}
                   >
                     Tutte le categorie
@@ -148,7 +148,7 @@ export default function CalendarioCorsi() {
                       key={cat.key}
                       onClick={() => setCategoriaFiltro(cat.key)}
                       className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                        categoriaFiltro === cat.key ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                        categoriaFiltro === cat.key ? 'bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                       }`}
                     >
                       <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: categoryColor[cat.key], flexShrink: 0 }} />
@@ -288,13 +288,13 @@ export default function CalendarioCorsi() {
 
                                         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600 dark:text-gray-300">
                                           <span className="inline-flex items-center gap-1.5">
-                                            <i className="fas fa-location-dot text-primary dark:text-[#10B981]" /> {corso.sede}
+                                            <i className="fas fa-location-dot text-primary dark:text-primary-on-dark" /> {corso.sede}
                                           </span>
                                           <span className="inline-flex items-center gap-1.5">
-                                            <i className="far fa-clock text-primary dark:text-[#10B981]" /> {corso.orario}
+                                            <i className="far fa-clock text-primary dark:text-primary-on-dark" /> {corso.orario}
                                           </span>
                                           <span className="inline-flex items-center gap-1.5">
-                                            <i className="fas fa-hourglass-half text-primary dark:text-[#10B981]" /> {corso.durata}
+                                            <i className="fas fa-hourglass-half text-primary dark:text-primary-on-dark" /> {corso.durata}
                                           </span>
                                         </div>
 

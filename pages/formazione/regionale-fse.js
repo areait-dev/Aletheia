@@ -88,7 +88,8 @@ function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt 
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(4,15,20,0.92) 10%, rgba(4,15,20,0.6) 55%, rgba(4,15,20,0.12) 100%)' }} />
 
       <div style={{ position: 'relative', zIndex: 1, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1, justifyContent: 'flex-end' }}>
-        <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6EE7B7', width: 'fit-content' }}>
+        <span className="badge-overlay">
+          <span className="badge-overlay-dot" aria-hidden="true" />
           {badge}
         </span>
         <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, lineHeight: 1.3, color: '#fff' }}>{title}</h3>
@@ -156,51 +157,6 @@ export default function FormazioneFinanziataSicilia() {
           .calendario-orientamento-grid { grid-template-columns: 1fr; }
         }
 
-        .cta-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: #008C95;
-          color: #fff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none;
-          cursor: pointer;
-          font-family: inherit;
-        }
-        .cta-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0,140,149,0.5);
-        }
-        .cta-btn-outline {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: transparent;
-          color: rgba(255,255,255,0.85);
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22);
-          transition: all 0.2s ease;
-          font-family: inherit;
-          cursor: pointer;
-        }
-        .cta-btn-outline:hover {
-          background: rgba(255,255,255,0.08);
-          border-color: rgba(255,255,255,0.5);
-        }
       `}</style>
 
       {/* ══════════════ HERO ══════════════ */}
@@ -219,8 +175,8 @@ export default function FormazioneFinanziataSicilia() {
           </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#offerta" className="cta-btn-primary">Scopri i percorsi</a>
-            <a href="/contatti" className="cta-btn-outline">Contattaci</a>
+            <a href="#offerta" className="btn btn-lg btn-light">Scopri i percorsi</a>
+            <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
           </div>
         </div>
       </section>
@@ -270,7 +226,7 @@ export default function FormazioneFinanziataSicilia() {
               padding: '2rem',
               background: isDark ? '#1f2937' : 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
               border: isDark ? '1px solid rgba(255,255,255,0.08)' : 'none',
-              borderLeft: isDark ? '3px solid #10B981' : 'none',
+              borderLeft: isDark ? '3px solid #018891' : 'none',
             }}>
               <h3 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '0 0 0.75rem', lineHeight: 1.3, color: '#fff' }}>
                 Non sai quale percorso scegliere?
@@ -278,7 +234,7 @@ export default function FormazioneFinanziataSicilia() {
               <p style={{ fontSize: '0.92rem', lineHeight: 1.75, margin: '0 0 1.5rem', color: 'rgba(255,255,255,0.7)' }}>
                 Il team di Alètheia analizza gratuitamente il tuo profilo o quello della tua azienda, verifica i bandi e i corsi disponibili e ti guida verso la soluzione più adatta ai tuoi obiettivi formativi. Un orientamento gratuito e senza impegno.
               </p>
-              <a href="/contatti" className="cta-btn-primary">Contattaci</a>
+              <a href="/contatti" className="btn btn-lg btn-light">Contattaci</a>
             </div>
           </div>
         </div>

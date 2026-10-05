@@ -28,7 +28,7 @@ export async function getStaticProps({ params }) {
 function getCategory(slug) {
   if (/sicurezza|accordo-stato|obbligatori/.test(slug)) return { label: 'Sicurezza sul lavoro', color: '#F59E0B' };
   if (/intelligenza|ai|digitale/.test(slug)) return { label: 'Innovazione', color: '#6366F1' };
-  if (/formazione|corsi|gol|fse/.test(slug)) return { label: 'Formazione', color: '#10B981' };
+  if (/formazione|corsi|gol|fse/.test(slug)) return { label: 'Formazione', color: '#018891' };
   if (/lavoro|lavoratori|imprese|assumere/.test(slug)) return { label: 'Mercato del lavoro', color: '#008C95' };
   if (/sicilia|microchip/.test(slug)) return { label: 'Sicilia', color: '#EC4899' };
   if (/smart-working/.test(slug)) return { label: 'Smart Working', color: '#8B5CF6' };
@@ -401,7 +401,7 @@ export default function ArticlePage({ article, related }) {
               )}
 
               {/* Lead / excerpt in evidenza */}
-              <p className="text-slate-600 dark:text-gray-300 bg-[#008C95]/10 dark:bg-[#10B981]/10" style={{
+              <p className="text-slate-600 dark:text-gray-300 bg-[#018891]/10 dark:bg-[#018891]/10" style={{
                 fontSize: '1.2rem', fontWeight: 500,
                 lineHeight: 1.75, borderLeft: '3px solid #008C95',
                 paddingLeft: '1.25rem', marginBottom: '2.25rem',
@@ -425,7 +425,7 @@ export default function ArticlePage({ article, related }) {
                   {/* gray-600: la sezione poggia su bg-light (#F2F2F2), dove gray-500 farebbe solo 4,32:1 */}
                   <span className="text-gray-600 dark:text-gray-400" style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginRight: '0.25rem' }}>Tag:</span>
                   {tags.map((tag) => (
-                    <span key={tag} className="bg-[#008C95]/10 dark:bg-[#10B981]/10 border border-[#008C95]/30 dark:border-[#10B981]/30 text-[#006066] dark:text-[#10B981]" style={{ padding: '0.3rem 0.875rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span key={tag} className="bg-[#018891]/10 dark:bg-[#018891]/10 border border-[#018891]/30 dark:border-primary-on-dark/30 text-[#006066] dark:text-primary-on-dark" style={{ padding: '0.3rem 0.875rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
                       {tag}
                     </span>
                   ))}
@@ -476,7 +476,7 @@ export default function ArticlePage({ article, related }) {
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
                       {tags.map((tag) => (
-                        <span key={tag} className="bg-white dark:bg-gray-700 border border-[#008C95]/30 dark:border-gray-600 text-primary dark:text-[#10B981]" style={{ padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
+                        <span key={tag} className="bg-white dark:bg-gray-700 border border-[#018891]/30 dark:border-gray-600 text-primary dark:text-primary-on-dark" style={{ padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 600 }}>
                           {tag}
                         </span>
                       ))}
@@ -488,7 +488,7 @@ export default function ArticlePage({ article, related }) {
                 <div style={{
                   background: isDark ? '#1f2937' : 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
                   border: isDark ? '1px solid rgba(255,255,255,0.08)' : 'none',
-                  borderLeft: isDark ? '3px solid #10B981' : 'none',
+                  borderLeft: isDark ? '3px solid #018891' : 'none',
                   borderRadius: '1rem', padding: '1.5rem', textAlign: 'center',
                 }}>
                   <p style={{ margin: '0 0 0.5rem', fontSize: '0.95rem', fontWeight: 800, color: '#fff', lineHeight: 1.35 }}>

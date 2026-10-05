@@ -55,7 +55,7 @@ Pages import the `Header` component and manage their own page-specific styling
 No API routes or backend logic
 Design Language
 iTeach-inspired theme with soft shadows, rounded corners, and a teal/green primary color (`#008C95`)
-Color palette includes secondary accent colors (`#10B981`, `#F59E0B`, `#6366F1`) for categories/badges
+Color palette includes secondary accent colors (`#F59E0B`, `#6366F1`) for categories/badges; il verde smeraldo `#10B981` è stato rimosso (vedi regola colori)
 Responsive design using CSS media queries and flexbox/grid
 Hover states and transitions for interactivity
 Important Notes
@@ -105,16 +105,18 @@ Verificare sempre il rapporto con un calcolatore (o misurandolo nel browser), ma
 La homepage (`index.js`) è il riferimento corretto — se un componente non sa come implementare la dark mode, guarda lì
 Note sui token (valori reali del sito)
 Nel codice le pagine usano i token del Design System in `tailwind.config.js`, non i `gray-*` della tabella: sezioni `bg-white dark:bg-dark-card` (`#004d52`, card/pannelli) alternate a `bg-light dark:bg-dark-bg` (`#F2F2F2` / `#161C1A`); queste due alternano già visivamente. La tabella vale per nuovo codice Tailwind "puro"; per coerenza con la homepage preferire i token DS.
-`text-gray-500` (#6B7280) su `bg-light` (#F2F2F2) fa solo 4,32:1: su quello sfondo usare `text-gray-600` (6,75:1).
+Su FOTO e relative maschere (overlay) non usare mai testo `#04767D` (illeggibile): lì testo bianco o accento originale `#10B981`/`#6EE7B7`, e niente maschere in `#04767D`. Sezioni sempre scure (hero, numeri, CTA, card su foto) e gradienti restano con i verdi originali (`#10B981`, `#6EE7B7`): il nuovo verde si usa sui testi su superfici normali. `text-gray-500` (#6B7280) su `bg-light` (#F2F2F2) fa solo 4,32:1: su quello sfondo usare `text-gray-600` (6,75:1).
 Placeholder: `placeholder-gray-400` fa 2,54:1 su bianco e `dark:placeholder-gray-500` 2,13:1 su input `gray-700`: sotto soglia, da rivedere (aperto).
 Token derivati per il contrasto (`styles/globals.css`)
 `#008C95` resta fisso (bottoni pieni, icone, bordi, focus) ma come TESTO su chiaro fa 4,05:1 su bianco e 3,62:1 su `#F2F2F2`. Per testo piccolo su sfondo chiaro usare:
-`text-primary-text` (= `var(--primary-text-on-light)`, `#006B73`: 6,27:1 su bianco, 5,60:1 su #F2F2F2), sempre in coppia con `dark:text-[#10B981]`
-`var(--primary-text)` negli stili inline/CSS: `#006B73` in light, `#10B981` in dark (nessuna variante dark da scrivere a mano)
+`text-primary-text` (= `var(--primary-text-on-light)`, `#04767D`: 5,38:1 su bianco, 4,81:1 su #F2F2F2), sempre in coppia con `dark:text-primary-on-dark`
+`var(--primary-text)` negli stili inline/CSS: `#04767D` in light, `#5FC2C8` in dark (nessuna variante dark da scrivere a mano)
 `var(--muted-text)` per testo muted inline/CSS: `#6B7280` in light, `#9CA3AF` in dark
-Testo bianco su `#10B981` = 2,54:1, vietato: sul verde usare testo scuro `#0F172A` (7,04:1). Bianco su `#008C95` fa 4,05:1: accettabile solo per testo grande/bold ≥18,66px
+Lo smeraldo `#10B981` e la menta `#6EE7B7` non si usano più: il verde da usare è `#018891` (fill, bordi, icone, hover, gradienti). Testo piccolo su chiaro `#04767D`; testo su fondo scuro `#5FC2C8` (token `--primary-on-dark` / `text-primary-on-dark`, 4,6:1 su `#004d52`, 8,2:1 su `#161C1A`). Bianco su `#008C95`/`#018891` fa 4,05–4,26:1: accettabile solo per testo grande/bold ≥18,66px
 Non usare `#94A3B8` / `text-*-400` come testo su sfondo chiaro (2,4-2,5:1)
 Componenti condivisi di layout (`styles/globals.css`) — non ridefinirli nelle pagine
 Hero pagine interne: `.page-hero` (+ `--dark` gradiente scuro, `--left` testo a sinistra, `.page-hero-actions` per i bottoni). La hero espansa (`.hero`) è solo in `index.js`
 Badge, uno stile per ruolo: `.page-hero-badge` (eyebrow sopra l'H1), `.section-badge` (eyebrow sopra gli H2), `.badge-overlay` (etichette sopra le foto, con `.badge-overlay-dot`), `.badge-solid` (stato/tipologia a tinta piena, colori via `--badge-bg`/`--badge-fg`), `.badge-chip` (micro-tag di livello)
+Bottoni, un solo sistema `.btn` (+ `.btn-sm|md|lg`): su sfondo CHIARO `.btn-primary` (pieno teal) e `.btn-outline`; su sfondo SCURO (hero, banner CTA, card su foto) `.btn-light` (primario bianco con testo `#0F172A`, ~17:1; hover verde Alètheia `#018891` con testo bianco, 4,26:1: ok solo per testo bold grande, per AA pieno usare `#04767D`) e `.btn-ghost-light` (secondario con contorno bianco). Freccia animata opzionale: `<i className="fas fa-arrow-right btn-arrow" />`. Un solo primario per sezione. Non ridefinire `.cta-btn-*` nelle pagine (le vecchie copie locali sono state rimosse); `.hero-btn-*`, `.course-btn`, `.cta-btn`, `.premium-card-btn` sono CSS legacy non più usato
+CTA di chiusura pagina: componente `components/CtaFinale.tsx` (stili `.cta-final*`), props `eyebrow`, `title`, `text`, `primary`, `secondary` (`{ label, href, icon?, external? }`). Il copy resta sempre quello della pagina: il componente non contiene testi. Usarlo solo per banner a tutta larghezza; le pagine che chiudono con un form (`FormAzienda`, `FormCandidato`, ecc.) o una scheda contatti restano così
 Ogni pagina deve avere un solo H1 presente nell'HTML pre-renderizzato (le pagine dinamiche usano getStaticPaths/getStaticProps)

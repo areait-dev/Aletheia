@@ -245,7 +245,7 @@ export default function AllCourses() {
               <li
                 onClick={resetFilters}
                 className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                  selectedCategory === '' && selectedSub === '' ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                  selectedCategory === '' && selectedSub === '' ? 'bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -262,7 +262,7 @@ export default function AllCourses() {
                   key={key}
                   onClick={() => selectCategory(key)}
                   className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                    selectedCategory === key ? 'bg-[#008C95]/10 dark:bg-[#10B981]/10 text-[#006066] dark:text-[#10B981]' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                    selectedCategory === key ? 'bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -335,7 +335,7 @@ export default function AllCourses() {
               .map((group) => (
                 <div key={group.key} className="mb-10 last:mb-0">
                   <h2 className="flex items-center gap-2.5 text-slate-900 dark:text-white" style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1.1rem' }}>
-                    <i className={`${group.meta.icon} text-[#008C95] dark:text-[#10B981]`} style={{ fontSize: '0.95rem' }} aria-hidden="true"></i>
+                    <i className={`${group.meta.icon} text-[#018891] dark:text-primary-on-dark`} style={{ fontSize: '0.95rem' }} aria-hidden="true"></i>
                     {group.meta.name}
                     <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.85rem', fontWeight: 600 }}>({group.items.length})</span>
                   </h2>

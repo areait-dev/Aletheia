@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import CtaFinale from '../components/CtaFinale';
 
 const corsiGOL = [
   {
@@ -75,16 +76,16 @@ function CourseCard({ title, icon, description, misura, target }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
           <div style={{
             width: '48px', height: '48px', borderRadius: '12px', flexShrink: 0,
-            background: hovered ? '#10B981' : 'rgba(16,185,129,0.1)',
+            background: hovered ? '#018891' : 'rgba(1,136,145,0.1)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             transition: 'all 0.25s ease',
           }}>
-            <i className={icon} style={{ fontSize: '1.2rem', color: hovered ? '#fff' : '#10B981' }}></i>
+            <i className={icon} style={{ fontSize: '1.2rem', color: hovered ? '#fff' : '#018891' }}></i>
           </div>
           <span style={{
             fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.09em',
-            textTransform: 'uppercase', color: '#10B981',
-            background: 'rgba(16,185,129,0.1)', padding: '0.22rem 0.6rem',
+            textTransform: 'uppercase', color: 'var(--primary-text)',
+            background: 'rgba(1,136,145,0.1)', padding: '0.22rem 0.6rem',
             borderRadius: '999px',
           }}>
             GOL
@@ -101,18 +102,18 @@ function CourseCard({ title, icon, description, misura, target }) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
           <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            <i className="fas fa-tag" style={{ color: '#10B981', fontSize: '0.65rem' }}></i>
+            <i className="fas fa-tag" style={{ color: '#018891', fontSize: '0.65rem' }}></i>
             {misura}
           </span>
           <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            <i className="fas fa-users" style={{ color: '#10B981', fontSize: '0.65rem' }}></i>
+            <i className="fas fa-users" style={{ color: '#018891', fontSize: '0.65rem' }}></i>
             {target}
           </span>
         </div>
 
         <div className="border-slate-100 dark:border-[rgba(255,255,255,0.08)]" style={{ paddingTop: '0.75rem', borderTop: '1px solid', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{
-            fontSize: '0.78rem', fontWeight: 700, color: '#10B981',
+            fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary-text)',
             opacity: hovered ? 1 : 0.55, transition: 'opacity 0.2s',
           }}>
             100% Finanziato
@@ -189,51 +190,6 @@ export default function ProgrammaGOL() {
         .breadcrumb a:hover { color: #6EE7B7; }
         .breadcrumb span { color: rgba(255,255,255,0.3); }
 
-        .cta-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: #008C95;
-          color: #fff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          box-shadow: 0 4px 24px rgba(16,185,129,0.35);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none;
-          cursor: pointer;
-          font-family: inherit;
-        }
-        .cta-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(16,185,129,0.5);
-        }
-        .cta-btn-outline {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: transparent;
-          color: rgba(255,255,255,0.85);
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22);
-          transition: all 0.2s ease;
-          font-family: inherit;
-          cursor: pointer;
-        }
-        .cta-btn-outline:hover {
-          background: rgba(255,255,255,0.08);
-          border-color: rgba(255,255,255,0.5);
-        }
 
         .info-grid {
           display: grid;
@@ -286,11 +242,11 @@ export default function ProgrammaGOL() {
           </p>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#percorsi" className="cta-btn-primary">
+            <a href="#percorsi" className="btn btn-lg btn-light">
               <i className="fas fa-rocket"></i>
               Scopri i percorsi
             </a>
-            <a href="/contatti" className="cta-btn-outline">Contattaci</a>
+            <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
           </div>
         </div>
       </section>
@@ -300,12 +256,12 @@ export default function ProgrammaGOL() {
         <div className="container">
           <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
             <div style={{ flex: 1, minWidth: '280px' }}>
-              <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#10B981', marginBottom: '0.5rem' }}>
+              <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--primary-text)', marginBottom: '0.5rem' }}>
                 Il programma
               </span>
               <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
                 Cos&apos;è il{' '}
-                <span style={{ color: '#10B981' }}>Programma G.O.L.?</span>
+                <span style={{ color: 'var(--primary-text)' }}>Programma G.O.L.?</span>
               </h2>
               <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: '0 0 1rem' }}>
                 Il Programma <strong className="text-slate-900 dark:text-white">Garanzia di Occupabilità dei Lavoratori (G.O.L.)</strong> è una misura del Piano Nazionale di Ripresa e Resilienza (PNRR) che mira a rafforzare le politiche attive del lavoro in Italia. Con una dotazione di 4,4 miliardi di euro, punta a coinvolgere almeno 3 milioni di persone entro il 2025.
@@ -315,8 +271,8 @@ export default function ProgrammaGOL() {
               </p>
             </div>
             <div style={{ flex: '0 0 auto', minWidth: '260px' }}>
-              <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900/40" style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <h3 className="text-emerald-900 dark:text-emerald-200" style={{ fontSize: '0.85rem', fontWeight: 800, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div className="bg-brand-100/40 dark:bg-brand-600/20 border border-brand-100 dark:border-brand-600/40" style={{ borderRadius: '1.25rem', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <h3 className="text-brand-700 dark:text-brand-200" style={{ fontSize: '0.85rem', fontWeight: 800, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Chi può aderire
                 </h3>
                 {[
@@ -327,10 +283,10 @@ export default function ProgrammaGOL() {
                   { icon: 'fas fa-users', label: 'Lavoratori in crisi aziendale' },
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(16,185,129,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <i className={item.icon} style={{ fontSize: '0.85rem', color: '#10B981' }}></i>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(1,136,145,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <i className={item.icon} style={{ fontSize: '0.85rem', color: '#018891' }}></i>
                     </div>
-                    <span className="text-emerald-900 dark:text-emerald-200" style={{ fontSize: '0.875rem', fontWeight: 600 }}>{item.label}</span>
+                    <span className="text-brand-700 dark:text-brand-200" style={{ fontSize: '0.875rem', fontWeight: 600 }}>{item.label}</span>
                   </div>
                 ))}
               </div>
@@ -343,7 +299,7 @@ export default function ProgrammaGOL() {
       <section id="percorsi" className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', textAlign: 'center' }}>
-            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#10B981', marginBottom: '0.6rem' }}>
+            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--primary-text)', marginBottom: '0.6rem' }}>
               Le 5 misure
             </span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: '0 0 0.75rem', lineHeight: 1.25 }}>
@@ -360,7 +316,7 @@ export default function ProgrammaGOL() {
             ))}
           </div>
 
-          <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900/40" style={{
+          <div className="bg-brand-100/40 dark:bg-brand-600/20 border border-brand-100 dark:border-brand-600/40" style={{
             marginTop: '3rem',
             borderRadius: '1rem',
             padding: '1.25rem 2rem',
@@ -369,8 +325,8 @@ export default function ProgrammaGOL() {
             gap: '1.25rem',
             flexWrap: 'wrap',
           }}>
-            <i className="fas fa-info-circle" style={{ color: '#10B981', fontSize: '1.25rem', flexShrink: 0 }}></i>
-            <p className="text-emerald-900 dark:text-emerald-200" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.6 }}>
+            <i className="fas fa-info-circle" style={{ color: '#018891', fontSize: '1.25rem', flexShrink: 0 }}></i>
+            <p className="text-brand-700 dark:text-brand-200" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.6 }}>
               Tutti i percorsi G.O.L. sono <strong>completamente gratuiti</strong> per i beneficiari. Contattaci per verificare la tua eleggibilità e avviare la presa in carico personalizzata.
             </p>
           </div>
@@ -381,7 +337,7 @@ export default function ProgrammaGOL() {
       <section className="bg-white dark:bg-dark-card" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#10B981', marginBottom: '0.6rem' }}>
+            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--primary-text)', marginBottom: '0.6rem' }}>
               Il processo
             </span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
@@ -397,9 +353,9 @@ export default function ProgrammaGOL() {
             ].map((item) => (
               <div key={item.step} className="bg-slate-50 dark:bg-dark-bg" style={{ borderRadius: '1.25rem', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 900, color: '#10B981', letterSpacing: '0.08em' }}>STEP {item.step}</span>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className={item.icon} style={{ fontSize: '1.1rem', color: '#10B981' }}></i>
+                  <span style={{ fontSize: '0.65rem', fontWeight: 900, color: 'var(--primary-text)', letterSpacing: '0.08em' }}>STEP {item.step}</span>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(1,136,145,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className={item.icon} style={{ fontSize: '1.1rem', color: '#018891' }}></i>
                   </div>
                 </div>
                 <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1rem', fontWeight: 800, margin: 0 }}>{item.title}</h3>
@@ -411,28 +367,14 @@ export default function ProgrammaGOL() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #064E3B 100%)', padding: '5rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6EE7B7', marginBottom: '1rem' }}>
-            Inizia ora
-          </span>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 900, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>
-            Vuoi aderire al Programma G.O.L.?
-          </h2>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', maxWidth: '720px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-            Contattaci per verificare la tua eleggibilità e avviare gratuitamente il percorso personalizzato più adatto a te.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="/contatti" className="cta-btn-primary">
-              <i className="fas fa-paper-plane"></i>
-              Contattaci
-            </a>
-            <a href="/agenzia-per-il-lavoro/servizi-alla-persona" className="cta-btn-outline">
-              Tutti i servizi
-            </a>
-          </div>
-        </div>
-      </section>
+      <CtaFinale
+        background="linear-gradient(135deg, #0F172A 0%, #064E3B 100%)"
+        eyebrow="Inizia ora"
+        title="Vuoi aderire al Programma G.O.L.?"
+        text="Contattaci per verificare la tua eleggibilità e avviare gratuitamente il percorso personalizzato più adatto a te."
+        primary={{ label: 'Contattaci', href: '/contatti', icon: 'fas fa-paper-plane' }}
+        secondary={{ label: 'Tutti i servizi', href: '/agenzia-per-il-lavoro/servizi-alla-persona' }}
+      />
 
       </main>
       <Footer />

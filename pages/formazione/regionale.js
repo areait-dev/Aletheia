@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState, Fragment } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import CtaFinale from '../../components/CtaFinale';
 import Reveal from '../../components/Reveal';
 
 const avvisi = [
@@ -111,7 +112,7 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
     >
       <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
       <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1 }}>
-        <span style={{ fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#10B981', background: 'rgba(16,185,129,0.1)', padding: '0.25rem 0.65rem', borderRadius: '999px', width: 'fit-content' }}>
+        <span style={{ fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary-text)', background: 'rgba(1,136,145,0.1)', padding: '0.25rem 0.65rem', borderRadius: '999px', width: 'fit-content' }}>
           {badge}
         </span>
 
@@ -209,51 +210,6 @@ export default function FormazioneRegionale() {
         }
 
 
-        .cta-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: #008C95;
-          color: #fff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none;
-          cursor: pointer;
-          font-family: inherit;
-        }
-        .cta-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0,140,149,0.5);
-        }
-        .cta-btn-outline {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: transparent;
-          color: rgba(255,255,255,0.85);
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22);
-          transition: all 0.2s ease;
-          font-family: inherit;
-          cursor: pointer;
-        }
-        .cta-btn-outline:hover {
-          background: rgba(255,255,255,0.08);
-          border-color: rgba(255,255,255,0.5);
-        }
       `}</style>
 
       {/* ── HERO ── */}
@@ -306,8 +262,8 @@ export default function FormazioneRegionale() {
             </div>
 
             <div className="fade-up fade-up-3 justify-center mx-auto" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a href="#avvisi" className="cta-btn-primary">Scopri gli avvisi</a>
-              <a href="/contatti" className="cta-btn-outline">Contattaci</a>
+              <a href="#avvisi" className="btn btn-lg btn-light">Scopri gli avvisi</a>
+              <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
             </div>
           </div>
         </div>
@@ -384,7 +340,7 @@ export default function FormazioneRegionale() {
             }}>
               <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 90% 10%, rgba(16,185,129,0.18) 0%, transparent 70%)' }} />
 
-              <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)' }}>
+              <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(1,136,145,0.15)', border: '1px solid rgba(1,136,145,0.3)' }}>
                 <i className="fas fa-clipboard-check" style={{ color: '#6EE7B7', fontSize: '1.4rem' }}></i>
               </div>
 
@@ -399,7 +355,7 @@ export default function FormazioneRegionale() {
 
               <a
                 href="/contatti"
-                className="hover:bg-[#10B981]"
+                className="hover:bg-[#006B73]"
                 style={{
                   fontSize: '0.92rem',
                   fontWeight: 700,
@@ -466,23 +422,13 @@ export default function FormazioneRegionale() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', padding: '5rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6EE7B7', marginBottom: '1rem' }}>
-            Hai domande?
-          </span>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 900, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>
-            Non sai quale corso scegliere?
-          </h2>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', maxWidth: '720px', margin: '0 auto 2rem', lineHeight: 1.75 }}>
-            Che tu stia cercando lavoro o la persona giusta per la tua azienda, contattaci.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
-            <a href="/contatti" className="cta-btn-primary">Contattaci</a>
-            <a href="/agenzia-per-il-lavoro/servizi-alle-imprese#contatta-azienda" className="cta-btn-outline">Contatta un consulente</a>
-          </div>
-        </div>
-      </section>
+      <CtaFinale
+        eyebrow="Hai domande?"
+        title="Non sai quale corso scegliere?"
+        text="Che tu stia cercando lavoro o la persona giusta per la tua azienda, contattaci."
+        primary={{ label: 'Contattaci', href: '/contatti' }}
+        secondary={{ label: 'Contatta un consulente', href: '/agenzia-per-il-lavoro/servizi-alle-imprese#contatta-azienda' }}
+      />
 
       </main>
       <Footer />

@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
 import HeroParallax from '../components/HeroParallax';
+import CtaFinale from '../components/CtaFinale';
 import { CALENDARIO, CATEGORIE } from '../data/calendario';
 
 /* ─── Dati statici ───────────────────────────────────────── */
@@ -15,7 +16,7 @@ const categorie = [
   {
     href: '/formazione/regionale-fse',
     badge: 'Gratuito',
-    badgeColor: '#10B981',
+    badgeColor: '#018891',
     title: 'Formazione Finanziata',
     description: 'Percorsi finanziati da fondi regionali, europei e interprofessionali per acquisire nuove competenze e ottenere qualifiche professionali.',
     color: '#008C95',
@@ -161,10 +162,10 @@ function formatDateItalian(dateStr) {
 // Etichetta leggibile della categoria a partire dalla key
 const CATEGORIA_LABEL = Object.fromEntries(CATEGORIE.map((c) => [c.key, c.label]));
 
-// Stile pill pastello per categoria (solo tinte brand #008C95/#10B981 + un neutro)
+// Stile pill pastello per categoria (solo tinte brand #018891/#018891 + un neutro)
 const CATEGORIA_BADGE = {
-  'obbligatoria': 'bg-[#008C95]/8 text-[#006066] border border-[#008C95]/25 dark:bg-[#10B981]/10 dark:text-[#6EE7B7] dark:border-[#10B981]/30',
-  'regionale-fse': 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-[#10B981]/10 dark:text-[#6EE7B7] dark:border-[#10B981]/30',
+  'obbligatoria': 'bg-[#018891]/8 text-[#006066] border border-[#018891]/25 dark:bg-[#018891]/10 dark:text-[#5FC2C8] dark:border-primary-on-dark/30',
+  'regionale-fse': 'bg-brand-100/40 text-brand-600 border border-brand-200 dark:bg-[#018891]/10 dark:text-[#5FC2C8] dark:border-primary-on-dark/30',
   'professionale': 'bg-slate-50 text-slate-700 border border-slate-200 dark:bg-white/5 dark:text-gray-200 dark:border-white/15',
 };
 
@@ -368,7 +369,7 @@ function HeroSearch() {
                 }}
                 className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   selected === cat.value
-                    ? 'bg-[#008C95]/10 text-[#006066] dark:text-[#10B981]' /* WCAG AA 4.5:1 su sfondo tinta */
+                    ? 'bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark' /* WCAG AA 4.5:1 su sfondo tinta */
                     : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5'
                 }`}
               >
@@ -381,7 +382,7 @@ function HeroSearch() {
 
       <button
         type="button"
-        className="px-8 min-h-[44px] inline-flex items-center justify-center bg-[#008C95] hover:bg-[#006B73] dark:bg-[#10B981] dark:hover:bg-[#059669] text-white font-bold text-sm rounded-full transition-all duration-200 whitespace-nowrap"
+        className="px-8 min-h-[44px] inline-flex items-center justify-center bg-[#018891] hover:bg-[#006B73] dark:bg-[#018891] dark:hover:bg-[#006B73] text-white font-bold text-sm rounded-full transition-all duration-200 whitespace-nowrap"
       >
         Cerca
       </button>
@@ -435,7 +436,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 justify-center mt-8">
               <a
                 href="/all-courses"
-                className="inline-flex items-center justify-center gap-2 min-h-[52px] whitespace-nowrap bg-[#008C95] hover:bg-[#006B73] text-white font-bold px-8 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-base"
+                className="btn btn-lg btn-light"
               >
                 Scopri i corsi
               </a>
@@ -443,7 +444,7 @@ export default function Home() {
                 href="https://aletheia4job.it/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 min-h-[52px] whitespace-nowrap bg-white/10 backdrop-blur-sm text-white font-bold px-8 rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-200 text-base"
+                className="btn btn-lg btn-ghost-light"
               >
                 <i className="fas fa-briefcase text-sm" aria-hidden="true" />
                 Vedi offerte di lavoro
@@ -457,7 +458,7 @@ export default function Home() {
       <Reveal as="section" className="pt-16 pb-24 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
               Calendario corsi
             </span>
             <h2 id="calendario-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -475,7 +476,7 @@ export default function Home() {
           <div className="text-center mt-12">
             <a
               href="/calendario-corsi"
-              className="inline-flex items-center gap-2 text-primary dark:text-[#10B981] hover:text-[#006B73] dark:hover:text-[#059669] font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-primary dark:text-primary-on-dark hover:text-[#04767D] dark:hover:text-[#99D1D5] font-semibold transition-colors"
             >
               Vedi il calendario completo →
             </a>
@@ -488,7 +489,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <Reveal className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
               I nostri percorsi formativi
             </span>
             <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto mb-2">
@@ -527,7 +528,7 @@ export default function Home() {
       <section className="numbers-section">
         <div className="container">
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#10B981]">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-white">
               Alètheia in numeri
             </span>
           </div>
@@ -536,14 +537,14 @@ export default function Home() {
               <NumberCounter
                 target="+10000"
                 label="Persone formate dal 2005"
-                valueClassName="text-6xl sm:text-7xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none"
+                valueClassName="text-6xl sm:text-7xl font-extrabold text-white tracking-tight tabular-nums leading-none"
                 labelClassName="text-sm"
               />
             </div>
             <div className="numbers-hero-side">
-              <NumberCounter target="+20"  label="Anni di esperienza" valueClassName="text-3xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none" />
-              <NumberCounter target="+100" label="Progetti formativi realizzati" valueClassName="text-3xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none" />
-              <NumberCounter target="+200" label="Aziende clienti" valueClassName="text-3xl font-extrabold text-[#10B981] tracking-tight tabular-nums leading-none" />
+              <NumberCounter target="+20"  label="Anni di esperienza" valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
+              <NumberCounter target="+100" label="Progetti formativi realizzati" valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
+              <NumberCounter target="+200" label="Aziende clienti" valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
             </div>
           </div>
         </div>
@@ -586,7 +587,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
               Cosa facciamo
             </span>
             <h2 id="cosa-facciamo-heading" className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">
@@ -609,7 +610,10 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#004D52]/95 via-[#004D52]/70 to-transparent" />
                 <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
-                  <p className="font-black tracking-wider text-xs text-[#10B981] uppercase mb-2">Sviluppo delle Competenze</p>
+                  <span className="badge-overlay mb-3">
+                    <span className="badge-overlay-dot" aria-hidden="true" />
+                    Sviluppo delle Competenze
+                  </span>
                   <h3 className="text-2xl font-bold text-white mb-3">Formazione</h3>
                   <p className="text-slate-200 text-sm leading-relaxed max-w-md">
                     Progettiamo percorsi formativi che rispondono alle esigenze reali del
@@ -618,7 +622,7 @@ export default function Home() {
                   </p>
                   <a
                     href="/all-courses"
-                    className="mt-5 self-start inline-flex items-center justify-center min-h-9 whitespace-nowrap bg-primary hover:bg-[#10B981] text-white font-bold px-5 rounded-full text-xs transition-colors duration-200"
+                    className="btn btn-sm btn-light mt-5 self-start"
                   >
                     Scopri di più →
                   </a>
@@ -639,7 +643,10 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#004D52]/95 via-[#004D52]/70 to-transparent" />
                 <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end h-full text-white">
-                  <p className="font-black tracking-wider text-xs text-[#10B981] uppercase mb-2">Orientamento e inserimento</p>
+                  <span className="badge-overlay mb-3">
+                    <span className="badge-overlay-dot" aria-hidden="true" />
+                    Orientamento e inserimento
+                  </span>
                   <h3 className="text-2xl font-bold text-white mb-3">Agenzia per il Lavoro</h3>
                   <p className="text-slate-200 text-sm leading-relaxed max-w-md">
                     Siamo Agenzia per il Lavoro autorizzata. Supportiamo giovani, lavoratori
@@ -648,7 +655,7 @@ export default function Home() {
                   </p>
                   <a
                     href="/agenzia-per-il-lavoro"
-                    className="mt-5 self-start inline-flex items-center justify-center min-h-9 whitespace-nowrap bg-primary hover:bg-[#10B981] text-white font-bold px-5 rounded-full text-xs transition-colors duration-200"
+                    className="btn btn-sm btn-light mt-5 self-start"
                   >
                     Scopri di più →
                   </a>
@@ -664,7 +671,7 @@ export default function Home() {
       <section className="pt-20 pb-24 bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#10B981] mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-white mb-3">
               Parte del Gruppo
             </span>
             <h2 id="gruppo-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-white text-balance max-w-3xl mx-auto">
@@ -736,7 +743,7 @@ export default function Home() {
           {/* Header sezione */}
           <Reveal className="flex items-end justify-between mb-10">
             <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
                 News
               </span>
               <h2 id="news-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
@@ -746,7 +753,7 @@ export default function Home() {
             <a
               href="/news"
               aria-label="Vedi tutte le notizie"
-              className="inline-flex items-center gap-2 text-[#008C95] dark:text-[#10B981] font-semibold hover:text-[#006B73] dark:hover:text-[#059669] transition-colors text-sm"
+              className="inline-flex items-center gap-2 text-[#018891] dark:text-primary-on-dark font-semibold hover:text-[#04767D] dark:hover:text-[#99D1D5] transition-colors text-sm"
             >
               Vedi tutte le notizie
             </a>
@@ -778,13 +785,13 @@ export default function Home() {
                   <time dateTime={item.date} className="text-xs text-slate-600 dark:text-gray-500 font-medium mb-2">
                     {formatDateItalian(item.date)}
                   </time>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 group-hover:text-[#008C95] dark:group-hover:text-[#10B981] transition-colors">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 group-hover:text-[#018891] dark:group-hover:text-[#018891] transition-colors">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-slate-600 dark:text-gray-300 text-sm line-clamp-2 flex-1">
                     {item.excerpt}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-[#008C95] dark:text-[#10B981] font-semibold text-sm group-hover:gap-3 transition-all duration-200">
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[#018891] dark:text-primary-on-dark font-semibold text-sm group-hover:gap-3 transition-all duration-200">
                     Leggi
                   </span>
                 </div>
@@ -806,7 +813,7 @@ export default function Home() {
       <section className="py-24 bg-light dark:bg-dark-bg" aria-labelledby="clienti-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-[#10B981] mb-3">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
               Clienti
             </span>
             <h2 id="clienti-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">
@@ -825,7 +832,7 @@ export default function Home() {
                 aria-hidden={i >= clientiLoghi.length}
               >
                 {/* Placeholder logo - sostituire con <img src="/images/clienti/..." className="grayscale opacity-70 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 transition-all duration-300" /> */}
-                <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap text-slate-700 dark:text-white/70 grayscale opacity-100 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:text-[#008C95] dark:group-hover/logo:text-[#10B981] transition-all duration-300">
+                <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap text-slate-700 dark:text-white/70 grayscale opacity-100 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:text-[#018891] dark:group-hover/logo:text-[#018891] transition-all duration-300">
                   <i className={`${logo.icon} text-2xl`} aria-hidden="true" />
                   {logo.name}
                 </span>
@@ -854,25 +861,12 @@ export default function Home() {
       )}
 
       {/* ── 4b · CTA FINALE ──────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950 via-[#003134] to-slate-950 text-white border-t border-slate-900">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white text-balance">
-            Hai bisogno di un corso<br className="hidden sm:block" /> o stai cercando lavoro?
-          </h2>
-          <p className="text-slate-300 text-base sm:text-lg max-w-4xl mx-auto font-normal leading-relaxed">
-            Il team di Alètheia è a disposizione per orientarti verso il percorso più
-            adatto alle tue esigenze.
-          </p>
-          <div className="pt-4">
-            <a
-              href="/contatti"
-              className="inline-flex items-center justify-center min-h-[60px] whitespace-nowrap bg-primary hover:bg-[#10B981] text-white font-bold px-8 rounded-full text-base transition-all duration-[250ms] shadow-lg shadow-[#008C95]/10 hover:shadow-[#10B981]/20 hover:-translate-y-0.5 active:translate-y-0"
-            >
-              Contattaci
-            </a>
-          </div>
-        </div>
-      </section>
+      <CtaFinale
+        background="linear-gradient(to bottom right, #020617, #003134, #020617)" /* gradiente originale della CTA home */
+        title={<>Hai bisogno di un corso<br className="hidden sm:block" /> o stai cercando lavoro?</>}
+        text="Il team di Alètheia è a disposizione per orientarti verso il percorso più adatto alle tue esigenze."
+        primary={{ label: 'Contattaci', href: '/contatti' }}
+      />
 
       {/* ── 5 · FOOTER ───────────────────────────────────── */}
       </main>

@@ -73,7 +73,7 @@ function Field({ label, required, error, children, isDark }: FieldProps) {
         color: error ? '#F87171' : isDark ? 'rgba(226,232,240,0.75)' : 'rgba(255,255,255,0.75)',
         letterSpacing: '0.02em',
       }}>
-        {label}{required && <span style={{ color: '#10B981', marginLeft: '2px' }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
       {error && (
@@ -106,7 +106,7 @@ const selectStyle = (hasError: boolean, isDark: boolean): CSSProperties => ({
   cursor: 'pointer',
 });
 
-const focusOn  = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.target.style.borderColor = '#10B981'; };
+const focusOn  = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.target.style.borderColor = '#018891'; };
 const focusOff = (hasErr: boolean, isDark: boolean) => (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.target.style.borderColor = hasErr ? '#F87171' : isDark ? 'rgba(148,163,184,0.2)' : 'rgba(255,255,255,0.12)'; };
 
 interface FormAziendaProps {
@@ -190,7 +190,7 @@ export default function FormAzienda({
           <span style={{
             display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
             letterSpacing: '0.12em', textTransform: 'uppercase',
-            color: isDark ? '#86EFAC' : '#6EE7B7', marginBottom: '0.6rem',
+            color: '#fff', marginBottom: '0.6rem',
           }}>
             {badge}
           </span>
@@ -457,7 +457,7 @@ export default function FormAzienda({
                         Privacy Policy
                       </a>{' '}
                       di Alètheia S.r.l.
-                      <span style={{ color: '#10B981', marginLeft: '2px' }}>*</span>
+                      <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>
                     </span>
                   </label>
                   {errors.privacy && (

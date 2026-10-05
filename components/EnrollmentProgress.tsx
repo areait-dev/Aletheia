@@ -74,7 +74,7 @@ export default function EnrollmentProgress({ courseId, courseTitle }: Enrollment
             style={{
               width: `${(count / SOGLIA_AVVIO) * 100}%`,
               height: '100%',
-              background: soglaRaggiunta ? '#10B981' : '#008C95',
+              background: soglaRaggiunta ? '#018891' : '#018891',
               transition: 'width 0.3s ease',
             }}
           />
@@ -83,7 +83,7 @@ export default function EnrollmentProgress({ courseId, courseTitle }: Enrollment
       </div>
 
       {soglaRaggiunta ? (
-        <p className="text-emerald-700 dark:text-emerald-400" style={{ fontSize: '0.78rem', margin: 0 }}>
+        <p className="text-brand-500 dark:text-primary-on-dark" style={{ fontSize: '0.78rem', margin: 0 }}>
           Soglia di {SOGLIA_AVVIO} iscrizioni raggiunta: il corso partirà a breve, il nostro staff ricontatterà gli iscritti per calendarizzarlo.
         </p>
       ) : justEnrolled ? (

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import CtaFinale from '../../components/CtaFinale';
 import Reveal from '../../components/Reveal';
 
 const heroBadges = [
@@ -111,13 +112,10 @@ function VerticaleCard({ sopratitolo, title, bullets, cta, href, image, imageAlt
     >
       <div style={{ aspectRatio: '4 / 3', position: 'relative' }}>
         {image && <ImgCourse src={image} alt={imageAlt} />}
-        {/* Sopratitolo come badge sovrapposto alla foto: sfondo scuro solido (non il verde
-           trasparente della hero) perché sopra foto chiare il testo verde chiaro spariva
-           per mancanza di contrasto. */}
-        <span
-          className="absolute left-4 bottom-4 text-[0.68rem] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-full"
-          style={{ color: '#6EE7B7', background: 'rgba(4,15,20,0.82)', border: '1px solid rgba(110,231,183,0.4)', backdropFilter: 'blur(3px)' }}
-        >
+        {/* Sopratitolo come badge sovrapposto alla foto: stile unico .badge-overlay
+           (pillola bianca, leggibile su qualsiasi foto). */}
+        <span className="badge-overlay absolute left-4 bottom-4">
+          <span className="badge-overlay-dot" aria-hidden="true" />
           {sopratitolo}
         </span>
       </div>
@@ -129,13 +127,13 @@ function VerticaleCard({ sopratitolo, title, bullets, cta, href, image, imageAlt
         <ul className="list-none m-0 p-0 space-y-2 flex-1">
           {bullets.map((b, i) => (
             <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-slate-600 dark:text-gray-300">
-              <i className="fas fa-check text-xs mt-1 shrink-0 text-primary dark:text-[#10B981]"></i>
+              <i className="fas fa-check text-xs mt-1 shrink-0 text-primary dark:text-primary-on-dark"></i>
               <span>{b}</span>
             </li>
           ))}
         </ul>
 
-        <span className="mt-auto inline-flex items-center gap-2 text-sm font-bold rounded-full border-2 px-5 py-2.5 transition-all duration-300 border-primary text-primary dark:border-[#10B981] dark:text-[#10B981] hover:bg-primary hover:text-white dark:hover:bg-[#10B981] dark:hover:text-slate-900">
+        <span className="mt-auto inline-flex items-center gap-2 text-sm font-bold rounded-full border-2 px-5 py-2.5 transition-all duration-300 border-primary text-primary dark:border-primary-on-dark dark:text-primary-on-dark hover:bg-primary hover:text-white dark:hover:bg-primary-on-dark dark:hover:text-slate-900">
           {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
         </span>
       </div>
@@ -171,17 +169,6 @@ export default function FormazioneProfessionaleSpecialistica() {
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
         .fade-up-4 { animation-delay: 0.38s; opacity: 0; }
 
-        .cta-btn-primary-fps {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
-          white-space: nowrap;
-          background: #008C95; color: #fff;
-          font-weight: 700; font-size: 0.95rem; text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none; cursor: pointer; font-family: inherit;
-        }
-        .cta-btn-primary-fps:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
 
         .fps-badges-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
 
@@ -244,7 +231,7 @@ export default function FormazioneProfessionaleSpecialistica() {
           </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#aree" className="cta-btn-primary-fps">Scopri i nostri corsi</a>
+            <a href="#aree" className="btn btn-lg btn-light">Scopri i nostri corsi</a>
           </div>
         </div>
       </section>
@@ -258,7 +245,7 @@ export default function FormazioneProfessionaleSpecialistica() {
           <div className="valori-grid-fps">
             {valori.map((v, i) => (
               <Reveal key={v.title} delay={(i % 4) * 80} className="valori-item-fps">
-                <span className="text-primary dark:text-[#10B981] font-black block mb-2" style={{ fontSize: '1.6rem', opacity: 0.35 }}>
+                <span className="text-primary dark:text-primary-on-dark font-black block mb-2" style={{ fontSize: '1.6rem', opacity: 0.35 }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="font-extrabold text-slate-900 dark:text-white text-lg block mb-2">
@@ -297,14 +284,10 @@ export default function FormazioneProfessionaleSpecialistica() {
       </section>
 
       {/* ══════════════ CHIUSURA ══════════════ */}
-      <section style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', padding: '5rem 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, color: '#fff', marginBottom: '1.5rem', lineHeight: 1.3 }}>
-            Non trovi il percorso formativo che cerchi?
-          </h3>
-          <a href="/all-courses" className="cta-btn-primary-fps">Visiona tutti i nostri corsi</a>
-        </div>
-      </section>
+      <CtaFinale
+        title="Non trovi il percorso formativo che cerchi?"
+        primary={{ label: 'Visiona tutti i nostri corsi', href: '/all-courses' }}
+      />
 
       </main>
       <Footer />

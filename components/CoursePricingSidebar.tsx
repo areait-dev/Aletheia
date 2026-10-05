@@ -41,7 +41,7 @@ export default function CoursePricingSidebar({
         {customContent ?? (priceRows?.map((row, i) => (
           <div key={row.label} className="flex flex-col">
             <span className="text-[0.7rem] font-bold text-slate-600 dark:text-[#9aa8a6]">{row.label}</span>
-            <span className="text-[#008C95] dark:text-[#10B981] font-black text-3xl tracking-tight mt-0.5">{row.value}</span>
+            <span className="text-[#018891] dark:text-primary-on-dark font-black text-3xl tracking-tight mt-0.5">{row.value}</span>
           </div>
         )))}
       </div>
@@ -51,7 +51,7 @@ export default function CoursePricingSidebar({
         <a
           href={primaryHref || '#'}
           onClick={onPrimaryClick}
-          className="w-full text-center text-white rounded-full min-h-[52px] px-6 font-bold no-underline bg-[#008C95] dark:bg-[#10B981] hover:bg-[#006B73] dark:hover:bg-[#059669] transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-[#008C95]/20 dark:shadow-none group whitespace-nowrap"
+          className="w-full text-center text-white rounded-full min-h-[52px] px-6 font-bold no-underline bg-[#018891] dark:bg-[#018891] hover:bg-[#006B73] dark:hover:bg-[#006B73] transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-[#018891]/20 dark:shadow-none group whitespace-nowrap"
         >
           {label}
           <i className={`${icon} text-xs transition-transform group-hover:translate-x-1`}></i>
@@ -60,17 +60,17 @@ export default function CoursePricingSidebar({
         {whatsappHref && (
           <a
             href={whatsappHref} target="_blank" rel="noopener noreferrer"
-            className="w-full text-center py-2 font-medium text-xs no-underline text-slate-600 dark:text-[#9aa8a6] hover:text-[#008C95] dark:hover:text-[#10B981] bg-transparent flex items-center justify-center gap-1.5 transition-colors"
+            className="w-full text-center py-2 font-medium text-xs no-underline text-slate-600 dark:text-[#9aa8a6] hover:text-[#018891] dark:hover:text-primary-on-dark bg-transparent flex items-center justify-center gap-1.5 transition-colors"
           >
-            <i className="fab fa-whatsapp text-sm text-[#10B981]"></i> Parla con un consulente su WhatsApp
+            <i className="fab fa-whatsapp text-sm text-[#018891]"></i> Parla con un consulente su WhatsApp
           </a>
         )}
       </div>
 
       {/* Trust Badges in stile Apple Micro-copy */}
       <div className="flex justify-between items-center text-[0.65rem] font-semibold text-slate-600 dark:text-[#9aa8a6] px-1 pt-1">
-        <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-[#10B981]"></i> Preventivo gratuito</span>
-        <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-[#10B981]"></i> Risposta in 24h</span>
+        <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-[#018891]"></i> Preventivo gratuito</span>
+        <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-[#018891]"></i> Risposta in 24h</span>
       </div>
 
     </div>

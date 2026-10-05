@@ -127,7 +127,7 @@ function ConsulenzaPAForm({ isDark }) {
   const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
   const setCheck = (e) => setFields((p) => ({ ...p, privacy: e.target.checked }));
   const inputStyle = getInputStyle(isDark);
-  const groupLabelColor = isDark ? '#6EE7B7' : '#008C95';
+  const groupLabelColor = isDark ? '#5FC2C8' : '#008C95';
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -221,7 +221,7 @@ function ConsulenzaPAForm({ isDark }) {
         />
         <label htmlFor="pa-privacy" style={{ fontSize: '0.8rem', lineHeight: 1.6, cursor: 'pointer', color: isDark ? 'rgba(255,255,255,0.65)' : '#475569' }}>
           Ho letto e accetto la{' '}
-          <a href="/privacy-cookie" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
+          <a href="/privacy-cookie" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>Privacy Policy</a>
           {' '}e acconsento al trattamento dei dati ai sensi del GDPR. <span style={{ color: '#008C95' }}>*</span>
         </label>
       </div>
@@ -277,26 +277,6 @@ export default function CorsiPA() {
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
 
-        .cta-btn-primary-pa {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
-          white-space: nowrap;
-          background: #008C95; color: #fff;
-          font-weight: 700; font-size: 0.95rem; text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none; cursor: pointer; font-family: inherit;
-        }
-        .cta-btn-primary-pa:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,140,149,0.5); }
-        .cta-btn-outline-pa {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius); background: transparent;
-          white-space: nowrap;
-          color: rgba(255,255,255,0.85); font-weight: 700; font-size: 0.95rem; text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22); transition: all 0.2s ease;
-          font-family: inherit; cursor: pointer;
-        }
-        .cta-btn-outline-pa:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 
         .partner-grid-pa { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: stretch; }
         @media (max-width: 900px) { .partner-grid-pa { grid-template-columns: 1fr; } }
@@ -335,7 +315,7 @@ export default function CorsiPA() {
           display: flex; align-items: center; justify-content: center;
           background: rgba(0,140,149,0.08); color: #008C95;
         }
-        .dark .pa-mepa-item .pa-mepa-icon { background: rgba(16,185,129,0.12); color: #6EE7B7; }
+        .dark .pa-mepa-item .pa-mepa-icon { background: rgba(1,136,145,0.12); color: #5FC2C8; }
         .pa-mepa-item span { font-size: 0.87rem; line-height: 1.6; color: #334155; padding-top: 0.4rem; }
         .dark .pa-mepa-item span { color: #E2E8F0; }
 
@@ -392,7 +372,7 @@ export default function CorsiPA() {
           </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#contatti" className="cta-btn-primary-pa">Richiedi informazioni</a>
+            <a href="#contatti" className="btn btn-lg btn-light">Richiedi informazioni</a>
           </div>
         </div>
       </section>
@@ -416,12 +396,12 @@ export default function CorsiPA() {
 
             {/* Blocchi di completamento */}
             <div className="col-span-1 bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-6 flex flex-col justify-center gap-2">
-              <span className="text-lg lg:text-xl font-black text-primary-text dark:text-[#10B981] leading-tight uppercase">Ente accreditato</span>
+              <span className="text-lg lg:text-xl font-black text-primary-text dark:text-primary-on-dark leading-tight uppercase">Ente accreditato</span>
               <span className="text-slate-600 dark:text-gray-300 text-sm leading-snug">Regione Siciliana</span>
             </div>
 
             <div className="col-span-1 bg-slate-50 dark:bg-dark-bg border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-3xl p-6 flex flex-col justify-center gap-2">
-              <span className="text-lg lg:text-xl font-black text-primary-text dark:text-[#10B981] leading-tight uppercase">Percorsi personalizzabili</span>
+              <span className="text-lg lg:text-xl font-black text-primary-text dark:text-primary-on-dark leading-tight uppercase">Percorsi personalizzabili</span>
               <span className="text-slate-600 dark:text-gray-300 text-sm leading-snug">progettati sulle esigenze della PA</span>
             </div>
           </div>
@@ -451,7 +431,7 @@ export default function CorsiPA() {
                 Svolgiamo attività di formazione, aggiornamento professionale, progettazione finanziata e sviluppo delle competenze per il personale della PA.
               </p>
 
-              <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : 'var(--primary-text-on-light)', margin: '1.5rem 0 0.85rem' }}>
+              <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#5FC2C8' : 'var(--primary-text-on-light)', margin: '1.5rem 0 0.85rem' }}>
                 Il nostro curriculum comprende collaborazioni con
               </span>
               <ul style={{ listStyle: 'none', margin: '0 0 1.5rem', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -470,7 +450,7 @@ export default function CorsiPA() {
                   { icon: 'fas fa-sliders', text: 'Modalità di erogazione flessibili' },
                 ].map((item) => (
                   <div key={item.text} className={`pa-strength-card${item.featured ? ' featured' : ''}`}>
-                    <i className={item.icon} style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '1.1rem' }}></i>
+                    <i className={item.icon} style={{ color: isDark ? '#5FC2C8' : '#008C95', fontSize: '1.1rem' }}></i>
                     <span>{item.text}</span>
                   </div>
                 ))}
@@ -488,7 +468,7 @@ export default function CorsiPA() {
                   Alètheia è presente sul Mercato Elettronico della Pubblica Amministrazione (MEPA), la piattaforma ufficiale di acquisto della Pubblica Amministrazione. Gli enti possono così affidare i servizi formativi tramite una procedura ufficiale, riducendo i tempi amministrativi e semplificando l&apos;iter di acquisto, nel pieno rispetto della normativa sugli appalti.
                 </p>
 
-                <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#6EE7B7' : 'var(--primary-text-on-light)', marginBottom: '0.85rem' }}>
+                <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#5FC2C8' : 'var(--primary-text-on-light)', marginBottom: '0.85rem' }}>
                   Con Alètheia puoi contare su
                 </span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.75rem' }}>
@@ -576,7 +556,7 @@ export default function CorsiPA() {
                     style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '1.1rem 1.4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', cursor: 'pointer', fontWeight: 700, fontSize: '0.95rem' }}
                   >
                     <span>{item.domanda}</span>
-                    <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: isDark ? '#6EE7B7' : '#008C95', flexShrink: 0 }}></i>
+                    <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} style={{ color: isDark ? '#5FC2C8' : '#008C95', flexShrink: 0 }}></i>
                   </button>
                   {isOpen && (
                     <p className="text-slate-600 dark:text-gray-300" style={{ margin: 0, padding: '0 1.4rem 1.4rem', lineHeight: 1.75, fontSize: '0.9rem' }}>
@@ -607,7 +587,7 @@ export default function CorsiPA() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem' }}>
                   <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-phone" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                    <i className="fas fa-phone" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontSize: '0.9rem' }}></i>
                   </div>
                   <div>
                     <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : 'var(--muted-text)' }}>Telefono</span>
@@ -616,7 +596,7 @@ export default function CorsiPA() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem' }}>
                   <div style={{ width: '38px', height: '38px', minWidth: '38px', borderRadius: '10px', background: isDark ? 'rgba(255,255,255,0.08)' : '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-envelope" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                    <i className="fas fa-envelope" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontSize: '0.9rem' }}></i>
                   </div>
                   <div>
                     <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', color: isDark ? 'rgba(255,255,255,0.45)' : 'var(--muted-text)' }}>Email</span>
@@ -626,11 +606,11 @@ export default function CorsiPA() {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '1.75rem', paddingTop: '1.5rem', borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #E2E8F0' }}>
-                <i className="fas fa-landmark" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                <i className="fas fa-landmark" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontSize: '0.9rem' }}></i>
                 <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.85rem', fontWeight: 600 }}>Ente accreditato Regione Siciliana</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.75rem' }}>
-                <i className="fas fa-clock" style={{ color: isDark ? '#6EE7B7' : '#008C95', fontSize: '0.9rem' }}></i>
+                <i className="fas fa-clock" style={{ color: isDark ? '#5FC2C8' : '#008C95', fontSize: '0.9rem' }}></i>
                 <span className="text-slate-700 dark:text-gray-300" style={{ fontSize: '0.85rem', fontWeight: 600 }}>Rispondiamo entro 24 ore lavorative</span>
               </div>
             </div>

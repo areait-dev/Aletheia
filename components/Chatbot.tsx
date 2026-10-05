@@ -462,7 +462,7 @@ export default function Chatbot() {
                 }}>
                   {aiAnswer}
                   <div style={{ marginTop: '0.6rem', borderTop: theme === 'dark' ? '1px solid #4B5563' : '1px solid #F1F5F9', paddingTop: '0.5rem' }}>
-                    <a href="/#contatti" style={{ fontSize: '0.76rem', color: theme === 'dark' ? '#10B981' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>
+                    <a href="/#contatti" style={{ fontSize: '0.76rem', color: theme === 'dark' ? '#018891' : '#018891', fontWeight: 700, textDecoration: 'none' }}>
                       Contattaci per saperne di più →
                     </a>
                   </div>
@@ -499,7 +499,7 @@ export default function Chatbot() {
                       href="tel:+390932862613"
                       style={{
                         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                        background: theme === 'dark' ? '#10B981' : '#008C95',
+                        background: theme === 'dark' ? '#018891' : '#018891',
                         color: '#fff', fontWeight: 700, fontSize: '0.76rem',
                         padding: '0 0.9rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', textDecoration: 'none',
                       }}
@@ -512,8 +512,8 @@ export default function Chatbot() {
                       style={{
                         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                         background: 'transparent',
-                        border: theme === 'dark' ? '1px solid #10B981' : '1px solid #008C95',
-                        color: theme === 'dark' ? '#10B981' : '#008C95',
+                        border: theme === 'dark' ? '1px solid #018891' : '1px solid #018891',
+                        color: theme === 'dark' ? '#018891' : '#018891',
                         fontWeight: 700, fontSize: '0.76rem',
                         padding: '0 0.9rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', textDecoration: 'none',
                       }}
@@ -543,12 +543,12 @@ export default function Chatbot() {
                         background: chipHover === i
                           ? (theme === 'dark' ? '#1e3a3a' : '#F0FDFA')
                           : (theme === 'dark' ? '#374151' : '#fff'),
-                        border: chipHover === i ? '1px solid #10B981' : (theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0'),
+                        border: chipHover === i ? '1px solid #018891' : (theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0'),
                         borderRadius: '999px',
                         padding: '0.55rem 0.9rem',
                         fontSize: '0.78rem',
                         fontWeight: 600,
-                        color: chipHover === i ? '#10B981' : (theme === 'dark' ? '#E2E8F0' : '#0F172A'),
+                        color: chipHover === i ? '#018891' : (theme === 'dark' ? '#E2E8F0' : '#0F172A'),
                         cursor: 'pointer',
                         textAlign: 'left',
                         width: '100%',
@@ -589,12 +589,12 @@ export default function Chatbot() {
                     background: chipHover === i
                       ? (theme === 'dark' ? '#1e3a3a' : '#F0FDFA')
                       : (theme === 'dark' ? '#374151' : '#fff'),
-                    border: chipHover === i ? '1px solid #10B981' : (theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0'),
+                    border: chipHover === i ? '1px solid #018891' : (theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0'),
                     borderRadius: '999px',
                     padding: '0.6rem 1rem',
                     fontSize: '0.82rem',
                     fontWeight: 600,
-                    color: chipHover === i ? '#10B981' : (theme === 'dark' ? '#E2E8F0' : '#0F172A'),
+                    color: chipHover === i ? '#018891' : (theme === 'dark' ? '#E2E8F0' : '#0F172A'),
                     cursor: 'pointer',
                     textAlign: 'left',
                     width: '100%',
@@ -611,7 +611,7 @@ export default function Chatbot() {
               {/* Domanda (destra) */}
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div style={{
-                  background: theme === 'dark' ? '#10B981' : '#008C95',
+                  background: theme === 'dark' ? '#018891' : '#018891',
                   color: '#fff',
                   borderRadius: '1rem 1rem 0.25rem 1rem',
                   padding: '0.65rem 1rem',
@@ -638,7 +638,7 @@ export default function Chatbot() {
                 }}>
                   {selected.a}
                   <div style={{ marginTop: '0.6rem', borderTop: theme === 'dark' ? '1px solid #4B5563' : '1px solid #F1F5F9', paddingTop: '0.5rem' }}>
-                    <a href="/#contatti" style={{ fontSize: '0.76rem', color: theme === 'dark' ? '#10B981' : '#008C95', fontWeight: 700, textDecoration: 'none' }}>
+                    <a href="/#contatti" style={{ fontSize: '0.76rem', color: theme === 'dark' ? '#018891' : '#018891', fontWeight: 700, textDecoration: 'none' }}>
                       Contattaci per saperne di più →
                     </a>
                   </div>
@@ -690,7 +690,7 @@ export default function Chatbot() {
             type="submit"
             aria-label="Invia domanda"
             style={{
-              background: theme === 'dark' ? '#10B981' : '#008C95',
+              background: theme === 'dark' ? '#018891' : '#018891',
               border: 'none',
               borderRadius: '50%',
               width: '38px', height: '38px',
@@ -727,13 +727,13 @@ export default function Chatbot() {
         style={{
           position: 'relative',
           borderRadius: '50%',
-          background: theme === 'dark' ? '#10B981' : '#008C95',
+          background: theme === 'dark' ? '#018891' : '#018891',
           border: 'none',
           cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: open ? (theme === 'dark' ? '0 4px 20px rgba(16,185,129,0.45)' : '0 4px 20px rgba(0,140,149,0.45)') : undefined,
-          '--chatbot-glow-color': theme === 'dark' ? 'rgba(16,185,129,0.45)' : 'rgba(0,140,149,0.45)',
-          '--chatbot-glow-ring': theme === 'dark' ? 'rgba(16,185,129,0.14)' : 'rgba(0,140,149,0.12)',
+          boxShadow: open ? (theme === 'dark' ? '0 4px 20px rgba(1,136,145,0.45)' : '0 4px 20px rgba(1,136,145,0.45)') : undefined,
+          '--chatbot-glow-color': theme === 'dark' ? 'rgba(1,136,145,0.45)' : 'rgba(1,136,145,0.45)',
+          '--chatbot-glow-ring': theme === 'dark' ? 'rgba(1,136,145,0.14)' : 'rgba(1,136,145,0.12)',
           transform: btnHover ? 'scale(1.08)' : 'scale(1)',
           transition: 'transform 0.2s ease',
           flexShrink: 0,

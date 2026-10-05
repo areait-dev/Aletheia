@@ -41,7 +41,7 @@ const SERVICES = [
     description:
       'Offriamo sessioni di orientamento individuale per aiutarti a definire il tuo percorso professionale, valorizzare le tue competenze e affrontare con sicurezza il mercato del lavoro.',
     tag: 'Orientamento',
-    color: '#10B981',
+    color: '#018891',
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
     imageAlt: 'Consulente in sessione di orientamento professionale',
   },
@@ -61,7 +61,7 @@ const SERVICES = [
     description:
       'Siamo operatori accreditati del Programma Garanzia Occupabilità Lavoratori (G.O.L.), il piano nazionale per il reinserimento lavorativo. Percorsi personalizzati di formazione e riqualificazione professionale finanziati.',
     tag: 'Piano Nazionale',
-    color: '#10B981',
+    color: '#018891',
     href: '/programma-gol',
     image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=600&q=80',
     imageAlt: 'Percorso di reinserimento lavorativo finanziato',
@@ -82,7 +82,7 @@ const SERVICES = [
     description:
       'Accompagniamo le persone in transizione professionale con coaching individuale, aggiornamento del CV e strategie efficaci di ricerca attiva del lavoro.',
     tag: 'Transizione',
-    color: '#10B981',
+    color: '#018891',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
     imageAlt: 'Coaching per la transizione professionale',
   },
@@ -157,19 +157,8 @@ function ServiceCard({ icon, title, description, tag, color, index, href, image,
         >
           <i className={icon}></i>
         </div>
-        <span
-          style={{
-            fontSize: '0.63rem',
-            fontWeight: 800,
-            letterSpacing: '0.09em',
-            textTransform: 'uppercase',
-            color: '#fff',
-            background: 'rgba(255,255,255,0.18)',
-            backdropFilter: 'blur(4px)',
-            padding: '0.3rem 0.7rem',
-            borderRadius: '999px',
-          }}
-        >
+        <span className="badge-overlay">
+          <span className="badge-overlay-dot" style={{ "--badge-dot": color }} aria-hidden="true" />
           {tag}
         </span>
       </div>
@@ -263,51 +252,6 @@ export default function ServiziAllaPersona() {
           .chi-siamo-section { padding-bottom: 5.5rem !important; }
         }
 
-        .cta-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: #008C95;
-          color: #fff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          font-family: inherit;
-          border: none;
-          cursor: pointer;
-        }
-        .cta-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0,140,149,0.5);
-        }
-        .cta-btn-outline {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: transparent;
-          color: rgba(255,255,255,0.85);
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22);
-          transition: all 0.2s ease;
-          font-family: inherit;
-          cursor: pointer;
-        }
-        .cta-btn-outline:hover {
-          background: rgba(255,255,255,0.08);
-          border-color: rgba(255,255,255,0.5);
-        }
 
         .breadcrumb {
           display: flex;
@@ -369,10 +313,10 @@ export default function ServiziAllaPersona() {
           </p>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="https://aletheia4job.it/" target="_blank" rel="noopener noreferrer" className="cta-btn-primary">Vedi le offerte</a>
+            <a href="https://aletheia4job.it/" target="_blank" rel="noopener noreferrer" className="btn btn-lg btn-light">Vedi le offerte</a>
             <a
               href="#contatta-candidato"
-              className="cta-btn-outline"
+              className="btn btn-lg btn-ghost-light"
               onClick={(e) => { e.preventDefault(); scrollToContattaCandidato(); }}
             >
               Contattaci
@@ -387,7 +331,7 @@ export default function ServiziAllaPersona() {
           a contatto diretto con l'hero, con un bordo inferiore sottile a fare
           da cerniera visiva con la sezione successiva. */}
       <div
-        className="bg-[#6EE7B7]/20 dark:bg-[#6EE7B7]/10 border-b border-[#10B981]/25 dark:border-[#6EE7B7]/20"
+        className="bg-[#5FC2C8]/20 dark:bg-[#5FC2C8]/10 border-b border-[#018891]/25 dark:border-[#5FC2C8]/20"
         style={{ padding: '1.1rem 0' }}
       >
         <div
@@ -400,8 +344,8 @@ export default function ServiziAllaPersona() {
           ].map((stat, i, arr) => (
             <Fragment key={i}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className={stat.icon} style={{ color: '#059669', fontSize: '1rem' }}></i>
-                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#059669' }}>{stat.label}</span>
+                <i className={stat.icon} style={{ color: '#04767D', fontSize: '1rem' }}></i>
+                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#04767D' }}>{stat.label}</span>
               </div>
               {i < arr.length - 1 && (
                 <span aria-hidden="true" style={{ width: '1px', height: '1.1rem', background: 'rgba(5,150,105,0.35)' }} />

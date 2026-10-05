@@ -23,7 +23,7 @@ const SERVICES = [
     description:
       'Selezioniamo i profili più adatti alla tua organizzazione attraverso un processo strutturato: analisi del fabbisogno, screening dei candidati, colloqui approfonditi e valutazione delle competenze tecniche e trasversali.',
     tag: 'Headhunting',
-    color: '#10B981',
+    color: '#018891',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
     imageAlt: 'Colloquio di selezione del personale',
   },
@@ -43,7 +43,7 @@ const SERVICES = [
     description:
       'Progettiamo percorsi di upskilling e reskilling su misura per sviluppare le competenze del tuo personale, attrarre nuovi talenti e mantenere la tua azienda competitiva. Gestiamo l\'accesso ai Fondi Interprofessionali e supportiamo i processi di riorganizzazione con programmi di riqualificazione finanziati, valorizzando il capitale umano e riducendo i costi di turnover.',
     tag: 'Upskilling',
-    color: '#10B981',
+    color: '#018891',
     image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
     imageAlt: 'Sessione di formazione aziendale per i dipendenti',
   },
@@ -63,7 +63,7 @@ const SERVICES = [
     description:
       'Mettiamo a disposizione delle imprese strumenti e misure per favorire l\'occupazione, facilitando l\'incontro con persone in cerca di lavoro, in fase di reinserimento o interessate a un nuovo percorso professionale. Individuiamo le opportunità più adatte e accompagniamo l\'azienda nella loro attivazione.',
     tag: 'Finanziato',
-    color: '#10B981',
+    color: '#018891',
     image: 'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=600&q=80',
     imageAlt: 'Percorso di riqualificazione professionale in azienda',
   },
@@ -155,19 +155,8 @@ function ServiceCard({ icon, title, description, tag, color, image, imageAlt }) 
         >
           <i className={icon}></i>
         </div>
-        <span
-          style={{
-            fontSize: '0.63rem',
-            fontWeight: 800,
-            letterSpacing: '0.09em',
-            textTransform: 'uppercase',
-            color: '#fff',
-            background: 'rgba(255,255,255,0.18)',
-            backdropFilter: 'blur(4px)',
-            padding: '0.3rem 0.7rem',
-            borderRadius: '999px',
-          }}
-        >
+        <span className="badge-overlay">
+          <span className="badge-overlay-dot" style={{ "--badge-dot": color }} aria-hidden="true" />
           {tag}
         </span>
       </div>
@@ -348,20 +337,6 @@ export default function ServiziAlleImprese() {
         .breadcrumb a:hover { color: #6EE7B7; }
         .breadcrumb span { color: rgba(255,255,255,0.3); }
 
-        .cta-btn-primary {
-          display: inline-flex; align-items: center; gap: 0.55rem;
-          padding: 0 2rem; min-height: var(--btn-height-lg); border-radius: var(--btn-radius);
-          white-space: nowrap;
-          background: #008C95;
-          color: #fff; font-weight: 700; font-size: 0.95rem;
-          text-decoration: none; font-family: inherit;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .cta-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0,140,149,0.5);
-        }
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
@@ -394,7 +369,7 @@ export default function ServiziAlleImprese() {
           <div className="page-hero-actions fade-up delay-3">
             <a
               href="#contatta-azienda"
-              className="cta-btn-primary"
+              className="btn btn-lg btn-light"
               onClick={(e) => { e.preventDefault(); scrollToContattaAzienda(); }}
             >
               Richiedi una consulenza

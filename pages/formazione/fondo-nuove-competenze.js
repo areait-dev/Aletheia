@@ -136,51 +136,6 @@ export default function FondoNuoveCompetenze() {
         .fade-up-2 { animation-delay: 0.18s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
-        .cta-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: #008C95;
-          color: #fff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          box-shadow: 0 4px 24px rgba(0,140,149,0.38);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          border: none;
-          cursor: pointer;
-          font-family: inherit;
-        }
-        .cta-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0,140,149,0.5);
-        }
-        .cta-btn-outline {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          padding: 0 2rem;
-          min-height: var(--btn-height-lg);
-          white-space: nowrap;
-          border-radius: var(--btn-radius);
-          background: transparent;
-          color: rgba(255,255,255,0.85);
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          border: 2px solid rgba(255,255,255,0.22);
-          transition: all 0.2s ease;
-          font-family: inherit;
-          cursor: pointer;
-        }
-        .cta-btn-outline:hover {
-          background: rgba(255,255,255,0.08);
-          border-color: rgba(255,255,255,0.5);
-        }
 
         /* Griglia target (transizione digitale / ecologica / organizzativa) */
         .target-grid {
@@ -294,7 +249,7 @@ export default function FondoNuoveCompetenze() {
         }
         .bento-card:hover {
           transform: translateY(-4px);
-          border-color: #10B981;
+          border-color: #018891;
           box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
         }
         .bento-card.featured {
@@ -317,8 +272,8 @@ export default function FondoNuoveCompetenze() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(16, 185, 129, 0.1);
-          color: #10B981;
+          background: rgba(1,136,145, 0.1);
+          color: #018891;
           flex-shrink: 0;
         }
         .bento-card .bento-icon svg {
@@ -426,7 +381,7 @@ export default function FondoNuoveCompetenze() {
           </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="/contatti" className="cta-btn-primary">
+            <a href="/contatti" className="btn btn-lg btn-light">
               Verifica se la tua azienda può accedere
               <i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
             </a>
@@ -510,7 +465,7 @@ export default function FondoNuoveCompetenze() {
           </div>
 
           <div style={{ marginTop: '2.5rem' }}>
-            <span className="page-hero-badge" style={{ color: '#059669', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>Servizi</span>
+            <span className="page-hero-badge" style={{ color: '#04767D', background: 'rgba(1,136,145,0.1)', border: '1px solid rgba(1,136,145,0.25)' }}>Servizi</span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 1.9rem)', fontWeight: 900, margin: 0 }}>
               Ci occupiamo di
             </h2>
