@@ -3,49 +3,10 @@ import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CtaFinale from '../components/CtaFinale';
-
-const corsiGOL = [
-  {
-    slug: 'gol-reinserimento-lavorativo',
-    title: 'Reinserimento Lavorativo',
-    icon: 'fas fa-redo-alt',
-    description: 'Percorso personalizzato per disoccupati e inattivi. Orientamento, formazione mirata e accompagnamento all\'inserimento o reinserimento nel mercato del lavoro.',
-    misura: 'Misura 1 - Reinserimento lavorativo',
-    target: 'Disoccupati, percettori NASpI / RdC',
-  },
-  {
-    slug: 'gol-upskilling',
-    title: 'Upskilling',
-    icon: 'fas fa-level-up-alt',
-    description: 'Aggiornamento delle competenze professionali per lavoratori a rischio di esclusione. Corsi brevi e certificati per rafforzare il profilo occupazionale.',
-    misura: 'Misura 2 - Upskilling',
-    target: 'Lavoratori fragili o a rischio',
-  },
-  {
-    slug: 'gol-reskilling',
-    title: 'Reskilling',
-    icon: 'fas fa-sync-alt',
-    description: 'Riqualificazione professionale completa per chi deve cambiare settore o ruolo. Percorsi formativi intensivi con rilascio di qualifica o certificazione.',
-    misura: 'Misura 3 - Reskilling',
-    target: 'Lavoratori in transizione professionale',
-  },
-  {
-    slug: 'gol-lavoro-inclusione',
-    title: 'Lavoro e Inclusione',
-    icon: 'fas fa-hands-helping',
-    description: 'Percorsi dedicati a persone con fragilità o distanza dal mercato del lavoro. Integrazione con i servizi sociali e supporto personalizzato all\'inserimento.',
-    misura: 'Misura 4 - Lavoro e inclusione',
-    target: 'Persone con fragilità sociale',
-  },
-  {
-    slug: 'gol-ricollocazione-collettiva',
-    title: 'Ricollocazione Collettiva',
-    icon: 'fas fa-users',
-    description: 'Interventi di outplacement collettivo per lavoratori in crisi aziendale. Supporto di gruppo e individuale per la transizione verso nuova occupazione.',
-    misura: 'Misura 5 - Ricollocazione collettiva',
-    target: 'Lavoratori in crisi aziendale / CIGS',
-  },
-];
+import { getSchede } from '../lib/wp-schede';
+import { isrOptions } from '../lib/wp';
+import { getPagina } from '../lib/wp-pagine';
+import { withSiteOptions } from '../lib/wp-site';
 
 function CourseCard({ title, icon, description, misura, target }) {
   const [hovered, setHovered] = useState(false);
@@ -134,15 +95,21 @@ function CourseCard({ title, icon, description, misura, target }) {
   );
 }
 
-export default function ProgrammaGOL() {
+// Liste di card: WordPress (CPT scheda) se WP_URL è impostato, altrimenti data/schede.js (vedi lib/wp-schede.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('programma-gol'), corsiGOL: await getSchede('gol-misure') }, ...isrOptions() };
+}
+
+export default function ProgrammaGOL({ corsiGOL, pagina }) {
+  const T = pagina.testi;
   return (
     <>
       <Head>
-        <title>Programma G.O.L. - Garanzia di Occupabilità dei Lavoratori - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Programma G.O.L. - Garanzia di Occupabilità dei Lavoratori - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Alètheia Srl è operatore accreditato del Programma G.O.L. (Garanzia di Occupabilità dei Lavoratori). Percorsi gratuiti di orientamento, formazione e reinserimento professionale in Sicilia."
+          content={pagina.seo.descrizione || "Alètheia Srl è operatore accreditato del Programma G.O.L. (Garanzia di Occupabilità dei Lavoratori). Percorsi gratuiti di orientamento, formazione e reinserimento professionale in Sicilia."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -217,9 +184,7 @@ export default function ProgrammaGOL() {
             <span style={{ color: 'rgba(255,255,255,0.75)' }}>Programma G.O.L.</span>
           </nav>
 
-          <div className="page-hero-badge fade-up">
-            Piano Nazionale - 100% Finanziato
-          </div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '750px' }}>
             Programma{' '}
@@ -237,16 +202,12 @@ export default function ProgrammaGOL() {
             </span>
           </h1>
 
-          <p className="fade-up fade-up-2" style={{ maxWidth: '820px', lineHeight: 1.7 }}>
-            Alètheia Srl è operatore accreditato del Programma G.O.L., il piano nazionale finanziato dal PNRR per il reinserimento lavorativo. Percorsi gratuiti e personalizzati di orientamento, formazione e ricollocazione professionale in Sicilia.
-          </p>
+          <p className="fade-up fade-up-2" style={{ maxWidth: '820px', lineHeight: 1.7 }}>{T.hero_sottotitolo}</p>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#percorsi" className="btn btn-lg btn-light">
-              <i className="fas fa-rocket"></i>
-              Scopri i percorsi
-            </a>
-            <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
+            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">
+              <i className="fas fa-rocket"></i>{T.hero_cta1.label}</a>
+            <a href={T.hero_cta2.href} className="btn btn-lg btn-ghost-light">{T.hero_cta2.label}</a>
           </div>
         </div>
       </section>
@@ -370,10 +331,10 @@ export default function ProgrammaGOL() {
       <CtaFinale
         background="linear-gradient(135deg, #0F172A 0%, #064E3B 100%)"
         eyebrow="Inizia ora"
-        title="Vuoi aderire al Programma G.O.L.?"
-        text="Contattaci per verificare la tua eleggibilità e avviare gratuitamente il percorso personalizzato più adatto a te."
-        primary={{ label: 'Contattaci', href: '/contatti', icon: 'fas fa-paper-plane' }}
-        secondary={{ label: 'Tutti i servizi', href: '/agenzia-per-il-lavoro/servizi-alla-persona' }}
+        title={T.cta_titolo}
+        text={T.cta_testo}
+        primary={{ label: T.cta_bottone1.label, href: T.cta_bottone1.href, icon: 'fas fa-paper-plane' }}
+        secondary={{ label: T.cta_bottone2.label, href: T.cta_bottone2.href }}
       />
 
       </main>
@@ -381,3 +342,6 @@ export default function ProgrammaGOL() {
     </>
   );
 }
+
+// Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

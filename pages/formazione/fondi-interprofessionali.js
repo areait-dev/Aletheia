@@ -3,47 +3,32 @@ import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import FormAzienda from '../../components/FormAzienda';
-
-const vantaggi = [
-  'Formazione a costo zero (o quasi): i corsi sono finanziati dal Fondo, non dal bilancio aziendale',
-  'Percorsi su misura: progettati sui reali fabbisogni della tua azienda, non corsi standard',
-  'Dipendenti più competenti e aggiornati, senza dover trovare budget extra',
-  'Più produttività e competitività, con un investimento che non pesa sui costi correnti',
-  'Valorizzare risorse che altrimenti resterebbero inutilizzate',
-];
+import { getFaqs } from '../../lib/wp-faq';
+import { isrOptions } from '../../lib/wp';
+import { getSchede } from '../../lib/wp-schede';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
 const partner = ['Fondimpresa', 'Fon.Ter', 'For.Agri', 'Fon.Ar.Com.', 'Fondoforte', 'Fondartigianato', 'Fondoconoscenze', 'Formazienda', 'For.Te.'];
 
-const faqs = [
-  {
-    domanda: 'Chi può accedere ai Fondi Interprofessionali?',
-    risposta: 'Tutte le aziende con dipendenti, di qualsiasi settore e dimensione, che versano già il contributo obbligatorio dello 0,30% all\'INPS. Basta aderire al Fondo scelto: l\'adesione è gratuita e non comporta costi aggiuntivi.',
-  },
-  {
-    domanda: 'Quanto costa alla mia azienda?',
-    risposta: 'Nulla di aggiuntivo: i corsi sono finanziati dal Fondo con le risorse che l\'azienda versa già per legge tramite i contributi INPS. Non è un incentivo da richiedere, ma un contributo già dovuto da attivare.',
-  },
-  {
-    domanda: 'Quale Fondo devo scegliere per la mia azienda?',
-    risposta: 'Dipende dal settore e dal CCNL applicato (es. Fon.Ter, For.Agri, Fondimpresa e altri). Il nostro team verifica gratuitamente qual è il Fondo più adatto e ti segue nell\'attivazione.',
-  },
-  {
-    domanda: 'Quanto tempo serve per attivare un percorso formativo?',
-    risposta: 'I tempi variano in base al Fondo e all\'avviso di riferimento. Alètheia segue l\'intero iter, dall\'analisi dei fabbisogni alla progettazione, per rendere il processo il più rapido possibile.',
-  },
-];
+// FAQ: WordPress (CPT faq) se WP_URL è impostato, altrimenti data/faq.js (vedi lib/wp-faq.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('formazione/fondi-interprofessionali'), faqs: await getFaqs('fondi-interprofessionali'), vantaggi: await getSchede('fondi-vantaggi') }, ...isrOptions() };
+}
 
-export default function FondiInterprofessionali() {
+export default function FondiInterprofessionali({ faqs, vantaggi, pagina }) {
+  const T = pagina.testi;
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   return (
     <>
       <Head>
-        <title>Fondi Interprofessionali per Aziende - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Fondi Interprofessionali per Aziende - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Trasforma i contributi INPS che la tua azienda versa già in formazione gratuita per i dipendenti attraverso i Fondi Paritetici Interprofessionali. Alètheia gestisce tutto il processo."
+          content={pagina.seo.descrizione || "Trasforma i contributi INPS che la tua azienda versa già in formazione gratuita per i dipendenti attraverso i Fondi Paritetici Interprofessionali. Alètheia gestisce tutto il processo."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -101,18 +86,14 @@ export default function FondiInterprofessionali() {
             <span style={{ color: '#6EE7B7' }}>Fondi Interprofessionali</span>
           </nav>
 
-          <div className="page-hero-badge fade-up">Formazione finanziata per le aziende</div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '820px' }}>
-            Trasforma i contributi che versi in{' '}
-            <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              formazione gratuita
-            </span>{' '}
-            per i tuoi dipendenti
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
+            </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="/contatti" className="btn btn-lg btn-light">Contattaci</a>
+            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}</a>
           </div>
         </div>
       </section>
@@ -122,24 +103,16 @@ export default function FondiInterprofessionali() {
         <div className="container">
           {/* Blocco attivazione */}
           <div style={{ marginBottom: '3.5rem' }}>
-            <span className="section-badge">Formazione a costo zero</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-              Attivare un Fondo Interprofessionale è più semplice di quanto pensi
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
-              L&apos;adesione a un Fondo Interprofessionale è gratuita e non comporta costi aggiuntivi per l&apos;azienda. Una volta individuato il Fondo più adatto al tuo settore, le risorse accantonate possono finanziare percorsi di formazione costruiti sulle reali esigenze della tua impresa. Alètheia gestisce l&apos;intero processo, dalla verifica delle opportunità disponibili alla progettazione dei corsi, fino alla gestione documentale e alla rendicontazione.
-            </p>
+            <span className="section-badge">{T.intro_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>{T.intro_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>{T.intro_testo[0]}</p>
           </div>
 
           {/* Blocco vantaggi */}
           <div>
-            <span className="section-badge">I vantaggi per la tua impresa</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-              Investi nelle competenze dei tuoi dipendenti
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '1.5rem' }}>
-              Utilizzare i Fondi Interprofessionali significa trasformare un contributo già versato in un&apos;opportunità concreta di crescita. I vantaggi per le aziende che aderiscono ai Fondi Interprofessionali sono:
-            </p>
+            <span className="section-badge">{T.s1_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>{T.s1_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '1.5rem' }}>{T.s1_testo[0]}</p>
 
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem 2rem' }}>
               {vantaggi.map((v) => (
@@ -157,13 +130,9 @@ export default function FondiInterprofessionali() {
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div>
-            <span className="section-badge">Perché scegliere Alètheia</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-              Un unico partner per progettare, finanziare e gestire la formazione aziendale
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
-              La vera difficoltà non è trovare i finanziamenti, ma gestire correttamente tutto il percorso. Scelta del fondo, analisi dei fabbisogni, progettazione, gestione amministrativa e rendicontazione richiedono tempo e competenze specifiche. Con Alètheia tutto questo diventa semplice: affianchiamo le imprese in ogni fase, dalla prima analisi fino alla rendicontazione finale. Non è necessario avere già un progetto definito, bastano poche informazioni e noi le trasformiamo in un piano formativo finanziato e pronto per essere realizzato. Concentrati sulla tua azienda. Alla formazione dei tuoi dipendenti ci pensiamo noi, a costo zero.
-            </p>
+            <span className="section-badge">{T.s2_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>{T.s2_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>{T.s2_testo[0]}</p>
           </div>
 
           {/* Loghi partner */}
@@ -244,3 +213,6 @@ export default function FondiInterprofessionali() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

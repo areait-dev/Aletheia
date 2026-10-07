@@ -3,45 +3,25 @@ import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTheme } from '../context/ThemeContext';
+import { useSiteOptions } from '../context/SiteOptionsContext';
+import { CHATBOT_FAQ } from '../data/chatbot-faq';
 
 interface Faq {
   q: string;
   a: string;
 }
 
-const FAQ_FORMAZIONE: Faq[] = [
-  { q: "Come mi iscrivo a un corso?", a: "Puoi iscriverti direttamente dal nostro sito nella sezione 'Tutti i corsi', oppure contattarci al +39 0932 862613 o via email a info@aletheiasrl.it." },
-  { q: "I corsi sono in presenza o online?", a: "Offriamo entrambe le modalità: corsi in presenza presso la nostra sede di Vittoria (RG) e corsi FAD (Formazione a Distanza) sulla nostra piattaforma e-learning." },
-  { q: "Ci sono corsi gratuiti disponibili?", a: "Sì! Gestiamo corsi finanziati attraverso il Programma G.O.L., l'Avviso FSE+ e altri bandi regionali. Contattaci per scoprire se hai i requisiti per accedere gratuitamente." },
-  { q: "Rilasciate attestati e certificazioni?", a: "Sì, al termine di ogni corso rilasciamo attestati riconosciuti. Per i corsi ECDL/ICDL siamo Test Center AICA accreditato. Per i corsi sulla sicurezza rilasciamo attestati conformi alla normativa vigente." },
-  { q: "Quanto durano i corsi?", a: "La durata varia in base al corso: dai corsi sulla sicurezza di poche ore, ai corsi professionalizzanti di centinaia di ore. Ogni corso ha la durata indicata nella sua scheda." },
-  { q: "Dove si trova la vostra sede?", a: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG). Siamo aperti dal lunedì al venerdì, 9:00-13:00 / 14:00-18:00." },
-  { q: "Cos'è il corso ECDL/ICDL?", a: "È la certificazione informatica più diffusa al mondo, riconosciuta a livello internazionale. Siamo Test Center AICA accreditato e offriamo percorsi Base, Standard, Full Standard e DigComp 2.2." },
-  { q: "Come posso pagare un corso?", a: "Contattaci direttamente per conoscere le modalità di pagamento disponibili: bonifico bancario, rateizzazione o finanziamenti agevolati. Chiamaci al +39 0932 862613." },
-];
+// FAQ per gruppo di pagine: da WordPress (siteOptions.chatbot.faq) o, in locale, da data/chatbot-faq.js.
+type FaqGruppi = { formazione: Faq[]; lavoro: Faq[]; generale: Faq[] };
+type FaqSorgente = { domanda: string; risposta: string };
 
-const FAQ_LAVORO: Faq[] = [
-  { q: "Come posso candidarmi a un'offerta di lavoro?", a: "Puoi consultare le offerte attive nella sezione 'Offerte di Lavoro' e candidarti online, oppure inviarci il tuo CV a info@aletheiasrl.it specificando il ruolo di interesse." },
-  { q: "Cos'è il Programma G.O.L.?", a: "Il Programma Garanzia Occupabilità Lavoratori (G.O.L.) è un piano nazionale per il reinserimento lavorativo. Offre percorsi personalizzati di formazione e riqualificazione professionale completamente finanziati." },
-  { q: "Cosa si intende per Garanzia Giovani?", a: "È un programma rivolto ai giovani NEET (under 30 non occupati e non in formazione) che offre orientamento, formazione e tirocinio finanziati dalla Regione Siciliana." },
-  { q: "Offrite supporto per la stesura del CV?", a: "Sì, nell'ambito dei nostri servizi alla persona offriamo supporto nella stesura del CV, preparazione al colloquio e orientamento professionale personalizzato." },
-  { q: "Siete un'agenzia per il lavoro autorizzata?", a: "Sì, Alètheia S.r.l. è Agenzia per il Lavoro autorizzata dal Ministero del Lavoro con decreto DDS Nr. 1.100/2019, iscritta all'Albo Nazionale delle Agenzie per il Lavoro." },
-  { q: "Quali servizi offrite alle aziende?", a: "Offriamo somministrazione di lavoro, ricerca e selezione del personale, consulenza HR, formazione aziendale e intermediazione lavoro. Contattaci per una consulenza gratuita." },
-  { q: "Come funziona la somministrazione di lavoro?", a: "Forniamo personale qualificato tramite contratti di somministrazione a tempo determinato e indeterminato, garantendo piena conformità normativa e riducendo i costi amministrativi per la tua azienda." },
-  { q: "Dove si trova la vostra sede?", a: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG). Puoi contattarci al +39 0932 862613 o via email a info@aletheiasrl.it." },
-];
+const toFaq = (rows: FaqSorgente[]): Faq[] => rows.map(({ domanda, risposta }) => ({ q: domanda, a: risposta }));
 
-const FAQ_GENERALE: Faq[] = [
-  { q: "Chi è Alètheia S.r.l.?", a: "Alètheia S.r.l. è un ente di formazione professionale e agenzia per il lavoro con sede a Vittoria (RG), operativo dal 2005 in Sicilia. Facciamo parte del gruppo PromoterGroup S.p.A." },
-  { q: "Quali servizi offrite?", a: "Offriamo formazione professionale (corsi obbligatori, ECDL/ICDL, corsi finanziati), servizi di agenzia per il lavoro (ricerca personale, somministrazione, orientamento) e supporto alle imprese." },
-  { q: "Avete corsi sulla sicurezza sul lavoro?", a: "Sì, siamo specializzati in formazione obbligatoria sulla sicurezza: corsi per lavoratori, preposti, dirigenti e datori di lavoro, conformi all'Accordo Stato-Regioni." },
-  { q: "Come posso contattarvi?", a: "Puoi chiamarci al +39 0932 862613, scriverci a info@aletheiasrl.it, o visitarci in Via del Carrubo, snc - Vittoria (RG). Siamo disponibili dal lunedì al venerdì, 9:00-13:00 / 14:00-18:00." },
-  { q: "Dove si trova la vostra sede?", a: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG), in Sicilia." },
-  { q: "Siete accreditati dalla Regione Siciliana?", a: "Sì, siamo accreditati dalla Regione Siciliana per la formazione professionale (DDG n 78/2017) e autorizzati come Agenzia per il Lavoro (DDS Nr. 1.100/2019)." },
-  { q: "Cosa sono i corsi FSE+?", a: "Sono corsi professionalizzanti co-finanziati dal Fondo Sociale Europeo, spesso gratuiti per i partecipanti. Gestiamo diversi avvisi FSE+ per la Regione Siciliana." },
-];
-
-const ALL_FAQ: Faq[] = [...FAQ_FORMAZIONE, ...FAQ_LAVORO, ...FAQ_GENERALE];
+const FAQ_LOCALI: FaqGruppi = {
+  formazione: toFaq(CHATBOT_FAQ.formazione),
+  lavoro: toFaq(CHATBOT_FAQ.lavoro),
+  generale: toFaq(CHATBOT_FAQ.generale),
+};
 
 // Parole chiave sui temi trattati dal sito: se la domanda libera non ne contiene
 // nessuna, l'assistente non tenta un match e resta pertinente al solo ambito Alètheia.
@@ -74,13 +54,13 @@ function isOnTopic(question: string): boolean {
 /** Cerca tra tutte le FAQ del sito la risposta più pertinente alla domanda libera
  *  dell'utente. Ritorna null se la domanda non tocca nessun argomento del sito
  *  (l'assistente non deve rispondere a temi non pertinenti). */
-function findBestAnswer(question: string): Faq | null {
+function findBestAnswer(question: string, allFaq: Faq[]): Faq | null {
   if (!isOnTopic(question)) return null;
 
   const qTokens = new Set(tokenize(question));
   let best: Faq | null = null;
   let bestScore = 0;
-  for (const faq of ALL_FAQ) {
+  for (const faq of allFaq) {
     // Set, non array: una parola ripetuta più volte nella risposta (es. "corso")
     // non deve pesare più di una parola pertinente citata una sola volta.
     const faqTokens = Array.from(new Set(tokenize(faq.q + ' ' + faq.a)));
@@ -100,12 +80,12 @@ function findBestAnswer(question: string): Faq | null {
   return bestScore >= 2 ? best : null;
 }
 
-function useFAQ(): Faq[] {
+function useFAQ(gruppi: FaqGruppi): Faq[] {
   const router = useRouter();
   const path = router.pathname;
-  if (path.includes('agenzia-per-il-lavoro')) return FAQ_LAVORO;
-  if (path.includes('all-courses') || path.includes('corsi') || path.includes('formazione')) return FAQ_FORMAZIONE;
-  return FAQ_GENERALE;
+  if (path.includes('agenzia-per-il-lavoro')) return gruppi.lavoro;
+  if (path.includes('all-courses') || path.includes('corsi') || path.includes('formazione')) return gruppi.formazione;
+  return gruppi.generale;
 }
 
 // Invia in modo silenzioso (fire-and-forget) le domande senza risposta all'endpoint
@@ -159,6 +139,9 @@ async function askAI(question: string, page: string, faqs: Faq[]): Promise<AiRes
 
 export default function Chatbot() {
   const { theme } = useTheme() || { theme: 'light' };
+  // Nome, saluto, segnaposto, messaggio di ripiego ed email di contatto: opzioni globali (tab Chatbot);
+  // il telefono è quello dell'identità del sito.
+  const { chatbot, identita } = useSiteOptions();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Faq | null>(null);
@@ -179,7 +162,11 @@ export default function Chatbot() {
     }
   });
   const bodyRef = useRef<HTMLDivElement>(null);
-  const faqs = useFAQ();
+  // Con WordPress attivo le FAQ arrivano dalle opzioni (toFaq: domanda/risposta → q/a); altrimenti i testi locali.
+  const gruppi: FaqGruppi = chatbot.faq
+    ? { formazione: toFaq(chatbot.faq.formazione), lavoro: toFaq(chatbot.faq.lavoro), generale: toFaq(chatbot.faq.generale) }
+    : FAQ_LOCALI;
+  const faqs = useFAQ(gruppi);
 
   const handleAsk = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -188,7 +175,7 @@ export default function Chatbot() {
     setQuery('');
     setAiAnswer(null);
 
-    const match = findBestAnswer(q);
+    const match = findBestAnswer(q, [...gruppi.formazione, ...gruppi.lavoro, ...gruppi.generale]);
     if (match) {
       setSelected(match);
       setNotPertinent(false);
@@ -248,6 +235,8 @@ export default function Chatbot() {
     setAiLoading(false);
     setNotPertinent(false);
   };
+
+  if (!chatbot.attivo) return null;
 
   return (
     <div className="chatbot-root">
@@ -406,8 +395,8 @@ export default function Chatbot() {
           gap: '0.75rem',
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: '0.9rem', lineHeight: 1.2 }}>Assistente Alètheia</div>
-            <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.15rem' }}>Rispondo subito alle tue domande</div>
+            <div style={{ fontWeight: 700, color: '#fff', fontSize: '0.9rem', lineHeight: 1.2 }}>{chatbot.nome}</div>
+            <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.15rem' }}>{chatbot.benvenuto}</div>
           </div>
           <button
             onClick={handleClose}
@@ -493,10 +482,10 @@ export default function Chatbot() {
                   maxWidth: '90%',
                   lineHeight: 1.6,
                 }}>
-                  Non ho trovato una risposta precisa a questa domanda. Puoi contattarci direttamente:
+                  {chatbot.fallback}
                   <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
                     <a
-                      href="tel:+390932862613"
+                      href={`tel:${identita.telefono.replace(/[^+\d]/g, '')}`}
                       style={{
                         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                         background: theme === 'dark' ? '#018891' : '#018891',
@@ -508,7 +497,7 @@ export default function Chatbot() {
                       Chiamaci
                     </a>
                     <a
-                      href="mailto:info@aletheiasrl.it"
+                      href={`mailto:${chatbot.email}`}
                       style={{
                         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                         background: 'transparent',
@@ -673,7 +662,7 @@ export default function Chatbot() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Scrivi una domanda su corsi o lavoro..."
+            placeholder={chatbot.placeholder}
             style={{
               flex: 1,
               minWidth: 0,

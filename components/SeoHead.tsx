@@ -28,6 +28,9 @@ function resolveUrl(value: string, base: string): string {
 }
 
 export default function SeoHead({ title, description, ogImage, url, type = 'website' }: SeoHeadProps) {
+  // Nota: i figli di next/head sono renderizzati fuori dal provider delle opzioni globali, quindi qui non si
+  // legge il contesto: le pagine passano `ogImage` (pagina.seo.ogImage || opzioni globali via useSiteOptions);
+  // la descrizione predefinita e la verifica Google sono emesse da _app.
   const absoluteUrl = resolveUrl(url, SITE_URL);
   const absoluteImage = ogImage ? resolveUrl(ogImage, SITE_URL) : DEFAULT_OG_IMAGE;
 

@@ -5,92 +5,13 @@ import { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import FormAzienda from '../../components/FormAzienda';
 import { getLenis } from '../../lib/lenis';
+import { getSchede } from '../../lib/wp-schede';
+import { isrOptions } from '../../lib/wp';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
-const SERVICES = [
-  {
-    icon: 'fas fa-handshake',
-    title: 'Somministrazione di Lavoro',
-    description:
-      'Forniamo personale qualificato tramite contratti di somministrazione a tempo determinato e indeterminato. Una soluzione flessibile che garantisce piena conformità normativa e riduzione dei costi amministrativi per la tua azienda.',
-    tag: 'Flessibilità',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Colloquio tra consulente e azienda per la somministrazione di personale',
-  },
-  {
-    icon: 'fas fa-magnifying-glass-chart',
-    title: 'Ricerca e Selezione del Personale',
-    description:
-      'Selezioniamo i profili più adatti alla tua organizzazione attraverso un processo strutturato: analisi del fabbisogno, screening dei candidati, colloqui approfonditi e valutazione delle competenze tecniche e trasversali.',
-    tag: 'Headhunting',
-    color: '#018891',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Colloquio di selezione del personale',
-  },
-  {
-    icon: 'fas fa-chart-line',
-    title: 'Consulenza HR',
-    description:
-      'Offriamo consulenza strategica nella gestione delle Risorse Umane: analisi organizzativa, definizione dei profili, piani di sviluppo del personale e supporto nelle fasi di cambiamento aziendale.',
-    tag: 'Strategia',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Team di consulenza HR in riunione strategica',
-  },
-  {
-    icon: 'fas fa-graduation-cap',
-    title: 'Formazione Aziendale',
-    description:
-      'Progettiamo percorsi di upskilling e reskilling su misura per sviluppare le competenze del tuo personale, attrarre nuovi talenti e mantenere la tua azienda competitiva. Gestiamo l\'accesso ai Fondi Interprofessionali e supportiamo i processi di riorganizzazione con programmi di riqualificazione finanziati, valorizzando il capitale umano e riducendo i costi di turnover.',
-    tag: 'Upskilling',
-    color: '#018891',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Sessione di formazione aziendale per i dipendenti',
-  },
-  {
-    icon: 'fas fa-arrows-left-right',
-    title: 'Attivazione Tirocini',
-    description:
-      'Offriamo alle aziende un canale concreto per conoscere e inserire nuove risorse. Individuiamo i profili più adatti, curiamo l\'attivazione del tirocinio e seguiamo l\'intero percorso, trasformando un\'esperienza formativa in una possibile opportunità di inserimento.',
-    tag: 'Matching',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Incontro tra domanda e offerta di lavoro',
-  },
-  {
-    icon: 'fas fa-rotate',
-    title: 'Politiche Attive per il Lavoro',
-    description:
-      'Mettiamo a disposizione delle imprese strumenti e misure per favorire l\'occupazione, facilitando l\'incontro con persone in cerca di lavoro, in fase di reinserimento o interessate a un nuovo percorso professionale. Individuiamo le opportunità più adatte e accompagniamo l\'azienda nella loro attivazione.',
-    tag: 'Finanziato',
-    color: '#018891',
-    image: 'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Percorso di riqualificazione professionale in azienda',
-  },
-];
-
-const WHY_US = [
-  {
-    icon: 'fas fa-certificate',
-    title: 'Autorizzati dal Ministero del Lavoro e delle Politiche Sociali',
-    description: 'Agenzia per il Lavoro autorizzata dal Ministero del Lavoro con decreto DDS Nr. 1.100/2019, iscritta all\'Albo Nazionale delle Agenzie per il Lavoro.',
-    detail: 'DDS Nr. 1.100/2019',
-  },
-  {
-    icon: 'fas fa-map-marker-alt',
-    title: 'Operativi in Sicilia dal 2005',
-    description: 'Vent\'anni di radicamento nel territorio siciliano, con una rete consolidata di relazioni con aziende, istituzioni ed enti di formazione locali.',
-    detail: 'Dal 2005',
-  },
-  {
-    icon: 'fas fa-network-wired',
-    title: 'Parte del network PromoterGroup S.p.A.',
-    description: 'Facciamo parte di un gruppo solido e strutturato, che ci permette di offrire competenze multidisciplinari e risorse ampliate a vantaggio dei nostri clienti.',
-    detail: 'PromoterGroup S.p.A.',
-  },
-];
-
-function ServiceCard({ icon, title, description, tag, color, image, imageAlt }) {
+function ServiceCard({ title, description, tag, color, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -136,25 +57,8 @@ function ServiceCard({ icon, title, description, tag, color, image, imageAlt }) 
         }}
       />
 
-      {/* badge + icona: sempre visibili, per incuriosire */}
+      {/* badge: sempre visibile, per incuriosire (niente icona nelle card dei servizi) */}
       <div style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.65rem', zIndex: 1 }}>
-        <div
-          style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '12px',
-            background: color,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.05rem',
-            color: '#fff',
-            flexShrink: 0,
-            boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
-          }}
-        >
-          <i className={icon}></i>
-        </div>
         <span className="badge-overlay">
           <span className="badge-overlay-dot" style={{ "--badge-dot": color }} aria-hidden="true" />
           {tag}
@@ -273,7 +177,14 @@ function scrollToContattaAzienda() {
   tryScroll();
 }
 
-export default function ServiziAlleImprese() {
+// Liste di card: WordPress (CPT scheda) se WP_URL è impostato, altrimenti data/schede.js (vedi lib/wp-schede.ts).
+async function getPageStaticProps() {
+  const [servizi, perche] = await Promise.all([getSchede('servizi-imprese'), getSchede('perche-noi')]);
+  return { props: { pagina: await getPagina('agenzia-per-il-lavoro/servizi-alle-imprese'), servizi, perche }, ...isrOptions() };
+}
+
+export default function ServiziAlleImprese({ servizi: SERVICES, perche: WHY_US, pagina }) {
+  const T = pagina.testi;
   // Al mount, se si arriva con #contatta-azienda nell'URL (es. da un'altra pagina):
   // Lenis riporta lo scroll a 0 all'inizializzazione, quindi il salto nativo del
   // browser all'anchor viene annullato se non lo rifacciamo qui dopo il mount.
@@ -286,11 +197,11 @@ export default function ServiziAlleImprese() {
   return (
     <>
       <Head>
-        <title>Servizi alle Imprese - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Servizi alle Imprese - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Alètheia Srl - Consulenza HR integrata per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."
+          content={pagina.seo.descrizione || "Alètheia Srl - Consulenza HR integrata per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -352,28 +263,18 @@ export default function ServiziAlleImprese() {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-          <div className="page-hero-badge fade-up">
-            Ricerca. Selezione. Somministrazione
-          </div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up delay-1" style={{ maxWidth: '700px' }}>
-            Servizi alle{' '}
-            <span style={{
-              background: 'linear-gradient(90deg, #008C95, #10B981)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            }}>
-              Imprese
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
+            </h1>
 
           <div className="page-hero-actions fade-up delay-3">
             <a
               href="#contatta-azienda"
               className="btn btn-lg btn-light"
               onClick={(e) => { e.preventDefault(); scrollToContattaAzienda(); }}
-            >
-              Richiedi una consulenza
-            </a>
+            >{T.hero_cta1.label}</a>
             <a
               href="tel:+390932862613"
               style={{
@@ -469,7 +370,7 @@ export default function ServiziAlleImprese() {
             </h2>
             <p className="text-slate-600 dark:text-gray-300" style={{
               fontSize: '1rem',
-              maxWidth: '780px', margin: '0 auto', lineHeight: 1.7,
+              margin: '0 auto', lineHeight: 1.7,
             }}>
               Soluzioni su misura per ogni esigenza organizzativa, dall'inserimento di risorse alla gestione strategica del capitale umano.
             </p>
@@ -522,7 +423,7 @@ export default function ServiziAlleImprese() {
             </h2>
             <p className="text-slate-600 dark:text-gray-400" style={{
               fontSize: '1rem',
-              maxWidth: '760px', margin: '0 auto', lineHeight: 1.7,
+              margin: '0 auto', lineHeight: 1.7,
             }}>
               Vent'anni di esperienza, autorizzazioni ministeriali e un network solido al servizio della tua impresa.
             </p>
@@ -548,3 +449,6 @@ export default function ServiziAlleImprese() {
     </>
   );
 }
+
+// Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-
-const ANNI_DISPONIBILI = ['2023', '2024'];
+import { getAiutiAnni, getAiutiAnno } from '../../lib/wp-aiuti';
+import { isWpEnabled, isrOptions } from '../../lib/wp';
+import { withSiteOptions } from '../../lib/wp-site';
 
 function TabellaEnte({ anno, ente, righe }) {
   return (
@@ -86,20 +87,27 @@ export default function AiutiDiStatoAnno({ anno, enti, paragrafiFinali }) {
   );
 }
 
+/* Sorgente: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-aiuti.ts). */
 export async function getStaticPaths() {
+  const anni = await getAiutiAnni();
   return {
-    paths: ANNI_DISPONIBILI.map((anno) => ({ params: { anno } })),
-    fallback: false,
+    paths: anni.map((anno) => ({ params: { anno } })),
+    fallback: isWpEnabled() ? 'blocking' : false,
   };
 }
 
-export async function getStaticProps({ params }) {
-  const content = require(`../../data/content/aiuti-di-stato/${params.anno}.js`);
+async function getPageStaticProps({ params }) {
+  const content = await getAiutiAnno(params.anno);
+  if (!content) return { notFound: true, ...isrOptions(60) };
   return {
     props: {
       anno: content.anno,
       enti: content.enti,
       paragrafiFinali: content.paragrafiFinali,
     },
+    ...isrOptions(),
   };
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

@@ -8,42 +8,30 @@ import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
 import HeroParallax from '../components/HeroParallax';
 import CtaFinale from '../components/CtaFinale';
-import { CALENDARIO, CATEGORIE } from '../data/calendario';
+import { CATEGORIE } from '../data/calendario';
+import { getCalendario, upcomingDays } from '../lib/wp-calendario';
+import { isrOptions, isWpEnabled } from '../lib/wp';
+import { getPartners } from '../lib/wp-partner';
+import { getSchede } from '../lib/wp-schede';
+import { getNewsList } from '../lib/wp-news';
+import { HOME_NEWS } from '../data/home-news';
+import { getPagina } from '../lib/wp-pagine';
+import HeroTitle from '../components/HeroTitle';
+import { withSiteOptions } from '../lib/wp-site';
+import { useSiteOptions } from '../context/SiteOptionsContext';
 
 /* ─── Dati statici ───────────────────────────────────────── */
 
-const categorie = [
-  {
-    href: '/formazione/regionale-fse',
-    badge: 'Gratuito',
-    badgeColor: '#018891',
-    title: 'Formazione Finanziata',
-    description: 'Percorsi finanziati da fondi regionali, europei e interprofessionali per acquisire nuove competenze e ottenere qualifiche professionali.',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
-    imageAlt: 'Persone che collaborano durante un percorso di formazione finanziata',
-  },
-  {
-    href: '/formazione/obbligatoria',
-    badge: 'Obbligatorio',
-    badgeColor: '#008C95',
-    title: 'Formazione obbligatoria',
-    description: 'Corsi obbligatori conformi al D.Lgs. 81/08. Sicurezza sul lavoro, Decreto Attrezzature, Fitosanitario e Sicurezza alimentare. Metti a norma la tua azienda.',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=80',
-    imageAlt: 'Lavoratore con casco e dispositivi di sicurezza in cantiere',
-  },
-  {
-    href: '/formazione/professionale-specialistica',
-    badge: 'Certificazioni riconosciute',
-    badgeColor: '#64748B',
-    title: 'Formazione professionale',
-    description: 'Certificazioni ICDL, corsi con qualifica professionale, formazione continua e percorsi per la Pubblica Amministrazione.',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
-    imageAlt: 'Persona che sostiene un esame di certificazione al computer',
-  },
-];
+// Righe `Valore|Suffisso|Etichetta` (es. `20|+|Anni di esperienza`) → { target: "20+", label }. NumberCounter ricava il
+// suffisso (+ o %) dal target. Righe senza valore numerico o senza etichetta si scartano.
+function contatori(righe) {
+  return (righe || [])
+    .map((r) => {
+      const [valore = '', suffisso = '', ...resto] = r.split('|').map((c) => c.trim());
+      return { target: `${valore}${suffisso}`, label: resto.join('|'), valido: /^\d+$/.test(valore) };
+    })
+    .filter((n) => n.valido && n.label);
+}
 
 function CategoriaCard({ href, badge, badgeColor, title, description, image, imageAlt }) {
   return (
@@ -100,53 +88,6 @@ const clientiLoghi = [
   { name: 'Wayne Ent.', icon: 'fas fa-building' },
 ];
 
-/* Aziende del gruppo Promotergroup - loghi in public/images/gruppo/ */
-const gruppoLoghi = [
-  { name: 'Promotergroup', src: '/images/gruppo/promotergroup.svg' },
-  { name: 'Promosan', src: '/images/gruppo/promosan.svg' },
-  { name: 'Promoter Soc. Coop.', src: '/images/gruppo/promoter-soc-coop.svg' },
-  { name: 'Promoter Srl', src: '/images/gruppo/promoter-srl.svg' },
-  { name: 'Promoteragri', src: '/images/gruppo/promoteragri.svg' },
-  { name: 'Iside', src: '/images/gruppo/iside.svg' },
-  { name: 'Promesys', src: '/images/gruppo/promesys.svg' },
-  { name: 'Doses', src: '/images/gruppo/doses.svg' },
-];
-
-const newsItems = [
-  {
-    id: 1,
-    slug: 'bonus-giovani-under-35-aprile-2026',
-    title: "Aprile 2026, ultimo mese per l'assunzione di under 35 con il Bonus Giovani",
-    excerpt: "Il decreto Coesione garantisce alle aziende uno sgravio contributivo fino al 100% per le nuove assunzioni under 35.",
-    date: '2026-04-01',
-    image: 'https://www.aletheiasrl.it/media/k2/items/cache/6a501db6788f8bc3147fbec59d7a4924_L.jpg',
-  },
-  {
-    id: 2,
-    slug: 'priorita-lavoratori-2026-workforce-trends',
-    title: 'Meno fughe, più ambizioni: come cambiano le priorità dei lavoratori nel 2026',
-    excerpt: 'Il Workforce Trends Report di The Adecco Group fotografa un mondo del lavoro in profonda trasformazione.',
-    date: '2026-03-15',
-    image: 'https://www.aletheiasrl.it/media/k2/items/cache/b069b892c6725bd357423bc8f6c17d01_L.jpg',
-  },
-  {
-    id: 3,
-    slug: 'accordo-stato-regioni-formazione-sicurezza-2025',
-    title: 'Formazione sulla sicurezza: il nuovo Accordo Stato-Regioni rivoluziona il sistema formativo',
-    excerpt: 'Un quadro unitario, obblighi per i datori di lavoro, percorsi strutturati e attenzione alla qualità.',
-    date: '2025-04-17',
-    image: 'https://www.aletheiasrl.it/media/k2/items/cache/9b8bb3eb74bd3cd97bb3679c60950d61_M.jpg',
-  },
-  {
-    id: 4,
-    slug: 'intelligenza-artificiale-obbligo-formazione-2025',
-    title: "L'Intelligenza Artificiale entra nelle aziende: obbligo di formazione dal 2025",
-    excerpt: "Dal 2 febbraio 2025, le imprese devono garantire formazione adeguata sull'AI ai propri dipendenti.",
-    date: '2025-02-02',
-    image: 'https://www.aletheiasrl.it/media/k2/items/cache/b3a54ecc0915f9347c3f53fa31d161fe_M.jpg',
-  },
-];
-
 /* ─── Utility ────────────────────────────────────────────── */
 
 const MONTHS_IT = [
@@ -180,16 +121,6 @@ const CATEGORIA_THUMB = {
 function modalitaFromSede(sede) {
   return /online/i.test(sede) ? 'Online' : 'In Presenza';
 }
-
-// Giorni dei prossimi corsi (max 10 distinti) a partire da oggi, ciascuno con i suoi corsi.
-// Il confronto su stringa 'YYYY-MM-DD' funziona perché è lessicograficamente ordinabile come una data.
-const oggiISO = new Date().toISOString().slice(0, 10);
-const corsiOrdinati = [...CALENDARIO]
-  .filter((c) => c.data >= oggiISO)
-  .sort((a, b) => a.data.localeCompare(b.data));
-const giorniCalendario = [...new Set(corsiOrdinati.map((c) => c.data))]
-  .slice(0, 10)
-  .map((data) => ({ data, corsi: corsiOrdinati.filter((c) => c.data === data) }));
 
 // Giorni della settimana (indice = Date.getDay(), 0 = domenica)
 const WEEKDAYS_IT = ['DOM', 'LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB'];
@@ -392,17 +323,38 @@ function HeroSearch() {
 
 /* ─── Page ───────────────────────────────────────────────── */
 
-export default function Home() {
+/* Calendario: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-calendario.ts); loghi del gruppo: CPT partner (lib/wp-partner.ts).
+   "Oggi" si calcola qui, a ogni rigenerazione, e non più una sola volta al caricamento del modulo.
+   Il confronto su stringa 'YYYY-MM-DD' funziona perché è lessicograficamente ordinabile come una data. */
+// Ultime tre notizie: con WordPress attivo le ultime pubblicate; senza, la copia storica della home (data/home-news.js)
+// così il sito resta identico a prima. Solo i campi usati dalla card.
+async function ultimeNews() {
+  if (!isWpEnabled()) return HOME_NEWS.slice(0, 3);
+  const all = await getNewsList();
+  return all.slice(0, 3).map(({ id, slug, title, excerpt, date, image }) => ({ id, slug, title, excerpt, date, image: image || '' }));
+}
+
+async function getPageStaticProps() {
+  const calendario = await getCalendario();
+  const oggiISO = new Date().toISOString().slice(0, 10);
+  return { props: { giorniCalendario: upcomingDays(calendario, oggiISO, 10), gruppoLoghi: await getPartners('ecosistema'), categorie: await getSchede('categorie-home'), pagina: await getPagina('home'), newsItems: await ultimeNews() }, ...isrOptions() };
+}
+
+export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina, newsItems }) {
+  const T = pagina.testi;
+  const numeri = contatori(T.numeri);
+  const { seo } = useSiteOptions(); // immagine OG predefinita (opzioni globali): i figli di <Head> non leggono il contesto
   return (
     <>
       <Head>
-        <title>Alètheia Srl - Formazione Professionale</title>
+        <title>{pagina.seo.titolo || "Alètheia Srl - Formazione Professionale"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead
           title="Alètheia Srl - Formazione Professionale"
-          description="Alètheia Srl: ente di formazione professionale e Agenzia per il Lavoro a Vittoria (RG). Corsi finanziati, formazione obbligatoria, certificazioni e inserimento lavorativo."
+          description={pagina.seo.descrizione || "Alètheia Srl: ente di formazione professionale e Agenzia per il Lavoro a Vittoria (RG). Corsi finanziati, formazione obbligatoria, certificazioni e inserimento lavorativo."}
           url="/"
+          ogImage={pagina.seo.ogImage || seo.ogImage || undefined}
         />
       </Head>
 
@@ -418,37 +370,27 @@ export default function Home() {
             <div className="hero-deco hero-deco-2" data-parallax-fast></div>
           </div>
           <div className="container" data-parallax-slow>
-            <div className="hero-badge">
-              Formiamo. Orientiamo. Inseriamo.
-            </div>
+            <div className="hero-badge">{T.hero_eyebrow}</div>
             <h1>
-              Il ponte tra <span>formazione</span> e <span>lavoro</span>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span>{w}</span>} />
             </h1>
-            <p>
-              Trasformiamo competenze in occupazione concreta. Dall&apos;orientamento
-              alla formazione, fino all&apos;inserimento lavorativo. Accompagniamo
-              persone e imprese in ogni fase della crescita professionale.
-            </p>
+            <p>{T.hero_sottotitolo}</p>
 
             {/* Filtro di ricerca - barra unica a capsula */}
             <HeroSearch />
 
             <div className="flex flex-wrap gap-4 justify-center mt-8">
               <a
-                href="/all-courses"
+                href={T.hero_cta1.href}
                 className="btn btn-lg btn-light"
-              >
-                Scopri i corsi
-              </a>
+              >{T.hero_cta1.label}</a>
               <a
-                href="https://aletheia4job.it/"
+                href={T.hero_cta2.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-lg btn-ghost-light"
               >
-                <i className="fas fa-briefcase text-sm" aria-hidden="true" />
-                Vedi offerte di lavoro
-              </a>
+                <i className="fas fa-briefcase text-sm" aria-hidden="true" />{T.hero_cta2.label}</a>
             </div>
           </div>
         </HeroParallax>
@@ -458,15 +400,9 @@ export default function Home() {
       <Reveal as="section" className="pt-16 pb-24 bg-light dark:bg-dark-bg" aria-labelledby="calendario-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
-              Calendario corsi
-            </span>
-            <h2 id="calendario-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
-              Corsi in partenza
-            </h2>
-            <p className="mt-3 text-slate-600 dark:text-gray-300 max-w-4xl mx-auto">
-              Questi corsi partono a breve. Controlla le date e prenota il tuo posto.
-            </p>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">{T.s1_badge}</span>
+            <h2 id="calendario-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">{T.s1_titolo}</h2>
+            <p className="mt-3 text-slate-600 dark:text-gray-300 max-w-4xl mx-auto">{T.s1_testo[0]}</p>
           </div>
 
           <div className="mt-10">
@@ -489,12 +425,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <Reveal className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
-              I nostri percorsi formativi
-            </span>
-            <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto mb-2">
-              Trova il percorso giusto per il tuo futuro professionale
-            </h2>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">{T.s2_badge}</span>
+            <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto mb-2">{T.s2_titolo}</h2>
           </Reveal>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="courses-cat-grid">
@@ -528,23 +460,24 @@ export default function Home() {
       <section className="numbers-section">
         <div className="container">
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-white">
-              Alètheia in numeri
-            </span>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-white">{T.numeri_badge}</span>
           </div>
           <div className="numbers-hero-grid">
-            <div className="numbers-hero-main">
-              <NumberCounter
-                target="+10000"
-                label="Persone formate dal 2005"
-                valueClassName="text-6xl sm:text-7xl font-extrabold text-white tracking-tight tabular-nums leading-none"
-                labelClassName="text-sm"
-              />
-            </div>
+            {/* Contatori da T.numeri (righe `Valore|Suffisso|Etichetta`): la prima è il numero grande, le altre di contorno */}
+            {numeri.length > 0 && (
+              <div className="numbers-hero-main">
+                <NumberCounter
+                  target={numeri[0].target}
+                  label={numeri[0].label}
+                  valueClassName="text-6xl sm:text-7xl font-extrabold text-white tracking-tight tabular-nums leading-none"
+                  labelClassName="text-sm"
+                />
+              </div>
+            )}
             <div className="numbers-hero-side">
-              <NumberCounter target="+20"  label="Anni di esperienza" valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
-              <NumberCounter target="+100" label="Progetti formativi realizzati" valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
-              <NumberCounter target="+200" label="Aziende clienti" valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
+              {numeri.slice(1).map((n) => (
+                <NumberCounter key={n.label} target={n.target} label={n.label} valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
+              ))}
             </div>
           </div>
         </div>
@@ -587,9 +520,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
-              Cosa facciamo
-            </span>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">{T.s3_badge}</span>
             <h2 id="cosa-facciamo-heading" className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">
               Formazione e lavoro.<br />Un unico interlocutore.
             </h2>
@@ -601,8 +532,8 @@ export default function Home() {
             <Reveal>
               <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <Image
-                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
-                  alt="Aula di formazione professionale"
+                  src={T.s3_img_1.src}
+                  alt={T.s3_img_1.alt}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   loading="lazy"
@@ -634,8 +565,8 @@ export default function Home() {
             <Reveal delay={120}>
               <div className="group relative h-[400px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <Image
-                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80"
-                  alt="Colloquio di selezione del personale"
+                  src={T.s3_img_2.src}
+                  alt={T.s3_img_2.alt}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   loading="lazy"
@@ -671,15 +602,9 @@ export default function Home() {
       <section className="pt-20 pb-24 bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-white mb-3">
-              Parte del Gruppo
-            </span>
-            <h2 id="gruppo-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-white text-balance max-w-3xl mx-auto">
-              Alètheia è l&rsquo;ente di formazione di Promotergroup S.p.A.
-            </h2>
-            <p className="mt-2 text-slate-200 max-w-4xl mx-auto">
-              Un ecosistema integrato di servizi per le imprese e il territorio.
-            </p>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-white mb-3">{T.s4_badge}</span>
+            <h2 id="gruppo-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-white text-balance max-w-3xl mx-auto">{T.s4_titolo}</h2>
+            <p className="mt-2 text-slate-200 max-w-4xl mx-auto">{T.s4_testo[0]}</p>
           </div>
 
         </div>
@@ -743,12 +668,8 @@ export default function Home() {
           {/* Header sezione */}
           <Reveal className="flex items-end justify-between mb-10">
             <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
-                News
-              </span>
-              <h2 id="news-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
-                Ultime Notizie
-              </h2>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">{T.s5_badge}</span>
+              <h2 id="news-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">{T.s5_titolo}</h2>
             </div>
             <a
               href="/news"
@@ -771,14 +692,15 @@ export default function Home() {
               >
                 {/* Immagine 16/9 */}
                 <div className="relative aspect-video bg-slate-200 dark:bg-gray-700 overflow-hidden">
-                  <Image
-                    src={item.image}
+                  {item.image && (
+                    <Image src={item.image}
                     alt={item.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 380px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
+                  )}
                 </div>
                 {/* Testo */}
                 <div className="flex flex-col flex-1 p-5">
@@ -864,8 +786,8 @@ export default function Home() {
       <CtaFinale
         background="linear-gradient(to bottom right, #020617, #003134, #020617)" /* gradiente originale della CTA home */
         title={<>Hai bisogno di un corso<br className="hidden sm:block" /> o stai cercando lavoro?</>}
-        text="Il team di Alètheia è a disposizione per orientarti verso il percorso più adatto alle tue esigenze."
-        primary={{ label: 'Contattaci', href: '/contatti' }}
+        text={T.cta_testo}
+        primary={{ label: T.cta_bottone1.label, href: T.cta_bottone1.href }}
       />
 
       {/* ── 5 · FOOTER ───────────────────────────────────── */}
@@ -874,3 +796,6 @@ export default function Home() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

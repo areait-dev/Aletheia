@@ -5,54 +5,11 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useTheme } from '../../context/ThemeContext';
 import Reveal from '../../components/Reveal';
-
-const percorsi = [
-  {
-    badge: 'FSE+, POC Sicilia, PSR, FEAMP',
-    icon: 'fas fa-map-marked-alt',
-    title: 'Formazione Regionale',
-    bullets: [
-      'Percorsi finanziati da Regione Siciliana e Unione Europea',
-      'Rivolti a disoccupati, inoccupati e chi cerca nuove competenze',
-      'Stage aziendali, indennità di frequenza, qualifiche riconosciute',
-      'Alètheia ti segue nella verifica requisiti e iscrizione',
-    ],
-    cta: 'Scopri i corsi',
-    href: '/formazione/regionale',
-    image: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Aula di formazione regionale con studenti al lavoro',
-  },
-  {
-    badge: 'La formazione che la tua azienda sta già finanziando',
-    icon: 'fas fa-building',
-    title: 'Fondi Interprofessionali per aziende',
-    bullets: [
-      'Usa lo 0,30% dei contributi INPS già versati per la formazione',
-      'Fon.Ter, For.Agri, Fondimpresa e altri fondi paritetici',
-      'Nessun costo aggiuntivo per l\'impresa',
-      'Alètheia segue tutto: dai fabbisogni alla rendicontazione',
-    ],
-    cta: 'Scopri di più',
-    href: '/formazione/fondi-interprofessionali',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Riunione aziendale per la formazione dei dipendenti',
-  },
-  {
-    badge: 'Forma i tuoi dipendenti senza costi retributivi',
-    icon: 'fas fa-lightbulb',
-    title: 'Fondo Nuove Competenze',
-    bullets: [
-      'Formazione durante l\'orario di lavoro, con rimborso dei costi retributivi',
-      'Digitalizzazione, transizione ecologica, competenze strategiche',
-      'Investimento sostenibile per affrontare le sfide del mercato',
-      'Verifica gratuita dei requisiti con il nostro team',
-    ],
-    cta: 'Scopri di più',
-    href: '/formazione/fondo-nuove-competenze',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Team che lavora su innovazione e competenze digitali',
-  },
-];
+import { getSchede } from '../../lib/wp-schede';
+import { isrOptions } from '../../lib/wp';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
 function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
@@ -109,18 +66,24 @@ function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt 
   );
 }
 
-export default function FormazioneFinanziataSicilia() {
+// Liste di card: WordPress (CPT scheda) se WP_URL è impostato, altrimenti data/schede.js (vedi lib/wp-schede.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('formazione/regionale-fse'), percorsi: await getSchede('percorsi-fse') }, ...isrOptions() };
+}
+
+export default function FormazioneFinanziataSicilia({ percorsi, pagina }) {
+  const T = pagina.testi;
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
 
   return (
     <>
       <Head>
-        <title>Formazione Finanziata in Sicilia - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Formazione Finanziata in Sicilia - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Corsi gratuiti in Sicilia finanziati da Regione Siciliana, Fondi Interprofessionali e Fondo Nuove Competenze. Alètheia: ente di formazione accreditato."
+          content={pagina.seo.descrizione || "Corsi gratuiti in Sicilia finanziati da Regione Siciliana, Fondi Interprofessionali e Fondo Nuove Competenze. Alètheia: ente di formazione accreditato."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -165,18 +128,15 @@ export default function FormazioneFinanziataSicilia() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="page-hero-badge fade-up">Formarsi senza costi</div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '760px' }}>
-            Formazione{' '}
-            <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Finanziata in Sicilia
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
+            </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#offerta" className="btn btn-lg btn-light">Scopri i percorsi</a>
-            <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
+            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}</a>
+            <a href={T.hero_cta2.href} className="btn btn-lg btn-ghost-light">{T.hero_cta2.label}</a>
           </div>
         </div>
       </section>
@@ -185,13 +145,9 @@ export default function FormazioneFinanziataSicilia() {
       <section id="offerta" className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '760px' }}>
-            <span className="section-badge">La nostra offerta formativa</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Scegli il percorso di formazione più adatto alle tue esigenze
-            </h2>
-            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
-              Ogni opportunità di finanziamento risponde a esigenze diverse. Seleziona il percorso dedicato a te e scopri come accedere ai corsi disponibili.
-            </p>
+            <span className="section-badge">{T.intro_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.intro_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>{T.intro_testo[0]}</p>
           </div>
 
           <div className="percorsi-grid">
@@ -246,3 +202,5 @@ export default function FormazioneFinanziataSicilia() {
   );
 }
 
+// Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

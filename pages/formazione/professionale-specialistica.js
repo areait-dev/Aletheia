@@ -4,12 +4,11 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CtaFinale from '../../components/CtaFinale';
 import Reveal from '../../components/Reveal';
-
-const heroBadges = [
-  { icon: 'fas fa-award', label: 'Ente accreditato Regione Siciliana' },
-  { icon: 'fas fa-laptop-code', label: 'Test Center AICA' },
-  { icon: 'fas fa-user-doctor', label: 'Provider ECM' },
-];
+import { getSchede } from '../../lib/wp-schede';
+import { isrOptions } from '../../lib/wp';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
 const valori = [
   {
@@ -29,65 +28,6 @@ const valori = [
     text: (
       <>Soluzioni flessibili per <strong className="text-slate-900 dark:text-white font-bold">privati e Pubblica Amministrazione</strong>. Corsi in aula, online o direttamente presso il tuo ente.</>
     ),
-  },
-];
-
-const verticali = [
-  {
-    sopratitolo: 'Riconosciute in più di 150 paesi',
-    title: 'Certificazioni Informatiche ICDL',
-    bullets: [
-      'Standard europeo per le competenze digitali richiesto nei concorsi pubblici',
-      'Test Center AICA qualificato con esami direttamente in sede a Vittoria',
-      'Percorsi flessibili per studenti, professionisti e docenti',
-    ],
-    cta: 'Scopri le certificazioni',
-    href: '/all-courses?categoria=certificazioni-informatiche',
-    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Certificazioni Informatiche ICDL',
-    gradient: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-  },
-  {
-    sopratitolo: 'Crescita professionale',
-    title: 'Corsi Qualificati',
-    bullets: [
-      'Percorsi di qualifica e riqualificazione per nuove opportunità lavorative',
-      'Qualifiche ufficiali inserite nel Repertorio Nazionale e spendibili sul mercato',
-      'Certificazione delle competenze acquisite con titoli riconosciuti',
-    ],
-    cta: 'Scopri i corsi qualificati',
-    href: '/all-courses?categoria=certificazione',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Corsi Qualificati',
-    gradient: 'linear-gradient(135deg, #0F172A 0%, #008C95 100%)',
-  },
-  {
-    sopratitolo: 'Educazione continua in medicina',
-    title: 'Corsi ECM',
-    bullets: [
-      'Crediti formativi obbligatori ogni anno per tutti i professionisti della salute',
-      'Provider ECM accreditato con contenuti scientifici sempre aggiornati e crediti certificati',
-      'Modalità di fruizione flessibili studiate per chi già lavora in corsia',
-    ],
-    cta: 'Scopri i corsi ECM',
-    href: '/formazione/ecm',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Corsi ECM',
-    gradient: 'linear-gradient(135deg, #134E4A 0%, #10B981 100%)',
-  },
-  {
-    sopratitolo: 'Per enti pubblici',
-    title: 'Formazione per la PA',
-    bullets: [
-      'Piani formativi mirati su digitalizzazione, anticorruzione e trasparenza',
-      'Corsi erogabili direttamente in sede o in modalità dedicate',
-      'Docenti altamente specializzati e orientati alle esigenze della PA',
-    ],
-    cta: 'Scopri la formazione PA',
-    href: '/formazione/corsi-pa',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Formazione per la PA',
-    gradient: 'linear-gradient(135deg, #008C95 0%, #0F172A 100%)',
   },
 ];
 
@@ -141,15 +81,22 @@ function VerticaleCard({ sopratitolo, title, bullets, cta, href, image, imageAlt
   );
 }
 
-export default function FormazioneProfessionaleSpecialistica() {
+// Liste di card: WordPress (CPT scheda) se WP_URL è impostato, altrimenti data/schede.js (vedi lib/wp-schede.ts).
+async function getPageStaticProps() {
+  const [heroBadges, verticali] = await Promise.all([getSchede('prof-hero-badges'), getSchede('prof-verticali')]);
+  return { props: { pagina: await getPagina('formazione/professionale-specialistica'), heroBadges, verticali }, ...isrOptions() };
+}
+
+export default function FormazioneProfessionaleSpecialistica({ heroBadges, verticali, pagina }) {
+  const T = pagina.testi;
   return (
     <>
       <Head>
-        <title>Formazione Professionale e Corsi per la Pubblica Amministrazione - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Formazione Professionale e Corsi per la Pubblica Amministrazione - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Corsi qualificati, certificazioni ICDL, corsi ECM e formazione per la Pubblica Amministrazione. Alètheia, ente accreditato Regione Siciliana, Test Center AICA e Provider ECM."
+          content={pagina.seo.descrizione || "Corsi qualificati, certificazioni ICDL, corsi ECM e formazione per la Pubblica Amministrazione. Alètheia, ente accreditato Regione Siciliana, Test Center AICA e Provider ECM."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -224,14 +171,11 @@ export default function FormazioneProfessionaleSpecialistica() {
           </div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '900px' }}>
-            Formazione professionale e corsi per la{' '}
-            <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Pubblica Amministrazione
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
+            </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#aree" className="btn btn-lg btn-light">Scopri i nostri corsi</a>
+            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}</a>
           </div>
         </div>
       </section>
@@ -285,8 +229,8 @@ export default function FormazioneProfessionaleSpecialistica() {
 
       {/* ══════════════ CHIUSURA ══════════════ */}
       <CtaFinale
-        title="Non trovi il percorso formativo che cerchi?"
-        primary={{ label: 'Visiona tutti i nostri corsi', href: '/all-courses' }}
+        title={T.cta_titolo}
+        primary={{ label: T.cta_bottone1.label, href: T.cta_bottone1.href }}
       />
 
       </main>
@@ -294,3 +238,6 @@ export default function FormazioneProfessionaleSpecialistica() {
     </>
   );
 }
+
+// Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

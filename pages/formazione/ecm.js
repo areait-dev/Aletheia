@@ -3,50 +3,20 @@ import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useTheme } from '../../context/ThemeContext';
+import { getFaqs } from '../../lib/wp-faq';
+import { isrOptions } from '../../lib/wp';
+import { getSchede } from '../../lib/wp-schede';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
-const modalita = [
-  {
-    title: 'Residenziale (RES)',
-    text: 'Corsi, convegni e congressi in aula presso le nostre sedi o presso strutture sanitarie.',
-  },
-  {
-    title: 'A distanza (FAD)',
-    text: 'Percorsi online fruibili in autonomia, compatibili con i turni di lavoro.',
-  },
-  {
-    title: 'Sul campo e su commessa',
-    text: 'Progetti formativi su misura per strutture sanitarie, poliambulatori, RSA ed enti del territorio.',
-  },
-];
+// FAQ: WordPress (CPT faq) se WP_URL è impostato, altrimenti data/faq.js (vedi lib/wp-faq.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('formazione/ecm'), faqs: await getFaqs('ecm'), modalita: await getSchede('ecm-modalita') }, ...isrOptions() };
+}
 
-const faqs = [
-  {
-    domanda: 'Che cosa sono i crediti ECM?',
-    risposta: "I crediti ECM sono crediti formativi assegnati ai professionisti sanitari che partecipano ad attività di Educazione Continua in Medicina riconosciute dal sistema ECM nazionale. Attestano l'impegno del professionista nell'aggiornamento costante delle proprie competenze.",
-  },
-  {
-    domanda: 'Chi è obbligato ad acquisire i crediti ECM?',
-    risposta: "L'obbligo ECM riguarda tutti i professionisti sanitari iscritti ai rispettivi ordini e albi che esercitano attività sanitaria, sia in regime dipendente sia libero-professionale.",
-  },
-  {
-    domanda: 'Quanti crediti ECM devo acquisire?',
-    risposta: 'Il fabbisogno formativo è definito per trienni dalla normativa nazionale. Il numero effettivo di crediti da maturare può variare in base a esoneri, esenzioni e alla situazione individuale del professionista. Ti aiutiamo a verificare la tua posizione e a pianificare i corsi necessari.',
-  },
-  {
-    domanda: 'I corsi ECM di Alètheia rilasciano crediti validi?',
-    risposta: 'Sì. In qualità di provider ECM accreditato, Alètheia rilascia direttamente i crediti formativi al termine delle attività, secondo le regole del sistema ECM.',
-  },
-  {
-    domanda: 'Cosa succede se non raggiungo i crediti ECM richiesti?',
-    risposta: 'Il mancato assolvimento dell\'obbligo formativo ECM può avere conseguenze sul piano professionale e assicurativo, ed è oggetto di verifica da parte degli ordini professionali. Frequentare corsi accreditati con regolarità è il modo più semplice per mantenersi in regola.',
-  },
-  {
-    domanda: 'Dove posso frequentare corsi ECM in Sicilia?',
-    risposta: 'Alètheia organizza corsi ECM in tutta la Sicilia come provider accreditato, con attività in aula presso le proprie sedi in provincia di Ragusa, presso strutture sanitarie e in modalità FAD online.',
-  },
-];
-
-export default function FormazioneECM() {
+export default function FormazioneECM({ faqs, modalita, pagina }) {
+  const T = pagina.testi;
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [activeModalita, setActiveModalita] = useState(0);
   const { theme } = useTheme() || { theme: 'light' };
@@ -55,11 +25,11 @@ export default function FormazioneECM() {
   return (
     <>
       <Head>
-        <title>Corsi ECM per Professionisti Sanitari - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Corsi ECM per Professionisti Sanitari - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Corsi ECM accreditati per medici, infermieri, fisioterapisti e OSS. Alètheia, provider ECM accreditato dalla Regione Siciliana."
+          content={pagina.seo.descrizione || "Corsi ECM accreditati per medici, infermieri, fisioterapisti e OSS. Alètheia, provider ECM accreditato dalla Regione Siciliana."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -107,18 +77,14 @@ export default function FormazioneECM() {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div>
-            <div className="page-hero-badge fade-up">Educazione Continua in Medicina</div>
+            <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
             <h1 className="fade-up fade-up-1">
-              Corsi{' '}
-              <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                ECM
-              </span>
-              {' '}per professionisti sanitari
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
             </h1>
 
             <div className="page-hero-actions fade-up fade-up-3">
-              <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
+              <a href={T.hero_cta1.href} className="btn btn-lg btn-ghost-light">{T.hero_cta1.label}</a>
             </div>
           </div>
 
@@ -128,29 +94,19 @@ export default function FormazioneECM() {
       {/* ══════════════ IL VALORE DEL PROVIDER ACCREDITATO ══════════════ */}
       <section id="corsi" className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <span className="section-badge">Provider ECM accreditato · Regione Siciliana</span>
-          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '960px' }}>
-            Formazione continua per i professionisti della sanità
-          </h2>
-          <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, maxWidth: '960px', margin: '0 0 1.5rem' }}>
-            Alètheia S.r.l. è provider ECM accreditato dalla Regione Siciliana, abilitato alla progettazione e realizzazione di attività formative rivolte ai professionisti sanitari. Non tutti gli enti che erogano formazione sanitaria possono assegnare crediti ECM.
-          </p>
-          <p className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 700, lineHeight: 1.7, maxWidth: '960px', margin: 0, borderLeft: '3px solid #008C95', paddingLeft: '1.25rem' }}>
-            Alètheia rilascia direttamente i crediti ECM al termine delle attività, secondo le regole del sistema nazionale.
-          </p>
+          <span className="section-badge">{T.intro_badge}</span>
+          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '960px' }}>{T.intro_titolo}</h2>
+          <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, maxWidth: '960px', margin: '0 0 1.5rem' }}>{T.intro_testo[0]}</p>
+          <p className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 700, lineHeight: 1.7, maxWidth: '960px', margin: 0, borderLeft: '3px solid #008C95', paddingLeft: '1.25rem' }}>{T.intro_testo[1]}</p>
         </div>
       </section>
 
       {/* ══════════════ TARGET & PROPOSTA FORMATIVA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <span className="section-badge">La proposta formativa</span>
-          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-            Corsi ECM in aula e in FAD, in tutta la Sicilia
-          </h2>
-          <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '760px', marginBottom: '2rem' }}>
-            Alètheia organizza attività formative accreditate in diverse modalità, per adattarsi ai tempi e alle esigenze dei professionisti sanitari.
-          </p>
+          <span className="section-badge">{T.s1_badge}</span>
+          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>{T.s1_titolo}</h2>
+          <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '760px', marginBottom: '2rem' }}>{T.s1_testo[0]}</p>
 
           <div className="modalita-tabs">
             {modalita.map((m, i) => (
@@ -178,10 +134,8 @@ export default function FormazioneECM() {
       {/* ══════════════ FAQ ══════════════ */}
       <section className="bg-white dark:bg-dark-card border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <span className="section-badge">FAQ</span>
-          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '2rem', lineHeight: 1.25 }}>
-            Domande frequenti sui corsi ECM
-          </h2>
+          <span className="section-badge">{T.s2_badge}</span>
+          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '2rem', lineHeight: 1.25 }}>{T.s2_titolo}</h2>
 
           <div className="faq-grid-ecm">
             {faqs.map((item, i) => {
@@ -247,3 +201,6 @@ export default function FormazioneECM() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

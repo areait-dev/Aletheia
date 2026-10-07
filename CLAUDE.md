@@ -52,7 +52,7 @@ Page Structure
 Pages are static content (no dynamic data fetching in most cases)
 Some pages use [slug].js dynamic routes (e.g., `all-courses/[slug].js`, `news/[slug].js`)
 Pages import the `Header` component and manage their own page-specific styling
-No API routes or backend logic
+Dati: WordPress headless predisposto ma opzionale. Senza `WP_URL` le pagine usano i dati locali (`data/*`, `lib/newsData.js`); con `WP_URL` leggono da WordPress con ripiego locale (`lib/wp.ts`, `lib/wp-auth.ts`, `lib/wp-news.ts`, API `pages/api/preview|exit-preview|revalidate`). Per collegare un nuovo tipo di contenuto seguire lo schema in `wordpress/README.md` §7 (già collegati: news, calendario, catalogo corsi, aiuti di Stato; migrazione con `wordpress/migrate-local-to-wp.mjs`; anteprima live in `lib/live-preview.ts`). Le props di `getStaticProps` non devono contenere `undefined`. Variabili in `.env.example`
 Design Language
 iTeach-inspired theme with soft shadows, rounded corners, and a teal/green primary color (`#008C95`)
 Color palette includes secondary accent colors (`#F59E0B`, `#6366F1`) for categories/badges; il verde smeraldo `#10B981` è stato rimosso (vedi regola colori)

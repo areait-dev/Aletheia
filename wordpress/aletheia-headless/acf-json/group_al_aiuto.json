@@ -1,0 +1,104 @@
+{
+  "key": "group_al_aiuto",
+  "title": "Aiuto di Stato - Riga",
+  "fields": [
+    {
+      "key": "field_al_aiuto_anno",
+      "label": "Anno",
+      "name": "anno",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_aiuto_ente",
+      "label": "Ente (denominazione e C.F.)",
+      "name": "ente",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_aiuto_data",
+      "label": "Data",
+      "name": "data",
+      "aria-label": "",
+      "type": "date_picker",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "display_format": "d/m/Y",
+      "return_format": "d/m/Y",
+      "first_day": 1
+    },
+    {
+      "key": "field_al_aiuto_importo",
+      "label": "Importo",
+      "name": "importo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "€ 500,00"
+    },
+    {
+      "key": "field_al_aiuto_cup",
+      "label": "CUP",
+      "name": "cup",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "aiuto_stato"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

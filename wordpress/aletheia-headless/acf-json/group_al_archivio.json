@@ -1,0 +1,383 @@
+{
+  "key": "group_al_archivio",
+  "title": "Archivio - Dati",
+  "fields": [
+    {
+      "key": "field_al_archivio_famiglia",
+      "label": "Famiglia",
+      "name": "famiglia",
+      "aria-label": "",
+      "type": "select",
+      "instructions": "Vuota = voce singola nell'elenco dell'archivio. Con una famiglia la voce compare nel suo accordion e nella sua panoramica (URL /archivio/<famiglia>/<slug>).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "misura-psr-1-1": "Misura PSR 1.1",
+        "avviso-2-2018": "Avviso 2/2018"
+      },
+      "return_format": "value",
+      "allow_null": 1,
+      "ui": 0
+    },
+    {
+      "key": "field_al_archivio_descrizione",
+      "label": "Descrizione",
+      "name": "descrizione",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Paragrafi separati da una riga vuota; elenchi puntati con \"- \" a inizio riga.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 8,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_destinatari",
+      "label": "Destinatari e requisiti",
+      "name": "destinatari",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Stesso formato della descrizione. Vuoto = riquadro non mostrato.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_documenti",
+      "label": "Documenti (PDF)",
+      "name": "documenti",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una riga per documento. Sezioni: bandi-docenti, bandi-tutor, bandi-allievi, altri. Carica il PDF in Media e incolla il suo URL (es. bandi-docenti|Bando docenti ed. 12|https://cms…/wp-content/uploads/2026/05/bando.pdf).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 10,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_titolo_indice",
+      "label": "Titolo nell'elenco (facoltativo)",
+      "name": "titolo_indice",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Vuoto = titolo del post.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_archivio_titolo_panoramica",
+      "label": "Titolo nella panoramica della famiglia (facoltativo)",
+      "name": "titolo_panoramica",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Vuoto = titolo nell'elenco.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_archivio_fuori_elenco",
+      "label": "Non mostrare nell'elenco di /archivio",
+      "name": "fuori_elenco",
+      "aria-label": "",
+      "type": "true_false",
+      "instructions": "La pagina esiste comunque (si raggiunge dai link): utile per gli avvisi collegati da altre pagine.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "ui": 1,
+      "default_value": 0
+    },
+    {
+      "key": "field_al_archivio_meta_titolo",
+      "label": "Titolo della pagina per i motori di ricerca (facoltativo)",
+      "name": "meta_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Vuoto = titolo del post (solo layout a scheda).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_archivio_meta_descrizione",
+      "label": "Descrizione per i motori di ricerca (facoltativa)",
+      "name": "meta_descrizione",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_tab_layout_a_scheda",
+      "label": "Layout a scheda",
+      "name": "tab_layout_a_scheda",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_archivio_layout",
+      "label": "Layout della pagina",
+      "name": "layout",
+      "aria-label": "",
+      "type": "select",
+      "instructions": "Con \"A scheda\" si usano i campi di questa sezione; \"Descrizione\" diventa il testo \"Di cosa si tratta\" e i documenti compaiono in un'unica lista.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "standard": "Standard (descrizione, destinatari, documenti per sezione)",
+        "scheda": "A scheda (hero, requisiti, documenti in un'unica lista)"
+      },
+      "return_format": "value",
+      "allow_null": 1,
+      "ui": 0
+    },
+    {
+      "key": "field_al_archivio_scheda_titolo_breve",
+      "label": "Voce nelle briciole di pane",
+      "name": "scheda_titolo_breve",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Avviso 1/2026 POC. Vuoto = titolo del post.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_archivio_scheda_badge",
+      "label": "Etichetta sopra il titolo",
+      "name": "scheda_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Corsi con qualifica professionale.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_archivio_scheda_sottotitolo",
+      "label": "Sottotitolo",
+      "name": "scheda_sottotitolo",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_scheda_requisiti_intro",
+      "label": "Introduzione ai requisiti (facoltativa)",
+      "name": "scheda_requisiti_intro",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_archivio_scheda_requisiti",
+      "label": "Requisiti di accesso",
+      "name": "scheda_requisiti",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: uno per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_scheda_extra_titolo",
+      "label": "Titolo del blocco extra",
+      "name": "scheda_extra_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Qualifiche disponibili (esempi) oppure Sedi del corso.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_archivio_scheda_extra_tipo",
+      "label": "Tipo del blocco extra",
+      "name": "scheda_extra_tipo",
+      "aria-label": "",
+      "type": "select",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "chips": "Etichette (es. qualifiche)",
+        "sedi": "Elenco con icona di luogo (es. sedi)"
+      },
+      "return_format": "value",
+      "allow_null": 1,
+      "ui": 0
+    },
+    {
+      "key": "field_al_archivio_scheda_extra",
+      "label": "Voci del blocco extra",
+      "name": "scheda_extra",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 8,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_scheda_avviso",
+      "label": "Riquadro evidenziato (facoltativo)",
+      "name": "scheda_avviso",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Es. una scadenza. I link si scrivono [etichetta](URL).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_archivio_scheda_contatti",
+      "label": "Mostra email e telefono in fondo",
+      "name": "scheda_contatti",
+      "aria-label": "",
+      "type": "true_false",
+      "instructions": "Usa i contatti delle Opzioni Globali.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "ui": 1,
+      "default_value": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "archivio"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

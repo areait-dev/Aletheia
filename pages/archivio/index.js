@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import Header from '../../components/Header';
-import archivioIndex from '../../public/pdf/archivio/index.json';
-import descrizioniArchivio from '../../public/pdf/archivio/descrizioni.json';
+import { FAMIGLIE } from '../../data/archivio-famiglie';
+import { getArchivio } from '../../lib/wp-archivio';
+import { isrOptions } from '../../lib/wp';
+import { withSiteOptions } from '../../lib/wp-site';
 
-function titoloFromSlug(slug) {
-  return slug
-    .split('-')
-    .map((w) => (w.match(/^\d+$/) ? w : w.charAt(0).toUpperCase() + w.slice(1)))
-    .join(' ');
+/* Elenco: voci locali storiche + voci del CPT `archivio` di WordPress (vedi lib/wp-archivio.ts).
+   Le voci singole stanno in elenco; quelle di una famiglia, nel relativo accordion. */
+async function getPageStaticProps() {
+  const archivio = await getArchivio();
+  const voci = archivio.filter((v) => !v.famiglia && !v.fuoriElenco).map((v) => ({ slug: v.slug, titolo: v.titoloIndice }));
+  const famiglie = FAMIGLIE.map((f) => ({
+    chiave: f.chiave,
+    titolo: f.titolo,
+    panoramica: f.panoramica,
+    sottovoci: archivio.filter((v) => v.famiglia === f.chiave).map((v) => ({ slug: v.ultimo, titolo: v.titoloIndice })),
+  })).filter((f) => f.sottovoci.length > 0);
+  return { props: { voci, famiglie }, ...isrOptions() };
 }
 
-const FAMIGLIE = [
-  { prefisso: 'misura-psr-1-1/', titolo: 'Misura PSR 1.1', panoramica: 'Panoramica Misura PSR 1.1' },
-  { prefisso: 'avviso-2-2018/', titolo: 'Avviso 2/2018', panoramica: 'Panoramica Avviso 2/2018' },
-];
-
-function AccordionFamiglia({ famiglia, sottovoci, aperta, onToggle }) {
+function AccordionFamiglia({ famiglia, aperta, onToggle }) {
   return (
     <li className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
       <button
@@ -31,17 +35,17 @@ function AccordionFamiglia({ famiglia, sottovoci, aperta, onToggle }) {
         <ul className="border-t border-gray-200 dark:border-gray-700 divide-y divide-gray-200 dark:divide-gray-700">
           <li>
             <a
-              href={`/archivio/${famiglia.prefisso.slice(0, -1)}`}
+              href={`/archivio/${famiglia.chiave}`}
               className="flex items-center justify-between px-4 py-3 pl-8 hover:text-[#008C95] transition-colors"
             >
               <span className="text-gray-600 dark:text-gray-300">{famiglia.panoramica}</span>
               <i className="fa-solid fa-chevron-right text-gray-500" />
             </a>
           </li>
-          {sottovoci.map(({ slug, titolo }) => (
+          {famiglia.sottovoci.map(({ slug, titolo }) => (
             <li key={slug}>
               <a
-                href={`/archivio/${famiglia.prefisso}${slug}`}
+                href={`/archivio/${famiglia.chiave}/${slug}`}
                 className="flex items-center justify-between px-4 py-3 pl-8 hover:text-[#008C95] transition-colors"
               >
                 <span className="text-gray-600 dark:text-gray-300">{titolo}</span>
@@ -55,25 +59,8 @@ function AccordionFamiglia({ famiglia, sottovoci, aperta, onToggle }) {
   );
 }
 
-export default function ArchivioIndex() {
+export default function ArchivioIndex({ voci, famiglie }) {
   const [famigliaAperta, setFamigliaAperta] = useState(null);
-
-  const voci = [];
-  const sottovociPerFamiglia = {};
-  for (const famiglia of FAMIGLIE) sottovociPerFamiglia[famiglia.prefisso] = [];
-
-  for (const slug of Object.keys(archivioIndex)) {
-    const famiglia = FAMIGLIE.find((f) => slug.startsWith(f.prefisso));
-    if (famiglia) {
-      const sottoSlug = slug.slice(famiglia.prefisso.length);
-      sottovociPerFamiglia[famiglia.prefisso].push({
-        slug: sottoSlug,
-        titolo: descrizioniArchivio[slug]?.titolo || titoloFromSlug(sottoSlug),
-      });
-    } else {
-      voci.push(slug);
-    }
-  }
 
   return (
     <>
@@ -84,36 +71,36 @@ export default function ArchivioIndex() {
             Archivio
           </h1>
           <ul className="space-y-3">
-            {voci.map((slug) => (
+            {voci.map(({ slug, titolo }) => (
               <li key={slug}>
                 <a
                   href={`/archivio/${slug}`}
                   className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 hover:border-[#008C95] transition-colors"
                 >
                   <span className="text-gray-900 dark:text-gray-50 font-medium">
-                    {titoloFromSlug(slug)}
+                    {titolo}
                   </span>
                   <i className="fa-solid fa-chevron-right text-gray-500" />
                 </a>
               </li>
             ))}
 
-            {FAMIGLIE.map((famiglia) =>
-              sottovociPerFamiglia[famiglia.prefisso].length > 0 ? (
-                <AccordionFamiglia
-                  key={famiglia.prefisso}
-                  famiglia={famiglia}
-                  sottovoci={sottovociPerFamiglia[famiglia.prefisso]}
-                  aperta={famigliaAperta === famiglia.prefisso}
-                  onToggle={() =>
-                    setFamigliaAperta((corrente) => (corrente === famiglia.prefisso ? null : famiglia.prefisso))
-                  }
-                />
-              ) : null
-            )}
+            {famiglie.map((famiglia) => (
+              <AccordionFamiglia
+                key={famiglia.chiave}
+                famiglia={famiglia}
+                aperta={famigliaAperta === famiglia.chiave}
+                onToggle={() =>
+                  setFamigliaAperta((corrente) => (corrente === famiglia.chiave ? null : famiglia.chiave))
+                }
+              />
+            ))}
           </ul>
         </div>
       </main>
     </>
   );
 }
+
+// Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

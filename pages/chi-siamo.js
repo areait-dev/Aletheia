@@ -7,6 +7,13 @@ import Header from '../components/Header';
 import SeoHead from '../components/SeoHead';
 import { getLenis } from '../lib/lenis';
 import Reveal from '../components/Reveal';
+import { getPartners } from '../lib/wp-partner';
+import { getSchede } from '../lib/wp-schede';
+import { isrOptions } from '../lib/wp';
+import { getPagina } from '../lib/wp-pagine';
+import HeroTitle from '../components/HeroTitle';
+import { withSiteOptions } from '../lib/wp-site';
+import { useSiteOptions } from '../context/SiteOptionsContext';
 
 // Scroll fluido (Lenis) verso la sezione Qualità e Certificazioni,
 // con fallback nativo se Lenis non è ancora inizializzato.
@@ -171,60 +178,43 @@ function CertCard({ icon, title, subtitle, description, benefits, pdfUrl, extraL
   );
 }
 
-const ecoLoghi = [
-  { name: 'Promotergroup', src: '/images/gruppo/promotergroup.svg' },
-  { name: 'Promosan', src: '/images/gruppo/promosan.svg' },
-  { name: 'Promoter Soc. Coop.', src: '/images/gruppo/promoter-soc-coop.svg' },
-  { name: 'Promoter Srl', src: '/images/gruppo/promoter-srl.svg' },
-  { name: 'Promoteragri', src: '/images/gruppo/promoteragri.svg' },
-  { name: 'Iside', src: '/images/gruppo/iside.svg' },
-  { name: 'Promesys', src: '/images/gruppo/promesys.svg' },
-  { name: 'Doses', src: '/images/gruppo/doses.svg' },
-];
-
-export default function ChiSiamo() {
-  const content = {
-    missione: {
-      titolo: 'MISSIONE',
-      sottotitolo: 'Trasformare la formazione in occupazione.',
-      punti: [
-        { key: '', desc: "Non ci fermiamo all'aula. Progettiamo percorsi che trasformano il potenziale in competenze e le competenze in opportunità. Costruiamo reti tra persone e aziende, tra competenze e bisogni, tra chi forma e chi assume. Facciamo matching tra talenti e opportunità perché il risultato giusto non è mai casuale: è il frutto di un ecosistema che funziona. Come agenzia per il lavoro, come punto di orientamento, come partner, accompagniamo ogni persona lungo il proprio percorso professionale e ogni impresa nello sviluppo del proprio capitale umano." },
-      ],
+// Loghi dell'ecosistema: WordPress (CPT partner) se WP_URL è impostato, altrimenti data/partner.js (vedi lib/wp-partner.ts).
+async function getPageStaticProps() {
+  return {
+    props: {
+      pagina: await getPagina('chi-siamo'),
+      ecoLoghi: await getPartners('ecosistema'),
+      // Elenchi della pagina: schede di WordPress (liste chi-*) o data/schede.js
+      storia: await getSchede('chi-storia'),
+      tabsLista: await getSchede('chi-tabs'),
+      puntiForza: await getSchede('chi-punti-forza'),
+      expertise: await getSchede('chi-expertise'),
+      certificazioni: await getSchede('chi-certificazioni'),
+      accreditamenti: await getSchede('chi-accreditamenti'),
     },
-    visione: {
-      titolo: 'VISIONE',
-      sottotitolo: 'Unire formazione e lavoro in un unico ecosistema.',
-      punti: [
-        { key: '', desc: "Puntiamo a un futuro in cui la formazione non sia mai separata dall'occupazione, ma ne sia il motore. Ogni percorso deve generare opportunità concrete per le persone e valore reale per le imprese. Perché il lavoro nasce dalle competenze. E le competenze crescono quando incontrano le giuste opportunità." },
-      ],
-    },
-    valori: {
-      titolo: 'VALORI',
-      sottotitolo: 'Concretezza. Qualità. Aggiornamento continuo.',
-      punti: [
-        { key: '', desc: 'Una buona formazione si misura sui risultati, non sulle ore. Per questo ogni percorso nasce da bisogni reali, viene erogato secondo standard certificati e aggiornato costantemente per restare allineato a un mercato del lavoro che non smette di cambiare.' },
-      ],
-    },
+    ...isrOptions(),
   };
+}
 
-  const [activeTab, setActiveTab] = useState('Missione');
-  const tabs = [
-    { key: 'Missione', data: content.missione },
-    { key: 'Visione', data: content.visione },
-    { key: 'I Nostri Valori', data: content.valori },
-  ];
+export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiForza, expertise, certificazioni, accreditamenti }) {
+  const T = pagina.testi;
+  const { seo } = useSiteOptions(); // immagine OG predefinita (opzioni globali)
+  // Tab Missione / Visione / Valori: schede della lista chi-tabs (nome della tab = badge)
+  const tabs = tabsLista.map((t) => ({ key: t.tab, data: t }));
+  const [activeTab, setActiveTab] = useState(tabs[0]?.key);
   const activeData = tabs.find((t) => t.key === activeTab)?.data;
 
   return (
     <>
       <Head>
-        <title>Chi Siamo - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Chi Siamo - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead
           title="Chi Siamo - Alètheia Srl"
           description="Alètheia Srl: mission, vision e valori di un ente di formazione professionale e Agenzia per il Lavoro attivo dal 2005 a Vittoria (RG), parte del gruppo Promotergroup."
           url="/chi-siamo"
+          ogImage={pagina.seo.ogImage || seo.ogImage || undefined}
         />
       </Head>
 
@@ -255,27 +245,20 @@ export default function ChiSiamo() {
           agenzia-per-il-lavoro): niente intestazione "compatta" isolata su questa sola pagina. */}
       <section className="page-hero">
         <div className="container">
-          <div className="page-hero-badge">Dal 2005 al fianco di persone e imprese</div>
+          <div className="page-hero-badge">{T.hero_eyebrow}</div>
           <h1 className="text-balance max-w-3xl mx-auto">
-            Da vent&rsquo;anni trasformiamo la <span>formazione</span> in opportunità
-          </h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-            Alètheia è Ente di Formazione accreditato e Agenzia per il Lavoro autorizzata dalla
-            Regione Siciliana.
-          </p>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span>{w}</span>} />
+            </h1>
+          <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">{T.hero_sottotitolo}</p>
           <div className="page-hero-actions flex-col sm:flex-row items-center">
             <a
-              href="#cosa-facciamo"
+              href={T.hero_cta1.href}
               className="inline-flex items-center justify-center h-[44px] bg-primary hover:bg-[#006B73] text-white font-bold px-6 rounded-full text-sm transition-all"
-            >
-              Scopri cosa facciamo
-            </a>
+            >{T.hero_cta1.label}</a>
             <a
-              href="/contatti"
+              href={T.hero_cta2.href}
               className="inline-flex items-center justify-center h-[44px] bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 hover:bg-white/20 hover:border-white/50 px-6 rounded-full text-sm transition-all"
-            >
-              Contattaci
-            </a>
+            >{T.hero_cta2.label}</a>
           </div>
         </div>
       </section>
@@ -290,20 +273,15 @@ export default function ChiSiamo() {
         <div className="py-20 px-6 sm:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-x-12 gap-y-10 items-start">
           <div style={{ maxWidth: '640px' }}>
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
-              La nostra storia
+              {T.s1_badge}
             </span>
             <h2 id="storia-heading" className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Nati per formare. Cresciuti per andare oltre
+              {T.s1_titolo}
             </h2>
           </div>
 
           <div style={{ maxWidth: '640px' }}>
-            {[
-              { anno: '2005', titolo: 'Fondazione', desc: 'Alètheia nasce a Vittoria (RG) con un obiettivo preciso: trasformare la formazione in crescita professionale e occupazionale concreta.' },
-              { anno: '2017', titolo: 'Accreditamento regionale', desc: 'Diventiamo Ente di Formazione accreditato dalla Regione Siciliana (DDG n. 78 del 20/01/2017).' },
-              { anno: '2019', titolo: 'Agenzia per il Lavoro', desc: 'Otteniamo l’autorizzazione ministeriale come Agenzia per il Lavoro (DDS n. 1100 del 26/04/2019), ampliando i servizi a candidati e imprese.' },
-              { anno: 'Oggi', titolo: 'Parte di Promotergroup', desc: 'Facciamo parte di Promotergroup S.p.A., un ecosistema che unisce formazione, consulenza e servizi alle imprese, offrendo accesso a competenze oltre l’aula.' },
-            ].map((step, i, arr) => (
+            {storia.map((step, i, arr) => (
               <Reveal key={step.anno} delay={i * 90}>
                 <div className="flex gap-5" style={{ paddingBottom: i === arr.length - 1 ? 0 : '1.75rem' }}>
                   <div className="flex flex-col items-center" style={{ width: '3.5rem', flexShrink: 0 }}>
@@ -331,10 +309,10 @@ export default function ChiSiamo() {
       {/* SEZIONE PRINCIPALE */}
       <section id="cosa-facciamo" className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
         <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-primary-on-dark mb-2">
-          Ciò che guida ogni nostro progetto
+          {T.s2_badge}
         </span>
         <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-10">
-          Formazione che genera <span className="text-primary dark:text-primary-on-dark">impatto</span>
+          <HeroTitle text={T.s2_titolo} renderHighlight={(w) => <span className="text-primary dark:text-primary-on-dark">{w}</span>} />
         </h2>
 
         {/* Tab Missione / Visione / Valori: un solo blocco alla volta. Il testo sta direttamente sullo
@@ -377,7 +355,7 @@ export default function ChiSiamo() {
             <div key={activeTab} className="animate-fadeIn">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{activeData.titolo}</h3>
               <p className="text-primary-text dark:text-primary-on-dark font-medium mb-4 text-sm">{activeData.sottotitolo}</p>
-              <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-base m-0">{activeData.punti[0].desc}</p>
+              <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-base m-0">{activeData.desc}</p>
             </div>
           )}
         </div>
@@ -387,18 +365,13 @@ export default function ChiSiamo() {
       <section className="bg-slate-50 dark:bg-dark-bg py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-12">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
-            Perché scegliere Alètheia
+            {T.s3_badge}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Formazione e lavoro in un unico percorso
+            {T.s3_titolo}
           </h2>
           <p className="text-slate-600 dark:text-gray-300 text-base mt-3 mb-12 leading-relaxed">
-            Molti enti formano. Molte agenzie per il lavoro selezionano. Alètheia fa entrambe
-            le cose. Per questo possiamo accompagnare persone e imprese lungo l&rsquo;intero
-            percorso di crescita professionale: dall&rsquo;orientamento iniziale
-            all&rsquo;acquisizione delle competenze, fino all&rsquo;inserimento lavorativo e
-            allo sviluppo delle organizzazioni. Non offriamo semplicemente corsi. Costruiamo
-            percorsi per affrontare le sfide di domani.
+            {T.s3_testo[0]}
           </p>
 
           <span className="text-xs font-bold uppercase tracking-widest text-slate-600 mb-6 block">
@@ -416,17 +389,7 @@ export default function ChiSiamo() {
                 backgroundSize: '18px 18px',
               }}
             />
-            {[
-              // Riga 1: spazio 1 (span 2) + spazio 2 (span 1, ultima colonna).
-              { titolo: 'Sistema formazione-lavoro integrato', span: 'sm:col-span-2', big: true, borders: 'border-b sm:border-r' },
-              { titolo: 'Affidabilità certificata', span: 'sm:col-span-1', big: false, borders: 'border-b' },
-              // Riga 2: tre spazi da 1 colonna.
-              { titolo: 'Esperti in formazione finanziata', span: 'sm:col-span-1', big: false, borders: 'border-b sm:border-r' },
-              { titolo: 'Certificazioni riconosciute', span: 'sm:col-span-1', big: false, borders: 'border-b sm:border-r' },
-              { titolo: 'Competenze verticali', span: 'sm:col-span-1', big: false, borders: 'border-b' },
-              // Riga 3: spazio 6, riga intera, nessun bordo residuo (ultimo blocco).
-              { titolo: 'La forza di un gruppo', span: 'sm:col-span-3', big: true, borders: '' },
-            ].map((card) => (
+            {puntiForza.map((card) => (
               <div
                 key={card.titolo}
                 className={`${card.span} ${card.borders} border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.1)] flex items-start justify-start text-left p-8`}
@@ -449,22 +412,15 @@ export default function ChiSiamo() {
         <div className="max-w-7xl mx-auto py-20 px-6 sm:px-12">
           <div className="mb-16">
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
-              Le nostre Expertise
+              {T.s4_badge}
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight uppercase">
-              Formazione in ogni settore
+              {T.s4_titolo}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
-            {[
-              { n: '01', accent: 'text-[#018891]/30 dark:text-primary-on-dark/20', titolo: 'Sicurezza sul lavoro', desc: 'Oltre 5.000 lavoratori formati. Corsi conformi al D.Lgs. 81/08 per aziende e PA.' },
-              { n: '02', accent: 'text-[#018891]/30 dark:text-[#018891]/20', titolo: 'Agricoltura e agroalimentare', desc: "Vantiamo una specifica esperienza nel settore agricolo e agroalimentare. Percorsi PSR, FEAMP, fitosanitario, conduzione d'impresa agricola, innovazione in agricoltura." },
-              { n: '03', accent: 'text-[#018891]/30 dark:text-primary-on-dark/20', titolo: 'Formazione finanziata', desc: "FSE+, Fondi Interprofessionali, Fondo Nuove Competenze, POC Sicilia. Gestione completa: dall'analisi dei fabbisogni alla rendicontazione." },
-              { n: '04', accent: 'text-[#018891]/30 dark:text-[#018891]/20', titolo: 'Sanità e welfare', desc: 'Percorsi per operatori socio-sanitari, assistenti familiari e operatori socio-assistenziali.' },
-              { n: '05', accent: 'text-[#018891]/30 dark:text-primary-on-dark/20', titolo: 'Competenze digitali', desc: 'Certificazioni ICDL e percorsi AICA per scuola, imprese e pubblica amministrazione.' },
-              { n: '06', accent: 'text-[#018891]/30 dark:text-[#018891]/20', titolo: 'Pubblica Amministrazione', desc: 'Percorsi su misura per enti locali, assessorati e operatori del settore pubblico. Formazione che rispetta i tempi e le esigenze della PA.' },
-            ].map((s, i) => (
+            {expertise.map((s, i) => (
               <Reveal key={s.n} delay={(i % 3) * 90}>
                 <div>
                   {/* Numero puramente decorativo (opacità bassa): nascosto agli screen reader */}
@@ -483,125 +439,49 @@ export default function ChiSiamo() {
         <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16">
           <div className="text-left mb-12">
             <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-primary-on-dark mb-2">
-              Certificazioni e accreditamenti
+              {T.s5_badge}
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
-              La qualità che si verifica, non si dichiara.
+              {T.s5_titolo}
             </h2>
             <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed">
-              Le certificazioni ISO e UNI PdR attestano standard di qualità, inclusione e
-              misurabilità dei processi formativi. Non sono dichiarazioni di intenti, ma
-              verifiche ufficiali riconosciute. Una garanzia per chi sceglie Alètheia come
-              partner formativo.
+              {T.s5_testo[0]}
             </p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-5">
-            <Reveal delay={0} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
-              <CertCard
-              icon="fas fa-certificate"
-              title="ISO 9001"
-              subtitle="Sistemi di gestione per la qualità"
-              description="La certificazione ISO 9001:2015 attesta che Alètheia s.r.l. adotta un sistema di gestione della qualità conforme agli standard internazionali, garantendo processi efficienti, miglioramento continuo e soddisfazione del cliente."
-              benefits={['Servizi di formazione e consulenza di qualità', 'Processi standardizzati e tracciabili', 'Miglioramento continuo delle performance']}
-              pdfUrl="/pdf/certificati/ALTH2572Q1901_-certificate-release_ISO9001_20220408.pdf"
-              />
-            </Reveal>
-            <Reveal delay={80} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
-              <CertCard
-              icon="fas fa-venus-mars"
-              title="UNI PDR 125:2022"
-              subtitle="Parità di genere"
-              description="La prassi di riferimento UNI/PdR 125:2022 certifica l'impegno di Alètheia s.r.l. per la parità di genere, garantendo politiche aziendali inclusive e trasparenti, riconosciute dal PNRR."
-              benefits={['Pari opportunità di carriera', 'Trasparenza retributiva', 'Ambienti di lavoro inclusivi', 'Agevolazioni fiscali e premialità nei bandi']}
-              pdfUrl="/pdf/certificati/2023_ALETHEIA_paritdigenere.pdf"
-              extraLinks={[{ label: 'Politica Aziendale', url: '/pdf/certificati/ALL1--POLITICA-PDR-125-Aletheia.pdf' }]}
-              />
-            </Reveal>
-            <Reveal delay={160} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
-              <CertCard
-              icon="fas fa-school"
-              title="UNI ISO 21001:2019"
-              subtitle="Sistema di Gestione per Organizzazioni Educative"
-              description="Certificazione specifica per le organizzazioni educative, garantisce che Alètheia s.r.l. eroga servizi formativi di alta qualità, centrati sull'apprendimento e il miglioramento continuo."
-              benefits={['Processi formativi standardizzati', 'Focalizzazione sui bisogni dei discenti', "Valutazione dell'efficacia dell'apprendimento"]}
-              pdfUrl="/pdf/certificati/ALTH2572A2002_certificate-release_ISO21001_20240322.pdf"
-              />
-            </Reveal>
-            <Reveal delay={240} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
-              <CertCard
-              icon="fas fa-chalkboard-user"
-              title="UNI ISO 29993:2019"
-              subtitle="Servizi di formazione professionale non formale"
-              description="La norma definisce i requisiti per i servizi di formazione professionale non formale, garantendo trasparenza, coerenza e qualità nell'offerta formativa."
-              benefits={["Trasparenza nell'offerta formativa", 'Qualità dei contenuti e dei materiali', 'Gestione efficace dei processi di erogazione']}
-              pdfUrl="/pdf/certificati/ALTH2572A2003_certificate-release_ISO29993_20240322.pdf"
-              />
-            </Reveal>
-            <Reveal delay={320} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
-              <CertCard
-              icon="fas fa-clipboard-list"
-              title="UNI ISO 29992:2019"
-              subtitle="Valutazione dei risultati dell'apprendimento"
-              description="La norma garantisce l'adozione di metodi rigorosi per la valutazione dei risultati dell'apprendimento, assicurando l'efficacia dei percorsi formativi."
-              benefits={["Valutazione oggettiva delle competenze", "Monitoraggio continuo dell'apprendimento", 'Certificazione delle competenze acquisite']}
-              pdfUrl="/pdf/certificati/ALTH2572A2404_certificate-release_ISO29992_20240322.pdf"
-              />
-            </Reveal>
+            {certificazioni.map((c, i) => (
+              <Reveal key={c.title} delay={i * 80} className="h-full w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]">
+                <CertCard
+                  icon={c.icon}
+                  title={c.title}
+                  subtitle={c.subtitle}
+                  description={c.description}
+                  benefits={c.benefits}
+                  pdfUrl={c.pdfUrl}
+                  extraLinks={c.extraLinks}
+                />
+              </Reveal>
+            ))}
           </div>
 
           {/* Accreditamenti istituzionali */}
           <div className="mt-16 pt-12 border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
             <div className="text-left mb-10">
               <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary-text dark:text-primary-on-dark mb-2">
-                Accreditamenti
+                {T.s6_badge}
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-                Autorizzati. Riconosciuti. Verificati.
+                {T.s6_titolo}
               </h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-              <Reveal delay={0} className="h-full">
-                <AccreditamentoCard
-                  logo="/images/accreditamenti/regione.svg"
-                  logoAlt="Regione Siciliana"
-                  title="Ente di Formazione accreditato Regione Siciliana"
-                  code="DDG n. 78 del 20/01/2017"
-                />
-              </Reveal>
-              <Reveal delay={80} className="h-full">
-                <AccreditamentoCard
-                  logo="/images/accreditamenti/image-removebg-preview.png"
-                  logoAlt="Ministero del Lavoro e delle Politiche Sociali"
-                  title="Agenzia per il Lavoro autorizzata"
-                  code="DDS n. 1100 del 26/04/2019"
-                />
-              </Reveal>
-              <Reveal delay={160} className="h-full">
-                <AccreditamentoCard
-                  logo="/images/accreditamenti/aica.jpg"
-                  logoAlt="AICA"
-                  title="Test Center AICA – ICDL"
-                  code="Codice AKHF0001"
-                />
-              </Reveal>
-              <Reveal delay={240} className="h-full">
-                <AccreditamentoCard
-                  logo="/images/accreditamenti/Logo-ECM.png"
-                  logoAlt="ECM - Educazione Continua in Medicina"
-                  title="Provider ECM – Educazione Continua in Medicina"
-                  code="Provider Accreditato Ministero della Salute"
-                />
-              </Reveal>
-              <Reveal delay={320} className="h-full">
-                <AccreditamentoCard
-                  logo="/images/accreditamenti/isors.png"
-                  logoAlt="Rete ISORS"
-                  title="Partner Rete ISORS"
-                  code="Rete di partner"
-                />
-              </Reveal>
+              {accreditamenti.map((a, i) => (
+                <Reveal key={a.title} delay={i * 80} className="h-full">
+                  <AccreditamentoCard logo={a.logo} logoAlt={a.logoAlt} title={a.title} code={a.code} />
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
@@ -613,15 +493,13 @@ export default function ChiSiamo() {
           {/* Colonna sede */}
           <Reveal>
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
-              La nostra sede
+              {T.s7_badge}
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-              Vieni a trovarci. O scrivici.
+              {T.s7_titolo}
             </h2>
             <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
-              La sede di Alètheia si trova a Vittoria (RG), con aule, laboratori informatici e
-              spazi dedicati all&rsquo;orientamento. La formazione è disponibile anche in
-              modalità online tramite piattaforma e-learning.
+              {T.s7_testo[0]}
             </p>
 
             <div className="space-y-3">
@@ -655,17 +533,16 @@ export default function ChiSiamo() {
           {/* Colonna CTA */}
           <Reveal delay={100} className="bg-gradient-to-br from-slate-950 via-[#003134] to-slate-950 text-white rounded-3xl p-8 flex flex-col justify-center shadow-lg border border-slate-800/50">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
-              Vuoi costruire il tuo percorso professionale?
+              {T.cta_titolo}
             </h3>
             <p className="text-slate-300 text-sm leading-relaxed mb-6">
-              Contattaci per una consulenza gratuita. Ti aiutiamo a capire qual è il percorso
-              giusto per te o per la tua azienda.
+              {T.cta_testo}
             </p>
             <a
-              href="/contatti"
+              href={T.cta_bottone1.href}
               className="inline-flex items-center justify-center text-center h-[52px] bg-primary hover:bg-[#006B73] text-white font-extrabold px-8 rounded-full text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#018891]/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
             >
-              Richiedi consulenza gratuita
+              {T.cta_bottone1.label}
             </a>
           </Reveal>
         </div>
@@ -677,3 +554,6 @@ export default function ChiSiamo() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

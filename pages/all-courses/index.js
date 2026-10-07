@@ -12,7 +12,11 @@ import CourseSkeleton from '../../components/CourseSkeleton';
 import Reveal from '../../components/Reveal';
 import SeoHead from '../../components/SeoHead';
 
-import { coursesData } from '../../data/coursesRaw';
+import { getCoursesRaw } from '../../lib/wp-corsi';
+import { isrOptions } from '../../lib/wp';
+import { getPagina } from '../../lib/wp-pagine';
+import { withSiteOptions } from '../../lib/wp-site';
+import { useSiteOptions } from '../../context/SiteOptionsContext';
 
 const GRID_SPRING = { type: 'spring', stiffness: 500, damping: 40 };
 
@@ -44,7 +48,14 @@ const subCategoryMeta = {
   'corsi-pa':                      'Corsi per la PA',
 };
 
-export default function AllCourses() {
+/* Catalogo: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-corsi.ts). */
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('all-courses'), coursesRaw: await getCoursesRaw() }, ...isrOptions() };
+}
+
+export default function AllCourses({ coursesRaw, pagina }) {
+  const T = pagina.testi;
+  const { seo } = useSiteOptions(); // immagine OG predefinita (opzioni globali)
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -162,7 +173,7 @@ export default function AllCourses() {
   };
 
   // Corsi raggruppati per famiglia (es. Antincendio Livello 1/2/3 + Aggiornamenti = 1 sola card)
-  const courseFamilies = buildCourseFamilies(coursesData);
+  const courseFamilies = buildCourseFamilies(coursesRaw);
 
   // Conta le famiglie raggruppate (una card = una famiglia), non i corsi grezzi:
   // coursesData.length include separatamente ogni corso/aggiornamento che invece
@@ -188,13 +199,14 @@ export default function AllCourses() {
   return (
     <>
       <Head>
-        <title>Tutti i Corsi - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Tutti i Corsi - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead
           title="Tutti i Corsi - Alètheia Srl"
           description="Scopri il catalogo completo dei corsi di formazione Alètheia Srl: sicurezza sul lavoro, fitosanitario, sicurezza alimentare, formazione finanziata e certificazioni digitali."
           url="/all-courses"
+          ogImage={pagina.seo.ogImage || seo.ogImage || undefined}
         />
       </Head>
 
@@ -204,9 +216,11 @@ export default function AllCourses() {
       {/* Hero compatta comune (.page-hero in globals.css): stesso gradiente teal di prima */}
       <section className="page-hero page-hero--left">
         <div className="container">
-          <div className="page-hero-badge">Catalogo completo</div>
-          <h1>Tutti i Corsi</h1>
-          <p>Scopri la nostra offerta formativa completa e scegli il corso che fa per te</p>
+          <div className="page-hero-badge">{T.hero_eyebrow}</div>
+          <h1>
+              {T.hero_titolo}
+            </h1>
+          <p>{T.hero_sottotitolo}</p>
         </div>
       </section>
 
@@ -385,3 +399,6 @@ export default function AllCourses() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

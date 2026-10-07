@@ -4,8 +4,13 @@ import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { useState } from 'react';
 import Header from '../../components/Header';
-import { ALL_NEWS, formatDate } from '../../lib/newsData';
+import { formatDate } from '../../lib/newsData';
+import { getNewsList } from '../../lib/wp-news';
+import { isrOptions } from '../../lib/wp';
 import Reveal from '../../components/Reveal';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
 function NewsCard({ news }) {
   const [hovered, setHovered] = useState(false);
@@ -31,7 +36,7 @@ function NewsCard({ news }) {
     >
       {/* Immagine */}
       <div style={{ position: 'relative', paddingTop: '56.25%', background: '#F0FDFA', overflow: 'hidden' }}>
-        {!imgError ? (
+        {news.image && !imgError ? (
           <Image
             src={news.image}
             alt={news.title}
@@ -108,14 +113,21 @@ const CATEGORIE = [
   { value: 'formazione', label: 'Formazione' },
 ];
 
-export default function NewsPage() {
+/* Sorgente: WordPress se WP_URL è impostato, altrimenti i dati locali (vedi lib/wp-news.ts). */
+async function getPageStaticProps() {
+  const news = await getNewsList();
+  return { props: { news, pagina: await getPagina('news') }, ...isrOptions() };
+}
+
+export default function NewsPage({ news: allNews, pagina }) {
+  const T = pagina.testi;
   const [query, setQuery] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedCategoria, setSelectedCategoria] = useState('');
 
-  const years = [...new Set(ALL_NEWS.map(n => Number(n.date.slice(0, 4))))].sort((a, b) => b - a);
+  const years = [...new Set(allNews.map(n => Number(n.date.slice(0, 4))))].sort((a, b) => b - a);
 
-  const filtered = ALL_NEWS.filter(news => {
+  const filtered = allNews.filter(news => {
     const matchQuery =
       query === '' ||
       news.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -130,11 +142,11 @@ export default function NewsPage() {
   return (
     <>
       <Head>
-        <title>News - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "News - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Notizie e aggiornamenti su formazione, lavoro e opportunità professionali in Sicilia. Il blog di Alètheia Srl."
+          content={pagina.seo.descrizione || "Notizie e aggiornamenti su formazione, lavoro e opportunità professionali in Sicilia. Il blog di Alètheia Srl."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -270,9 +282,7 @@ export default function NewsPage() {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-          <div className="page-hero-badge fade-up">
-            News
-          </div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1
             className="fade-up fade-up-1"
@@ -285,17 +295,7 @@ export default function NewsPage() {
               maxWidth: '680px',
             }}
           >
-            Ultime{' '}
-            <span
-              style={{
-                background: 'linear-gradient(90deg, #10B981, #008C95)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Notizie
-            </span>
+            <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
           </h1>
 
           <p
@@ -307,9 +307,7 @@ export default function NewsPage() {
               lineHeight: 1.75,
               margin: 0,
             }}
-          >
-            Aggiornamenti su formazione, lavoro e opportunità professionali.
-          </p>
+          >{T.hero_sottotitolo}</p>
         </div>
       </section>
 
@@ -470,3 +468,6 @@ export default function NewsPage() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

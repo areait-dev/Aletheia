@@ -2,54 +2,23 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useTheme } from '../context/ThemeContext';
 import ThemeToggle from './ThemeToggle';
+import { useSiteOptions } from '../context/SiteOptionsContext';
 
 interface HeaderProps {
   active?: string;
   solid?: boolean;
 }
 
-type SubDropdownKey = 'regionale' | 'obbligatoria' | 'professionale';
+// Voci di menu, gruppi del mega-menu "Formazione" e pulsanti arrivano dalle opzioni globali (WordPress o data/site-options.js).
+// I gruppi sono l'unica fonte dati condivisa tra il mega-menu desktop e la schermata Formazione del menu mobile
+// (sotto i 992px il mega-menu passa a position:static e finisce dietro l'overlay fisso del menu mobile, non
+// cliccabile, quindi su mobile serve una resa alternativa).
 
-// Gruppi del mega-menu "Formazione": unica fonte dati condivisa tra il mega-menu
-// desktop (colonne 1-3) e l'accordion mobile dentro .navbar (vedi sotto) — sotto i
-// 992px il mega-menu passa a position:static e finisce dietro l'overlay fisso del
-// menu mobile (non cliccabile), quindi su mobile serve una resa alternativa inline.
-const FORMAZIONE_GROUPS: { key: SubDropdownKey; href: string; title: string; items: { label: string; href: string }[] }[] = [
-  {
-    key: 'regionale',
-    href: '/formazione/regionale-fse',
-    title: 'Formazione Finanziata',
-    items: [
-      { label: 'Formazione Regionale', href: '/formazione/regionale' },
-      { label: 'Fondi Interprofessionali', href: '/formazione/fondi-interprofessionali' },
-      { label: 'Fondo Nuove Competenze', href: '/formazione/fondo-nuove-competenze' },
-    ],
-  },
-  {
-    key: 'obbligatoria',
-    href: '/formazione/obbligatoria',
-    title: 'Formazione Obbligatoria',
-    items: [
-      { label: 'Sicurezza sui luoghi di lavoro', href: '/all-courses?categoria=sicurezza-lavoro' },
-      { label: 'Decreto attrezzature', href: '/all-courses?categoria=decreto-attrezzature' },
-      { label: 'Fitosanitario', href: '/all-courses?categoria=fitosanitario' },
-      { label: 'Sicurezza alimentare', href: '/all-courses?categoria=sicurezza-alimentare' },
-    ],
-  },
-  {
-    key: 'professionale',
-    href: '/formazione/professionale-specialistica',
-    title: 'Formazione Professionale e PA',
-    items: [
-      { label: 'Certificazioni Informatiche', href: '/all-courses?categoria=certificazioni-informatiche' },
-      { label: 'Corsi Qualificati', href: '/all-courses?categoria=certificazione' },
-      { label: 'ECM', href: '/formazione/ecm' },
-      { label: 'Corsi per la PA', href: '/formazione/corsi-pa' },
-    ],
-  },
-];
+const isExternal = (href: string) => /^https?:\/\//.test(href);
 
 export default function Header({ active, solid = false }: HeaderProps) {
+  const { header } = useSiteOptions();
+  const FORMAZIONE_GROUPS = header.formazione;
   const themeCtx = useTheme();
   const theme = themeCtx?.theme;
   const [menuOpen, setMenuOpen] = useState(false);
@@ -63,23 +32,15 @@ export default function Header({ active, solid = false }: HeaderProps) {
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const [subDropdowns, setSubDropdowns] = useState<Record<SubDropdownKey, boolean>>({
-    regionale: false,
-    obbligatoria: false,
-    professionale: false,
-  });
+  // Un solo sottomenu aperto alla volta: si memorizza l'href del gruppo aperto.
+  const [openSub, setOpenSub] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const toggleSubDropdown = (key: SubDropdownKey) => {
-    setSubDropdowns((prev) => ({
-      regionale: false,
-      obbligatoria: false,
-      professionale: false,
-      [key]: !prev[key], // apre quella cliccata e chiude le altre
-    }));
+  const toggleSubDropdown = (key: string) => {
+    setOpenSub((prev) => (prev === key ? null : key)); // apre quella cliccata e chiude le altre
   };
 
   useEffect(() => {
@@ -108,14 +69,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
   // tenendo conto sia dello stato scrolled/solid sia del tema attivo.
   const iconColor = isLight ? (theme === 'dark' ? '#F8FAFC' : '#0F172A') : '#FFFFFF';
 
-  const links = [
-    { href: '/', label: 'Home' },
-    { href: '/chi-siamo', label: 'Chi Siamo' },
-    { href: '/#formazione', label: 'Formazione' },
-    { href: '/agenzia-per-il-lavoro', label: 'Agenzia per il Lavoro' },
-    { href: '/news', label: 'News' },
-    { href: '/contatti', label: 'Contatti' },
-  ];
+  const links = header.links;
 
   return (
     <>
@@ -149,12 +103,13 @@ export default function Header({ active, solid = false }: HeaderProps) {
               sotto-schermata "Formazione" (vedi .navbar-screen-formazione in CSS). */}
           <div className="navbar-screen-main">
             {links.map((link) => {
-              if (link.label === 'Formazione') {
+              if (!link.href) {
+                // Voce senza URL = apre il mega-menu Formazione
                 return (
                   <a
-                    key={link.href}
-                    href={link.href}
-                    className={active === link.href ? 'active' : ''}
+                    key={link.label}
+                    href="/#formazione"
+                    className=""
                     aria-expanded={formazioneOpen}
                     aria-haspopup="true"
                     onClick={(e) => {
@@ -175,7 +130,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
               }
               return (
                 <a
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
                   className={active === link.href ? 'active' : ''}
                   onClick={() => {
@@ -188,13 +143,12 @@ export default function Header({ active, solid = false }: HeaderProps) {
               );
             })}
             <a
-              href="https://aletheia4job.it/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={header.ctaLavoro.href}
+              {...(isExternal(header.ctaLavoro.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               className="navbar-mobile-cta"
               onClick={() => { setMenuOpen(false); setFormazioneOpen(false); }}
             >
-              Sei un docente? Candidati
+              {header.ctaLavoro.label}
             </a>
           </div>
 
@@ -211,7 +165,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
               <i className="fas fa-arrow-left" aria-hidden="true"></i> Torna al menu
             </button>
             {FORMAZIONE_GROUPS.map((group) => (
-              <div key={group.key} className="navbar-formazione-group">
+              <div key={group.href} className="navbar-formazione-group">
                 <a
                   href={group.href}
                   onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
@@ -232,11 +186,11 @@ export default function Header({ active, solid = false }: HeaderProps) {
               </div>
             ))}
             <a
-              href="/calendario-corsi"
+              href={header.megaCalendario.btn.href}
               className="navbar-formazione-calendar"
               onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
             >
-              Calendario Corsi <i className="fas fa-arrow-right" aria-hidden="true"></i>
+              {header.megaCalendario.btn.label} <i className="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
         </nav>
@@ -245,15 +199,14 @@ export default function Header({ active, solid = false }: HeaderProps) {
         <div className="header-right">
           <ThemeToggle color={iconColor} />
           <a
-            href="https://aletheia4job.it/"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={header.ctaLavoro.href}
+            {...(isExternal(header.ctaLavoro.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             className="cta-nav-btn-outline"
             style={{ color: iconColor }}
             onMouseEnter={(e) => { e.currentTarget.style.background = '#027F87'; e.currentTarget.style.color = '#fff'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = iconColor; }}
           >
-            Sei un docente? Candidati
+            {header.ctaLavoro.label}
           </a>
           <div className="cta-dropdown" ref={dropdownRef}>
             <button
@@ -268,12 +221,11 @@ export default function Header({ active, solid = false }: HeaderProps) {
             {dropdownOpen && (
               <div className="cta-dropdown-menu">
                 <a
-                  href="https://www.aletheiasrl.it/elearning2/"
-                  target="_blank"
-                  rel="noreferrer"
+                  href={header.elearning.href}
+                  {...(isExternal(header.elearning.href) ? { target: '_blank', rel: 'noreferrer' } : {})}
                   className="cta-dropdown-item"
                 >
-                  Piattaforma E-learning
+                  {header.elearning.label}
                 </a>
               </div>
             )}
@@ -307,7 +259,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
         <div className="mega-menu-dropdown">
           <div className="mega-menu-container">
             {FORMAZIONE_GROUPS.map((group) => (
-              <div key={group.key} className="mega-col-links">
+              <div key={group.href} className="mega-col-links">
                 <div className="sub-dropdown-wrapper">
                   <div className="sub-dropdown-toggle-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <a
@@ -320,15 +272,15 @@ export default function Header({ active, solid = false }: HeaderProps) {
                     </a>
                     <button
                       className="sub-dropdown-toggle-icon text-[#018891] dark:text-primary-on-dark"
-                      onClick={() => toggleSubDropdown(group.key)}
+                      onClick={() => toggleSubDropdown(group.href)}
                       aria-label={`Espandi sottomenu ${group.title}`}
-                      aria-expanded={!!subDropdowns[group.key]}
+                      aria-expanded={openSub === group.href}
                       style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem' }}
                     >
                       ▾
                     </button>
                   </div>
-                  <div className={`sub-dropdown-menu${subDropdowns[group.key] ? ' open' : ''}`}>
+                  <div className={`sub-dropdown-menu${openSub === group.href ? ' open' : ''}`}>
                     {group.items.map((item) => (
                       <a key={item.href} href={item.href} onClick={() => setFormazioneOpen(false)}>{item.label}</a>
                     ))}
@@ -339,18 +291,18 @@ export default function Header({ active, solid = false }: HeaderProps) {
 
             {/* Col 4: Calendario */}
             <div className="mega-col-info">
-              <h3>Calendario Corsi</h3>
-              <p>Scopri le date dei prossimi corsi in partenza e pianifica la tua formazione.</p>
-              <a href="/calendario-corsi" className="mega-calendar-btn" onClick={() => setFormazioneOpen(false)}>
-                Calendario Corsi
+              <h3>{header.megaCalendario.titolo}</h3>
+              <p>{header.megaCalendario.testo}</p>
+              <a href={header.megaCalendario.btn.href} className="mega-calendar-btn" onClick={() => setFormazioneOpen(false)}>
+                {header.megaCalendario.btn.label}
               </a>
               <a
-                href="/all-courses"
+                href={header.megaCorsiBtn.href}
                 onClick={() => setFormazioneOpen(false)}
                 className="text-[#018891] dark:text-primary-on-dark"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.85rem', fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none' }}
               >
-                Scopri tutti i corsi <span aria-hidden="true">→</span>
+                {header.megaCorsiBtn.label} <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>

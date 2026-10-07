@@ -1,0 +1,132 @@
+{
+  "key": "group_al_scheda",
+  "title": "Scheda - Dati",
+  "fields": [
+    {
+      "key": "field_al_scheda_icona",
+      "label": "Icona",
+      "name": "icona",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Classe Font Awesome (es. fas fa-redo-alt). Nelle liste con icone disegnate (Fondo Nuove Competenze: vantaggi e servizi) si scrive invece il NOME: fulmine, bersaglio, cuore, moneta, lente, scudo, matita, ricevuta, busta, gruppo, grafico (elenco in data/icone-svg.js).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "fas fa-redo-alt"
+    },
+    {
+      "key": "field_al_scheda_badge",
+      "label": "Badge / etichetta",
+      "name": "badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_scheda_sottotitolo",
+      "label": "Sottotitolo / ente",
+      "name": "sottotitolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_scheda_link",
+      "label": "Link",
+      "name": "link",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_scheda_meta_1",
+      "label": "Dato 1",
+      "name": "meta_1",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Modalità, Misura. Certificati di Chi siamo: link extra nel formato Etichetta|URL (es. Politica Aziendale|/pdf/politica.pdf). Servizi del Fondo Nuove Competenze: scrivi \"in evidenza\" per la card in primo piano.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_scheda_meta_2",
+      "label": "Dato 2",
+      "name": "meta_2",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Durata, Target. Certificati di Chi siamo: secondo link extra, formato Etichetta|URL.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_scheda_immagine_alt",
+      "label": "Testo alternativo immagine",
+      "name": "immagine_alt",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "scheda"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "side",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

@@ -7,14 +7,15 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import SeoHead from '../components/SeoHead';
-import { ALL_NEWS, formatDate } from '../lib/newsData';
+import { formatDate } from '../lib/newsData';
+import { getNewsList } from '../lib/wp-news';
 import JobSkeleton from '../components/JobSkeleton';
 import Reveal from '../components/Reveal';
+import { withSiteOptions } from '../lib/wp-site';
+import { getPagina } from '../lib/wp-pagine';
+import { useSiteOptions } from '../context/SiteOptionsContext';
 
 const GRID_SPRING = { type: 'spring', stiffness: 500, damping: 40 };
-
-// Solo le news rilevanti per l'Agenzia per il Lavoro (tag 'apl')
-const aplNews = ALL_NEWS.filter((n) => n.tags?.includes('apl'));
 
 // Card news riutilizzata dalla pagina /news (pages/news/index.js)
 function NewsCard({ news }) {
@@ -112,8 +113,10 @@ function NewsCard({ news }) {
   );
 }
 
-export default function AgenziaPerIlLavoro({ jobs = [] }) {
+export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) {
+  const T = pagina.testi;
   const [hoveredPanel, setHoveredPanel] = useState(null);
+  const { seo } = useSiteOptions(); // immagine OG predefinita (opzioni globali)
   // Skeleton di cortesia durante l'inizializzazione della pagina (evita reflow al mount).
   const [jobsLoading, setJobsLoading] = useState(true);
   useEffect(() => {
@@ -151,6 +154,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           title="Agenzia per il Lavoro - Alètheia Srl"
           description="Alètheia Srl - Agenzia per il Lavoro autorizzata. Servizi di somministrazione, ricerca e selezione, outplacement e formazione professionale in Sicilia."
           url="/agenzia-per-il-lavoro"
+          ogImage={seo.ogImage || undefined}
         />
       </Head>
 
@@ -225,7 +229,10 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           z-index: 2;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          /* Titolo, punti elenco e bottone sullo stesso bordo sinistro: con center il titolo (più stretto) si
+             centrava sopra il blocco dei punti, che sono allineati a sinistra. Il blocco resta centrato nel pannello. */
+          align-items: flex-start;
+          text-align: left;
           gap: 1rem;
         }
 
@@ -302,7 +309,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           >
             <Image
               className="panel-bg"
-              src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?auto=format&fit=crop&w=1200&q=80"
+              src={T.s1_img_1.src}
               alt=""
               aria-hidden="true"
               fill
@@ -317,12 +324,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             />
 
             <div className="panel-content">
-              {/* Badge */}
-              <span className="badge-overlay">
-                <span className="badge-overlay-dot" aria-hidden="true" />
-                Candidati
-              </span>
-
               <h2
                 style={{
                   fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
@@ -378,7 +379,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
           >
             <Image
               className="panel-bg"
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+              src={T.s1_img_2.src}
               alt=""
               aria-hidden="true"
               fill
@@ -393,12 +394,6 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
             />
 
             <div className="panel-content">
-              {/* Badge */}
-              <span className="badge-overlay">
-                <span className="badge-overlay-dot" aria-hidden="true" />
-                Aziende
-              </span>
-
               <h2
                 style={{
                   fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
@@ -524,8 +519,8 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
                 }}
               >
                 <Image
-                  src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Team Alètheia al lavoro"
+                  src={T.s2_immagine.src}
+                  alt={T.s2_immagine.alt}
                   fill
                   sizes="(min-width: 768px) 40vw, 100vw"
                   loading="lazy"
@@ -773,7 +768,7 @@ export default function AgenziaPerIlLavoro({ jobs = [] }) {
   );
 }
 
-export async function getStaticProps() {
+async function getPageStaticProps() {
   let jobs = [];
 
   try {
@@ -786,8 +781,17 @@ export async function getStaticProps() {
     // Fonte esterna non raggiungibile in fase di build: la sezione mostra il fallback statico
   }
 
+  // Solo le news rilevanti per l'Agenzia per il Lavoro (tag 'apl'): WordPress se attivo, altrimenti dati locali.
+  const aplNews = (await getNewsList()).filter((n) => n.tags?.includes('apl')).slice(0, 3);
+
+  // Immagini della pagina (sfondi dello split, foto di "Chi siamo"): WordPress se attivo, altrimenti data/pagine.js.
+  const pagina = await getPagina('agenzia-per-il-lavoro');
+
   return {
-    props: { jobs },
+    props: { jobs, aplNews, pagina },
     revalidate: 300, // 5 minuti, coerente con la cache lato aletheia4job.it (s-maxage=300)
   };
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

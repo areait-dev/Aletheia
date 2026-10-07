@@ -5,72 +5,39 @@ import Footer from '../components/Footer';
 import SeoHead from '../components/SeoHead';
 import { darkTokens } from '../lib/darkTokens';
 import { getCookieConsent } from '../components/CookieConsent';
+import { getSedi } from '../lib/wp-sedi';
+import { isrOptions } from '../lib/wp';
+import { useSiteOptions } from '../context/SiteOptionsContext';
+import { getPagina } from '../lib/wp-pagine';
+import HeroTitle from '../components/HeroTitle';
+import { withSiteOptions } from '../lib/wp-site';
 
-const SEDI = [
-  {
-    città: 'Vittoria',
-    indirizzo: 'Via del Carrubo, snc',
-    cap: '97019 Vittoria (RG)',
-    // Link e embed puntano allo stesso luogo Google (pin "PROMOTERGROUP S.p.A.", 36.9676, 14.5558): stesso ftid dell'embed
-    mapsHref: 'https://www.google.com/maps?ftid=0x1311a473afdcbf41:0x2f2626c2fa9958be',
-    mapsEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3187.767471209099!2d14.555755176275595!3d36.96760995824408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1311a473afdcbf41%3A0x2f2626c2fa9958be!2sPROMOTERGROUP%20S.p.A.!5e0!3m2!1sit!2sit!4v1790761569752!5m2!1sit!2sit',
-  },
-  {
-    città: 'Ragusa',
-    indirizzo: 'Viale delle Americhe, 141',
-    cap: 'Ragusa (RG)',
-    mapsHref: 'https://maps.google.com/?q=Viale+delle+Americhe+141+Ragusa',
-    mapsEmbed: 'https://www.google.com/maps?q=Viale+delle+Americhe+141+Ragusa&output=embed',
-  },
-  {
-    città: 'Pozzallo',
-    indirizzo: 'Via Ginevra, 9',
-    cap: 'Pozzallo (RG)',
-    mapsHref: 'https://maps.google.com/?q=Via+Ginevra+9+Pozzallo',
-    mapsEmbed: 'https://www.google.com/maps?q=Via+Ginevra+9+Pozzallo+RG&output=embed',
-  },
-  {
-    città: 'Acate',
-    indirizzo: 'C.da Casazza, snc',
-    cap: 'Acate (RG)',
-    mapsHref: 'https://maps.google.com/?q=PROMOTERAGRI',
-    mapsEmbed: 'https://www.google.com/maps?q=PROMOTERAGRI&output=embed',
-  },
-];
-
-const INFO_ITEMS = [
-  {
-    icon: 'fas fa-phone',
-    label: 'Telefono',
-    value: '+39 0932 862613',
-    href: 'tel:+390932862613',
-    linkLabel: 'Chiama ora',
-  },
-  {
-    icon: 'fas fa-envelope',
-    label: 'Email',
-    value: 'info@aletheiasrl.it',
-    href: 'mailto:info@aletheiasrl.it',
-    linkLabel: 'Scrivi ora',
-  },
-  {
-    icon: 'fas fa-clock',
-    label: 'Orari',
-    value: 'Lun - Ven: 9:00-13:00 / 14:00-18:00',
-    href: null,
-    linkLabel: null,
-  },
-];
-
-const MOTIVI = [
-  'Informazioni su un corso',
-  'Candidatura / ricerca lavoro',
-  'Servizi alle imprese',
-  'Formazione obbligatoria',
-  'Formazione finanziata',
-  'Richiesta preventivo',
-  'Altro',
-];
+// Telefono ed email seguono l'identità del sito (opzioni globali); gli orari, in questa pagina, hanno un formato proprio.
+function buildInfoItems(identita) {
+  return [
+    {
+      icon: 'fas fa-phone',
+      label: 'Telefono',
+      value: identita.telefono,
+      href: `tel:${identita.telefono.replace(/[^+\d]/g, '')}`,
+      linkLabel: 'Chiama ora',
+    },
+    {
+      icon: 'fas fa-envelope',
+      label: 'Email',
+      value: identita.email,
+      href: `mailto:${identita.email}`,
+      linkLabel: 'Scrivi ora',
+    },
+    {
+      icon: 'fas fa-clock',
+      label: 'Orari',
+      value: 'Lun - Ven: 9:00-13:00 / 14:00-18:00',
+      href: null,
+      linkLabel: null,
+    },
+  ];
+}
 
 // Unica fonte per title/description della pagina: usati sia nel <title> reale
 // (che SeoHead non gestisce) sia passati a SeoHead per description/OG/Twitter,
@@ -81,7 +48,15 @@ const PAGE_DESCRIPTION = "Contatta Alètheia Srl: sede a Vittoria (RG), telefono
 // Telefono opzionale: se valorizzato deve contenere solo cifre, spazi, + o -
 const PHONE_RE = /^[0-9\s+-]+$/;
 
-export default function Contatti() {
+// Sedi: WordPress (CPT sede) se WP_URL è impostato, altrimenti data/sedi.js (vedi lib/wp-sedi.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('contatti'), sedi: await getSedi() }, ...isrOptions() };
+}
+
+export default function Contatti({ sedi: SEDI, pagina }) {
+  const T = pagina.testi;
+  const { identita, contatti, seo } = useSiteOptions();
+  const INFO_ITEMS = buildInfoItems(identita);
   const [activeSede, setActiveSede] = useState(0);
   // La mappa Google Maps carica script/iframe di terze parti: la mostriamo solo
   // dopo che l'utente ha accettato i cookie dal banner di consenso (CookieConsent.tsx).
@@ -144,7 +119,7 @@ export default function Contatti() {
         <title>{PAGE_TITLE}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <SeoHead title={PAGE_TITLE} description={PAGE_DESCRIPTION} url="/contatti" />
+        <SeoHead title={PAGE_TITLE} description={PAGE_DESCRIPTION} url="/contatti" ogImage={pagina.seo.ogImage || seo.ogImage || undefined} />
       </Head>
 
       <Header active="/contatti" />
@@ -322,30 +297,18 @@ export default function Contatti() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="page-hero-badge fade-up">
-            Siamo qui per te
-          </div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '650px' }}>
-            Parliamo del tuo{' '}
-            <span style={{
-              background: 'linear-gradient(90deg, #10B981, #008C95)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              futuro
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
+            </h1>
 
           <p className="fade-up fade-up-2" style={{
             fontSize: 'clamp(1rem, 2vw, 1.15rem)',
             color: 'rgba(255,255,255,0.68)',
             maxWidth: '800px',
             lineHeight: 1.75,
-          }}>
-            Hai domande su corsi, offerte di lavoro o servizi alle imprese? Scrivici o chiamaci.
-          </p>
+          }}>{T.hero_sottotitolo}</p>
         </div>
       </section>
 
@@ -556,7 +519,7 @@ export default function Contatti() {
                       <div className="field-select-wrap">
                         <select id="motivo" name="motivo" value={form.motivo} onChange={handleChange} aria-invalid={!!errors.motivo} aria-describedby={errors.motivo ? 'motivo-error' : undefined} className={`${errors.motivo ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white`}>
                           <option value="">Seleziona l&apos;oggetto della richiesta…</option>
-                          {MOTIVI.map((m) => <option key={m} value={m}>{m}</option>)}
+                          {contatti.motivi.map((m) => <option key={m} value={m}>{m}</option>)}
                         </select>
                       </div>
                       {errors.motivo && <p id="motivo-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.motivo}</p>}
@@ -616,3 +579,6 @@ export default function Contatti() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

@@ -1,0 +1,104 @@
+{
+  "key": "group_al_pagina_hero",
+  "title": "Pagina - Hero",
+  "fields": [
+    {
+      "key": "field_al_pagina_hero_hero_eyebrow",
+      "label": "Badge sopra il titolo",
+      "name": "hero_eyebrow",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_hero_hero_titolo",
+      "label": "Titolo (H1)",
+      "name": "hero_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Le parole tra asterischi sono evidenziate: Il ponte tra *formazione* e *lavoro*.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_hero_hero_sottotitolo",
+      "label": "Sottotitolo",
+      "name": "hero_sottotitolo",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_hero_hero_cta1",
+      "label": "Bottone primario",
+      "name": "hero_cta1",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_hero_hero_cta2",
+      "label": "Bottone secondario",
+      "name": "hero_cta2",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

@@ -5,84 +5,12 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CtaFinale from '../../components/CtaFinale';
 import Reveal from '../../components/Reveal';
-
-const avvisi = [
-  {
-    badge: 'Corsi con qualifica professionale',
-    logo: 'POC Sicilia',
-    title: 'Avviso 1/2026 POC',
-    text: 'Percorsi di formazione professionale finanziati dal Programma Operativo Complementare Sicilia, finalizzati al conseguimento di una qualifica professionale riconosciuta e spendibile nel mercato del lavoro.',
-    modalita: 'Aula (o variabile)',
-    href: '/archivio/avviso-1-2026-poc',
-    image: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Aula di formazione professionale con studenti',
-  },
-  {
-    badge: 'Disoccupati, NASpI, ADI',
-    logo: 'UE · Ministero del Lavoro · GOL',
-    title: 'Avviso 6/2025 GOL',
-    text: 'Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.',
-    modalita: 'Aula (o variabile)',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Persona in colloquio di lavoro per il reinserimento occupazionale',
-  },
-  {
-    badge: 'Qualifica, Stage, Indennità di frequenza',
-    logo: 'Coesione Italia · Cofinanziato UE · Ministero',
-    title: 'Avviso 7/2023 - II Finestra',
-    text: 'Percorsi rivolti a disoccupati e inoccupati che prevedono una qualifica professionale riconosciuta, indennità di frequenza e stage presso aziende partner.',
-    modalita: 'Aula + Stage (o variabile)',
-    href: '/archivio/avviso-7-2023',
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Stage in azienda con affiancamento professionale',
-  },
-  {
-    badge: 'Assistente Familiare',
-    logo: 'Coesione Italia · Cofinanziato UE · Ministero',
-    title: 'Avviso n. 20/2024 FSE+',
-    text: 'Percorso finanziato dedicato alla formazione della figura professionale di Assistente Familiare. Il corso prevede formazione teorica, attività pratiche e rilascio della qualifica professionale.',
-    durata: '300 ore',
-    modalita: 'Aula + Stage',
-    href: '/archivio/avviso-20-2024-fse',
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Assistente familiare che si prende cura di una persona anziana',
-  },
-];
-
-const requisiti = [
-  { icon: 'fas fa-map-marker-alt', text: 'Residenti o domiciliati in Sicilia' },
-  { icon: 'fas fa-id-card', text: 'Persone tra i 18 e i 65 anni (salvo requisiti specifici)' },
-  { icon: 'fas fa-user-clock', text: 'Disoccupati, inoccupati, inattivi o beneficiari di misure di sostegno al reddito' },
-  { icon: 'fas fa-building', text: 'Utenti presi in carico dal Centro per l\'Impiego quando previsto' },
-  { icon: 'fas fa-passport', text: 'Cittadini extra UE con permesso di soggiorno valido' },
-  { icon: 'fas fa-graduation-cap', text: 'Candidati in possesso del titolo di studio richiesto dal corso' },
-];
-
-const puntiDiForza = [
-  { text: 'Formazione gratuita' },
-  { text: 'Docenti qualificati' },
-  { text: 'Stage in azienda' },
-  { text: 'Qualifiche certificate' },
-];
-
-const faqs = [
-  {
-    domanda: 'Come si accede ai corsi di formazione regionale gratuiti in Sicilia?',
-    risposta: 'Per accedere ai corsi di formazione regionale in Sicilia è necessario possedere i requisiti previsti dallo specifico bando o avviso pubblico (come lo stato di disoccupazione, la residenza in Sicilia o specifiche fasce d\'età) e presentare la domanda di iscrizione direttamente presso il nostro ente Alètheia, che ti supporterà in tutta la fase di verifica e presentazione.',
-  },
-  {
-    domanda: 'I corsi regionali sono davvero gratuiti?',
-    risposta: 'Sì, i percorsi finanziati attraverso FSE+, POC Sicilia e gli altri programmi regionali sono completamente gratuiti per i partecipanti. In molti casi è prevista anche un\'indennità di frequenza.',
-  },
-  {
-    domanda: 'Ottengo una qualifica riconosciuta al termine del corso?',
-    risposta: 'Sì, la maggior parte degli avvisi regionali prevede il rilascio di una qualifica professionale o di un attestato riconosciuto a livello regionale e nazionale, spendibile nel mercato del lavoro.',
-  },
-  {
-    domanda: 'Come faccio a sapere quale avviso è attivo per il mio profilo?',
-    risposta: 'I requisiti cambiano da avviso ad avviso. Contattaci per una verifica gratuita: analizziamo la tua situazione e ti indichiamo subito se hai i requisiti per uno o più percorsi disponibili.',
-  },
-];
+import { getFaqs } from '../../lib/wp-faq';
+import { getSchede } from '../../lib/wp-schede';
+import { isrOptions } from '../../lib/wp';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
 function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
@@ -156,17 +84,23 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
   );
 }
 
-export default function FormazioneRegionale() {
+// FAQ: WordPress (CPT faq) se WP_URL è impostato, altrimenti data/faq.js (vedi lib/wp-faq.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('formazione/regionale'), faqs: await getFaqs('regionale'), avvisi: await getSchede('avvisi-regionali'), requisiti: await getSchede('req-regionale'), puntiDiForza: await getSchede('punti-regionale') }, ...isrOptions() };
+}
+
+export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiForza, pagina }) {
+  const T = pagina.testi;
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   return (
     <>
       <Head>
-        <title>Formazione Regionale - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Formazione Regionale - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Percorsi di formazione regionale finanziati dalla Regione Siciliana: FSE+, POC Sicilia, Garanzia Giovani e Programma G.O.L. Spesso gratuiti per i partecipanti."
+          content={pagina.seo.descrizione || "Percorsi di formazione regionale finanziati dalla Regione Siciliana: FSE+, POC Sicilia, Garanzia Giovani e Programma G.O.L. Spesso gratuiti per i partecipanti."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -228,21 +162,10 @@ export default function FormazioneRegionale() {
 
           {/* Contenuto principale centrato, sotto la breadcrumb allineata a sinistra */}
           <div className="text-center flex flex-col items-center justify-center w-full">
-            <div className="page-hero-badge fade-up self-start">
-              Formazione Finanziata
-            </div>
+            <div className="page-hero-badge fade-up self-start">{T.hero_eyebrow}</div>
 
             <h1 className="fade-up fade-up-1 text-center justify-center mx-auto" style={{ maxWidth: '780px' }}>
-              Formazione regionale{' '}
-              <span style={{
-                background: 'linear-gradient(90deg, #10B981, #008C95)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                gratuita
-              </span>{' '}
-              con qualifica riconosciuta
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
             </h1>
 
             {/* TRUST BAR CON EFFETTO GLASSMORPHISM, CENTRATA, CON DIVISORI VERTICALI */}
@@ -262,8 +185,8 @@ export default function FormazioneRegionale() {
             </div>
 
             <div className="fade-up fade-up-3 justify-center mx-auto" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a href="#avvisi" className="btn btn-lg btn-light">Scopri gli avvisi</a>
-              <a href="/contatti" className="btn btn-lg btn-ghost-light">Contattaci</a>
+              <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}</a>
+              <a href={T.hero_cta2.href} className="btn btn-lg btn-ghost-light">{T.hero_cta2.label}</a>
             </div>
           </div>
         </div>
@@ -295,13 +218,9 @@ export default function FormazioneRegionale() {
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ maxWidth: '760px', margin: '0 auto 2.5rem', textAlign: 'center' }}>
-            <span className="section-badge">Requisiti di accesso</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, margin: '0 0 0.75rem', lineHeight: 1.3 }}>
-              Hai i requisiti? Scoprilo subito
-            </h2>
-            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
-              I requisiti cambiano in base al bando, ma generalmente possono partecipare:
-            </p>
+            <span className="section-badge">{T.intro_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, margin: '0 0 0.75rem', lineHeight: 1.3 }}>{T.intro_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>{T.intro_testo[0]}</p>
           </div>
 
           {/* Layout asimmetrico: elenco editoriale a sinistra (senza card/box né divisori),
@@ -424,10 +343,10 @@ export default function FormazioneRegionale() {
       {/* ── CTA ── */}
       <CtaFinale
         eyebrow="Hai domande?"
-        title="Non sai quale corso scegliere?"
-        text="Che tu stia cercando lavoro o la persona giusta per la tua azienda, contattaci."
-        primary={{ label: 'Contattaci', href: '/contatti' }}
-        secondary={{ label: 'Contatta un consulente', href: '/agenzia-per-il-lavoro/servizi-alle-imprese#contatta-azienda' }}
+        title={T.cta_titolo}
+        text={T.cta_testo}
+        primary={{ label: T.cta_bottone1.label, href: T.cta_bottone1.href }}
+        secondary={{ label: T.cta_bottone2.label, href: T.cta_bottone2.href }}
       />
 
       </main>
@@ -435,3 +354,6 @@ export default function FormazioneRegionale() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

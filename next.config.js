@@ -68,11 +68,32 @@ function buildAiutiDiStatoRedirects() {
   }));
 }
 
+/** Host di WordPress (da WP_URL) per le immagini in evidenza servite da next/image. Vuoto se WP non è configurato. */
+function wpImageHosts() {
+  try {
+    return process.env.WP_URL ? [new URL(process.env.WP_URL).hostname] : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Origine di WordPress per l'anteprima live nell'editor (accettata come mittente dei postMessage). Non è un segreto. */
+function wpOrigin() {
+  try {
+    return process.env.WP_URL ? new URL(process.env.WP_URL).origin : '';
+  } catch {
+    return '';
+  }
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_WP_ORIGIN: process.env.NEXT_PUBLIC_WP_ORIGIN || wpOrigin(),
+  },
   images: {
-    domains: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com'],
+    domains: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()],
   },
   async redirects() {
     return [...buildCourseRedirects(), ...buildAiutiDiStatoRedirects()];

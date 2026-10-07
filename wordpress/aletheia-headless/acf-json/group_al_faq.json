@@ -1,0 +1,85 @@
+{
+  "key": "group_al_faq",
+  "title": "FAQ - Dati",
+  "fields": [
+    {
+      "key": "field_al_faq_categoria",
+      "label": "Categoria",
+      "name": "categoria",
+      "aria-label": "",
+      "type": "select",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "generale": "Generale",
+        "corsi": "Corsi",
+        "agenzia-lavoro": "Agenzia per il lavoro",
+        "finanziata": "Formazione finanziata"
+      },
+      "return_format": "value",
+      "allow_null": 1,
+      "ui": 0
+    },
+    {
+      "key": "field_al_faq_pagina",
+      "label": "Pagina in cui compare",
+      "name": "pagina",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Chiave della pagina (es. ecm, corsi-pa, obbligatoria). Per il chatbot: chatbot-formazione, chatbot-lavoro o chatbot-generale.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_faq_corso",
+      "label": "Corso collegato",
+      "name": "corso",
+      "aria-label": "",
+      "type": "post_object",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "corso"
+      ],
+      "return_format": "id",
+      "ui": 1,
+      "allow_null": 1
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "faq"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "side",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

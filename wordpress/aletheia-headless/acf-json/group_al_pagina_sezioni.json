@@ -1,0 +1,1932 @@
+{
+  "key": "group_al_pagina_sezioni",
+  "title": "Pagina - Sezioni",
+  "fields": [
+    {
+      "key": "field_al_pagina_sezioni_tab_intro",
+      "label": "Intro",
+      "name": "tab_intro",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_intro_badge",
+      "label": "Badge",
+      "name": "intro_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_intro_titolo",
+      "label": "Titolo (H2)",
+      "name": "intro_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_intro_testo",
+      "label": "Testo",
+      "name": "intro_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_1",
+      "label": "Sezione 1",
+      "name": "tab_sezione_1",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s1_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_badge",
+      "label": "Badge",
+      "name": "s1_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_titolo",
+      "label": "Titolo (H2)",
+      "name": "s1_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_testo",
+      "label": "Testo",
+      "name": "s1_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_elenco",
+      "label": "Card / elenco",
+      "name": "s1_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_immagine",
+      "label": "Immagine della sezione",
+      "name": "s1_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_img_1",
+      "label": "Immagine card 1",
+      "name": "s1_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_img_2",
+      "label": "Immagine card 2",
+      "name": "s1_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_img_3",
+      "label": "Immagine card 3",
+      "name": "s1_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_img_4",
+      "label": "Immagine card 4",
+      "name": "s1_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s1_cta",
+      "label": "Pulsante",
+      "name": "s1_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_2",
+      "label": "Sezione 2",
+      "name": "tab_sezione_2",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s2_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_badge",
+      "label": "Badge",
+      "name": "s2_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_titolo",
+      "label": "Titolo (H2)",
+      "name": "s2_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_testo",
+      "label": "Testo",
+      "name": "s2_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_elenco",
+      "label": "Card / elenco",
+      "name": "s2_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_immagine",
+      "label": "Immagine della sezione",
+      "name": "s2_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_img_1",
+      "label": "Immagine card 1",
+      "name": "s2_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_img_2",
+      "label": "Immagine card 2",
+      "name": "s2_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_img_3",
+      "label": "Immagine card 3",
+      "name": "s2_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_img_4",
+      "label": "Immagine card 4",
+      "name": "s2_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s2_cta",
+      "label": "Pulsante",
+      "name": "s2_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_3",
+      "label": "Sezione 3",
+      "name": "tab_sezione_3",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s3_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_badge",
+      "label": "Badge",
+      "name": "s3_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_titolo",
+      "label": "Titolo (H2)",
+      "name": "s3_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_testo",
+      "label": "Testo",
+      "name": "s3_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_elenco",
+      "label": "Card / elenco",
+      "name": "s3_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_immagine",
+      "label": "Immagine della sezione",
+      "name": "s3_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_img_1",
+      "label": "Immagine card 1",
+      "name": "s3_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_img_2",
+      "label": "Immagine card 2",
+      "name": "s3_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_img_3",
+      "label": "Immagine card 3",
+      "name": "s3_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_img_4",
+      "label": "Immagine card 4",
+      "name": "s3_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s3_cta",
+      "label": "Pulsante",
+      "name": "s3_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_4",
+      "label": "Sezione 4",
+      "name": "tab_sezione_4",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s4_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_badge",
+      "label": "Badge",
+      "name": "s4_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_titolo",
+      "label": "Titolo (H2)",
+      "name": "s4_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_testo",
+      "label": "Testo",
+      "name": "s4_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_elenco",
+      "label": "Card / elenco",
+      "name": "s4_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_immagine",
+      "label": "Immagine della sezione",
+      "name": "s4_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_img_1",
+      "label": "Immagine card 1",
+      "name": "s4_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_img_2",
+      "label": "Immagine card 2",
+      "name": "s4_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_img_3",
+      "label": "Immagine card 3",
+      "name": "s4_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_img_4",
+      "label": "Immagine card 4",
+      "name": "s4_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s4_cta",
+      "label": "Pulsante",
+      "name": "s4_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_5",
+      "label": "Sezione 5",
+      "name": "tab_sezione_5",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s5_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_badge",
+      "label": "Badge",
+      "name": "s5_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_titolo",
+      "label": "Titolo (H2)",
+      "name": "s5_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_testo",
+      "label": "Testo",
+      "name": "s5_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_elenco",
+      "label": "Card / elenco",
+      "name": "s5_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_immagine",
+      "label": "Immagine della sezione",
+      "name": "s5_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_img_1",
+      "label": "Immagine card 1",
+      "name": "s5_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_img_2",
+      "label": "Immagine card 2",
+      "name": "s5_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_img_3",
+      "label": "Immagine card 3",
+      "name": "s5_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_img_4",
+      "label": "Immagine card 4",
+      "name": "s5_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s5_cta",
+      "label": "Pulsante",
+      "name": "s5_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_6",
+      "label": "Sezione 6",
+      "name": "tab_sezione_6",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s6_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_badge",
+      "label": "Badge",
+      "name": "s6_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_titolo",
+      "label": "Titolo (H2)",
+      "name": "s6_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_testo",
+      "label": "Testo",
+      "name": "s6_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_elenco",
+      "label": "Card / elenco",
+      "name": "s6_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_immagine",
+      "label": "Immagine della sezione",
+      "name": "s6_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_img_1",
+      "label": "Immagine card 1",
+      "name": "s6_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_img_2",
+      "label": "Immagine card 2",
+      "name": "s6_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_img_3",
+      "label": "Immagine card 3",
+      "name": "s6_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_img_4",
+      "label": "Immagine card 4",
+      "name": "s6_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s6_cta",
+      "label": "Pulsante",
+      "name": "s6_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_7",
+      "label": "Sezione 7",
+      "name": "tab_sezione_7",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s7_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_badge",
+      "label": "Badge",
+      "name": "s7_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_titolo",
+      "label": "Titolo (H2)",
+      "name": "s7_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_testo",
+      "label": "Testo",
+      "name": "s7_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_elenco",
+      "label": "Card / elenco",
+      "name": "s7_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_immagine",
+      "label": "Immagine della sezione",
+      "name": "s7_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_img_1",
+      "label": "Immagine card 1",
+      "name": "s7_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_img_2",
+      "label": "Immagine card 2",
+      "name": "s7_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_img_3",
+      "label": "Immagine card 3",
+      "name": "s7_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_img_4",
+      "label": "Immagine card 4",
+      "name": "s7_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s7_cta",
+      "label": "Pulsante",
+      "name": "s7_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_sezione_8",
+      "label": "Sezione 8",
+      "name": "tab_sezione_8",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_ancora",
+      "label": "Ancora (id) per i link interni",
+      "name": "s8_ancora",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. corsi, cosa-facciamo: serve ai link #corsi della pagina.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_badge",
+      "label": "Badge",
+      "name": "s8_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_titolo",
+      "label": "Titolo (H2)",
+      "name": "s8_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_testo",
+      "label": "Testo",
+      "name": "s8_testo",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_elenco",
+      "label": "Card / elenco",
+      "name": "s8_elenco",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_immagine",
+      "label": "Immagine della sezione",
+      "name": "s8_immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_img_1",
+      "label": "Immagine card 1",
+      "name": "s8_img_1",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_img_2",
+      "label": "Immagine card 2",
+      "name": "s8_img_2",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_img_3",
+      "label": "Immagine card 3",
+      "name": "s8_img_3",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_img_4",
+      "label": "Immagine card 4",
+      "name": "s8_img_4",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_pagina_sezioni_s8_cta",
+      "label": "Pulsante",
+      "name": "s8_cta",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_numeri",
+      "label": "Numeri",
+      "name": "tab_numeri",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_numeri_badge",
+      "label": "Badge",
+      "name": "numeri_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_numeri_titolo",
+      "label": "Titolo",
+      "name": "numeri_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_numeri",
+      "label": "Numeri / statistiche",
+      "name": "numeri",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Valore|Suffisso|Etichetta (es. 20|+|Anni di esperienza). La prima riga è il numero protagonista",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_modulo",
+      "label": "Modulo",
+      "name": "tab_modulo",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_form_badge",
+      "label": "Modulo: badge",
+      "name": "form_badge",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_form_titolo",
+      "label": "Modulo: titolo",
+      "name": "form_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_form_sottotitolo",
+      "label": "Modulo: sottotitolo",
+      "name": "form_sottotitolo",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_tab_cta_finale",
+      "label": "CTA finale",
+      "name": "tab_cta_finale",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_pagina_sezioni_cta_titolo",
+      "label": "Titolo",
+      "name": "cta_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_sezioni_cta_testo",
+      "label": "Testo",
+      "name": "cta_testo",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_sezioni_cta_bottone1",
+      "label": "Bottone 1",
+      "name": "cta_bottone1",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_pagina_sezioni_cta_bottone2",
+      "label": "Bottone 2",
+      "name": "cta_bottone2",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      }
+    ]
+  ],
+  "menu_order": 10,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

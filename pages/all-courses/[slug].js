@@ -8,7 +8,8 @@ import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { coursesData } from '../../data/coursesRaw';
+import { getCoursesRaw } from '../../lib/wp-corsi';
+import { isrOptions } from '../../lib/wp';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
 import antincendioContent from '../../data/content/antincendio-content';
 import antincendioAggiornamentoContent from '../../data/content/antincendio-aggiornamento-content';
@@ -61,6 +62,15 @@ import personaleAlimentaristaOsaAggiornamentoContent from '../../data/content/pe
 import pesPavLavoriElettriciContent from '../../data/content/pes-pav-lavori-elettrici-content';
 import pompePerCalcestruzzoContent from '../../data/content/pompe-per-calcestruzzo-content';
 import pompePerCalcestruzzoAggiornamentoContent from '../../data/content/pompe-per-calcestruzzo-aggiornamento-content';
+import fseContent from '../../data/content/fse-content';
+import fondiInterprofessionaliContent from '../../data/content/fondi-interprofessionali-content';
+import fondoNuoveCompetenzeContent from '../../data/content/fondo-nuove-competenze-content';
+import corsiPerLaPaContent from '../../data/content/corsi-per-la-pa-content';
+import psrContent from '../../data/content/psr-content';
+import avviso22018Content from '../../data/content/avviso-2-2018-content';
+import blsdContent from '../../data/content/blsd-content';
+import icdlContent from '../../data/content/icdl-content';
+import { withSiteOptions } from '../../lib/wp-site';
 
 // Registro dei contenuti editoriali completi (descrizione/FAQ/moduli) per famiglia, separati per tipo
 // ("corso" vs "aggiornamento", perché i due materiali sono scritti/pubblicati in tempi diversi).
@@ -219,6 +229,24 @@ const EDITORIAL_CONTENT = {
     corso: pompePerCalcestruzzoContent['pompe-per-calcestruzzo'],
     aggiornamento: pompePerCalcestruzzoAggiornamentoContent,
   },
+  // Famiglie di formazione finanziata / programmi / corsi professionali: variante unica 'corso', livello 'livello-1'.
+  // Contenuto ricavato SOLO da testi già presenti nel progetto (pagine formazione/*, programma-gol, archivio/descrizioni.json);
+  // i campi senza fonte sono omessi e la pagina li nasconde (vedi guardie opzionali nel render).
+  fse: { corso: fseContent.fse },
+  'fondi-interprofessionali': { corso: fondiInterprofessionaliContent['fondi-interprofessionali'] },
+  'fondo-nuove-competenze': { corso: fondoNuoveCompetenzeContent['fondo-nuove-competenze'] },
+  'corsi-per-la-pa': { corso: corsiPerLaPaContent['corsi-per-la-pa'] },
+  psr: { corso: psrContent.psr },
+  'conduttore-d-impresa-agricola': { corso: psrContent['conduttore-d-impresa-agricola'] },
+  'ammodernamento-aziende-agricole': { corso: psrContent['ammodernamento-aziende-agricole'] },
+  'nuove-strategie-di-sviluppo-e-investimento': { corso: psrContent['nuove-strategie-di-sviluppo-e-investimento'] },
+  'cucina-professionale': { corso: avviso22018Content['cucina-professionale'] },
+  'addetto-panificatore-e-pasticciere': { corso: avviso22018Content['addetto-panificatore-e-pasticciere'] },
+  'operatore-informativo-di-risorse-web': { corso: avviso22018Content['operatore-informativo-di-risorse-web'] },
+  'blsd-basic-life-support-and-defibrillation': { corso: blsdContent['blsd-basic-life-support-and-defibrillation'] },
+  'icdl-base': { corso: icdlContent['icdl-base'] },
+  'icdl-standard': { corso: icdlContent['icdl-standard'] },
+  'icdl-update': { corso: icdlContent['icdl-update'] },
 };
 
 // Dettagli editoriali completi per famiglia di corso (overview, curriculum, instructor, prezzi per variante)
@@ -1236,15 +1264,16 @@ export const coursesDetails = {
 // markup servito (crawler, screen reader senza JS) non contiene H1 né contenuto del corso. Gli slug non
 // presenti restano gestiti dal ramo "Corso non trovato" (fallback 'blocking').
 export async function getStaticPaths() {
-  const families = buildCourseFamilies(coursesData, coursesDetails, { quiet: true });
+  const families = buildCourseFamilies(await getCoursesRaw(), coursesDetails, { quiet: true });
   return { paths: families.map((f) => ({ params: { slug: f.slug } })), fallback: 'blocking' };
 }
 
-export async function getStaticProps({ params }) {
-  return { props: { slug: params.slug } };
+/* Catalogo: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-corsi.ts). */
+async function getPageStaticProps({ params }) {
+  return { props: { slug: params.slug, coursesRaw: await getCoursesRaw() }, ...isrOptions() };
 }
 
-export default function CourseDetail({ slug: slugProp }) {
+export default function CourseDetail({ slug: slugProp, coursesRaw }) {
   const router = useRouter();
   const slug = slugProp ?? router.query.slug;
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'moduli' - indipendente da livello/tipo, non si resetta al cambio
@@ -1263,7 +1292,7 @@ export default function CourseDetail({ slug: slugProp }) {
   // Famiglie derivate automaticamente da coursesData (livelli/varianti annidati) + dettagli editoriali per prezzo/overview.
   // I vecchi slug per-livello (es. /all-courses/antincendio-rischio-basso-livello-1) sono gestiti a monte da
   // redirect 301 in next.config.js: qui arriva solo lo slug canonico di famiglia.
-  const families = useMemo(() => buildCourseFamilies(coursesData, coursesDetails), []);
+  const families = useMemo(() => buildCourseFamilies(coursesRaw, coursesDetails), [coursesRaw]);
   const family = useMemo(() => families.find((f) => f.slug === slug), [families, slug]);
 
   useEffect(() => {
@@ -1599,12 +1628,12 @@ export default function CourseDetail({ slug: slugProp }) {
         {contenutoLivello ? (
           <CourseSchedaTecnica
             items={[
-              { icon: 'fas fa-clock', label: 'Durata', value: `${contenutoLivello.durataOre} ore` },
-              { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita },
-              { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita },
-              { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato },
-              { icon: 'fas fa-users', label: 'Partecipanti', value: `Max ${contenutoLivello.partecipantiMax} persone` },
-            ]}
+              { icon: 'fas fa-clock', label: 'Durata', value: `${contenutoLivello.durataOre} ore`, show: contenutoLivello.durataOre != null },
+              { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita, show: !!contenutoLivello.modalita },
+              { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita, show: !!contenutoLivello.validita },
+              { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato, show: !!contenutoLivello.attestato },
+              { icon: 'fas fa-users', label: 'Partecipanti', value: `Max ${contenutoLivello.partecipantiMax} persone`, show: contenutoLivello.partecipantiMax != null },
+            ].filter(({ show }) => show).map(({ show, ...item }) => item)}
           />
         ) : (
           <CourseSchedaTecnica
@@ -1624,7 +1653,7 @@ export default function CourseDetail({ slug: slugProp }) {
           {[
             { id: 'overview', label: 'Panoramica' },
             { id: 'moduli', label: 'Moduli' },
-          ].map(({ id, label }) => (
+          ].filter(({ id }) => id !== 'moduli' || !contenutoLivello || contenutoLivello.moduli?.length).map(({ id, label }) => (
             <button key={id} onClick={() => setActiveTab(id)} style={{ background: 'none', border: 'none', padding: '0.75rem 1.5rem', fontSize: '1rem', fontWeight: activeTab === id ? '700' : '500', color: activeTab === id ? '#008C95' : '#6B7280', cursor: 'pointer', borderBottom: activeTab === id ? '3px solid #008C95' : '3px solid transparent', marginBottom: '-2px', transition: 'all 0.2s ease' }}>
               {label}
             </button>
@@ -1643,13 +1672,14 @@ export default function CourseDetail({ slug: slugProp }) {
               Contenuto dettagliato in arrivo. Nel frattempo trovi qui accanto durata, modalità e attestato.
             </p>
           </div>
-        ) : activeTab === 'overview' ? (
+        ) : activeTab === 'overview' || !contenutoLivello.moduli?.length ? (
           <div>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Descrizione del corso</h2>
             {contenutoLivello.descrizione.split('\n\n').map((paragrafo, i) => (
               <p key={i} className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginBottom: '1.25rem' }}>{paragrafo}</p>
             ))}
 
+            {contenutoLivello.aChiERivolto?.length > 0 && (<>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.aChiERivolto.map((riga, i) => (
@@ -1659,7 +1689,9 @@ export default function CourseDetail({ slug: slugProp }) {
                 </li>
               ))}
             </ul>
+            </>)}
 
+            {contenutoLivello.cosaImparerai?.length > 0 && (<>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Cosa imparerai</h2>
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.cosaImparerai.map((outcome, i) => (
@@ -1669,8 +1701,10 @@ export default function CourseDetail({ slug: slugProp }) {
                 </li>
               ))}
             </ul>
+            </>)}
 
             {/* FAQ - accordion, una sola domanda aperta alla volta */}
+            {contenutoLivello.faq?.length > 0 && (<>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Domande frequenti</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
               {contenutoLivello.faq.map((item, i) => {
@@ -1696,12 +1730,13 @@ export default function CourseDetail({ slug: slugProp }) {
                 );
               })}
             </div>
+            </>)}
           </div>
         ) : (
           <div>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Programma Formativo</h2>
             <p className="text-slate-600 dark:text-gray-400" style={{ marginBottom: '1.5rem' }}>
-              Il corso è strutturato in {contenutoLivello.moduli.length} moduli per un totale di {contenutoLivello.durataOre} ore
+              Il corso è strutturato in {contenutoLivello.moduli.length} moduli {contenutoLivello.durataOre != null && ` per un totale di ${contenutoLivello.durataOre} ore`}
             </p>
             <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -1723,7 +1758,7 @@ export default function CourseDetail({ slug: slugProp }) {
                       </td>
                       <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                          {modulo.argomenti.map((arg, j) => (
+                          {(modulo.argomenti || []).map((arg, j) => (
                             <li key={j} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{arg}</li>
                           ))}
                         </ul>
@@ -1874,7 +1909,7 @@ export default function CourseDetail({ slug: slugProp }) {
                         className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
                         style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)' }}
                       >
-                        <i className="fas fa-shield-halved" style={{ fontSize: '2rem', color: 'rgba(110,231,183,0.5)' }}></i>
+                        <i className="fas fa-shield-halved" style={{ fontSize: '2rem', color: 'rgba(95,194,200,0.5)' }}></i>
                       </div>
                     )}
                     <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(0deg, rgba(15,23,42,0.65) 0%, transparent 55%)' }} />
@@ -1898,3 +1933,6 @@ export default function CourseDetail({ slug: slugProp }) {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

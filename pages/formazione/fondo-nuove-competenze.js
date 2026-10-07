@@ -4,108 +4,23 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import FormAzienda from '../../components/FormAzienda';
 import { useTheme } from '../../context/ThemeContext';
+import { getFaqs } from '../../lib/wp-faq';
+import { isrOptions } from '../../lib/wp';
+import { getSchede } from '../../lib/wp-schede';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { ICONE_SVG } from '../../data/icone-svg';
+import { withSiteOptions } from '../../lib/wp-site';
 
-const target = [
-  {
-    icon: 'fas fa-laptop-code',
-    title: 'Transizione digitale',
-    text: 'Nuovi software gestionali, cybersecurity, e-commerce, automazione, competenze digitali di base e avanzate.',
-  },
-  {
-    icon: 'fas fa-leaf',
-    title: 'Transizione ecologica',
-    text: 'Sostenibilità, efficienza energetica, economia circolare, nuovi processi produttivi green.',
-  },
-  {
-    icon: 'fas fa-sitemap',
-    title: 'Innovazione organizzativa',
-    text: 'Riorganizzazione dei processi, nuove figure professionali, cambiamenti tecnologici interni.',
-  },
-];
+// Vantaggi e servizi: schede di WordPress (liste `fnc-vantaggi`, `fnc-servizi`) o data/schede.js; icone SVG per nome (data/icone-svg.js).
 
-const vantaggi = [
-  {
-    title: 'Nessun blocco della produzione',
-    text: 'La rimodulazione dell\'orario si progetta sulle esigenze reali dell\'azienda.',
-    icon: <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" />,
-  },
-  {
-    title: 'Competenze allineate al mercato',
-    text: 'Percorsi su misura su digitale, sostenibilità e organizzazione, non corsi standard.',
-    icon: <path d="M12 2a10 10 0 1 0 10 10M22 2 12 12M16 2h6v6" />,
-  },
-  {
-    title: 'Personale più motivato e trattenuto',
-    text: 'Investire sulle persone riduce il turnover e rafforza il senso di appartenenza.',
-    icon: <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" />,
-  },
-  {
-    title: 'Un investimento sostenibile',
-    text: 'Cresci sul capitale umano senza intaccare la liquidità aziendale.',
-    icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />,
-  },
-];
+// FAQ: WordPress (CPT faq) se WP_URL è impostato, altrimenti data/faq.js (vedi lib/wp-faq.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('formazione/fondo-nuove-competenze'), faqs: await getFaqs('fondo-nuove-competenze'), target: await getSchede('fnc-target'), vantaggi: await getSchede('fnc-vantaggi'), servizi: await getSchede('fnc-servizi') }, ...isrOptions() };
+}
 
-const servizi = [
-  {
-    bold: 'Analisi',
-    rest: ' dei fabbisogni aziendali',
-    icon: <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-4.35-4.35" />,
-  },
-  {
-    bold: 'Verifica',
-    rest: ' dei requisiti di accesso',
-    icon: <path d="m9 12 2 2 4-4M12 3a9 9 0 0 0-8 4.7V17a9 9 0 0 0 16 0V7.7A9 9 0 0 0 12 3Z" />,
-  },
-  {
-    bold: 'Progettazione',
-    rest: ' del piano formativo',
-    icon: <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5Z" />,
-    featured: true,
-  },
-  {
-    bold: 'Supporto',
-    rest: ' nella predisposizione degli accordi previsti dalla misura',
-    icon: <path d="M9 12h6M9 16h6M8 3h8a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 0 1 2-2Z" />,
-  },
-  {
-    bold: 'Gestione',
-    rest: ' della domanda',
-    icon: <path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2m18 0v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8m18 0-9 6-9-6" />,
-  },
-  {
-    bold: 'Coordinamento',
-    rest: ' delle attività formative',
-    icon: <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm10 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />,
-  },
-  {
-    bold: 'Monitoraggio',
-    rest: ' e rendicontazione finale',
-    icon: <path d="M3 3v18h18M7 15l4-4 3 3 5-6" />,
-    featured: true,
-  },
-];
-
-const faqs = [
-  {
-    domanda: 'Chi può accedere al Fondo Nuove Competenze?',
-    risposta: 'Possono accedere le aziende private di ogni settore e dimensione che abbiano necessità di aggiornare le competenze dei propri dipendenti, previo accordo con i lavoratori o le rappresentanze sindacali.',
-  },
-  {
-    domanda: 'Quanto costa alla mia azienda?',
-    risposta: 'Le ore di lavoro destinate alla formazione sono coperte dal Fondo per la parte retributiva e contributiva. L\'azienda non sostiene il costo del lavoro relativo a quelle ore.',
-  },
-  {
-    domanda: 'Che tipo di formazione posso attivare?',
-    risposta: 'Percorsi orientati a transizione digitale, transizione ecologica e innovazione organizzativa, progettati sui reali fabbisogni della tua impresa.',
-  },
-  {
-    domanda: 'Il Fondo è sempre attivo?',
-    risposta: 'La misura viene rifinanziata a edizioni successive, con requisiti e finestre di apertura che possono variare. Contattaci per sapere se è attualmente attivabile e quali sono le condizioni aggiornate.',
-  },
-];
-
-export default function FondoNuoveCompetenze() {
+export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, pagina }) {
+  const T = pagina.testi;
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
@@ -113,11 +28,11 @@ export default function FondoNuoveCompetenze() {
   return (
     <>
       <Head>
-        <title>Fondo Nuove Competenze - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Fondo Nuove Competenze - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Il Fondo Nuove Competenze permette alle imprese di destinare parte dell'orario di lavoro alla formazione, ottenendo il rimborso del costo delle ore. Alètheia ti accompagna in ogni fase."
+          content={pagina.seo.descrizione || "Il Fondo Nuove Competenze permette alle imprese di destinare parte dell'orario di lavoro alla formazione, ottenendo il rimborso del costo delle ore. Alètheia ti accompagna in ogni fase."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -371,19 +286,14 @@ export default function FondoNuoveCompetenze() {
             Fondo Nuove Competenze
           </span>
 
-          <div className="page-hero-badge fade-up fade-up-1">Formazione senza costi retributivi</div>
+          <div className="page-hero-badge fade-up fade-up-1">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1">
-            Fondo{' '}
-            <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Nuove Competenze
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
+            </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="/contatti" className="btn btn-lg btn-light">
-              Verifica se la tua azienda può accedere
-              <i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
+            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}<i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
             </a>
           </div>
         </div>
@@ -393,13 +303,9 @@ export default function FondoNuoveCompetenze() {
       <section className="bg-white dark:bg-dark-card border-y border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div>
-            <span className="section-badge">A chi si rivolge</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Pensato per le aziende che vogliono crescere senza fermarsi
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', marginTop: '1rem', lineHeight: 1.85 }}>
-              Il Fondo Nuove Competenze è una misura ANPAL che permette alle imprese di destinare parte dell&apos;orario di lavoro alla formazione, ottenendo il rimborso delle ore dedicate all&apos;aggiornamento professionale. È particolarmente indicato per chi affronta:
-            </p>
+            <span className="section-badge">{T.intro_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.intro_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', marginTop: '1rem', lineHeight: 1.85 }}>{T.intro_testo[0]}</p>
           </div>
 
           <div className="target-grid">
@@ -428,20 +334,16 @@ export default function FondoNuoveCompetenze() {
       <section className="dark:bg-dark-bg" style={{ padding: '5rem 0', background: isDark ? undefined : '#f4f6f9' }}>
         <div className="container">
           <div>
-            <span className="section-badge">I vantaggi per la tua azienda</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Investi sulle competenze senza rallentare la crescita
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.85 }}>
-              Il Fondo Nuove Competenze ti permette di aggiornare il capitale umano trasformando la formazione in un investimento sostenibile.
-            </p>
+            <span className="section-badge">{T.s1_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.s1_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.85 }}>{T.s1_testo[0]}</p>
           </div>
 
           <div className="vantaggi-row">
             {vantaggi.map((v) => (
               <div key={v.title} className="vantaggio-item">
                 <span className="vantaggio-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">{v.icon}</svg>
+                  <svg viewBox="0 0 24 24">{ICONE_SVG[v.icon] && <path d={ICONE_SVG[v.icon]} />}</svg>
                 </span>
                 <h3>{v.title}</h3>
                 <p>{v.text}</p>
@@ -455,13 +357,9 @@ export default function FondoNuoveCompetenze() {
       <section className="bg-white dark:bg-dark-card border-y border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div>
-            <span className="section-badge">Il tuo ente di fiducia</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-              Un unico partner per progettare e gestire il Fondo Nuove Competenze
-            </h2>
-            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>
-              Accedere al Fondo Nuove Competenze richiede competenze tecniche, progettazione accurata e una gestione amministrativa puntuale. Per questo Alètheia segue direttamente tutte le fasi del progetto. Il Fondo Nuove Competenze richiede un&apos;istanza strutturata: accordo sindacale o con i lavoratori, progetto formativo coerente con i fabbisogni, corretta quantificazione delle ore e delle competenze in uscita, rendicontazione puntuale. Un errore in fase di presentazione può costare l&apos;accesso al contributo.
-            </p>
+            <span className="section-badge">{T.s2_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>{T.s2_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, margin: 0 }}>{T.s2_testo[0]}</p>
           </div>
 
           <div style={{ marginTop: '2.5rem' }}>
@@ -474,7 +372,7 @@ export default function FondoNuoveCompetenze() {
               {servizi.map((s) => (
                 <div key={s.bold} className={`bento-card${s.featured ? ' featured' : ''}`}>
                   <span className="bento-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">{s.icon}</svg>
+                    <svg viewBox="0 0 24 24">{ICONE_SVG[s.icon] && <path d={ICONE_SVG[s.icon]} />}</svg>
                   </span>
                   <p><b>{s.bold}</b>{s.rest}</p>
                 </div>
@@ -488,10 +386,8 @@ export default function FondoNuoveCompetenze() {
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '2.5rem' }}>
-            <span className="section-badge">Domande frequenti</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Fondo Nuove Competenze: le domande più comuni
-            </h2>
+            <span className="section-badge">{T.s3_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.s3_titolo}</h2>
           </div>
 
           <div className="faq-grid">
@@ -533,3 +429,6 @@ export default function FondoNuoveCompetenze() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

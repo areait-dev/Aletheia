@@ -1,30 +1,10 @@
 import { useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useSiteOptions } from '../context/SiteOptionsContext';
+import LinkText from './LinkText';
 
-const SETTORI = [
-  'Agricoltura / Agroalimentare',
-  'Commercio / Retail',
-  'Edilizia / Costruzioni',
-  'Industria / Manifatturiero',
-  'Informatica / Tecnologia',
-  'Pubblica Amministrazione',
-  'Sanità / Assistenza',
-  'Servizi / Consulenza',
-  'Turismo / Ristorazione',
-  'Altro',
-];
-
-const DIPENDENTI = ['1-10', '11-50', '51-200', 'Oltre 200'];
-
-const SERVIZI = [
-  'Somministrazione di Lavoro',
-  'Ricerca e Selezione del Personale',
-  'Consulenza HR',
-  'Formazione Aziendale',
-  'Intermediazione Lavoro',
-  'Riqualificazione e Upskilling',
-];
+// Settori, fasce di dipendenti, servizi, consenso privacy e messaggio di successo arrivano dalle opzioni globali (tab Moduli).
 
 const INFO_ITEMS = [
   { icon: 'fas fa-phone',         label: 'Telefono', value: '+39 0932 862613',   href: 'tel:+390932862613' },
@@ -121,6 +101,7 @@ export default function FormAzienda({
   subtitle = 'Compila il form, ti risponderemo entro 24 ore',
 }: FormAziendaProps = {}) {
   const { theme } = useTheme() || { theme: 'light' };
+  const { moduli } = useSiteOptions();
   const isDark = theme === 'dark';
   const [fields, setFields] = useState<FormFields>(EMPTY);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -324,10 +305,10 @@ export default function FormAzienda({
                   <i className="fas fa-check"></i>
                 </div>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-                  Richiesta inviata!
+                  {moduli.successoAzienda.titolo}
                 </h3>
                 <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', maxWidth: '360px', lineHeight: 1.65, margin: 0 }}>
-                  Grazie per averci contattato. Un nostro consulente HR ti risponderà entro 24 ore lavorative.
+                  {moduli.successoAzienda.testo}
                 </p>
                 <button
                   onClick={() => { setSubmitted(false); setFields(EMPTY); }}
@@ -399,7 +380,7 @@ export default function FormAzienda({
                       style={selectStyle(!!errors.settore, isDark)}
                       onFocus={focusOn} onBlur={focusOff(!!errors.settore, isDark)}>
                       <option value="" style={{ background: '#0F172A' }}>Seleziona…</option>
-                      {SETTORI.map((s) => <option key={s} value={s} style={{ background: '#0F172A' }}>{s}</option>)}
+                      {moduli.settoriAzienda.map((s) => <option key={s} value={s} style={{ background: '#0F172A' }}>{s}</option>)}
                     </select>
                   </Field>
                   <Field label="N° dipendenti" required error={errors.dipendenti} isDark={isDark}>
@@ -407,7 +388,7 @@ export default function FormAzienda({
                       style={selectStyle(!!errors.dipendenti, isDark)}
                       onFocus={focusOn} onBlur={focusOff(!!errors.dipendenti, isDark)}>
                       <option value="" style={{ background: '#0F172A' }}>Seleziona…</option>
-                      {DIPENDENTI.map((d) => <option key={d} value={d} style={{ background: '#0F172A' }}>{d}</option>)}
+                      {moduli.dipendentiAzienda.map((d) => <option key={d} value={d} style={{ background: '#0F172A' }}>{d}</option>)}
                     </select>
                   </Field>
                 </div>
@@ -418,7 +399,7 @@ export default function FormAzienda({
                     style={selectStyle(!!errors.servizio, isDark)}
                     onFocus={focusOn} onBlur={focusOff(!!errors.servizio, isDark)}>
                     <option value="" style={{ background: '#0F172A' }}>Seleziona un servizio…</option>
-                    {SERVIZI.map((s) => <option key={s} value={s} style={{ background: '#0F172A' }}>{s}</option>)}
+                    {moduli.serviziAzienda.map((s) => <option key={s} value={s} style={{ background: '#0F172A' }}>{s}</option>)}
                   </select>
                 </Field>
 
@@ -452,11 +433,7 @@ export default function FormAzienda({
                       </div>
                     </div>
                     <span style={{ fontSize: '0.825rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                      Ho letto e accetto la{' '}
-                      <a href="/privacy-cookie" style={{ color: '#008C95', textDecoration: 'underline' }}>
-                        Privacy Policy
-                      </a>{' '}
-                      di Alètheia S.r.l.
+                      <LinkText text={moduli.privacyTesto} style={{ color: '#008C95', textDecoration: 'underline' }} />
                       <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>
                     </span>
                   </label>

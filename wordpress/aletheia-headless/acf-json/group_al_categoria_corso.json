@@ -1,0 +1,89 @@
+{
+  "key": "group_al_categoria_corso",
+  "title": "Categoria corso - Dati",
+  "fields": [
+    {
+      "key": "field_al_categoria_corso_icona",
+      "label": "Icona Font Awesome",
+      "name": "icona",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "fas fa-hard-hat"
+    },
+    {
+      "key": "field_al_categoria_corso_immagine",
+      "label": "Immagine",
+      "name": "immagine",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_categoria_corso_colore",
+      "label": "Colore accento (#hex)",
+      "name": "colore",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Solo token del design system: #008C95, #10B981, #F59E0B, #6366F1.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_categoria_corso_pagina",
+      "label": "Pagina di destinazione",
+      "name": "pagina",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. /formazione/obbligatoria",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "taxonomy",
+        "operator": "==",
+        "value": "categoria_corso"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

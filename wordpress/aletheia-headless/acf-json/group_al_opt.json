@@ -1,0 +1,962 @@
+{
+  "key": "group_al_opt",
+  "title": "Opzioni Globali Alètheia",
+  "fields": [
+    {
+      "key": "field_al_opt_tab_identit_",
+      "label": "Identità",
+      "name": "tab_identit_",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_logo",
+      "label": "Logo",
+      "name": "logo",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_opt_logo_bianco",
+      "label": "Logo bianco (sfondi scuri)",
+      "name": "logo_bianco",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_opt_nome",
+      "label": "Ragione sociale",
+      "name": "nome",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_telefono",
+      "label": "Telefono",
+      "name": "telefono",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_email",
+      "label": "Email",
+      "name": "email",
+      "aria-label": "",
+      "type": "email",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_whatsapp",
+      "label": "WhatsApp",
+      "name": "whatsapp",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_orari",
+      "label": "Orari",
+      "name": "orari",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "Lun - Ven: 9:00-13:00 / 14:00-18:00"
+    },
+    {
+      "key": "field_al_opt_social",
+      "label": "Social",
+      "name": "social",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Classe Font Awesome|URL|Nome per accessibilità (es. fa-brands fa-facebook|https://…|Facebook)",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_tab_menu",
+      "label": "Menu",
+      "name": "tab_menu",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_menu_voci",
+      "label": "Voci di menu principale",
+      "name": "menu_voci",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Etichetta|URL (vuoto URL = contenitore del dropdown)",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_menu_formazione",
+      "label": "Dropdown Formazione",
+      "name": "menu_formazione",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Riga che inizia con \"# \" = gruppo: \"# Titolo|URL\". Le righe sotto = voci: \"Etichetta|URL\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 14,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_header_cta_lavoro",
+      "label": "Pulsante header \"Offerte di lavoro\"",
+      "name": "header_cta_lavoro",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_opt_header_elearning",
+      "label": "Link piattaforma e-learning",
+      "name": "header_elearning",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_opt_mega_calendario_titolo",
+      "label": "Mega-menu: titolo riquadro calendario",
+      "name": "mega_calendario_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_mega_calendario_testo",
+      "label": "Mega-menu: testo riquadro calendario",
+      "name": "mega_calendario_testo",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_mega_calendario_btn",
+      "label": "Mega-menu: pulsante calendario",
+      "name": "mega_calendario_btn",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_opt_mega_corsi_btn",
+      "label": "Mega-menu: pulsante tutti i corsi",
+      "name": "mega_corsi_btn",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_opt_tab_footer",
+      "label": "Footer",
+      "name": "tab_footer",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_footer_indirizzo",
+      "label": "Indirizzo (colonna contatti)",
+      "name": "footer_indirizzo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_footer_indirizzo_link",
+      "label": "Link mappa dell'indirizzo",
+      "name": "footer_indirizzo_link",
+      "aria-label": "",
+      "type": "url",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_footer_link_legali",
+      "label": "Link legali",
+      "name": "footer_link_legali",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Etichetta|URL (Privacy e Cookie, Reclami, Aiuti di Stato…)",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 5,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_footer_colonne",
+      "label": "Link rapidi",
+      "name": "footer_colonne",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Riga \"# Titolo colonna\", riga \"## Sottotitolo\" (facoltativa), poi righe \"Etichetta|URL\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 14,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_footer_catalogo_pdf",
+      "label": "Catalogo corsi (PDF)",
+      "name": "footer_catalogo_pdf",
+      "aria-label": "",
+      "type": "file",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "library": "all",
+      "mime_types": "pdf"
+    },
+    {
+      "key": "field_al_opt_footer_accreditamenti",
+      "label": "Accreditamenti (testo)",
+      "name": "footer_accreditamenti",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una riga per accreditamento",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 5,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_footer_copyright",
+      "label": "Barra inferiore (©, P.IVA, PEC)",
+      "name": "footer_copyright",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_footer_credits_testo",
+      "label": "Credits: testo",
+      "name": "footer_credits_testo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "Ente della rete di imprese"
+    },
+    {
+      "key": "field_al_opt_footer_credits_link",
+      "label": "Credits: link",
+      "name": "footer_credits_link",
+      "aria-label": "",
+      "type": "link",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array"
+    },
+    {
+      "key": "field_al_opt_tab_contatti",
+      "label": "Contatti",
+      "name": "tab_contatti",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_motivi_contatto",
+      "label": "Motivi di contatto (select del modulo)",
+      "name": "motivi_contatto",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una voce per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_tab_moduli",
+      "label": "Moduli",
+      "name": "tab_moduli",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_form_servizi_candidato",
+      "label": "Candidato: servizi richiesti (select)",
+      "name": "form_servizi_candidato",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una voce per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_form_settori_azienda",
+      "label": "Azienda: settori (select)",
+      "name": "form_settori_azienda",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una voce per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_form_dipendenti_azienda",
+      "label": "Azienda: fasce dipendenti (select)",
+      "name": "form_dipendenti_azienda",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una voce per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_form_servizi_azienda",
+      "label": "Azienda: servizi richiesti (select)",
+      "name": "form_servizi_azienda",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una voce per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_form_privacy_testo",
+      "label": "Testo consenso privacy",
+      "name": "form_privacy_testo",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Un link si scrive [etichetta](URL). Es.: Ho letto e accetto la [Privacy Policy](/privacy-cookie) di Alètheia S.r.l.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 2,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_form_successo_testo",
+      "label": "Messaggio di invio riuscito",
+      "name": "form_successo_testo",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Sei righe: 1) titolo e 2) testo del modulo candidato; 3) titolo e 4) testo del modulo azienda; 5) titolo e 6) testo del modulo reclami e proposte. Se mancano, si usano i testi predefiniti.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_form_email_candidati",
+      "label": "Email destinatario candidature",
+      "name": "form_email_candidati",
+      "aria-label": "",
+      "type": "email",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_form_email_aziende",
+      "label": "Email destinatario richieste aziende",
+      "name": "form_email_aziende",
+      "aria-label": "",
+      "type": "email",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_tab_chatbot",
+      "label": "Chatbot",
+      "name": "tab_chatbot",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_chatbot_attivo",
+      "label": "Chatbot attivo",
+      "name": "chatbot_attivo",
+      "aria-label": "",
+      "type": "true_false",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "ui": 1,
+      "default_value": 1
+    },
+    {
+      "key": "field_al_opt_chatbot_nome",
+      "label": "Nome assistente",
+      "name": "chatbot_nome",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_chatbot_placeholder",
+      "label": "Testo del campo messaggio",
+      "name": "chatbot_placeholder",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_chatbot_fallback",
+      "label": "Messaggio quando non sa rispondere",
+      "name": "chatbot_fallback",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_chatbot_benvenuto",
+      "label": "Messaggio di benvenuto",
+      "name": "chatbot_benvenuto",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_chatbot_email",
+      "label": "Email per domande senza risposta",
+      "name": "chatbot_email",
+      "aria-label": "",
+      "type": "email",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_tab_seo_globale",
+      "label": "SEO globale",
+      "name": "tab_seo_globale",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_sito_seo_template",
+      "label": "Template titolo (non ancora usato dal frontend)",
+      "name": "sito_seo_template",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "%s | Alètheia Srl"
+    },
+    {
+      "key": "field_al_opt_sito_seo_descrizione",
+      "label": "Description predefinita (non ancora usata dal frontend)",
+      "name": "sito_seo_descrizione",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_sito_seo_og",
+      "label": "Immagine OG predefinita (non ancora usata dal frontend)",
+      "name": "sito_seo_og",
+      "aria-label": "",
+      "type": "image",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_al_opt_sito_seo_gsv",
+      "label": "Google site verification",
+      "name": "sito_seo_gsv",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_tab_cookie_e_privacy",
+      "label": "Cookie e privacy",
+      "name": "tab_cookie_e_privacy",
+      "aria-label": "",
+      "type": "tab",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_al_opt_legale_banner",
+      "label": "Testo banner cookie",
+      "name": "legale_banner",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Un link si scrive [etichetta](URL). Es.: Consulta la nostra [Privacy e Cookie Policy](/privacy-cookie).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_opt_legale_btn_accetta",
+      "label": "Etichetta pulsante accetta",
+      "name": "legale_btn_accetta",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_legale_btn_rifiuta",
+      "label": "Etichetta pulsante rifiuta",
+      "name": "legale_btn_rifiuta",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_opt_legale_privacy",
+      "label": "Informativa privacy",
+      "name": "legale_privacy",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    },
+    {
+      "key": "field_al_opt_legale_cookie",
+      "label": "Cookie policy",
+      "name": "legale_cookie",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

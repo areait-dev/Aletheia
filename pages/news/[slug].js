@@ -4,23 +4,32 @@ import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
-import { ALL_NEWS, getNewsBySlug, formatDate } from '../../lib/newsData';
+import { formatDate } from '../../lib/newsData';
+import { getAllNews, getNewsArticle } from '../../lib/wp-news';
+import { isWpEnabled, isrOptions } from '../../lib/wp';
+import { useLiveNews } from '../../lib/live-preview';
 import { useTheme } from '../../context/ThemeContext';
+import { withSiteOptions } from '../../lib/wp-site';
 
 /* ─── Data fetching (invariato) ─────────────────────────────── */
 
 export async function getStaticPaths() {
+  const news = await getAllNews();
   return {
-    paths: ALL_NEWS.map((n) => ({ params: { slug: n.slug } })),
-    fallback: false,
+    paths: news.map((n) => ({ params: { slug: n.slug } })),
+    // Con WordPress attivo le news nuove compaiono senza rifare il build.
+    fallback: isWpEnabled() ? 'blocking' : false,
   };
 }
 
-export async function getStaticProps({ params }) {
-  const article = getNewsBySlug(params.slug);
-  if (!article) return { notFound: true };
-  const related = ALL_NEWS.filter((n) => n.slug !== params.slug).slice(0, 3);
-  return { props: { article, related } };
+async function getPageStaticProps({ params, preview = false, previewData }) {
+  const article = await getNewsArticle(params.slug, { preview, previewData });
+  if (!article) return { notFound: true, ...isrOptions(60) };
+  const related = (await getAllNews())
+    .filter((n) => n.slug !== article.slug)
+    .slice(0, 3)
+    .map(({ body, bodyHtml, ...rest }) => rest);
+  return { props: { article, related, isPreview: Boolean(preview) }, ...isrOptions() };
 }
 
 /* ─── Utilities ─────────────────────────────────────────────── */
@@ -183,9 +192,11 @@ function RelatedCardSmall({ article }) {
       className={hovered ? 'bg-[#008C95]/10 dark:bg-gray-700' : ''}
       style={{ display: 'flex', gap: '0.75rem', textDecoration: 'none', padding: '0.75rem', borderRadius: '0.75rem', transition: 'background 0.2s' }}>
       <div className="bg-slate-200 dark:bg-gray-700" style={{ flexShrink: 0, width: '72px', height: '54px', borderRadius: '0.5rem', overflow: 'hidden', position: 'relative' }}>
-        <Image src={article.image} alt={article.title} fill sizes="72px"
-          style={{ objectFit: 'cover' }}
-          onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        {article.image && (
+          <Image src={article.image} alt={article.title} fill sizes="72px"
+            style={{ objectFit: 'cover' }}
+            onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        )}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
         <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#008C95' }}>{formatDate(article.date)}</span>
@@ -208,9 +219,11 @@ function RelatedCardLarge({ article }) {
       className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
       style={{ display: 'flex', flexDirection: 'column', borderRadius: '1rem', overflow: 'hidden', textDecoration: 'none', transform: hovered ? 'translateY(-4px)' : 'translateY(0)', boxShadow: hovered ? '0 12px 32px rgba(0,0,0,0.1)' : '0 2px 8px rgba(0,0,0,0.04)', transition: 'all 0.25s ease' }}>
       <div className="bg-[#008C95]/10 dark:bg-gray-700" style={{ position: 'relative', paddingTop: '56.25%', overflow: 'hidden' }}>
-        <Image src={article.image} alt={article.title} fill sizes="(max-width: 768px) 100vw, 340px"
-          style={{ objectFit: 'cover', transform: hovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.4s ease' }}
-          onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        {article.image && (
+          <Image src={article.image} alt={article.title} fill sizes="(max-width: 768px) 100vw, 340px"
+            style={{ objectFit: 'cover', transform: hovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.4s ease' }}
+            onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        )}
       </div>
       <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
         <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#008C95' }}>{formatDate(article.date)}</span>
@@ -227,7 +240,9 @@ function RelatedCardLarge({ article }) {
 
 /* ─── Page ───────────────────────────────────────────────────── */
 
-export default function ArticlePage({ article, related }) {
+export default function ArticlePage({ article: initialArticle, related, isPreview = false }) {
+  // Nell'editor di WordPress (iframe con ?live=1) mostra le modifiche non ancora salvate.
+  const article = useLiveNews(initialArticle);
   const category = getCategory(article.slug);
   const tags = getTags(article.slug);
   const { theme } = useTheme() || { theme: 'light' };
@@ -244,6 +259,13 @@ export default function ArticlePage({ article, related }) {
 
       <ProgressBar />
       <Header active="/news" />
+
+      {isPreview && (
+        <div role="status" style={{ position: 'fixed', bottom: 16, left: 16, zIndex: 9999, background: '#0F172A', color: '#fff', padding: '0.6rem 1rem', borderRadius: 999, fontSize: '0.8rem', fontWeight: 700, boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
+          Anteprima bozza ·{' '}
+          <a href={`/api/exit-preview?path=${encodeURIComponent(`/news/${article.slug || article.id}`)}`} style={{ color: '#fff', textDecoration: 'underline' }}>Esci</a>
+        </div>
+      )}
 
       <style jsx global>{`
         .article-h2 {
@@ -413,7 +435,12 @@ export default function ArticlePage({ article, related }) {
 
               {/* Testo articolo */}
               <article>
-                {renderBody(article.body)}
+                {article.bodyHtml ? (
+                  /* HTML già pulito da WordPress (editor fidato): le classi .article-* sono applicate in lib/wp-news.ts */
+                  <div dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
+                ) : (
+                  renderBody(article.body)
+                )}
               </article>
 
               {/* Condividi */}
@@ -548,3 +575,6 @@ export default function ArticlePage({ article, related }) {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

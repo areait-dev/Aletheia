@@ -3,66 +3,18 @@ import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useTheme } from '../../context/ThemeContext';
-
-const aree = [
-  {
-    icon: 'fas fa-laptop-code',
-    title: 'Digitalizzazione della Pubblica Amministrazione',
-    text: 'Transizione digitale, CAD, servizi online, gestione documentale, firme elettroniche, protocollo informatico e innovazione dei processi amministrativi.',
-  },
-  {
-    icon: 'fas fa-balance-scale',
-    title: 'Normativa e aggiornamento amministrativo',
-    text: 'Aggiornamenti legislativi, trasparenza, anticorruzione, privacy (GDPR), contratti e appalti pubblici, procedimenti amministrativi.',
-  },
-  {
-    icon: 'fas fa-users-cog',
-    title: 'Competenze organizzative',
-    text: 'Leadership, project management, comunicazione istituzionale, gestione del personale e sviluppo delle competenze trasversali.',
-  },
-  {
-    icon: 'fas fa-hard-hat',
-    title: 'Formazione obbligatoria',
-    text: "Sicurezza sul lavoro, anticorruzione, privacy, etica pubblica e tutti gli adempimenti previsti dalla normativa.",
-  },
-];
-
-const mepaElenco = [
-  { icon: 'fas fa-file-contract', text: 'Iscrizione al MEPA' },
-  { icon: 'fas fa-file-lines', text: 'Gestione completa della documentazione amministrativa' },
-  { icon: 'fas fa-handshake', text: 'Supporto nelle procedure di acquisto' },
-  { icon: 'fas fa-sliders', text: 'Progettazione di percorsi personalizzati' },
-  { icon: 'fas fa-display', text: 'Formazione in presenza, online o in modalità blended' },
-];
+import { getFaqs } from '../../lib/wp-faq';
+import { isrOptions } from '../../lib/wp';
+import { getSchede } from '../../lib/wp-schede';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
 const entiLoghi = [
   { name: 'Comune di Vittoria' },
   { name: 'Comune di Ragusa' },
   { name: 'Comune di Comiso' },
   { name: 'Comune di Modica' },
-];
-
-const faqs = [
-  {
-    domanda: 'Gli enti pubblici possono acquistare i servizi tramite MEPA?',
-    risposta: 'Sì. Alètheia è presente sul Mercato Elettronico della Pubblica Amministrazione (MEPA), permettendo agli enti di acquisire servizi formativi attraverso la piattaforma.',
-  },
-  {
-    domanda: 'La formazione può essere personalizzata?',
-    risposta: 'Sì. Ogni percorso può essere progettato sulla base delle esigenze dell\'ente, delle figure coinvolte e degli obiettivi organizzativi.',
-  },
-  {
-    domanda: 'Dove vengono svolti i corsi?',
-    risposta: "Presso la sede dell'ente, nelle sedi Alètheia oppure online, in funzione delle esigenze organizzative.",
-  },
-  {
-    domanda: 'Realizzate formazione anche per piccoli Comuni?',
-    risposta: 'Sì. Collaboriamo con amministrazioni di diverse dimensioni, progettando percorsi proporzionati alle esigenze organizzative dell\'ente.',
-  },
-  {
-    domanda: 'La formazione è valida ai fini degli obblighi normativi del personale pubblico?',
-    risposta: 'Sì. I nostri percorsi coprono gli adempimenti formativi obbligatori della PA — sicurezza, anticorruzione, trasparenza, privacy — con attestati riconosciuti.',
-  },
 ];
 
 const EMPTY_FORM = {
@@ -245,7 +197,13 @@ function ConsulenzaPAForm({ isDark }) {
   );
 }
 
-export default function CorsiPA() {
+// FAQ: WordPress (CPT faq) se WP_URL è impostato, altrimenti data/faq.js (vedi lib/wp-faq.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('formazione/corsi-pa'), faqs: await getFaqs('corsi-pa'), aree: await getSchede('aree-pa'), mepaElenco: await getSchede('mepa-elenco') }, ...isrOptions() };
+}
+
+export default function CorsiPA({ faqs, aree, mepaElenco, pagina }) {
+  const T = pagina.testi;
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
@@ -253,11 +211,11 @@ export default function CorsiPA() {
   return (
     <>
       <Head>
-        <title>Formazione per la Pubblica Amministrazione - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Formazione per la Pubblica Amministrazione - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Formazione per Comuni, enti locali e aziende pubbliche, attivabile tramite MEPA. Alètheia, ente accreditato Regione Siciliana con 20+ anni di esperienza nella formazione della PA."
+          content={pagina.seo.descrizione || "Formazione per Comuni, enti locali e aziende pubbliche, attivabile tramite MEPA. Alètheia, ente accreditato Regione Siciliana con 20+ anni di esperienza nella formazione della PA."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -362,17 +320,14 @@ export default function CorsiPA() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="page-hero-badge fade-up">Formazione per Enti Pubblici · Iscritti al MEPA</div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '820px' }}>
-            Formazione per la{' '}
-            <span style={{ background: 'linear-gradient(90deg, #6EE7B7, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Pubblica Amministrazione
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #6EE7B7, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
+            </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#contatti" className="btn btn-lg btn-light">Richiedi informazioni</a>
+            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}</a>
           </div>
         </div>
       </section>
@@ -414,22 +369,12 @@ export default function CorsiPA() {
           <div className="partner-grid-pa">
             {/* Blocco esperienza */}
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <span className="section-badge">Esperienza al servizio delle Istituzioni</span>
-              <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>
-                Il partner che conosce le esigenze della PA
-              </h2>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>
-                Da oltre vent&apos;anni Alètheia affianca enti pubblici, amministrazioni locali, aziende partecipate e organismi pubblici nella progettazione e realizzazione di percorsi formativi. La differenza sta nella conoscenza del contesto: comprendiamo i processi della Pubblica Amministrazione, le esigenze organizzative degli uffici, le modalità di affidamento e gli obblighi normativi che accompagnano la formazione del personale pubblico.
-              </p>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>
-                Questo ci permette di proporre percorsi non solo qualificati, ma coerenti con le procedure e i vincoli dell&apos;ente, dalla progettazione alla rendicontazione, nel rispetto dei tempi e delle modalità previste dalla normativa vigente.
-              </p>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>
-                Operiamo attraverso affidamenti diretti, procedure negoziate e gare d&apos;appalto, con esperienza consolidata nella partecipazione a bandi pubblici per la fornitura di servizi formativi. Siamo iscritti al MEPA, Mercato Elettronico della Pubblica Amministrazione, che semplifica le procedure di acquisizione dei servizi da parte degli enti e garantisce la massima trasparenza nell&apos;affidamento.
-              </p>
-              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0' }}>
-                Svolgiamo attività di formazione, aggiornamento professionale, progettazione finanziata e sviluppo delle competenze per il personale della PA.
-              </p>
+              <span className="section-badge">{T.intro_badge}</span>
+              <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25 }}>{T.intro_titolo}</h2>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>{T.intro_testo[0]}</p>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>{T.intro_testo[1]}</p>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0.9rem' }}>{T.intro_testo[2]}</p>
+              <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.93rem', lineHeight: 1.85, margin: '0 0 0' }}>{T.intro_testo[3]}</p>
 
               <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#5FC2C8' : 'var(--primary-text-on-light)', margin: '1.5rem 0 0.85rem' }}>
                 Il nostro curriculum comprende collaborazioni con
@@ -460,13 +405,9 @@ export default function CorsiPA() {
             {/* Blocco MEPA */}
             <div className="pa-mepa-card">
               <div style={{ padding: '2rem' }}>
-                <span className="section-badge">Affidamento semplice e conforme</span>
-                <h2 style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.5rem)', fontWeight: 900, color: isDark ? '#F8FAFC' : '#0f172a', marginBottom: '1rem', lineHeight: 1.25 }}>
-                  Alètheia è iscritta al MEPA
-                </h2>
-                <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: isDark ? '#CBD5E1' : '#576574', marginBottom: '1.5rem' }}>
-                  Alètheia è presente sul Mercato Elettronico della Pubblica Amministrazione (MEPA), la piattaforma ufficiale di acquisto della Pubblica Amministrazione. Gli enti possono così affidare i servizi formativi tramite una procedura ufficiale, riducendo i tempi amministrativi e semplificando l&apos;iter di acquisto, nel pieno rispetto della normativa sugli appalti.
-                </p>
+                <span className="section-badge">{T.s1_badge}</span>
+                <h2 style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.5rem)', fontWeight: 900, color: isDark ? '#F8FAFC' : '#0f172a', marginBottom: '1rem', lineHeight: 1.25 }}>{T.s1_titolo}</h2>
+                <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: isDark ? '#CBD5E1' : '#576574', marginBottom: '1.5rem' }}>{T.s1_testo[0]}</p>
 
                 <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: isDark ? '#5FC2C8' : 'var(--primary-text-on-light)', marginBottom: '0.85rem' }}>
                   Con Alètheia puoi contare su
@@ -495,10 +436,8 @@ export default function CorsiPA() {
       <section className="bg-white dark:bg-dark-card" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '820px' }}>
-            <span className="section-badge">Competenze per accompagnare il cambiamento</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Le nostre aree formative
-            </h2>
+            <span className="section-badge">{T.s2_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.s2_titolo}</h2>
           </div>
 
           <div className="aree-grid-pa">
@@ -642,3 +581,6 @@ export default function CorsiPA() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

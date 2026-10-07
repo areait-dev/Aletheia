@@ -5,6 +5,11 @@ import { Fragment, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import FormCandidato from '../../components/FormCandidato';
 import { getLenis } from '../../lib/lenis';
+import { getSchede } from '../../lib/wp-schede';
+import { isrOptions } from '../../lib/wp';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
 
 // Scroll fluido (Lenis) verso il form candidato, con fallback nativo se Lenis
 // non è ancora inizializzato (retry limitato per non ciclare all'infinito).
@@ -24,71 +29,7 @@ function scrollToContattaCandidato() {
   tryScroll();
 }
 
-const SERVICES = [
-  {
-    icon: 'fas fa-search',
-    title: 'Ricerca Attiva del Lavoro',
-    description:
-      'Ti supportiamo nella ricerca di opportunità lavorative in linea con il tuo profilo, le tue competenze e le tue aspirazioni. Analizziamo il mercato e ti mettiamo in contatto con le aziende giuste.',
-    tag: 'Placement',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Persona che consulta offerte di lavoro al computer',
-  },
-  {
-    icon: 'fas fa-compass',
-    title: 'Orientamento Professionale',
-    description:
-      'Offriamo sessioni di orientamento individuale per aiutarti a definire il tuo percorso professionale, valorizzare le tue competenze e affrontare con sicurezza il mercato del lavoro.',
-    tag: 'Orientamento',
-    color: '#018891',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Consulente in sessione di orientamento professionale',
-  },
-  {
-    icon: 'fas fa-comments',
-    title: 'Supporto al Colloquio',
-    description:
-      'Ti prepariamo al colloquio di lavoro con simulazioni pratiche, consigli personalizzati e tecniche per valorizzare al meglio le tue esperienze e competenze.',
-    tag: 'Coaching',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Simulazione di colloquio di lavoro',
-  },
-  {
-    icon: 'fas fa-briefcase',
-    title: 'Programma G.O.L.',
-    description:
-      'Siamo operatori accreditati del Programma Garanzia Occupabilità Lavoratori (G.O.L.), il piano nazionale per il reinserimento lavorativo. Percorsi personalizzati di formazione e riqualificazione professionale finanziati.',
-    tag: 'Piano Nazionale',
-    color: '#018891',
-    href: '/programma-gol',
-    image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Percorso di reinserimento lavorativo finanziato',
-  },
-  {
-    icon: 'fas fa-star',
-    title: 'Garanzia Giovani',
-    description:
-      'Supportiamo i giovani NEET (under 30 non occupati e non in formazione) con percorsi di orientamento, formazione e tirocinio finanziati dalla Regione Siciliana.',
-    tag: 'Under 30',
-    color: '#008C95',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Giovani professionisti in formazione',
-  },
-  {
-    icon: 'fas fa-road',
-    title: 'Outplacement',
-    description:
-      'Accompagniamo le persone in transizione professionale con coaching individuale, aggiornamento del CV e strategie efficaci di ricerca attiva del lavoro.',
-    tag: 'Transizione',
-    color: '#018891',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
-    imageAlt: 'Coaching per la transizione professionale',
-  },
-];
-
-function ServiceCard({ icon, title, description, tag, color, index, href, image, imageAlt }) {
+function ServiceCard({ title, description, tag, color, index, href, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
   const Wrapper = href ? 'a' : 'div';
 
@@ -133,30 +74,14 @@ function ServiceCard({ icon, title, description, tag, color, index, href, image,
           inset: 0,
           background: hovered
             ? 'linear-gradient(180deg, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0.92) 100%)'
-            : 'linear-gradient(180deg, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0.15) 40%, rgba(15,23,42,0.55) 100%)',
+            // fondo 0.72 (era 0.55): foto molto chiare (es. Outplacement) lasciavano il titolo bianco sotto il contrasto minimo
+            : 'linear-gradient(180deg, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0.15) 40%, rgba(15,23,42,0.72) 100%)',
           transition: 'background 0.3s ease',
         }}
       />
 
-      {/* badge + icona: sempre visibili, per incuriosire */}
+      {/* badge: sempre visibile, per incuriosire (niente icona nelle card dei servizi) */}
       <div style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.65rem', zIndex: 1 }}>
-        <div
-          style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '12px',
-            background: color,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.05rem',
-            color: '#fff',
-            flexShrink: 0,
-            boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
-          }}
-        >
-          <i className={icon}></i>
-        </div>
         <span className="badge-overlay">
           <span className="badge-overlay-dot" style={{ "--badge-dot": color }} aria-hidden="true" />
           {tag}
@@ -197,7 +122,13 @@ function ServiceCard({ icon, title, description, tag, color, index, href, image,
   );
 }
 
-export default function ServiziAllaPersona() {
+// Liste di card: WordPress (CPT scheda) se WP_URL è impostato, altrimenti data/schede.js (vedi lib/wp-schede.ts).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('agenzia-per-il-lavoro/servizi-alla-persona'), servizi: await getSchede('servizi-persona') }, ...isrOptions() };
+}
+
+export default function ServiziAllaPersona({ servizi: SERVICES, pagina }) {
+  const T = pagina.testi;
   // Al mount, se si arriva con #contatta-candidato nell'URL (es. da un'altra pagina):
   // Lenis riporta lo scroll a 0 all'inizializzazione, quindi il salto nativo del
   // browser all'anchor viene annullato se non lo rifacciamo qui dopo il mount.
@@ -210,11 +141,11 @@ export default function ServiziAllaPersona() {
   return (
     <>
       <Head>
-        <title>Servizi alla Persona - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Servizi alla Persona - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Alètheia Srl - Servizi alla persona: ricerca del lavoro, orientamento professionale, Programma G.O.L., Garanzia Giovani e outplacement in Sicilia."
+          content={pagina.seo.descrizione || "Alètheia Srl - Servizi alla persona: ricerca del lavoro, orientamento professionale, Programma G.O.L., Garanzia Giovani e outplacement in Sicilia."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -290,37 +221,22 @@ export default function ServiziAllaPersona() {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-          <div className="page-hero-badge fade-up">
-            Per i Candidati
-          </div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '700px' }}>
-            Servizi alla{' '}
-            <span
-              style={{
-                background: 'linear-gradient(90deg, #10B981, #008C95)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Persona
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
+            </h1>
 
-          <p className="fade-up fade-up-2" style={{ maxWidth: '820px', lineHeight: 1.7 }}>
-            Ti affianchiamo in ogni fase del tuo percorso professionale: dalla ricerca del lavoro all'inserimento in azienda.
-          </p>
+          {/* Nessun sottotitolo: l'hero è speculare a quella di Servizi alle imprese (badge, titolo, bottoni).
+              Il campo `hero_sottotitolo` di questa pagina (data/pagine.js / WordPress) non viene più mostrato. */}
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="https://aletheia4job.it/" target="_blank" rel="noopener noreferrer" className="btn btn-lg btn-light">Vedi le offerte</a>
+            <a href={T.hero_cta1.href} target="_blank" rel="noopener noreferrer" className="btn btn-lg btn-light">{T.hero_cta1.label}</a>
             <a
               href="#contatta-candidato"
               className="btn btn-lg btn-ghost-light"
               onClick={(e) => { e.preventDefault(); scrollToContattaCandidato(); }}
-            >
-              Contattaci
-            </a>
+            >{T.hero_cta2.label}</a>
           </div>
         </div>
       </section>
@@ -398,7 +314,6 @@ export default function ServiziAllaPersona() {
                   fontSize: '1rem',
                   lineHeight: 1.8,
                   margin: 0,
-                  maxWidth: '700px',
                 }}
               >
                 Alètheia S.r.l., Agenzia per il Lavoro autorizzata dal Ministero del Lavoro{' '}
@@ -443,7 +358,6 @@ export default function ServiziAllaPersona() {
               className="text-slate-600 dark:text-gray-300"
               style={{
                 fontSize: '1rem',
-                maxWidth: '780px',
                 margin: '0 auto',
                 lineHeight: 1.7,
               }}
@@ -468,3 +382,6 @@ export default function ServiziAllaPersona() {
     </>
   );
 }
+
+// Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

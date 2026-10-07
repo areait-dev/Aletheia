@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSiteOptions } from '../context/SiteOptionsContext';
+import LinkText from './LinkText';
 
 export const COOKIE_CONSENT_KEY = 'cookie-consent';
 
@@ -20,6 +22,7 @@ export function getCookieConsent(): string | null {
  * di Google Maps in contatti.js possono reagire senza dover ricaricare.
  */
 export default function CookieConsent() {
+  const { legale } = useSiteOptions();
   const [visible, setVisible] = useState(false);
   const bannerRef = useRef<HTMLDivElement>(null);
 
@@ -82,12 +85,7 @@ export default function CookieConsent() {
       }}
     >
       <p className="text-gray-600 dark:text-gray-300" style={{ margin: 0, fontSize: '0.85rem', maxWidth: '640px', flex: '1 1 320px' }}>
-        Utilizziamo cookie tecnici e, previo consenso, cookie non tecnici per migliorare l&apos;esperienza sul sito.
-        Consulta la nostra{' '}
-        <a href="/privacy-cookie" className="text-[#04767D] dark:text-primary-on-dark" style={{ fontWeight: 700, textDecoration: 'underline' }}>
-          Privacy e Cookie Policy
-        </a>{' '}
-        per maggiori informazioni.
+        <LinkText text={legale.banner} className="text-[#04767D] dark:text-primary-on-dark" style={{ fontWeight: 700, textDecoration: 'underline' }} />
       </p>
       <div style={{ display: 'flex', gap: '0.6rem', flexShrink: 0 }}>
         <button
@@ -95,7 +93,7 @@ export default function CookieConsent() {
           className="text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700"
           style={{ padding: '0 1.1rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}
         >
-          Rifiuta
+          {legale.btnRifiuta}
         </button>
         <button
           onClick={() => choose('accepted')}
@@ -111,7 +109,7 @@ export default function CookieConsent() {
             background: '#008C95',
           }}
         >
-          Accetta
+          {legale.btnAccetta}
         </button>
       </div>
     </div>

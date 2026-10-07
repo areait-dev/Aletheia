@@ -2,6 +2,11 @@ import Head from 'next/head';
 import { useState, useRef } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import LinkText from '../components/LinkText';
+import { useSiteOptions } from '../context/SiteOptionsContext';
+import { getPagina } from '../lib/wp-pagine';
+import { isrOptions } from '../lib/wp';
+import { withSiteOptions } from '../lib/wp-site';
 
 const EMPTY = {
   nome: '', email: '', tipologia: '', parti: '', oggetto: '', messaggio: '',
@@ -24,7 +29,14 @@ const inputClass =
   'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 dark:placeholder-gray-500 ' +
   'outline-none focus:border-primary dark:focus:border-primary-on-dark transition-colors';
 
-export default function ReclamiProposte() {
+// Testi: pagina WordPress "reclami-proposte" se WP_URL è impostato, altrimenti i valori locali (data/pagine.js).
+async function getPageStaticProps() {
+  return { props: { pagina: await getPagina('reclami-proposte') }, ...isrOptions() };
+}
+
+export default function ReclamiProposte({ pagina }) {
+  const T = pagina.testi;
+  const { moduli } = useSiteOptions();
   const [fields, setFields] = useState(EMPTY);
   const [fileName, setFileName] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -52,24 +64,15 @@ export default function ReclamiProposte() {
   return (
     <>
       <Head>
-        <title>Reclami e Proposte | Alètheia S.r.l.</title>
+        <title>{pagina.seo.titolo || "Reclami e Proposte | Alètheia S.r.l."}</title>
       </Head>
       <Header />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-3xl mx-auto px-6 sm:px-12 pt-40 pb-24">
-          <span className="text-primary-text dark:text-primary-on-dark font-bold text-xs tracking-widest uppercase mb-4 block">
-            Trasparenza
-          </span>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-50 mb-4">
-            Reclami e Proposte
-          </h1>
+          <span className="text-primary-text dark:text-primary-on-dark font-bold text-xs tracking-widest uppercase mb-4 block">{T.hero_eyebrow}</span>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-50 mb-4">{T.hero_titolo}</h1>
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-10">
-            Ti invitiamo a compilare il seguente form, che può essere inviato anche in forma anonima. Il tuo
-            contributo ci aiuta a migliorare la qualità del nostro servizio. In alternativa, puoi scaricare il
-            modulo di segnalazione e inviarlo via email a{' '}
-            <a href="mailto:segnalazioni@aletheiasrl.it" className="text-primary dark:text-primary-on-dark underline">
-              segnalazioni@aletheiasrl.it
-            </a>, oppure allegarlo direttamente nel form.
+            <LinkText text={T.hero_sottotitolo} className="text-primary dark:text-primary-on-dark underline" />
           </p>
 
           {submitted ? (
@@ -77,10 +80,8 @@ export default function ReclamiProposte() {
               <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-primary dark:text-primary-on-dark text-2xl">
                 <i className="fas fa-check" />
               </div>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">Segnalazione inviata!</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300 max-w-sm">
-                Grazie per averci contattato. Valuteremo la tua segnalazione nel più breve tempo possibile.
-              </p>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">{moduli.successoReclami.titolo}</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300 max-w-sm">{moduli.successoReclami.testo}</p>
               <button
                 onClick={() => { setSubmitted(false); setFields(EMPTY); setFileName(''); }}
                 className="mt-2 inline-flex items-center justify-center px-6 min-h-9 whitespace-nowrap rounded-full text-sm font-semibold border border-primary text-primary dark:text-primary-on-dark dark:border-primary-on-dark hover:bg-primary hover:text-white dark:hover:bg-primary-on-dark dark:hover:text-gray-900 transition-colors"
@@ -153,11 +154,7 @@ export default function ReclamiProposte() {
                   className="mt-1"
                 />
                 <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Ho letto e accetto la{' '}
-                  <a href="/privacy-cookie" className="text-primary dark:text-primary-on-dark underline">
-                    Privacy Policy
-                  </a>{' '}
-                  di Alètheia S.r.l.
+                  <LinkText text={moduli.privacyTesto} className="text-primary dark:text-primary-on-dark underline" />
                 </span>
               </label>
 
@@ -176,3 +173,6 @@ export default function ReclamiProposte() {
     </>
   );
 }
+
+// Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

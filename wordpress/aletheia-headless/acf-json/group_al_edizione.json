@@ -1,0 +1,195 @@
+{
+  "key": "group_al_edizione",
+  "title": "Edizione - Dati",
+  "fields": [
+    {
+      "key": "field_al_edizione_corso",
+      "label": "Corso",
+      "name": "corso",
+      "aria-label": "",
+      "type": "post_object",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "corso"
+      ],
+      "return_format": "id",
+      "ui": 1,
+      "allow_null": 1
+    },
+    {
+      "key": "field_al_edizione_data",
+      "label": "Data",
+      "name": "data",
+      "aria-label": "",
+      "type": "date_picker",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "display_format": "d/m/Y",
+      "return_format": "Y-m-d",
+      "first_day": 1
+    },
+    {
+      "key": "field_al_edizione_categoria",
+      "label": "Categoria calendario",
+      "name": "categoria",
+      "aria-label": "",
+      "type": "select",
+      "instructions": "Se vuota si deduce dalla categoria del corso.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "obbligatoria": "Obbligatoria",
+        "regionale-fse": "Regionale FSE",
+        "professionale": "Professionale",
+        "ecm": "ECM"
+      },
+      "return_format": "value",
+      "allow_null": 1,
+      "ui": 0
+    },
+    {
+      "key": "field_al_edizione_orario",
+      "label": "Orario",
+      "name": "orario",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "09:00 - 13:00"
+    },
+    {
+      "key": "field_al_edizione_sede",
+      "label": "Sede",
+      "name": "sede",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_edizione_durata",
+      "label": "Durata",
+      "name": "durata",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "8 ore"
+    },
+    {
+      "key": "field_al_edizione_posti",
+      "label": "Posti totali",
+      "name": "posti",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_edizione_posti_disponibili",
+      "label": "Posti disponibili",
+      "name": "posti_disponibili",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_edizione_relatore",
+      "label": "Relatore (solo ECM)",
+      "name": "relatore",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_edizione_crediti_ecm",
+      "label": "Crediti ECM (solo ECM)",
+      "name": "crediti_ecm",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "edizione_corso"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

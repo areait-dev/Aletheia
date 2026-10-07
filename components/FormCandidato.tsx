@@ -1,14 +1,8 @@
 import { useState, useRef } from 'react';
+import { useSiteOptions } from '../context/SiteOptionsContext';
+import LinkText from './LinkText';
 
-const SERVIZI = [
-  'Ricerca Attiva del Lavoro',
-  'Orientamento Professionale',
-  'Supporto al Colloquio',
-  'Programma G.O.L.',
-  'Garanzia Giovani',
-  'Outplacement',
-  'Candidatura Spontanea',
-];
+// Elenco servizi, consenso privacy e messaggio di successo arrivano dalle opzioni globali (tab Moduli).
 
 const INFO_ITEMS = [
   {
@@ -104,6 +98,7 @@ interface FormCandidatoProps {
 }
 
 export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoProps) {
+  const { moduli } = useSiteOptions();
   const [fields, setFields] = useState<FormFields>({ ...EMPTY, messaggio: posizioneDefault ? `Candidatura per: ${posizioneDefault}` : '' });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -292,10 +287,10 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                   <i className="fas fa-check"></i>
                 </div>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-                  Candidatura inviata!
+                  {moduli.successoCandidato.titolo}
                 </h3>
                 <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.6)', maxWidth: '360px', lineHeight: 1.65, margin: 0 }}>
-                  Grazie per averci contattato. Uno dei nostri consulenti ti risponderà entro 24 ore lavorative.
+                  {moduli.successoCandidato.testo}
                 </p>
                 <button
                   onClick={() => { setSubmitted(false); setFields(EMPTY); setFileName(''); }}
@@ -394,7 +389,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     onBlur={(e) => e.target.style.borderColor = errors.servizio ? '#F87171' : 'rgba(255,255,255,0.12)'}
                   >
                     <option value="" style={{ background: '#0F172A' }}>Seleziona un servizio…</option>
-                    {SERVIZI.map((s) => (
+                    {moduli.serviziCandidato.map((s) => (
                       <option key={s} value={s} style={{ background: '#0F172A' }}>{s}</option>
                     ))}
                   </select>
@@ -470,11 +465,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       </div>
                     </div>
                     <span style={{ fontSize: '0.825rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                      Ho letto e accetto la{' '}
-                      <a href="/privacy-cookie" style={{ color: 'var(--primary-text)', textDecoration: 'underline' }}>
-                        Privacy Policy
-                      </a>{' '}
-                      di Alètheia S.r.l.
+                      <LinkText text={moduli.privacyTesto} style={{ color: 'var(--primary-text)', textDecoration: 'underline' }} />
                       <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>
                     </span>
                   </label>

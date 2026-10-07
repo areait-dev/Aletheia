@@ -3,117 +3,25 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { CALENDARIO } from '../../data/calendario';
+import { getCalendario, daysByCategory } from '../../lib/wp-calendario';
+import { isrOptions } from '../../lib/wp';
+import { getFaqs } from '../../lib/wp-faq';
+import { getSchede } from '../../lib/wp-schede';
 import { useTheme } from '../../context/ThemeContext';
 import Reveal from '../../components/Reveal';
+import { getPagina } from '../../lib/wp-pagine';
+import HeroTitle from '../../components/HeroTitle';
+import { withSiteOptions } from '../../lib/wp-site';
+import RichText from '../../components/RichText';
 
-const aree = [
-  {
-    badge: 'D.Lgs. 81/08 · Accordo Stato-Regioni',
-    icon: 'fas fa-hard-hat',
-    title: 'Sicurezza sul lavoro',
-    text: 'Corsi obbligatori per lavoratori, preposti, dirigenti e addetti alle emergenze (RSPP, antincendio, primo soccorso).',
-    cta: 'Scopri i corsi sicurezza',
-    href: '/all-courses?categoria=sicurezza-lavoro',
-    image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Lavoratore con casco e dispositivi di sicurezza in cantiere',
-  },
-  {
-    badge: 'Accordo Stato-Regioni · Abilitazione obbligatoria',
-    icon: 'fas fa-tools',
-    title: 'Corsi abilitazione attrezzature di lavoro',
-    text: 'Corsi per il rilascio del patentino attrezzature: carrelli elevatori, gru, piattaforme aeree (PLE) ed escavatori.',
-    cta: 'Scopri i corsi attrezzature',
-    href: '/all-courses?categoria=decreto-attrezzature',
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Operatore alla guida di un carrello elevatore in magazzino',
-  },
-  {
-    badge: 'Patentino obbligatorio',
-    icon: 'fas fa-leaf',
-    title: 'Fitosanitario',
-    text: "Corsi per il rilascio e il rinnovo del patentino obbligatorio per l'acquisto, l'utilizzo e la distribuzione di prodotti professionali.",
-    cta: 'Scopri i corsi',
-    href: '/all-courses?categoria=fitosanitario',
-    image: 'https://images.unsplash.com/photo-1585504198199-20277593b94f?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Trattamento fitosanitario in campo agricolo',
-  },
-  {
-    badge: 'Reg. CE 852/2004 · HACCP',
-    icon: 'fas fa-utensils',
-    title: 'Sicurezza alimentare',
-    text: 'Corsi HACCP per tutti gli operatori del settore alimentare: titolari, manipolatori, addetti alla conservazione e vendita.',
-    cta: 'Scopri i corsi',
-    href: '/all-courses?categoria=sicurezza-alimentare',
-    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=700&q=80',
-    imageAlt: 'Operatore alimentare al lavoro in cucina professionale',
-  },
-];
-
-const step = [
-  { n: '1', icon: 'fas fa-comments', title: 'Ci contatti' },
-  { n: '2', icon: 'fas fa-clipboard-check', title: 'Valutiamo gli obblighi' },
-  { n: '3', icon: 'fas fa-calendar-alt', title: 'Organizziamo il corso' },
-  { n: '4', icon: 'fas fa-certificate', title: 'Rilasciamo gli attestati' },
-];
-
-const puntiForza = [
-  {
-    icon: 'fas fa-shield-alt',
-    title: 'Attestati validi ovunque',
-    text: (
-      <>Corsi pienamente conformi al <strong className="text-slate-900 dark:text-white font-bold">D.Lgs. 81/08</strong> e all&apos;<strong className="text-slate-900 dark:text-white font-bold">Accordo Stato-Regioni</strong>. Rilasciamo attestati ufficiali validi su tutto il territorio nazionale.</>
-    ),
-  },
-  {
-    icon: 'fas fa-sliders-h',
-    title: 'Flessibilità reale',
-    text: (
-      <>Formazione cucita sulle esigenze aziendali: corsi in <strong className="text-slate-900 dark:text-white font-bold">aula</strong> presso le nostre sedi, in <strong className="text-slate-900 dark:text-white font-bold">FAD (online)</strong> o direttamente presso la tua sede.</>
-    ),
-  },
-  {
-    icon: 'fas fa-bell',
-    title: 'Gestione delle scadenze',
-    text: (
-      <>Ci occupiamo noi di tutto. Alètheia <strong className="text-slate-900 dark:text-white font-bold">monitora le scadenze</strong> della formazione dei tuoi dipendenti e pianifica i rinnovi per tenerti sempre in regola.</>
-    ),
-  },
-];
-
-const faqs = [
-  {
-    domanda: 'Quali corsi di formazione sono obbligatori per la mia azienda?',
-    risposta: 'Dipende dal settore, dalle mansioni dei lavoratori e dalle attrezzature utilizzate. In linea generale, ogni azienda deve garantire almeno: formazione generale e specifica per tutti i lavoratori, formazione per preposti e dirigenti, designazione e formazione degli addetti antincendio e primo soccorso, formazione RSPP. Contattaci: verifichiamo insieme gli obblighi specifici per la tua realtà aziendale.',
-  },
-  {
-    domanda: 'Cosa succede se non effettuo la formazione obbligatoria?',
-    risposta: 'Il datore di lavoro che non garantisce la formazione obbligatoria ai propri dipendenti va incontro a sanzioni amministrative che possono arrivare fino a €6.400 per lavoratore non formato. In caso di infortunio, la mancata formazione aggrava significativamente la responsabilità penale del datore di lavoro. Non è un rischio che vale la pena correre.',
-  },
-  {
-    domanda: 'Gli attestati rilasciati da Alètheia sono validi in tutta Italia?',
-    risposta: "Sì. Tutti gli attestati rilasciati al termine dei corsi sono validi su tutto il territorio nazionale, in conformità con il D.Lgs. 81/08 e l'Accordo Stato-Regioni 2025. Alètheia è ente accreditato dalla Regione Siciliana (DDG n. 78 del 20/01/2017).",
-  },
-  {
-    domanda: 'È possibile organizzare i corsi direttamente in azienda?',
-    risposta: 'Sì, con un minimo di 15 partecipanti. Alètheia organizza il corso presso la tua sede, in orari compatibili con esigenze produttive, inclusa la parte pratica dove prevista. Contattaci per un preventivo personalizzato.',
-  },
-  {
-    domanda: 'I corsi di formazione obbligatoria possono essere svolti online?',
-    risposta: 'Alcuni sì, altri no. La formazione generale per i lavoratori, alcuni moduli RSPP e la parte tecnica di molti corsi sono disponibili in FAD o videoconferenza. La parte pratica (antincendio, primo soccorso, attrezzature) deve essere svolta obbligatoriamente in presenza. Ti indichiamo noi la modalità corretta per ogni corso.',
-  },
-  {
-    domanda: 'Con quale frequenza va rinnovata la formazione obbligatoria?',
-    risposta: 'Dipende dal corso. La formazione lavoratori va aggiornata ogni 5 anni (6 ore). L\'antincendio ogni 5 anni. Il primo soccorso ogni 3 anni. Le abilitazioni attrezzature ogni 5 anni. Alètheia monitora le scadenze per i propri clienti e invia un promemoria prima che la formazione scada.',
-  },
-];
+// Punti di forza: schede di WordPress (lista `obbligatoria-punti`) o data/schede.js; il grassetto nel testo è <strong> (components/RichText).
 
 const EMPTY_FORM = {
   ragioneSociale: '', piva: '', ateco: '', telefono: '', email: '',
   nome: '', cognome: '', sede: '', partecipanti: '', categoriaCorso: '', privacy: false,
 };
 
-function AreaCard({ badge, icon, title, text, cta, href, image, imageAlt }) {
+function AreaCard({ badge, title, text, cta, href, image, imageAlt }) {
   const [hovered, setHovered] = useState(false);
   return (
     <a
@@ -128,6 +36,9 @@ function AreaCard({ badge, icon, title, text, cta, href, image, imageAlt }) {
         textDecoration: 'none',
         display: 'flex',
         minHeight: '380px',
+        // La card sta dentro <Reveal> (elemento della griglia, alto quanto la riga): height 100% la fa riempire
+        // la riga, così tutte le card hanno la stessa altezza invece di quella del proprio testo.
+        height: '100%',
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
         boxShadow: hovered ? '0 20px 48px rgba(0,0,0,0.22)' : '0 4px 18px rgba(0,0,0,0.1)',
@@ -146,18 +57,19 @@ function AreaCard({ badge, icon, title, text, cta, href, image, imageAlt }) {
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.3) 100%)' }} />
 
       <div style={{ position: 'relative', zIndex: 1, padding: '1.6rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, justifyContent: 'flex-start' }}>
-        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(1,136,145,0.18)', border: '1px solid rgba(1,136,145,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <i className={icon} style={{ fontSize: '1.05rem', color: '#6EE7B7' }}></i>
-        </div>
-        <span className="badge-overlay">
-          <span className="badge-overlay-dot" aria-hidden="true" />
-          {badge}
-        </span>
         <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, lineHeight: 1.3, color: '#fff' }}>{title}</h3>
         <p style={{ fontSize: '0.83rem', lineHeight: 1.65, margin: 0, color: 'rgba(255,255,255,0.85)' }}>{text}</p>
-        <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: 'auto' }}>
-          {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem' }}></i>
-        </span>
+        {/* Riferimento normativo: riga di testo in basso, sopra il link (non più pillola in alto, che sfalsava i titoli).
+            Bianco al 75% sul fondo scuro dell'overlay (≈0.85 nero): contrasto > 7:1. */}
+        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.7rem', paddingTop: '0.7rem', borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+          {/* minHeight = 2 righe (2 × 1.4em): il badge più corto riserva lo stesso spazio, così la linea sopra è allineata tra le card */}
+          <span style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.4, minHeight: '2.8em', color: 'rgba(255,255,255,0.75)' }}>
+            {badge}
+          </span>
+          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+            {cta} <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem' }}></i>
+          </span>
+        </div>
       </div>
     </a>
   );
@@ -483,28 +395,28 @@ function ConsulenzaForm({ isDark }) {
   );
 }
 
-export default function FormazioneObbligatoria() {
+/* Calendario e FAQ: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-calendario.ts). */
+async function getPageStaticProps() {
+  const calendario = await getCalendario();
+  return { props: { pagina: await getPagina('formazione/obbligatoria'), giorniObbligatoria: daysByCategory(calendario, 'obbligatoria', 8), faqs: await getFaqs('obbligatoria'), step: await getSchede('step'), aree: await getSchede('aree-obbligatoria'), puntiForza: await getSchede('obbligatoria-punti') }, ...isrOptions() };
+}
+
+export default function FormazioneObbligatoria({ giorniObbligatoria, faqs, step, aree, puntiForza, pagina }) {
+  const T = pagina.testi;
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   // Solo la sezione "Calendario + Form" in fondo pagina è sensibile al tema chiaro/scuro: le altre
   // sezioni (Hero, CTA finale) restano scure fisse per design, come altrove nel sito.
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
 
-  const corsiObbligatoriOrdinati = [...CALENDARIO]
-    .filter((c) => c.categoria === 'obbligatoria')
-    .sort((a, b) => a.data.localeCompare(b.data));
-  const giorniObbligatoria = [...new Set(corsiObbligatoriOrdinati.map((c) => c.data))]
-    .slice(0, 8)
-    .map((data) => ({ data, corsi: corsiObbligatoriOrdinati.filter((c) => c.data === data) }));
-
   return (
     <>
       <Head>
-        <title>Formazione Obbligatoria per la Sicurezza sul Lavoro - Alètheia Srl</title>
+        <title>{pagina.seo.titolo || "Formazione Obbligatoria per la Sicurezza sul Lavoro - Alètheia Srl"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Corsi obbligatori per legge conformi al D.Lgs. 81/08: sicurezza sul lavoro, attrezzature, fitosanitario, HACCP. Attestati validi in tutta Italia. Alètheia S.r.l."
+          content={pagina.seo.descrizione || "Corsi obbligatori per legge conformi al D.Lgs. 81/08: sicurezza sul lavoro, attrezzature, fitosanitario, HACCP. Attestati validi in tutta Italia. Alètheia S.r.l."}
         />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
@@ -524,9 +436,11 @@ export default function FormazioneObbligatoria() {
         .fade-up-3 { animation-delay: 0.28s; opacity: 0; }
 
 
-        .aree-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        @media (max-width: 1100px) { .aree-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .aree-grid { grid-template-columns: 1fr; } }
+        /* minmax(0, 1fr): con 1fr il minimo è la larghezza del contenuto, e il badge .badge-overlay (nowrap) più lungo
+           allargava la sua colonna a scapito delle altre. Così le colonne sono sempre uguali. */
+        .aree-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+        @media (max-width: 1100px) { .aree-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 600px) { .aree-grid { grid-template-columns: minmax(0, 1fr); } }
 
         .evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
         @media (max-width: 800px) { .evidence-grid { grid-template-columns: 1fr; } }
@@ -885,18 +799,15 @@ export default function FormazioneObbligatoria() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="page-hero-badge fade-up">Corsi conformi al D.Lgs. 81/08 · Accordo Stato-Regioni</div>
+          <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '760px' }}>
-            Formazione obbligatoria per la{' '}
-            <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              sicurezza sul lavoro
-            </span>
-          </h1>
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
+            </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href="#corsi" className="btn btn-lg btn-light">Scopri i corsi</a>
-            <a href="#form-contatto" className="btn btn-lg btn-ghost-light">Contattaci</a>
+            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}</a>
+            <a href={T.hero_cta2.href} className="btn btn-lg btn-ghost-light">{T.hero_cta2.label}</a>
           </div>
         </div>
       </section>
@@ -904,13 +815,9 @@ export default function FormazioneObbligatoria() {
       {/* ══════════════ NORMATIVA & NUMERI ══════════════ */}
       <section className="bg-white dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <span className="section-badge">Non è una scelta. È un obbligo di legge</span>
-          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '760px' }}>
-            La formazione obbligatoria: un requisito per lavorare in sicurezza
-          </h2>
-          <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '2rem' }}>
-            Il D.Lgs. 81/08 obbliga ogni datore di lavoro a formare i propri dipendenti, a prescindere dalle dimensioni aziendali. La mancata formazione espone a pesanti sanzioni finanziarie e penali. Affidati ad unico partner per tutti i corsi obbligatori della tua azienda.
-          </p>
+          <span className="section-badge">{T.intro_badge}</span>
+          <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2rem)', fontWeight: 900, marginBottom: '1rem', lineHeight: 1.25, maxWidth: '760px' }}>{T.intro_titolo}</h2>
+          <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.85, marginBottom: '2rem' }}>{T.intro_testo[0]}</p>
 
         </div>
       </section>
@@ -919,10 +826,8 @@ export default function FormazioneObbligatoria() {
       <section style={{ padding: '5rem 0', background: isDark ? undefined : '#f8fafc' }} className="dark:bg-dark-bg">
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '760px' }}>
-            <span className="section-badge">Perché scegliere Alètheia</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Oltre 5.000 lavoratori formati. Da vent&apos;anni.
-            </h2>
+            <span className="section-badge">{T.s1_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.s1_titolo}</h2>
           </div>
 
           <div className="perche-bento">
@@ -947,7 +852,7 @@ export default function FormazioneObbligatoria() {
                     <i className={p.icon} style={{ color: '#008C95', fontSize: '1.15rem' }}></i>
                   </span>
                   <h3>{p.title}</h3>
-                  <p>{p.text}</p>
+                  <p><RichText html={p.text} strongClassName="text-slate-900 dark:text-white font-bold" /></p>
                 </div>
               ))}
             </div>
@@ -959,13 +864,9 @@ export default function FormazioneObbligatoria() {
       <section id="corsi" className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '760px' }}>
-            <span className="section-badge">Le aree della formazione obbligatoria</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Tutti i corsi obbligatori per la tua azienda, in un unico ente accreditato
-            </h2>
-            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>
-              Ogni obbligo di legge ha il suo corso. Seleziona l&apos;area che ti riguarda e scopri corsi, date, modalità e costi.
-            </p>
+            <span className="section-badge">{T.s2_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.s2_titolo}</h2>
+            <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', marginTop: '0.75rem', lineHeight: 1.75 }}>{T.s2_testo[0]}</p>
           </div>
 
           <div className="aree-grid">
@@ -982,10 +883,8 @@ export default function FormazioneObbligatoria() {
       <section className="bg-white dark:bg-dark-card" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div style={{ marginBottom: '3rem', maxWidth: '760px' }}>
-            <span className="section-badge">Come lavoriamo</span>
-            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>
-              Dalla necessità all&apos;attestato in pochi passaggi
-            </h2>
+            <span className="section-badge">{T.s3_badge}</span>
+            <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 900, margin: 0, lineHeight: 1.25 }}>{T.s3_titolo}</h2>
           </div>
 
           {/* Barra di flusso: i 4 numeri sopra la linea orizzontale continua */}
@@ -1100,3 +999,6 @@ export default function FormazioneObbligatoria() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);

@@ -1,0 +1,55 @@
+{
+  "key": "group_al_news",
+  "title": "News - Campi aggiuntivi",
+  "fields": [
+    {
+      "key": "field_al_news_fonte",
+      "label": "Fonte",
+      "name": "fonte",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_news_tempo_lettura",
+      "label": "Tempo di lettura (minuti)",
+      "name": "tempo_lettura",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "news"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "side",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

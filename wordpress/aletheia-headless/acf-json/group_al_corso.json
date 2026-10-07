@@ -1,0 +1,420 @@
+{
+  "key": "group_al_corso",
+  "title": "Corso - Scheda",
+  "fields": [
+    {
+      "key": "field_al_corso_badge",
+      "label": "Badge",
+      "name": "badge",
+      "aria-label": "",
+      "type": "select",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "Obbligatoria": "Obbligatoria",
+        "Finanziato": "Finanziato",
+        "Professionale": "Professionale",
+        "Agricolo": "Agricolo",
+        "GOL": "GOL",
+        "Digitale": "Digitale",
+        "Regionale": "Regionale",
+        "ECM": "ECM",
+        "FSE": "FSE"
+      },
+      "return_format": "value",
+      "allow_null": 1,
+      "ui": 0
+    },
+    {
+      "key": "field_al_corso_tipo",
+      "label": "Tipo",
+      "name": "tipo",
+      "aria-label": "",
+      "type": "select",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "corso": "Corso base",
+        "aggiornamento": "Aggiornamento"
+      },
+      "return_format": "value",
+      "allow_null": 1,
+      "ui": 0
+    },
+    {
+      "key": "field_al_corso_livello",
+      "label": "Livello / variante",
+      "name": "livello",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Livello 1, Rischio Medio, Meno di 50 dipendenti.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_provider",
+      "label": "Ambito / riferimento normativo",
+      "name": "provider",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Sicurezza sui luoghi di lavoro - D.Lgs. 81/08",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_durata_ore",
+      "label": "Durata (ore)",
+      "name": "durata_ore",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_prezzo",
+      "label": "Prezzo (€)",
+      "name": "prezzo",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "Vuoto = \"su richiesta\".",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_prezzi_variante",
+      "label": "Prezzi per modalità",
+      "name": "prezzi_variante",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Etichetta|Importo (es. Aula|80)",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_corso_modalita",
+      "label": "Modalità",
+      "name": "modalita",
+      "aria-label": "",
+      "type": "checkbox",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "choices": {
+        "Aula": "Aula",
+        "FAD": "FAD",
+        "Videoconferenza": "Videoconferenza"
+      },
+      "return_format": "value",
+      "layout": "horizontal"
+    },
+    {
+      "key": "field_al_corso_validita",
+      "label": "Validità / aggiornamento",
+      "name": "validita",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_attestato",
+      "label": "Attestato",
+      "name": "attestato",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "Attestato valido in tutta Italia"
+    },
+    {
+      "key": "field_al_corso_partecipanti_max",
+      "label": "Partecipanti max",
+      "name": "partecipanti_max",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_icona",
+      "label": "Icona meta (emoji o classe Font Awesome)",
+      "name": "icona",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_meta_card",
+      "label": "Dettagli sulla card",
+      "name": "meta_card",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Icona|Testo (es. 🔥|4 ore oppure 💰|100% Finanziato)",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_corso_gradiente",
+      "label": "Gradiente card (CSS)",
+      "name": "gradiente",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Fallback se manca l'immagine in evidenza.",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_moduli",
+      "label": "Programma / moduli",
+      "name": "moduli",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Titolo modulo|Ore teoria|Ore pratica|Argomenti separati da ; (ore pratica e argomenti facoltativi). Con una sola durata, mettila in \"Ore teoria\"",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 8,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_corso_destinatari",
+      "label": "A chi è rivolto",
+      "name": "destinatari",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una voce per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 5,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_corso_cosa_imparerai",
+      "label": "Cosa imparerai",
+      "name": "cosa_imparerai",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: una voce per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 5,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_corso_corsi_correlati",
+      "label": "Corsi correlati",
+      "name": "corsi_correlati",
+      "aria-label": "",
+      "type": "relationship",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "post_type": [
+        "corso"
+      ],
+      "return_format": "id",
+      "filters": [
+        "search",
+        "taxonomy"
+      ],
+      "max": 6
+    },
+    {
+      "key": "field_al_corso_target",
+      "label": "Target in una riga",
+      "name": "target",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "Es. Lavoratori, RLS, RSPP (card e sidebar).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_studenti",
+      "label": "Numero formati (opzionale)",
+      "name": "studenti",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "placeholder": "150+"
+    },
+    {
+      "key": "field_al_corso_livello_difficolta",
+      "label": "Livello (Base, Intermedio…)",
+      "name": "livello_difficolta",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_corso_stato_card",
+      "label": "Etichetta stato sulla card",
+      "name": "stato_card",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "Attestato Valido Italia"
+    },
+    {
+      "key": "field_al_corso_immagine_alt",
+      "label": "Testo alternativo immagine",
+      "name": "immagine_alt",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "corso"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

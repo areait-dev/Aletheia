@@ -1,0 +1,183 @@
+{
+  "key": "group_al_pagina_home",
+  "title": "Pagina - Extra Home",
+  "fields": [
+    {
+      "key": "field_al_pagina_home_home_chips",
+      "label": "Chip di ricerca nella hero",
+      "name": "home_chips",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: Etichetta|URL",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_home_home_calendario_titolo",
+      "label": "Corsi in partenza: titolo",
+      "name": "home_calendario_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_home_home_calendario_limite",
+      "label": "Corsi in partenza: quanti",
+      "name": "home_calendario_limite",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 6
+    },
+    {
+      "key": "field_al_pagina_home_home_corsi_titolo",
+      "label": "Corsi in evidenza: titolo",
+      "name": "home_corsi_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_home_home_corsi_intro",
+      "label": "Corsi in evidenza: introduzione",
+      "name": "home_corsi_intro",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 2,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_home_home_corsi_evidenza",
+      "label": "Corsi in evidenza",
+      "name": "home_corsi_evidenza",
+      "aria-label": "",
+      "type": "textarea",
+      "instructions": "Una voce per riga. Formato: slug del corso, uno per riga",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "rows": 6,
+      "new_lines": ""
+    },
+    {
+      "key": "field_al_pagina_home_home_news_titolo",
+      "label": "News: titolo",
+      "name": "home_news_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_home_home_news_limite",
+      "label": "News: quante",
+      "name": "home_news_limite",
+      "aria-label": "",
+      "type": "number",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 3
+    },
+    {
+      "key": "field_al_pagina_home_home_clienti_titolo",
+      "label": "Clienti: titolo",
+      "name": "home_clienti_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    },
+    {
+      "key": "field_al_pagina_home_home_gruppo_titolo",
+      "label": "Gruppo: titolo",
+      "name": "home_gruppo_titolo",
+      "aria-label": "",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      }
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "page"
+      }
+    ]
+  ],
+  "menu_order": 20,
+  "position": "acf_after_title",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 1,
+  "modified": 1791383856
+}

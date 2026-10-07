@@ -2,7 +2,10 @@ import { useState, useMemo } from 'react';
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { CALENDARIO, CATEGORIE } from '../data/calendario';
+import { CATEGORIE } from '../data/calendario';
+import { getCalendario } from '../lib/wp-calendario';
+import { isrOptions } from '../lib/wp';
+import { withSiteOptions } from '../lib/wp-site';
 
 const MESI = [
   'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
@@ -36,16 +39,21 @@ function postiStyle(postiDisponibili) {
   return { color: 'var(--primary-text)', label: `${postiDisponibili} posti disponibili`, icon: 'fa-circle-check' };
 }
 
-export default function CalendarioCorsi() {
+/* Calendario: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-calendario.ts). */
+async function getPageStaticProps() {
+  return { props: { calendario: await getCalendario() }, ...isrOptions() };
+}
+
+export default function CalendarioCorsi({ calendario }) {
   const [categoriaFiltro, setCategoriaFiltro] = useState(''); // es. "obbligatoria"
   const [meseAperto, setMeseAperto] = useState(null); // indice mese (0-11) espanso in fisarmonica, o null
 
   // Corsi filtrati per categoria (il mese non è più un filtro ma un accordion nella vista principale)
   const corsiFiltrati = useMemo(() => {
-    return CALENDARIO
+    return calendario
       .filter((c) => categoriaFiltro === '' || c.categoria === categoriaFiltro)
       .sort((a, b) => a.data.localeCompare(b.data));
-  }, [categoriaFiltro]);
+  }, [calendario, categoriaFiltro]);
 
   // Finestra fissa del calendario: da Agosto 2026 a Luglio 2027 (12 mesi consecutivi a cavallo di due anni)
   const FINESTRA_MESI = useMemo(() => {
@@ -345,3 +353,6 @@ export default function CalendarioCorsi() {
     </>
   );
 }
+
+// Aggiunge le opzioni globali (Header/Footer) alle props: vedi lib/wp-site.ts.
+export const getStaticProps = withSiteOptions(getPageStaticProps);
