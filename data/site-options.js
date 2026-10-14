@@ -53,7 +53,7 @@ export const SITE_OPTIONS = {
         ],
       },
     ],
-    ctaLavoro: { label: 'Sei un docente? Candidati', href: 'https://aletheia4job.it/' },
+    ctaLavoro: { label: 'Sei un docente? Candidati', href: 'https://aletheia4job.it/diventa-docente' },
     elearning: { label: 'Piattaforma E-learning', href: 'https://www.aletheiasrl.it/elearning2/' },
     megaCalendario: {
       titolo: 'Calendario Corsi',
