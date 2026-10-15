@@ -220,7 +220,7 @@ h3 { font-size: 18px; line-height: 21.6px; }   /* H3 */
   gap: 0.5rem;
   border: none;
   border-radius: var(--btn-radius);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 700;
   white-space: nowrap;
   text-decoration: none;
@@ -807,7 +807,7 @@ html.dark .cta-dropdown-item:hover {
   background: transparent;
   border: none;
   color: var(--white);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 1rem;
   outline: none;
 }
@@ -836,7 +836,7 @@ html.dark .cta-dropdown-item:hover {
   background: transparent;
   border: none;
   color: var(--white);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 1rem;
   outline: none;
   appearance: none;
@@ -999,6 +999,20 @@ html.dark .cta-dropdown-item:hover {
 html.dark .section-badge {
   color: #5FC2C8; /* WCAG AA su #111827 */
 }
+
+/* Link di chiusura sezione ("Vedi tutti…" + freccia): un solo stile per tutta la home */
+.link-sezione {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--primary-text); /* #04767D su chiaro (5,38:1), #5FC2C8 in dark: nessuna variante da scrivere */
+  transition: color 0.2s, gap 0.2s;
+}
+.link-sezione:hover { gap: 0.75rem; }
+.link-sezione:focus-visible { outline: 2px solid #008C95; outline-offset: 3px; border-radius: 4px; }
 
 .badge-overlay {
   display: inline-flex;
@@ -1550,7 +1564,7 @@ html.dark .service-kind-card p {
   padding: 0.8rem 1rem 0.8rem 2.5rem;
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-sm);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 0.95rem;
   color: var(--text-dark);
   background: var(--white);
@@ -1590,7 +1604,7 @@ html.dark .hero-search-wrapper .search-bar-input-group input {
   padding: 0.8rem 1rem 0.8rem 2.5rem;
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-sm);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 0.95rem;
   color: var(--text-dark);
   background: var(--white);
@@ -1713,7 +1727,7 @@ html.dark .badge-count {
   border-radius: var(--btn-radius);
   font-weight: 700;
   font-size: 0.9rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1751,7 +1765,7 @@ html.dark .form-group label {
   padding: 0.75rem 1rem;
   border: 1.5px solid #E2E8F0;
   border-radius: var(--radius-sm);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 0.9rem;
   color: #374151; /* WCAG AA: 7:1 on white */
   background: #FFFFFF;
@@ -1803,7 +1817,7 @@ html.dark .form-group textarea:focus {
   border-radius: var(--btn-radius);
   font-weight: 700;
   font-size: 1rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2513,7 +2527,7 @@ html.dark .courses-premium-nav button {
   transition: all 0.3s ease;
   align-self: flex-start;
   white-space: nowrap;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   text-decoration: none;
 }
 
@@ -3196,3 +3210,34 @@ html.dark .legal-content blockquote { background: #1F2937; color: #E5E7EB; }
 html.dark .legal-content table, html.dark .legal-content .wp-block-table, html.dark .legal-content figure { border-color: #374151; }
 html.dark .legal-content th { background: #1F2937; color: #E5E7EB; border-bottom-color: #374151; }
 html.dark .legal-content td { border-bottom-color: #1F2937; }
+
+/* ── Ritocchi tipografici home ─────────────────────────────── */
+/* Titoli: righe bilanciate (niente parole orfane) e tracking leggermente più stretto per Viga a taglie grandi */
+.home-main h2 { text-wrap: balance; letter-spacing: -0.01em; }
+
+/* Suffisso dei contatori (+ / %): più piccolo e rialzato rispetto alla cifra */
+.number-suffix {
+  font-size: 0.5em;
+  vertical-align: 0.55em;
+  margin-left: 0.08em;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+/* Tab calendario: il giorno attivo ha una tacca sul bordo inferiore, come un segnalibro */
+.cal-tab { position: relative; }
+.cal-tab-active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 10px;
+  height: 10px;
+  background: var(--primary, #008C95);
+  transform: translateX(-50%) rotate(45deg);
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* Statistiche di contorno: filetto sottile tra una e l'altra */
+.numbers-hero-side > * + * { border-left: 1px solid rgba(255,255,255,0.12); }

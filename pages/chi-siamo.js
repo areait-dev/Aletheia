@@ -253,11 +253,11 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
           <div className="page-hero-actions flex-col sm:flex-row items-center">
             <a
               href={T.hero_cta1.href}
-              className="inline-flex items-center justify-center h-[44px] bg-primary hover:bg-[#006B73] text-white font-bold px-6 rounded-full text-sm transition-all"
+              className="btn btn-md btn-light"
             >{T.hero_cta1.label}</a>
             <a
               href={T.hero_cta2.href}
-              className="inline-flex items-center justify-center h-[44px] bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 hover:bg-white/20 hover:border-white/50 px-6 rounded-full text-sm transition-all"
+              className="btn btn-md btn-ghost-light"
             >{T.hero_cta2.label}</a>
           </div>
         </div>
@@ -288,7 +288,7 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
                     {/* Cerchio con bordo brand e testo scuro: prima testo bianco su #008C95 (3.9:1) e su
                         #018891 in dark (2.5:1), sotto WCAG AA 4.5:1. Ora #006B73 su bianco 6.4:1 e
                         #018891 su #161C1A 7:1; il turchese brand resta invariato nel bordo. */}
-                    <span className="flex items-center justify-center rounded-full bg-white dark:bg-dark-bg border-2 border-[#018891] dark:border-primary-on-dark text-[#04767D] dark:text-primary-on-dark font-bold" style={{ width: '3.5rem', height: '3.5rem', fontSize: '0.8rem' }}>
+                    <span className="flex items-center justify-center rounded-full bg-white dark:bg-dark-bg border-2 border-[#018891] dark:border-primary-on-dark text-[#04767D] dark:text-primary-on-dark font-viga tabular-nums" style={{ width: '3.5rem', height: '3.5rem', fontSize: '0.95rem' }}>
                       {step.anno}
                     </span>
                     {i < arr.length - 1 && (
@@ -424,7 +424,7 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
               <Reveal key={s.n} delay={(i % 3) * 90}>
                 <div>
                   {/* Numero puramente decorativo (opacità bassa): nascosto agli screen reader */}
-                  <span aria-hidden="true" className={`text-4xl font-black ${s.accent} mb-2 block tracking-tight`}>{s.n}</span>
+                  <span aria-hidden="true" className="text-4xl font-black text-[#018891] dark:text-primary-on-dark mb-2 block tracking-tight" /* verde Alètheia pieno; decorativo (aria-hidden), dark: #5FC2C8 */>{s.n}</span>
                   <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 normal-case tracking-normal">{s.titolo}</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{s.desc}</p>
                 </div>
@@ -514,9 +514,10 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
                     href="https://www.google.com/maps/search/?api=1&query=Via+del+Carrubo+Vittoria+RG"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary hover:text-[#04767D] dark:text-primary-on-dark dark:hover:text-[#99D1D5] text-xs font-bold transition-colors block mt-0.5 cursor-pointer"
+                    className="link-sezione !text-xs mt-1"
                   >
-                    Vedi su Google Maps →
+                    Vedi su Google Maps
+                    <i className="fas fa-arrow-right text-[10px]" aria-hidden="true" />
                   </a>
                 </div>
               </div>
@@ -540,7 +541,7 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
             </p>
             <a
               href={T.cta_bottone1.href}
-              className="inline-flex items-center justify-center text-center h-[52px] bg-primary hover:bg-[#006B73] text-white font-extrabold px-8 rounded-full text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#018891]/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto self-start cursor-pointer"
+              className="btn btn-md btn-light w-full sm:w-auto self-start"
             >
               {T.cta_bottone1.label}
             </a>

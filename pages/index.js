@@ -48,6 +48,7 @@ function CategoriaCard({ href, badge, badgeColor, title, description, image, ima
         sizes="(max-width: 768px) 100vw, 420px"
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
+      <div className="absolute inset-0 bg-[#004D52]/25 mix-blend-multiply" aria-hidden="true" /> {/* velatura brand: uniforma le foto stock */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/10" />
 
       {/* Contenuto sovrapposto */}
@@ -146,15 +147,15 @@ function CorsiCalendarTabs({ giorni }) {
               type="button"
               onClick={() => setActiveTab(data)}
               aria-pressed={isActive}
-              className={`flex flex-col items-center justify-center shrink-0 w-16 h-16 rounded-xl transition-all ${
+              className={`cal-tab flex flex-col items-center justify-center shrink-0 w-16 h-[72px] rounded-xl transition-all ${
                 isActive
-                  ? 'bg-primary text-white shadow-md shadow-primary/20'
-                  : 'bg-gray-50 dark:bg-dark-bg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-card'
+                  ? 'cal-tab-active bg-primary text-white shadow-md shadow-primary/20'
+                  : 'bg-white dark:bg-dark-bg border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-card' /* WCAG AA: gray-600 6,75:1 su gray-50 */
               }`}
             >
-              <span className="text-[11px] font-semibold uppercase tracking-wide">{wd}</span>
-              <span className="text-lg font-bold leading-none mt-0.5">{d}</span>
-              <span className="text-[10px] font-semibold uppercase tracking-wide">{mese}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wide opacity-90">{wd}</span>
+              <span className="font-viga text-2xl leading-none my-0.5 tabular-nums">{d}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wide opacity-90">{mese}</span>
             </button>
           );
         })}
@@ -360,7 +361,7 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
 
       <Header active="/" />
 
-      <main>
+      <main className="home-main">
 
       {/* ── 1 · HERO ─────────────────────────────────────── */}
       <section className="hero" style={{ overflow: 'visible' }}>
@@ -410,11 +411,9 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
           </div>
 
           <div className="text-center mt-12">
-            <a
-              href="/calendario-corsi"
-              className="inline-flex items-center gap-2 text-primary dark:text-primary-on-dark hover:text-[#04767D] dark:hover:text-[#99D1D5] font-semibold transition-colors"
-            >
-              Vedi il calendario completo →
+            <a href="/calendario-corsi" className="link-sezione">
+              Vedi il calendario completo
+              <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -429,7 +428,8 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
             <h2 id="courses-heading" className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white text-balance max-w-3xl mx-auto mb-2">{T.s2_titolo}</h2>
           </Reveal>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="courses-cat-grid">
+          {/* Prima categoria più larga (1,5fr): fa da apertura, le altre due la affiancano */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '1.5rem' }} className="courses-cat-grid">
             {categorie.map((cat, i) => (
               <Reveal key={cat.href} delay={i * 100}>
                 <CategoriaCard {...cat} />
@@ -438,15 +438,9 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
           </div>
 
           <div className="text-center mt-12">
-            <a
-              href="/all-courses"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                fontSize: '0.95rem', fontWeight: 700, color: 'var(--primary-text)',
-                textDecoration: 'none',
-              }}
-            >
-              Vedi tutti i corsi →
+            <a href="/all-courses" className="link-sezione">
+              Vedi tutti i corsi
+              <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
             </a>
           </div>
 
@@ -471,12 +465,13 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
                   label={numeri[0].label}
                   valueClassName="text-6xl sm:text-7xl font-extrabold text-white tracking-tight tabular-nums leading-none"
                   labelClassName="text-sm"
+                  smallSuffix
                 />
               </div>
             )}
             <div className="numbers-hero-side">
               {numeri.slice(1).map((n) => (
-                <NumberCounter key={n.label} target={n.target} label={n.label} valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
+                <NumberCounter key={n.label} target={n.target} label={n.label} smallSuffix valueClassName="text-3xl font-extrabold text-white tracking-tight tabular-nums leading-none" />
               ))}
             </div>
           </div>
@@ -496,7 +491,7 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
           .numbers-hero-side {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            gap: 0;
             border-top: 1px solid rgba(255,255,255,0.12);
             padding-top: 1.5rem;
           }
@@ -674,9 +669,10 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
             <a
               href="/news"
               aria-label="Vedi tutte le notizie"
-              className="inline-flex items-center gap-2 text-[#018891] dark:text-primary-on-dark font-semibold hover:text-[#04767D] dark:hover:text-[#99D1D5] transition-colors text-sm"
+              className="link-sezione text-sm"
             >
               Vedi tutte le notizie
+              <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
             </a>
           </Reveal>
 
@@ -684,40 +680,42 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {newsItems.slice(0, 3).map((item, i) => (
               <Reveal key={item.id} delay={i * 100} className="h-full">
-              <a
-                href={`/news/${item.slug}`}
-                aria-label={`Leggi l'articolo: ${item.title}`}
-                className="percorso-card group flex flex-col h-full rounded-2xl overflow-hidden bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008C95]"
-                style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
-              >
-                {/* Immagine 16/9 */}
-                <div className="relative aspect-video bg-slate-200 dark:bg-gray-700 overflow-hidden">
-                  {item.image && (
-                    <Image src={item.image}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 380px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                  />
-                  )}
-                </div>
-                {/* Testo */}
-                <div className="flex flex-col flex-1 p-5">
-                  <time dateTime={item.date} className="text-xs text-slate-600 dark:text-gray-500 font-medium mb-2">
-                    {formatDateItalian(item.date)}
-                  </time>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 group-hover:text-[#018891] dark:group-hover:text-[#018891] transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-slate-600 dark:text-gray-300 text-sm line-clamp-2 flex-1">
-                    {item.excerpt}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-[#018891] dark:text-primary-on-dark font-semibold text-sm group-hover:gap-3 transition-all duration-200">
-                    Leggi
-                  </span>
-                </div>
-              </a>
+                <a
+                  href={`/news/${item.slug}`}
+                  aria-label={`Leggi l'articolo: ${item.title}`}
+                  className="percorso-card group flex flex-col h-full rounded-2xl overflow-hidden bg-white dark:bg-dark-card border border-slate-100 dark:border-[rgba(255,255,255,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008C95]"
+                  style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                >
+                  {/* Immagine 16/9 */}
+                  <div className="relative aspect-video bg-slate-200 dark:bg-gray-700 overflow-hidden">
+                    {item.image && (
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 380px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
+                    )}
+                  </div>
+                  <div className="flex flex-col flex-1 p-5">
+                    {/* WCAG AA: gray-300 su dark-card (gray-500 era sotto 4.5:1) */}
+                    <time dateTime={item.date} className="text-xs text-slate-600 dark:text-gray-300 font-medium mb-2">
+                      {formatDateItalian(item.date)}
+                    </time>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 group-hover:text-primary-text dark:group-hover:text-primary-on-dark transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-slate-600 dark:text-gray-300 text-sm line-clamp-2 flex-1">
+                      {item.excerpt}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-primary-text dark:text-primary-on-dark font-semibold text-sm group-hover:gap-3 transition-all duration-200">
+                      Leggi
+                      <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
+                    </span>
+                  </div>
+                </a>
               </Reveal>
             ))}
           </div>

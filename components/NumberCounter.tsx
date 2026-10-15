@@ -9,6 +9,8 @@ interface NumberCounterProps {
   valueClassName?: string;
   /** Label sotto il numero: sempre secondaria (piccola, maiuscola, attenuata); il protagonista può usare una taglia sopra. */
   labelClassName?: string;
+  /** Suffisso (+ / %) più piccolo e rialzato rispetto alla cifra (stile .number-suffix in globals.css). */
+  smallSuffix?: boolean;
 }
 
 export default function NumberCounter({
@@ -19,6 +21,7 @@ export default function NumberCounter({
   prefix = '',
   valueClassName = 'text-5xl font-extrabold text-emerald-400 tracking-tight tabular-nums leading-none',
   labelClassName = 'text-xs', // WCAG AA: bianco 75% su sfondo scuro > 4.5:1
+  smallSuffix = false,
 }: NumberCounterProps) {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
@@ -55,7 +58,7 @@ export default function NumberCounter({
   }, [hasStarted, target, duration]);
 
   const suffix = target.toString().includes('+') ? '+' : target.toString().includes('%') ? '%' : '';
-  const displayValue = prefix + count.toLocaleString('it-IT') + suffix;
+  const displayValue = prefix + count.toLocaleString('it-IT') + (smallSuffix ? '' : suffix);
   // Valore finale per gli screen reader: il contatore animato esporrebbe numeri intermedi (0, 340, ...)
   const finalValue = prefix + Number(target.toString().replace(/[^0-9]/g, '')).toLocaleString('it-IT') + suffix;
 
@@ -63,6 +66,7 @@ export default function NumberCounter({
     <div ref={ref} className="flex flex-col items-center gap-3 px-4 py-6">
       <div className={valueClassName} aria-hidden="true">
         {displayValue}
+        {smallSuffix && suffix && <span className="number-suffix">{suffix}</span>}
       </div>
       <span className="sr-only">{finalValue}</span>
       <div className={`text-white/75 font-semibold uppercase tracking-[0.12em] ${labelClassName}`}>
