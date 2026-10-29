@@ -499,7 +499,7 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
                 </p>
                 <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
                   Attraverso Alètheia S.r.l., ente accreditato quale Agenzia per il Lavoro,{' '}
-                  <strong className="text-slate-900 dark:text-white">PromoterGroup S.p.A.</strong> amplia il proprio
+                  <strong className="text-slate-900 dark:text-white">Promotergroup S.p.A.</strong> amplia il proprio
                   ruolo di leva del sistema economico e sociale, mettendo la professionalità dei propri consulenti
                   al servizio di candidati e aziende.
                 </p>
@@ -740,7 +740,6 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
 
       {/* ── CTA FINALE ───────────────────────────────────────── */}
       <CtaFinale
-        eyebrow="Inizia oggi"
         title={
           <>
             Inizia oggi il tuo{' '}
@@ -758,7 +757,7 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
         }
         text="Che tu stia cercando lavoro o il candidato giusto per la tua azienda, siamo pronti ad aiutarti."
         primary={{ label: 'Candidati ora', href: 'https://aletheia4job.it/', external: true }}
-        secondary={{ label: 'Contatta un consulente', href: '#contatti' }}
+        secondary={{ label: 'Contatta un consulente', href: '/contatti' }}
       />
 
       {/* ── FOOTER ───────────────────────────────────────────── */}

@@ -79,7 +79,7 @@ export const PAGINE = {
     "intro_badge": "A chi si rivolge",
     "intro_titolo": "Pensato per le aziende che vogliono crescere senza fermarsi",
     "intro_testo": [
-      "Il Fondo Nuove Competenze è una misura ANPAL che permette alle imprese di destinare parte dell'orario di lavoro alla formazione, ottenendo il rimborso delle ore dedicate all'aggiornamento professionale. È particolarmente indicato per chi affronta:"
+      "Il Fondo Nuove Competenze è una misura del Ministero del Lavoro e delle Politiche Sociali che permette alle imprese di destinare parte dell'orario di lavoro alla formazione, ottenendo il rimborso delle ore dedicate all'aggiornamento professionale. È particolarmente indicato per chi affronta:"
     ],
     "s1_badge": "I vantaggi per la tua azienda",
     "s1_titolo": "Investi sulle competenze senza rallentare la crescita",

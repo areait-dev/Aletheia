@@ -63,24 +63,13 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
           .target-grid { grid-template-columns: 1fr; }
         }
 
-        /* Vantaggi: layout minimale a 4 colonne, senza card/bordi/ombre */
+        /* Vantaggi: layout minimale a 4 colonne, senza card/bordi/ombre né linee tra le icone */
         .vantaggi-row {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 2.5rem;
           margin-top: 3rem;
           position: relative;
-        }
-        /* Linea sottile che collega le icone, come un "percorso" */
-        .vantaggi-row::before {
-          content: '';
-          position: absolute;
-          top: 1.375rem;
-          left: calc(12.5% + 1.375rem);
-          right: calc(12.5% + 1.375rem);
-          height: 1px;
-          background: #e2e8f0;
-          z-index: 0;
         }
         .vantaggio-item {
           display: flex;
@@ -124,9 +113,6 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
           margin: 0;
           line-height: 1.75;
         }
-        :global(.dark) .vantaggi-row::before {
-          background: rgba(255, 255, 255, 0.08);
-        }
         :global(.dark) .vantaggio-item h3 {
           color: #F8FAFC;
         }
@@ -135,7 +121,6 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
         }
         @media (max-width: 900px) {
           .vantaggi-row { grid-template-columns: 1fr; gap: 2rem; }
-          .vantaggi-row::before { display: none; }
         }
 
         /* Bento grid servizi */
@@ -149,7 +134,8 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
         }
         .bento-card {
           --card-border: #e2e8f0;
-          background: #ffffff;
+          /* Gradiente verde che si attenua card dopo card (vedi --tint sotto) fino al bianco dell'ultima */
+          background: linear-gradient(135deg, rgba(0, 140, 149, var(--tint, 0)) 0%, rgba(0, 140, 149, 0) 75%), #ffffff;
           border: 1px solid var(--card-border);
           border-radius: 20px;
           padding: 1.5rem;
@@ -169,8 +155,15 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
         }
         .bento-card.featured {
           grid-column: span 2;
-          background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 60%);
         }
+        /* Intensità del verde nell'ordine di lettura (la 7ª card sta prima della 6ª, vedi order sotto): da 0,22 a 0 */
+        .bento-card:nth-child(1) { --tint: 0.22; }
+        .bento-card:nth-child(2) { --tint: 0.183; }
+        .bento-card:nth-child(3) { --tint: 0.147; }
+        .bento-card:nth-child(4) { --tint: 0.11; }
+        .bento-card:nth-child(5) { --tint: 0.073; }
+        .bento-card:nth-child(7) { --tint: 0.037; }
+        .bento-card:nth-child(6) { --tint: 0; }
         /* "Coordinamento" (6° card nel DOM) chiude la griglia a piena larghezza */
         .bento-card:nth-child(6) {
           order: 7;
@@ -212,10 +205,8 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
         }
         :global(.dark) .bento-card {
           --card-border: rgba(255,255,255,0.08);
-          background: #1f2937;
-        }
-        :global(.dark) .bento-card.featured {
-          background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, #1f2937 60%);
+          /* base opaca #1f2937: lo sfondo teal della sezione non deve trasparire */
+          background: linear-gradient(135deg, rgba(0, 140, 149, calc(var(--tint, 0) * 0.9)) 0%, rgba(0, 140, 149, 0) 75%), #1f2937;
         }
         :global(.dark) .bento-card p {
           color: #CBD5E1;
@@ -281,10 +272,6 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
             <span aria-hidden="true">›</span>
             <span style={{ color: '#6EE7B7' }}>Fondo Nuove Competenze</span>
           </nav>
-
-          <span className="fade-up" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#10B981', marginBottom: '0.5rem', letterSpacing: '0.02em' }}>
-            Fondo Nuove Competenze
-          </span>
 
           <div className="page-hero-badge fade-up fade-up-1">{T.hero_eyebrow}</div>
 
@@ -420,7 +407,8 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
       </section>
 
       <FormAzienda
-        title={<>Tu definisci gli obiettivi della tua impresa.<br />Noi trasformiamo il progetto in un&apos;opportunità di finanziamento.</>}
+        badge="Contattaci"
+        title={<>Tu definisci gli obiettivi della tua impresa<br />Noi trasformiamo il progetto in un&apos;opportunità di finanziamento</>}
         subtitle="Compila il form e raccontaci il tuo progetto. Il nostro Team analizzerà gratuitamente la situazione della tua impresa."
       />
 

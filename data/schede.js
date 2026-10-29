@@ -129,9 +129,9 @@ export const SCHEDE_LOCALI = {
     },
     {
       "icon": "fas fa-network-wired",
-      "title": "Parte del network PromoterGroup S.p.A.",
+      "title": "Parte del network Promotergroup S.p.A.",
       "description": "Facciamo parte di un gruppo solido e strutturato, che ci permette di offrire competenze multidisciplinari e risorse ampliate a vantaggio dei nostri clienti.",
-      "detail": "PromoterGroup S.p.A."
+      "detail": "Promotergroup S.p.A."
     }
   ],
   "step": [
@@ -164,8 +164,8 @@ export const SCHEDE_LOCALI = {
       "text": "Corsi obbligatori per lavoratori, preposti, dirigenti e addetti alle emergenze (RSPP, antincendio, primo soccorso).",
       "cta": "Scopri i corsi sicurezza",
       "href": "/all-courses?categoria=sicurezza-lavoro",
-      "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Lavoratore con casco e dispositivi di sicurezza in cantiere"
+      "image": "/images/formazione-obbligatoria/sicurezza-sul-lavoro.jpg",
+      "imageAlt": "Lavoratore con casco e giubbotto ad alta visibilità davanti a un'aula di formazione"
     },
     {
       "badge": "Accordo Stato-Regioni · Abilitazione obbligatoria",
@@ -174,8 +174,8 @@ export const SCHEDE_LOCALI = {
       "text": "Corsi per il rilascio del patentino attrezzature: carrelli elevatori, gru, piattaforme aeree (PLE) ed escavatori.",
       "cta": "Scopri i corsi attrezzature",
       "href": "/all-courses?categoria=decreto-attrezzature",
-      "image": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Operatore alla guida di un carrello elevatore in magazzino"
+      "image": "/images/formazione-obbligatoria/decreto-attrezzature.jpg",
+      "imageAlt": "Operaio con il casco arancione in mano davanti a un mezzo da cantiere"
     },
     {
       "badge": "Patentino obbligatorio",
@@ -184,8 +184,8 @@ export const SCHEDE_LOCALI = {
       "text": "Corsi per il rilascio e il rinnovo del patentino obbligatorio per l'acquisto, l'utilizzo e la distribuzione di prodotti professionali.",
       "cta": "Scopri i corsi",
       "href": "/all-courses?categoria=fitosanitario",
-      "image": "https://images.unsplash.com/photo-1585504198199-20277593b94f?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Trattamento fitosanitario in campo agricolo"
+      "image": "/images/formazione-obbligatoria/patentino-fitosanitario.jpg",
+      "imageAlt": "Operatore con guanti e mascherina che spruzza un prodotto fitosanitario sulle piante"
     },
     {
       "badge": "Reg. CE 852/2004 · HACCP",
@@ -194,8 +194,8 @@ export const SCHEDE_LOCALI = {
       "text": "Corsi HACCP per tutti gli operatori del settore alimentare: titolari, manipolatori, addetti alla conservazione e vendita.",
       "cta": "Scopri i corsi",
       "href": "/all-courses?categoria=sicurezza-alimentare",
-      "image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Operatore alimentare al lavoro in cucina professionale"
+      "image": "/images/formazione-obbligatoria/personale-alimentarista.jpg",
+      "imageAlt": "Operatore alimentare con guanti monouso che prepara le verdure"
     }
   ],
   "avvisi-regionali": [

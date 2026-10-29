@@ -23,7 +23,7 @@ export const CHATBOT_FAQ = {
     { domanda: "Dove si trova la vostra sede?", risposta: "La nostra sede è in Via del Carrubo, snc - 97019 Vittoria (RG). Puoi contattarci al +39 0932 862613 o via email a info@aletheiasrl.it." },
   ],
   generale: [
-    { domanda: "Chi è Alètheia S.r.l.?", risposta: "Alètheia S.r.l. è un ente di formazione professionale e agenzia per il lavoro con sede a Vittoria (RG), operativo dal 2005 in Sicilia. Facciamo parte del gruppo PromoterGroup S.p.A." },
+    { domanda: "Chi è Alètheia S.r.l.?", risposta: "Alètheia S.r.l. è un ente di formazione professionale e agenzia per il lavoro con sede a Vittoria (RG), operativo dal 2005 in Sicilia. Facciamo parte del gruppo Promotergroup S.p.A." },
     { domanda: "Quali servizi offrite?", risposta: "Offriamo formazione professionale (corsi obbligatori, ECDL/ICDL, corsi finanziati), servizi di agenzia per il lavoro (ricerca personale, somministrazione, orientamento) e supporto alle imprese." },
     { domanda: "Avete corsi sulla sicurezza sul lavoro?", risposta: "Sì, siamo specializzati in formazione obbligatoria sulla sicurezza: corsi per lavoratori, preposti, dirigenti e datori di lavoro, conformi all'Accordo Stato-Regioni." },
     { domanda: "Come posso contattarvi?", risposta: "Puoi chiamarci al +39 0932 862613, scriverci a info@aletheiasrl.it, o visitarci in Via del Carrubo, snc - Vittoria (RG). Siamo disponibili dal lunedì al venerdì, 9:00-13:00 / 14:00-18:00." },

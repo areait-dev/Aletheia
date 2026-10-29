@@ -491,7 +491,7 @@ export default function FormazioneObbligatoria({ giorniObbligatoria, faqs, step,
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-top: 20px;
+          margin-bottom: 16px;
         }
         @media (max-width: 768px) {
           .stream-numbers { display: none; }
@@ -894,15 +894,15 @@ export default function FormazioneObbligatoria({ giorniObbligatoria, faqs, step,
             ))}
           </div>
 
-          {/* Colonne aperte: titolo in alto, icona staccata sotto */}
+          {/* Colonne aperte: icona in alto, titolo sotto */}
           <div className="stream-columns">
             {step.map((s) => (
               <div key={s.n} className="stream-col">
                 <span className="stream-n-mobile">{s.n.padStart(2, '0')}</span>
-                <h3>{s.title}</h3>
                 <span className="stream-col-icon" aria-hidden="true">
                   <i className={s.icon} style={{ color: '#fff', fontSize: '1rem' }}></i>
                 </span>
+                <h3>{s.title}</h3>
               </div>
             ))}
           </div>

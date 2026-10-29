@@ -243,7 +243,7 @@ export default function FormAzienda({
               {[
                 'Autorizzati dal Ministero del Lavoro e delle Politiche Sociali',
                 'Operativi in Sicilia dal 2005',
-                'Parte del network PromoterGroup S.p.A.',
+                'Parte del network Promotergroup S.p.A.',
               ].map((t, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <i className="fas fa-check-circle" style={{ color: '#008C95', fontSize: '0.75rem', flexShrink: 0 }}></i>

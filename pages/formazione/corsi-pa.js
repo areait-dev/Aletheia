@@ -10,11 +10,28 @@ import { getPagina } from '../../lib/wp-pagine';
 import HeroTitle from '../../components/HeroTitle';
 import { withSiteOptions } from '../../lib/wp-site';
 
+// Enti: `name` è il nome mostrato nel carosello (abbreviato per i più lunghi); `full` è la denominazione completa (tooltip e lettori di schermo)
 const entiLoghi = [
-  { name: 'Comune di Vittoria' },
-  { name: 'Comune di Ragusa' },
-  { name: 'Comune di Comiso' },
-  { name: 'Comune di Modica' },
+  { name: "Comune di Mirabella Imbaccari" },
+  { name: "Comune di Agrigento" },
+  { name: "Comune di Piazza Armerina" },
+  { name: "Comune di Pietraperzia" },
+  { name: "Comune di Aidone" },
+  { name: "Comune di Barrafranca" },
+  { name: "Comune di Ramacca" },
+  { name: "Comune di Roma" },
+  { name: "Comune di Belpasso" },
+  { name: "ASL RM 2" },
+  { name: "Assessorato Regionale dell'Agricoltura – Servizio 8 Caltanissetta", full: "ASSESSORATO REGIONALE DELL'AGRICOLTURA, DELLO SVILUPPO RURALE E DELLA PESCA MEDITERRANEA - DIPARTIMENTO REGIONALE DELL'AGRICOLTURA - SERVIZIO 8 ISPETTORATO DELL'AGRICOLTURA DI CALTANISSETTA" },
+  { name: "Regione Sicilia – Assessorato Territorio e Ambiente, Palermo", full: "REGIONE SICILIA - ASSESSORATO REGIONALE DEL TERRITORIO E DELL'AMBIENTE - PALERMO" },
+  { name: "Corpo Forestale Regione Siciliana – Servizio 10 Catania", full: "ASSESSORATO REGIONALE DEL TERRITORIO E DELL’AMBIENTE COMANDO DEL CORPO FORESTALE DELLA REGIONE SICILIANA Ispettorato ripartimentale SERVIZIO 10 di CATANIA" },
+  { name: "Assessorato Regionale dell'Agricoltura – Servizio 13 Messina", full: "ASSESSORATO REGIONALE DELL'AGRICOLTURA, DELLO SVILUPPO RURALE E DELLA PESCA MEDITERRANEA - \"SERVIZIO 13 - SERVIZIO PER IL TERRITORIO DI MESSINA\"" },
+  { name: "Regione Sicilia – Comando Corpo Forestale", full: "REGIONE SICILIA - ASSESSORATO REGIONALE DEL TERRITORIO E DELL'AMBIENTE - PALERMO - COMANDO DEL CORPO FORESTALE DELLA REGIONE SICILIANA" },
+  { name: "Assessorato Territorio e Ambiente – Corpo Forestale", full: "ASSESSORATO DEL TERRITORIO E DELL'AMBIENTE COMANDO DEL CORPO FORESTALE DELLA REGIONE SICILIANA" },
+  { name: "Guardia di Finanza Ostia" },
+  { name: "Anac" },
+  { name: "Ministero del Turismo" },
+  { name: "INSP" },
 ];
 
 const EMPTY_FORM = {
@@ -301,7 +318,7 @@ export default function CorsiPA({ faqs, aree, mepaElenco, pagina }) {
         .pa-contact-grid-2col { display: grid; grid-template-columns: 5fr 7fr; gap: 3rem; align-items: start; }
         @media (max-width: 900px) { .pa-contact-grid-2col { grid-template-columns: 1fr; gap: 2rem; } }
 
-        /* Marquee loghi enti */
+        /* Carosello enti (2 copie dell'elenco: -50% = un elenco intero, ciclo senza salti) */
         .marquee-mask-pa {
           -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
           mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
@@ -310,7 +327,7 @@ export default function CorsiPA({ faqs, aree, mepaElenco, pagina }) {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
         }
-        .animate-marquee-pa { animation: marqueePA 32s linear infinite; }
+        .animate-marquee-pa { animation: marqueePA 110s linear infinite; }
         .animate-marquee-pa:hover { animation-play-state: paused; }
       `}</style>
 
@@ -460,14 +477,16 @@ export default function CorsiPA({ faqs, aree, mepaElenco, pagina }) {
 
         <div className="relative overflow-hidden marquee-mask-pa">
           <div className="flex w-max animate-marquee-pa">
-            {[...entiLoghi, ...entiLoghi, ...entiLoghi].map((logo, i) => (
+            {[...entiLoghi, ...entiLoghi].map((ente, i) => (
               <div
                 key={i}
                 className="flex items-center justify-center h-12 px-10 shrink-0 text-slate-600 dark:text-white/70"
                 aria-hidden={i >= entiLoghi.length}
+                title={ente.full || undefined}
               >
                 <span className="flex items-center gap-2 text-lg font-bold whitespace-nowrap">
-                  {logo.name}
+                  {ente.name}
+                  {ente.full && <span className="sr-only">{`: ${ente.full}`}</span>}
                 </span>
               </div>
             ))}

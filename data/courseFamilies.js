@@ -13,6 +13,8 @@
  * coursesDetails, per le famiglie che hanno già dati editoriali granulari.
  */
 
+const { COURSE_IMAGES } = require('./courseImages');
+
 const ALIAS_TO_DETAILS = {
   'formazione-dei-lavoratori': 'formazione-lavoratori',
   'formazione-dei-lavoratori-parte-generale': 'formazione-lavoratori',
@@ -250,6 +252,11 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
       );
     }
   }
+
+  // Immagine di famiglia da data/courseImages.js (se presente), altrimenti quella della scheda in coursesData
+  families.forEach((family) => {
+    if (COURSE_IMAGES[family.slug]) family.image = COURSE_IMAGES[family.slug];
+  });
 
   return Array.from(families.values());
 }

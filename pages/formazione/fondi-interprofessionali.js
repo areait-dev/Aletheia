@@ -61,7 +61,7 @@ export default function FondiInterprofessionali({ faqs, vantaggi, pagina }) {
           .faq-grid { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
         }
 
-        /* Loghi partner scorrevoli */
+        /* Nomi dei fondi partner */
         .partner-row {
           display: grid;
           gap: 1.25rem;
@@ -144,19 +144,19 @@ export default function FondiInterprofessionali({ faqs, vantaggi, pagina }) {
 
             <div className="partner-row">
               {partner.map((p) => (
+                // Solo il nome del fondo (niente icone né segnaposto di logo). Contrasti: #004d52 su #E6F4F5 8,5:1; dark: bianco su #0F3B3E 12,2:1
                 <div
                   key={p}
-                  className="bg-white dark:bg-dark-card border-slate-200 dark:border-[rgba(255,255,255,0.1)] text-slate-600 dark:text-gray-500"
+                  className="bg-[#E6F4F5] dark:bg-[#0F3B3E] text-[#004d52] dark:text-white"
                   style={{
-                                        height: '120px',
-                    border: '1px dashed',
+                    minHeight: '88px',
                     borderRadius: '1rem',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+                    padding: '1rem 1.25rem',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    textAlign: 'center',
                   }}
-                  aria-label={`Logo ${p} (placeholder)`}
                 >
-                  <i className="far fa-image" style={{ fontSize: '1.5rem' }} aria-hidden="true"></i>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700 }}>{p}</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 800, lineHeight: 1.3 }}>{p}</span>
                 </div>
               ))}
             </div>
