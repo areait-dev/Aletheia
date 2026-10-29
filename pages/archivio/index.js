@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Header from '../../components/Header';
+import ArchivioShell, { LISTA_STYLE, RIGA_CLASS, RIGA_STYLE } from '../../components/ArchivioShell';
 import { FAMIGLIE } from '../../data/archivio-famiglie';
 import { getArchivio } from '../../lib/wp-archivio';
 import { isrOptions } from '../../lib/wp';
@@ -21,13 +21,13 @@ async function getPageStaticProps() {
 
 function AccordionFamiglia({ famiglia, aperta, onToggle }) {
   return (
-    <li className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+    <li className={`${RIGA_CLASS} overflow-hidden`} style={{ borderRadius: '0.75rem' }}>
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-4 py-3 text-left hover:text-[#008C95] transition-colors"
+        className="w-full flex items-center justify-between text-left hover:text-[#008C95] transition-colors" style={{ padding: '0.85rem 1.25rem' }}
       >
-        <span className="text-gray-900 dark:text-gray-50 font-medium">{famiglia.titolo}</span>
+        <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{famiglia.titolo}</span>
         <i className={`fa-solid fa-chevron-down text-gray-500 transition-transform ${aperta ? 'rotate-180' : ''}`} />
       </button>
 
@@ -36,7 +36,7 @@ function AccordionFamiglia({ famiglia, aperta, onToggle }) {
           <li>
             <a
               href={`/archivio/${famiglia.chiave}`}
-              className="flex items-center justify-between px-4 py-3 pl-8 hover:text-[#008C95] transition-colors"
+              className="flex items-center justify-between py-3 pl-8 pr-5 hover:text-[#008C95] transition-colors"
             >
               <span className="text-gray-600 dark:text-gray-300">{famiglia.panoramica}</span>
               <i className="fa-solid fa-chevron-right text-gray-500" />
@@ -46,7 +46,7 @@ function AccordionFamiglia({ famiglia, aperta, onToggle }) {
             <li key={slug}>
               <a
                 href={`/archivio/${famiglia.chiave}/${slug}`}
-                className="flex items-center justify-between px-4 py-3 pl-8 hover:text-[#008C95] transition-colors"
+                className="flex items-center justify-between py-3 pl-8 pr-5 hover:text-[#008C95] transition-colors"
               >
                 <span className="text-gray-600 dark:text-gray-300">{titolo}</span>
                 <i className="fa-solid fa-chevron-right text-gray-500" />
@@ -63,42 +63,33 @@ export default function ArchivioIndex({ voci, famiglie }) {
   const [famigliaAperta, setFamigliaAperta] = useState(null);
 
   return (
-    <>
-      <Header solid />
-      <main className="bg-white dark:bg-gray-900 min-h-screen pt-40 pb-16 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-8">
-            Archivio
-          </h1>
-          <ul className="space-y-3">
-            {voci.map(({ slug, titolo }) => (
-              <li key={slug}>
-                <a
-                  href={`/archivio/${slug}`}
-                  className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 hover:border-[#008C95] transition-colors"
-                >
-                  <span className="text-gray-900 dark:text-gray-50 font-medium">
-                    {titolo}
-                  </span>
-                  <i className="fa-solid fa-chevron-right text-gray-500" />
-                </a>
-              </li>
-            ))}
+    <ArchivioShell
+      titolo="Archivio"
+      badge="Bandi e avvisi"
+      briciole={[{ label: 'Archivio' }]}
+    >
+      <ul style={{ ...LISTA_STYLE, gap: '0.75rem' }}>
+        {voci.map(({ slug, titolo }) => (
+          <li key={slug}>
+            <a href={`/archivio/${slug}`} className={`${RIGA_CLASS} hover:border-[#008C95] transition-colors`} style={{ ...RIGA_STYLE, textDecoration: 'none' }}>
+              <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{titolo}</span>
+              <i className="fa-solid fa-chevron-right text-gray-500" />
+            </a>
+          </li>
+        ))}
 
-            {famiglie.map((famiglia) => (
-              <AccordionFamiglia
-                key={famiglia.chiave}
-                famiglia={famiglia}
-                aperta={famigliaAperta === famiglia.chiave}
-                onToggle={() =>
-                  setFamigliaAperta((corrente) => (corrente === famiglia.chiave ? null : famiglia.chiave))
-                }
-              />
-            ))}
-          </ul>
-        </div>
-      </main>
-    </>
+        {famiglie.map((famiglia) => (
+          <AccordionFamiglia
+            key={famiglia.chiave}
+            famiglia={famiglia}
+            aperta={famigliaAperta === famiglia.chiave}
+            onToggle={() =>
+              setFamigliaAperta((corrente) => (corrente === famiglia.chiave ? null : famiglia.chiave))
+            }
+          />
+        ))}
+      </ul>
+    </ArchivioShell>
   );
 }
 

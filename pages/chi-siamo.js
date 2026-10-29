@@ -28,6 +28,16 @@ function scrollToCertificazioni() {
   }
 }
 
+// Punti di forza: icone lineari (stile Lucide, stroke 1.75), una per posizione nella lista `chi-punti-forza`
+const PF_ICONE = [
+  <><rect width="8" height="8" x="3" y="3" rx="2" /><path d="M7 11v4a2 2 0 0 0 2 2h4" /><rect width="8" height="8" x="13" y="13" rx="2" /></>, // workflow: sistema formazione-lavoro integrato
+  <><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></>, // shield-check: affidabilità certificata
+  <><rect width="20" height="12" x="2" y="6" rx="2" /><circle cx="12" cy="12" r="2" /><path d="M6 12h.01M18 12h.01" /></>, // banknote: esperti in formazione finanziata
+  <><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></>, // badge-check: certificazioni riconosciute
+  <><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></>, // target: competenze verticali
+  <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>, // users: la forza di rete
+];
+
 function AccreditamentoCard({ logo, logoAlt, title, code, logoScale, icon }) {
   return (
     <article className="group h-full bg-white dark:bg-dark-card rounded-xl p-6 sm:p-7 flex flex-col transition-all duration-300 shadow-sm border border-slate-200 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-1 hover:shadow-md">
@@ -361,49 +371,38 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
         </div>
       </section>
 
-      {/* I NOSTRI PUNTI DI FORZA */}
-      <section className="bg-slate-50 dark:bg-dark-bg py-16">
+      {/* PERCHÉ SCEGLIERE ALÈTHEIA (punti di forza): sei tessere uguali con icona e titolo, 3 colonne desktop / 2 tablet / 1 mobile. */}
+      <section className="bg-slate-50 dark:bg-dark-bg py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 sm:px-12">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-4">
-            {T.s3_badge}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            {T.s3_titolo}
-          </h2>
-          <p className="text-slate-600 dark:text-gray-300 text-base mt-3 mb-12 leading-relaxed">
-            {T.s3_testo[0]}
-          </p>
+          <div className="text-center mb-12">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
+              {T.s3_badge}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">
+              {T.s3_titolo}
+            </h2>
+            <p className="mt-3 text-slate-600 dark:text-gray-300 leading-[1.6] max-w-4xl mx-auto">
+              {T.s3_testo[0]}
+            </p>
+          </div>
 
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-600 mb-6 block">
-            I nostri punti di forza
-          </span>
-
-          <Reveal className="relative grid grid-cols-1 sm:grid-cols-[repeat(3,minmax(0,1fr))] gap-0 bg-transparent border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden">
-            {/* Dot Grid: micro-texture a puntini in Ottanio brand a bassissima opacità,
-                assolutamente posizionata così esce dal flusso della grid (non conta come cella)
-                e resta dietro il reticolo di linee — dettaglio elegante, non invasivo per la lettura. */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                backgroundImage: 'radial-gradient(circle, rgba(0,140,149,0.12) 1px, transparent 1px)',
-                backgroundSize: '18px 18px',
-              }}
-            />
-            {puntiForza.map((card) => (
-              <div
-                key={card.titolo}
-                className={`${card.span} ${card.borders} border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.1)] flex items-start justify-start text-left p-8`}
-              >
-                <h3
-                  className={`text-[#006066] dark:text-primary-on-dark normal-case tracking-normal leading-snug ${
-                    card.big ? '!font-bold !text-2xl' : '!font-semibold !text-lg'
-                  }`}
-                >
-                  {card.titolo}
-                </h3>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {puntiForza.map((card, i) => (
+              // Reveal ha già una transizione inline su opacità/trasformazione: lo sfondo (hover) sta nell'elemento interno
+              <Reveal key={card.titolo} delay={i * 80}>
+                {/* Contrasti (WCAG AA): titolo #004d52 su #E6F4F5 8,5:1 (hover #D6EDEF 7,9:1); dark: titolo bianco su #0F3B3E 12,2:1 (hover #14494D ~11:1).
+                    Icona #008C95 su bianco 4,05:1 (non testuale, soglia 3:1); dark #5FC2C8 su #0F3B3E ~7:1. Solo titoli: nessuna descrizione. */}
+                <article className="h-full rounded-2xl p-[22px] sm:p-7 bg-[#E6F4F5] hover:bg-[#D6EDEF] dark:bg-[#0F3B3E] dark:hover:bg-[#14494D] transition-colors duration-200">
+                  <span aria-hidden="true" className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#008C95] dark:bg-white/10 dark:text-primary-on-dark">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      {PF_ICONE[i % PF_ICONE.length]}
+                    </svg>
+                  </span>
+                  <h3 className="text-[22px] sm:text-2xl !font-semibold leading-snug normal-case tracking-normal text-[#004d52] dark:text-white" /* !font-*: la regola globale degli h3 azzera il peso */>{card.titolo}</h3>
+                </article>
+              </Reveal>
             ))}
-          </Reveal>
+          </div>
         </div>
       </section>
 

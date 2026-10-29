@@ -205,7 +205,7 @@ export const SCHEDE_LOCALI = {
       "title": "Avviso 1/2026 POC",
       "text": "Percorsi di formazione professionale finanziati dal Programma Operativo Complementare Sicilia, finalizzati al conseguimento di una qualifica professionale riconosciuta e spendibile nel mercato del lavoro.",
       "modalita": "Aula (o variabile)",
-      "href": "/archivio/avviso-1-2026-poc",
+      "href": "/formazione/avviso-1-2026-poc",
       "image": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=600&q=80",
       "imageAlt": "Aula di formazione professionale con studenti"
     },
@@ -619,8 +619,8 @@ export const SCHEDE_LOCALI = {
     },
     {
       "anno": "Oggi",
-      "titolo": "Parte di Promotergroup",
-      "desc": "Facciamo parte di Promotergroup S.p.A., un ecosistema che unisce formazione, consulenza e servizi alle imprese, offrendo accesso a competenze oltre l’aula."
+      "titolo": "Facciamo parte della rete di imprese Promotergroup S.p.A.",
+      "desc": "Un ecosistema che unisce formazione, consulenza e servizi alle imprese, offrendo accesso a competenze oltre l’aula."
     }
   ],
   "chi-tabs": [
@@ -645,40 +645,22 @@ export const SCHEDE_LOCALI = {
   ],
   "chi-punti-forza": [
     {
-      "titolo": "Sistema formazione-lavoro integrato",
-      "span": "sm:col-span-2",
-      "big": true,
-      "borders": "border-b sm:border-r"
+      "titolo": "Sistema formazione-lavoro integrato"
     },
     {
-      "titolo": "Affidabilità certificata",
-      "span": "sm:col-span-1",
-      "big": false,
-      "borders": "border-b"
+      "titolo": "Affidabilità certificata"
     },
     {
-      "titolo": "Esperti in formazione finanziata",
-      "span": "sm:col-span-1",
-      "big": false,
-      "borders": "border-b sm:border-r"
+      "titolo": "Esperti in formazione finanziata"
     },
     {
-      "titolo": "Certificazioni riconosciute",
-      "span": "sm:col-span-1",
-      "big": false,
-      "borders": "border-b sm:border-r"
+      "titolo": "Certificazioni riconosciute"
     },
     {
-      "titolo": "Competenze verticali",
-      "span": "sm:col-span-1",
-      "big": false,
-      "borders": "border-b"
+      "titolo": "Competenze verticali"
     },
     {
-      "titolo": "La forza di un gruppo",
-      "span": "sm:col-span-3",
-      "big": true,
-      "borders": ""
+      "titolo": "La forza di rete"
     }
   ],
   "chi-expertise": [
@@ -835,7 +817,7 @@ export const SCHEDE_LOCALI = {
       "badge": "Obbligatorio",
       "badgeColor": "#008C95",
       "title": "Formazione obbligatoria",
-      "description": "Corsi obbligatori conformi al D.Lgs. 81/08. Sicurezza sul lavoro, Decreto Attrezzature, Fitosanitario e Sicurezza alimentare. Metti a norma la tua azienda.",
+      "description": "Corsi obbligatori conformi al D.Lgs. 81/08. Sicurezza sul lavoro, Decreto Attrezzature, Fitosanitario e Sicurezza alimentare.",
       "color": "#008C95",
       "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=80",
       "imageAlt": "Lavoratore con casco e dispositivi di sicurezza in cantiere"

@@ -24,7 +24,7 @@ import type { WpPost } from './wp-cpt';
 
 export type Doc = { titoloLink: string; percorsoLocale: string };
 export type Documenti = Record<string, Doc[]>;
-/** Contenuti del layout a scheda. `extra`: qualifiche (`chips`) o sedi (`sedi`) sotto i requisiti. */
+/** Contenuti del layout a scheda. `extra`: qualifiche (`chips`), sedi (`sedi`) o corsi con durata (`corsi`, voci "Nome | durata") sotto i requisiti. */
 export type Scheda = {
   titoloBreve: string;
   badge: string;
@@ -32,7 +32,7 @@ export type Scheda = {
   requisitiIntro: string;
   requisiti: string[];
   extraTitolo: string;
-  extraTipo: 'chips' | 'sedi';
+  extraTipo: 'chips' | 'sedi' | 'corsi';
   extra: string[];
   /** Riquadro evidenziato (es. scadenza); i link si scrivono [etichetta](URL). */
   avviso: string;
@@ -62,6 +62,11 @@ export type VoceArchivio = {
   scheda: Scheda | null;
 };
 export type Famiglia = { chiave: string; titolo: string; panoramica: string; sezione: string; sottovoci: { slug: string; titolo: string }[] };
+
+/** Voci che non stanno in /archivio ma hanno una pagina propria altrove (avvisi ancora attivi). Il vecchio percorso reindirizza (next.config.js). */
+export const VOCI_SPOSTATE: Record<string, string> = {
+  'avviso-1-2026-poc': '/formazione/avviso-1-2026-poc',
+};
 
 /** Sezioni dei documenti, nell'ordine di visualizzazione. */
 export const SEZIONI = [
@@ -116,7 +121,16 @@ function locali(): VoceArchivio[] {
     destinatari: '',
     documenti: { altri: s.documenti },
   }));
-  return [...storiche, ...schede];
+  // Una scheda con lo stesso slug di una voce storica la sostituisce al suo posto (titoli di elenco e panoramica invariati).
+  const perSlug = new Map(schede.map((v) => [v.slug, v]));
+  const usate = new Set<string>();
+  const unite = storiche.map((v) => {
+    const sc = perSlug.get(v.slug);
+    if (!sc) return v;
+    usate.add(v.slug);
+    return { ...sc, famiglia: v.famiglia, ultimo: v.ultimo, titoloIndice: v.titoloIndice, titoloPanoramica: v.titoloPanoramica };
+  });
+  return [...unite, ...schede.filter((v) => !usate.has(v.slug))];
 }
 
 /** `sezione|Titolo|URL` per riga → documenti per sezione (una sezione sconosciuta finisce in "altri"). */
@@ -165,7 +179,7 @@ function schedaDaAcf(a: Record<string, unknown>): Scheda {
     requisitiIntro: str(a.scheda_requisiti_intro),
     requisiti: lines(a.scheda_requisiti),
     extraTitolo: str(a.scheda_extra_titolo),
-    extraTipo: a.scheda_extra_tipo === 'sedi' ? 'sedi' : 'chips',
+    extraTipo: a.scheda_extra_tipo === 'sedi' ? 'sedi' : a.scheda_extra_tipo === 'corsi' ? 'corsi' : 'chips',
     extra: lines(a.scheda_extra),
     avviso: str(a.scheda_avviso),
     contatti: a.scheda_contatti === true,

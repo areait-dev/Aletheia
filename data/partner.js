@@ -5,12 +5,12 @@ export const PARTNER = {
   ecosistema: [
     { name: 'Promotergroup', src: '/images/gruppo/promotergroup.svg' },
     { name: 'Promosan', src: '/images/gruppo/promosan.svg' },
-    { name: 'Promoter Soc. Coop.', src: '/images/gruppo/promoter-soc-coop.svg' },
+    { name: 'Promoter Soc. Coop.', src: '/images/gruppo/promoter-soc-coop-bianco.png' },
     { name: 'Promoter Srl', src: '/images/gruppo/promoter-srl.svg' },
     { name: 'Promoteragri', src: '/images/gruppo/promoteragri.svg' },
-    { name: 'Iside', src: '/images/gruppo/iside.svg' },
-    { name: 'Promesys', src: '/images/gruppo/promesys.svg' },
-    { name: 'Doses', src: '/images/gruppo/doses.svg' },
+    { name: 'Iside', src: '/images/gruppo/iside-bold.svg' },
+    { name: 'Promesys', src: '/images/gruppo/promesys-rebranding.png' },
+    { name: 'Doses', src: '/images/gruppo/DOSES-logo-orizzontale-bianco.png' },
   ],
   // Certificazioni del Footer: `srcDark` = logo per il tema scuro
   certificazioni: [

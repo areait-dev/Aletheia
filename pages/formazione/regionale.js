@@ -217,7 +217,7 @@ export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiFo
       {/* ══════════════ REQUISITI & VALORE ALÈTHEIA ══════════════ */}
       <section className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div style={{ maxWidth: '760px', margin: '0 auto 2.5rem', textAlign: 'center' }}>
+          <div style={{ maxWidth: '760px', margin: '0 0 2.5rem', textAlign: 'left' }}>
             <span className="section-badge">{T.intro_badge}</span>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, margin: '0 0 0.75rem', lineHeight: 1.3 }}>{T.intro_titolo}</h2>
             <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>{T.intro_testo[0]}</p>
@@ -346,7 +346,6 @@ export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiFo
         title={T.cta_titolo}
         text={T.cta_testo}
         primary={{ label: T.cta_bottone1.label, href: T.cta_bottone1.href }}
-        secondary={{ label: T.cta_bottone2.label, href: T.cta_bottone2.href }}
       />
 
       </main>

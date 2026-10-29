@@ -209,7 +209,7 @@ group('archivio', 'Archivio - Dati', pt('archivio'), () => [
   text('scheda_requisiti_intro', 'Introduzione ai requisiti (facoltativa)'),
   list('scheda_requisiti', 'Requisiti di accesso', 'uno per riga', { rows: 6 }),
   text('scheda_extra_titolo', 'Titolo del blocco extra', { instructions: 'Es. Qualifiche disponibili (esempi) oppure Sedi del corso.' }),
-  sel('scheda_extra_tipo', 'Tipo del blocco extra', { chips: 'Etichette (es. qualifiche)', sedi: 'Elenco con icona di luogo (es. sedi)' }),
+  sel('scheda_extra_tipo', 'Tipo del blocco extra', { chips: 'Etichette (es. qualifiche)', sedi: 'Elenco con icona di luogo (es. sedi)', corsi: 'Elenco corsi con durata (una voce per riga: Nome | durata)' }),
   list('scheda_extra', 'Voci del blocco extra', 'una per riga', { rows: 8 }),
   area('scheda_avviso', 'Riquadro evidenziato (facoltativo)', { rows: 3, instructions: 'Es. una scadenza. I link si scrivono [etichetta](URL).' }),
   bool('scheda_contatti', 'Mostra email e telefono in fondo', { instructions: 'Usa i contatti delle Opzioni Globali.' }),

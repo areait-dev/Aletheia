@@ -164,13 +164,9 @@ export const LISTE: Record<string, Mapping> = {
     toWp: (x) => ({ badge: s(x.tab), titolo: s(x.titolo), sottotitolo: s(x.sottotitolo), testo: s(x.desc) }),
   },
   'chi-punti-forza': {
-    // Il reticolo (larghezza di cella, bordi, dimensione del titolo) dipende dalla POSIZIONE: si prende dalla card locale
-    // nella stessa posizione (o con lo stesso titolo); una voce in più è una cella piccola.
-    fromWp: (c, loc, i, all) => {
-      const base = loc ?? all[i] ?? {};
-      return { titolo: c.titolo, span: base.span ?? 'sm:col-span-1', big: base.big ?? false, borders: base.borders ?? 'border-b' };
-    },
-    toWp: (x) => ({ titolo: s(x.titolo) }),
+    // Punto di forza: titolo e descrizione nel contenuto; il numero (01, 02…) segue la posizione
+    fromWp: (c) => ({ titolo: c.titolo, desc: c.testo }),
+    toWp: (x) => ({ titolo: s(x.titolo), testo: s(x.desc) }),
   },
   'chi-expertise': {
     // Numero (01, 02…) e colore decorativo seguono la posizione

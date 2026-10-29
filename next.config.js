@@ -68,6 +68,14 @@ function buildAiutiDiStatoRedirects() {
   }));
 }
 
+/**
+ * Voci spostate fuori da /archivio perché ancora attive (vedi VOCI_SPOSTATE in lib/wp-archivio.ts):
+ * il vecchio indirizzo reindirizza alla nuova pagina.
+ */
+function buildArchivioSpostatiRedirects() {
+  return [{ source: '/archivio/avviso-1-2026-poc', destination: '/formazione/avviso-1-2026-poc', permanent: true }];
+}
+
 /** Host di WordPress (da WP_URL) per le immagini in evidenza servite da next/image. Vuoto se WP non è configurato. */
 function wpImageHosts() {
   try {
@@ -96,7 +104,7 @@ const nextConfig = {
     domains: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()],
   },
   async redirects() {
-    return [...buildCourseRedirects(), ...buildAiutiDiStatoRedirects()];
+    return [...buildCourseRedirects(), ...buildAiutiDiStatoRedirects(), ...buildArchivioSpostatiRedirects()];
   },
 };
 

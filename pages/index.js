@@ -341,6 +341,27 @@ async function getPageStaticProps() {
   return { props: { giorniCalendario: upcomingDays(calendario, oggiISO, 10), gruppoLoghi: await getPartners('ecosistema'), categorie: await getSchede('categorie-home'), pagina: await getPagina('home'), newsItems: await ultimeNews() }, ...isrOptions() };
 }
 
+// Loghi del marquee: [aspect ratio del contenuto (file già ritagliati), --logo-scale, altezza fissa px, larghezza max px, --logo-offset-y px].
+// Altezza di default = 80 * AR^-0.5 (limitata a 24-60px) * scala: i wordmark larghi (Promo.San 9,4:1) restano bassi, i compatti (Iside, Promesys) più alti.
+// Loghi testuali: x-height ("promo") uguale a 14,8px (misurata sui file rasterizzati) per Promoter coop (40px di altezza), Promo.San (19,5px: x-height 76% dell'altezza) e Promotergroup / Promoter srl / Promoter agri (73px: x-height 20,1%).
+// Questi tre hanno il box "ter" alto quanto tutto il file per design del marchio (flush con il viewBox): il testo sta nel 60% inferiore, quindi si sposta con --logo-offset-y per portare la linea mediana delle minuscole sulla stessa linea di Promo.San (mediana a -2,0px dal centro; Promoter coop a -3,5px, spostato di +1,5px; i tre a +7,3px, spostati di -9,9px (corretto sulla misura a schermo)).
+// Iside: altezza totale (emblema + scritta + sottotitolo) = 73px come il box "ter" di Promoter srl/agri/group, con lo stesso offset (-9,9px) così occupa la stessa fascia verticale (stessi bordi alto e basso e stessa mediana del box); tratto ispessito nel file iside-bold.svg. Promesys e Doses: scala 0,9.
+const LOGO_METRICS = {
+  'promotergroup': [4.15, 1, 73, 310, -9.9],
+  'promosan': [9.4, 1, 19.5, 200],
+  'promoter-soc-coop-bianco': [4.0, 1, undefined, undefined, 1.5],
+  'promoter-srl': [2.98, 1, 73, 240, -9.9],
+  'promoteragri': [3.13, 1, 73, 240, -9.9],
+  'iside-bold': [1.17, 1, 73, 200, -9.9],
+  'promesys-rebranding': [1.38, 0.9],
+  'DOSES-logo-orizzontale-bianco': [4.55, 1, 46, 300], // 46px: il sottotitolo arriva a ~5px di maiuscole (a 34px erano 3,7px, illeggibili); DOSES risulta più alto degli altri testi ma resta nella fascia dei loghi
+};
+const logoSize = (src) => {
+  const [ar, scala, hFisso, maxW, offsetY] = LOGO_METRICS[src.split('/').pop().split('.')[0]] || [4, 1];
+  const h = hFisso ?? Math.min(60, Math.max(24, 80 * Math.pow(ar, -0.5))) * scala;
+  return { h: Math.round(h * 10) / 10, maxW: maxW ?? 200, offsetY: offsetY ?? 0 };
+};
+
 export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina, newsItems }) {
   const T = pagina.testi;
   const numeri = contatori(T.numeri);
@@ -594,9 +615,9 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
       </Reveal>
 
       {/* ── 3e · PARTE DEL GRUPPO ────────────────────────── */}
-      <section className="pt-20 pb-24 bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
+      <section className="pt-20 pb-[4.5rem] bg-[linear-gradient(135deg,#0F172A_0%,#0a4f54_50%,#008C95_100%)]" aria-labelledby="gruppo-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 !mt-0" /* annulla il margin-top 3rem della regola globale .text-center, così il padding sopra e sotto la sezione è simmetrico */>
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-white mb-3">{T.s4_badge}</span>
             <h2 id="gruppo-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-white text-balance max-w-3xl mx-auto">{T.s4_titolo}</h2>
             <p className="mt-2 text-slate-200 max-w-4xl mx-auto">{T.s4_testo[0]}</p>
@@ -611,7 +632,7 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
               <div
                 key={i}
                 aria-hidden={i >= gruppoLoghi.length * 3}
-                className="flex items-center justify-center h-16 mx-7 shrink-0"
+                className="flex items-center justify-center h-24 mx-7 shrink-0" /* gap costante, loghi centrati in verticale */
               >
                 {/* <img> nativo intenzionale: il marquee ripete questi loghi 6x (36 istanze
                     simultanee) per il loop continuo - convertirli a next/image moltiplica
@@ -623,7 +644,9 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
                   src={logo.src}
                   alt={logo.name}
                   decoding="sync"
-                  className="h-10 w-auto max-w-[170px] object-contain shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300"
+                  // Altezza ottica per logo (vedi LOGO_METRICS); --logo-k riduce tutto su mobile; stessa opacità per tutti
+                  style={{ height: `calc(${logoSize(logo.src).h}px * var(--logo-k, 1))`, maxWidth: `calc(${logoSize(logo.src).maxW}px * var(--logo-k, 1))`, transform: `translateY(calc(${logoSize(logo.src).offsetY}px * var(--logo-k, 1)))` }}
+                  className="w-auto object-contain shrink-0 opacity-80 hover:opacity-100 transition-opacity duration-300"
                   onError={(e) => {
                     const el = e.currentTarget;
                     el.style.display = 'none';
@@ -650,8 +673,12 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
             animation-play-state: paused;
           }
           .marquee-mask {
+            --logo-k: 1;
             -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
             mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+          }
+          @media (max-width: 640px) {
+            .marquee-mask { --logo-k: 0.75; }
           }
         `}</style>
       </section>

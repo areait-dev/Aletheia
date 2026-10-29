@@ -1,71 +1,35 @@
-import Head from 'next/head';
-import Header from './Header';
-import Footer from './Footer';
 import LinkText from './LinkText';
+import ArchivioShell, { DocumentiLista, H2_STYLE, LISTA_STYLE, VOCE_STYLE } from './ArchivioShell';
 import { useSiteOptions } from '../context/SiteOptionsContext';
 
 /**
  * Layout "a scheda" di una voce dell'archivio (es. Avviso 1/2026 POC, Avviso 20/2024 FSE+): hero con briciole e badge,
- * "Di cosa si tratta", requisiti, un blocco extra (qualifiche o sedi), riquadro avviso (es. scadenza), documenti in
+ * "Di cosa si tratta", requisiti, un blocco extra (qualifiche, sedi o elenco corsi con durata), riquadro avviso (es. scadenza), documenti in
  * un'unica lista e contatti. Tutti i testi vengono dalla voce (dati locali o WordPress): vedi lib/wp-archivio.ts.
  */
 
-// Titolo di sezione e paragrafo di testo condivisi dalle sezioni della scheda.
-const H2_STYLE = { fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.85rem' };
-const LISTA_STYLE = { listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' };
-const VOCE_STYLE = { display: 'flex', alignItems: 'flex-start', gap: '0.65rem' };
-
 export default function ArchivioScheda({ voce }) {
   const { scheda: s } = voce;
-  const { identita, seo } = useSiteOptions();
+  const { identita } = useSiteOptions();
   // Un'unica lista, senza titoli di sezione: nell'ordine in cui i documenti sono stati inseriti.
   const documenti = Object.values(voce.documenti || {}).flat();
+  const gruppi = [];
+  documenti.forEach((d) => {
+    const g = gruppi.find((x) => x.gruppo === (d.gruppo || ''));
+    if (g) g.docs.push(d);
+    else gruppi.push({ gruppo: d.gruppo || '', docs: [d] });
+  });
   const paragrafi = (voce.descrizione || '').split(/\n\s*\n/).filter(Boolean);
 
   return (
-    <>
-      <Head>
-        <title>{voce.metaTitolo || `${voce.titolo} - Alètheia Srl`}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {(voce.metaDescrizione || seo.descrizione) && <meta name="description" content={voce.metaDescrizione || seo.descrizione} />}
-        <link rel="icon" type="image/png" href="/favicon.png" />
-      </Head>
-
-      <Header active="/" solid />
-
-      {/* ── HERO ── */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)',
-        paddingTop: '120px',
-        paddingBottom: '4rem',
-      }}>
-        <div className="container">
-          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-            <a href="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Home</a>
-            <span aria-hidden="true">›</span>
-            <a href="/formazione/regionale" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Formazione Regionale</a>
-            <span aria-hidden="true">›</span>
-            <span style={{ color: '#6EE7B7' }}>{s.titoloBreve || voce.titolo}</span>
-          </nav>
-          {s.badge && (
-            <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', background: 'rgba(1,136,145,0.12)', border: '1px solid rgba(1,136,145,0.25)', padding: '0.35rem 0.9rem', borderRadius: '999px', marginBottom: '1.25rem' }}>
-              {s.badge}
-            </span>
-          )}
-          <h1 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.75rem)', fontWeight: 900, color: '#fff', lineHeight: 1.2, marginBottom: '1rem', maxWidth: '820px' }}>
-            {voce.titolo}
-          </h1>
-          {s.sottotitolo && (
-            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.68)', maxWidth: '820px', lineHeight: 1.8 }}>
-              {s.sottotitolo}
-            </p>
-          )}
-        </div>
-      </section>
-
-      <main className="bg-white dark:bg-gray-900">
-        <div className="container" style={{ maxWidth: '860px', padding: '4rem 1.5rem' }}>
-
+    <ArchivioShell
+      titolo={voce.titolo}
+      badge={s.badge}
+      sottotitolo={s.sottotitolo}
+      metaTitolo={voce.metaTitolo}
+      metaDescrizione={voce.metaDescrizione}
+      briciole={[voce.fuoriElenco ? { label: 'Formazione Regionale', href: '/formazione/regionale' } : { label: 'Archivio', href: '/archivio' }, { label: s.titoloBreve || voce.titolo }]} // fuoriElenco = avviso attivo (fuori dall'archivio); le altre voci sono archivio
+    >
           {paragrafi.length > 0 && (
             <section style={{ marginBottom: '2.5rem' }}>
               <h2 className="text-slate-900 dark:text-gray-50" style={H2_STYLE}>
@@ -114,6 +78,27 @@ export default function ArchivioScheda({ voce }) {
                     </li>
                   ))}
                 </ul>
+              ) : s.extraTipo === 'corsi' ? (
+                // Elenco corsi: voci "Nome del corso | durata", nome a sinistra e durata a destra
+                <ul style={{ ...LISTA_STYLE, gap: '0.5rem' }}>
+                  {s.extra.map((voceCorso) => {
+                    const [nome, durata] = voceCorso.split('|').map((x) => x.trim());
+                    return (
+                      <li
+                        key={voceCorso}
+                        className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', borderRadius: '0.75rem', padding: '0.8rem 1.1rem' }}
+                      >
+                        <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.92rem', fontWeight: 600, lineHeight: 1.5 }}>{nome}</span>
+                        {durata && (
+                          <span className="bg-[#018891]/10 border border-[#018891]/30 dark:border-primary-on-dark/30 text-[#006066] dark:text-primary-on-dark" style={{ flexShrink: 0, padding: '0.25rem 0.7rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                            {durata}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
               ) : (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                   {s.extra.map((q) => (
@@ -128,10 +113,13 @@ export default function ArchivioScheda({ voce }) {
 
           {s.avviso && (
             <section className="bg-[#018891]/10 dark:bg-[#018891]/10 border border-[#018891]/30 dark:border-primary-on-dark/30" style={{ borderRadius: '1rem', padding: '1.5rem', marginBottom: '2.5rem' }}>
-              <p className="text-[#004D52] dark:text-primary-on-dark" style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.7 }}>
-                <i className="far fa-calendar-alt" style={{ marginRight: '0.5rem' }}></i>
-                <LinkText text={s.avviso} newTab style={{ color: 'inherit', textDecoration: 'underline' }} />
-              </p>
+              {/* Più paragrafi separati da una riga vuota (es. scadenza + news); l'icona sta solo sul primo */}
+              {s.avviso.split(/\n\s*\n/).filter(Boolean).map((par, i) => (
+                <p key={i} className="text-[#004D52] dark:text-primary-on-dark" style={{ margin: i === 0 ? 0 : '0.9rem 0 0', fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.7 }}>
+                  {i === 0 && <i className="far fa-calendar-alt" style={{ marginRight: '0.5rem' }}></i>}
+                  <LinkText text={par} newTab style={{ color: 'inherit', textDecoration: 'underline' }} />
+                </p>
+              ))}
             </section>
           )}
 
@@ -140,26 +128,15 @@ export default function ArchivioScheda({ voce }) {
               <h2 className="text-slate-900 dark:text-gray-50" style={{ ...H2_STYLE, marginBottom: '1rem' }}>
                 Documenti scaricabili
               </h2>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {documenti.map((doc) => (
-                  <li
-                    key={doc.percorsoLocale}
-                    className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', borderRadius: '0.75rem', padding: '0.85rem 1.25rem', flexWrap: 'wrap' }}
-                  >
-                    <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{doc.titoloLink}</span>
-                    <a
-                      href={doc.percorsoLocale}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white"
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.55rem 1.1rem', borderRadius: '999px', background: '#008C95', fontWeight: 700, fontSize: '0.82rem', textDecoration: 'none' }}
-                    >
-                      <i className="fas fa-download"></i> Scarica PDF
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              {/* Se i documenti hanno un `gruppo`, un titoletto per ogni gruppo (come nella pagina originale); altrimenti un'unica lista */}
+              {gruppi.map(({ gruppo, docs }) => (
+                <div key={gruppo || 'documenti'} style={{ marginBottom: gruppo ? '1.75rem' : 0 }}>
+                  {gruppo && (
+                    <h3 className="text-slate-700 dark:text-gray-200" style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 0.75rem' }}>{gruppo}</h3>
+                  )}
+                  <DocumentiLista documenti={docs} />
+                </div>
+              ))}
             </section>
           )}
 
@@ -171,10 +148,6 @@ export default function ArchivioScheda({ voce }) {
             </div>
           )}
 
-        </div>
-      </main>
-
-      <Footer />
-    </>
+    </ArchivioShell>
   );
 }

@@ -1,8 +1,8 @@
-import Header from '../../components/Header';
 import ArchivioTesto from '../../components/ArchivioTesto';
 import ArchivioScheda from '../../components/ArchivioScheda';
+import ArchivioShell, { DocumentiLista, H2_STYLE, LISTA_STYLE, RIGA_CLASS, RIGA_STYLE } from '../../components/ArchivioShell';
 import { FAMIGLIE } from '../../data/archivio-famiglie';
-import { descrizioneFamiglia, getArchivio, getFamiglia, getVoce, SEZIONI, sottovociPanoramica } from '../../lib/wp-archivio';
+import { descrizioneFamiglia, getArchivio, getFamiglia, getVoce, SEZIONI, sottovociPanoramica, VOCI_SPOSTATE } from '../../lib/wp-archivio';
 import { isWpEnabled, isrOptions } from '../../lib/wp';
 import { withSiteOptions } from '../../lib/wp-site';
 
@@ -12,14 +12,14 @@ import { withSiteOptions } from '../../lib/wp-site';
  *  /archivio/<slug>                voce singola
  *  /archivio/<famiglia>/<slug>     voce di una famiglia
  * Le voci arrivano dai dati locali storici e dal CPT `archivio` di WordPress (lib/wp-archivio.ts): una voce nuova
- * creata in WordPress ha la sua pagina senza toccare il codice. Le voci con layout a scheda (avviso-1-2026-poc,
+ * creata in WordPress ha la sua pagina senza toccare il codice. Le voci con layout a scheda (avviso-7-2023,
  * avviso-20-2024-fse: dati in data/archivio-schede.js) usano components/ArchivioScheda.js.
  */
 
 export async function getStaticPaths() {
   const voci = await getArchivio();
   const paths = [
-    ...voci.map((v) => ({ params: { slug: v.slug.split('/') } })),
+    ...voci.filter((v) => !VOCI_SPOSTATE[v.slug]).map((v) => ({ params: { slug: v.slug.split('/') } })),
     ...FAMIGLIE.map((f) => ({ params: { slug: [f.chiave] } })),
   ];
   return { paths, fallback: isWpEnabled() ? 'blocking' : false };
@@ -38,122 +38,96 @@ async function getPageStaticProps({ params }) {
   }
 
   const voce = await getVoce(slug);
-  if (!voce) return { notFound: true, ...isrOptions() };
+  if (!voce || VOCI_SPOSTATE[slug]) return { notFound: true, ...isrOptions() };
   return { props: { tipo: 'voce', voce }, ...isrOptions() };
 }
 
+// Corpo delle pagine non a scheda: stesso schema della scheda (sezioni con titolo H2, righe a scheda), dentro ArchivioShell.
 function Panoramica({ famiglia, descr, sottovoci }) {
   return (
-    <>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-8">
-        {descr.titolo || famiglia.titolo}
-      </h1>
-
+    <ArchivioShell
+      titolo={descr.titolo || famiglia.titolo}
+      badge="Archivio"
+      briciole={[{ label: 'Archivio', href: '/archivio' }, { label: famiglia.titolo }]}
+    >
       {descr.descrizione && (
-        <ArchivioTesto testo={descr.descrizione} className="mb-10 text-gray-600 dark:text-gray-300" />
+        <section style={{ marginBottom: '2.5rem' }}>
+          <h2 className="text-slate-900 dark:text-gray-50" style={H2_STYLE}>Di cosa si tratta</h2>
+          <ArchivioTesto testo={descr.descrizione} className="text-slate-600 dark:text-gray-300 text-[0.95rem] leading-[1.85]" />
+        </section>
       )}
 
       <section>
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
-          {famiglia.sezione}
-        </h2>
-        <ul className="space-y-3">
+        <h2 className="text-slate-900 dark:text-gray-50" style={{ ...H2_STYLE, marginBottom: '1rem' }}>{famiglia.sezione}</h2>
+        <ul style={{ ...LISTA_STYLE, gap: '0.75rem' }}>
           {sottovoci.map(({ slug, titolo }) => (
             <li key={slug}>
-              <a
-                href={`/archivio/${famiglia.chiave}/${slug}`}
-                className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 hover:border-[#008C95] transition-colors"
-              >
-                <span className="text-gray-900 dark:text-gray-50 font-medium">{titolo}</span>
+              <a href={`/archivio/${famiglia.chiave}/${slug}`} className={`${RIGA_CLASS} hover:border-[#008C95] transition-colors`} style={{ ...RIGA_STYLE, textDecoration: 'none' }}>
+                <span className="text-slate-700 dark:text-gray-200" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{titolo}</span>
                 <i className="fa-solid fa-chevron-right text-gray-500" />
               </a>
             </li>
           ))}
         </ul>
       </section>
-    </>
+    </ArchivioShell>
   );
 }
 
 function Voce({ voce }) {
   const dati = voce.documenti || {};
-
+  const sezioni = SEZIONI.filter(({ key }) => (dati[key] || []).length > 0);
+  const famiglia = getFamiglia(voce.famiglia);
   return (
-    <>
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-8">
-        {voce.titolo}
-      </h1>
-
+    <ArchivioShell
+      titolo={voce.titolo}
+      badge={famiglia ? famiglia.titolo : 'Archivio'}
+      metaTitolo={voce.metaTitolo}
+      metaDescrizione={voce.metaDescrizione}
+      briciole={[
+        { label: 'Archivio', href: '/archivio' },
+        ...(famiglia ? [{ label: famiglia.titolo, href: `/archivio/${famiglia.chiave}` }] : []),
+        { label: voce.titolo },
+      ]}
+    >
       {voce.descrizione && (
-        <ArchivioTesto testo={voce.descrizione} className="mb-8 text-gray-600 dark:text-gray-300" />
+        <section style={{ marginBottom: '2.5rem' }}>
+          <h2 className="text-slate-900 dark:text-gray-50" style={H2_STYLE}>Di cosa si tratta</h2>
+          <ArchivioTesto testo={voce.descrizione} className="text-slate-600 dark:text-gray-300 text-[0.95rem] leading-[1.85]" />
+        </section>
       )}
 
       {voce.destinatari && (
-        <div className="mb-10 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-3">
-            Destinatari e requisiti
-          </h2>
-          <ArchivioTesto testo={voce.destinatari} className="text-gray-600 dark:text-gray-300" />
-        </div>
+        <section style={{ marginBottom: '2.5rem' }}>
+          <h2 className="text-slate-900 dark:text-gray-50" style={H2_STYLE}>Requisiti di accesso</h2>
+          <ArchivioTesto testo={voce.destinatari} className="text-slate-600 dark:text-gray-300 text-[0.95rem] leading-[1.85]" />
+        </section>
       )}
 
-      {SEZIONI.map(({ key, label }) => {
-        const documenti = dati[key] || [];
-        if (documenti.length === 0) return null;
-
-        return (
-          <section key={key} className="mb-10">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-4">
-              {label}
-            </h2>
-            <ul className="space-y-3">
-              {documenti.map((doc, i) => (
-                <li
-                  key={i}
-                  className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3"
-                >
-                  <span className="text-gray-600 dark:text-gray-300">
-                    {doc.titoloLink}
-                  </span>
-                  <a
-                    href={doc.percorsoLocale}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-4 min-h-9 whitespace-nowrap rounded-full text-white font-medium text-sm"
-                    style={{ backgroundColor: '#008C95' }}
-                  >
-                    <i className="fa-solid fa-download" />
-                    Scarica PDF
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })}
-
-      {Object.values(dati).every((arr) => !arr || arr.length === 0) && (
-        <p className="text-gray-600 dark:text-gray-300">
-          Nessun documento disponibile per questo avviso.
-        </p>
+      {sezioni.length > 0 ? (
+        <section>
+          <h2 className="text-slate-900 dark:text-gray-50" style={{ ...H2_STYLE, marginBottom: '1rem' }}>Documenti scaricabili</h2>
+          {sezioni.map(({ key, label }) => (
+            <div key={key} style={{ marginBottom: '1.75rem' }}>
+              {/* Con più sezioni di documenti, una sottointestazione per tipo; con una sola l'elenco sta sotto il titolo */}
+              {sezioni.length > 1 && (
+                <h3 className="text-slate-700 dark:text-gray-200" style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 0.75rem' }}>{label}</h3>
+              )}
+              <DocumentiLista documenti={dati[key]} />
+            </div>
+          ))}
+        </section>
+      ) : (
+        <p className="text-slate-600 dark:text-gray-300">Nessun documento disponibile per questo avviso.</p>
       )}
-    </>
+    </ArchivioShell>
   );
 }
 
 export default function ArchivioPagina({ tipo, famiglia, descr, sottovoci, voce }) {
-  // Voce con layout a scheda (hero, requisiti, documenti…): pagina completa, con Header e Footer propri.
+  // Voce con layout a scheda (hero, requisiti, documenti…): corpo con sezioni dedicate.
   if (tipo === 'voce' && voce.scheda) return <ArchivioScheda voce={voce} />;
-  return (
-    <>
-      <Header solid />
-      <main className="bg-white dark:bg-gray-900 min-h-screen pt-40 pb-16 px-4">
-        <div className="max-w-5xl mx-auto">
-          {tipo === 'panoramica' ? <Panoramica famiglia={famiglia} descr={descr} sottovoci={sottovoci} /> : <Voce voce={voce} />}
-        </div>
-      </main>
-    </>
-  );
+  return tipo === 'panoramica' ? <Panoramica famiglia={famiglia} descr={descr} sottovoci={sottovoci} /> : <Voce voce={voce} />;
 }
 
 // Opzioni globali (Header/Footer) da WordPress o dati locali: vedi lib/wp-site.ts.

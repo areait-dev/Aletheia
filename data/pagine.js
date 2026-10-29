@@ -153,15 +153,11 @@ export const PAGINE = {
     "cta_bottone1": {
       "label": "Contattaci",
       "href": "/contatti"
-    },
-    "cta_bottone2": {
-      "label": "Contatta un consulente",
-      "href": "/agenzia-per-il-lavoro/servizi-alle-imprese#contatta-azienda"
     }
   },
   "formazione/regionale-fse": {
     "hero_eyebrow": "Formarsi senza costi",
-    "hero_titolo": "Formazione *Finanziata in Sicilia*",
+    "hero_titolo": "Formazione *Finanziata*",
     "hero_cta1": {
       "label": "Scopri i percorsi",
       "href": "#offerta"
@@ -311,7 +307,7 @@ export const PAGINE = {
       "src": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80",
       "alt": "Colloquio di selezione del personale"
     },
-    "s4_badge": "Parte del Gruppo",
+    "s4_badge": "Parte della Rete",
     "s4_titolo": "Alètheia è l’ente di formazione di Promotergroup S.p.A.",
     "s4_testo": [
       "Un ecosistema integrato di servizi per le imprese e il territorio."
