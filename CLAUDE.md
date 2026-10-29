@@ -41,7 +41,7 @@ CSS & Styling Approach
 CSS Variables (`--primary`, `--text-dark`, `--shadow-md`, etc.) defined in `globals.css` for consistency and theming
 Tailwind CSS via `@tailwind` directives in globals.css
 Inline styles used in components for dynamic, data-driven styling (e.g., badge colors, hover states)
-Font: Plus Jakarta Sans from Google Fonts
+Font: Nunito (testo) e Viga (titoli) da Google Fonts, caricati in _document.js
 Icon library: Font Awesome 6.4.0 (via CDN in `_app.js`)
 Component Architecture
 Most components are stateless or manage minimal UI state (e.g., hover, menu toggle)
