@@ -247,6 +247,7 @@ const EDITORIAL_CONTENT = {
   'icdl-base': { corso: icdlContent['icdl-base'] },
   'icdl-standard': { corso: icdlContent['icdl-standard'] },
   'icdl-update': { corso: icdlContent['icdl-update'] },
+  'icdl-digcomp-2-2': { corso: icdlContent['icdl-digcomp-2-2'] },
 };
 
 // Dettagli editoriali completi per famiglia di corso (overview, curriculum, instructor, prezzi per variante)
@@ -1853,7 +1854,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                  è l'unica CTA, i corsi non si acquistano online. */
               return (
                 <CoursePricingSidebar
-                  priceRows={[{ label: 'Quota di partecipazione', value: course.price }]}
+                  priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
                   primaryHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
                   whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                 />

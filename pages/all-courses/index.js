@@ -28,7 +28,6 @@ const categoryMeta = {
   professionale:         { name: 'Formazione Professionale', icon: 'fas fa-briefcase' },
   digitali:              { name: 'Certificazioni Digitali', icon: 'fas fa-laptop-code' },
   agricolo:              { name: 'Settore Agricolo', icon: 'fas fa-seedling' },
-  gol:                   { name: 'Programma GOL', icon: 'fas fa-rocket' },
 };
 
 // Sotto-categorie granulari: corrispondono ai query param ?categoria= usati nel mega menu di Formazione (Header.js)

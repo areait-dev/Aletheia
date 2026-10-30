@@ -27,7 +27,7 @@ Il programma affronta la corretta gestione dell'igiene personale e delle struttu
 
 Un focus specifico è dedicato alla corretta gestione degli allergeni alimentari, in conformità al Regolamento UE 1169/2011 sull'informazione ai consumatori, e alla prevenzione delle contaminazioni crociate nelle fasi di preparazione, conservazione e somministrazione degli alimenti.
 
-Al termine del corso è previsto il rilascio dell'attestato di frequenza, valido su tutto il territorio nazionale, che sostituisce il precedente libretto sanitario abolito dalla normativa vigente. Il corso è disponibile in Aula (€ 80,00 + IVA) o in FAD (€ 70,00 + IVA).`,
+Al termine del corso è previsto il rilascio dell'attestato di frequenza, valido su tutto il territorio nazionale, che sostituisce il precedente libretto sanitario abolito dalla normativa vigente.`,
 
       aChiERivolto: [
         'Titolari di imprese alimentari e responsabili del sistema di autocontrollo HACCP',
