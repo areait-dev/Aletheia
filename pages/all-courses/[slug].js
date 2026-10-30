@@ -20,6 +20,7 @@ import trattoriAgricoliAggiornamentoContent from '../../data/content/trattori-ag
 import pleContent from '../../data/content/ple-content';
 import pleAggiornamentoContent from '../../data/content/ple-aggiornamento-content';
 import addettiMacchinaRaccogliFruttaContent from '../../data/content/addetti-macchina-raccogli-frutta-content';
+import dpi3CategoriaContent from '../../data/content/dpi-3-categoria-content';
 import dpi3CategoriaAggiornamentoContent from '../../data/content/dpi-3-categoria-aggiornamento-content';
 import formazioneDirigenteContent from '../../data/content/formazione-dirigente-content';
 import formazioneDirigenteAggiornamentoContent from '../../data/content/formazione-dirigente-aggiornamento-content';
@@ -60,6 +61,7 @@ import patentinoFitosanitarioAggiornamentoContent from '../../data/content/paten
 import personaleAlimentaristaOsaContent from '../../data/content/personale-alimentarista-osa-content';
 import personaleAlimentaristaOsaAggiornamentoContent from '../../data/content/personale-alimentarista-osa-aggiornamento-content';
 import pesPavLavoriElettriciContent from '../../data/content/pes-pav-lavori-elettrici-content';
+import formazionePerFormatoreContent from '../../data/content/formazione-per-formatore-content';
 import pompePerCalcestruzzoContent from '../../data/content/pompe-per-calcestruzzo-content';
 import pompePerCalcestruzzoAggiornamentoContent from '../../data/content/pompe-per-calcestruzzo-aggiornamento-content';
 import fseContent from '../../data/content/fse-content';
@@ -104,10 +106,9 @@ const EDITORIAL_CONTENT = {
   'addetti-macchina-raccogli-frutta-crf': {
     corso: addettiMacchinaRaccogliFruttaContent['addetti-macchina-raccogli-frutta-crf'],
   },
-  // Famiglia "dpi-3-categoria": un solo livello ('default') con varianti corso/aggiornamento. Solo
-  // "aggiornamento" ha contenuto editoriale (unico PDF fornito finora); il corso base (8h) mostra
-  // ancora il placeholder finché non arriva il relativo programma.
+  // Famiglia "dpi-3-categoria": un solo livello ('default') con varianti corso (8h) / aggiornamento (4h).
   'dpi-3-categoria': {
+    corso: dpi3CategoriaContent['dpi-3-categoria'],
     aggiornamento: dpi3CategoriaAggiornamentoContent,
   },
   // Famiglia "formazione-dirigente": già raggruppata automaticamente da buildCourseFamilies (pattern
@@ -224,6 +225,10 @@ const EDITORIAL_CONTENT = {
   // Nessun aggiornamento raw corrispondente per questa famiglia (2 livelli: Sotto Tensione/In Prossimità).
   'pes-pav-lavori-elettrici': {
     corso: pesPavLavoriElettriciContent['pes-pav-lavori-elettrici'],
+  },
+  // Famiglia a variante unica (solo corso, 24h FAD): nessun aggiornamento raw corrispondente.
+  'formazione-per-formatore': {
+    corso: formazionePerFormatoreContent['formazione-per-formatore'],
   },
   'pompe-per-calcestruzzo': {
     corso: pompePerCalcestruzzoContent['pompe-per-calcestruzzo'],
@@ -1755,7 +1760,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                       <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>
                         {modulo.durataOreTeoria != null
                           ? `Teoria: ${modulo.durataOreTeoria}h · Pratica: ${modulo.durataOrePratica}h`
-                          : `${modulo.durataOre} ore`}
+                          : modulo.durataOre != null ? `${modulo.durataOre} ore` : '—'}
                       </td>
                       <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>

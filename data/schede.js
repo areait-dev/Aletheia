@@ -206,8 +206,9 @@ export const SCHEDE_LOCALI = {
       "text": "Percorsi di formazione professionale finanziati dal Programma Operativo Complementare Sicilia, finalizzati al conseguimento di una qualifica professionale riconosciuta e spendibile nel mercato del lavoro.",
       "modalita": "Aula (o variabile)",
       "href": "/formazione/avviso-1-2026-poc",
-      "image": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "Aula di formazione professionale con studenti"
+      "image": "/images/avvisi/avviso-1-e-7.jpg",
+      "imagePosition": "center top",
+      "imageAlt": "Due partecipanti sorridenti si salutano con un pugno in un'aula di formazione"
     },
     {
       "badge": "Disoccupati, NASpI, ADI",
@@ -225,8 +226,9 @@ export const SCHEDE_LOCALI = {
       "text": "Percorsi rivolti a disoccupati e inoccupati che prevedono una qualifica professionale riconosciuta, indennità di frequenza e stage presso aziende partner.",
       "modalita": "Aula + Stage (o variabile)",
       "href": "/archivio/avviso-7-2023",
-      "image": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "Stage in azienda con affiancamento professionale"
+      "image": "/images/avvisi/avviso-1-e-7.jpg",
+      "imagePosition": "center top",
+      "imageAlt": "Due partecipanti sorridenti si salutano con un pugno in un'aula di formazione"
     },
     {
       "badge": "Assistente Familiare",

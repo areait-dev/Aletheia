@@ -12,7 +12,7 @@ import { getPagina } from '../../lib/wp-pagine';
 import HeroTitle from '../../components/HeroTitle';
 import { withSiteOptions } from '../../lib/wp-site';
 
-function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external, image, imageAlt }) {
+function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external, image, imageAlt, imagePosition }) {
   const [hovered, setHovered] = useState(false);
   const clickable = Boolean(href);
   const Tag = clickable ? 'a' : 'div';
@@ -45,7 +45,7 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
         </span>
 
         <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '140px', position: 'relative' }}>
-          <Image src={image} alt={imageAlt || title} fill sizes="(max-width: 768px) 100vw, 340px" style={{ objectFit: 'cover' }} />
+          <Image src={image} alt={imageAlt || title} fill sizes="(max-width: 768px) 100vw, 340px" style={{ objectFit: 'cover', objectPosition: imagePosition || 'center' }} />
         </div>
 
         <span className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 700 }}>
