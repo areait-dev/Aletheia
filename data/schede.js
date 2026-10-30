@@ -8,7 +8,7 @@ export const SCHEDE_LOCALI = {
       "description": "Ti supportiamo nella ricerca di opportunità lavorative in linea con il tuo profilo, le tue competenze e le tue aspirazioni. Analizziamo il mercato e ti mettiamo in contatto con le aziende giuste.",
       "tag": "Placement",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per le imprese/orientamento professionale.jpg",
       "imageAlt": "Persona che consulta offerte di lavoro al computer"
     },
     {
@@ -17,7 +17,7 @@ export const SCHEDE_LOCALI = {
       "description": "Offriamo sessioni di orientamento individuale per aiutarti a definire il tuo percorso professionale, valorizzare le tue competenze e affrontare con sicurezza il mercato del lavoro.",
       "tag": "Orientamento",
       "color": "#018891",
-      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per la persona/orientamento.jpg",
       "imageAlt": "Consulente in sessione di orientamento professionale"
     },
     {
@@ -26,7 +26,7 @@ export const SCHEDE_LOCALI = {
       "description": "Ti prepariamo al colloquio di lavoro con simulazioni pratiche, consigli personalizzati e tecniche per valorizzare al meglio le tue esperienze e competenze.",
       "tag": "Coaching",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per la persona/supporto al colloquio.jpg",
       "imageAlt": "Simulazione di colloquio di lavoro"
     },
     {
@@ -36,7 +36,7 @@ export const SCHEDE_LOCALI = {
       "tag": "Piano Nazionale",
       "color": "#018891",
       "href": "/programma-gol",
-      "image": "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per la persona/programma gol.jpg",
       "imageAlt": "Percorso di reinserimento lavorativo finanziato"
     },
     {
@@ -45,7 +45,7 @@ export const SCHEDE_LOCALI = {
       "description": "Supportiamo i giovani NEET (under 30 non occupati e non in formazione) con percorsi di orientamento, formazione e tirocinio finanziati dalla Regione Siciliana.",
       "tag": "Under 30",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per la persona/garanzia giovani.jpg",
       "imageAlt": "Giovani professionisti in formazione"
     },
     {
@@ -54,7 +54,7 @@ export const SCHEDE_LOCALI = {
       "description": "Accompagniamo le persone in transizione professionale con coaching individuale, aggiornamento del CV e strategie efficaci di ricerca attiva del lavoro.",
       "tag": "Transizione",
       "color": "#018891",
-      "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per la persona/outplacement.jpg",
       "imageAlt": "Coaching per la transizione professionale"
     }
   ],
@@ -65,7 +65,7 @@ export const SCHEDE_LOCALI = {
       "description": "Forniamo personale qualificato tramite contratti di somministrazione a tempo determinato e indeterminato. Una soluzione flessibile che garantisce piena conformità normativa e riduzione dei costi amministrativi per la tua azienda.",
       "tag": "Flessibilità",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per le imprese/somministrazione.jpg",
       "imageAlt": "Colloquio tra consulente e azienda per la somministrazione di personale"
     },
     {
@@ -74,7 +74,7 @@ export const SCHEDE_LOCALI = {
       "description": "Selezioniamo i profili più adatti alla tua organizzazione attraverso un processo strutturato: analisi del fabbisogno, screening dei candidati, colloqui approfonditi e valutazione delle competenze tecniche e trasversali.",
       "tag": "Headhunting",
       "color": "#018891",
-      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per le imprese/ricerca e selezione.jpg",
       "imageAlt": "Colloquio di selezione del personale"
     },
     {
@@ -83,7 +83,7 @@ export const SCHEDE_LOCALI = {
       "description": "Offriamo consulenza strategica nella gestione delle Risorse Umane: analisi organizzativa, definizione dei profili, piani di sviluppo del personale e supporto nelle fasi di cambiamento aziendale.",
       "tag": "Strategia",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per le imprese/consulenza hr.jpg",
       "imageAlt": "Team di consulenza HR in riunione strategica"
     },
     {
@@ -92,7 +92,7 @@ export const SCHEDE_LOCALI = {
       "description": "Progettiamo percorsi di upskilling e reskilling su misura per sviluppare le competenze del tuo personale, attrarre nuovi talenti e mantenere la tua azienda competitiva. Gestiamo l'accesso ai Fondi Interprofessionali e supportiamo i processi di riorganizzazione con programmi di riqualificazione finanziati, valorizzando il capitale umano e riducendo i costi di turnover.",
       "tag": "Upskilling",
       "color": "#018891",
-      "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per le imprese/formazione aziendale.jpg",
       "imageAlt": "Sessione di formazione aziendale per i dipendenti"
     },
     {
@@ -101,7 +101,7 @@ export const SCHEDE_LOCALI = {
       "description": "Offriamo alle aziende un canale concreto per conoscere e inserire nuove risorse. Individuiamo i profili più adatti, curiamo l'attivazione del tirocinio e seguiamo l'intero percorso, trasformando un'esperienza formativa in una possibile opportunità di inserimento.",
       "tag": "Matching",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per le imprese/tirocini.jpg",
       "imageAlt": "Incontro tra domanda e offerta di lavoro"
     },
     {
@@ -110,7 +110,7 @@ export const SCHEDE_LOCALI = {
       "description": "Mettiamo a disposizione delle imprese strumenti e misure per favorire l'occupazione, facilitando l'incontro con persone in cerca di lavoro, in fase di reinserimento o interessate a un nuovo percorso professionale. Individuiamo le opportunità più adatte e accompagniamo l'azienda nella loro attivazione.",
       "tag": "Finanziato",
       "color": "#018891",
-      "image": "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=600&q=80",
+      "image": "/images/per le imprese/politiche attive lavoro.jpg",
       "imageAlt": "Percorso di riqualificazione professionale in azienda"
     }
   ],
@@ -130,7 +130,7 @@ export const SCHEDE_LOCALI = {
     {
       "icon": "fas fa-network-wired",
       "title": "Parte del network Promotergroup S.p.A.",
-      "description": "Facciamo parte di un gruppo solido e strutturato, che ci permette di offrire competenze multidisciplinari e risorse ampliate a vantaggio dei nostri clienti.",
+      "description": "Facciamo parte di una rete solida e strutturata, che ci permette di offrire competenze multidisciplinari e risorse ampliate a vantaggio dei nostri clienti.",
       "detail": "Promotergroup S.p.A."
     }
   ],
