@@ -7,12 +7,12 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="true" />
-        {/* Nunito (testo), Viga (titoli) e Montserrat (titolo hero home, 400/600) in un unico link sincrono con
+        {/* Nunito (testo) e Viga (titoli) in un unico link sincrono con
             display=swap (il testo appare subito col font di ripiego). Il vecchio pattern media="print" + onLoad
             come stringa non funziona: React non emette l'handler nell'HTML server-side, quindi il foglio restava
             bloccato su media="print" per sempre e i font non si applicavano mai. */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Viga&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Viga&display=swap"
           rel="stylesheet"
         />
 
