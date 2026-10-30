@@ -36,6 +36,13 @@ export default function Document() {
           <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet" />
         </noscript>
 
+        {/* Montserrat (solo titolo hero della home, pesi 400/600): link sincrono, perché il pattern
+            media="print" + onLoad stringa non viene emesso da React e lascerebbe il foglio bloccato. */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+
         {/* Font Awesome: link sincrono. Il precedente pattern preload+onLoad non
             attivava sempre lo swap a rel="stylesheet" (icone mancanti in alcuni
             browser), quindi si carica direttamente come stylesheet. */}

@@ -364,6 +364,9 @@ const logoSize = (src) => {
 
 export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina, newsItems }) {
   const T = pagina.testi;
+  const primoAsterisco = T.hero_titolo.indexOf('*');
+  const heroRiga1 = primoAsterisco > 0 ? T.hero_titolo.slice(0, primoAsterisco).trim() : '';
+  const heroRiga2 = primoAsterisco > 0 ? T.hero_titolo.slice(primoAsterisco) : T.hero_titolo;
   const numeri = contatori(T.numeri);
   const { seo } = useSiteOptions(); // immagine OG predefinita (opzioni globali): i figli di <Head> non leggono il contesto
   return (
@@ -394,7 +397,11 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
           <div className="container" data-parallax-slow>
             <div className="hero-badge">{T.hero_eyebrow}</div>
             <h1>
-              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span>{w}</span>} />
+              {/* Riga 1: testo prima della prima parola evidenziata; riga 2: il resto. Un solo H1, letto come frase continua */}
+              {heroRiga1 && <><span className="hero-title-line">{heroRiga1}</span>{' '}</>}
+              <span className="hero-title-line">
+                <HeroTitle text={heroRiga2} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
+              </span>
             </h1>
             <p>{T.hero_sottotitolo}</p>
 
