@@ -25,7 +25,6 @@ const categoryMeta = {
   'decreto-attrezzature':{ name: 'Decreto Attrezzature', icon: 'fas fa-tools' },
   fitosanitario:         { name: 'Fitosanitario', icon: 'fas fa-leaf' },
   'sicurezza-alimentare':{ name: 'Sicurezza Alimentare', icon: 'fas fa-utensils' },
-  regionale:             { name: 'Formazione Finanziata', icon: 'fas fa-euro-sign' },
   professionale:         { name: 'Formazione Professionale', icon: 'fas fa-briefcase' },
   digitali:              { name: 'Certificazioni Digitali', icon: 'fas fa-laptop-code' },
   agricolo:              { name: 'Settore Agricolo', icon: 'fas fa-seedling' },
