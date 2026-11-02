@@ -1,17 +1,73 @@
-# Migrazione Pages Router → App Router
+# Aggiornamento di Next (Pages Router) – ex "Migrazione ad App Router"
 
-Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principale del repository si chiama **`master`**, non `main`: non si fa merge né push su `master`.
+Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principale del repository si chiama **`master`**, non `main`: non si fa merge né push su `master`. Si pusha solo il branch.
 
-## Stato
+**Decisione del 2 novembre 2026: la migrazione all'App Router è SOSPESA.** Si fa solo la **Fase 1b**: aggiornare Next da 13.4.0 a 16 restando in Pages Router. Le Fasi 2–5 sono "rimandate" (vedi la sezione dedicata in fondo, con le note per riprenderle).
 
-| Fase | Stato |
-|---|---|
-| 0 – Analisi | **fatta, in attesa di approvazione** |
-| 1 – Rete di sicurezza (Playwright) | da fare |
-| 2 – Struttura base `app/` | da fare |
-| 3 – Pagine | da fare |
-| 4 – Pulizia | da fare |
-| 5 – Verifica finale | da fare |
+## Stato al rientro (2 novembre 2026, sera)
+
+**Cosa è stato fatto oggi**
+- Fase 0: analisi (report più sotto).
+- Fase 1: rete di sicurezza (Playwright) sul codice di `master` (`f25d7fd`) con Next 13.4.0: 113 URL, 75 redirect, 37 URL con screenshot × 3 larghezze × 2 temi = 222 screenshot, 11 tracce di interazione, test chat, rete simulata (copie locali di font e immagini esterne). Dettagli in "Infrastruttura di test".
+- Lighthouse di base su Next 13.4.0 (risultati in `tests/riferimenti/lighthouse/base.json`, tabella qui sotto).
+- Commit separati: infrastruttura di test; `DATA_FISSA_TEST` in `pages/index.js` (da solo); riferimenti e test; `MIGRAZIONE.md`.
+- **Non** è stato toccato nulla di `package.json` (a parte lo strumento di test già committato), `node_modules` né la versione di Next. Nessun push.
+
+**Esito dei due confronti consecutivi (stesso codice, nessuna modifica nel mezzo)** — NON verdi
+- Esecuzione 1: 317 passati, 30 falliti (45 min). Esecuzione 2: 317 passati, 30 falliti (48 min).
+- **Tutti i 60 fallimenti sono screenshot.** Metadata e HTML grezzo (115 test), interazioni (11 tracce), chat (2 test), 404 e redirect sono verdi in entrambe le esecuzioni: la parte SEO/contenuti/comportamento è stabile.
+- 16 screenshot falliscono in entrambe le esecuzioni, altri 14 per esecuzione solo in una (instabilità casuale). Per larghezza (somma delle due esecuzioni): 390px → 23, 768px → 31, 1440px → 6.
+- Falliscono in entrambe le esecuzioni: `/` 390 chiaro; `/` 768 scuro; `/agenzia-per-il-lavoro/servizi-alla-persona` 768 scuro; `/aiuti-di-stato/2024` 768 chiaro; `/all-courses` 390 chiaro, 390 scuro e 768 chiaro; `/all-courses/antincendio` 390 chiaro e 768 scuro; `/formazione/avviso-1-2026-poc` 390 chiaro; `/formazione/regionale` 390 chiaro; `/all-courses?categoria=sicurezza-lavoro` 768 chiaro, 390 scuro, 768 scuro e 1440 scuro; `/all-courses/antincendio?livello=2` 390 scuro.
+- A 1440px i fallimenti sono 6 su 120 test-esecuzioni; in tema chiaro: `/all-courses?categoria=sicurezza-lavoro`, `/archivio/avviso-7-2023`, `/all-courses/antincendio?livello=2` (una volta ciascuno).
+
+**Cause osservate (analisi delle immagini di differenza, non ancora corrette)**
+1. **Loghi di certificazione ISO del footer** presenti in uno scatto e assenti nell'altro (regione di circa 87×87 px per logo, in fondo alla pagina): immagini sotto la piega non ancora arrivate o non ancora scambiate (varianti chiaro/scuro) al momento dello scatto.
+2. **Card o sezioni intere mancanti** (es. la card "Formazione professionale" della home a 390px nel riferimento, le liste di `/all-courses`): contenuto non ancora reso/rivelato quando parte lo scatto. Anche **alcuni riferimenti** sono stati catturati in questo stato.
+3. **Altezza di pagina diversa di decine di pixel** (es. `/archivio/avviso-7-2023` 4140 vs 4169 px): layout che si assesta dopo lo scatto (font/immagini).
+4. Il carico della CPU con 3 worker peggiora tutto (le esecuzioni isolate sono più stabili).
+
+**Problemi aperti**
+- Stabilizzare gli screenshot **prima** di usarli come criterio di accettazione (proposte sotto, in "Primo passo di domani").
+- La suite rapida (`test:rapido`) non è ancora stata creata (serve dopo la stabilizzazione).
+- Da fare con calma: ridurre le attese fisse (i 5 s di "rete ferma" in `pagina.mjs`), solo se la suite resta stabile su due passaggi.
+- Su Vercel, da confermare nel pannello (Settings → Build → Node.js Version) che sia Node 20.9 o superiore; il lockfile va committato e aggiornato prima del push.
+
+**Primo passo esatto da cui ripartire domattina**
+1. *(prima di toccare Next)* Stabilizzare gli screenshot, senza cambiare i riferimenti dei test "buoni" senza autorizzazione. Proposte, in ordine: (a) in `tests/regressione/pagina.mjs`, prima dello scatto forzare via script `loading="eager"` su tutte le `<img>` e attendere `naturalWidth > 0` su ciascuna (non solo `complete`); (b) forzare visibili i `<Reveal>` con uno stile di prova (`[style*="will-change: opacity, transform"] { opacity: 1 !important; transform: none !important; }`); (c) scattare solo dopo due letture uguali dell'altezza a distanza di 500 ms; (d) provare con 2 worker (`WORKERS=2`). Dopo ogni modifica: rigenerare i riferimenti (con autorizzazione) e rifare due confronti.
+2. Creare `npm run test:rapido` (tag `@rapido`, le 20 pagine concordate a 1440 chiaro; elenco in "Infrastruttura di test").
+3. **Step 13.4.0 → 13.5.11**: `npm i next@13.5.11 --save-exact` (React 18.2 resta), poi `npm run build:test` e `npm run test:rapido`. Se passa senza correzioni, un commit e passo al 14.2.x (ultima patch), poi 15.x con React 19 (usare `npx @next/codemod@canary upgrade latest`), poi 16.x. Suite completa solo alla fine su Next 16, Lighthouse alla fine confrontato con la base (`node tests/lighthouse/lighthouse.mjs confronta base finale`).
+
+**Lighthouse di base — Next 13.4.0** (Lighthouse 13.6.0, mediana di 3 passate, build di produzione locale su `127.0.0.1:3101`, Chromium di Playwright; 2026-11-02)
+
+| Forma | Pagina | Perf | A11y | BP | SEO | LCP ms | TBT ms | CLS | JS KB |
+|---|---|---|---|---|---|---|---|---|---|
+| mobile | / | 91 | 97 | 100 | 100 | 1943 | 218 | 0 | 123 |
+| mobile | /calendario-corsi | 93 | 96 | 100 | 100 | 2002 | 133 | 0 | 119 |
+| mobile | /chi-siamo | 97 | 97 | 100 | 100 | 1956 | 35 | 0.006 | 121 |
+| mobile | /all-courses/antincendio | 89 | 97 | 100 | 92 | 2112 | 278 | 0 | 220 |
+| desktop | / | 99 | 97 | 100 | 100 | 775 | 0 | 0.004 | 123 |
+| desktop | /calendario-corsi | 100 | 96 | 100 | 100 | 657 | 0 | 0.002 | 119 |
+| desktop | /chi-siamo | 99 | 97 | 100 | 100 | 801 | 0 | 0.003 | 121 |
+| desktop | /all-courses/antincendio | 97 | 97 | 100 | 92 | 1187 | 0 | 0.001 | 220 |
+
+Note: SEO 92 su `/all-courses/antincendio` è già nella base (da indagare a parte, non è una regressione). Per il confronto finale: `node tests/lighthouse/lighthouse.mjs esegui finale` e poi `node tests/lighthouse/lighthouse.mjs confronta base finale`, sulla stessa macchina (font e icone di Google/cdnjs arrivano dalla rete reale).
+
+
+## Fase 1b – Aggiornamento di Next restando in Pages Router (piano)
+
+Step: 13.4.0 → 13.5.11 → 14.2.x → 15.x (React 19) → 16.x. Suite rapida dopo ogni step; se uno step la passa senza correzioni si prosegue subito; ci si ferma solo se qualcosa rompe aspetto o funzionamento in modo non risolvibile.
+
+Dalle guide ufficiali di aggiornamento, ciò che riguarda questo progetto:
+- **Requisiti:** Node ≥ 18.17 (14), ≥ 20.9 (16); TypeScript ≥ 5.1 (16). Locale: Node 24.16, TS 5.9. Impostare `engines.node` (≥ 20.9) in `package.json` al momento dell'aggiornamento a 16 e verificare Node su Vercel.
+- **React 19:** con Pages Router è facoltativo già da Next 15; si adotta al passo 15 come da piano. Aggiornare anche `@types/react` e `@types/react-dom`; con i tipi 19 possono comparire errori di tipo (es. `useRef()` senza argomento, namespace `JSX`): `next build` esegue il controllo dei tipi.
+- **`next lint` rimosso in 16:** nel progetto non c'è ESLint, quindi si toglie lo script `lint` da `package.json` e si aggiorna `CLAUDE.md` (che lo cita).
+- **Turbopack è il bundler predefinito di `next build` in 16:** il progetto non ha configurazione webpack. Se gli screenshot cambiano (ordine del CSS, styled-jsx), usare `next build --webpack` come ripiego e **annotarlo qui come cosa da riprovare in futuro**.
+- **`images.domains` deprecato:** convertire in `remotePatterns` con **gli stessi tre domini** (`www.aletheiasrl.it`, `images.unsplash.com`, `images.pexels.com`) più l'host di `WP_URL` se impostato; nessun dominio in più o in meno. Verificare che tutte le immagini esterne si carichino (script `tests/regressione/misura-rete.mjs`).
+- **Altri default di `next/image` in 16:** `qualities` solo `[75]` (il codice non usa la prop `quality`), `minimumCacheTTL` 4 ore, `imageSizes` senza 16, query string su immagini locali richiedono `localPatterns` (non ce ne sono). `maximumRedirects` 3.
+- **`scroll-behavior: smooth`** (CSS, righe 95 e 2423 di `globals.css`): da 16 Next non lo sovrascrive più durante le navigazioni. Per mantenere il comportamento attuale aggiungere `data-scroll-behavior="smooth"` su `<Html>` in `pages/_document.js`.
+- **Output della build:** da 16 `next build` non mostra più "First Load JS"; per il peso del JavaScript si usa Lighthouse (voce `javascriptKB`).
+- Nessun impatto: AMP, `serverRuntimeConfig` / `publicRuntimeConfig`, `next/legacy/image`, `@next/font`, middleware (non esiste), `getServerSideProps` (non usato).
+- **Lockfile:** `package-lock.json` aggiornato e committato prima del push (altrimenti l'anteprima Vercel fallisce).
 
 ---
 
@@ -122,3 +178,38 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 - `images.domains` è deprecato a favore di `remotePatterns`.
 - `components/CourseHero.tsx` non è usato da nessuna pagina.
 - `iside-bold.svg` e `promesys-rebranding.png` non sono più referenziati.
+- **Immagini esterne** (misurate il 2 novembre 2026, con server di produzione locale, solo sulle 37 pagine campione): arrivano **tutte da `next/image`** (`/_next/image?url=…`, ottimizzatore lato server, config `images.domains`); nessuna immagine esterna è caricata direttamente dal browser. Domini e pagine: `images.unsplash.com` (`/`, `/agenzia-per-il-lavoro`, `/all-courses/icdl-base`, `/formazione/professionale-specialistica`, `/formazione/regionale`, `/formazione/regionale-fse`, `/all-courses?categoria=icdl`), `images.pexels.com` (`/agenzia-per-il-lavoro`), `www.aletheiasrl.it` (`/agenzia-per-il-lavoro`, `/news`, due articoli di news). Tempi di caricamento: a freddo (cache dell'ottimizzatore vuota) 180 ms in media per Unsplash (max 308), 234 ms Pexels, 280 ms aletheiasrl.it (max 553); a caldo 30–55 ms. Altre risorse esterne dirette: font e icone (`fonts.googleapis.com`, `fonts.gstatic.com`, `cdnjs.cloudflare.com`, 37 pagine su 37) e Google Maps in `/contatti`. I timeout di 2 minuti visti nei primi test (`/all-courses`) non sono dovuti alle immagini esterne e non si riproducono su una pagina alla volta: probabile carico della CPU con più worker in parallelo.
+- Dopo gli aggiornamenti di Next, il comportamento di `next/image` può cambiare (vedi i default di Next 16 nel piano della Fase 1b): ricontrollare le immagini esterne con `tests/regressione/misura-rete.mjs`.
+- `next build` con `NEXT_DIST_DIR=.next-test` fa aggiungere automaticamente a `tsconfig.json` la riga `.next-test/types/**/*.ts` (innocua).
+
+## Infrastruttura di test (Fase 1)
+
+Tutto sta in `tests/` e `playwright.config.mjs`; i test girano su una **build di produzione** in una cartella separata (`.next-test`), così non pestano `next dev`.
+
+- **Build:** `npm run build:test` (usa `NEXT_DIST_DIR=.next-test` e `DATA_FISSA_TEST=2026-08-10`).
+- **Esecuzione:** `npm run test:regressione` (avvia da sé `next start -p 3101` sulla build di test; `PORTA_TEST`, `WORKERS`, `CHROMIUM_PATH` configurabili). Chromium: usa quello già in `ms-playwright`.
+- **Contenuto:**
+  - `metadata.spec.mjs`: 113 URL (HTML grezzo senza JavaScript: status, lang, title, description, canonical, Open Graph, Twitter, JSON-LD, robots, H1, link interni, testo e immagini), `robots.txt` e i 75 redirect di `next.config.js` (status e `Location`).
+  - `visivo.spec.mjs`: screenshot a pagina intera di 37 URL a 390, 768 e 1440 px, in tema chiaro e scuro. Per le famiglie di pagine (corsi, news, archivio, aiuti) si campionano alcune pagine per tipo di layout; tutte le altre sono coperte dal confronto del metadata. Pagine senza screenshot: gli altri 39 corsi (`/all-courses/*`), 13 news, 18 voci d'archivio e le restanti varianti `?categoria=` (45 + 18 + 13 URL elencati in `tests/regressione/urls.json`, campo `visivo: false`).
+  - `interazioni.spec.mjs`: menu mobile, sottomenu Formazione (desktop e mobile), filtri e contatore di `/calendario-corsi`, filtri di `/all-courses` da query string (tutte e 12 le categorie, reset, `?livello=`), 404, campi dei form (senza inviare), sezione "Corsi in partenza" della home con data congelata.
+  - `chatbot.spec.mjs`: il pulsante della chat è presente, abilitato, in basso a destra, e apre/chiude la finestra. Negli screenshot di pagina la chat (`.chatbot-root`) è nascosta.
+- **Riferimenti (committati):** `tests/riferimenti/immagini/` (screenshot, circa 136 MB), `tests/riferimenti/dati/` (JSON di metadata e interazioni), `tests/riferimenti/rete/` (copie locali). Non si rigenerano senza autorizzazione: `AGGIORNA_RIFERIMENTI=1 npx playwright test … --update-snapshots` (solo per crearli).
+- **Test indipendenti dalla rete:** `tests/regressione/rete.mjs` serve da copia locale font, icone, immagini esterne (anche quelle passate da `/_next/image?url=https://…`, di cui si salva l'originale) e blocca Google Maps (l'iframe diventa vuoto: la mappa **non** è nel confronto). Con una copia mancante il test fallisce (non avvisa soltanto). Per registrare nuove copie: `AGGIORNA_RETE=1`.
+- **Hook di test nel codice del sito (da riportare identici se si riscrive la home):** in `pages/index.js` la riga `const oggiISO = process.env.DATA_FISSA_TEST || new Date()…` congela "oggi" per la sezione "Corsi in partenza"; in produzione la variabile non esiste. Commit separato e documentato. `next.config.js` ha `distDir: process.env.NEXT_DIST_DIR || '.next'` (stesso valore di sempre senza variabile).
+- **Lighthouse:** `tests/lighthouse/lighthouse.mjs` (nessuna dipendenza nel progetto, usa `npx lighthouse@13.6.0`); vedi "Stato al rientro".
+- **Suite rapida prevista (`test:rapido`, da creare):** metadata di tutti gli URL, interazioni, chat e screenshot a 1440 px chiaro di queste 20 pagine: `/`, `/calendario-corsi`, `/all-courses`, `/all-courses?categoria=sicurezza-lavoro`, `/all-courses/antincendio`, `/all-courses/macchine-movimento-terra`, `/news`, `/news/bonus-giovani-under-35-aprile-2026`, `/formazione/obbligatoria`, `/formazione/ecm`, `/formazione/avviso-1-2026-poc`, `/chi-siamo`, `/contatti`, `/aiuti-di-stato/2023`, `/archivio`, `/archivio/avviso-7-2023`, `/agenzia-per-il-lavoro`, `/agenzia-per-il-lavoro/servizi-alla-persona`, `/privacy-cookie`, `/url-inesistente-404`. Tempo stimato 10–12 minuti con la build. Suite completa (un passaggio): circa 47 minuti.
+- **Misura:** 229 test visivi + interazioni in 43,7 min con 3 worker; metadata di 115 test in 7 s.
+
+## Fasi 2–5: rimandate
+
+La migrazione all'App Router è sospesa. Note utili per riprenderla (decisioni già prese e punti critici, da rivedere alla luce di Next 16):
+- **Prerequisito:** Next 16 in Pages Router (Fase 1b) e screenshot stabili.
+- **D2 – preview delle news:** con Next 16 si usa `draftMode()`; `news/[slug]` va migrata per ultima adattando le route API di preview di WordPress; verificare che la preview funzioni come oggi.
+- **D3 – `revalidate`:** non usare 300 a priori: controllare su Vercel (o chiedere) se `WP_URL` è impostato in produzione e usare esattamente il valore che oggi vale in produzione. Senza `WP_URL` le pagine sono statiche pure: cambia cosa significa "identico". Nota: in `app/` `revalidate` e `dynamicParams` devono essere letterali statici (oggi `isrOptions()` decide a runtime).
+- **D4 – `fallback`:** `fallback: false` → `dynamicParams = false`; `blocking`/`true` → `dynamicParams = true` con `notFound()` per gli slug inesistenti; gli status HTTP devono restare quelli di oggi.
+- **D5 – styled-jsx:** componenti client ammessi, ma `page.tsx` resta sempre Server Component (fetch dati ed export di `metadata`/`generateMetadata`) e renderizza un componente client (es. `XxxClient.tsx`) con il markup attuale; aggiungere il registry di styled-jsx nel layout (`useServerInsertedHTML`) e verificare nei test che non ci sia flash di pagina senza stili.
+- **Query string** (`/all-courses`, `/all-courses/:slug`): l'HTML pre-renderizzato deve contenere gli stessi contenuti di oggi (la pagina statica è generata senza filtri, che si applicano lato client): il fallback di `<Suspense>` attorno a `useSearchParams` deve mostrare l'elenco completo non filtrato, non uno spazio vuoto; verificarlo confrontando l'HTML grezzo (test `metadata.spec.mjs`, campo `testoSha1`) prima e dopo.
+- **404:** riprodurre identica quella attuale di default di Next, con screenshot e status 404 (riferimento: test `404` e `/url-inesistente-404`).
+- **`DATA_FISSA_TEST`:** riportare identica la logica nella nuova home, altrimenti i test della home falliscono per il motivo sbagliato.
+- **Altre decisioni minori:** approvate le proposte del report, salvo quelle che cambiano URL, status HTTP o aspetto (da chiedere).
+- **Regole:** un commit per passo, `MIGRAZIONE.md` aggiornato, mai su `master`, nessun redesign né refactoring extra.
