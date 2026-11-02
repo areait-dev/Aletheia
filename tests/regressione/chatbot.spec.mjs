@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 import { preparaPagina, verificaRete } from './pagina.mjs';
 
 for (const [larghezza, nome] of [[390, 'mobile'], [1440, 'desktop']]) {
-  test(`chatbot: pulsante presente e cliccabile (${nome})`, async ({ page }) => {
+  test(`chatbot: pulsante presente e cliccabile (${nome}) @rapido`, async ({ page }) => {
     await page.setViewportSize({ width: larghezza, height: 800 });
     await preparaPagina(page, 'chiaro');
     await page.goto('/chi-siamo', { waitUntil: 'domcontentloaded' });

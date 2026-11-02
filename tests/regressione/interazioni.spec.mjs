@@ -10,7 +10,7 @@ const CHIAVI_CATEGORIA = ['fse-plus', 'fondi-interprofessionali', 'fondo-nuove-c
 
 const testiLink = (loc) => loc.evaluateAll((els) => els.map((e) => `${e.textContent.replace(/\s+/g, ' ').trim()} -> ${e.getAttribute('href')}`));
 
-test('menu mobile: apri e chiudi', async ({ page }) => {
+test('menu mobile: apri e chiudi @rapido', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 800 });
   await preparaPagina(page, 'chiaro');
   await page.goto('/', { waitUntil: 'domcontentloaded' });
@@ -28,7 +28,7 @@ test('menu mobile: apri e chiudi', async ({ page }) => {
   confronta('interazioni/menu-mobile', traccia);
 });
 
-test('sottomenu Formazione: desktop', async ({ page }) => {
+test('sottomenu Formazione: desktop @rapido', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await preparaPagina(page, 'chiaro');
   await page.goto('/chi-siamo', { waitUntil: 'domcontentloaded' });
@@ -43,7 +43,7 @@ test('sottomenu Formazione: desktop', async ({ page }) => {
   confronta('interazioni/sottomenu-desktop', traccia);
 });
 
-test('sottomenu Formazione: mobile', async ({ page }) => {
+test('sottomenu Formazione: mobile @rapido', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 800 });
   await preparaPagina(page, 'chiaro');
   await page.goto('/chi-siamo', { waitUntil: 'domcontentloaded' });
@@ -64,7 +64,7 @@ test('sottomenu Formazione: mobile', async ({ page }) => {
   confronta('interazioni/sottomenu-mobile', traccia);
 });
 
-test('filtri di /calendario-corsi: categoria, reset e contatore', async ({ page }) => {
+test('filtri di /calendario-corsi: categoria, reset e contatore @rapido', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await preparaPagina(page, 'chiaro');
   await page.goto('/calendario-corsi', { waitUntil: 'domcontentloaded' });
@@ -85,7 +85,7 @@ test('filtri di /calendario-corsi: categoria, reset e contatore', async ({ page 
   confronta('interazioni/calendario-filtri', traccia);
 });
 
-test('filtri di /all-courses: query string, selezione e reset', async ({ page }) => {
+test('filtri di /all-courses: query string, selezione e reset @rapido', async ({ page }) => {
   test.setTimeout(300_000);
   page.setDefaultTimeout(20_000);
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -114,7 +114,7 @@ test('filtri di /all-courses: query string, selezione e reset', async ({ page })
   confronta('interazioni/all-courses-query', traccia);
 });
 
-test('pagina 404 inesistente', async ({ page }) => {
+test('pagina 404 inesistente @rapido', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await preparaPagina(page, 'chiaro');
   const r = await page.goto('/url-inesistente-404', { waitUntil: 'domcontentloaded' });
@@ -123,7 +123,7 @@ test('pagina 404 inesistente', async ({ page }) => {
   confronta('interazioni/404', { status: r.status(), testo: (await page.locator('body').innerText()).replace(/\s+/g, ' ').trim() });
 });
 
-test('form contatti e candidatura: campi (senza inviare)', async ({ page }) => {
+test('form contatti e candidatura: campi (senza inviare) @rapido', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await preparaPagina(page, 'chiaro');
   const traccia = {};
@@ -141,7 +141,7 @@ test('form contatti e candidatura: campi (senza inviare)', async ({ page }) => {
   confronta('interazioni/form', traccia);
 });
 
-test('home: "Corsi in partenza" (data congelata)', async ({ page }) => {
+test('home: "Corsi in partenza" (data congelata) @rapido', async ({ page }) => {
   for (const larghezza of [390, 768, 1440]) {
     await page.setViewportSize({ width: larghezza, height: 900 });
     await preparaPagina(page, 'chiaro');

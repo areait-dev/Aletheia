@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test:regressione": "playwright test",
-    "build:test": "node tests/regressione/build-test.mjs"
+    "build:test": "node tests/regressione/build-test.mjs",
+    "test:rapido": "npm run build:test && playwright test --grep @rapido"
   },
   "dependencies": {
     "axios": "^1.18.1",
