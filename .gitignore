@@ -28,7 +28,10 @@ npm-debug.log*
 # typescript
 *.tsbuildinfo
 
-# build e report temporanei dei test di regressione (i riferimenti in tests/riferimenti SONO versionati)
+# build e report temporanei dei test di regressione (in tests/riferimenti sono versionati JSON, copie di rete e Lighthouse; gli screenshot no)
 /.next-test/
 /test-results/
 /playwright-report/
+
+# screenshot di riferimento dei test visivi: NON versionati (rigenerabili, vedi MIGRAZIONE.md)
+/tests/riferimenti/immagini/
