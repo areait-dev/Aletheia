@@ -6,7 +6,9 @@
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:regressione": "playwright test",
+    "build:test": "node tests/regressione/build-test.mjs"
   },
   "dependencies": {
     "axios": "^1.18.1",
@@ -19,6 +21,7 @@
     "sharp": "^0.35.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "@types/node": "^20.19.43",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",

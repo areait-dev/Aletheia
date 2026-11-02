@@ -27,3 +27,8 @@ npm-debug.log*
 
 # typescript
 *.tsbuildinfo
+
+# build e report temporanei dei test di regressione (i riferimenti in tests/riferimenti SONO versionati)
+/.next-test/
+/test-results/
+/playwright-report/
