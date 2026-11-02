@@ -1,0 +1,3 @@
+# Copie di rete registrate (CSS, font, immagini): vanno restituite byte per byte, senza conversione degli a capo
+# (altrimenti l'hash di integrita' dei fogli di stile, es. Font Awesome, non corrisponde piu).
+* -text
