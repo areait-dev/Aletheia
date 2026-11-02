@@ -1,0 +1,112 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": null,
+  "classeBody": null,
+  "title": "News - Alètheia Srl",
+  "description": [
+    "Notizie e aggiornamenti su formazione, lavoro e opportunità professionali in Sicilia. Il blog di Alètheia Srl."
+  ],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {},
+  "twitter": {},
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://cdnjs.cloudflare.com",
+    "https://fonts.gstatic.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Ultime Notizie"
+  ],
+  "intestazioni": 15,
+  "testoLunghezza": 5415,
+  "testoSha1": "1c238ef01471329c4eb82030dfc6faac8144d202",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/all-courses?categoria=certificazione",
+    "/all-courses?categoria=certificazioni-informatiche",
+    "/all-courses?categoria=decreto-attrezzature",
+    "/all-courses?categoria=fitosanitario",
+    "/all-courses?categoria=sicurezza-alimentare",
+    "/all-courses?categoria=sicurezza-lavoro",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/news/accordo-stato-regioni-formazione-sicurezza-2025",
+    "/news/bonus-giovani-under-35-aprile-2026",
+    "/news/corsi-gratuiti-progetto-gol-sicilia",
+    "/news/credito-imposta-formazione-agricola-2024",
+    "/news/domanda-lavoro-italia-vocazioni-professionali-2025",
+    "/news/empowerment-femminile-retribuzioni-eque",
+    "/news/formazione-frontiere-lavoro-cambiamento",
+    "/news/intelligenza-artificiale-obbligo-formazione-2025",
+    "/news/lavoratori-stranieri-alloggi-ddl-semplificazioni",
+    "/news/piccole-imprese-assumere-profili-mancanti",
+    "/news/priorita-lavoratori-2026-workforce-trends",
+    "/news/sicilia-microchip-ingegneri-elettronici",
+    "/news/sicurezza-lavoro-trend-formazione-futuro",
+    "/news/smart-working-inclusione-sicurezza-futuro",
+    "/news/stress-lavoro-salute-mentale-italiani",
+    "/pdf/catalogo.pdf",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 22,
+  "immaginiAlt": "14f37763e444b7604a84e5b5cdba82e0206f7da9"
+}

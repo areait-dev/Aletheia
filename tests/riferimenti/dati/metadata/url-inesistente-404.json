@@ -1,0 +1,61 @@
+{
+  "status": 404,
+  "lang": "it",
+  "classeHtml": null,
+  "classeBody": null,
+  "title": "404: This page could not be found",
+  "description": [],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width"
+  ],
+  "canonical": [],
+  "icon": [],
+  "og": {},
+  "twitter": {},
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://cdnjs.cloudflare.com",
+    "https://fonts.gstatic.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "404"
+  ],
+  "intestazioni": 1,
+  "testoLunghezza": 32,
+  "testoSha1": "34594e7078d16d235caeb281aa26525ff90b9089",
+  "testoInizio": "404This page could not be found.",
+  "link": [],
+  "immaginiConAlt": 0,
+  "immaginiAlt": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+}

@@ -1,0 +1,97 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": null,
+  "classeBody": null,
+  "title": "Servizi alle Imprese - Alètheia Srl",
+  "description": [
+    "Alètheia Srl - Consulenza HR integrata per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."
+  ],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {},
+  "twitter": {},
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://cdnjs.cloudflare.com",
+    "https://fonts.gstatic.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Servizi alle Imprese"
+  ],
+  "intestazioni": 13,
+  "testoLunghezza": 5429,
+  "testoSha1": "c66e52d83f07c44c09b524afc4e695876b782847",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/all-courses?categoria=certificazione",
+    "/all-courses?categoria=certificazioni-informatiche",
+    "/all-courses?categoria=decreto-attrezzature",
+    "/all-courses?categoria=fitosanitario",
+    "/all-courses?categoria=sicurezza-alimentare",
+    "/all-courses?categoria=sicurezza-lavoro",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/pdf/catalogo.pdf",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 13,
+  "immaginiAlt": "4783cb4c74c2ef62691c85a8da0a1bbf5df8eacd"
+}

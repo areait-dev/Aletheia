@@ -1,0 +1,101 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": null,
+  "classeBody": null,
+  "title": "Formazione Del Preposto<!-- --> - Alètheia Srl",
+  "description": [],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {},
+  "twitter": {},
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://cdnjs.cloudflare.com",
+    "https://fonts.gstatic.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Formazione Del Preposto"
+  ],
+  "intestazioni": 6,
+  "testoLunghezza": 5080,
+  "testoSha1": "6f0389ac68d8031ce109353309cb89a43cc8cfa9",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/all-courses",
+    "/all-courses/antincendio",
+    "/all-courses/formazione-dei-lavoratori",
+    "/all-courses/formazione-dirigente",
+    "/all-courses/rspp-datore-di-lavoro",
+    "/all-courses?categoria=certificazione",
+    "/all-courses?categoria=certificazioni-informatiche",
+    "/all-courses?categoria=decreto-attrezzature",
+    "/all-courses?categoria=fitosanitario",
+    "/all-courses?categoria=sicurezza-alimentare",
+    "/all-courses?categoria=sicurezza-lavoro",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/obbligatoria#form-contatto",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/pdf/catalogo.pdf",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 11,
+  "immaginiAlt": "9ef1889df2dfa2ee5b497669072c98d58cb9f993"
+}

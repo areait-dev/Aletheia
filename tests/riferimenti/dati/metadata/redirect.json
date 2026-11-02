@@ -1,0 +1,377 @@
+[
+  {
+    "da": "/all-courses/antincendio-rischio-basso-livello-1",
+    "status": 308,
+    "location": "/all-courses/antincendio?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-antincendio-rischio-basso-livello-1",
+    "status": 308,
+    "location": "/all-courses/antincendio?livello=1"
+  },
+  {
+    "da": "/all-courses/antincendio-rischio-medio-livello-2",
+    "status": 308,
+    "location": "/all-courses/antincendio?livello=2"
+  },
+  {
+    "da": "/all-courses/aggiornamento-rischio-medio-livello-2",
+    "status": 308,
+    "location": "/all-courses/antincendio?livello=2"
+  },
+  {
+    "da": "/all-courses/antincendio-rischio-alto-livello-3",
+    "status": 308,
+    "location": "/all-courses/antincendio?livello=3"
+  },
+  {
+    "da": "/all-courses/aggiornamento-antincendio-rischio-alto-livello-3",
+    "status": 308,
+    "location": "/all-courses/antincendio?livello=3"
+  },
+  {
+    "da": "/all-courses/formazione-dei-lavoratori-parte-generale",
+    "status": 308,
+    "location": "/all-courses/formazione-dei-lavoratori?livello=1"
+  },
+  {
+    "da": "/all-courses/formazione-dei-lavoratori-rischio-basso",
+    "status": 308,
+    "location": "/all-courses/formazione-dei-lavoratori?livello=2"
+  },
+  {
+    "da": "/all-courses/formazione-dei-lavoratori-rischio-medio",
+    "status": 308,
+    "location": "/all-courses/formazione-dei-lavoratori?livello=3"
+  },
+  {
+    "da": "/all-courses/formazione-dei-lavoratori-rischio-alto",
+    "status": 308,
+    "location": "/all-courses/formazione-dei-lavoratori?livello=4"
+  },
+  {
+    "da": "/all-courses/aggiornamento-formazione-dei-lavoratori",
+    "status": 308,
+    "location": "/all-courses/formazione-dei-lavoratori?livello=5"
+  },
+  {
+    "da": "/all-courses/rspp-datore-di-lavoro-modulo-comune",
+    "status": 308,
+    "location": "/all-courses/rspp-datore-di-lavoro?livello=1"
+  },
+  {
+    "da": "/all-courses/rspp-datore-di-lavoro-modulo-1-agricoltura-silvicoltura-zootecnia",
+    "status": 308,
+    "location": "/all-courses/rspp-datore-di-lavoro?livello=2"
+  },
+  {
+    "da": "/all-courses/rspp-datore-di-lavoro-modulo-2-pesca",
+    "status": 308,
+    "location": "/all-courses/rspp-datore-di-lavoro?livello=3"
+  },
+  {
+    "da": "/all-courses/rspp-datore-di-lavoro-modulo-3-costruzioni",
+    "status": 308,
+    "location": "/all-courses/rspp-datore-di-lavoro?livello=4"
+  },
+  {
+    "da": "/all-courses/rspp-datore-di-lavoro-modulo-4-chimico",
+    "status": 308,
+    "location": "/all-courses/rspp-datore-di-lavoro?livello=5"
+  },
+  {
+    "da": "/all-courses/aggiornamento-rspp-datore-di-lavoro",
+    "status": 308,
+    "location": "/all-courses/rspp-datore-di-lavoro?livello=6"
+  },
+  {
+    "da": "/all-courses/aggiornamento-rspp-aspp-esterno",
+    "status": 308,
+    "location": "/all-courses/rspp-aspp?livello=1"
+  },
+  {
+    "da": "/all-courses/rspp-aspp-esterno-modulo-a",
+    "status": 308,
+    "location": "/all-courses/rspp-aspp?livello=2"
+  },
+  {
+    "da": "/all-courses/rspp-aspp-esterno-modulo-b",
+    "status": 308,
+    "location": "/all-courses/rspp-aspp?livello=3"
+  },
+  {
+    "da": "/all-courses/rspp-esterno-modulo-c",
+    "status": 308,
+    "location": "/all-courses/rspp-aspp?livello=4"
+  },
+  {
+    "da": "/all-courses/aggiornamento-rls-meno-di-50-dipendenti",
+    "status": 308,
+    "location": "/all-courses/rls?livello=2"
+  },
+  {
+    "da": "/all-courses/aggiornamento-rls-piu-di-50-dipendenti",
+    "status": 308,
+    "location": "/all-courses/rls?livello=3"
+  },
+  {
+    "da": "/all-courses/primo-soccorso-aziendale-gruppo-a",
+    "status": 308,
+    "location": "/all-courses/primo-soccorso-aziendale?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-primo-soccorso-aziendale-gruppo-a",
+    "status": 308,
+    "location": "/all-courses/primo-soccorso-aziendale?livello=1"
+  },
+  {
+    "da": "/all-courses/primo-soccorso-aziendale-gruppo-b-c",
+    "status": 308,
+    "location": "/all-courses/primo-soccorso-aziendale?livello=2"
+  },
+  {
+    "da": "/all-courses/aggiornamento-primo-soccorso-aziendale-gruppo-b-c",
+    "status": 308,
+    "location": "/all-courses/primo-soccorso-aziendale?livello=2"
+  },
+  {
+    "da": "/all-courses/aggiornamento-formazione-del-preposto",
+    "status": 308,
+    "location": "/all-courses/formazione-del-preposto?livello=1"
+  },
+  {
+    "da": "/all-courses/formazione-dirigente-modulo-comune",
+    "status": 308,
+    "location": "/all-courses/formazione-dirigente?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-formazione-dirigente",
+    "status": 308,
+    "location": "/all-courses/formazione-dirigente?livello=2"
+  },
+  {
+    "da": "/all-courses/aggiornamento-coordinatori-cantieri-cse-csp",
+    "status": 308,
+    "location": "/all-courses/coordinatori-cantieri-cse-csp?livello=1"
+  },
+  {
+    "da": "/all-courses/pes-pav-lavori-elettrici-sotto-tensione",
+    "status": 308,
+    "location": "/all-courses/pes-pav-lavori-elettrici?livello=1"
+  },
+  {
+    "da": "/all-courses/pes-pav-lavori-elettrici-in-prossimita",
+    "status": 308,
+    "location": "/all-courses/pes-pav-lavori-elettrici?livello=2"
+  },
+  {
+    "da": "/all-courses/aggiornamento-lavori-in-quota",
+    "status": 308,
+    "location": "/all-courses/lavori-in-quota?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-dpi-3-categoria",
+    "status": 308,
+    "location": "/all-courses/dpi-3-categoria?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-pimus-ponteggi",
+    "status": 308,
+    "location": "/all-courses/pimus-ponteggi?livello=1"
+  },
+  {
+    "da": "/all-courses/corso-per-spazi-confinati",
+    "status": 308,
+    "location": "/all-courses/spazi-confinati?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-spazi-confinati",
+    "status": 308,
+    "location": "/all-courses/spazi-confinati?livello=1"
+  },
+  {
+    "da": "/all-courses/addetti-segnaletica-stradale",
+    "status": 308,
+    "location": "/all-courses/lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale?livello=1"
+  },
+  {
+    "da": "/all-courses/modulo-aggiuntivo-cantieri-datore-di-lavoro",
+    "status": 308,
+    "location": "/all-courses/modulo-aggiuntivo-cantieri-per-datore-di-lavoro?livello=1"
+  },
+  {
+    "da": "/all-courses/datore-di-lavoro-modulo-comune",
+    "status": 308,
+    "location": "/all-courses/datore-di-lavoro?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-datore-di-lavoro",
+    "status": 308,
+    "location": "/all-courses/datore-di-lavoro?livello=2"
+  },
+  {
+    "da": "/all-courses/carrelli-elevatori-semoventi-conduttore-a-bordo",
+    "status": 308,
+    "location": "/all-courses/carrelli-elevatori-semoventi-con-conduttore-a-bordo?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-carrelli-elevatori-semoventi-conduttore-a-bordo",
+    "status": 308,
+    "location": "/all-courses/carrelli-elevatori-semoventi-con-conduttore-a-bordo?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-operatore-di-gru",
+    "status": 308,
+    "location": "/all-courses/operatore-di-gru-per-autocarro?livello=1"
+  },
+  {
+    "da": "/all-courses/ple-con-stabilizzatori",
+    "status": 308,
+    "location": "/all-courses/ple-piattaforme-di-lavoro-mobili-elevabili?livello=1"
+  },
+  {
+    "da": "/all-courses/ple-senza-stabilizzatori",
+    "status": 308,
+    "location": "/all-courses/ple-piattaforme-di-lavoro-mobili-elevabili?livello=2"
+  },
+  {
+    "da": "/all-courses/ple-con-e-senza-stabilizzatori",
+    "status": 308,
+    "location": "/all-courses/ple-piattaforme-di-lavoro-mobili-elevabili?livello=3"
+  },
+  {
+    "da": "/all-courses/aggiornamento-ple",
+    "status": 308,
+    "location": "/all-courses/ple-piattaforme-di-lavoro-mobili-elevabili?livello=4"
+  },
+  {
+    "da": "/all-courses/trattori-agricoli-forestali-a-ruote",
+    "status": 308,
+    "location": "/all-courses/trattori-agricoli-o-forestali?livello=1"
+  },
+  {
+    "da": "/all-courses/trattori-agricoli-forestali-a-cingoli",
+    "status": 308,
+    "location": "/all-courses/trattori-agricoli-o-forestali?livello=2"
+  },
+  {
+    "da": "/all-courses/trattori-agricoli-forestali-ruote-e-cingoli",
+    "status": 308,
+    "location": "/all-courses/trattori-agricoli-o-forestali?livello=3"
+  },
+  {
+    "da": "/all-courses/aggiornamento-trattori-agricoli-forestali",
+    "status": 308,
+    "location": "/all-courses/trattori-agricoli-o-forestali?livello=4"
+  },
+  {
+    "da": "/all-courses/aggiornamento-macchine-movimento-terra",
+    "status": 308,
+    "location": "/all-courses/macchine-movimento-terra?livello=7"
+  },
+  {
+    "da": "/all-courses/addetti-conduzione-carriponte",
+    "status": 308,
+    "location": "/all-courses/addetti-alla-conduzione-di-carriponte?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-addetti-conduzione-carriponte",
+    "status": 308,
+    "location": "/all-courses/addetti-alla-conduzione-di-carriponte?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-pompe-per-calcestruzzo",
+    "status": 308,
+    "location": "/all-courses/pompe-per-calcestruzzo?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-macchina-raccogli-frutta-crf",
+    "status": 308,
+    "location": "/all-courses/addetti-macchina-raccogli-frutta-aggiornamento?livello=1"
+  },
+  {
+    "da": "/all-courses/addetti-caricatori-movimentazione-materiali-cmm",
+    "status": 308,
+    "location": "/all-courses/addetti-caricatori-movimentazione-di-materiali-cmm?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-caricatori-movimentazione-materiali-cmm",
+    "status": 308,
+    "location": "/all-courses/addetti-caricatori-movimentazione-di-materiali-cmm?livello=1"
+  },
+  {
+    "da": "/all-courses/addetti-conduzione-carriponti-pensile-cabina",
+    "status": 308,
+    "location": "/all-courses/addetti-alla-conduzione-di-carriponti-pensile-cabina?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-conduzione-carriponti-pensile-cabina",
+    "status": 308,
+    "location": "/all-courses/addetti-alla-conduzione-di-carriponti-pensile-cabina?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-patentino-fitosanitario",
+    "status": 308,
+    "location": "/all-courses/patentino-fitosanitario?livello=1"
+  },
+  {
+    "da": "/all-courses/aggiornamento-personale-alimentarista-osa",
+    "status": 308,
+    "location": "/all-courses/personale-alimentarista-osa?livello=1"
+  },
+  {
+    "da": "/all-courses/blsd-basic-life-support-defibrillation",
+    "status": 308,
+    "location": "/all-courses/blsd-basic-life-support-and-defibrillation?livello=1"
+  },
+  {
+    "da": "/all-courses/conduttore-impresa-agricola",
+    "status": 308,
+    "location": "/all-courses/conduttore-d-impresa-agricola?livello=1"
+  },
+  {
+    "da": "/all-courses/mmt-escavatori-idraulici",
+    "status": 308,
+    "location": "/all-courses/macchine-movimento-terra"
+  },
+  {
+    "da": "/all-courses/mmt-escavatori-a-fune",
+    "status": 308,
+    "location": "/all-courses/macchine-movimento-terra"
+  },
+  {
+    "da": "/all-courses/mmt-pale-caricatrici-frontali",
+    "status": 308,
+    "location": "/all-courses/macchine-movimento-terra"
+  },
+  {
+    "da": "/all-courses/mmt-terne",
+    "status": 308,
+    "location": "/all-courses/macchine-movimento-terra"
+  },
+  {
+    "da": "/all-courses/mmt-autoribaltabili-a-cingoli",
+    "status": 308,
+    "location": "/all-courses/macchine-movimento-terra"
+  },
+  {
+    "da": "/all-courses/mmt-escavatori-caricatori-frontali-terne",
+    "status": 308,
+    "location": "/all-courses/macchine-movimento-terra"
+  },
+  {
+    "da": "/aiuti-di-stato-2023",
+    "status": 308,
+    "location": "/aiuti-di-stato/2023"
+  },
+  {
+    "da": "/aiuti-di-stato-2024",
+    "status": 308,
+    "location": "/aiuti-di-stato/2024"
+  },
+  {
+    "da": "/archivio/avviso-1-2026-poc",
+    "status": 308,
+    "location": "/formazione/avviso-1-2026-poc"
+  }
+]

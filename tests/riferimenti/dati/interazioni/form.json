@@ -1,0 +1,60 @@
+{
+  "/contatti": [
+    [
+      "input:text:nome:",
+      "input:text:cognome:",
+      "input:email:email:",
+      "input:tel:telefono:",
+      "select::motivo:",
+      "textarea::messaggio:",
+      "input:checkbox:privacy:",
+      "button:submit::"
+    ],
+    [
+      "input:text::",
+      "button:submit::"
+    ]
+  ],
+  "/contatti valore": "Prova",
+  "/agenzia-per-il-lavoro/servizi-alla-persona": [
+    [
+      "input:text::",
+      "input:text::",
+      "input:email::",
+      "input:tel::",
+      "input:date::",
+      "input:text::",
+      "select:::",
+      "input:file::",
+      "textarea:::",
+      "input:checkbox::",
+      "button:submit::"
+    ],
+    [
+      "input:text::",
+      "button:submit::"
+    ]
+  ],
+  "/agenzia-per-il-lavoro/servizi-alla-persona valore": "Prova",
+  "/agenzia-per-il-lavoro/servizi-alle-imprese": [
+    [
+      "input:text::",
+      "input:text::",
+      "input:text::",
+      "input:text::",
+      "input:email::",
+      "input:tel::",
+      "select:::",
+      "select:::",
+      "select:::",
+      "textarea:::",
+      "input:checkbox::",
+      "button:submit::"
+    ],
+    [
+      "input:text::",
+      "button:submit::"
+    ]
+  ],
+  "/agenzia-per-il-lavoro/servizi-alle-imprese valore": "Prova"
+}
