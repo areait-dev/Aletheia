@@ -81,7 +81,10 @@ export default function ArchivioShell({ titolo, badge, sottotitolo, briciole = [
             </span>
           )}
           <h1 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.75rem)', fontWeight: 900, color: '#fff', lineHeight: 1.2, marginBottom: '1rem', maxWidth: '820px' }}>
-            {titolo}
+            {/* ultima parola evidenziata come negli altri hero (.hero-title-mark) */}
+            {titolo.includes(' ')
+              ? <>{titolo.slice(0, titolo.lastIndexOf(' ') + 1)}<span className="hero-title-mark">{titolo.slice(titolo.lastIndexOf(' ') + 1)}</span></>
+              : <span className="hero-title-mark">{titolo}</span>}
           </h1>
           {sottotitolo && (
             <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.68)', maxWidth: '820px', lineHeight: 1.8 }}>

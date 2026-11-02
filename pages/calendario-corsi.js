@@ -118,7 +118,7 @@ export default function CalendarioCorsi({ calendario }) {
             Formazione
           </span>
           <h1 style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3rem)', fontWeight: 900, color: '#fff', lineHeight: 1.12, letterSpacing: '-0.02em', margin: '0 0 0.875rem' }}>
-            Calendario Corsi
+            Calendario <span className="hero-title-mark">Corsi</span>
           </h1>
           <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.7)', maxWidth: '820px', lineHeight: 1.6, margin: 0 }}>
             Scopri le date dei prossimi corsi in partenza, filtra per mese o categoria e prenota subito il tuo posto.

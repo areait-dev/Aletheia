@@ -65,7 +65,8 @@ function CategoriaCard({ href, badge, badgeColor, title, description, image, ima
         </h3>
 
         {/* Descrizione */}
-        <p className="text-sm text-slate-200 leading-relaxed m-0 mb-4 line-clamp-3">
+        {/* min-h = 3 righe (3 × 1,625 × 0,875rem ≈ 4,27rem): riserva sempre lo stesso spazio così badge, titolo e link restano allineati tra le card anche se la colonna è più larga */}
+        <p className="text-sm text-slate-200 leading-relaxed m-0 mb-4 line-clamp-3 min-h-[4.27rem]">
           {description}
         </p>
 
@@ -345,15 +346,15 @@ async function getPageStaticProps() {
 // Altezza di default = 80 * AR^-0.5 (limitata a 24-60px) * scala: i wordmark larghi (Promo.San 9,4:1) restano bassi, i compatti (Iside, Promesys) più alti.
 // Loghi testuali: x-height ("promo") uguale a 14,8px (misurata sui file rasterizzati) per Promoter coop (40px di altezza), Promo.San (19,5px: x-height 76% dell'altezza) e Promotergroup / Promoter srl / Promoter agri (73px: x-height 20,1%).
 // Questi tre hanno il box "ter" alto quanto tutto il file per design del marchio (flush con il viewBox): il testo sta nel 60% inferiore, quindi si sposta con --logo-offset-y per portare la linea mediana delle minuscole sulla stessa linea di Promo.San (mediana a -2,0px dal centro; Promoter coop a -3,5px, spostato di +1,5px; i tre a +7,3px, spostati di -9,9px (corretto sulla misura a schermo)).
-// Iside: altezza totale (emblema + scritta + sottotitolo) = 73px come il box "ter" di Promoter srl/agri/group, con lo stesso offset (-9,9px) così occupa la stessa fascia verticale (stessi bordi alto e basso e stessa mediana del box); tratto ispessito nel file iside-bold.svg. Promesys e Doses: scala 0,9.
+// Iside: PNG bianco dal file ufficiale (firma mail), ritagliato; altezza 64px, nessun offset (vedi LOGO_METRICS).
 const LOGO_METRICS = {
   'promotergroup': [4.15, 1, 73, 310, -9.9],
   'promosan': [9.4, 1, 19.5, 200],
   'promoter-soc-coop-bianco': [4.0, 1, undefined, undefined, 1.5],
   'promoter-srl': [2.98, 1, 73, 240, -9.9],
   'promoteragri': [3.13, 1, 73, 240, -9.9],
-  'iside-bold': [1.17, 1, 73, 200, -9.9],
-  'promesys-rebranding': [1.38, 0.9],
+  'iside-bianco': [3.53, 1, 64, 240], // PNG bianco ritagliato (emblema + scritta + sottotitolo): nessun offset, il file non ha margini vuoti
+  'promesys-bianco': [5.2, 1, 40, 260], // PNG bianco ritagliato, wordmark largo con emblema </>: 40px di altezza (la x-height resta leggibile)
   'DOSES-logo-orizzontale-bianco': [4.55, 1, 46, 300], // 46px: il sottotitolo arriva a ~5px di maiuscole (a 34px erano 3,7px, illeggibili); DOSES risulta più alto degli altri testi ma resta nella fascia dei loghi
 };
 const logoSize = (src) => {
@@ -816,7 +817,6 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
 
       {/* ── 4b · CTA FINALE ──────────────────────────────── */}
       <CtaFinale
-        background="linear-gradient(to bottom right, #020617, #003134, #020617)" /* gradiente originale della CTA home */
         title={<>Hai bisogno di un corso<br className="hidden sm:block" /> o stai cercando lavoro?</>}
         text={T.cta_testo}
         primary={{ label: T.cta_bottone1.label, href: T.cta_bottone1.href }}

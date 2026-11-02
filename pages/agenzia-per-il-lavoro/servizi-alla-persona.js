@@ -224,7 +224,7 @@ export default function ServiziAllaPersona({ servizi: SERVICES, pagina }) {
           <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '700px' }}>
-              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
             </h1>
 
           {/* Nessun sottotitolo: l'hero è speculare a quella di Servizi alle imprese (badge, titolo, bottoni).

@@ -11,6 +11,7 @@ import CourseFamilyCard from '../../components/CourseFamilyCard';
 import CourseSkeleton from '../../components/CourseSkeleton';
 import Reveal from '../../components/Reveal';
 import SeoHead from '../../components/SeoHead';
+import HeroTitle from '../../components/HeroTitle';
 
 import { getCoursesRaw } from '../../lib/wp-corsi';
 import { isrOptions } from '../../lib/wp';
@@ -216,7 +217,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
         <div className="container">
           <div className="page-hero-badge">{T.hero_eyebrow}</div>
           <h1>
-              {T.hero_titolo}
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
             </h1>
           <p>{T.hero_sottotitolo}</p>
         </div>

@@ -266,7 +266,7 @@ export default function ServiziAlleImprese({ servizi: SERVICES, perche: WHY_US, 
           <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
           <h1 className="fade-up delay-1" style={{ maxWidth: '700px' }}>
-              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #008C95, #10B981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
             </h1>
 
           <div className="page-hero-actions fade-up delay-3">

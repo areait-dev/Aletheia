@@ -8,8 +8,8 @@ export const PARTNER = {
     { name: 'Promoter Soc. Coop.', src: '/images/gruppo/promoter-soc-coop-bianco.png' },
     { name: 'Promoter Srl', src: '/images/gruppo/promoter-srl.svg' },
     { name: 'Promoteragri', src: '/images/gruppo/promoteragri.svg' },
-    { name: 'Iside', src: '/images/gruppo/iside-bold.svg' },
-    { name: 'Promesys', src: '/images/gruppo/promesys-rebranding.png' },
+    { name: 'Iside', src: '/images/gruppo/iside-bianco.png' },
+    { name: 'Promesys', src: '/images/gruppo/promesys-bianco.png' },
     { name: 'Doses', src: '/images/gruppo/DOSES-logo-orizzontale-bianco.png' },
   ],
   // Certificazioni del Footer: `srcDark` = logo per il tema scuro

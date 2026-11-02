@@ -295,7 +295,7 @@ export default function NewsPage({ news: allNews, pagina }) {
               maxWidth: '680px',
             }}
           >
-            <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
+            <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
           </h1>
 
           <p

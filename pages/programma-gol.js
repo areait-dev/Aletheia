@@ -188,14 +188,7 @@ export default function ProgrammaGOL({ corsiGOL, pagina }) {
 
           <h1 className="fade-up fade-up-1" style={{ maxWidth: '750px' }}>
             Programma{' '}
-            <span style={{
-              background: 'linear-gradient(90deg, #6EE7B7, #10B981)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              G.O.L.
-            </span>
+            <span className="hero-title-mark">G.O.L.</span>
             <br />
             <span style={{ fontSize: '0.55em', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>
               Garanzia di Occupabilità dei Lavoratori
@@ -329,7 +322,6 @@ export default function ProgrammaGOL({ corsiGOL, pagina }) {
 
       {/* ── CTA ── */}
       <CtaFinale
-        background="linear-gradient(135deg, #0F172A 0%, #064E3B 100%)"
         eyebrow="Inizia ora"
         title={T.cta_titolo}
         text={T.cta_testo}

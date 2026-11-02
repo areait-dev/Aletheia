@@ -80,7 +80,7 @@ export default function FormazioneECM({ faqs, modalita, pagina }) {
             <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 
             <h1 className="fade-up fade-up-1">
-              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{w}</span>} />
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
             </h1>
 
             <div className="page-hero-actions fade-up fade-up-3">

@@ -217,7 +217,7 @@ export const PAGINE = {
   },
   "all-courses": {
     "hero_eyebrow": "Catalogo completo",
-    "hero_titolo": "Tutti i Corsi",
+    "hero_titolo": "Tutti i *Corsi*",
     "hero_sottotitolo": "Scopri la nostra offerta formativa completa e scegli il corso che fa per te"
   },
   "chi-siamo": {

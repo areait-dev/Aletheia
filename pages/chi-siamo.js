@@ -257,7 +257,7 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
         <div className="container">
           <div className="page-hero-badge">{T.hero_eyebrow}</div>
           <h1 className="text-balance max-w-3xl mx-auto">
-              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span>{w}</span>} />
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
             </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">{T.hero_sottotitolo}</p>
           <div className="page-hero-actions flex-col sm:flex-row items-center">
@@ -374,14 +374,14 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
       {/* PERCHÉ SCEGLIERE ALÈTHEIA (punti di forza): sei tessere uguali con icona e titolo, 3 colonne desktop / 2 tablet / 1 mobile. */}
       <section className="bg-slate-50 dark:bg-dark-bg py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 sm:px-12">
-          <div className="text-center mb-12">
+          <div className="mb-12">
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary-text dark:text-primary-on-dark mb-3">
               {T.s3_badge}
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white text-balance max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white text-balance max-w-3xl">
               {T.s3_titolo}
             </h2>
-            <p className="mt-3 text-slate-600 dark:text-gray-300 leading-[1.6] max-w-4xl mx-auto">
+            <p className="mt-3 text-slate-600 dark:text-gray-300 leading-[1.6]">
               {T.s3_testo[0]}
             </p>
           </div>

@@ -165,7 +165,7 @@ export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiFo
             <div className="page-hero-badge fade-up self-start">{T.hero_eyebrow}</div>
 
             <h1 className="fade-up fade-up-1 text-center justify-center mx-auto" style={{ maxWidth: '780px' }}>
-              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span style={{ background: 'linear-gradient(90deg, #10B981, #008C95)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', }}>{w}</span>} />
+              <HeroTitle text={T.hero_titolo} renderHighlight={(w) => <span className="hero-title-mark">{w}</span>} />
             </h1>
 
             {/* TRUST BAR CON EFFETTO GLASSMORPHISM, CENTRATA, CON DIVISORI VERTICALI */}
