@@ -1,7 +1,7 @@
 {
   "status": 200,
   "lang": "it",
-  "classeHtml": null,
+  "classeHtml": "FKligG_variable q2izMG_variable",
   "classeBody": null,
   "title": "Sicurezza sul lavoro: i trend della formazione e come si evolvono - Alètheia Srl",
   "description": [
@@ -44,12 +44,9 @@
     }
   ],
   "preconnect": [
-    "https://fonts.googleapis.com",
-    "https://fonts.gstatic.com",
     "https://cdnjs.cloudflare.com"
   ],
   "stylesheetEsterni": [
-    "https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Viga&display=swap",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [

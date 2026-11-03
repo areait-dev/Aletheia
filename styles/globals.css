@@ -107,7 +107,8 @@ html {
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  /* --font-nunito / --font-viga: variabili di next/font (lib/fonts.js), definite su <html> da pages/_document.js */
+  font-family: var(--font-nunito), sans-serif;
   font-weight: 400;
   background-color: var(--bg-light); /* #F2F2F2 — DS background light */
   color: var(--text-dark); /* #161C1A su chiaro */
@@ -164,9 +165,9 @@ h3 { font-size: 18px; line-height: 21.6px; }   /* H3 */
 .ds-h2   { font-family: var(--font-viga), sans-serif; font-weight: 400; font-size: 36px; line-height: 57.6px; }
 .ds-h3   { font-family: var(--font-viga), sans-serif; font-weight: 400; font-size: 18px; line-height: 21.6px; }
 .ds-deco { font-family: var(--font-viga), sans-serif; font-weight: 400; text-transform: uppercase; font-size: 48px; line-height: 57.6px; } /* DIV decorativo */
-.ds-p1   { font-family: 'Nunito', sans-serif; font-weight: 400; font-size: 20px; line-height: 24px; }    /* Paragraph p1 */
-.ds-p2   { font-family: 'Nunito', sans-serif; font-weight: 400; font-size: 14px; line-height: 16.8px; }  /* Paragraph p2 */
-.ds-span { font-family: 'Nunito', sans-serif; font-weight: 400; font-size: 12px; line-height: 14.4px; }  /* Span */
+.ds-p1   { font-family: var(--font-nunito), sans-serif; font-weight: 400; font-size: 20px; line-height: 24px; }    /* Paragraph p1 */
+.ds-p2   { font-family: var(--font-nunito), sans-serif; font-weight: 400; font-size: 14px; line-height: 16.8px; }  /* Paragraph p2 */
+.ds-span { font-family: var(--font-nunito), sans-serif; font-weight: 400; font-size: 12px; line-height: 14.4px; }  /* Span */
 
 /* ── Bottoni Design System ────────────────────────────────── */
 .btn-ds-small {
@@ -178,7 +179,7 @@ h3 { font-size: 18px; line-height: 21.6px; }   /* H3 */
   border-radius: var(--btn-radius);
   background: #016A71;             /* DS button primary */
   color: var(--white);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-weight: 700;                /* Nunito Bold */
   font-size: 12px;
   line-height: 1;
@@ -199,7 +200,7 @@ h3 { font-size: 18px; line-height: 21.6px; }   /* H3 */
   border-radius: var(--btn-radius);
   background: #9AD2D6;             /* DS tag */
   color: var(--green-800);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-weight: 700;
   font-size: 12px;
   line-height: 1;
@@ -220,7 +221,7 @@ h3 { font-size: 18px; line-height: 21.6px; }   /* H3 */
   gap: 0.5rem;
   border: none;
   border-radius: var(--btn-radius);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-weight: 700;
   white-space: nowrap;
   text-decoration: none;
@@ -835,7 +836,7 @@ html.dark .cta-dropdown-item:hover {
   background: transparent;
   border: none;
   color: var(--white);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-size: 1rem;
   outline: none;
 }
@@ -864,7 +865,7 @@ html.dark .cta-dropdown-item:hover {
   background: transparent;
   border: none;
   color: var(--white);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-size: 1rem;
   outline: none;
   appearance: none;
@@ -1592,7 +1593,7 @@ html.dark .service-kind-card p {
   padding: 0.8rem 1rem 0.8rem 2.5rem;
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-sm);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-size: 0.95rem;
   color: var(--text-dark);
   background: var(--white);
@@ -1632,7 +1633,7 @@ html.dark .hero-search-wrapper .search-bar-input-group input {
   padding: 0.8rem 1rem 0.8rem 2.5rem;
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-sm);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-size: 0.95rem;
   color: var(--text-dark);
   background: var(--white);
@@ -1755,7 +1756,7 @@ html.dark .badge-count {
   border-radius: var(--btn-radius);
   font-weight: 700;
   font-size: 0.9rem;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1793,7 +1794,7 @@ html.dark .form-group label {
   padding: 0.75rem 1rem;
   border: 1.5px solid #E2E8F0;
   border-radius: var(--radius-sm);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   font-size: 0.9rem;
   color: #374151; /* WCAG AA: 7:1 on white */
   background: #FFFFFF;
@@ -1845,7 +1846,7 @@ html.dark .form-group textarea:focus {
   border-radius: var(--btn-radius);
   font-weight: 700;
   font-size: 1rem;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2555,7 +2556,7 @@ html.dark .courses-premium-nav button {
   transition: all 0.3s ease;
   align-self: flex-start;
   white-space: nowrap;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-nunito), sans-serif;
   text-decoration: none;
 }
 

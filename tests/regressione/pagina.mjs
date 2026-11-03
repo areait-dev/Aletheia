@@ -49,9 +49,14 @@ export async function caricaTutto(page) {
     await pausa(150);
   });
   await page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => {});
-  // 2) font del sito realmente caricati (non solo "ready": i pesi usati si caricano a richiesta)
+  // 2) font del sito realmente caricati. Con next/font il nome della famiglia è generato (es. "__Nunito_abc123"), quindi si
+  //    caricano tutte le facce Nunito/Viga dichiarate (i pesi usati si caricano a richiesta, non basta "ready").
   await page.evaluate(() =>
-    Promise.all(['400 1em Nunito', '600 1em Nunito', '700 1em Nunito', '800 1em Nunito', '900 1em Nunito', '1em Viga'].map((f) => document.fonts.load(f).catch(() => null))).then(() => document.fonts.ready)
+    Promise.all(
+      Array.from(document.fonts)
+        .filter((f) => /nunito|viga/i.test(f.family) && ['400', '600', '700', '800', '900'].includes(String(f.weight)))
+        .map((f) => f.load().catch(() => null))
+    ).then(() => document.fonts.ready)
   );
   // 3) immagini: tutte forzate a loading="eager" e attese finché naturalWidth > 0 (non basta `complete`: un'immagine
   //    lazy non ancora richiesta risulta "complete" con naturalWidth 0). Le <img> senza src o in errore sono ignorate dopo il timeout.

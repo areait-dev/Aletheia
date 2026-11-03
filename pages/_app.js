@@ -1,3 +1,4 @@
+import { nunito, viga } from '../lib/fonts';
 import '../styles/globals.css';
 import 'lenis/dist/lenis.css';
 import { useEffect } from 'react';
@@ -90,9 +91,8 @@ function MyApp({ Component, pageProps }) {
           {/* Font Awesome caricato non-bloccante via _document.js (preload+swap):
               qui in _app.js sarebbe HTML statico ma un <link> in mezzo al JSX del body
               resta comunque render-blocking per il browser, oltre a finire fuori posto. */}
-          {/* Viga caricato via _document.js (evita il fetch a build-time di next/font) */}
-          {/* La variabile --font-viga viene resa disponibile a tutta l'app */}
-          <div style={{ '--font-viga': "'Viga', sans-serif", display: 'contents' }}>
+          {/* Nunito e Viga: next/font (lib/fonts.js); il CSS dei font entra nel bundle solo se importato qui (non basta _document). Le stesse classi stanno anche su <html> (_document.js) perché il body usa Nunito */}
+          <div className={`${nunito.variable} ${viga.variable}`} style={{ display: 'contents' }}>
             <SiteOptionsProvider value={siteOptions}>
               <Component {...restProps} />
               <Chatbot />
