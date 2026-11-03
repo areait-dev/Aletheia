@@ -4,6 +4,24 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 
 **Decisione del 2 novembre 2026: la migrazione all'App Router è SOSPESA.** Si fa solo la **Fase 1b**: aggiornare Next da 13.4.0 a 16 restando in Pages Router. Le Fasi 2–5 sono "rimandate" (vedi la sezione dedicata in fondo, con le note per riprenderle).
 
+## Stato al rientro (3 novembre 2026, sera) – da leggere per primo
+
+**Diagnosi dell'LCP di `/all-courses/antincendio` (fatta con Lighthouse mobile, 3 passate per caso, stesse condizioni, base 13.4.0 rifatta da un worktree del tag)**
+- **Non c'è un peggioramento reale dell'LCP.** Rimisurato nelle stesse condizioni, `/all-courses/antincendio`: base mediana **3294 ms** (singole passate 1915 / 3294 / 4871), ora **3475 ms** (5288 / 3475 / 3473). `macchine-movimento-terra`: base 3502 (5066 / 2054 / 3502), ora 3549 (5297 / 3476 / 3549). Il "2112 → 4076" della tabella precedente era un confronto tra due estrazioni diverse di una distribuzione molto dispersa (la base del 2 novembre aveva avuto una passata fortunata): valgono per **tutte le pagine corso**, non solo antincendio. FCP uguale (~1,9 s) in tutti i casi; TBT migliore ora.
+- **Perché l'LCP è così variabile (1,9 s – 5,3 s, sia sulla base sia ora):** l'elemento LCP **non è il contenuto del corso ma il paragrafo del banner cookie** ("Utilizziamo cookie tecnici e, previo consenso, …", `components/CookieConsent.tsx`), che compare solo dopo l'idratazione (`useEffect` → `setVisible`). Lighthouse parte senza consenso salvato; l'istante in cui il banner appare dipende dalla fine dell'idratazione sotto CPU rallentata 4x (task lunghi di 100–180 ms attorno a 0,8 s e 2,5–3,8 s), quindi l'LCP "salta" tra i due-tre valori. Reveal e CSS bloccante non sono la causa: il "render delay" dell'elemento è 360–1280 ms, il TTFB 8–26 ms. (Nei test automatici il banner è nascosto perché `cookie-consent` è già accettato.)
+- **Bundler:** la build attuale usava **Turbopack** (`Next.js 16.4.4 (Turbopack)`).
+- **Da dove vengono i +95–104 KB di JavaScript (trasferiti, antincendio mobile: 211 → 315 KB):**
+  - chunk della pagina: invariato (102,6 → 99,9 KB);
+  - runtime (React-DOM 19 + Next 16): `framework` 44,7 KB → `0z-r5z7i5p1ms.js` 73,4 KB (≈ +29 KB), `main` 26,6 → ~14–19 KB;
+  - **chunk aggiuntivi di Turbopack**: `3yhizvc89nfj0.js` 39,9 KB (contiene framer-motion `MotionConfig` e scheduler), `0g4t-29geem8h.js` 17,0 KB, `0jo86oyqcvu1z.js` 13,2 KB (Chatbot, caricato con `dynamic`), più altri piccoli: circa +60 KB.
+  - **Prova di controllo:** stessa build con `--webpack`: **253 KB** invece di 315 (base 211): il bundler spiega circa 62 dei +104 KB; i restanti ~42 KB sono il runtime di React 19/Next 16.
+
+**Modifica applicata (solo configurazione, commit separato):** `next build --webpack` (script `build` in `package.json` e `tests/regressione/build-test.mjs`). Verifica: suite rapida **32/32 non-metadata passati** (screenshot, interazioni, chat identici); i 113 riferimenti di metadata cambiano solo per il nome di classe generato da `next/font` (dipende dal bundler), rigenerati e controllati riga per riga. Lighthouse home (3 passate): mobile LCP **1928 ms** (base 1943), CLS **0**, JS 153 KB (Turbopack 161; base 123); desktop LCP **682 ms** (base 775), CLS 0; antincendio mobile JS **253 KB** (Turbopack 315). Nota: `--webpack` è il ripiego previsto da Next 16 (Turbopack è il predefinito): ricontrollare a ogni aggiornamento maggiore se resta disponibile.
+
+**Correzione proposta per domattina (non applicata, tocca il markup/comportamento):** rendere l'LCP stabile non dipendente dal banner cookie, in ordine di preferenza: (1) mostrare il banner senza che sia il candidato LCP più grande (testo più piccolo del contenuto principale, o `position: fixed` con dimensioni contenute) oppure renderlo già nell'HTML del server con un flag in `localStorage` letto prima del paint; (2) ridurre il lavoro di idratazione (lazy `dynamic()` di framer-motion/`ThemeToggle`, `Chatbot` più tardi). Prima di toccare il markup serve misurare l'effetto con Lighthouse (3 passate) e confermare l'aspetto con la suite rapida. Il confronto "base vs ora" per l'LCP va fatto sempre con più passate e sulle mediane, mai con una passata sola.
+
+**Altro rimasto aperto:** controllo manuale mobile (390/768 px) sull'anteprima; `JavaScript +` residuo con webpack (home +30 KB, antincendio +42 KB) dovuto al runtime di React 19/Next 16.
+
 ## Stato al rientro (3 novembre 2026)
 
 **Passo 4 – Font con `next/font/google` (3 novembre 2026, commit `ecb3267`)**
