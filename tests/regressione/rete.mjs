@@ -39,7 +39,8 @@ export async function preparaRete(page) {
     }
 
     const base = path.join(cartella, nomeCopia(esterno));
-    if (registra) {
+    // AGGIORNA_RETE=1 registra solo le copie MANCANTI (quelle esistenti restano, così i riferimenti non cambiano); AGGIORNA_RETE=1 + RETE_SOVRASCRIVI=1 le rifà tutte.
+    if (registra && (process.env.RETE_SOVRASCRIVI === '1' || !fs.existsSync(`${base}.json`))) {
       const risposta = await page.request.get(esterno, { timeout: 60_000 });
       const corpo = await risposta.body();
       fs.mkdirSync(cartella, { recursive: true });

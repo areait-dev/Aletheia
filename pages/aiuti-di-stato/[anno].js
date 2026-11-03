@@ -42,7 +42,7 @@ export default function AiutiDiStatoAnno({ anno, enti, paragrafiFinali }) {
   return (
     <>
       <Head>
-        <title>Obblighi di pubblicazione per i beneficiari di contributi {anno} | Alètheia S.r.l.</title>
+        <title>{`Obblighi di pubblicazione per i beneficiari di contributi ${anno} | Alètheia S.r.l.`}</title>
       </Head>
       <Header />
       <main className="bg-white dark:bg-gray-900 min-h-screen">

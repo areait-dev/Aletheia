@@ -3,7 +3,7 @@
   "lang": "it",
   "classeHtml": null,
   "classeBody": null,
-  "title": "CORSI GRATUITI PROGETTO GOL<!-- --> - Alètheia Srl",
+  "title": "CORSI GRATUITI PROGETTO GOL - Alètheia Srl",
   "description": [
     "Sul sito del Dipartimento Formazione Professionale della Regione Siciliana è stato pubblicato il Comunicato relativo all'Avviso pubblico n. 3/2022 per l'attuazione del Programma Garanzia Occupabilità dei Lavoratori (GOL)."
   ],
@@ -46,10 +46,10 @@
   "preconnect": [
     "https://fonts.googleapis.com",
     "https://fonts.gstatic.com",
-    "https://cdnjs.cloudflare.com",
-    "https://fonts.gstatic.com"
+    "https://cdnjs.cloudflare.com"
   ],
   "stylesheetEsterni": [
+    "https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Viga&display=swap",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [

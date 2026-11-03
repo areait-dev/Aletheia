@@ -3,7 +3,7 @@
   "lang": "it",
   "classeHtml": null,
   "classeBody": null,
-  "title": "Meno fughe, più ambizioni: come cambiano le priorità dei lavoratori nel 2026<!-- --> - Alètheia Srl",
+  "title": "Meno fughe, più ambizioni: come cambiano le priorità dei lavoratori nel 2026 - Alètheia Srl",
   "description": [
     "Il Workforce Trends Report di The Adecco Group, realizzato su un campione di 37.500 lavoratori e 2.000 dirigenti in 31 Paesi, fotografa un mondo del lavoro in profonda trasformazione."
   ],
@@ -46,10 +46,10 @@
   "preconnect": [
     "https://fonts.googleapis.com",
     "https://fonts.gstatic.com",
-    "https://cdnjs.cloudflare.com",
-    "https://fonts.gstatic.com"
+    "https://cdnjs.cloudflare.com"
   ],
   "stylesheetEsterni": [
+    "https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Viga&display=swap",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
