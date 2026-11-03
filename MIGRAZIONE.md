@@ -6,6 +6,28 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 
 ## Stato al rientro (3 novembre 2026)
 
+**Passo 3 – Next 16.4.4: suite completa e Lighthouse (3 novembre 2026)**
+- **Suite completa** (`npm run test:regressione`, 1 worker, screenshot solo a 1440 px): **199/199 passati** (13,3 min).
+- **Lighthouse, base (Next 13.4.0) → finale (Next 16.4.4)**, stessa macchina, mediana di 3 passate:
+
+| Forma | Pagina | Perf | A11y | BP | SEO | LCP ms | TBT ms | CLS | JS KB |
+|---|---|---|---|---|---|---|---|---|---|
+| mobile | / | 91 → 93 | 97 → 97 | 100 → 100 | 100 → 100 | 1943 → 1902 | 218 → 80 | 0 → 0.111 | 123 → 161 |
+| mobile | /calendario-corsi | 93 → 98 | 96 → 96 | 100 → 100 | 100 → 100 | 2002 → 1826 | 133 → 56 | 0 → 0.001 | 119 → 154 |
+| mobile | /chi-siamo | 97 → 93 | 97 → 97 | 100 → 100 | 100 → 100 | 1956 → 2400 | 35 → 123 | 0.006 → 0 | 121 → 159 |
+| mobile | /all-courses/antincendio | 89 → 83 | 97 → 97 | 100 → 100 | 92 → 92 | 2112 → 4338 | 278 → 115 | 0 → 0.021 | 220 → 315 |
+| desktop | / | 99 → 99 | 97 → 97 | 100 → 100 | 100 → 100 | 775 → 728 | 0 → 0 | 0.004 → 0.003 | 123 → 161 |
+| desktop | /calendario-corsi | 100 → 100 | 96 → 96 | 100 → 100 | 100 → 100 | 657 → 676 | 0 → 0 | 0.002 → 0.001 | 119 → 154 |
+| desktop | /chi-siamo | 99 → 99 | 97 → 97 | 100 → 100 | 100 → 100 | 801 → 717 | 0 → 0 | 0.003 → 0.002 | 121 → 159 |
+| desktop | /all-courses/antincendio | 97 → 96 | 97 → 97 | 100 → 100 | 92 → 92 | 1187 → 1295 | 0 → 0 | 0.001 → 0.001 | 220 → 315 |
+
+- **Peggioramenti e spiegazione** (non nascosti):
+  1. **Foglio Google Fonts non più incorporato nell'HTML** (Next ≤14 lo incorporava in build, da 15 no). Lighthouse lo segnala come risorsa che blocca il rendering (circa 870 ms stimati, più Font Awesome da cdnjs ~1,2 s, già presente prima). Spiega con buona probabilità: LCP mobile di `/all-courses/antincendio` 2112 → 4338 ms (Perf 89 → 83; l'elemento LCP è un paragrafo di testo, quindi dipende dal font), `/chi-siamo` mobile 1956 → 2400 ms (Perf 97 → 93) e il **CLS della home mobile 0 → 0,111** (spostamento dell'elemento `section.hero > div > div.container > div.relative`, coerente con lo scambio del font; il legame col font è un'ipotesi, non provato con una prova di controllo).
+  2. **JavaScript trasferito +30%** (123 → 161 KB, 219/220 → 315 KB): runtime di React 19 + Next 16 più grande; non scomposto chunk per chunk.
+  - Migliorano: TBT (home mobile 218 → 80 ms, calendario 133 → 56 ms, antincendio 278 → 115 ms), Perf calendario mobile 93 → 98.
+  - Desktop: nessuna variazione significativa (Perf 96–100).
+- **Rimedi possibili, NON applicati (cambiano l'architettura dei font, da decidere):** (a) `next/font/google` (self-hosting, niente richiesta a Google: probabile ritorno alla base; richiede di rivedere `--font-viga`/`_document`); (b) incorporare a mano nello `<head>` il CSS del foglio font (come faceva Next ≤14), con il rischio di URL dei file da aggiornare a mano.
+
 **Passo 2 – Fase 1b**
 - **13.4.0 → 13.5.11** (React 18.2): suite rapida 144/145 passati. Unica differenza: la pagina 404 predefinita di Next (altezza di riga diversa: divisore verticale più alto, testo spostato di pochi pixel; stesso testo, status 404). Cambio dovuto a Next, non al sito: riferimento `url-inesistente-404-1440-chiaro.png` aggiornato (gli altri riferimenti non toccati). Se si vuole la 404 identica alla 13.4 serve un `pages/404.js` che riproduca il markup vecchio (non fatto).
 
