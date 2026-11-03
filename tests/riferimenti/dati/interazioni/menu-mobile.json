@@ -1,0 +1,35 @@
+{
+  "prima": "false",
+  "aperto": {
+    "expanded": "true",
+    "navbarAperta": true,
+    "voci": [
+      "Home -> /",
+      "Chi Siamo -> /chi-siamo",
+      "Formazione -> /#formazione",
+      "Agenzia per il Lavoro -> /agenzia-per-il-lavoro",
+      "News -> /news",
+      "Contatti -> /contatti",
+      "Sei un docente? Candidati -> https://aletheia4job.it/diventa-docente",
+      "Formazione Finanziata -> /formazione/regionale-fse",
+      "Formazione Regionale -> /formazione/regionale",
+      "Fondi Interprofessionali -> /formazione/fondi-interprofessionali",
+      "Fondo Nuove Competenze -> /formazione/fondo-nuove-competenze",
+      "Formazione Obbligatoria -> /formazione/obbligatoria",
+      "Sicurezza sui luoghi di lavoro -> /all-courses?categoria=sicurezza-lavoro",
+      "Decreto attrezzature -> /all-courses?categoria=decreto-attrezzature",
+      "Fitosanitario -> /all-courses?categoria=fitosanitario",
+      "Sicurezza alimentare -> /all-courses?categoria=sicurezza-alimentare",
+      "Formazione Professionale e PA -> /formazione/professionale-specialistica",
+      "Certificazioni Informatiche -> /all-courses?categoria=certificazioni-informatiche",
+      "Corsi Qualificati -> /all-courses?categoria=certificazione",
+      "ECM -> /formazione/ecm",
+      "Corsi per la PA -> /formazione/corsi-pa",
+      "Calendario Corsi -> /calendario-corsi"
+    ]
+  },
+  "dopo": {
+    "expanded": "false",
+    "navbarAperta": false
+  }
+}

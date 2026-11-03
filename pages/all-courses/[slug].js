@@ -1439,7 +1439,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
   return (
     <>
       <Head>
-        <title>{course.title} - Alètheia Srl</title>
+        <title>{`${course.title} - Alètheia Srl`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>

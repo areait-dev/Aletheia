@@ -96,12 +96,16 @@ function wpOrigin() {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Solo per i test di regressione (tests/regressione): build in una cartella separata così non si pesta `next dev`.
+  // Senza la variabile vale `.next` come sempre.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   reactStrictMode: true,
   env: {
     NEXT_PUBLIC_WP_ORIGIN: process.env.NEXT_PUBLIC_WP_ORIGIN || wpOrigin(),
   },
   images: {
-    domains: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()],
+    // Stessi domini di prima (images.domains è deprecato): senza protocollo/porta/percorso = identico a `domains`.
+    remotePatterns: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()].map((hostname) => ({ hostname })),
   },
   async redirects() {
     return [...buildCourseRedirects(), ...buildAiutiDiStatoRedirects(), ...buildArchivioSpostatiRedirects()];

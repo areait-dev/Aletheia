@@ -1,13 +1,12 @@
 CLAUDE.md
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 Project Overview
-Alètheia Srl is a Next.js mockup project demonstrating how Alètheia's business content (training services and job agency) would integrate with the iTeach WordPress theme. This is a static site mockup — not a functional WordPress theme or production deployment. It uses Next.js 13 with Tailwind CSS for styling and is designed to be presented to the iTeach theme owner as a proof-of-concept for content integration.
+Alètheia Srl is a Next.js mockup project demonstrating how Alètheia's business content (training services and job agency) would integrate with the iTeach WordPress theme. This is a static site mockup — not a functional WordPress theme or production deployment. It uses Next.js 16 (Pages Router) with React 19 and Tailwind CSS for styling and is designed to be presented to the iTeach theme owner as a proof-of-concept for content integration.
 Common Development Commands
 ```bash
 npm run dev      # Start dev server (localhost:3000)
 npm run build    # Build for production
 npm start        # Run production build locally
-npm run lint     # Run Next.js linting
 ```
 Project Structure
 ```
@@ -34,7 +33,7 @@ styles/               # Styling
 
 tailwind.config.js    # Tailwind CSS configuration
 postcss.config.js     # PostCSS config for Tailwind
-package.json          # Dependencies (Next.js 13, React 18, Tailwind, Framer Motion)
+package.json          # Dependencies (Next.js 16, React 19, Tailwind, Framer Motion)
 ```
 Key Architectural Patterns
 CSS & Styling Approach

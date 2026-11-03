@@ -338,7 +338,9 @@ async function ultimeNews() {
 
 async function getPageStaticProps() {
   const calendario = await getCalendario();
-  const oggiISO = new Date().toISOString().slice(0, 10);
+  // DATA_FISSA_TEST (YYYY-MM-DD): solo per i test di regressione, congela "oggi" così la sezione "Corsi in partenza" è riproducibile.
+  // In produzione la variabile non esiste e vale la data reale, come prima.
+  const oggiISO = process.env.DATA_FISSA_TEST || new Date().toISOString().slice(0, 10);
   return { props: { giorniCalendario: upcomingDays(calendario, oggiISO, 10), gruppoLoghi: await getPartners('ecosistema'), categorie: await getSchede('categorie-home'), pagina: await getPagina('home'), newsItems: await ultimeNews() }, ...isrOptions() };
 }
 

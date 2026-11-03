@@ -1,0 +1,37 @@
+{
+  "iniziale": {
+    "contatore": "47 corsi in programma",
+    "resetAbilitato": false
+  },
+  "categorie": {
+    "Tutte le categorie": {
+      "contatore": "47 corsi in programma",
+      "resetAbilitato": false,
+      "mesi": 12
+    },
+    "Regionale FSE": {
+      "contatore": "0 corsi in programma",
+      "resetAbilitato": true,
+      "mesi": 0
+    },
+    "Obbligatoria": {
+      "contatore": "44 corsi in programma",
+      "resetAbilitato": true,
+      "mesi": 12
+    },
+    "Professionale": {
+      "contatore": "3 corsi in programma",
+      "resetAbilitato": true,
+      "mesi": 12
+    },
+    "ECM": {
+      "contatore": "0 corsi in programma",
+      "resetAbilitato": true,
+      "mesi": 0
+    }
+  },
+  "dopoReset": {
+    "contatore": "47 corsi in programma",
+    "resetAbilitato": false
+  }
+}

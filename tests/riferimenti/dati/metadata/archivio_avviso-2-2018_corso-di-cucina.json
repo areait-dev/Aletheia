@@ -1,0 +1,111 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": "__variable_9302a3 __variable_37b1ed",
+  "classeBody": null,
+  "title": "Corso di Cucina (500 ore) - Alètheia Srl - Corsi di formazione professionale in Sicilia - Ragusa - Alètheia Srl",
+  "description": [],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {},
+  "twitter": {},
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://cdnjs.cloudflare.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Corso di Cucina (500 ore) - Alètheia Srl - Corsi di formazione professionale in Sicilia - Ragusa"
+  ],
+  "intestazioni": 5,
+  "testoLunghezza": 4347,
+  "testoSha1": "5720c9bbc9fc5de19b46cd3fbf4bead239e90785",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/all-courses?categoria=certificazione",
+    "/all-courses?categoria=certificazioni-informatiche",
+    "/all-courses?categoria=decreto-attrezzature",
+    "/all-courses?categoria=fitosanitario",
+    "/all-courses?categoria=sicurezza-alimentare",
+    "/all-courses?categoria=sicurezza-lavoro",
+    "/archivio",
+    "/archivio/avviso-2-2018",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/1 - Manifestazione bando selezione  op. logistica Avviso 2 ALETHEIA 03.09.2019 (tutti e tre).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/1 - Manifestazione personale non docente20.12.2018 bando selezione  NON DOCENTI Avviso 2 ALETHEIA (tutti e tre) .pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/BANDO CHIAMATA DIRETTA TUTOR ALETHEIA(CUCINA-PANIFICATORE).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/Esito_1_Manifestazione_non_docente(pan-cucina).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/Esito_1_Manifestazione_tutor_(pan-cucina).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/Esito_2_ manifestazione docente_(pan-cucina-web).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/Esito_4_Manifestazione_aggiornato_a_Dicembre_2018_docente_(pani-Cucina).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/Esito_4_Manifestazione_aggiornato_a_Gennaio_2019_docente_(panifi-cucina).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/altri/esito 1 selezione  docenti Avviso 2 - CUCINA - ALETHEIA - SITO.pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-allievi/bando allievi Collaboratore Cucina Aletheia 29.11.2018.pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-allievi/riapertura Bando allievi Cucina 25.01.2019.pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-allievi/riapertura bando Cucina 11.12.pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-allievi/riapertura bando allievi cucina 05.02.2019.pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-docenti/1- Manifestazione interesse docenti CS4068 coll. CUCINA 03-08-2018.pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-docenti/2 - Manifestaz docenti corso cucina 08.08.18 - aletheia.pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-docenti/3 - Manifestazione - bando docenti 21.09.18 aletheia (per tutti e tre).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-docenti/4 - Manifestazione bando docenti 16.10.18- aletheia (tutti e tre).pdf",
+    "/pdf/archivio/avviso-2-2018/corso-di-cucina/bandi-docenti/Manifestaz-docenti-corso-cucina-08.08.18-aletheia.pdf",
+    "/pdf/catalogo.pdf",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 7,
+  "immaginiAlt": "39d27fb0dc79abf5013c3ea4646380caea17bdd4"
+}
