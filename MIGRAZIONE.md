@@ -6,6 +6,25 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 
 ## Stato al rientro (3 novembre 2026)
 
+**Passo 4 – Font con `next/font/google` (3 novembre 2026, commit `ecb3267`)**
+- Nunito (300–900, normale) e Viga (400), `display: swap`, self-hosted da `next/font/google` (`lib/fonts.js`); via i link a Google Fonts da `_document`. Variabili `--font-nunito`/`--font-viga` su `<html>` (`_document`) **e** sul wrapper di `_app` (l'import in `_app` è necessario: solo in `_document` il CSS dei font non entra nel bundle e il testo usciva in serif). `globals.css` e `tailwind.config.js` usano `var(--font-nunito)`. `next/font/google` scarica i font da Google **durante la build** (ok su Vercel; una build senza rete fallirebbe).
+- Suite rapida: screenshot a 1440 px, interazioni e chat **identici**; cambiano solo i 113 riferimenti di metadata (link font rimossi, classe sull'`<html>`), rigenerati dopo aver controllato il diff riga per riga.
+- **Lighthouse base (Next 13.4.0) → Next 16.4.4 con next/font** (mediana di 3 passate):
+
+| Forma | Pagina | Perf | A11y | BP | SEO | LCP ms | TBT ms | CLS | JS KB |
+|---|---|---|---|---|---|---|---|---|---|
+| mobile | / | 91 → 97 | 97 → 97 | 100 → 100 | 100 → 100 | 1943 → 1915 | 218 → 110 | 0 → 0 | 123 → 161 |
+| mobile | /calendario-corsi | 93 → 97 | 96 → 96 | 100 → 100 | 100 → 100 | 2002 → 1833 | 133 → 68 | 0 → 0 | 119 → 154 |
+| mobile | /chi-siamo | 97 → 96 | 97 → 97 | 100 → 100 | 100 → 100 | 1956 → 2015 | 35 → 79 | 0.006 → 0 | 121 → 159 |
+| mobile | /all-courses/antincendio | 89 → 85 | 97 → 97 | 100 → 100 | 92 → 92 | 2112 → 4076 | 278 → 80 | 0 → 0 | 220 → 315 |
+| desktop | / | 99 → 99 | 97 → 97 | 100 → 100 | 100 → 100 | 775 → 690 | 0 → 0 | 0.004 → 0 | 123 → 161 |
+| desktop | /calendario-corsi | 100 → 100 | 96 → 96 | 100 → 100 | 100 → 100 | 657 → 657 | 0 → 0 | 0.002 → 0 | 119 → 154 |
+| desktop | /chi-siamo | 99 → 99 | 97 → 97 | 100 → 100 | 100 → 100 | 801 → 707 | 0 → 0 | 0.003 → 0 | 121 → 159 |
+| desktop | /all-courses/antincendio | 97 → 97 | 97 → 97 | 100 → 100 | 92 → 92 | 1187 → 1201 | 0 → 0 | 0.001 → 0 | 220 → 315 |
+
+- **Home:** LCP mobile 1943 → 1915 ms, CLS mobile 0 → 0 (era 0,111 prima del cambio font); desktop LCP 775 → 690 ms, CLS 0,004 → 0. Tornano alla base o migliorano.
+- **Ancora peggio della base, spiegazione parziale:** `/all-courses/antincendio` mobile LCP 2112 → 4076 ms (Perf 89 → 85): il cambio font **non** lo risolve, quindi la causa NON era (solo) il font; da indagare (elemento LCP = paragrafo di testo; ipotesi non verificate). JavaScript trasferito +30% (123 → 161 KB; 220 → 315 KB) con Next 16/React 19, non scomposto. Migliorano TBT e Perf di calendario e home mobile.
+
 **Passo 3 – Next 16.4.4: suite completa e Lighthouse (3 novembre 2026)**
 - **Suite completa** (`npm run test:regressione`, 1 worker, screenshot solo a 1440 px): **199/199 passati** (13,3 min).
 - **Lighthouse, base (Next 13.4.0) → finale (Next 16.4.4)**, stessa macchina, mediana di 3 passate:
