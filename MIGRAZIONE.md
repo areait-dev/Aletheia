@@ -9,6 +9,8 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 **Passo 2 – Fase 1b**
 - **13.4.0 → 13.5.11** (React 18.2): suite rapida 144/145 passati. Unica differenza: la pagina 404 predefinita di Next (altezza di riga diversa: divisore verticale più alto, testo spostato di pochi pixel; stesso testo, status 404). Cambio dovuto a Next, non al sito: riferimento `url-inesistente-404-1440-chiaro.png` aggiornato (gli altri riferimenti non toccati). Se si vuole la 404 identica alla 13.4 serve un `pages/404.js` che riproduca il markup vecchio (non fatto).
 
+- **13.5.11 → 14.2.35**: suite rapida 145/145 passati, nessuna correzione.
+
 **Passo 1 – stabilizzazione screenshot (in corso, quasi chiuso)**
 - Applicato in `tests/regressione/pagina.mjs`: immagini forzate `loading="eager"` con `naturalWidth > 0` (decode con limite 5 s), `<Reveal>` forzati visibili, attesa dell'idratazione, scatto dopo due letture uguali dell'altezza a 500 ms, 2 worker (default in `playwright.config.mjs`).
 - **Causa principale trovata:** l'HTML del server serializza lo stile dei `<Reveal>` senza spazi (`opacity:0`), il selettore e l'attesa cercavano la forma con spazi: se lo scatto partiva prima dell'idratazione i `<Reveal>` restavano invisibili. Corretto.
