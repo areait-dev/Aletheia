@@ -62,6 +62,16 @@ export async function caricaTutto(page) {
     }
   });
   await page.waitForFunction(() => Array.from(document.images).filter((i) => i.currentSrc || i.src).every((i) => i.complete && i.naturalWidth > 0), null, { timeout: 30_000 }).catch(() => {});
+  // Immagini rimaste rotte (richiesta fallita sotto carico, es. /_next/image): fino a 3 tentativi di ricarica prima dello scatto.
+  for (let t = 0; t < 3; t++) {
+    const rotte = await page.evaluate(() => {
+      const r = Array.from(document.images).filter((i) => (i.currentSrc || i.src) && i.complete && i.naturalWidth === 0);
+      r.forEach((i) => { const s = i.src; i.src = ''; i.src = s; });
+      return r.length;
+    });
+    if (!rotte) break;
+    await page.waitForFunction(() => Array.from(document.images).filter((i) => i.currentSrc || i.src).every((i) => i.complete && i.naturalWidth > 0), null, { timeout: 10_000 }).catch(() => {});
+  }
   await page.evaluate(() => Promise.race([Promise.all(Array.from(document.images).map((i) => (i.decode ? i.decode().catch(() => null) : null))), new Promise((r) => setTimeout(r, 5000))])); // decode() può non risolversi mai: massimo 5 s
   // 4) idratazione avvenuta: nessun <Reveal> ancora in stato iniziale (opacity 0 + translateY(28px), con o senza spazi
   //    nella serializzazione). Poi, per sicurezza, <Reveal> forzati visibili e stile "fermo".
