@@ -26,7 +26,7 @@ export default defineConfig({
   testDir: './tests/regressione',
   testMatch: '**/*.spec.mjs',
   timeout: 120_000,
-  workers: Number(process.env.WORKERS || 3),
+  workers: Number(process.env.WORKERS || 2),
   fullyParallel: true,
   reporter: [['list']],
   // I riferimenti (PNG) stanno in tests/riferimenti/immagini: NON si rigenerano senza autorizzazione.

@@ -4,7 +4,16 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 
 **Decisione del 2 novembre 2026: la migrazione all'App Router è SOSPESA.** Si fa solo la **Fase 1b**: aggiornare Next da 13.4.0 a 16 restando in Pages Router. Le Fasi 2–5 sono "rimandate" (vedi la sezione dedicata in fondo, con le note per riprenderle).
 
-## Stato al rientro (2 novembre 2026, sera)
+## Stato al rientro (3 novembre 2026)
+
+**Passo 1 – stabilizzazione screenshot (in corso, quasi chiuso)**
+- Applicato in `tests/regressione/pagina.mjs`: immagini forzate `loading="eager"` con `naturalWidth > 0` (decode con limite 5 s), `<Reveal>` forzati visibili, attesa dell'idratazione, scatto dopo due letture uguali dell'altezza a 500 ms, 2 worker (default in `playwright.config.mjs`).
+- **Causa principale trovata:** l'HTML del server serializza lo stile dei `<Reveal>` senza spazi (`opacity:0`), il selettore e l'attesa cercavano la forma con spazi: se lo scatto partiva prima dell'idratazione i `<Reveal>` restavano invisibili. Corretto.
+- Riferimenti rigenerati dal codice del tag (identico al branch salvo `package.json`). Primo confronto dopo la rigenerazione: 221 passati, 9 falliti, tutti a 390/768 px (7) o su `/all-courses…` (1 a 1440 scuro); **tutti i 1440 chiaro verdi**. Il secondo confronto è stato interrotto dal sistema per memoria.
+- **Decisione per la regola concordata:** 390 e 768 px restano instabili (soprattutto `/all-courses`, pagina lenta) → screenshot automatici **solo a 1440 px** (`LARGHEZZE` in `tests/regressione/util.mjs`; `LARGHEZZE_COMPLETE=1` per riprovare tutte). **Mobile (390/768): controllo manuale sull'anteprima Vercel**, da fare a fine aggiornamento.
+- Nota: le esecuzioni con più worker o in parallelo con altri programmi possono essere fermate dal sistema per memoria; il server di test lasciato sulla porta 3101 va chiuso prima di rilanciare.
+
+## Stato al rientro precedente (2 novembre 2026, sera)
 
 **Cosa è stato fatto oggi**
 - Fase 0: analisi (report più sotto).

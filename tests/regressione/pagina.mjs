@@ -6,6 +6,9 @@ const STILE_FERMO = `
 
 // La chat (components/Chatbot.tsx, widget del sito, posizione fissa) si nasconde negli screenshot di pagina: in uno scatto
 // a pagina intera la sua posizione dipende dalla viewport e rende instabili tutti i confronti. Ha un test dedicato (chatbot.spec.mjs).
+// Rivelazioni di <Reveal> (stile inline con will-change): forzate visibili solo nei test.
+export const STILE_REVEAL = `[style*="will-change"][style*="translateY(28px)"] { opacity: 1 !important; transform: none !important; }` // l'HTML del server serializza senza spazi ("opacity:0"), dopo l'idratazione con spazi: il selettore regge entrambi;
+
 export const STILE_SCREENSHOT = `.chatbot-root { display: none !important; }`;
 
 /** Fallisce se qualche risorsa esterna non ha la copia locale (mai ignorare: lo screenshot sarebbe incompleto). */
@@ -50,20 +53,30 @@ export async function caricaTutto(page) {
   await page.evaluate(() =>
     Promise.all(['400 1em Nunito', '600 1em Nunito', '700 1em Nunito', '800 1em Nunito', '900 1em Nunito', '1em Viga'].map((f) => document.fonts.load(f).catch(() => null))).then(() => document.fonts.ready)
   );
-  // 3) immagini complete (decodificate)
-  await page.waitForFunction(() => Array.from(document.images).every((i) => i.complete), null, { timeout: 30_000 }).catch(() => {});
-  // 4) idratazione: nessun <Reveal> ancora nascosto (stile inline "opacity: 0" con will-change)
-  await page.waitForFunction(() => !document.querySelector('[style*="will-change: opacity, transform"][style*="opacity: 0"]'), null, { timeout: 20_000 }).catch(() => {});
+  // 3) immagini: tutte forzate a loading="eager" e attese finché naturalWidth > 0 (non basta `complete`: un'immagine
+  //    lazy non ancora richiesta risulta "complete" con naturalWidth 0). Le <img> senza src o in errore sono ignorate dopo il timeout.
+  await page.evaluate(() => {
+    for (const i of document.images) {
+      i.loading = 'eager';
+      if (i.getAttribute('loading') !== 'eager') i.setAttribute('loading', 'eager');
+    }
+  });
+  await page.waitForFunction(() => Array.from(document.images).filter((i) => i.currentSrc || i.src).every((i) => i.complete && i.naturalWidth > 0), null, { timeout: 30_000 }).catch(() => {});
+  await page.evaluate(() => Promise.race([Promise.all(Array.from(document.images).map((i) => (i.decode ? i.decode().catch(() => null) : null))), new Promise((r) => setTimeout(r, 5000))])); // decode() può non risolversi mai: massimo 5 s
+  // 4) idratazione avvenuta: nessun <Reveal> ancora in stato iniziale (opacity 0 + translateY(28px), con o senza spazi
+  //    nella serializzazione). Poi, per sicurezza, <Reveal> forzati visibili e stile "fermo".
+  await page.waitForFunction(() => !Array.from(document.querySelectorAll('[style*="will-change"]')).some((e) => /opacity:\s*0\s*;/.test(e.getAttribute('style') || '') && /translateY\(28px\)/.test(e.getAttribute('style') || '')), null, { timeout: 30_000 }).catch(() => {});
+  await page.addStyleTag({ content: STILE_REVEAL });
   await page.addStyleTag({ content: STILE_FERMO + STILE_SCREENSHOT });
-  // 5) altezza stabile per ~1 s (4 campioni uguali a distanza di 250 ms)
+  // 5) scatto solo dopo due letture uguali dell'altezza a 500 ms di distanza (al massimo ~30 s)
   await page.evaluate(async () => {
+    const pausa = (ms) => new Promise((r) => setTimeout(r, ms));
     let ultima = -1;
-    let uguali = 0;
-    for (let i = 0; i < 60 && uguali < 4; i++) {
+    for (let i = 0; i < 60; i++) {
       const h = document.documentElement.scrollHeight;
-      uguali = h === ultima ? uguali + 1 : 0;
+      if (h === ultima) break;
       ultima = h;
-      await new Promise((r) => setTimeout(r, 250));
+      await pausa(500);
     }
   });
   await page.evaluate(() => window.scrollTo(0, 0));
