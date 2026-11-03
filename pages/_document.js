@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html lang="it">
+    <Html lang="it" data-scroll-behavior="smooth">{/* Next 16 non sovrascrive più scroll-behavior durante le navigazioni: mantiene il "smooth" di globals.css */}
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />

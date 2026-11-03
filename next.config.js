@@ -104,7 +104,8 @@ const nextConfig = {
     NEXT_PUBLIC_WP_ORIGIN: process.env.NEXT_PUBLIC_WP_ORIGIN || wpOrigin(),
   },
   images: {
-    domains: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()],
+    // Stessi domini di prima (images.domains è deprecato): senza protocollo/porta/percorso = identico a `domains`.
+    remotePatterns: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()].map((hostname) => ({ hostname })),
   },
   async redirects() {
     return [...buildCourseRedirects(), ...buildAiutiDiStatoRedirects(), ...buildArchivioSpostatiRedirects()];
