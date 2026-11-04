@@ -1816,6 +1816,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 return (
                   <>
                     <CoursePricingSidebar
+                      primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
                       whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                       customContent={
                         <div className="flex flex-col gap-3">
@@ -1842,14 +1843,13 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
 
               /* CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
                  regione a regione, quindi niente prezzo in vetrina - solo "Richiedi
-                 preventivo". A differenza del CASO 5, qui puntiamo al form in fondo a
-                 /formazione/obbligatoria (stesse 4 categorie: sicurezza lavoro, attrezzature,
-                 fitosanitario, alimentare) invece che alla pagina Contatti generica. */
+                 preventivo", che porta alla pagina dedicata /richiedi-preventivo (come il CASO 5).
+                 Il form in fondo a /formazione/obbligatoria resta per chi arriva dalla pagina di categoria. */
               if (varianteCorrente.obbligatoria) {
                 return (
                   <CoursePricingSidebar
                     priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
-                    primaryHref="/formazione/obbligatoria#form-contatto"
+                    primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
                     whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                   />
                 );
@@ -1860,7 +1860,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
               return (
                 <CoursePricingSidebar
                   priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
-                  primaryHref={`/contatti?corso=${encodeURIComponent(course.title)}&tipo=preventivo`}
+                  primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
                   whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                 />
               );
