@@ -16,7 +16,10 @@ import os from 'node:os';
 
 const VERSIONE_LIGHTHOUSE = '13.6.0';
 const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:3101';
-const PAGINE = ['/', '/calendario-corsi', '/chi-siamo', '/all-courses/antincendio'];
+// PAGINE (elenco separato da virgole) e FORME (mobile,desktop) si possono sovrascrivere da ambiente; senza variabili
+// valgono le quattro pagine storiche in entrambe le forme, quindi i confronti con le misure precedenti restano validi.
+const PAGINE = process.env.PAGINE ? process.env.PAGINE.split(',') : ['/', '/calendario-corsi', '/chi-siamo', '/all-courses/antincendio'];
+const FORME = process.env.FORME ? process.env.FORME.split(',') : ['mobile', 'desktop'];
 const radice = path.resolve(import.meta.dirname, '..', '..');
 const cartellaRis = path.join(radice, 'tests', 'riferimenti', 'lighthouse');
 
@@ -33,6 +36,8 @@ function unaPassata(url, forma, tmp) {
     `--chrome-path=${chromePlaywright()}`, '--chrome-flags=--headless=new --no-sandbox --disable-gpu',
     '--only-categories=performance,accessibility,best-practices,seo'];
   if (forma === 'desktop') args.push('--preset=desktop');
+  // La pagina 404 risponde con status 404: senza questo flag Lighthouse rifiuta di analizzarla.
+  if (/non-esiste/.test(url)) args.push('--ignore-status-code');
   const r = spawnSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', args, { cwd: os.tmpdir(), encoding: 'utf8', shell: process.platform === 'win32', timeout: 300_000 });
   if (r.status !== 0 || !fs.existsSync(tmp)) throw new Error(`Lighthouse fallito su ${url} (${forma}): ${r.stderr || r.stdout}`);
   const l = JSON.parse(fs.readFileSync(tmp, 'utf8'));
@@ -52,13 +57,24 @@ function unaPassata(url, forma, tmp) {
   };
 }
 
+// Un avvio di Chrome/Lighthouse può fallire in modo occasionale (errore dell'infrastruttura, non della pagina): prima un solo
+// errore buttava via tutta la misura. Si ritenta fino a 2 volte e il ritento viene scritto a video.
+function unaPassataConRitenti(url, forma, tmp) {
+  for (let tentativo = 1; ; tentativo++) {
+    try { return unaPassata(url, forma, tmp); } catch (e) {
+      if (tentativo >= 3) throw e;
+      console.log(`  (passata fallita su ${url} [${forma}], ritento ${tentativo}/2)`);
+    }
+  }
+}
+
 function esegui(etichetta, passate) {
   fs.mkdirSync(cartellaRis, { recursive: true });
   const risultati = [];
-  for (const forma of ['mobile', 'desktop']) {
+  for (const forma of FORME) {
     for (const pagina of PAGINE) {
       const righe = [];
-      for (let i = 0; i < passate; i++) righe.push(unaPassata(BASE_URL + pagina, forma, path.join(os.tmpdir(), `lh-${process.pid}-${i}.json`)));
+      for (let i = 0; i < passate; i++) righe.push(unaPassataConRitenti(BASE_URL + pagina, forma, path.join(os.tmpdir(), `lh-${process.pid}-${i}.json`)));
       const med = {};
       for (const k of Object.keys(righe[0])) med[k] = mediana(righe.map((r) => r[k]));
       risultati.push({ forma, pagina, mediana: med, passate: righe });

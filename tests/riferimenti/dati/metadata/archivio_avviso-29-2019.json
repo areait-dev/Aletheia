@@ -51,8 +51,8 @@
     "ASSISTENTE FAMILIARE (PERCORSO PER DISOCCUPATI)"
   ],
   "intestazioni": 7,
-  "testoLunghezza": 9626,
-  "testoSha1": "285694e2bba7fbcf63f9c3f5b6c88fa6a928504c",
+  "testoLunghezza": 9647,
+  "testoSha1": "861ca36a71e65770793960177943b342d5ce91e0",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

@@ -53,8 +53,8 @@
     "CORSI GRATUITI PROGETTO GOL"
   ],
   "intestazioni": 7,
-  "testoLunghezza": 4686,
-  "testoSha1": "bd0e413b5e5276006f89eef6d164048e1bc8f66d",
+  "testoLunghezza": 4707,
+  "testoSha1": "80c63bffb97bd455dcc7b34d995952560b2031d6",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -62,6 +62,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

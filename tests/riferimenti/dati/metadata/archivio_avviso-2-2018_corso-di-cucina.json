@@ -51,8 +51,8 @@
     "Corso di Cucina (500 ore) - Alètheia Srl - Corsi di formazione professionale in Sicilia - Ragusa"
   ],
   "intestazioni": 5,
-  "testoLunghezza": 4347,
-  "testoSha1": "5720c9bbc9fc5de19b46cd3fbf4bead239e90785",
+  "testoLunghezza": 4368,
+  "testoSha1": "801427fd98f4bf079d8a7494f24681716014376e",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

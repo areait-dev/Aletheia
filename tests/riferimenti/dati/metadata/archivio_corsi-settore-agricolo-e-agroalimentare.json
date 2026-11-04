@@ -51,8 +51,8 @@
     "Corsi Settore Agricolo E Agroalimentare"
   ],
   "intestazioni": 0,
-  "testoLunghezza": 1259,
-  "testoSha1": "36ef577045725303008fda21ae478cf95edd0e3b",
+  "testoLunghezza": 1280,
+  "testoSha1": "85aec6bd5ab8046f8ae755696766a06b7b79126e",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

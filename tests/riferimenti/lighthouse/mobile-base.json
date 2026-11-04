@@ -1,0 +1,495 @@
+{
+  "etichetta": "mobile-base",
+  "lighthouse": "13.6.0",
+  "passate": 3,
+  "data": "2026-11-04T10:43:10.283Z",
+  "node": "v24.16.0",
+  "risultati": [
+    {
+      "forma": "mobile",
+      "pagina": "/",
+      "mediana": {
+        "performance": 97,
+        "accessibility": 97,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1927,
+        "lcpMs": 1927,
+        "tbtMs": 99,
+        "cls": 0,
+        "pesoTotaleKB": 862,
+        "javascriptKB": 153
+      },
+      "passate": [
+        {
+          "performance": 96,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1924,
+          "lcpMs": 1924,
+          "tbtMs": 154,
+          "cls": 0,
+          "pesoTotaleKB": 862,
+          "javascriptKB": 153
+        },
+        {
+          "performance": 97,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1979,
+          "lcpMs": 1979,
+          "tbtMs": 99,
+          "cls": 0,
+          "pesoTotaleKB": 862,
+          "javascriptKB": 153
+        },
+        {
+          "performance": 98,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1927,
+          "lcpMs": 1927,
+          "tbtMs": 95,
+          "cls": 0,
+          "pesoTotaleKB": 862,
+          "javascriptKB": 153
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/all-courses",
+      "mediana": {
+        "performance": 71,
+        "accessibility": 96,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1989,
+        "lcpMs": 5324,
+        "tbtMs": 305,
+        "cls": 0,
+        "pesoTotaleKB": 877,
+        "javascriptKB": 192
+      },
+      "passate": [
+        {
+          "performance": 71,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1951,
+          "lcpMs": 5377,
+          "tbtMs": 305,
+          "cls": 0,
+          "pesoTotaleKB": 877,
+          "javascriptKB": 192
+        },
+        {
+          "performance": 70,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 2009,
+          "lcpMs": 5324,
+          "tbtMs": 335,
+          "cls": 0,
+          "pesoTotaleKB": 877,
+          "javascriptKB": 192
+        },
+        {
+          "performance": 91,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1989,
+          "lcpMs": 1989,
+          "tbtMs": 262,
+          "cls": 0,
+          "pesoTotaleKB": 877,
+          "javascriptKB": 192
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/all-courses?categoria=sicurezza-lavoro",
+      "mediana": {
+        "performance": 68,
+        "accessibility": 96,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1958,
+        "lcpMs": 4984,
+        "tbtMs": 469,
+        "cls": 0,
+        "pesoTotaleKB": 877,
+        "javascriptKB": 192
+      },
+      "passate": [
+        {
+          "performance": 88,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 2112,
+          "lcpMs": 2112,
+          "tbtMs": 273,
+          "cls": 0,
+          "pesoTotaleKB": 877,
+          "javascriptKB": 192
+        },
+        {
+          "performance": 68,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1862,
+          "lcpMs": 5131,
+          "tbtMs": 469,
+          "cls": 0,
+          "pesoTotaleKB": 877,
+          "javascriptKB": 192
+        },
+        {
+          "performance": 68,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1958,
+          "lcpMs": 4984,
+          "tbtMs": 478,
+          "cls": 0,
+          "pesoTotaleKB": 877,
+          "javascriptKB": 192
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/all-courses/antincendio",
+      "mediana": {
+        "performance": 88,
+        "accessibility": 97,
+        "bestPractices": 100,
+        "seo": 92,
+        "fcpMs": 1897,
+        "lcpMs": 3553,
+        "tbtMs": 128,
+        "cls": 0,
+        "pesoTotaleKB": 788,
+        "javascriptKB": 253
+      },
+      "passate": [
+        {
+          "performance": 88,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 92,
+          "fcpMs": 1897,
+          "lcpMs": 3524,
+          "tbtMs": 128,
+          "cls": 0,
+          "pesoTotaleKB": 788,
+          "javascriptKB": 253
+        },
+        {
+          "performance": 88,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 92,
+          "fcpMs": 1829,
+          "lcpMs": 3553,
+          "tbtMs": 128,
+          "cls": 0,
+          "pesoTotaleKB": 788,
+          "javascriptKB": 253
+        },
+        {
+          "performance": 84,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 92,
+          "fcpMs": 1900,
+          "lcpMs": 3990,
+          "tbtMs": 167,
+          "cls": 0,
+          "pesoTotaleKB": 788,
+          "javascriptKB": 253
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/news/bonus-giovani-under-35-aprile-2026",
+      "mediana": {
+        "performance": 81,
+        "accessibility": 95,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1757,
+        "lcpMs": 4841,
+        "tbtMs": 89,
+        "cls": 0,
+        "pesoTotaleKB": 744,
+        "javascriptKB": 153
+      },
+      "passate": [
+        {
+          "performance": 80,
+          "accessibility": 95,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1757,
+          "lcpMs": 4910,
+          "tbtMs": 89,
+          "cls": 0,
+          "pesoTotaleKB": 744,
+          "javascriptKB": 153
+        },
+        {
+          "performance": 82,
+          "accessibility": 95,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1722,
+          "lcpMs": 4549,
+          "tbtMs": 149,
+          "cls": 0,
+          "pesoTotaleKB": 744,
+          "javascriptKB": 153
+        },
+        {
+          "performance": 81,
+          "accessibility": 95,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1810,
+          "lcpMs": 4841,
+          "tbtMs": 60,
+          "cls": 0,
+          "pesoTotaleKB": 744,
+          "javascriptKB": 153
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/contatti",
+      "mediana": {
+        "performance": 97,
+        "accessibility": 93,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1747,
+        "lcpMs": 1747,
+        "tbtMs": 118,
+        "cls": 0,
+        "pesoTotaleKB": 786,
+        "javascriptKB": 150
+      },
+      "passate": [
+        {
+          "performance": 98,
+          "accessibility": 93,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1747,
+          "lcpMs": 1747,
+          "tbtMs": 115,
+          "cls": 0,
+          "pesoTotaleKB": 786,
+          "javascriptKB": 150
+        },
+        {
+          "performance": 97,
+          "accessibility": 93,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1647,
+          "lcpMs": 1647,
+          "tbtMs": 118,
+          "cls": 0,
+          "pesoTotaleKB": 788,
+          "javascriptKB": 150
+        },
+        {
+          "performance": 94,
+          "accessibility": 93,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1813,
+          "lcpMs": 1813,
+          "tbtMs": 138,
+          "cls": 0,
+          "pesoTotaleKB": 786,
+          "javascriptKB": 150
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/calendario-corsi",
+      "mediana": {
+        "performance": 98,
+        "accessibility": 96,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1795,
+        "lcpMs": 1795,
+        "tbtMs": 73,
+        "cls": 0,
+        "pesoTotaleKB": 780,
+        "javascriptKB": 146
+      },
+      "passate": [
+        {
+          "performance": 99,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1752,
+          "lcpMs": 1752,
+          "tbtMs": 73,
+          "cls": 0,
+          "pesoTotaleKB": 780,
+          "javascriptKB": 146
+        },
+        {
+          "performance": 98,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1795,
+          "lcpMs": 1795,
+          "tbtMs": 79,
+          "cls": 0,
+          "pesoTotaleKB": 780,
+          "javascriptKB": 146
+        },
+        {
+          "performance": 98,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1835,
+          "lcpMs": 1835,
+          "tbtMs": 72,
+          "cls": 0,
+          "pesoTotaleKB": 780,
+          "javascriptKB": 146
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/chi-siamo",
+      "mediana": {
+        "performance": 95,
+        "accessibility": 97,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 2183,
+        "lcpMs": 2183,
+        "tbtMs": 107,
+        "cls": 0,
+        "pesoTotaleKB": 630,
+        "javascriptKB": 150
+      },
+      "passate": [
+        {
+          "performance": 95,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 2183,
+          "lcpMs": 2183,
+          "tbtMs": 117,
+          "cls": 0,
+          "pesoTotaleKB": 630,
+          "javascriptKB": 150
+        },
+        {
+          "performance": 97,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1882,
+          "lcpMs": 1882,
+          "tbtMs": 69,
+          "cls": 0,
+          "pesoTotaleKB": 630,
+          "javascriptKB": 150
+        },
+        {
+          "performance": 95,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 2189,
+          "lcpMs": 2189,
+          "tbtMs": 107,
+          "cls": 0,
+          "pesoTotaleKB": 630,
+          "javascriptKB": 150
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/pagina-che-non-esiste",
+      "mediana": {
+        "performance": 95,
+        "accessibility": 96,
+        "bestPractices": 96,
+        "seo": 82,
+        "fcpMs": 1800,
+        "lcpMs": 2790,
+        "tbtMs": 43,
+        "cls": 0,
+        "pesoTotaleKB": 413,
+        "javascriptKB": 139
+      },
+      "passate": [
+        {
+          "performance": 95,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 82,
+          "fcpMs": 1800,
+          "lcpMs": 2790,
+          "tbtMs": 32,
+          "cls": 0,
+          "pesoTotaleKB": 413,
+          "javascriptKB": 139
+        },
+        {
+          "performance": 95,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 82,
+          "fcpMs": 1841,
+          "lcpMs": 2801,
+          "tbtMs": 44,
+          "cls": 0,
+          "pesoTotaleKB": 413,
+          "javascriptKB": 139
+        },
+        {
+          "performance": 95,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 82,
+          "fcpMs": 1674,
+          "lcpMs": 2784,
+          "tbtMs": 43,
+          "cls": 0,
+          "pesoTotaleKB": 413,
+          "javascriptKB": 139
+        }
+      ]
+    }
+  ]
+}

@@ -53,8 +53,8 @@
     "Avviso 20/2024 FSE+"
   ],
   "intestazioni": 8,
-  "testoLunghezza": 3376,
-  "testoSha1": "ae865a0dcab2a055605e3485de96a084bb192981",
+  "testoLunghezza": 3397,
+  "testoSha1": "ea1f6e239fd6d695c7f021db7b52664e947f2972",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -62,6 +62,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

@@ -90,8 +90,8 @@
     "Agenzia per il Lavoro Alètheia: servizi per candidati e per imprese"
   ],
   "intestazioni": 9,
-  "testoLunghezza": 3928,
-  "testoSha1": "4c0fd16f02df0516d4678fd36c9b76451da419da",
+  "testoLunghezza": 3949,
+  "testoSha1": "9d0642db4887c16d08a8822bd7735cde744b6465",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -101,6 +101,7 @@
     "/agenzia-per-il-lavoro/servizi-alle-imprese",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

@@ -51,8 +51,8 @@
     "Ammodernamento aziende agricole (20 ore)"
   ],
   "intestazioni": 2,
-  "testoLunghezza": 2076,
-  "testoSha1": "735ae687d70db5d28e4555d929af0be26dff7280",
+  "testoLunghezza": 2097,
+  "testoSha1": "6a375b345b206dbe5ef46697a4a88c3e07af99ba",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

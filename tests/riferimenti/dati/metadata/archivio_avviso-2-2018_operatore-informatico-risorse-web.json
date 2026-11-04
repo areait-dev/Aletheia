@@ -51,8 +51,8 @@
     "Operatore Informatico di risorse Web (544 ORE)"
   ],
   "intestazioni": 5,
-  "testoLunghezza": 4112,
-  "testoSha1": "3fe39f915d2df3f57639ade08c3fda23b5875b15",
+  "testoLunghezza": 4133,
+  "testoSha1": "336efddc0310ef7977d097102320d8244a060733",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

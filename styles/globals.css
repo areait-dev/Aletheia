@@ -622,6 +622,49 @@ html.dark .cta-nav-btn-outline:hover {
   color: #0F172A;
 }
 
+/* Catalogo corsi (/all-courses), da 1024px in su.
+   - .catalog-sidebar: sticky come prima, ma con altezza massima e scorrimento interno: la sidebar è alta ~671px e su
+     schermi bassi (laptop 12-13", iPad in orizzontale dentro Safari) il fondo (ultime categorie, box "Chiamaci")
+     restava irraggiungibile. Su schermi alti non cambia nulla (nessuna barra di scorrimento).
+   - .catalog-grid: al massimo 3 colonne ma ognuna larga almeno 240px (41px e non 40px: con il valore esatto per
+     arrotondamento la terza colonna non entrava mai). Con la sidebar da 260px, a 1024-1279px le 3 colonne
+     fisse davano card di ~210px; ora 2 colonne larghe. Da ~1366px in su resta a 3 colonne identiche a prima. */
+@media (min-width: 1024px) {
+  .catalog-sidebar {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+    max-height: calc(100vh - 6rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding: 4px;   /* spazio per le ombre delle card, altrimenti l'overflow le taglia */
+    margin: -4px;
+  }
+  /* .catalog-grid.grid (0,2,0): le utility di Tailwind (sm:grid-cols-2) finiscono più avanti nel CSS con specificità 0,1,0 e
+     altrimenti vincerebbero su questa regola. */
+  .catalog-grid.grid {
+    grid-template-columns: repeat(auto-fill, minmax(max(240px, calc((100% - 41px) / 3)), 1fr));
+  }
+}
+
+/* Header compatto per tablet in orizzontale e laptop piccoli (12-13", iPad Pro in verticale): con gap e margini
+   pensati per 1280px+ l'header occupa ~1174px e sotto quella larghezza il gruppo di destra usciva dallo schermo
+   ("Piattaforma" tagliato di 118px a 1024px, non toccabile). Misurato: con queste regole tutto sta da 1000px in su
+   (margine destro 16px, respiro tra menu e pulsanti 29px a 1024px). Da 1280px in su NIENTE cambia. Sotto i 1024px
+   c'è l'hamburger. Il logo non si tocca. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .site-header .container { padding-left: 0.75rem; padding-right: 1rem; }
+  .navbar { gap: 1rem; margin-left: 1.25rem; }
+  .navbar a { font-size: 0.85rem; }
+  .header-right { gap: 0.75rem; }
+  .cta-nav-btn-outline { padding: 0 0.9rem; font-size: 0.78rem; }
+}
+@media (min-width: 1024px) and (max-width: 1039px) {
+  .navbar { gap: 0.8rem; }
+  .header-right { gap: 0.5rem; }
+}
+
 .cta-dropdown {
   position: relative;
   display: inline-block;
@@ -2637,7 +2680,11 @@ html.dark .elearning p {
   }
 }
 
-@media (max-width: 768px) {
+/* Menu mobile (hamburger) fino a 1023px (era 768px). Tra 769 e 1023px (iPad Air/Pro 11" in verticale 820-834px, telefoni
+   in orizzontale, iPad mini/Pro 12.9" fino a 1024) l'header desktop non ci sta: "Piattaforma" usciva dallo schermo di
+   300px e non era toccabile. Il blocco contiene SOLO regole del menu/header: spostare la soglia non tocca altro layout.
+   Da 1024px c'è l'header desktop (compatto fino a 1279px, vedi sopra). */
+@media (max-width: 1023px) {
   .site-header {
     padding: 0.75rem 0;
     background: transparent;
@@ -2665,7 +2712,10 @@ html.dark .elearning p {
     gap: 1.75rem;
     z-index: 100;
     margin: 0;
-    padding: 6.5rem 1.5rem 3rem;
+    /* In basso 12rem (era 3rem): il banner cookie (fixed, z-index 10000, ~150px) sta sopra il menu e finché non si
+       sceglie copriva gli ultimi link ("Scopri tutti i corsi", "Calendario Corsi" nella schermata Formazione),
+       impossibili da toccare anche scorrendo a fine corsa. Con più margine il contenuto sale sopra il banner. */
+    padding: 6.5rem 1.5rem 12rem;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -2825,6 +2875,11 @@ html.dark .elearning p {
     border-top: 1px solid rgba(255,255,255,0.12);
     width: 100%;
     justify-content: center;
+  }
+
+  /* "Scopri tutti i corsi" sta sopra il link al calendario: un solo filetto di separazione (quello del calendario) */
+  .navbar-formazione-calendar.navbar-formazione-corsi {
+    border-top: 0;
   }
 
   /* Il menu mobile a schermo intero deve restare sempre leggibile (testo bianco,
@@ -3270,3 +3325,34 @@ html.dark .legal-content td { border-bottom-color: #1F2937; }
 
 /* Statistiche di contorno: filetto sottile tra una e l'altra */
 .numbers-hero-side > * + * { border-left: 1px solid rgba(255,255,255,0.12); }
+
+/* ── Touch (puntatore "coarse": telefoni e tablet, a qualsiasi larghezza) ─────────────────────────────────────────
+   Il mouse (desktop) non è toccato. Misurato a 390px: 34-49 aree cliccabili sotto i 44px per pagina e campi con testo
+   di 13-14px (iOS Safari ingrandisce la pagina quando si mette a fuoco un campo sotto i 16px). */
+@media (pointer: coarse) {
+  /* Sistema .btn e pulsanti dell'header: una sola fonte (token), niente ritocchi pulsante per pulsante */
+  :root { --btn-height-sm: 44px; --btn-height-md: 48px; --btn-height-lg: 52px; }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="submit"]):not([type="button"]):not([type="range"]):not([type="hidden"]),
+  select,
+  textarea {
+    font-size: 16px !important; /* !important: gli stili dei campi sono sparsi in styled-jsx e classi Tailwind */
+  }
+
+  .theme-toggle { min-width: 44px !important; min-height: 44px !important; } /* stile inline 40x40 nel componente */
+  [role="tablist"] button, [role="option"] { min-height: 44px; }
+  .cp-carousel-arrow { width: 44px !important; height: 44px !important; } /* styled-jsx 32x32 */
+
+  /* Link in elenco e icone: l'area cliccabile si allarga con un pseudo-elemento trasparente, SENZA allungare il layout.
+     (Con min-height:44px il footer cresceva di ~330px e ogni pagina di ~400px a 390px: troppo, e non richiesto.)
+     Footer: link alti ~20px a passo 32px -> area di ~32px senza sovrapposizioni; icone social 11-17x28 -> area ~39x44. */
+  footer a, .link-sezione, a[href^="tel:"], a[href*="wa.me"], a[href*="whatsapp"] { position: relative; }
+  footer a::after, .link-sezione::after, a[href^="tel:"]::after, a[href*="wa.me"]::after, a[href*="whatsapp"]::after {
+    content: ""; position: absolute; inset: -6px -4px;
+  }
+  footer a[aria-label]::after { inset: -8px -14px; }
+
+  /* Chat: domande suggerite (34px) e pulsante di chiusura (24x24) */
+  .chatbot-root button:not(.chatbot-toggle) { min-height: 44px; }
+  .chatbot-root button[aria-label="Chiudi chat"] { min-width: 44px; }
+}
