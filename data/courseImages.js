@@ -34,6 +34,17 @@ const COURSE_IMAGES = {
   'addetti-macchina-raccogli-frutta-crf': '/images/corsi/raccogli-frutta.jpg',
   'addetti-macchina-raccogli-frutta-aggiornamento': '/images/corsi/raccogli-frutta.jpg',
   'patentino-fitosanitario': '/images/formazione-obbligatoria/patentino-fitosanitario.jpg',
+  // Corsi con qualifica ("corsi con qualifica/qualificati_*.png", 2545x1697, ottimizzate a 1200px come le altre).
+  // Attenzione: lo slug di famiglia del BLSD è "...-and-defibrillation", diverso dallo slug in coursesRaw.js.
+  'oss-operatore-socio-sanitario': '/images/corsi/oss.jpg',
+  'asacom-assistente-alla-comunicazione': '/images/corsi/asacom.jpg',
+  'blsd-basic-life-support-and-defibrillation': '/images/corsi/blsd.jpg',
+  // ICDL ("immagini/icdl/icdl_*.png"). Update NON collegata: icdl_Update.png ha una scritta "Update" con glifo rotto
+  // impressa nell'immagine (a sinistra, vicino alla finestra); resta la foto della scheda finché non arriva il file corretto.
+  // icdl_Full Standard.png e icdl_generica.png non hanno un corso corrispondente (nel catalogo: Base, Standard, DigComp 2.2, Update).
+  'icdl-base': '/images/corsi/icdl-base.jpg',
+  'icdl-standard': '/images/corsi/icdl-standard.jpg',
+  'icdl-digcomp-2-2': '/images/corsi/icdl-digcomp-2-2.jpg',
 };
 
 module.exports = { COURSE_IMAGES };
