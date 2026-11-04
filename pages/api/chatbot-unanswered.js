@@ -1,13 +1,17 @@
-import fs from 'fs';
-import path from 'path';
+// Domande del chatbot senza risposta: vengono scritte nei LOG DEL SERVER (una riga JSON per domanda) e la rotta risponde 200.
+// Prima scriveva su data/chatbot-log/unanswered.jsonl con fs.appendFileSync: su Vercel il disco è in sola lettura, quindi
+// ogni chiamata in produzione finiva in errore 500.
+// I log di Vercel si conservano per poco tempo: NON servono ad analizzare le domande nel tempo. Quando si collegherà il
+// foglio Google con l'account di servizio, le domande andranno salvate in una scheda "Domande chatbot" dello stesso foglio
+// (vedi MIGRAZIONE.md). Nessun nome né email: la domanda è testo libero, quindi email e numeri di telefono eventualmente
+// scritti dall'utente vengono oscurati prima di registrarla.
 
-// Log locale, semplice e persistente delle domande del chatbot senza risposta:
-// una riga JSON per domanda, così da poterle rivedere periodicamente e capire
-// quali contenuti/FAQ mancano. Nessun servizio email è ancora configurato nel
-// progetto (FormAzienda/FormCandidato simulano l'invio lato client), quindi si
-// evita di aggiungere una nuova dipendenza solo per questo.
-const LOG_DIR = path.join(process.cwd(), 'data', 'chatbot-log');
-const LOG_FILE = path.join(LOG_DIR, 'unanswered.jsonl');
+/** Oscura email e sequenze di cifre lunghe (telefoni, codici fiscali numerici) scritte per errore nella domanda */
+function oscuraDatiPersonali(testo) {
+  return testo
+    .replace(/[^\s@]+@[^\s@]+\.[^\s@]+/g, '[email]')
+    .replace(/\+?\d[\d\s().\-/]{5,}\d/g, '[numero]');
+}
 
 export default function handler(req, res) {
   if (req.method !== 'POST') {
@@ -21,7 +25,7 @@ export default function handler(req, res) {
   }
 
   const entry = {
-    question: question.trim().slice(0, 500),
+    question: oscuraDatiPersonali(question.trim().slice(0, 500)),
     page: typeof page === 'string' ? page.slice(0, 200) : '',
     // 'off-topic': filtro keyword o Gemini ha giudicato la domanda fuori tema.
     // 'ai-error': Gemini non configurato/in errore/timeout (matching locale non trovato).
@@ -29,13 +33,6 @@ export default function handler(req, res) {
     timestamp: new Date().toISOString(),
   };
 
-  try {
-    fs.mkdirSync(LOG_DIR, { recursive: true });
-    fs.appendFileSync(LOG_FILE, `${JSON.stringify(entry)}\n`);
-  } catch (err) {
-    console.error('chatbot-unanswered: impossibile scrivere il log', err);
-    return res.status(500).json({ error: 'Impossibile salvare la domanda' });
-  }
-
+  console.log(`[chatbot-unanswered] ${JSON.stringify(entry)}`);
   return res.status(200).json({ ok: true });
 }
