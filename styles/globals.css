@@ -651,16 +651,16 @@ html.dark .cta-nav-btn-outline:hover {
 /* Header compatto per tablet in orizzontale e laptop piccoli (12-13", iPad Pro in verticale): con gap e margini
    pensati per 1280px+ l'header occupa ~1174px e sotto quella larghezza il gruppo di destra usciva dallo schermo
    ("Piattaforma" tagliato di 118px a 1024px, non toccabile). Misurato: con queste regole tutto sta da 1000px in su
-   (margine destro 16px, respiro tra menu e pulsanti 29px a 1024px). Da 1280px in su NIENTE cambia. Sotto i 993px
+   (margine destro 16px, respiro tra menu e pulsanti 29px a 1024px). Da 1280px in su NIENTE cambia. Sotto i 1024px
    c'è l'hamburger. Il logo non si tocca. */
-@media (min-width: 993px) and (max-width: 1279px) {
+@media (min-width: 1024px) and (max-width: 1279px) {
   .site-header .container { padding-left: 0.75rem; padding-right: 1rem; }
   .navbar { gap: 1rem; margin-left: 1.25rem; }
   .navbar a { font-size: 0.85rem; }
   .header-right { gap: 0.75rem; }
   .cta-nav-btn-outline { padding: 0 0.9rem; font-size: 0.78rem; }
 }
-@media (min-width: 993px) and (max-width: 1039px) {
+@media (min-width: 1024px) and (max-width: 1039px) {
   .navbar { gap: 0.8rem; }
   .header-right { gap: 0.5rem; }
 }
@@ -2680,7 +2680,11 @@ html.dark .elearning p {
   }
 }
 
-@media (max-width: 768px) {
+/* Menu mobile (hamburger) fino a 1023px (era 768px). Tra 769 e 1023px (iPad Air/Pro 11" in verticale 820-834px, telefoni
+   in orizzontale, iPad mini/Pro 12.9" fino a 1024) l'header desktop non ci sta: "Piattaforma" usciva dallo schermo di
+   300px e non era toccabile. Il blocco contiene SOLO regole del menu/header: spostare la soglia non tocca altro layout.
+   Da 1024px c'è l'header desktop (compatto fino a 1279px, vedi sopra). */
+@media (max-width: 1023px) {
   .site-header {
     padding: 0.75rem 0;
     background: transparent;

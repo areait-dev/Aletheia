@@ -12,7 +12,7 @@ interface HeaderProps {
 
 // Voci di menu, gruppi del mega-menu "Formazione" e pulsanti arrivano dalle opzioni globali (WordPress o data/site-options.js).
 // I gruppi sono l'unica fonte dati condivisa tra il mega-menu desktop e la schermata Formazione del menu mobile
-// (sotto i 992px il mega-menu passa a position:static e finisce dietro l'overlay fisso del menu mobile, non
+// (sotto i 1024px il mega-menu passa a position:static e finisce dietro l'overlay fisso del menu mobile, non
 // cliccabile, quindi su mobile serve una resa alternativa).
 
 const isExternal = (href: string) => /^https?:\/\//.test(href);
@@ -145,7 +145,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
                       e.preventDefault();
                       if (menuOpen) {
                         // Mobile: apre la sotto-schermata dedicata invece del mega-menu
-                        // desktop (che sotto i 992px finirebbe nascosto dietro l'overlay).
+                        // desktop (che sotto i 1024px finirebbe nascosto dietro l'overlay).
                         setMobileFormazioneScreen(true);
                       } else {
                         setFormazioneOpen(!formazioneOpen);
@@ -184,7 +184,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
           {/* Sotto-schermata "Formazione": solo mobile, sostituisce la lista
               principale invece di espandersi in un accordion (che allungherebbe
               troppo il menu). Nascosta di default via CSS, mostrata solo sotto i
-              768px quando .navbar-screen-formazione è attiva. */}
+              1024px quando .navbar-screen-formazione è attiva. */}
           <div className="navbar-screen-formazione-panel">
             <button
               type="button"
