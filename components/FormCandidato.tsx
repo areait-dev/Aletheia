@@ -72,7 +72,7 @@ function Field({ label, required, error, children }: FieldProps) {
         color: error ? '#F87171' : 'rgba(255,255,255,0.75)',
         letterSpacing: '0.02em',
       }}>
-        {label}{required && <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--primary-on-dark)', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
       {error && (
@@ -301,7 +301,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                   style={{
                     marginTop: '0.5rem', padding: '0 1.75rem', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--btn-radius)',
                     background: 'rgba(1,136,145,0.15)', border: '1.5px solid rgba(1,136,145,0.4)',
-                    color: 'var(--primary-text)', fontWeight: 700, fontSize: '0.875rem',
+                    color: 'var(--primary-on-dark)', fontWeight: 700, fontSize: '0.875rem',
                     cursor: 'pointer', fontFamily: 'inherit',
                   }}
                 >
@@ -469,8 +469,8 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       </div>
                     </div>
                     <span style={{ fontSize: '0.825rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                      <LinkText text={moduli.privacyTesto} style={{ color: 'var(--primary-text)', textDecoration: 'underline' }} />
-                      <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>
+                      <LinkText text={moduli.privacyTesto} style={{ color: 'var(--primary-on-dark)', textDecoration: 'underline' }} />
+                      <span style={{ color: 'var(--primary-on-dark)', marginLeft: '2px' }}>*</span>
                     </span>
                   </label>
                   {errors.privacy && (
