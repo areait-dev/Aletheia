@@ -51,8 +51,8 @@
     "ASACOM - Assistente alla Comunicazione"
   ],
   "intestazioni": 2,
-  "testoLunghezza": 2072,
-  "testoSha1": "f814794dbad967a5d5aecc113b289bc688ec0b3a",
+  "testoLunghezza": 2081,
+  "testoSha1": "cdc07d638715e6820bc5e76de6f42e0715b4c410",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -85,6 +85,7 @@
     "/formazione/regionale-fse",
     "/news",
     "/pdf/catalogo.pdf",
+    "/pre-iscrizione?corso=ASACOM%20-%20Assistente%20alla%20Comunicazione",
     "/privacy-cookie",
     "/reclami-proposte",
     "/richiedi-preventivo?corso=ASACOM%20-%20Assistente%20alla%20Comunicazione",

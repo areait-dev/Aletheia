@@ -1,0 +1,132 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": "__variable_9302a3 __variable_37b1ed",
+  "classeBody": null,
+  "title": "Pre-iscrizione al corso - Alètheia Srl",
+  "description": [
+    "Pre-iscriviti a un corso Alètheia Srl a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): lasci i tuoi dati senza impegno e senza pagamento anticipato, ti contattiamo noi per quota e date."
+  ],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [
+    "https://www.aletheiasrl.it/pre-iscrizione"
+  ],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:title": [
+      "Pre-iscrizione al corso - Alètheia Srl"
+    ],
+    "og:description": [
+      "Pre-iscriviti a un corso Alètheia Srl a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): lasci i tuoi dati senza impegno e senza pagamento anticipato, ti contattiamo noi per quota e date."
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/pre-iscrizione"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Pre-iscrizione al corso - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Pre-iscriviti a un corso Alètheia Srl a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): lasci i tuoi dati senza impegno e senza pagamento anticipato, ti contattiamo noi per quota e date."
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ]
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://cdnjs.cloudflare.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Pre-iscrizione al corso"
+  ],
+  "intestazioni": 3,
+  "testoLunghezza": 1874,
+  "testoSha1": "18b99f17d35f6fa50285c4fc01d1186bc5c70ce0",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/all-courses",
+    "/all-courses?categoria=certificazione",
+    "/all-courses?categoria=certificazioni-informatiche",
+    "/all-courses?categoria=decreto-attrezzature",
+    "/all-courses?categoria=fitosanitario",
+    "/all-courses?categoria=sicurezza-alimentare",
+    "/all-courses?categoria=sicurezza-lavoro",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/pdf/catalogo.pdf",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 7,
+  "immaginiAlt": "39d27fb0dc79abf5013c3ea4646380caea17bdd4"
+}

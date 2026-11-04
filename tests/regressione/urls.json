@@ -400,6 +400,9 @@
       "url": "/richiedi-preventivo"
     },
     {
+      "url": "/pre-iscrizione"
+    },
+    {
       "url": "/all-courses?categoria=fse-plus",
       "visivo": false
     },
