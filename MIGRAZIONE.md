@@ -34,6 +34,27 @@ Branch `ottimizzazione-mobile` (HEAD `0c57f25`), 12 commit sopra `master` `022ae
 - Misurato a 390 px: campi sotto i 16 px da 1-7 a 0 per pagina; aree sotto i 44 px da 35-44 a ~10-17; scroll dietro il menu aperto da +547 a 0 px.
 - **Lighthouse mobile, mediana di 3 passate, base → finale** (`mobile-base.json` → `mobile-finale.json`, stessa macchina e procedura; codice finale poi ritoccato solo con CSS sotto `pointer: coarse`): JS KB, CLS (0) e Accessibilità **identici su tutte le pagine**; Performance e LCP dentro la dispersione (es. `/all-courses` 71 → 83 solo perché la mediana ha pescato due passate "veloci" di ~2 s invece di due "lente" di ~5 s: le singole passate sono le stesse due modalità). Home 97 → 96, contatti 97 → 99, calendario 98 → 94 (TBT 73 → 140), news 81 → 77 (3 passate su 3 più basse: 72/77/79 contro 80/82/81; TBT 89 → 197): non dimostrato come regressione né spiegato, **da ricontrollare con 5 passate** sull'anteprima. Lighthouse desktop **non** rifatto in questa fase (a 1440 px gli screenshot sono identici e sopra i 1280 px il CSS non cambia).
 
+**Verifica iPad in WebKit prima del merge (4 novembre 2026)** — WebKit 26.5 di Playwright (profilo iPad con touch e DPR 2), build di produzione dello stesso codice dell'anteprima (`9b6dedf`; dopo di esso solo documentazione e test). 12 misure x 7 pagine (home, `/all-courses` con e senza `?categoria=`, `/all-courses/antincendio`, `/calendario-corsi`, `/contatti`, una news) = 84 caricamenti, più le prove di tocco su `/all-courses` per ogni misura. **Zero problemi su tutte le righe.** Controlli per riga: nessun overflow orizzontale; header completo dentro lo schermo con "Piattaforma" visibile e toccabile (il punto centrale colpisce il pulsante); sidebar che non copre le card; la chat non si sovrappone al banner né copre elementi cliccabili (a 4 posizioni di scroll); menu al tocco funzionante. Screenshot: `Desktop\ottimizzazione-mobile-fase1\ipad-finale\<larghezza>x<altezza>-all-courses.png` (più `-menu-aperto`/`-mega-menu`/`-piattaforma`).
+
+| Misura (px) | Header | Menu al tocco | Spazio libero tra menu e pulsanti | Sidebar | Screenshot |
+|---|---|---|---|---|---|
+| iPad mini 6 verticale 744x1133 | hamburger | apre, Formazione, Escape e pulsante chiudono, scroll bloccato | – | non sticky, non copre | `744x1133-all-courses.png` |
+| iPad mini 6 orizzontale 1133x744 | desktop compatto | mega-menu e "Piattaforma" aprono, si chiudono toccando fuori | 111 px | sticky, non copre | `1133x744-all-courses.png` |
+| iPad 9,7"/mini 5 verticale 768x1024 | hamburger | come sopra | – | non sticky, non copre | `768x1024-all-courses.png` |
+| iPad 9,7"/mini 5 orizzontale 1024x768 | desktop compatto | come sopra | **26 px** | sticky, non copre | `1024x768-all-courses.png` |
+| iPad Air verticale 820x1180 | hamburger | come sopra | – | non sticky, non copre | `820x1180-all-courses.png` |
+| iPad Air orizzontale 1180x820 | desktop compatto | come sopra | 158 px | sticky, non copre | `1180x820-all-courses.png` |
+| iPad Pro 11" verticale 834x1194 | hamburger | come sopra | – | non sticky, non copre | `834x1194-all-courses.png` |
+| iPad Pro 11" orizzontale 1194x834 | desktop compatto | come sopra | 172 px | sticky, non copre | `1194x834-all-courses.png` |
+| iPad Pro 12,9" verticale 1024x1366 | desktop compatto | come sopra | **26 px** | sticky, non copre | `1024x1366-all-courses.png` |
+| iPad Pro 12,9" orizzontale 1366x1024 | desktop | come sopra | 188 px | sticky, non copre | `1366x1024-all-courses.png` |
+| iPad Pro 13" verticale 1032x1376 | desktop compatto | come sopra | **34 px** | sticky, non copre | `1032x1376-all-courses.png` |
+| iPad Pro 13" orizzontale 1376x1032 | desktop | come sopra | 198 px | sticky, non copre | `1376x1032-all-courses.png` |
+
+Banner cookie: alto 6-10% dello schermo su tutte le misure. Resta, fino alla scelta, **un solo elemento cliccabile sotto il banner a fine pagina** (il link in fondo al footer): comportamento del banner fisso, non toccato in questa fase. Lo scroll bloccato è verificato con il tasto Fine (che con il menu chiuso scorre la pagina: la prova "sente" lo scroll).
+
+*Header a 1024 e 1032 px (iPad da 13" in verticale e iPad mini 5 in orizzontale), misurato in WebKit:* margine destro 16 px; logo→menu 20 px; **ultimo link→icona tema 26 px a 1024 e 34 px a 1032**; tema→"Sei un docente? Candidati" e questo→"Piattaforma" 8 px (12 px da 1040 px); l'icona del tema sta in un riquadro da 44 px, quindi a vista il distacco da "Contatti" è maggiore dei 26 px. **Giudizio: sta, non è al limite** (nessuna sovrapposizione, nessun elemento tagliato, tutto toccabile), ma senza molta riserva. Il punto più stretto in assoluto non è 1024 ma **1040 px (18 px liberi)**, dove la compattazione cambia livello. Non ho alzato la soglia dell'hamburger (1023 px): lo si farebbe solo se si prevede di aggiungere voci al menu o di allungare le etichette (una voce in più, ~70-90 px, farebbe uscire il gruppo di destra fino a circa 1100-1130 px). Alzarla a 1099 px darebbe l'hamburger a iPad mini 5 e Pro 12,9"/13" in verticale e a iPad 10,2" in orizzontale (1080 px): si perde l'header desktop su quei dispositivi. Decisione del committente.
+
 **Non fatto / da decidere**
 - **Banner cookie come elemento LCP** (causa dimostrata del 2,3 s su `/all-courses` e pagine corso): **approvato, ma su un branch separato** (vedi "Decisioni del 4 novembre" qui sotto).
 - Font Awesome da cdnjs bloccante (~1,1 s stimati), `LazyMotion` per la griglia dei corsi (JS 192 KB, TBT 305-469 ms), logo servito a 640 px: non toccati.
