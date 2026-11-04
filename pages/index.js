@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 import NumberCounter from '../components/NumberCounter';
 import SeoHead from '../components/SeoHead';
@@ -222,13 +223,16 @@ function CorsiCalendarTabs({ giorni }) {
 
 const SEARCH_CATEGORIES = [
   { value: '', label: 'Tutte le categorie' },
-  { value: 'fse', label: 'Formazione Finanziata' },
-  { value: 'obbligatoria', label: 'Formazione Obbligatoria' },
-  { value: 'professionale', label: 'Formazione Professionale e PA' },
+  { value: 'fse', label: 'Formazione Finanziata', pagina: '/formazione/regionale-fse' },
+  { value: 'obbligatoria', label: 'Formazione Obbligatoria', filtro: 'categoria=sicurezza-lavoro' },
+  { value: 'professionale', label: 'Formazione Professionale e PA', filtro: 'macro=professionale' },
   { value: 'offerte', label: 'Offerte di lavoro', href: 'https://aletheia4job.it/' },
 ];
+// `filtro` = parametro di /all-courses (sotto-categoria ?categoria= o macro-categoria ?macro=).
+// `pagina`: il catalogo non ha corsi finanziati (hanno pagine proprie), quindi senza testo si apre la pagina.
 
 function HeroSearch() {
+  const router = useRouter();
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState('');
   const [open, setOpen] = useState(false);
@@ -248,14 +252,34 @@ function HeroSearch() {
   const selectedLabel =
     SEARCH_CATEGORIES.find((c) => c.value === selected)?.label || 'Tutte le categorie';
 
+  // Porta al catalogo con testo (?q=) e categoria scelta già applicati ai filtri
+  function handleSubmit(e) {
+    e.preventDefault();
+    const params = [];
+    const testo = query.trim();
+    if (testo) params.push(`q=${encodeURIComponent(testo)}`);
+    const cat = SEARCH_CATEGORIES.find((c) => c.value === selected);
+    if (cat?.pagina && !testo) {
+      router.push(cat.pagina);
+      return;
+    }
+    if (cat?.filtro) params.push(cat.filtro);
+    router.push(`/all-courses${params.length ? `?${params.join('&')}` : ''}`);
+  }
+
   return (
-    <div className="relative z-[9999] flex flex-col sm:flex-row items-stretch gap-2 sm:gap-1 mt-8 max-w-2xl mx-auto bg-white/10 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-3xl sm:rounded-full p-2 focus-within:border-white/60 dark:focus-within:border-white/40 transition-colors">
+    <form
+      role="search"
+      onSubmit={handleSubmit}
+      className="relative z-[9999] flex flex-col sm:flex-row items-stretch gap-2 sm:gap-1 mt-8 max-w-2xl mx-auto bg-white/10 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-3xl sm:rounded-full p-2 focus-within:border-white/60 dark:focus-within:border-white/40 transition-colors"
+    >
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        aria-label="Cerca un corso"
         placeholder="Di cosa hai bisogno? Cerca un corso..."
-        className="flex-1 px-5 py-2.5 bg-transparent text-white placeholder-white/50 dark:placeholder-white/40 focus:outline-none rounded-full"
+        className="flex-1 px-5 py-2.5 bg-transparent text-white placeholder-white/70 focus:outline-none rounded-full"
       />
 
       <div className="hidden sm:block w-px self-center h-6 bg-white/20" aria-hidden="true" />
@@ -314,12 +338,12 @@ function HeroSearch() {
       </div>
 
       <button
-        type="button"
+        type="submit"
         className="px-8 min-h-[44px] inline-flex items-center justify-center bg-[#018891] hover:bg-[#006B73] dark:bg-[#018891] dark:hover:bg-[#006B73] text-white font-bold text-sm rounded-full transition-all duration-200 whitespace-nowrap"
       >
         Cerca
       </button>
-    </div>
+    </form>
   );
 }
 

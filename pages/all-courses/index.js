@@ -143,12 +143,20 @@ export default function AllCourses({ coursesRaw, pagina }) {
   // Al mount (o quando cambia la query) leggo ?categoria= e imposto il filtro granulare corrispondente
   useEffect(() => {
     if (!router.isReady) return;
-    const { categoria } = router.query;
+    const { categoria, macro, q } = router.query;
+    // ?q= testo di ricerca (barra della home); ?macro= macro-categoria (categoryMeta); ?categoria= sotto-categoria
+    if (typeof q === 'string') setSearchTerm(q);
     if (categoria && subCategoryMeta[categoria]) {
       setSelectedSub(categoria);
       setSelectedCategory(''); // i due filtri sono mutuamente esclusivi
+    } else if (typeof macro === 'string' && categoryMeta[macro]) {
+      setSelectedCategory(macro);
+      setSelectedSub('');
     }
   }, [router.isReady, router.query]);
+
+  // Pulisce i parametri di filtro dall'URL (shallow) per non riapplicarli o lasciarli incoerenti
+  const hasFilterParams = !!(router.query.categoria || router.query.macro || router.query.q);
 
   // Reset di tutti i filtri senza ricaricare la pagina (pulisco anche il query param in modo shallow)
   const resetFilters = () => {
@@ -156,7 +164,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
     setSearchTerm('');
     setSelectedCategory('');
     setSelectedSub('');
-    if (router.query.categoria) {
+    if (hasFilterParams) {
       router.replace('/all-courses', undefined, { shallow: true });
     }
   };
@@ -166,7 +174,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
     scrollToCourses();
     setSelectedCategory(key);
     setSelectedSub('');
-    if (router.query.categoria) {
+    if (hasFilterParams) {
       router.replace('/all-courses', undefined, { shallow: true });
     }
   };
@@ -229,7 +237,8 @@ export default function AllCourses({ coursesRaw, pagina }) {
       <div className="max-w-[1680px] mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10" style={{ minHeight: '100vh' }}>
 
         {/* SIDEBAR */}
-        <aside className="space-y-4" style={{ position: 'sticky', top: '5rem', height: 'fit-content' }}>
+        {/* Sticky solo da lg: sotto i 1024px il layout è a una colonna e una sidebar sticky copriva le card */}
+        <aside className="space-y-4 h-fit lg:sticky lg:top-20">
           {/* Search */}
           <div className="bg-white dark:bg-dark-card rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)]">
             <div className="flex items-center gap-3 border border-slate-200 dark:border-gray-600 rounded-xl px-4 py-3 transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
