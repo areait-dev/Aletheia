@@ -3339,17 +3339,20 @@ html.dark .legal-content td { border-bottom-color: #1F2937; }
     font-size: 16px !important; /* !important: gli stili dei campi sono sparsi in styled-jsx e classi Tailwind */
   }
 
-  .link-sezione { min-height: 44px; }
   .theme-toggle { min-width: 44px !important; min-height: 44px !important; } /* stile inline 40x40 nel componente */
   [role="tablist"] button, [role="option"] { min-height: 44px; }
   .cp-carousel-arrow { width: 44px !important; height: 44px !important; } /* styled-jsx 32x32 */
 
-  /* Footer: link e icone social (erano alti 20-28px e larghi 11-17px) */
-  footer a { display: inline-flex; align-items: center; min-height: 44px; }
-  footer a[aria-label] { min-width: 44px; justify-content: center; }
+  /* Link in elenco e icone: l'area cliccabile si allarga con un pseudo-elemento trasparente, SENZA allungare il layout.
+     (Con min-height:44px il footer cresceva di ~330px e ogni pagina di ~400px a 390px: troppo, e non richiesto.)
+     Footer: link alti ~20px a passo 32px -> area di ~32px senza sovrapposizioni; icone social 11-17x28 -> area ~39x44. */
+  footer a, .link-sezione, a[href^="tel:"], a[href*="wa.me"], a[href*="whatsapp"] { position: relative; }
+  footer a::after, .link-sezione::after, a[href^="tel:"]::after, a[href*="wa.me"]::after, a[href*="whatsapp"]::after {
+    content: ""; position: absolute; inset: -6px -4px;
+  }
+  footer a[aria-label]::after { inset: -8px -14px; }
 
-  /* Chat: domande suggerite (34px) e pulsante di chiusura (24x24); link di telefono e WhatsApp (36px) */
+  /* Chat: domande suggerite (34px) e pulsante di chiusura (24x24) */
   .chatbot-root button:not(.chatbot-toggle) { min-height: 44px; }
   .chatbot-root button[aria-label="Chiudi chat"] { min-width: 44px; }
-  a[href^="tel:"], a[href*="wa.me"], a[href*="whatsapp"] { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
 }
