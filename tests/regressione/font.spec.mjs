@@ -96,3 +96,26 @@ test('WebKit (iPad): navbar, body, testo e pulsanti in Nunito, titoli in Viga @r
     for (const [k, f] of Object.entries(font)) { const atteso = k === 'titolo' ? 'Viga' : 'Nunito'; expect(f, `WebKit ${w}px ${url}: ${k} in "${f}" invece di ${atteso}`).toBe(atteso); }
   }
 });
+
+// Rete di sicurezza in globals.css (:where(:root) con "Nunito"/"Viga"): scritta con i nomi che next/font dichiara nei suoi
+// @font-face. Questo test la rende AUTO-VERIFICANTE: se una versione futura di Next cambiasse i nomi delle famiglie, fallisce.
+// In più segnala (senza far fallire) il disallineamento delle classi .variable di next/font: causa del bug in produzione
+// (Google Fonts risponde in due forme diverse per Nunito e server e client possono ricevere forme diverse: hash diversi).
+test('rete di sicurezza dei font: i nomi nel :root coincidono con i @font-face; segnala classi di next/font non definite @rapido', async ({ page }) => {
+  await apri(page, '/', 1024, 768);
+  const r = await page.evaluate(() => {
+    const regole = [];
+    for (const sh of Array.from(document.styleSheets)) { try { regole.push(...Array.from(sh.cssRules)); } catch { /* foglio di un altro dominio (Font Awesome) */ } }
+    const famiglie = new Set(); const selettori = []; let radice = null;
+    for (const rule of regole) {
+      if (rule instanceof CSSFontFaceRule) famiglie.add(rule.style.getPropertyValue('font-family').replace(/["']/g, '').trim());
+      else if (rule.selectorText) { selettori.push(rule.selectorText); if (rule.selectorText === ':where(:root)') radice = { nunito: rule.style.getPropertyValue('--font-nunito'), viga: rule.style.getPropertyValue('--font-viga') }; }
+    }
+    const classi = Array.from(document.documentElement.classList).filter((c) => c.startsWith('__variable_'));
+    return { famiglie: Array.from(famiglie), radice, classi, nonDefinite: classi.filter((c) => !selettori.some((s) => s.includes('.' + c))) };
+  });
+  expect(r.radice, 'la regola :where(:root) con --font-nunito/--font-viga non c\'è in globals.css').not.toBeNull();
+  const nomi = (v) => v.split(',').map((x) => x.replace(/["']/g, '').trim());
+  for (const nome of [...nomi(r.radice.nunito), ...nomi(r.radice.viga)]) expect(r.famiglie, `:root usa "${nome}" ma nessun @font-face dichiara questa famiglia (next/font ha cambiato i nomi?)`).toContain(nome);
+  if (r.nonDefinite.length) test.info().annotations.push({ type: 'avviso', description: `classi next/font su <html> non definite nel CSS: ${r.nonDefinite.join(', ')} (disallineamento server/client, coperto dalla rete di sicurezza del :root)` });
+});
