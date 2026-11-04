@@ -1807,11 +1807,10 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 );
               }
 
-              /* CASO 3 - Iscrizione online senza pagamento anticipato, a soglia (OSS, ASACOM,
-                 Conduttore d'Impresa Agricola): il pulsante "Iscriviti" incrementa il conteggio
-                 iscritti (EnrollmentProgress) invece di puntare solo a un link statico - al
-                 raggiungimento di 15 iscrizioni lo staff viene avvisato per ricontattare gli
-                 iscritti e avviare il corso. */
+              /* CASO 3 - Pre-iscrizione senza pagamento anticipato, corsi a partenza differita (OSS, ASACOM,
+                 Conduttore d'Impresa Agricola): il pulsante "Pre-iscriviti" (EnrollmentProgress) porta al modulo
+                 /pre-iscrizione, che arriva a info@ via Resend. Nessun contatore né notifica automatica a soglia:
+                 non c'è un dato reale da cui leggere il numero di iscritti (vedi MIGRAZIONE.md). */
               if (course.enrollOnly) {
                 return (
                   <>
@@ -1824,7 +1823,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                             <span className="text-[0.7rem] font-bold text-slate-600 dark:text-slate-400">Quota di iscrizione</span>
                             <span className="text-brand-500 dark:text-primary-on-dark font-black text-3xl tracking-tight mt-0.5">Su richiesta</span>
                           </div>
-                          <EnrollmentProgress courseId={slug} courseTitle={course.title} />
+                          <EnrollmentProgress courseTitle={course.title} />
                           <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
                             <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
                             <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
