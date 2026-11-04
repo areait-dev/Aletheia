@@ -91,6 +91,20 @@ html {
   }
 }
 
+/* Variabili dei font: RETE DI SICUREZZA indipendente dai nomi di classe di next/font.
+   Bug in produzione (Vercel, Linux; non in locale su Windows): il nome della classe .variable di Nunito generato per il
+   server (__variable_e34b07, messa su <html> e sul contenitore di _app) era diverso da quello definito nel CSS emesso
+   (__variable_b93571). Risultato: --font-nunito NON definita su html/body, quindi "font-family: var(--font-nunito),
+   sans-serif" era non valida in fase di calcolo e body, navbar, sottotitoli e pulsanti ricadevano nel serif predefinito
+   (Times); i titoli restavano in Viga perché per Viga i due nomi coincidevano.
+   Qui le variabili sono definite con i nomi delle famiglie che next/font dichiara nei suoi @font-face ("Nunito",
+   "Viga" e i font di ripiego "Nunito Fallback"/"Viga Fallback"). :where() dà specificità 0: se la classe di next/font
+   coincide (valore identico) vince lei, altrimenti restano queste. Controllato da tests/regressione/font.spec.mjs. */
+:where(:root) {
+  --font-nunito: "Nunito", "Nunito Fallback";
+  --font-viga: "Viga", "Viga Fallback";
+}
+
 html {
   scroll-behavior: smooth;
   /* overflow-x: clip (non "hidden"): impedisce lo scroll orizzontale senza il
