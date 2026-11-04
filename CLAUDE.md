@@ -40,7 +40,7 @@ CSS & Styling Approach
 CSS Variables (`--primary`, `--text-dark`, `--shadow-md`, etc.) defined in `globals.css` for consistency and theming
 Tailwind CSS via `@tailwind` directives in globals.css
 Inline styles used in components for dynamic, data-driven styling (e.g., badge colors, hover states)
-Font: Nunito (testo) e Viga (titoli) da Google Fonts, caricati in _document.js
+Font: Nunito (testo) e Viga (titoli) con `next/font/google` (`lib/fonts.js`, self-hosted), mai un `font-family` per nome: si usa sempre `var(--font-nunito)` / `var(--font-viga)`. Le variabili sono definite anche sul `:root` in `globals.css` (`:where(:root)`, rete di sicurezza): in produzione (Vercel) le classi `.variable` di next/font su `<html>` possono non coincidere con quelle del CSS e senza quella riga il testo ricade nel font predefinito del browser. `tests/regressione/font.spec.mjs` controlla il font realmente usato; con `URL_BASE=https://…` si esegue contro l'anteprima o la produzione
 Icon library: Font Awesome 6.4.0 (via CDN in `_app.js`)
 Component Architecture
 Most components are stateless or manage minimal UI state (e.g., hover, menu toggle)
