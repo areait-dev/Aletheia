@@ -7,7 +7,9 @@
 import { test, expect } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
+import * as cheerio from 'cheerio';
 import { CONSENSO } from './font-comune.mjs';
+import { urls } from './util.mjs';
 
 const CATTURE = process.env.CATTURE_MODULI;
 const SALTA_SERVER_VERO = !!process.env.URL_BASE;
@@ -265,4 +267,46 @@ test('contatti: da ?corso= si precompilano oggetto e messaggio; conferma centrat
   });
   expect(Math.abs(g.sopra - g.sotto) / g.altezza, `la conferma deve stare al centro della scheda (sopra ${g.sopra}px, sotto ${g.sotto}px)`).toBeLessThan(0.15);
   await cattura(page, 'contatti-1-riuscito-centrato', 'h3:has-text("inviato")');
+});
+
+// ── Pre-iscrizione (corsi a partenza differita: OSS, ASACOM, Conduttore d'Impresa Agricola) ──────────
+
+test('corsi a iscrizione differita: "Pre-iscriviti" porta al modulo, niente contatore né promesse di avviso @rapido', async ({ request }) => {
+  const trovate = [];
+  for (const u of urls.map((x) => x.url).filter((x) => /^\/all-courses\/[^?/]+$/.test(x))) {
+    const html = await (await request.get(u)).text();
+    const $ = cheerio.load(html);
+    // su TUTTE le schede: niente contatore, niente promessa di avviso, niente vecchio pulsante
+    const testo = $('body').text();
+    expect(testo, `${u}: contatore di iscritti ancora presente`).not.toMatch(/\d+\/15 iscritti/);
+    expect(testo, `${u}: promessa di avviso allo staff`).not.toMatch(/Iscrizione registrata|Corso confermato|lo staff (viene|verrà) avvisato/i);
+    expect($('button').filter((_, e) => /^\s*iscriviti\s*$/i.test($(e).text())).length, `${u}: il vecchio pulsante "Iscriviti" non deve esistere`).toBe(0);
+    const link = $('a').filter((_, e) => /pre-iscriviti/i.test($(e).text()));
+    if (!link.length) continue;
+    trovate.push(u);
+    expect(link.length, `${u}: un solo pulsante Pre-iscriviti`).toBe(1);
+    expect(link.attr('href'), `${u}`).toMatch(/^\/pre-iscrizione\?corso=.+/);
+  }
+  // Oggi la pagina scheda usa questo caso solo per OSS e ASACOM (Conduttore e BLSD hanno il flag nei dati ma un altro caso li precede)
+  expect(trovate.sort(), 'schede con "Pre-iscriviti"').toEqual(['/all-courses/asacom-assistente-alla-comunicazione', '/all-courses/oss-operatore-socio-sanitario']);
+});
+
+test('pre-iscrizione: corso precompilato, validazione e i tre stati @rapido', async ({ page }) => {
+  await provaTreStati(page, {
+    nome: 'preiscrizione', url: '/pre-iscrizione?corso=Operatore%20Socio%20Sanitario%20(OSS)', rotta: 'preiscrizione', titoloOk: 'Pre-iscrizione inviata!',
+    oggetto: '[Sito] Pre-iscrizione: Operatore Socio Sanitario (OSS)', attesoNelCorpo: ['Operatore Socio Sanitario (OSS)', 'mario@esempio.it', '333 1234567'],
+    compila: async (p) => {
+      await expect(p.locator('#corso')).toHaveValue('Operatore Socio Sanitario (OSS)');
+      await expect(p.locator('h1')).toHaveCount(1);
+      await p.fill('#nome', 'Mario Rossi'); await p.fill('#email', 'mario@esempio.it'); await p.fill('#telefono', '333 1234567'); await p.check('#privacy');
+    },
+    invia: (p) => p.getByRole('button', { name: /Invia la pre-iscrizione/i }).click(),
+  });
+  // modulo vuoto: errori e nessuna richiesta
+  await prepara(page, '/pre-iscrizione');
+  let chiamate = 0;
+  await page.route('**/api/moduli/preiscrizione', async (r) => { chiamate++; await r.fulfill({ status: 200, contentType: 'application/json', body: '{"stato":"ok"}' }); });
+  await page.getByRole('button', { name: /Invia la pre-iscrizione/i }).click();
+  expect(await page.locator('[role="alert"]').count()).toBeGreaterThanOrEqual(4);
+  expect(chiamate).toBe(0);
 });
