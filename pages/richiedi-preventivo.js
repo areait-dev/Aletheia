@@ -280,10 +280,11 @@ export default function RichiediPreventivo() {
                   </p>
                   <div className="flex flex-col gap-2">
                     <a href={`tel:${identita.telefono.replace(/[^+\d]/g, '')}`} className="flex items-center gap-3 font-semibold text-sm text-primary-text dark:text-primary-on-dark no-underline hover:underline">
-                      <i className="fas fa-phone w-4 text-center" aria-hidden="true" /> {identita.telefono}
+                      {/* Niente classe `text-center` sulle icone: in globals.css .text-center aggiunge margin-top:3rem e spingeva l'icona sotto il testo */}
+                      <i className="fas fa-phone w-4 shrink-0 [text-align:center]" aria-hidden="true" /> {identita.telefono}
                     </a>
                     <a href={`mailto:${identita.email}`} className="flex items-center gap-3 font-semibold text-sm text-primary-text dark:text-primary-on-dark no-underline hover:underline break-all">
-                      <i className="fas fa-envelope w-4 text-center" aria-hidden="true" /> {identita.email}
+                      <i className="fas fa-envelope w-4 shrink-0 [text-align:center]" aria-hidden="true" /> {identita.email}
                     </a>
                   </div>
                 </div>
