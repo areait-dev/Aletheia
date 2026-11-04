@@ -6,6 +6,10 @@ import path from 'node:path';
 import os from 'node:os';
 
 const PORTA = process.env.PORTA_TEST || '3101';
+// URL_BASE: esegue i test contro un indirizzo già online (anteprima o produzione di Vercel) invece della build locale: senza
+// avvio del server. Serve ai test che devono vedere l'ambiente reale (es. font.spec.mjs, che in locale su Windows non poteva
+// vedere un problema che compare solo nella build di Vercel). Le anteprime protette da login richiedono una chiave di bypass.
+const URL_BASE = process.env.URL_BASE;
 
 // Chromium già presente sul computer (la build attesa da Playwright 1.61 potrebbe non essere scaricata):
 // si usa la più recente tra quelle installate in ms-playwright, a meno che non sia impostato CHROMIUM_PATH.
@@ -42,14 +46,14 @@ export default defineConfig({
     },
   },
   use: {
-    baseURL: `http://127.0.0.1:${PORTA}`,
+    baseURL: URL_BASE || `http://127.0.0.1:${PORTA}`,
     locale: 'it-IT',
     timezoneId: 'Europe/Rome',
     // Con riduzione del movimento il sito mostra subito i contenuti (Reveal, contatori, animazioni dei titoli).
     reducedMotion: 'reduce',
     launchOptions: { executablePath: trovaChromium() },
   },
-  webServer: {
+  webServer: URL_BASE ? undefined : {
     command: `node node_modules/next/dist/bin/next start -p ${PORTA} -H 127.0.0.1`,
     env: { NEXT_DIST_DIR: process.env.NEXT_DIST_DIR || '.next-test' },
     url: `http://127.0.0.1:${PORTA}/`,
