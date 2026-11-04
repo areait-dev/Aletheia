@@ -9,12 +9,11 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 **In produzione (`master`, https://aletheiasrl.vercel.app).** Tre merge, uno alla volta, ognuno con push, deploy su Vercel e test sulla produzione prima del successivo:
 1. `invio-moduli` (`ea84a12`) → i sette moduli inviano via Resend da `pages/api/moduli/<tipo>.ts`. **Senza `RESEND_API_KEY` non c'è nessun invio finto**: il modulo dice che l'invio non è attivo e offre l'email già compilata e il telefono. Verificato in produzione: per tutti e sette GET 405, modulo vuoto 400, campo-trappola 200 senza invio, troppo veloce 429; test nel browser 8/8, font 7/7, preventivo 2/2.
 2. `preiscrizione-corsi` (`0a59b5c`) → ottavo modulo `/pre-iscrizione?corso=…` e "Pre-iscriviti" per OSS e ASACOM al posto dell'iscrizione finta in `localStorage`. Verificato in produzione: rotta, pagina, pulsanti, 12/12 test nel browser.
-3. `chatbot-log` → `/api/chatbot-unanswered` scrive nei log del server e risponde 200 (prima 500 su Vercel). **STATO: merge in `master` con il conflitto in `MIGRAZIONE.md` già risolto nel file, ma COMMIT, PUSH e CONTROLLO DEL DEPLOY NON ANCORA FATTI** (la shell era bloccata da un errore transitorio del controllo di sicurezza). Per concludere: `git add MIGRAZIONE.md && git commit --no-edit`, `git push origin master`, aspettare il deploy su Vercel, poi `node` di un controllo della rotta (POST con domanda vuota → 400, con domanda → 200) e `npx playwright test tests/regressione/chatbot-log.spec.mjs`. Se il repository è ancora in "merging", `git status` lo mostra.
+3. `chatbot-log` → `/api/chatbot-unanswered` scrive nei log del server e risponde 200 (prima 500 su Vercel). `e4bd3dc`, in produzione e verificato: POST con domanda vuota 400, con domanda 200, GET 405; `chatbot-log.spec.mjs` e `preventivo.spec.mjs` verdi (5/5).
 
 **Non provato in produzione, e perché.** Il vero "senza chiave": con un modulo compilato bene, se la chiave ci fosse, partirebbe un'email vera (si vede in locale con `npm run test:rapido` o in una Preview senza la variabile). I test `metadata` e `interazioni` non valgono con `URL_BASE` (riferimenti della build di test); con `URL_BASE` valgono `font.spec`, `preventivo.spec`, `moduli-ui.spec`.
 
 **Da fare, nell'ordine.**
-- **Concludere il merge 3** (sopra).
 - **Resend, solo prima di andare online:** account, dominio e DNS, variabili su Vercel, privacy policy con Resend responsabile del trattamento, prove (checklist qui sotto).
 - **Prova su un iPad vero** prima dei DNS.
 - **Risposte ancora da dare** (il messaggio aveva i segnaposto): "Pre-iscriviti" anche per Conduttore d'Impresa Agricola e BLSD? (oggi il flag `enrollOnly` è nei dati ma la scheda usa un altro caso); il minimo «15 iscrizioni» nelle schede è corretto?
