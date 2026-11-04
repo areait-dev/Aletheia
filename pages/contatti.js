@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SeoHead from '../components/SeoHead';
@@ -79,6 +80,21 @@ export default function Contatti({ sedi: SEDI, pagina }) {
     privacy: false,
   });
   const [errors, setErrors] = useState({});
+  const router = useRouter();
+
+  // ?corso=<titolo>: i corsi finanziati/gratuiti ("Richiedi informazioni") arrivano qui con il titolo nell'indirizzo, come
+  // il preventivo. Si precompilano oggetto e messaggio, senza mai sovrascrivere ciò che l'utente ha già scritto.
+  useEffect(() => {
+    if (!router.isReady) return;
+    const { corso } = router.query;
+    const titolo = typeof corso === 'string' ? corso.trim().slice(0, 200) : '';
+    if (!titolo) return;
+    setForm((p) => ({
+      ...p,
+      motivo: p.motivo || (contatti.motivi.includes('Informazioni su un corso') ? 'Informazioni su un corso' : p.motivo),
+      messaggio: p.messaggio || `Buongiorno, vorrei ricevere informazioni sul corso «${titolo}».`,
+    }));
+  }, [router.isReady, router.query]); // eslint-disable-line react-hooks/exhaustive-deps
   const [hoveredBtn, setHoveredBtn] = useState(false);
   // Invio reale: il server (pages/api/moduli/contatti) risponde "ok" solo se Resend ha accettato l'email.
   const { inviando: isSubmitting, esito, invia, azzera } = useInvioModulo('contatti', identita.email);
@@ -438,6 +454,8 @@ export default function Contatti({ sedi: SEDI, pagina }) {
               padding: '2.5rem',
               boxShadow: '0 4px 30px rgba(0,0,0,0.05)',
               alignSelf: 'stretch',
+              // Dopo l'invio la scheda resta alta quanto la colonna accanto: il messaggio di conferma si centra, niente vuoto in cima
+              ...(sent ? { display: 'flex', flexDirection: 'column', justifyContent: 'center' } : {}),
             }}>
               {sent ? (
                 <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
@@ -553,7 +571,8 @@ export default function Contatti({ sedi: SEDI, pagina }) {
                     </button>
 
                     <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>
-                      I tuoi dati sono al sicuro e non verranno condivisi con terze parti.
+                      I tuoi dati sono usati solo per rispondere alla tua richiesta, come descritto nella{' '}
+                      <a href="/privacy-cookie" className="text-primary-text dark:text-primary-on-dark" style={{ fontWeight: 700 }}>Privacy Policy</a>.
                     </p>
 
                   </form>
