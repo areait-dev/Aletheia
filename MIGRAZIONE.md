@@ -16,7 +16,7 @@ Branch `ottimizzazione-mobile` da `master` (`022ae44`, Next 16.4.4 già unito, s
 
 ## Ottimizzazione mobile – Fase 2 e 3 (4 novembre 2026): layout e touch per telefoni, tablet e laptop da 12-13"
 
-Branch `ottimizzazione-mobile` (HEAD `a512988` + eventuali commit di sola documentazione), 10 commit sopra `master` `022ae44`. Report con screenshot: `Desktop\ottimizzazione-mobile-fase1\REPORT-fase1.md`; confronto visivo prima/dopo a 390 e 768 px: `Desktop\confronto-mobile-ottimizzazione\index.html` (58 coppie, fuori dal repository).
+Branch `ottimizzazione-mobile` (HEAD `0c57f25`), 12 commit sopra `master` `022ae44` (8 interventi sul sito, 4 di test e documentazione). Report con screenshot: `Desktop\ottimizzazione-mobile-fase1\REPORT-fase1.md`; confronto visivo prima/dopo a 390 e 768 px: `Desktop\confronto-mobile-ottimizzazione\index.html` (58 coppie, fuori dal repository).
 
 **Interventi applicati (un commit ciascuno, tutti solo CSS/comportamento, nessun cambio di contenuto o SEO)**
 1. `31a02cb` + `43b0e63` – **Header**: compatto tra 1024 e 1279 px e **hamburger fino a 1023 px** (era 768 px). Prima, tra 769 e 1170 px "Piattaforma" usciva dallo schermo (118 px a 1024, 312-326 px a 820-844): iPad Air/Pro 11" in verticale, iPad mini/Pro 12.9" in orizzontale, telefoni in orizzontale. *Errore corretto lungo il percorso:* nel primo commit avevo supposto che sotto i 993 px ci fosse già l'hamburger; la verifica a tappeto (24 dimensioni x 7 pagine) ha dimostrato il contrario.
