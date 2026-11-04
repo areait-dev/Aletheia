@@ -241,8 +241,9 @@ function HeroSearch() {
         setOpen(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    // pointerdown (non mousedown): su iOS Safari i tocchi su elementi non interattivi non generano mousedown.
+    document.addEventListener('pointerdown', handleClickOutside);
+    return () => document.removeEventListener('pointerdown', handleClickOutside);
   }, []);
 
   const selectedLabel =

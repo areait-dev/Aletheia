@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useTheme } from '../context/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 import { useSiteOptions } from '../context/SiteOptionsContext';
+import { getLenis } from '../lib/lenis';
 
 interface HeaderProps {
   active?: string;
@@ -44,16 +45,44 @@ export default function Header({ active, solid = false }: HeaderProps) {
   };
 
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
+    function handleClickOutside(e: Event) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setDropdownOpen(false);
       }
       const headerEl = document.querySelector('.site-header');
       if (headerEl && !headerEl.contains(e.target as Node)) setFormazioneOpen(false);
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    // 'pointerdown' e non 'mousedown': su iOS/iPadOS Safari i tocchi su elementi non interattivi non generano
+    // mousedown, quindi toccando fuori il mega-menu e il menu "Piattaforma" restavano aperti. pointerdown scatta
+    // per mouse, tocco e penna.
+    document.addEventListener('pointerdown', handleClickOutside);
+    return () => document.removeEventListener('pointerdown', handleClickOutside);
   }, []);
+
+  // Menu mobile aperto: la pagina sotto non deve scorrere (prima scorreva di centinaia di px) e Escape lo chiude
+  // restituendo il focus all'hamburger. Lenis muove la pagina con scroll programmatico, che overflow:hidden non
+  // ferma: va fermato anche lui (stop/start).
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const html = document.documentElement;
+    const overflowPrima = html.style.overflow;
+    html.style.overflow = 'hidden';
+    getLenis()?.stop();
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        setMobileFormazioneScreen(false);
+        hamburgerRef.current?.focus();
+      }
+    }
+    document.addEventListener('keydown', onKey);
+    return () => {
+      html.style.overflow = overflowPrima;
+      getLenis()?.start();
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     function handleScroll() { setScrolled(window.scrollY > 60); }
@@ -234,6 +263,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
 
         {/* HAMBURGER */}
         <button
+          ref={hamburgerRef}
           className={`hamburger${menuOpen ? ' hamburger-open' : ''}`}
           onClick={() => {
             setMenuOpen(!menuOpen);
