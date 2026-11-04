@@ -2708,7 +2708,10 @@ html.dark .elearning p {
     gap: 1.75rem;
     z-index: 100;
     margin: 0;
-    padding: 6.5rem 1.5rem 3rem;
+    /* In basso 12rem (era 3rem): il banner cookie (fixed, z-index 10000, ~150px) sta sopra il menu e finché non si
+       sceglie copriva gli ultimi link ("Scopri tutti i corsi", "Calendario Corsi" nella schermata Formazione),
+       impossibili da toccare anche scorrendo a fine corsa. Con più margine il contenuto sale sopra il banner. */
+    padding: 6.5rem 1.5rem 12rem;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -2868,6 +2871,11 @@ html.dark .elearning p {
     border-top: 1px solid rgba(255,255,255,0.12);
     width: 100%;
     justify-content: center;
+  }
+
+  /* "Scopri tutti i corsi" sta sopra il link al calendario: un solo filetto di separazione (quello del calendario) */
+  .navbar-formazione-calendar.navbar-formazione-corsi {
+    border-top: 0;
   }
 
   /* Il menu mobile a schermo intero deve restare sempre leggibile (testo bianco,
