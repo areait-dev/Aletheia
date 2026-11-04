@@ -49,8 +49,8 @@
     "Reclami e Proposte"
   ],
   "intestazioni": 0,
-  "testoLunghezza": 1744,
-  "testoSha1": "133068bafcfe1edbcf490a1678cdf54364e9eed6",
+  "testoLunghezza": 1765,
+  "testoSha1": "b70b63dd6f34dbf2e28b1fc7937d41d665bc1dfe",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -58,6 +58,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

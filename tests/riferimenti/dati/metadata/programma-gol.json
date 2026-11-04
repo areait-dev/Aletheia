@@ -53,8 +53,8 @@
     "Programma G.O.L.Garanzia di Occupabilità dei Lavoratori"
   ],
   "intestazioni": 13,
-  "testoLunghezza": 4497,
-  "testoSha1": "c6aa88f2c2cc45c3328910a02d66c24eb37ddb80",
+  "testoLunghezza": 4518,
+  "testoSha1": "7684b7b8bd11009bbc1cad074bebd9885d7fba0f",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -63,6 +63,7 @@
     "/agenzia-per-il-lavoro/servizi-alla-persona",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

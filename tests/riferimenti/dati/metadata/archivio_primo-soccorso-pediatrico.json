@@ -51,8 +51,8 @@
     "PRIMO SOCCORSO PEDIATRICO"
   ],
   "intestazioni": 1,
-  "testoLunghezza": 1279,
-  "testoSha1": "0deaaf2427e2d67471d6cd765321c3cd8c4ac690",
+  "testoLunghezza": 1300,
+  "testoSha1": "4b99d13b16d29ecfa0e511dd21940bed303bae58",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

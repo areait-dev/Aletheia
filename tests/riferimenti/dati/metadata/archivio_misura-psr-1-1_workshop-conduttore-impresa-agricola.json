@@ -51,8 +51,8 @@
     "WORKSHOP | Agricoltura, multifunzionalità e diversificazione (8 ore)"
   ],
   "intestazioni": 4,
-  "testoLunghezza": 2390,
-  "testoSha1": "50963dc12d0c9a6d740471640e66efac976da1f3",
+  "testoLunghezza": 2411,
+  "testoSha1": "b5271720e12adc85c22014850e5f7646bebb31e5",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

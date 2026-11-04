@@ -51,8 +51,8 @@
     "Conduttore d’impresa agricola (200 ore)"
   ],
   "intestazioni": 4,
-  "testoLunghezza": 2633,
-  "testoSha1": "8ec83b18647257564b8908c403fca7594a79b7dd",
+  "testoLunghezza": 2654,
+  "testoSha1": "ce2297362f0370c4dc11182c94f4b2b8b3ba41c7",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -60,6 +60,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

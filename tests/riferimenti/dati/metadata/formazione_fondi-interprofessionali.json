@@ -53,8 +53,8 @@
     "Trasforma i contributi che versi in formazione gratuita per i tuoi dipendenti"
   ],
   "intestazioni": 6,
-  "testoLunghezza": 4729,
-  "testoSha1": "b22df4b1f905f8f39352bd914329c1d19fbd5896",
+  "testoLunghezza": 4750,
+  "testoSha1": "446fd86fb410c5aacf9d2f77454a72b47a1beebb",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -62,6 +62,7 @@
     "/agenzia-per-il-lavoro",
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
+    "/all-courses",
     "/all-courses?categoria=certificazione",
     "/all-courses?categoria=certificazioni-informatiche",
     "/all-courses?categoria=decreto-attrezzature",

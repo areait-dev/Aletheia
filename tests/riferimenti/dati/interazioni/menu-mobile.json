@@ -25,6 +25,7 @@
       "Corsi Qualificati -> /all-courses?categoria=certificazione",
       "ECM -> /formazione/ecm",
       "Corsi per la PA -> /formazione/corsi-pa",
+      "Scopri tutti i corsi -> /all-courses",
       "Calendario Corsi -> /calendario-corsi"
     ]
   },
