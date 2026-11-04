@@ -47,7 +47,7 @@ Prima del lancio le variabili **non** vanno messe in nessun file del repository:
 
 **Blocchi da risolvere prima di spostare i DNS (decisi il 4 novembre 2026, ognuno in un branch separato dopo questo):**
 - **`EnrollmentProgress`** (corsi OSS, ASACOM, Conduttore d'Impresa Agricola): il pulsante "Iscriviti" incrementa solo un contatore in `localStorage` e **non avvisa nessuno**, benché i commenti in `pages/all-courses/[slug].js` dicano che al raggiungimento di 15 iscrizioni lo staff viene avvisato. Va reso funzionante (un vero modulo di pre-iscrizione con la stessa logica) **o tolto** prima dei DNS.
-- **`/api/chatbot-unanswered`** scrive le domande senza risposta in `data/chatbot-log/unanswered.jsonl` con `fs.appendFileSync`: su Vercel il disco è in sola lettura, quindi la rotta con ogni probabilità risponde 500 in produzione. Da correggere (per esempio con lo stesso invio email).
+- **`/api/chatbot-unanswered`** — **RISOLTO nel branch `chatbot-log`** (era un errore 500 in produzione: scriveva su `data/chatbot-log/unanswered.jsonl`, e su Vercel il disco è in sola lettura). Ora scrive una riga `[chatbot-unanswered] {json}` nei log del server e risponde 200; email e numeri di telefono eventualmente scritti nella domanda vengono oscurati. **I log di Vercel si conservano per poco tempo: non servono per analizzare le domande nel tempo.** Quando si collegherà il foglio Google del calendario con l'account di servizio, le domande senza risposta andranno salvate in una scheda **"Domande chatbot"** dello stesso foglio, **senza nome né email**.
 - Prova su un **iPad vero** (ancora da fare).
 - Il form della pagina contatti non legge `?corso=` (i corsi finanziati rimandano a `/contatti?corso=…`): il corso non viene precompilato. Non è un blocco, ma conviene.
 
