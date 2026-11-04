@@ -44,7 +44,7 @@ export default function AiutiDiStatoAnno({ anno, enti, paragrafiFinali }) {
       <Head>
         <title>{`Obblighi di pubblicazione per i beneficiari di contributi ${anno} | Alètheia S.r.l.`}</title>
       </Head>
-      <Header />
+      <Header solid />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-4xl mx-auto px-6 sm:px-12 pt-40 pb-24">
           <span className="text-primary-text dark:text-primary-on-dark font-bold text-xs tracking-widest uppercase mb-4 block">

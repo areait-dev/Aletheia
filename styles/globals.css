@@ -24,6 +24,10 @@
      #6B7280 = 4,83:1 su bianco (WCAG AA). Il vecchio #94A3B8 faceva 2,45:1. */
   --muted-text: #6B7280;
 
+  /* Placeholder di input/textarea (fonte unica): #6B7280 = 4,83:1 su bianco (WCAG AA).
+     Non vale su #F2F2F2 (4,32:1): lì usare un input bianco. */
+  --placeholder: #6B7280;
+
   /* Green scale ufficiale */
   --green-100: #CCE8EA;
   --green-200: #99D1D5;
@@ -79,6 +83,15 @@ html.dark {
   color-scheme: dark;
   --primary-text: #5FC2C8; /* = --primary-on-dark */
   --muted-text: #9CA3AF; /* 6,99:1 su #111827 */
+  --placeholder: #B0B7C3; /* WCAG AA: 5,11:1 su input #374151, 7,67:1 su #1c2423 (#9CA3AF faceva 4,06:1) */
+}
+
+/* Placeholder di base per tutti i campi. Le utility Tailwind placeholder-* (specificità maggiore)
+   restano valide dove serve un colore diverso, es. sulla barra di ricerca su foto. */
+input::placeholder,
+textarea::placeholder {
+  color: var(--placeholder);
+  opacity: 1; /* Firefox applica opacity .54 di default */
 }
 
 html {
@@ -1804,7 +1817,7 @@ html.dark .form-group label {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #6B7280; /* WCAG AA: 4.6:1 on white */
+  color: var(--placeholder); /* WCAG AA: 4,83:1 su bianco */
 }
 
 html.dark .form-group input,
@@ -1816,7 +1829,7 @@ html.dark .form-group textarea {
 
 html.dark .form-group input::placeholder,
 html.dark .form-group textarea::placeholder {
-  color: #9CA3AF; /* WCAG AA: 4.6:1 on #374151 */
+  color: var(--placeholder); /* WCAG AA: 5,11:1 su #374151 */
 }
 
 .form-group input:focus,
@@ -2825,6 +2838,11 @@ html.dark .elearning p {
     border-top: 1px solid rgba(255,255,255,0.12);
     width: 100%;
     justify-content: center;
+  }
+
+  /* "Scopri tutti i corsi" sta sopra il link al calendario: un solo filetto di separazione (quello del calendario) */
+  .navbar-formazione-calendar.navbar-formazione-corsi {
+    border-top: 0;
   }
 
   /* Il menu mobile a schermo intero deve restare sempre leggibile (testo bianco,

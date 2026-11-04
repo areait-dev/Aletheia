@@ -90,8 +90,8 @@ export const darkTokens = {
     inputTextDark: 'dark:text-white',
     
     // Input placeholder
-    placeholderLight: 'placeholder-white/50',
-    placeholderDark: 'dark:placeholder-white/40',
+    placeholderLight: 'placeholder-white/70', // WCAG AA: 5,6:1 su #004d52 (white/50 faceva ~3,6:1)
+    placeholderDark: '',
     
     // Input focus
     inputFocusLight: 'focus:border-white/60',

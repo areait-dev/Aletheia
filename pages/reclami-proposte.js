@@ -26,7 +26,7 @@ function Field({ label, required, children }) {
 
 const inputClass =
   'w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 dark:border-gray-500 ' +
-  'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 placeholder-gray-400 dark:placeholder-gray-500 ' +
+  'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 ' +
   'outline-none focus:border-primary dark:focus:border-primary-on-dark transition-colors';
 
 // Testi: pagina WordPress "reclami-proposte" se WP_URL è impostato, altrimenti i valori locali (data/pagine.js).
@@ -66,7 +66,7 @@ export default function ReclamiProposte({ pagina }) {
       <Head>
         <title>{pagina.seo.titolo || "Reclami e Proposte | Alètheia S.r.l."}</title>
       </Head>
-      <Header />
+      <Header solid />
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-3xl mx-auto px-6 sm:px-12 pt-40 pb-24">
           <span className="text-primary-text dark:text-primary-on-dark font-bold text-xs tracking-widest uppercase mb-4 block">{T.hero_eyebrow}</span>

@@ -60,7 +60,7 @@ export default function PrivacyCookie({ pagina }) {
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
-      <Header />
+      <Header solid />
 
       <main className="bg-white dark:bg-gray-900 min-h-screen">
         <section className="max-w-4xl mx-auto px-6 sm:px-12 pt-40 pb-24">

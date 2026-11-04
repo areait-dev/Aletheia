@@ -185,6 +185,14 @@ export default function Header({ active, solid = false }: HeaderProps) {
                 </div>
               </div>
             ))}
+            {/* Come nel mega-menu desktop (colonna Calendario): link alla pagina con tutti i corsi */}
+            <a
+              href={header.megaCorsiBtn.href}
+              className="navbar-formazione-calendar navbar-formazione-corsi"
+              onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
+            >
+              {header.megaCorsiBtn.label} <i className="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
             <a
               href={header.megaCalendario.btn.href}
               className="navbar-formazione-calendar"
