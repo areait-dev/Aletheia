@@ -229,7 +229,9 @@ export default function AllCourses({ coursesRaw, pagina }) {
       <div className="max-w-[1680px] mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10" style={{ minHeight: '100vh' }}>
 
         {/* SIDEBAR */}
-        <aside className="space-y-4" style={{ position: 'sticky', top: '5rem', height: 'fit-content' }}>
+        {/* Sticky e scorrimento interno solo da 1024px (regola .catalog-sidebar in globals.css): sotto, il layout è a una
+            colonna e una sidebar sticky inline copriva le card (telefono, iPad in verticale). */}
+        <aside className="catalog-sidebar space-y-4" style={{ height: 'fit-content' }}>
           {/* Search */}
           <div className="bg-white dark:bg-dark-card rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-[rgba(255,255,255,0.08)]">
             <div className="flex items-center gap-3 border border-slate-200 dark:border-gray-600 rounded-xl px-4 py-3 transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
@@ -327,7 +329,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
           </div>
 
           {isFiltering ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+            <div className="catalog-grid grid grid-cols-1 sm:grid-cols-2 gap-5 items-stretch">
               {Array.from({ length: Math.min(filteredFamilies.length || 6, 6) }).map((_, i) => (
                 <CourseSkeleton key={i} />
               ))}
@@ -353,7 +355,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
                     <span className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.85rem', fontWeight: 600 }}>({group.items.length})</span>
                   </h2>
                   {mounted ? (
-                    <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+                    <motion.div layout className="catalog-grid grid grid-cols-1 sm:grid-cols-2 gap-5 items-stretch">
                       <AnimatePresence mode="popLayout">
                         {group.items.map((family, i) => (
                           <motion.div
@@ -378,7 +380,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
                   ) : (
                     // Prerendering (SSG) e primo paint prima dell'hydration: stessa griglia,
                     // senza framer-motion (vedi commento su `mounted` sopra).
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+                    <div className="catalog-grid grid grid-cols-1 sm:grid-cols-2 gap-5 items-stretch">
                       {group.items.map((family) => (
                         <div key={family.slug} className="h-full">
                           <Reveal className="h-full">

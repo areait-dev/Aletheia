@@ -622,6 +622,32 @@ html.dark .cta-nav-btn-outline:hover {
   color: #0F172A;
 }
 
+/* Catalogo corsi (/all-courses), da 1024px in su.
+   - .catalog-sidebar: sticky come prima, ma con altezza massima e scorrimento interno: la sidebar è alta ~671px e su
+     schermi bassi (laptop 12-13", iPad in orizzontale dentro Safari) il fondo (ultime categorie, box "Chiamaci")
+     restava irraggiungibile. Su schermi alti non cambia nulla (nessuna barra di scorrimento).
+   - .catalog-grid: al massimo 3 colonne ma ognuna larga almeno 240px (41px e non 40px: con il valore esatto per
+     arrotondamento la terza colonna non entrava mai). Con la sidebar da 260px, a 1024-1279px le 3 colonne
+     fisse davano card di ~210px; ora 2 colonne larghe. Da ~1366px in su resta a 3 colonne identiche a prima. */
+@media (min-width: 1024px) {
+  .catalog-sidebar {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+    max-height: calc(100vh - 6rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding: 4px;   /* spazio per le ombre delle card, altrimenti l'overflow le taglia */
+    margin: -4px;
+  }
+  /* .catalog-grid.grid (0,2,0): le utility di Tailwind (sm:grid-cols-2) finiscono più avanti nel CSS con specificità 0,1,0 e
+     altrimenti vincerebbero su questa regola. */
+  .catalog-grid.grid {
+    grid-template-columns: repeat(auto-fill, minmax(max(240px, calc((100% - 41px) / 3)), 1fr));
+  }
+}
+
 /* Header compatto per tablet in orizzontale e laptop piccoli (12-13", iPad Pro in verticale): con gap e margini
    pensati per 1280px+ l'header occupa ~1174px e sotto quella larghezza il gruppo di destra usciva dallo schermo
    ("Piattaforma" tagliato di 118px a 1024px, non toccabile). Misurato: con queste regole tutto sta da 1000px in su
