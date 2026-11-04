@@ -4,6 +4,53 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 
 **Decisione del 2 novembre 2026: la migrazione all'App Router è SOSPESA.** Si fa solo la **Fase 1b**: aggiornare Next da 13.4.0 a 16 restando in Pages Router. Le Fasi 2–5 sono "rimandate" (vedi la sezione dedicata in fondo, con le note per riprenderle).
 
+## Invio dei moduli via email (4 novembre 2026) – branch `invio-moduli`
+
+**Stato.** Fino a questo branch **nessun modulo del sito inviava niente**: tutti mostravano "inviato" dopo un `setTimeout` e i dati restavano nel browser. Ora i sette moduli (preventivo, contatti, candidatura con CV, azienda, formazione obbligatoria, corsi PA, reclami e proposte) passano da `pages/api/moduli/<tipo>.ts` e, con le variabili d'ambiente giuste, arrivano a `info@aletheiasrl.it` tramite **Resend** (REST con `fetch`, nessuna dipendenza nuova). **Senza `RESEND_API_KEY` non si simula l'invio**: il modulo dice che l'invio non è attivo, offre l'email già compilata (mailto verso `info@aletheiasrl.it`) e il telefono, e il server lo annota nei log (`[moduli] <tipo>: RESEND_API_KEY non impostata, richiesta NON inviata`). Finché le variabili non sono su Vercel, **dopo il merge in produzione si vedrà questo stato**: è voluto, è la verità.
+
+**Dove sta il codice.** Regole, campi, oggetti e mailto in `lib/moduli.ts` (usato identico da browser e server); invio, antispam e Resend in `lib/moduli-server.ts`; hook del browser `lib/use-invio-modulo.ts`; riquadro degli stati `components/EsitoModulo.tsx`; honeypot `components/CampoTrappola.tsx`. Oggetti: `[Sito] Preventivo: <corso>`, `[Sito] Contatto: <motivo>`, `[Sito] Candidatura: <servizio>`, `[Sito] Azienda: <ragione sociale>`, `[Sito] Formazione obbligatoria: <ragione sociale>`, `[Sito] Corsi PA: <ente>`, `[Sito] Reclamo/Proposta: <tipologia>`. Reply-To = email di chi scrive (nei reclami nome ed email sono facoltativi: una segnalazione anonima parte senza Reply-To). Allegati: massimo 4 MB, CV in PDF/DOC/DOCX, reclami anche JPG/PNG; il server controlla estensione **e** contenuto (firma del file). Oltre il limite: messaggio che rimanda a `info@aletheiasrl.it`.
+
+**Antispam.** Campo-trappola `contatto_alternativo` (compilato → risposta "ok" finta e nessuna email); tempo minimo di compilazione 3 s (misurato dal browser, non dall'orologio); **3 invii ogni 10 minuti per IP**. Il limite è **in memoria**: su Vercel ogni istanza serverless ha il suo registro, quindi è un freno parziale. Un invio fallito per colpa nostra (Resend, configurazione) non consuma il limite di chi scrive. **Se arriva spam: aggiungere Cloudflare Turnstile oppure un limite persistente** (Upstash/Vercel KV).
+
+### Checklist lancio moduli
+
+Prima del lancio le variabili **non** vanno messe in nessun file del repository: solo nelle impostazioni di Vercel (e in `.env.local` per provare in locale; `.env.local` non si committa).
+
+1. **Creare l'account Resend** (resend.com) con un indirizzo dell'azienda, non personale. Verificare il piano: l'offerta gratuita ha un tetto giornaliero e mensile di email, sufficiente per i moduli di un sito di questa dimensione ma da controllare sulla pagina dei prezzi. Scegliere la regione **EU** quando si aggiunge il dominio (dati in Europa).
+2. **Verificare il dominio `aletheiasrl.it`**: Resend → Domains → Add Domain → `aletheiasrl.it`. Resend mostra i record da creare nel DNS del dominio (dove sono gestiti oggi i DNS, da chiedere a chi ha registrato il dominio). Struttura **fissa**:
+
+   | Tipo | Nome (host) | Valore | Note |
+   |---|---|---|---|
+   | TXT | `resend._domainkey` | `p=MIGf…` (chiave DKIM lunga) | **Il valore è unico per questo dominio e lo genera Resend: copiarlo dalla schermata, non esiste altrove** |
+   | MX | `send` | `feedback-smtp.<regione>.amazonses.com`, priorità 10 | il valore esatto (regione compresa) è nella schermata di Resend |
+   | TXT | `send` | `v=spf1 include:amazonses.com ~all` | SPF del sottodominio `send`: **non** tocca l'SPF della posta normale sul dominio principale |
+   | TXT | `_dmarc` | `v=DMARC1; p=none;` | consigliato; se esiste già un record DMARC non crearne un secondo |
+
+   Resend usa il sottodominio `send` proprio per non interferire con le caselle di posta già attive. Dopo aver aggiunto i record premere **Verify** in Resend (da pochi minuti a qualche ora): stato "Verified". Se il dominio punta ancora al vecchio sito, i record si aggiungono comunque: non influiscono sul sito.
+3. **Creare la chiave API**: Resend → API Keys → Create → permesso **Sending access**, limitata al dominio `aletheiasrl.it`. La chiave si vede una volta sola.
+4. **Variabili su Vercel** (Project → Settings → Environment Variables), per **Preview e Production**:
+   - `RESEND_API_KEY` = la chiave del punto 3
+   - `MAIL_FROM` = `Alètheia Srl <sito@aletheiasrl.it>` (qualunque indirizzo del dominio verificato)
+   - `MAIL_TO` = `info@aletheiasrl.it` (facoltativa: è il valore predefinito; più indirizzi separati da virgola)
+   - **Non** impostare `RESEND_API_URL` (serve solo ai test e in produzione viene ignorata).
+   Le variabili valgono solo per i **nuovi** deploy: dopo averle inserite rifare il deploy (Redeploy).
+5. **Prove da fare, prima in anteprima (Preview) e poi in produzione:**
+   - **Preventivo**: da una scheda corso → "Richiedi un preventivo" → compilare con un indirizzo proprio → arriva a `info@` con oggetto `[Sito] Preventivo: <corso>` e tutti i campi.
+   - **Contatto**: `/contatti` → oggetto `[Sito] Contatto: <motivo>`. Ripetere con **candidatura + CV** (PDF di prova: il file deve essere allegato all'email) e con un reclamo.
+   - **Rispondi**: dalla casella di `info@` premere "Rispondi": il destinatario deve essere l'email scritta nel modulo (Reply-To), non il mittente tecnico.
+   - **Spam**: inviare 4 moduli di fila dallo stesso computer → il quarto deve essere rifiutato ("più richieste di recente"); inviare un modulo in meno di 3 secondi (o via script) → rifiutato. Il campo-trappola si prova solo da strumenti per sviluppatori.
+   - **Errore con chiave sbagliata**: in Preview inserire per prova una chiave non valida → il modulo deve mostrare "Non siamo riusciti a inviare la richiesta" con telefono ed email, **senza** conferma; poi rimettere la chiave giusta e rifare il deploy.
+   - **Errore senza chiave**: in una Preview senza `RESEND_API_KEY` (o in locale senza `.env.local`) → "L'invio dal sito non è ancora attivo" con il pulsante "Apri l'email già compilata", e nei log di Vercel la riga `RESEND_API_KEY non impostata`.
+   - Controllare che le email non finiscano in spam (provare un indirizzo Gmail e uno aziendale).
+6. **Aggiornare la privacy policy (`data/privacy.js`, pagina `/privacy-cookie`) PRIMA di attivare l'invio**: citare **Resend come responsabile del trattamento** (fornitore che trasmette le email con i dati dei moduli: nome, contatti, messaggio, eventuale CV o allegato), con la finalità (rispondere alla richiesta), il periodo di conservazione, e il luogo del trattamento (regione EU scelta al punto 1; verificare se Resend, società statunitense, comporta un trasferimento extra-UE e il relativo accordo sul trattamento dei dati, il DPA, da accettare nella dashboard). I moduli rimandano già alla Privacy Policy con una casella non preselezionata; sotto il modulo contatti c'è la frase «I tuoi dati sono usati solo per rispondere alla tua richiesta, come descritto nella Privacy Policy»: il testo della policy deve rendere vera questa frase. Il testo legale lo valuta il titolare del trattamento, non il codice.
+7. **Test automatici**: `moduli-server.spec.mjs` (14 test: validazione, invio con Resend finto, errore di Resend, senza chiave, antispam, allegati) e `moduli-ui.spec.mjs` (i tre stati nel browser). Nessuna email vera: Resend è un server finto locale, le rotte nel browser sono simulate. Con `URL_BASE` lo scenario "senza chiave" si salta (sull'anteprima la chiave potrebbe esserci e l'invio sarebbe reale).
+
+**Blocchi da risolvere prima di spostare i DNS (decisi il 4 novembre 2026, ognuno in un branch separato dopo questo):**
+- **`EnrollmentProgress`** (corsi OSS, ASACOM, Conduttore d'Impresa Agricola): il pulsante "Iscriviti" incrementa solo un contatore in `localStorage` e **non avvisa nessuno**, benché i commenti in `pages/all-courses/[slug].js` dicano che al raggiungimento di 15 iscrizioni lo staff viene avvisato. Va reso funzionante (un vero modulo di pre-iscrizione con la stessa logica) **o tolto** prima dei DNS.
+- **`/api/chatbot-unanswered`** scrive le domande senza risposta in `data/chatbot-log/unanswered.jsonl` con `fs.appendFileSync`: su Vercel il disco è in sola lettura, quindi la rotta con ogni probabilità risponde 500 in produzione. Da correggere (per esempio con lo stesso invio email).
+- Prova su un **iPad vero** (ancora da fare).
+- Il form della pagina contatti non legge `?corso=` (i corsi finanziati rimandano a `/contatti?corso=…`): il corso non viene precompilato. Non è un blocco, ma conviene.
+
 ## Ottimizzazione mobile – Fase 1 (4 novembre 2026) – misura e controllo, nessun intervento applicato
 
 Branch `ottimizzazione-mobile` da `master` (`022ae44`, Next 16.4.4 già unito, skill in `.claude/skills/ottimizzazione-mobile-nextjs/`). Il lavoro sul sito della sessione precedente (preventivo, immagini, ricerca, sidebar mobile…) sta in 5 commit su `contenuti-immagini-preventivo`, **non** in `master`: quindi le misure sotto sono sulla base pulita. Report completo con screenshot: `Desktop\ottimizzazione-mobile-fase1\REPORT-fase1.md` (fuori dal repository).

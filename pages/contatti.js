@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SeoHead from '../components/SeoHead';
@@ -11,6 +12,10 @@ import { useSiteOptions } from '../context/SiteOptionsContext';
 import { getPagina } from '../lib/wp-pagine';
 import HeroTitle from '../components/HeroTitle';
 import { withSiteOptions } from '../lib/wp-site';
+import { validaModulo } from '../lib/moduli';
+import { useInvioModulo } from '../lib/use-invio-modulo';
+import EsitoModulo from '../components/EsitoModulo';
+import CampoTrappola from '../components/CampoTrappola';
 
 // Telefono ed email seguono l'identità del sito (opzioni globali); gli orari, in questa pagina, hanno un formato proprio.
 function buildInfoItems(identita) {
@@ -45,9 +50,6 @@ function buildInfoItems(identita) {
 const PAGE_TITLE = 'Contatti - Alètheia Srl';
 const PAGE_DESCRIPTION = "Contatta Alètheia Srl: sede a Vittoria (RG), telefono +39 0932 862613, email info@aletheiasrl.it. Formazione professionale e agenzia per il lavoro in Sicilia.";
 
-// Telefono opzionale: se valorizzato deve contenere solo cifre, spazi, + o -
-const PHONE_RE = /^[0-9\s+-]+$/;
-
 // Sedi: WordPress (CPT sede) se WP_URL è impostato, altrimenti data/sedi.js (vedi lib/wp-sedi.ts).
 async function getPageStaticProps() {
   return { props: { pagina: await getPagina('contatti'), sedi: await getSedi() }, ...isrOptions() };
@@ -77,22 +79,26 @@ export default function Contatti({ sedi: SEDI, pagina }) {
     messaggio: '',
     privacy: false,
   });
-  const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState({});
-  const [hoveredBtn, setHoveredBtn] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
-  const validate = () => {
-    const e = {};
-    if (!form.nome.trim()) e.nome = 'Campo obbligatorio';
-    if (!form.cognome.trim()) e.cognome = 'Campo obbligatorio';
-    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Email non valida';
-    if (form.telefono.trim() && !PHONE_RE.test(form.telefono)) e.telefono = 'Usa solo numeri, spazi, + o -';
-    if (!form.motivo) e.motivo = "Seleziona l'oggetto della richiesta";
-    if (!form.messaggio.trim()) e.messaggio = 'Campo obbligatorio';
-    if (!form.privacy) e.privacy = 'Devi accettare la privacy policy';
-    return e;
-  };
+  // ?corso=<titolo>: i corsi finanziati/gratuiti ("Richiedi informazioni") arrivano qui con il titolo nell'indirizzo, come
+  // il preventivo. Si precompilano oggetto e messaggio, senza mai sovrascrivere ciò che l'utente ha già scritto.
+  useEffect(() => {
+    if (!router.isReady) return;
+    const { corso } = router.query;
+    const titolo = typeof corso === 'string' ? corso.trim().slice(0, 200) : '';
+    if (!titolo) return;
+    setForm((p) => ({
+      ...p,
+      motivo: p.motivo || (contatti.motivi.includes('Informazioni su un corso') ? 'Informazioni su un corso' : p.motivo),
+      messaggio: p.messaggio || `Buongiorno, vorrei ricevere informazioni sul corso «${titolo}».`,
+    }));
+  }, [router.isReady, router.query]); // eslint-disable-line react-hooks/exhaustive-deps
+  const [hoveredBtn, setHoveredBtn] = useState(false);
+  // Invio reale: il server (pages/api/moduli/contatti) risponde "ok" solo se Resend ha accettato l'email.
+  const { inviando: isSubmitting, esito, invia, azzera } = useInvioModulo('contatti', identita.email);
+  const sent = esito?.stato === 'ok';
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -100,17 +106,14 @@ export default function Contatti({ sedi: SEDI, pagina }) {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const errs = validate();
+    // Regole condivise con il server: lib/moduli.ts
+    const errs = validaModulo('contatti', form);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    // Invio ancora simulato (in attesa del backend headless): il breve delay rende
-    // realistico lo stato di caricamento e resterà utile quando ci sarà una vera chiamata API.
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSent(true);
-    }, 500);
+    setErrors({});
+    const r = await invia(e.currentTarget, form);
+    if (r.stato === 'errori') setErrors(r.errori);
   };
 
   return (
@@ -451,6 +454,8 @@ export default function Contatti({ sedi: SEDI, pagina }) {
               padding: '2.5rem',
               boxShadow: '0 4px 30px rgba(0,0,0,0.05)',
               alignSelf: 'stretch',
+              // Dopo l'invio la scheda resta alta quanto la colonna accanto: il messaggio di conferma si centra, niente vuoto in cima
+              ...(sent ? { display: 'flex', flexDirection: 'column', justifyContent: 'center' } : {}),
             }}>
               {sent ? (
                 <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
@@ -470,7 +475,7 @@ export default function Contatti({ sedi: SEDI, pagina }) {
                     Grazie per averci contattato. Ti risponderemo al più presto all&apos;indirizzo email indicato.
                   </p>
                   <button
-                    onClick={() => { setSent(false); setForm({ nome: '', cognome: '', email: '', telefono: '', motivo: '', messaggio: '', privacy: false }); }}
+                    onClick={() => { azzera(); setForm({ nome: '', cognome: '', email: '', telefono: '', motivo: '', messaggio: '', privacy: false }); }}
                     className="text-[#018891] dark:text-primary-on-dark border border-[#018891] dark:border-primary-on-dark"
                     style={{ background: 'none', borderRadius: '999px', padding: '0.6rem 1.5rem', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s' }}
                   >
@@ -551,6 +556,9 @@ export default function Contatti({ sedi: SEDI, pagina }) {
                     </div>
                     {errors.privacy && <p id="privacy-error" style={{ margin: '-0.5rem 0 0', fontSize: '0.73rem', color: '#EF4444', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><i className="fas fa-exclamation-circle"></i>{errors.privacy}</p>}
 
+                    <CampoTrappola />
+                    <EsitoModulo esito={esito} tipo="contatti" valori={form} />
+
                     <button type="submit" className="submit-btn" disabled={isSubmitting} onMouseEnter={() => setHoveredBtn(true)} onMouseLeave={() => setHoveredBtn(false)}>
                       {isSubmitting ? (
                         <>
@@ -563,7 +571,8 @@ export default function Contatti({ sedi: SEDI, pagina }) {
                     </button>
 
                     <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>
-                      I tuoi dati sono al sicuro e non verranno condivisi con terze parti.
+                      I tuoi dati sono usati solo per rispondere alla tua richiesta, come descritto nella{' '}
+                      <a href="/privacy-cookie" className="text-primary-text dark:text-primary-on-dark" style={{ fontWeight: 700 }}>Privacy Policy</a>.
                     </p>
 
                   </form>

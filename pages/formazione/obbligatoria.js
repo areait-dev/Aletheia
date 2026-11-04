@@ -13,6 +13,11 @@ import { getPagina } from '../../lib/wp-pagine';
 import HeroTitle from '../../components/HeroTitle';
 import { withSiteOptions } from '../../lib/wp-site';
 import RichText from '../../components/RichText';
+import EsitoModulo from '../../components/EsitoModulo';
+import CampoTrappola from '../../components/CampoTrappola';
+import { validaModulo } from '../../lib/moduli';
+import { useInvioModulo } from '../../lib/use-invio-modulo';
+import { useSiteOptions } from '../../context/SiteOptionsContext';
 
 // Punti di forza: schede di WordPress (lista `obbligatoria-punti`) o data/schede.js; il grassetto nel testo è <strong> (components/RichText).
 
@@ -229,13 +234,18 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
   );
 }
 
-function FormField({ label, required, children, isDark }) {
+function FormField({ label, required, children, isDark, error }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <label style={{ fontSize: '0.85rem', fontWeight: 700, color: isDark ? 'rgba(255,255,255,0.75)' : '#334155', letterSpacing: '0.02em' }}>
         {label}{required && <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
+      {error && (
+        <span role="alert" style={{ fontSize: '0.75rem', color: isDark ? '#F87171' : '#B91C1C' }}>
+          <i className="fas fa-exclamation-circle" style={{ marginRight: '4px' }}></i>{error}
+        </span>
+      )}
     </div>
   );
 }
@@ -259,18 +269,30 @@ const focusOff = (isDark) => (e) => {
 
 function ConsulenzaForm({ isDark }) {
   const [fields, setFields] = useState(EMPTY_FORM);
-  const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  // Invio reale: il server (pages/api/moduli/obbligatoria) risponde "ok" solo se Resend ha accettato l'email.
+  const { identita } = useSiteOptions();
+  const { inviando, esito, invia, azzera } = useInvioModulo('obbligatoria', identita.email);
+  const submitted = esito?.stato === 'ok';
   const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
   const setCheck = (e) => setFields((p) => ({ ...p, privacy: e.target.checked }));
   const inputStyle = getInputStyle(isDark);
   const groupLabelColor = isDark ? 'rgba(95,194,200,0.8)' : '#008C95';
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (!fields.privacy) { setErrors({ privacy: 'Devi accettare la Privacy Policy' }); return; }
+    const form = e.currentTarget;
+    // Regole condivise con il server: lib/moduli.ts
+    const errs = validaModulo('obbligatoria', fields);
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      // Porta l'utente sul primo campo in errore (i campi non hanno id: si cerca il messaggio mostrato)
+      requestAnimationFrame(() => form.querySelector('[role="alert"]')?.scrollIntoView({ block: 'center' }));
+      return;
+    }
     setErrors({});
-    setSubmitted(true);
+    const r = await invia(form, fields);
+    if (r.stato === 'errori') setErrors(r.errori);
   }
 
   if (submitted) {
@@ -284,7 +306,7 @@ function ConsulenzaForm({ isDark }) {
           Grazie per averci contattato. Ti risponderemo entro 24 ore lavorative per proporti il calendario più adatto.
         </p>
         <button
-          onClick={() => { setSubmitted(false); setFields(EMPTY_FORM); }}
+          onClick={() => { azzera(); setFields(EMPTY_FORM); setErrors({}); }}
           style={{ marginTop: '0.5rem', padding: '0 1.5rem', minHeight: 'var(--btn-height-sm)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', background: 'rgba(0,140,149,0.12)', border: '1.5px solid rgba(0,140,149,0.35)', color: '#008C95', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit' }}
         >
           Invia una nuova richiesta
@@ -294,21 +316,21 @@ function ConsulenzaForm({ isDark }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
         <span style={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: groupLabelColor }}>
           Azienda
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
-          <FormField label="Ragione sociale" required isDark={isDark}>
+          <FormField label="Ragione sociale" required isDark={isDark} error={errors.ragioneSociale}>
             <input type="text" required value={fields.ragioneSociale} onChange={set('ragioneSociale')} placeholder="Azienda S.r.l." style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
-          <FormField label="P.IVA / Codice Fiscale" required isDark={isDark}>
+          <FormField label="P.IVA / Codice Fiscale" required isDark={isDark} error={errors.piva}>
             <input type="text" required value={fields.piva} onChange={set('piva')} placeholder="IT12345678901" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
-          <FormField label="Codice ATECO" isDark={isDark}>
+          <FormField label="Codice ATECO" isDark={isDark} error={errors.ateco}>
             <input type="text" value={fields.ateco} onChange={set('ateco')} placeholder="es. 41.20.00" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
@@ -319,18 +341,18 @@ function ConsulenzaForm({ isDark }) {
           Referente
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
-          <FormField label="Nome" required isDark={isDark}>
+          <FormField label="Nome" required isDark={isDark} error={errors.nome}>
             <input type="text" required value={fields.nome} onChange={set('nome')} placeholder="Mario" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
-          <FormField label="Cognome" required isDark={isDark}>
+          <FormField label="Cognome" required isDark={isDark} error={errors.cognome}>
             <input type="text" required value={fields.cognome} onChange={set('cognome')} placeholder="Rossi" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
-          <FormField label="Telefono" required isDark={isDark}>
+          <FormField label="Telefono" required isDark={isDark} error={errors.telefono}>
             <input type="tel" required value={fields.telefono} onChange={set('telefono')} placeholder="+39 0932 000000" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
-          <FormField label="Email" required isDark={isDark}>
+          <FormField label="Email" required isDark={isDark} error={errors.email}>
             <input type="email" required value={fields.email} onChange={set('email')} placeholder="info@azienda.it" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
@@ -341,21 +363,22 @@ function ConsulenzaForm({ isDark }) {
           Corso richiesto
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
-          <FormField label="Categoria corso" required isDark={isDark}>
+          <FormField label="Categoria corso" required isDark={isDark} error={errors.categoriaCorso}>
             <select required value={fields.categoriaCorso} onChange={set('categoriaCorso')} style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)}>
               <option value="" disabled>Seleziona una categoria</option>
-              <option value="sicurezza-lavoro">Sicurezza sul lavoro</option>
-              <option value="decreto-attrezzature">Decreto attrezzature</option>
-              <option value="fitosanitario">Fitosanitario</option>
-              <option value="sicurezza-alimentare">Sicurezza alimentare</option>
+              {/* Il valore è il nome leggibile: finisce così nell'email che riceve lo staff */}
+              <option value="Sicurezza sul lavoro">Sicurezza sul lavoro</option>
+              <option value="Decreto attrezzature">Decreto attrezzature</option>
+              <option value="Fitosanitario">Fitosanitario</option>
+              <option value="Sicurezza alimentare">Sicurezza alimentare</option>
             </select>
           </FormField>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
-          <FormField label="Sede" required isDark={isDark}>
+          <FormField label="Sede" required isDark={isDark} error={errors.sede}>
             <input type="text" required value={fields.sede} onChange={set('sede')} placeholder="Vittoria (RG)" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
-          <FormField label="Numero partecipanti" required isDark={isDark}>
+          <FormField label="Numero partecipanti" required isDark={isDark} error={errors.partecipanti}>
             <input type="number" min="1" required value={fields.partecipanti} onChange={set('partecipanti')} placeholder="es. 12" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
@@ -377,19 +400,23 @@ function ConsulenzaForm({ isDark }) {
       </div>
       {errors.privacy && <p style={{ margin: '-0.85rem 0 0', fontSize: '0.75rem', color: '#EF4444' }}><i className="fas fa-exclamation-circle" style={{ marginRight: '4px' }}></i>{errors.privacy}</p>}
 
+      <CampoTrappola />
+      <EsitoModulo esito={esito} tipo="obbligatoria" valori={fields} variante={isDark ? 'scura' : 'chiara'} />
+
       <button
         type="submit"
+        disabled={inviando}
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
           width: '100%', padding: '0 3rem', minHeight: 'var(--btn-height-lg)', whiteSpace: 'nowrap', borderRadius: 'var(--btn-radius)', border: 'none',
-          background: '#008C95',
-          color: '#fff', fontWeight: 700, fontSize: '1.05rem', cursor: 'pointer',
+          background: '#008C95', opacity: inviando ? 0.7 : 1,
+          color: '#fff', fontWeight: 700, fontSize: '1.05rem', cursor: inviando ? 'not-allowed' : 'pointer',
           fontFamily: 'inherit', boxShadow: '0 4px 20px rgba(0,140,149,0.35)',
           marginTop: '0.5rem', boxSizing: 'border-box',
         }}
       >
         <i className="fas fa-paper-plane" style={{ fontSize: '0.9rem' }}></i>
-        Lascia i tuoi dati
+        {inviando ? 'Invio in corso…' : 'Lascia i tuoi dati'}
       </button>
     </form>
   );

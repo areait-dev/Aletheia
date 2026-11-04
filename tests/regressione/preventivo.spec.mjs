@@ -56,6 +56,10 @@ test('pagina /richiedi-preventivo: corso precompilato, controlli e conferma @rap
   await page.fill('#email', 'mario@esempio.it'); await page.fill('#telefono', '+39 333 1234567');
   await page.fill('#partecipanti', '8'); await page.selectOption('#modalita', 'Presso la mia azienda');
   await page.check('#privacy');
+  // L'invio è reale (pages/api/moduli/preventivo): qui la rotta è simulata, nessuna email parte. Il server scarta i moduli
+  // compilati in meno di 3 secondi, quindi si attende prima di inviare. I tre stati completi sono in moduli-ui.spec.mjs.
+  await page.route('**/api/moduli/preventivo', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{"stato":"ok"}' }));
+  await page.waitForTimeout(3300);
   await page.getByRole('button', { name: /Invia la richiesta/i }).click();
   await expect(page.getByText('Richiesta inviata!')).toBeVisible();
   await expect(page.getByText('Antincendio Livello 2').first()).toBeVisible();

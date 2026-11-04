@@ -7,6 +7,10 @@ import SeoHead from '../components/SeoHead';
 import { useSiteOptions } from '../context/SiteOptionsContext';
 import { isrOptions } from '../lib/wp';
 import { withSiteOptions } from '../lib/wp-site';
+import { validaModulo } from '../lib/moduli';
+import { useInvioModulo } from '../lib/use-invio-modulo';
+import EsitoModulo from '../components/EsitoModulo';
+import CampoTrappola from '../components/CampoTrappola';
 
 const PAGE_TITLE = 'Richiedi un preventivo - Alètheia Srl';
 const PAGE_DESCRIPTION =
@@ -25,10 +29,6 @@ const EMPTY = {
   corso: '', tipologia: '', azienda: '', nome: '', cognome: '', email: '', telefono: '',
   partecipanti: '', modalita: '', messaggio: '', privacy: false,
 };
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// Telefono: cifre, spazi, + o - (stessa regola di /contatti)
-const PHONE_RE = /^[0-9\s+-]+$/;
 
 // Campi: bordo input gray-500 in dark (3:1 minimo per i controlli, CLAUDE.md). Il colore del placeholder
 // arriva dal token --placeholder in globals.css: niente classi placeholder-* qui.
@@ -65,8 +65,9 @@ export default function RichiediPreventivo() {
   const { identita, seo } = useSiteOptions();
   const [fields, setFields] = useState(EMPTY);
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
+  // Invio reale: il server (pages/api/moduli/preventivo) risponde "ok" solo se Resend ha accettato l'email.
+  const { inviando: loading, esito, invia, azzera } = useInvioModulo('preventivo', identita.email);
+  const sent = esito?.stato === 'ok';
 
   // Il corso arriva da ?corso= (pulsante "Richiedi preventivo" delle schede corso). Non sovrascrive ciò che l'utente ha già scritto.
   useEffect(() => {
@@ -85,43 +86,25 @@ export default function RichiediPreventivo() {
     if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
   }
 
-  function validate() {
-    const e = {};
-    if (!fields.corso.trim()) e.corso = 'Indica il corso di tuo interesse';
-    if (!fields.tipologia) e.tipologia = 'Seleziona chi sei';
-    if (fields.tipologia && !isPrivato && !fields.azienda.trim()) e.azienda = 'Campo obbligatorio';
-    if (!fields.nome.trim()) e.nome = 'Campo obbligatorio';
-    if (!fields.cognome.trim()) e.cognome = 'Campo obbligatorio';
-    if (!EMAIL_RE.test(fields.email.trim())) e.email = 'Email non valida';
-    if (!fields.telefono.trim()) e.telefono = 'Campo obbligatorio';
-    else if (!PHONE_RE.test(fields.telefono)) e.telefono = 'Usa solo numeri, spazi, + o -';
-    const n = Number(fields.partecipanti);
-    if (!fields.partecipanti || !Number.isInteger(n) || n < 1 || n > 999) e.partecipanti = 'Inserisci un numero da 1 a 999';
-    if (!fields.modalita) e.modalita = 'Seleziona la modalità';
-    if (!fields.privacy) e.privacy = 'Devi accettare la privacy policy';
-    return e;
+  // Regole condivise con il server: lib/moduli.ts
+  function mostraErrori(errs) {
+    setErrors(errs);
+    // Porta il focus sul primo campo in errore
+    const first = Object.keys(errs)[0];
+    if (first) document.getElementById(first)?.focus();
   }
 
-  function handleSubmit(ev) {
+  async function handleSubmit(ev) {
     ev.preventDefault();
-    const errs = validate();
-    setErrors(errs);
-    if (Object.keys(errs).length > 0) {
-      // Porta il focus sul primo campo in errore
-      const first = Object.keys(errs)[0];
-      document.getElementById(first)?.focus();
-      return;
-    }
-    // Invio simulato (in attesa del backend headless), come /contatti.
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSent(true);
-    }, 600);
+    const errs = validaModulo('preventivo', fields);
+    if (Object.keys(errs).length > 0) { mostraErrori(errs); return; }
+    setErrors({});
+    const r = await invia(ev.currentTarget, fields);
+    if (r.stato === 'errori') mostraErrori(r.errori);
   }
 
   function reset() {
-    setSent(false);
+    azzera();
     setFields(EMPTY);
     setErrors({});
   }
@@ -260,6 +243,9 @@ export default function RichiediPreventivo() {
                       )}
                     </div>
 
+                    <CampoTrappola />
+                    <EsitoModulo esito={esito} tipo="preventivo" valori={fields} />
+
                     <button type="submit" disabled={loading} className="btn btn-primary btn-lg self-start disabled:opacity-60">
                       {loading ? 'Invio in corso…' : 'Invia la richiesta'}
                       {!loading && <i className="fas fa-arrow-right btn-arrow" aria-hidden="true" />}
@@ -294,10 +280,11 @@ export default function RichiediPreventivo() {
                   </p>
                   <div className="flex flex-col gap-2">
                     <a href={`tel:${identita.telefono.replace(/[^+\d]/g, '')}`} className="flex items-center gap-3 font-semibold text-sm text-primary-text dark:text-primary-on-dark no-underline hover:underline">
-                      <i className="fas fa-phone w-4 text-center" aria-hidden="true" /> {identita.telefono}
+                      {/* Niente classe `text-center` sulle icone: in globals.css .text-center aggiunge margin-top:3rem e spingeva l'icona sotto il testo */}
+                      <i className="fas fa-phone w-4 shrink-0 [text-align:center]" aria-hidden="true" /> {identita.telefono}
                     </a>
                     <a href={`mailto:${identita.email}`} className="flex items-center gap-3 font-semibold text-sm text-primary-text dark:text-primary-on-dark no-underline hover:underline break-all">
-                      <i className="fas fa-envelope w-4 text-center" aria-hidden="true" /> {identita.email}
+                      <i className="fas fa-envelope w-4 shrink-0 [text-align:center]" aria-hidden="true" /> {identita.email}
                     </a>
                   </div>
                 </div>

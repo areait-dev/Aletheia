@@ -61,7 +61,8 @@ Important Notes
 This is a mockup, not production-ready: No database, authentication, real course data, or backend
 Font Awesome icons are loaded via CDN in `_app.js` (no local icon files)
 Logo is expected at `/public/logo.png`
-No environment variables currently in use
+Variabili d'ambiente: vedi `.env.example` (GEMINI, WordPress, e per i moduli `RESEND_API_KEY`, `MAIL_FROM`, `MAIL_TO`; mai segreti nel codice)
+Moduli: i sette moduli del sito (preventivo, contatti, candidatura, azienda, formazione obbligatoria, corsi PA, reclami) inviano via Resend da `pages/api/moduli/<tipo>.ts`. Regole, campi e oggetti sono in `lib/moduli.ts` (usato anche dal browser): un nuovo campo si aggiunge lì e basta. Un modulo mostra "inviato" SOLO se il server risponde `ok` (Resend ha accettato l'email); senza `RESEND_API_KEY` mostra `components/EsitoModulo.tsx` (mailto già compilato + telefono), mai un invio simulato. Ogni modulo ha `components/CampoTrappola.tsx` (honeypot) dentro il `<form>`. Test: `moduli-server.spec.mjs`, `moduli-ui.spec.mjs` (nessuna email vera). Checklist di lancio in `MIGRAZIONE.md`
 No testing framework set up
 No build optimizations (image compression, code splitting beyond Next.js defaults)
 When Adding New Pages or Features

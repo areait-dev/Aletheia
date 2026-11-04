@@ -1,6 +1,10 @@
 import { useState, useRef } from 'react';
 import { useSiteOptions } from '../context/SiteOptionsContext';
 import LinkText from './LinkText';
+import EsitoModulo from './EsitoModulo';
+import CampoTrappola from './CampoTrappola';
+import { validaModulo, validaAllegato, descrizioneAllegato } from '../lib/moduli';
+import { useInvioModulo } from '../lib/use-invio-modulo';
 
 // Elenco servizi, consenso privacy e messaggio di successo arrivano dalle opzioni globali (tab Moduli).
 
@@ -50,7 +54,8 @@ const EMPTY: FormFields = {
   privacy: false, cv: null,
 };
 
-type FormErrors = Partial<Record<keyof FormFields, string>>;
+// 'allegato' è la chiave con cui il server segnala un problema del CV
+type FormErrors = Partial<Record<keyof FormFields | 'allegato', string>>;
 
 interface FieldProps {
   label: string;
@@ -67,7 +72,7 @@ function Field({ label, required, error, children }: FieldProps) {
         color: error ? '#F87171' : 'rgba(255,255,255,0.75)',
         letterSpacing: '0.02em',
       }}>
-        {label}{required && <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--primary-on-dark)', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
       {error && (
@@ -101,23 +106,23 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
   const { moduli } = useSiteOptions();
   const [fields, setFields] = useState<FormFields>({ ...EMPTY, messaggio: posizioneDefault ? `Candidatura per: ${posizioneDefault}` : '' });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
+  // Invio reale: il server (pages/api/moduli/candidatura) risponde "ok" solo se Resend ha accettato l'email.
+  const { identita } = useSiteOptions();
+  const { inviando: loading, esito, invia, azzera } = useInvioModulo('candidatura', identita.email);
+  const submitted = esito?.stato === 'ok';
 
   const set = (k: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setFields((p) => ({ ...p, [k]: e.target.value }));
   const setCheck = (k: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement>) => setFields((p) => ({ ...p, [k]: e.target.checked }));
 
+  // Valori di testo del modulo (il CV viaggia a parte)
+  const valori = () => { const { cv, ...resto } = fields; return resto; };
+
+  // Regole condivise con il server: lib/moduli.ts
   function validate(): FormErrors {
-    const e: FormErrors = {};
-    if (!fields.nome.trim()) e.nome = 'Campo obbligatorio';
-    if (!fields.cognome.trim()) e.cognome = 'Campo obbligatorio';
-    if (!fields.email.trim()) e.email = 'Campo obbligatorio';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = 'Email non valida';
-    if (!fields.comune.trim()) e.comune = 'Campo obbligatorio';
-    if (!fields.servizio) e.servizio = 'Seleziona un servizio';
-    if (!fields.privacy) e.privacy = 'Devi accettare la Privacy Policy';
+    const e: FormErrors = validaModulo('candidatura', valori());
+    if (fields.cv) { const m = validaAllegato('candidatura', fields.cv, identita.email); if (m) e.allegato = m; }
     return e;
   }
 
@@ -126,6 +131,8 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
     if (file) {
       setFields((p) => ({ ...p, cv: file }));
       setFileName(file.name);
+      const m = validaAllegato('candidatura', file, identita.email);
+      setErrors((p) => ({ ...p, allegato: m || undefined }));
     }
   }
 
@@ -134,11 +141,8 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
-    setLoading(true);
-    // Simulate async send
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    const r = await invia(e.currentTarget, valori(), fields.cv);
+    if (r.stato === 'errori') setErrors(r.errori);
   }
 
   return (
@@ -293,11 +297,11 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                   {moduli.successoCandidato.testo}
                 </p>
                 <button
-                  onClick={() => { setSubmitted(false); setFields(EMPTY); setFileName(''); }}
+                  onClick={() => { azzera(); setFields(EMPTY); setFileName(''); setErrors({}); }}
                   style={{
                     marginTop: '0.5rem', padding: '0 1.75rem', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--btn-radius)',
                     background: 'rgba(1,136,145,0.15)', border: '1.5px solid rgba(1,136,145,0.4)',
-                    color: 'var(--primary-text)', fontWeight: 700, fontSize: '0.875rem',
+                    color: 'var(--primary-on-dark)', fontWeight: 700, fontSize: '0.875rem',
                     cursor: 'pointer', fontFamily: 'inherit',
                   }}
                 >
@@ -344,9 +348,9 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     <input
                       type="tel" value={fields.telefono} onChange={set('telefono')}
                       placeholder="+39 333 1234567"
-                      style={inputStyle(false)}
+                      style={inputStyle(!!errors.telefono)}
                       onFocus={(e) => e.target.style.borderColor = '#018891'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
+                      onBlur={(e) => e.target.style.borderColor = errors.telefono ? '#F87171' : 'rgba(255,255,255,0.12)'}
                     />
                   </Field>
                 </div>
@@ -396,13 +400,13 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                 </Field>
 
                 {/* CV */}
-                <Field label="Allega CV">
+                <Field label="Allega CV (facoltativo, max 4 MB)" error={errors.allegato}>
                   <div
                     onClick={() => fileRef.current?.click()}
                     style={{
                       display: 'flex', alignItems: 'center', gap: '0.75rem',
                       padding: '0.7rem 1rem', borderRadius: '10px', cursor: 'pointer',
-                      border: '1.5px dashed rgba(1,136,145,0.35)',
+                      border: `1.5px dashed ${errors.allegato ? '#F87171' : 'rgba(1,136,145,0.35)'}`,
                       background: 'rgba(1,136,145,0.04)',
                       transition: 'border-color 0.2s, background 0.2s',
                     }}
@@ -416,11 +420,11 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     }}
                   >
                     <span style={{ fontSize: '0.875rem', color: fileName ? '#fff' : 'rgba(255,255,255,0.4)' }}>
-                      {fileName || 'Clicca per allegare il CV (.pdf, .doc, .docx)'}
+                      {fileName || `Clicca per allegare il CV (${descrizioneAllegato('candidatura')})`}
                     </span>
                   </div>
                   <input
-                    ref={fileRef} type="file"
+                    ref={fileRef} type="file" data-testid="cv"
                     accept=".pdf,.doc,.docx"
                     onChange={handleFile}
                     style={{ display: 'none' }}
@@ -465,8 +469,8 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                       </div>
                     </div>
                     <span style={{ fontSize: '0.825rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                      <LinkText text={moduli.privacyTesto} style={{ color: 'var(--primary-text)', textDecoration: 'underline' }} />
-                      <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>
+                      <LinkText text={moduli.privacyTesto} style={{ color: 'var(--primary-on-dark)', textDecoration: 'underline' }} />
+                      <span style={{ color: 'var(--primary-on-dark)', marginLeft: '2px' }}>*</span>
                     </span>
                   </label>
                   {errors.privacy && (
@@ -476,6 +480,9 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     </span>
                   )}
                 </div>
+
+                <CampoTrappola />
+                <EsitoModulo esito={esito} tipo="candidatura" valori={valori()} variante="scura" allegato={fields.cv ? fields.cv.name : undefined} />
 
                 {/* Submit */}
                 <button

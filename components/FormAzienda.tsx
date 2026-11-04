@@ -3,6 +3,10 @@ import type { CSSProperties, ReactNode } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useSiteOptions } from '../context/SiteOptionsContext';
 import LinkText from './LinkText';
+import EsitoModulo from './EsitoModulo';
+import CampoTrappola from './CampoTrappola';
+import { validaModulo } from '../lib/moduli';
+import { useInvioModulo } from '../lib/use-invio-modulo';
 
 // Settori, fasce di dipendenti, servizi, consenso privacy e messaggio di successo arrivano dalle opzioni globali (tab Moduli).
 
@@ -53,7 +57,7 @@ function Field({ label, required, error, children, isDark }: FieldProps) {
         color: error ? '#F87171' : isDark ? 'rgba(226,232,240,0.75)' : 'rgba(255,255,255,0.75)',
         letterSpacing: '0.02em',
       }}>
-        {label}{required && <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--primary-on-dark)', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
       {error && (
@@ -101,40 +105,25 @@ export default function FormAzienda({
   subtitle = 'Compila il form, ti risponderemo entro 24 ore',
 }: FormAziendaProps = {}) {
   const { theme } = useTheme() || { theme: 'light' };
-  const { moduli } = useSiteOptions();
+  const { moduli, identita } = useSiteOptions();
   const isDark = theme === 'dark';
   const [fields, setFields] = useState<FormFields>(EMPTY);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // Invio reale: il server (pages/api/moduli/azienda) risponde "ok" solo se Resend ha accettato l'email.
+  const { inviando: loading, esito, invia, azzera } = useInvioModulo('azienda', identita.email);
+  const submitted = esito?.stato === 'ok';
 
   const set = (k: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setFields((p) => ({ ...p, [k]: e.target.value }));
   const setCheck = (e: React.ChangeEvent<HTMLInputElement>) => setFields((p) => ({ ...p, privacy: e.target.checked }));
 
-  function validate(): FormErrors {
-    const err: FormErrors = {};
-    if (!fields.ragioneSociale.trim()) err.ragioneSociale = 'Campo obbligatorio';
-    if (!fields.nomeReferente.trim())  err.nomeReferente  = 'Campo obbligatorio';
-    if (!fields.cognomeReferente.trim()) err.cognomeReferente = 'Campo obbligatorio';
-    if (!fields.email.trim())          err.email = 'Campo obbligatorio';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) err.email = 'Email non valida';
-    if (!fields.telefono.trim())       err.telefono = 'Campo obbligatorio';
-    if (!fields.settore)               err.settore = 'Seleziona un settore';
-    if (!fields.dipendenti)            err.dipendenti = 'Seleziona una fascia';
-    if (!fields.servizio)              err.servizio = 'Seleziona un servizio';
-    if (!fields.privacy)               err.privacy = 'Devi accettare la Privacy Policy';
-    return err;
-  }
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const errs = validate();
+    // Regole condivise con il server: lib/moduli.ts
+    const errs: FormErrors = validaModulo('azienda', fields);
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    const r = await invia(e.currentTarget, fields);
+    if (r.stato === 'errori') setErrors(r.errori);
   }
 
   return (
@@ -237,7 +226,7 @@ export default function FormAzienda({
               display: 'flex', flexDirection: 'column', gap: '0.65rem',
               marginTop: '0.5rem',
             }}>
-              <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary-text)' }}>
+              <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary-on-dark)' }}>
                 Perché sceglierci
               </p>
               {[
@@ -311,11 +300,12 @@ export default function FormAzienda({
                   {moduli.successoAzienda.testo}
                 </p>
                 <button
-                  onClick={() => { setSubmitted(false); setFields(EMPTY); }}
+                  onClick={() => { azzera(); setFields(EMPTY); setErrors({}); }}
                   style={{
                     marginTop: '0.5rem', padding: '0 1.75rem', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--btn-radius)',
                     background: 'rgba(0,140,149,0.12)', border: '1.5px solid rgba(0,140,149,0.35)',
-                    color: '#008C95', fontWeight: 700, fontSize: '0.875rem',
+                    // Testo su sezione scura: #5FC2C8 (--primary-on-dark), ≥ 4.5:1; #008C95 su #0F172A fa meno
+                    color: 'var(--primary-on-dark)', fontWeight: 700, fontSize: '0.875rem',
                     cursor: 'pointer', fontFamily: 'inherit',
                   }}
                 >
@@ -433,8 +423,8 @@ export default function FormAzienda({
                       </div>
                     </div>
                     <span style={{ fontSize: '0.825rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                      <LinkText text={moduli.privacyTesto} style={{ color: '#008C95', textDecoration: 'underline' }} />
-                      <span style={{ color: 'var(--primary-text)', marginLeft: '2px' }}>*</span>
+                      <LinkText text={moduli.privacyTesto} style={{ color: 'var(--primary-on-dark)', textDecoration: 'underline' }} />
+                      <span style={{ color: 'var(--primary-on-dark)', marginLeft: '2px' }}>*</span>
                     </span>
                   </label>
                   {errors.privacy && (
@@ -444,6 +434,9 @@ export default function FormAzienda({
                     </span>
                   )}
                 </div>
+
+                <CampoTrappola />
+                <EsitoModulo esito={esito} tipo="azienda" valori={fields} variante="scura" />
 
                 {/* Submit */}
                 <button
