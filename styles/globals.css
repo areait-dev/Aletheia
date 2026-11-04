@@ -3321,3 +3321,31 @@ html.dark .legal-content td { border-bottom-color: #1F2937; }
 
 /* Statistiche di contorno: filetto sottile tra una e l'altra */
 .numbers-hero-side > * + * { border-left: 1px solid rgba(255,255,255,0.12); }
+
+/* ── Touch (puntatore "coarse": telefoni e tablet, a qualsiasi larghezza) ─────────────────────────────────────────
+   Il mouse (desktop) non è toccato. Misurato a 390px: 34-49 aree cliccabili sotto i 44px per pagina e campi con testo
+   di 13-14px (iOS Safari ingrandisce la pagina quando si mette a fuoco un campo sotto i 16px). */
+@media (pointer: coarse) {
+  /* Sistema .btn e pulsanti dell'header: una sola fonte (token), niente ritocchi pulsante per pulsante */
+  :root { --btn-height-sm: 44px; --btn-height-md: 48px; --btn-height-lg: 52px; }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="submit"]):not([type="button"]):not([type="range"]):not([type="hidden"]),
+  select,
+  textarea {
+    font-size: 16px !important; /* !important: gli stili dei campi sono sparsi in styled-jsx e classi Tailwind */
+  }
+
+  .link-sezione { min-height: 44px; }
+  .theme-toggle { min-width: 44px !important; min-height: 44px !important; } /* stile inline 40x40 nel componente */
+  [role="tablist"] button, [role="option"] { min-height: 44px; }
+  .cp-carousel-arrow { width: 44px !important; height: 44px !important; } /* styled-jsx 32x32 */
+
+  /* Footer: link e icone social (erano alti 20-28px e larghi 11-17px) */
+  footer a { display: inline-flex; align-items: center; min-height: 44px; }
+  footer a[aria-label] { min-width: 44px; justify-content: center; }
+
+  /* Chat: domande suggerite (34px) e pulsante di chiusura (24x24); link di telefono e WhatsApp (36px) */
+  .chatbot-root button:not(.chatbot-toggle) { min-height: 44px; }
+  .chatbot-root button[aria-label="Chiudi chat"] { min-width: 44px; }
+  a[href^="tel:"], a[href*="wa.me"], a[href*="whatsapp"] { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
+}
