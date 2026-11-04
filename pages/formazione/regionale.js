@@ -25,6 +25,7 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
       onMouseLeave={clickable ? () => setHovered(false) : undefined}
       className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
       style={{
+        position: 'relative',
         borderRadius: '1.25rem',
         overflow: 'hidden',
         cursor: clickable ? 'pointer' : 'default',
@@ -38,16 +39,25 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
         opacity: clickable ? 1 : 0.85,
       }}
     >
-      <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
+      {/* Filetto in hover: sovrapposto al bordo alto della card (assoluto), così non sposta l'immagine */}
+      <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', zIndex: 1, background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
+      {/* Immagine a filo con i bordi alto, destro e sinistro della card (gli angoli arrotondati li dà la card con
+          overflow:hidden), in 4:3 invece dei 140px fissi. Il tag sta SULL'immagine, in basso a sinistra: in tutte le
+          foto degli avvisi la fascia bassa non ha volti (corpi, tavoli, divano). Se una nuova foto ha volti in basso,
+          scegliere un altro angolo. Può andare a capo (tag lunghi) invece di uscire dalla card. */}
+      <div style={{ aspectRatio: '4 / 3', position: 'relative', flexShrink: 0 }}>
+        <Image src={image} alt={imageAlt || title} fill sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 25vw" style={{ objectFit: 'cover', objectPosition: imagePosition || 'center' }} />
+        {badge && (
+          <span
+            className="badge-overlay"
+            style={{ position: 'absolute', left: '0.75rem', bottom: '0.75rem', maxWidth: 'calc(100% - 1.5rem)', whiteSpace: 'normal', lineHeight: 1.25, borderRadius: '1rem' }}
+          >
+            <span className="badge-overlay-dot" aria-hidden="true" />
+            {badge}
+          </span>
+        )}
+      </div>
       <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1 }}>
-        <span style={{ fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary-text)', background: 'rgba(1,136,145,0.1)', padding: '0.25rem 0.65rem', borderRadius: '999px', width: 'fit-content' }}>
-          {badge}
-        </span>
-
-        <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '140px', position: 'relative' }}>
-          <Image src={image} alt={imageAlt || title} fill sizes="(max-width: 768px) 100vw, 340px" style={{ objectFit: 'cover', objectPosition: imagePosition || 'center' }} />
-        </div>
-
         <span className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 700 }}>
           {logo}
         </span>

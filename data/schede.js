@@ -45,7 +45,7 @@ export const SCHEDE_LOCALI = {
       "description": "Supportiamo i giovani NEET (under 30 non occupati e non in formazione) con percorsi di orientamento, formazione e tirocinio finanziati dalla Regione Siciliana.",
       "tag": "Under 30",
       "color": "#008C95",
-      "image": "/images/per la persona/garanzia giovani.jpg",
+      "image": "/images/per la persona/garanzia-giovani.jpg",
       "imageAlt": "Giovani professionisti in formazione"
     },
     {
@@ -206,9 +206,9 @@ export const SCHEDE_LOCALI = {
       "text": "Percorsi di formazione professionale finanziati dal Programma Operativo Complementare Sicilia, finalizzati al conseguimento di una qualifica professionale riconosciuta e spendibile nel mercato del lavoro.",
       "modalita": "Aula (o variabile)",
       "href": "/formazione/avviso-1-2026-poc",
-      "image": "/images/avvisi/avviso-1-e-7.jpg",
+      "image": "/images/avvisi/avviso-1-2026-poc-e-7-2023.jpg",
       "imagePosition": "center top",
-      "imageAlt": "Due partecipanti sorridenti si salutano con un pugno in un'aula di formazione"
+      "imageAlt": "Due partecipanti sorridenti si salutano con un pugno davanti a un'aula di formazione"
     },
     {
       "badge": "Disoccupati, NASpI, ADI",
@@ -216,8 +216,9 @@ export const SCHEDE_LOCALI = {
       "title": "Avviso 6/2025 GOL",
       "text": "Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.",
       "modalita": "Aula (o variabile)",
-      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "Persona in colloquio di lavoro per il reinserimento occupazionale"
+      "image": "/images/avvisi/avviso-6-2025-gol.jpg",
+      "imagePosition": "left center",
+      "imageAlt": "Due giovani sorridenti schiena contro schiena con le braccia incrociate"
     },
     {
       "badge": "Qualifica, Stage, Indennità di frequenza",
@@ -226,9 +227,9 @@ export const SCHEDE_LOCALI = {
       "text": "Percorsi rivolti a disoccupati e inoccupati che prevedono una qualifica professionale riconosciuta, indennità di frequenza e stage presso aziende partner.",
       "modalita": "Aula + Stage (o variabile)",
       "href": "/archivio/avviso-7-2023",
-      "image": "/images/avvisi/avviso-1-e-7.jpg",
+      "image": "/images/avvisi/avviso-1-2026-poc-e-7-2023.jpg",
       "imagePosition": "center top",
-      "imageAlt": "Due partecipanti sorridenti si salutano con un pugno in un'aula di formazione"
+      "imageAlt": "Due partecipanti sorridenti si salutano con un pugno davanti a un'aula di formazione"
     },
     {
       "badge": "Assistente Familiare",
@@ -238,8 +239,8 @@ export const SCHEDE_LOCALI = {
       "durata": "300 ore",
       "modalita": "Aula + Stage",
       "href": "/archivio/avviso-20-2024-fse",
-      "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "Assistente familiare che si prende cura di una persona anziana"
+      "image": "/images/avvisi/avviso-20-2024-assistente-familiare.jpg",
+      "imageAlt": "Donna anziana sorridente sul divano con una giovane assistente che le mostra un tablet"
     }
   ],
   "gol-misure": [
@@ -419,8 +420,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri i corsi ECM",
       "href": "/formazione/ecm",
-      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Corsi ECM",
+      "image": "/images/formazione-professionale/corsi-ecm.jpg",
+      "imageAlt": "Medico sorridente in camice con stetoscopio e appunti in un corridoio ospedaliero",
       "gradient": "linear-gradient(135deg, #134E4A 0%, #10B981 100%)"
     },
     {
@@ -433,8 +434,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri la formazione PA",
       "href": "/formazione/corsi-pa",
-      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Formazione per la PA",
+      "image": "/images/formazione-professionale/formazione-pa.jpg",
+      "imageAlt": "Impiegata al computer in un ufficio pubblico con archivi e faldoni",
       "gradient": "linear-gradient(135deg, #008C95 0%, #0F172A 100%)"
     }
   ],
@@ -491,8 +492,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri i corsi",
       "href": "/formazione/regionale",
-      "image": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Aula di formazione regionale con studenti al lavoro"
+      "image": "/images/formazione-regionale/formazione-regionale.jpg",
+      "imageAlt": "Corsisti di età diverse in aula durante un corso di formazione regionale"
     },
     {
       "badge": "La formazione che la tua azienda sta già finanziando",

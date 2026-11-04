@@ -53,7 +53,8 @@ function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt 
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
           {bullets.map((b, i) => (
             <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.83rem', lineHeight: 1.5, color: 'rgba(255,255,255,0.85)' }}>
-              <i className="fas fa-check" style={{ color: '#6EE7B7', fontSize: '0.7rem', marginTop: '0.3rem', flexShrink: 0 }}></i>
+              {/* Verde Alètheia #018891 (non più la menta #6EE7B7): icona non testuale sul velo scuro della card, ~3,5-3,8:1 (minimo 3:1) */}
+              <i className="fas fa-check" style={{ color: '#018891', fontSize: '0.7rem', marginTop: '0.3rem', flexShrink: 0 }}></i>
               <span>{b}</span>
             </li>
           ))}
