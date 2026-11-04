@@ -1,0 +1,63 @@
+{
+  "etichetta": "mobile-news-priority",
+  "lighthouse": "13.6.0",
+  "passate": 3,
+  "data": "2026-11-04T11:34:36.854Z",
+  "node": "v24.16.0",
+  "risultati": [
+    {
+      "forma": "mobile",
+      "pagina": "/news/bonus-giovani-under-35-aprile-2026",
+      "mediana": {
+        "performance": 79,
+        "accessibility": 95,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1814,
+        "lcpMs": 4796,
+        "tbtMs": 110,
+        "cls": 0,
+        "pesoTotaleKB": 745,
+        "javascriptKB": 153
+      },
+      "passate": [
+        {
+          "performance": 79,
+          "accessibility": 95,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1800,
+          "lcpMs": 4901,
+          "tbtMs": 110,
+          "cls": 0,
+          "pesoTotaleKB": 745,
+          "javascriptKB": 153
+        },
+        {
+          "performance": 90,
+          "accessibility": 95,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1814,
+          "lcpMs": 3303,
+          "tbtMs": 106,
+          "cls": 0,
+          "pesoTotaleKB": 745,
+          "javascriptKB": 153
+        },
+        {
+          "performance": 74,
+          "accessibility": 95,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 2031,
+          "lcpMs": 4796,
+          "tbtMs": 210,
+          "cls": 0,
+          "pesoTotaleKB": 745,
+          "javascriptKB": 153
+        }
+      ]
+    }
+  ]
+}

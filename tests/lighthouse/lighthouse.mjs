@@ -57,13 +57,24 @@ function unaPassata(url, forma, tmp) {
   };
 }
 
+// Un avvio di Chrome/Lighthouse può fallire in modo occasionale (errore dell'infrastruttura, non della pagina): prima un solo
+// errore buttava via tutta la misura. Si ritenta fino a 2 volte e il ritento viene scritto a video.
+function unaPassataConRitenti(url, forma, tmp) {
+  for (let tentativo = 1; ; tentativo++) {
+    try { return unaPassata(url, forma, tmp); } catch (e) {
+      if (tentativo >= 3) throw e;
+      console.log(`  (passata fallita su ${url} [${forma}], ritento ${tentativo}/2)`);
+    }
+  }
+}
+
 function esegui(etichetta, passate) {
   fs.mkdirSync(cartellaRis, { recursive: true });
   const risultati = [];
   for (const forma of FORME) {
     for (const pagina of PAGINE) {
       const righe = [];
-      for (let i = 0; i < passate; i++) righe.push(unaPassata(BASE_URL + pagina, forma, path.join(os.tmpdir(), `lh-${process.pid}-${i}.json`)));
+      for (let i = 0; i < passate; i++) righe.push(unaPassataConRitenti(BASE_URL + pagina, forma, path.join(os.tmpdir(), `lh-${process.pid}-${i}.json`)));
       const med = {};
       for (const k of Object.keys(righe[0])) med[k] = mediana(righe.map((r) => r[k]));
       risultati.push({ forma, pagina, mediana: med, passate: righe });
