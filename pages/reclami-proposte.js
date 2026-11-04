@@ -7,19 +7,28 @@ import { useSiteOptions } from '../context/SiteOptionsContext';
 import { getPagina } from '../lib/wp-pagine';
 import { isrOptions } from '../lib/wp';
 import { withSiteOptions } from '../lib/wp-site';
+import { validaModulo, validaAllegato, descrizioneAllegato } from '../lib/moduli';
+import { useInvioModulo } from '../lib/use-invio-modulo';
+import EsitoModulo from '../components/EsitoModulo';
+import CampoTrappola from '../components/CampoTrappola';
 
 const EMPTY = {
   nome: '', email: '', tipologia: '', parti: '', oggetto: '', messaggio: '',
   privacy: false, allegato: null,
 };
 
-function Field({ label, required, children }) {
+function Field({ label, required, children, error }) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-xs font-bold tracking-wide text-gray-700 dark:text-gray-300">
         {label}{required && <span className="text-primary dark:text-primary-on-dark ml-0.5">*</span>}
       </label>
       {children}
+      {error && (
+        <p role="alert" className="text-xs text-red-600 dark:text-red-400 m-0 flex items-center gap-1.5">
+          <i className="fas fa-exclamation-circle" aria-hidden="true" /> {error}
+        </p>
+      )}
     </div>
   );
 }
@@ -36,29 +45,46 @@ async function getPageStaticProps() {
 
 export default function ReclamiProposte({ pagina }) {
   const T = pagina.testi;
-  const { moduli } = useSiteOptions();
+  const { moduli, identita } = useSiteOptions();
   const [fields, setFields] = useState(EMPTY);
   const [fileName, setFileName] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  // Invio reale: il server (pages/api/moduli/reclami) risponde "ok" solo se Resend ha accettato l'email.
+  const { inviando: loading, esito, invia, azzera } = useInvioModulo('reclami', identita.email);
+  const submitted = esito?.stato === 'ok';
   const fileRef = useRef(null);
 
-  const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
+  const set = (k) => (e) => {
+    setFields((p) => ({ ...p, [k]: e.target.value }));
+    if (errors[k]) setErrors((p) => ({ ...p, [k]: undefined }));
+  };
+
+  // Valori di testo (l'allegato viaggia a parte)
+  const valori = () => { const { allegato, ...resto } = fields; return resto; };
 
   function handleFile(e) {
     const file = e.target.files[0];
     if (file) {
       setFields((p) => ({ ...p, allegato: file }));
       setFileName(file.name);
+      setErrors((p) => ({ ...p, allegato: validaAllegato('reclami', file, identita.email) || undefined }));
     }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    setSubmitted(true);
+    const form = e.currentTarget;
+    // Regole condivise con il server: lib/moduli.ts
+    const errs = validaModulo('reclami', valori());
+    if (fields.allegato) { const m = validaAllegato('reclami', fields.allegato, identita.email); if (m) errs.allegato = m; }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      requestAnimationFrame(() => form.querySelector('[role="alert"]')?.scrollIntoView({ block: 'center' }));
+      return;
+    }
+    setErrors({});
+    const r = await invia(form, valori(), fields.allegato);
+    if (r.stato === 'errori') setErrors(r.errori);
   }
 
   return (
@@ -83,25 +109,25 @@ export default function ReclamiProposte({ pagina }) {
               <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">{moduli.successoReclami.titolo}</h2>
               <p className="text-sm text-gray-600 dark:text-gray-300 max-w-sm">{moduli.successoReclami.testo}</p>
               <button
-                onClick={() => { setSubmitted(false); setFields(EMPTY); setFileName(''); }}
+                onClick={() => { azzera(); setFields(EMPTY); setFileName(''); setErrors({}); }}
                 className="mt-2 inline-flex items-center justify-center px-6 min-h-9 whitespace-nowrap rounded-full text-sm font-semibold border border-primary text-primary dark:text-primary-on-dark dark:border-primary-on-dark hover:bg-primary hover:text-white dark:hover:bg-primary-on-dark dark:hover:text-gray-900 transition-colors"
               >
                 Invia un&apos;altra segnalazione
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="Nome e Cognome">
+                <Field label="Nome e Cognome (facoltativo)" error={errors.nome}>
                   <input type="text" value={fields.nome} onChange={set('nome')} placeholder="Mario Rossi" className={inputClass} />
                 </Field>
-                <Field label="Email">
+                <Field label="Email (facoltativa, per ricevere risposta)" error={errors.email}>
                   <input type="email" value={fields.email} onChange={set('email')} placeholder="mario@esempio.it" className={inputClass} />
                 </Field>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="Tipologia di comunicazione" required>
+                <Field label="Tipologia di comunicazione" required error={errors.tipologia}>
                   <select value={fields.tipologia} onChange={set('tipologia')} className={inputClass}>
                     <option value="">Seleziona…</option>
                     <option value="Proposta">Proposta</option>
@@ -109,7 +135,7 @@ export default function ReclamiProposte({ pagina }) {
                     <option value="Altro">Altro</option>
                   </select>
                 </Field>
-                <Field label="Parti interessate" required>
+                <Field label="Parti interessate" required error={errors.parti}>
                   <select value={fields.parti} onChange={set('parti')} className={inputClass}>
                     <option value="">Seleziona…</option>
                     <option value="Fornitori">Fornitori</option>
@@ -120,11 +146,11 @@ export default function ReclamiProposte({ pagina }) {
                 </Field>
               </div>
 
-              <Field label="Oggetto" required>
+              <Field label="Oggetto" required error={errors.oggetto}>
                 <input type="text" value={fields.oggetto} onChange={set('oggetto')} placeholder="Oggetto della segnalazione" className={inputClass} />
               </Field>
 
-              <Field label="Messaggio" required>
+              <Field label="Messaggio" required error={errors.messaggio}>
                 <textarea
                   value={fields.messaggio}
                   onChange={set('messaggio')}
@@ -134,29 +160,40 @@ export default function ReclamiProposte({ pagina }) {
                 />
               </Field>
 
-              <Field label="Allega il modulo (opzionale, max 100 MB)">
+              <Field label="Allega il modulo (opzionale, max 4 MB)" error={errors.allegato}>
                 <div
                   onClick={() => fileRef.current?.click()}
                   className="flex items-center gap-3 px-4 py-2.5 rounded-lg cursor-pointer border border-dashed border-primary/40 dark:border-primary-on-dark/40 bg-primary/5 dark:bg-[#018891]/5 hover:border-primary dark:hover:border-primary-on-dark transition-colors"
                 >
                   <span className={`text-sm ${fileName ? 'text-gray-900 dark:text-gray-50' : 'text-gray-500 dark:text-gray-500'}`}>
-                    {fileName || 'Clicca per allegare un file'}
+                    {fileName || `Clicca per allegare un file (${descrizioneAllegato('reclami')})`}
                   </span>
                 </div>
-                <input ref={fileRef} type="file" onChange={handleFile} className="hidden" />
+                <input ref={fileRef} type="file" data-testid="allegato" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={handleFile} className="hidden" />
               </Field>
 
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={fields.privacy}
-                  onChange={(e) => setFields((p) => ({ ...p, privacy: e.target.checked }))}
-                  className="mt-1"
-                />
-                <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  <LinkText text={moduli.privacyTesto} className="text-primary dark:text-primary-on-dark underline" />
-                </span>
-              </label>
+              <div>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={fields.privacy}
+                    onChange={(e) => { setFields((p) => ({ ...p, privacy: e.target.checked })); if (errors.privacy) setErrors((p) => ({ ...p, privacy: undefined })); }}
+                    className="mt-1"
+                  />
+                  <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <LinkText text={moduli.privacyTesto} className="text-primary dark:text-primary-on-dark underline" />
+                    <span className="text-primary-text dark:text-primary-on-dark font-bold ml-0.5" aria-hidden="true">*</span>
+                  </span>
+                </label>
+                {errors.privacy && (
+                  <p role="alert" className="text-xs text-red-600 dark:text-red-400 mt-2 mb-0 flex items-center gap-1.5">
+                    <i className="fas fa-exclamation-circle" aria-hidden="true" /> {errors.privacy}
+                  </p>
+                )}
+              </div>
+
+              <CampoTrappola />
+              <EsitoModulo esito={esito} tipo="reclami" valori={valori()} allegato={fields.allegato ? fields.allegato.name : undefined} />
 
               <button
                 type="submit"

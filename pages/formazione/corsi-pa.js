@@ -9,6 +9,11 @@ import { getSchede } from '../../lib/wp-schede';
 import { getPagina } from '../../lib/wp-pagine';
 import HeroTitle from '../../components/HeroTitle';
 import { withSiteOptions } from '../../lib/wp-site';
+import EsitoModulo from '../../components/EsitoModulo';
+import CampoTrappola from '../../components/CampoTrappola';
+import { validaModulo } from '../../lib/moduli';
+import { useInvioModulo } from '../../lib/use-invio-modulo';
+import { useSiteOptions } from '../../context/SiteOptionsContext';
 
 // Enti: `name` è il nome mostrato nel carosello (abbreviato per i più lunghi); `full` è la denominazione completa (tooltip e lettori di schermo)
 const entiLoghi = [
@@ -78,31 +83,47 @@ const getInputStyle = (isDark) => ({
 const focusOn = (e) => { e.target.style.borderColor = '#008C95'; };
 const focusOff = (isDark) => (e) => { e.target.style.borderColor = isDark ? 'rgba(255,255,255,0.12)' : '#CBD5E1'; };
 
-function FormField({ label, required, children, isDark }) {
+function FormField({ label, required, children, isDark, error }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
       <label style={{ fontSize: '0.78rem', fontWeight: 700, color: isDark ? 'rgba(255,255,255,0.75)' : '#334155', letterSpacing: '0.02em' }}>
         {label}{required && <span style={{ color: '#008C95', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
+      {error && (
+        <span role="alert" style={{ fontSize: '0.75rem', color: isDark ? '#F87171' : '#B91C1C' }}>
+          <i className="fas fa-exclamation-circle" style={{ marginRight: '4px' }}></i>{error}
+        </span>
+      )}
     </div>
   );
 }
 
 function ConsulenzaPAForm({ isDark }) {
   const [fields, setFields] = useState(EMPTY_FORM);
-  const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  // Invio reale: il server (pages/api/moduli/corsi-pa) risponde "ok" solo se Resend ha accettato l'email.
+  const { identita } = useSiteOptions();
+  const { inviando, esito, invia, azzera } = useInvioModulo('corsi-pa', identita.email);
+  const submitted = esito?.stato === 'ok';
   const set = (k) => (e) => setFields((p) => ({ ...p, [k]: e.target.value }));
   const setCheck = (e) => setFields((p) => ({ ...p, privacy: e.target.checked }));
   const inputStyle = getInputStyle(isDark);
   const groupLabelColor = isDark ? '#5FC2C8' : '#008C95';
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (!fields.privacy) { setErrors({ privacy: 'Devi accettare la Privacy Policy' }); return; }
+    const form = e.currentTarget;
+    // Regole condivise con il server: lib/moduli.ts
+    const errs = validaModulo('corsi-pa', fields);
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      requestAnimationFrame(() => form.querySelector('[role="alert"]')?.scrollIntoView({ block: 'center' }));
+      return;
+    }
     setErrors({});
-    setSubmitted(true);
+    const r = await invia(form, fields);
+    if (r.stato === 'errori') setErrors(r.errori);
   }
 
   if (submitted) {
@@ -116,7 +137,7 @@ function ConsulenzaPAForm({ isDark }) {
           Grazie per averci contattato. Il nostro team ti risponderà entro 24 ore lavorative per proporti un piano formativo su misura per il tuo ente.
         </p>
         <button
-          onClick={() => { setSubmitted(false); setFields(EMPTY_FORM); }}
+          onClick={() => { azzera(); setFields(EMPTY_FORM); setErrors({}); }}
           style={{ marginTop: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '999px', background: 'rgba(0,140,149,0.12)', border: '1.5px solid rgba(0,140,149,0.35)', color: '#008C95', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'inherit' }}
         >
           Invia una nuova richiesta
@@ -126,13 +147,13 @@ function ConsulenzaPAForm({ isDark }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem' }}>
+    <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: groupLabelColor }}>
           Ente
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }} className="pa-form-row">
-          <FormField label="Ente / Amministrazione" required isDark={isDark}>
+          <FormField label="Ente / Amministrazione" required isDark={isDark} error={errors.ente}>
             <input type="text" required value={fields.ente} onChange={set('ente')} placeholder="Comune di…" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="Area formativa di interesse" isDark={isDark}>
@@ -146,7 +167,7 @@ function ConsulenzaPAForm({ isDark }) {
           Referente
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }} className="pa-form-row">
-          <FormField label="Referente (Nome e Cognome)" required isDark={isDark}>
+          <FormField label="Referente (Nome e Cognome)" required isDark={isDark} error={errors.referente}>
             <input type="text" required value={fields.referente} onChange={set('referente')} placeholder="Mario Rossi" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="Ruolo / Ufficio" isDark={isDark}>
@@ -154,10 +175,10 @@ function ConsulenzaPAForm({ isDark }) {
           </FormField>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }} className="pa-form-row">
-          <FormField label="Email istituzionale" required isDark={isDark}>
+          <FormField label="Email istituzionale" required isDark={isDark} error={errors.email}>
             <input type="email" required value={fields.email} onChange={set('email')} placeholder="nome.cognome@ente.it" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
-          <FormField label="Telefono" isDark={isDark}>
+          <FormField label="Telefono" isDark={isDark} error={errors.telefono}>
             <input type="tel" value={fields.telefono} onChange={set('telefono')} placeholder="+39 0932 000000" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
@@ -196,19 +217,23 @@ function ConsulenzaPAForm({ isDark }) {
       </div>
       {errors.privacy && <p style={{ margin: '-0.85rem 0 0', fontSize: '0.75rem', color: '#EF4444' }}><i className="fas fa-exclamation-circle" style={{ marginRight: '4px' }}></i>{errors.privacy}</p>}
 
+      <CampoTrappola />
+      <EsitoModulo esito={esito} tipo="corsi-pa" valori={fields} variante={isDark ? 'scura' : 'chiara'} />
+
       <button
         type="submit"
+        disabled={inviando}
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem',
           width: '100%', padding: '0.95rem 2rem', borderRadius: '999px', border: 'none',
-          background: '#008C95',
-          color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
+          background: '#008C95', opacity: inviando ? 0.7 : 1,
+          color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: inviando ? 'not-allowed' : 'pointer',
           fontFamily: 'inherit', boxShadow: '0 4px 20px rgba(0,140,149,0.35)',
           marginTop: '0.25rem', boxSizing: 'border-box',
         }}
       >
         <i className="fas fa-paper-plane" style={{ fontSize: '0.85rem' }}></i>
-        Richiedi una consulenza dedicata
+        {inviando ? 'Invio in corso…' : 'Richiedi una consulenza dedicata'}
       </button>
     </form>
   );

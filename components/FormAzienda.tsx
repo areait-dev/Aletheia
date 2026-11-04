@@ -3,6 +3,10 @@ import type { CSSProperties, ReactNode } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useSiteOptions } from '../context/SiteOptionsContext';
 import LinkText from './LinkText';
+import EsitoModulo from './EsitoModulo';
+import CampoTrappola from './CampoTrappola';
+import { validaModulo } from '../lib/moduli';
+import { useInvioModulo } from '../lib/use-invio-modulo';
 
 // Settori, fasce di dipendenti, servizi, consenso privacy e messaggio di successo arrivano dalle opzioni globali (tab Moduli).
 
@@ -101,40 +105,25 @@ export default function FormAzienda({
   subtitle = 'Compila il form, ti risponderemo entro 24 ore',
 }: FormAziendaProps = {}) {
   const { theme } = useTheme() || { theme: 'light' };
-  const { moduli } = useSiteOptions();
+  const { moduli, identita } = useSiteOptions();
   const isDark = theme === 'dark';
   const [fields, setFields] = useState<FormFields>(EMPTY);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // Invio reale: il server (pages/api/moduli/azienda) risponde "ok" solo se Resend ha accettato l'email.
+  const { inviando: loading, esito, invia, azzera } = useInvioModulo('azienda', identita.email);
+  const submitted = esito?.stato === 'ok';
 
   const set = (k: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setFields((p) => ({ ...p, [k]: e.target.value }));
   const setCheck = (e: React.ChangeEvent<HTMLInputElement>) => setFields((p) => ({ ...p, privacy: e.target.checked }));
 
-  function validate(): FormErrors {
-    const err: FormErrors = {};
-    if (!fields.ragioneSociale.trim()) err.ragioneSociale = 'Campo obbligatorio';
-    if (!fields.nomeReferente.trim())  err.nomeReferente  = 'Campo obbligatorio';
-    if (!fields.cognomeReferente.trim()) err.cognomeReferente = 'Campo obbligatorio';
-    if (!fields.email.trim())          err.email = 'Campo obbligatorio';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) err.email = 'Email non valida';
-    if (!fields.telefono.trim())       err.telefono = 'Campo obbligatorio';
-    if (!fields.settore)               err.settore = 'Seleziona un settore';
-    if (!fields.dipendenti)            err.dipendenti = 'Seleziona una fascia';
-    if (!fields.servizio)              err.servizio = 'Seleziona un servizio';
-    if (!fields.privacy)               err.privacy = 'Devi accettare la Privacy Policy';
-    return err;
-  }
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const errs = validate();
+    // Regole condivise con il server: lib/moduli.ts
+    const errs: FormErrors = validaModulo('azienda', fields);
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    const r = await invia(e.currentTarget, fields);
+    if (r.stato === 'errori') setErrors(r.errori);
   }
 
   return (
@@ -311,7 +300,7 @@ export default function FormAzienda({
                   {moduli.successoAzienda.testo}
                 </p>
                 <button
-                  onClick={() => { setSubmitted(false); setFields(EMPTY); }}
+                  onClick={() => { azzera(); setFields(EMPTY); setErrors({}); }}
                   style={{
                     marginTop: '0.5rem', padding: '0 1.75rem', minHeight: 'var(--btn-height-md)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--btn-radius)',
                     background: 'rgba(0,140,149,0.12)', border: '1.5px solid rgba(0,140,149,0.35)',
@@ -444,6 +433,9 @@ export default function FormAzienda({
                     </span>
                   )}
                 </div>
+
+                <CampoTrappola />
+                <EsitoModulo esito={esito} tipo="azienda" valori={fields} variante="scura" />
 
                 {/* Submit */}
                 <button
