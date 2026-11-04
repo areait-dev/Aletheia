@@ -3,7 +3,7 @@
 // possono divergere: il server ripete SEMPRE tutti i controlli, quelli del browser servono solo a dare risposte rapide.
 // Nessun segreto qui: il file finisce nel bundle del browser.
 
-export type TipoModulo = 'preventivo' | 'contatti' | 'candidatura' | 'azienda' | 'obbligatoria' | 'corsi-pa' | 'reclami';
+export type TipoModulo = 'preventivo' | 'preiscrizione' | 'contatti' | 'candidatura' | 'azienda' | 'obbligatoria' | 'corsi-pa' | 'reclami';
 
 export const EMAIL_INFO = 'info@aletheiasrl.it';
 export const TELEFONO_INFO = '+39 0932 862613';
@@ -68,6 +68,19 @@ export const DEFINIZIONI: Record<TipoModulo, ModuloDef> = {
       { nome: 'partecipanti', etichetta: 'Numero di partecipanti', tipo: 'intero', obbligatorio: true, min: 1, maxValore: 999, msgVuoto: 'Inserisci un numero da 1 a 999' },
       { nome: 'modalita', etichetta: 'Modalità preferita', tipo: 'testo', obbligatorio: true, msgVuoto: 'Seleziona la modalità' },
       { nome: 'messaggio', etichetta: 'Note', tipo: 'testo', max: 3000 },
+      { nome: 'privacy', etichetta: 'Privacy Policy', tipo: 'consenso', obbligatorio: true, msgVuoto: PRIVACY_MIN },
+    ],
+  },
+  // Corsi a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): raccolta delle adesioni, nessun pagamento anticipato
+  preiscrizione: {
+    tipo: 'preiscrizione',
+    titolo: 'Nuova pre-iscrizione dal sito',
+    oggetto: (d) => `[Sito] Pre-iscrizione: ${d.corso}`,
+    campi: [
+      { nome: 'corso', etichetta: 'Corso', tipo: 'testo', obbligatorio: true, msgVuoto: 'Indica il corso a cui ti pre-iscrivi' },
+      { nome: 'nome', etichetta: 'Nome e cognome', tipo: 'testo', obbligatorio: true },
+      { nome: 'email', etichetta: 'Email', tipo: 'email', obbligatorio: true, msgVuoto: 'Email non valida' },
+      { nome: 'telefono', etichetta: 'Telefono', tipo: 'telefono', obbligatorio: true },
       { nome: 'privacy', etichetta: 'Privacy Policy', tipo: 'consenso', obbligatorio: true, msgVuoto: PRIVACY_MIN },
     ],
   },
