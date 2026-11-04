@@ -4,6 +4,16 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 
 **Decisione del 2 novembre 2026: la migrazione all'App Router è SOSPESA.** Si fa solo la **Fase 1b**: aggiornare Next da 13.4.0 a 16 restando in Pages Router. Le Fasi 2–5 sono "rimandate" (vedi la sezione dedicata in fondo, con le note per riprenderle).
 
+## Ottimizzazione mobile – Fase 1 (4 novembre 2026) – misura e controllo, nessun intervento applicato
+
+Branch `ottimizzazione-mobile` da `master` (`022ae44`, Next 16.4.4 già unito, skill in `.claude/skills/ottimizzazione-mobile-nextjs/`). Il lavoro sul sito della sessione precedente (preventivo, immagini, ricerca, sidebar mobile…) sta in 5 commit su `contenuti-immagini-preventivo`, **non** in `master`: quindi le misure sotto sono sulla base pulita. Report completo con screenshot: `Desktop\ottimizzazione-mobile-fase1\REPORT-fase1.md` (fuori dal repository).
+
+- **Base Lighthouse mobile** (mediana di 3 passate, `tests/riferimenti/lighthouse/mobile-base.json`): home 97, contatti 97, calendario 98, chi-siamo 95, 404 95, antincendio 88, news 81, **/all-courses 71 e ?categoria= 68**. CLS 0 ovunque. `tests/lighthouse/lighthouse.mjs` ora accetta `PAGINE` e `FORME` da ambiente (il comportamento predefinito è invariato).
+- **LCP, cause dimostrate:** su /all-courses, ?categoria= e pagine corso è il **paragrafo del banner cookie** (render delay ≈ 2,3 s; LCP bimodale ≈ 2 s / ≈ 5 s); sulla news è l'**immagine di testata con `loading="lazy"`**; su tutte c'è **CSS bloccante ≈ 1,1 s** (Font Awesome da cdnjs).
+- **Mobile 390/768 px (Chromium):** nessun overflow orizzontale. Menu hamburger: nessun blocco dello scroll (+547 px dietro il menu) e Escape non lo chiude. Input < 16 px (contatti, ricerca corsi, chat). 34–49 aree cliccabili < 44 px per pagina. Il solo sticky dannoso è la sidebar di `/all-courses` (copre le card sotto i 1024 px).
+- **iPad Mini (WebKit 26.5 contro Chromium di controllo, 768×1024 e 1024×768):** i due motori danno gli stessi numeri, zero errori JS. **Difetto di larghezza:** tra ~992 e ~1170 px il pulsante "Piattaforma" dell'header è fuori schermo e non toccabile (tagliato di 118 px a 1024, di 9 px a 1133). Sidebar sovrapposta alle card anche su iPad verticale. Le cause solo-Safari (chiusura dei menu con `mousedown`, zoom al focus, `100vh`, versione di iPadOS) sono **ipotesi dal codice**, non riproducibili con Playwright: serve una prova su un iPad vero e sapere modello e versione di iPadOS (Next 16 assume Safari ≥ 16.4).
+- **Prossimo passo:** STOP, aspetto l'approvazione dell'elenco ordinato degli interventi (report §4). Strumenti usati (script di ispezione) in `Desktop\ottimizzazione-mobile-fase1\`; WebKit scaricato in `%LOCALAPPDATA%\ms-playwright\webkit-2311`.
+
 ## Stato al rientro (3 novembre 2026, sera) – da leggere per primo
 
 **Aggiornamento di fine giornata (3 novembre 2026, 17:30)**
