@@ -36,6 +36,10 @@ export type Scheda = {
   extra: string[];
   /** Riquadro evidenziato (es. scadenza); i link si scrivono [etichetta](URL). */
   avviso: string;
+  /** Mostra il pulsante "Pre-iscriviti" (modulo /pre-iscrizione, oggetto "[Sito] Pre-iscrizione: <titolo>"). Falso di default: oggi nessun avviso la prevede. */
+  preiscrizione: boolean;
+  /** Scadenza della pre-iscrizione, `AAAA-MM-GG` (inclusa); vuota = nessuna scadenza. Passata: al posto del pulsante compare "Pre-iscrizioni chiuse". */
+  preiscrizioneScadenza: string;
   /** Riga finale con email e telefono del sito. */
   contatti: boolean;
 };
@@ -182,6 +186,8 @@ function schedaDaAcf(a: Record<string, unknown>): Scheda {
     extraTipo: a.scheda_extra_tipo === 'sedi' ? 'sedi' : a.scheda_extra_tipo === 'corsi' ? 'corsi' : 'chips',
     extra: lines(a.scheda_extra),
     avviso: str(a.scheda_avviso),
+    preiscrizione: a.scheda_preiscrizione === true,
+    preiscrizioneScadenza: str(a.scheda_preiscrizione_scadenza),
     contatti: a.scheda_contatti === true,
   };
 }

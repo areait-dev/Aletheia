@@ -3,7 +3,7 @@
 // possono divergere: il server ripete SEMPRE tutti i controlli, quelli del browser servono solo a dare risposte rapide.
 // Nessun segreto qui: il file finisce nel bundle del browser.
 
-export type TipoModulo = 'preventivo' | 'preiscrizione' | 'contatti' | 'candidatura' | 'azienda' | 'obbligatoria' | 'corsi-pa' | 'reclami';
+export type TipoModulo = 'preventivo' | 'iscrizione' | 'preiscrizione' | 'contatti' | 'candidatura' | 'azienda' | 'obbligatoria' | 'corsi-pa' | 'reclami';
 
 export const EMAIL_INFO = 'info@aletheiasrl.it';
 export const TELEFONO_INFO = '+39 0932 862613';
@@ -52,6 +52,17 @@ const PRIVACY_MAIUSC = 'Devi accettare la Privacy Policy';
 const CV_TIPI: AllegatoDef = { estensioni: ['pdf', 'doc', 'docx'], descrizione: 'PDF, DOC o DOCX' };
 const RECLAMI_TIPI: AllegatoDef = { estensioni: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'], descrizione: 'PDF, DOC, DOCX, JPG o PNG' };
 
+/** Campi di iscrizione e pre-iscrizione: identici, cambia solo il messaggio del campo "corso" vuoto. */
+function campiIscrizione(msgCorso: string): CampoDef[] {
+  return [
+    { nome: 'corso', etichetta: 'Corso', tipo: 'testo', obbligatorio: true, msgVuoto: msgCorso },
+    { nome: 'nome', etichetta: 'Nome e cognome', tipo: 'testo', obbligatorio: true },
+    { nome: 'email', etichetta: 'Email', tipo: 'email', obbligatorio: true, msgVuoto: 'Email non valida' },
+    { nome: 'telefono', etichetta: 'Telefono', tipo: 'telefono', obbligatorio: true },
+    { nome: 'privacy', etichetta: 'Privacy Policy', tipo: 'consenso', obbligatorio: true, msgVuoto: PRIVACY_MIN },
+  ];
+}
+
 export const DEFINIZIONI: Record<TipoModulo, ModuloDef> = {
   preventivo: {
     tipo: 'preventivo',
@@ -71,18 +82,19 @@ export const DEFINIZIONI: Record<TipoModulo, ModuloDef> = {
       { nome: 'privacy', etichetta: 'Privacy Policy', tipo: 'consenso', obbligatorio: true, msgVuoto: PRIVACY_MIN },
     ],
   },
-  // Corsi a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): raccolta delle adesioni, nessun pagamento anticipato
+  // Corsi del catalogo a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola, BLSD): ISCRIZIONE, nessun pagamento anticipato
+  iscrizione: {
+    tipo: 'iscrizione',
+    titolo: 'Nuova iscrizione dal sito',
+    oggetto: (d) => `[Sito] Iscrizione: ${d.corso}`,
+    campi: campiIscrizione('Indica il corso a cui ti iscrivi'),
+  },
+  // Avvisi pubblici (corsi finanziati): PRE-ISCRIZIONE, non garantisce il posto (requisiti e graduatorie). Stessi campi dell'iscrizione.
   preiscrizione: {
     tipo: 'preiscrizione',
     titolo: 'Nuova pre-iscrizione dal sito',
     oggetto: (d) => `[Sito] Pre-iscrizione: ${d.corso}`,
-    campi: [
-      { nome: 'corso', etichetta: 'Corso', tipo: 'testo', obbligatorio: true, msgVuoto: 'Indica il corso a cui ti pre-iscrivi' },
-      { nome: 'nome', etichetta: 'Nome e cognome', tipo: 'testo', obbligatorio: true },
-      { nome: 'email', etichetta: 'Email', tipo: 'email', obbligatorio: true, msgVuoto: 'Email non valida' },
-      { nome: 'telefono', etichetta: 'Telefono', tipo: 'telefono', obbligatorio: true },
-      { nome: 'privacy', etichetta: 'Privacy Policy', tipo: 'consenso', obbligatorio: true, msgVuoto: PRIVACY_MIN },
-    ],
+    campi: campiIscrizione("Indica l'avviso o il corso a cui ti pre-iscrivi"),
   },
   contatti: {
     tipo: 'contatti',

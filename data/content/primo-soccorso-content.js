@@ -47,7 +47,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
         { domanda: 'Ogni quanto va rinnovato?', risposta: 'È obbligatorio un aggiornamento ogni 3 anni, della durata di 6 ore.' },
         { domanda: 'L\'attestato è valido in tutta Italia?', risposta: 'Sì.' },
         { domanda: 'La parte pratica si può fare in FAD?', risposta: 'No, RCP, DAE ed emorragie richiedono la presenza. Solo la parte teorica è disponibile in FAD.' },
-        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, con un minimo di 15 iscritti.' }
+        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, al raggiungimento del numero minimo di iscritti.' }
       ],
 
       moduli: [
@@ -100,7 +100,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
         { domanda: 'Come si determina se sono Gruppo B o C?', risposta: 'Gruppo B con 3 o più lavoratori non appartenenti al Gruppo A, Gruppo C con meno di 3 lavoratori. Il corso da 12 ore è identico per entrambi.' },
         { domanda: 'Ogni quanto va rinnovato?', risposta: 'È obbligatorio un aggiornamento ogni 3 anni, della durata di 4 ore.' },
         { domanda: 'L\'attestato è valido in tutta Italia?', risposta: 'Sì.' },
-        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, con un minimo di 15 partecipanti.' }
+        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, al raggiungimento del numero minimo di iscritti.' }
       ],
 
       moduli: [

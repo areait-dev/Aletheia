@@ -5,7 +5,7 @@
   "classeBody": null,
   "title": "Pre-iscrizione al corso - Alètheia Srl",
   "description": [
-    "Pre-iscriviti a un corso Alètheia Srl a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): lasci i tuoi dati senza impegno e senza pagamento anticipato, ti contattiamo noi per quota e date."
+    "Pre-iscriviti a un corso finanziato Alètheia Srl (avvisi pubblici): lasci i tuoi dati senza impegno e senza pagamento. La pre-iscrizione non garantisce il posto: ti ricontattiamo per i requisiti e le graduatorie."
   ],
   "robots": [],
   "googleVerification": [],
@@ -29,7 +29,7 @@
       "Pre-iscrizione al corso - Alètheia Srl"
     ],
     "og:description": [
-      "Pre-iscriviti a un corso Alètheia Srl a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): lasci i tuoi dati senza impegno e senza pagamento anticipato, ti contattiamo noi per quota e date."
+      "Pre-iscriviti a un corso finanziato Alètheia Srl (avvisi pubblici): lasci i tuoi dati senza impegno e senza pagamento. La pre-iscrizione non garantisce il posto: ti ricontattiamo per i requisiti e le graduatorie."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/logo.png"
@@ -49,7 +49,7 @@
       "Pre-iscrizione al corso - Alètheia Srl"
     ],
     "twitter:description": [
-      "Pre-iscriviti a un corso Alètheia Srl a partenza differita (OSS, ASACOM, Conduttore d'Impresa Agricola): lasci i tuoi dati senza impegno e senza pagamento anticipato, ti contattiamo noi per quota e date."
+      "Pre-iscriviti a un corso finanziato Alètheia Srl (avvisi pubblici): lasci i tuoi dati senza impegno e senza pagamento. La pre-iscrizione non garantisce il posto: ti ricontattiamo per i requisiti e le graduatorie."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/logo.png"
@@ -90,8 +90,8 @@
     "Pre-iscrizione al corso"
   ],
   "intestazioni": 3,
-  "testoLunghezza": 1874,
-  "testoSha1": "18b99f17d35f6fa50285c4fc01d1186bc5c70ce0",
+  "testoLunghezza": 2053,
+  "testoSha1": "d3a3e63085a0385119b48aaef5d85895dcd66a9a",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",

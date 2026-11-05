@@ -212,6 +212,8 @@ group('archivio', 'Archivio - Dati', pt('archivio'), () => [
   sel('scheda_extra_tipo', 'Tipo del blocco extra', { chips: 'Etichette (es. qualifiche)', sedi: 'Elenco con icona di luogo (es. sedi)', corsi: 'Elenco corsi con durata (una voce per riga: Nome | durata)' }),
   list('scheda_extra', 'Voci del blocco extra', 'una per riga', { rows: 8 }),
   area('scheda_avviso', 'Riquadro evidenziato (facoltativo)', { rows: 3, instructions: 'Es. una scadenza. I link si scrivono [etichetta](URL).' }),
+  bool('scheda_preiscrizione', 'Mostra il pulsante "Pre-iscriviti"', { instructions: 'Spento di default: un avviso è un bando, di norma non prevede pre-iscrizioni. Se acceso porta al modulo di pre-iscrizione (non garantisce il posto).' }),
+  date('scheda_preiscrizione_scadenza', 'Scadenza della pre-iscrizione', 'Y-m-d', { instructions: 'Facoltativa, inclusa. Passata la data il pulsante diventa "Pre-iscrizioni chiuse" (senza link).' }),
   bool('scheda_contatti', 'Mostra email e telefono in fondo', { instructions: 'Usa i contatti delle Opzioni Globali.' }),
 ]);
 

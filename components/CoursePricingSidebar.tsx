@@ -11,6 +11,7 @@ interface CoursePricingSidebarProps {
   primaryLabel?: string;
   primaryHref?: string;
   onPrimaryClick?: MouseEventHandler<HTMLAnchorElement>;
+  /** Solo nei corsi di formazione obbligatoria: negli altri casi non va passato (niente pulsante WhatsApp). */
   whatsappHref?: string;
 }
 
@@ -70,7 +71,6 @@ export default function CoursePricingSidebar({
       {/* Trust Badges in stile Apple Micro-copy */}
       <div className="flex justify-between items-center text-[0.65rem] font-semibold text-slate-600 dark:text-[#9aa8a6] px-1 pt-1">
         <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-[#018891]"></i> Preventivo gratuito</span>
-        <span className="flex items-center gap-1"><i className="fas fa-circle text-[4px] text-[#018891]"></i> Risposta in 24h</span>
       </div>
 
     </div>

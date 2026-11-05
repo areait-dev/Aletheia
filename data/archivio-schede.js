@@ -59,6 +59,8 @@ export const SCHEDE_ARCHIVIO = [
         'Compila il form per la pre-iscrizione al seguente link: [corsi.aletheiasrl.it](https://corsi.aletheiasrl.it/)',
         'La scadenza del bando docenti e allievi è prevista per giorno 13/04/2026 ore 16.00.',
       ].join('\n\n'),
+      // Nessun avviso pubblicato prevede la pre-iscrizione (è un bando, non un corso): `preiscrizione` è false se omesso.
+      // Per attivarla: `preiscrizione: true` e, se c'è, `preiscrizioneScadenza: 'AAAA-MM-GG'` (components/ArchivioScheda.js).
       contatti: false,
     },
   },

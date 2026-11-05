@@ -487,6 +487,8 @@ function schedaAcf(s) {
     scheda_extra_tipo: k.extraTipo,
     scheda_extra: k.extra.join('\n'),
     scheda_avviso: k.avviso,
+    scheda_preiscrizione: k.preiscrizione === true,
+    scheda_preiscrizione_scadenza: k.preiscrizioneScadenza || '',
     scheda_contatti: k.contatti,
   };
 }

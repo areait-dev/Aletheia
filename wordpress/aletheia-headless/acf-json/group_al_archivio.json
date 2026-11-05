@@ -303,7 +303,8 @@
       },
       "choices": {
         "chips": "Etichette (es. qualifiche)",
-        "sedi": "Elenco con icona di luogo (es. sedi)"
+        "sedi": "Elenco con icona di luogo (es. sedi)",
+        "corsi": "Elenco corsi con durata (una voce per riga: Nome | durata)"
       },
       "return_format": "value",
       "allow_null": 1,
@@ -344,6 +345,41 @@
       "new_lines": ""
     },
     {
+      "key": "field_al_archivio_scheda_preiscrizione",
+      "label": "Mostra il pulsante \"Pre-iscriviti\"",
+      "name": "scheda_preiscrizione",
+      "aria-label": "",
+      "type": "true_false",
+      "instructions": "Spento di default: un avviso è un bando, di norma non prevede pre-iscrizioni. Se acceso porta al modulo di pre-iscrizione (non garantisce il posto).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "ui": 1,
+      "default_value": 0
+    },
+    {
+      "key": "field_al_archivio_scheda_preiscrizione_scadenza",
+      "label": "Scadenza della pre-iscrizione",
+      "name": "scheda_preiscrizione_scadenza",
+      "aria-label": "",
+      "type": "date_picker",
+      "instructions": "Facoltativa, inclusa. Passata la data il pulsante diventa \"Pre-iscrizioni chiuse\" (senza link).",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "display_format": "d/m/Y",
+      "return_format": "Y-m-d",
+      "first_day": 1
+    },
+    {
       "key": "field_al_archivio_scheda_contatti",
       "label": "Mostra email e telefono in fondo",
       "name": "scheda_contatti",
@@ -379,5 +415,5 @@
   "active": true,
   "description": "",
   "show_in_rest": 1,
-  "modified": 1791383856
+  "modified": 1793873199
 }
