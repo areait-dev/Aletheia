@@ -10,7 +10,8 @@
 import { webkit } from '@playwright/test';
 
 const base = process.argv[2] || 'http://localhost:3101';
-const MISURE = [[390, 844], [744, 1133], [768, 1024], [820, 1180], [834, 1194], [1023, 800], [1024, 768], [1032, 1376], [1133, 744], [1180, 820], [1280, 800], [1366, 1024], [1440, 900]];
+// 12 misure iPad (verticale e orizzontale) + telefono 390px + i limiti 1023/1024px + desktop
+const MISURE = [[390, 844], [744, 1133], [1133, 744], [768, 1024], [1024, 768], [820, 1180], [1180, 820], [834, 1194], [1194, 834], [1024, 1366], [1366, 1024], [1032, 1376], [1376, 1032], [1023, 800], [1280, 800], [1440, 900]];
 const browser = await webkit.launch();
 const violazioni = []; const tabella = [];
 for (const [w, h] of MISURE) {
@@ -37,7 +38,8 @@ for (const [w, h] of MISURE) {
     });
     const img = foto.querySelector('img'); const cs = getComputedStyle(img);
     const op = (e) => { let o = 1; while (e) { o *= parseFloat(getComputedStyle(e).opacity); e = e.parentElement; } return o; };
-    return { testo: r(testo), foto: r(foto), col: r(col), ps: info, fit: cs.objectFit, imgNat: [img.naturalWidth, img.naturalHeight], imgBox: [Math.round(img.getBoundingClientRect().width), Math.round(img.getBoundingClientRect().height)],
+    const offerte = [...document.querySelectorAll('a[href*="aletheia4job.it/offerte-di-lavoro"]')].map((a) => ({ op: op(a), visibile: a.getBoundingClientRect().width > 50 }));
+    return { offerte, testo: r(testo), foto: r(foto), col: r(col), ps: info, fit: cs.objectFit, imgNat: [img.naturalWidth, img.naturalHeight], imgBox: [Math.round(img.getBoundingClientRect().width), Math.round(img.getBoundingClientRect().height)],
       opFoto: op(foto), opTesto: op(testo), titoloDentro: !!col.querySelector('h2, h3, span'), overflowX: document.documentElement.scrollWidth > innerWidth + 1, fotoSopra: r(foto).bottom <= r(testo).top + 1 };
   });
   const corpo = m.ps.filter((p) => !p.lead);
@@ -47,6 +49,7 @@ for (const [w, h] of MISURE) {
   tabella.push(`${String(w).padStart(5)}px  foto ${m.fotoSopra ? 'sopra  ' : 'a lato '} ${Math.round(m.foto.w)}x${Math.round(m.foto.h)} | testo h=${Math.round(m.testo.h)} | colonne=${duecol ? 2 : 1} | caratteri/riga ${cpr.join('/')}`);
   const v = (x) => violazioni.push(`${w}px: ${x}`);
   if (m.overflowX) v('scroll orizzontale');
+  if (!m.offerte.length || m.offerte.some((o) => o.op < 0.99 || !o.visibile)) v(`offerte di lavoro assenti o invisibili (${JSON.stringify(m.offerte)})`);
   if (m.opFoto < 0.99 || m.opTesto < 0.99) v(`foto o testo non visibili (opacità ${m.opFoto.toFixed(2)}/${m.opTesto.toFixed(2)})`);
   if (m.fit !== 'cover') v(`object-fit ${m.fit} (deve essere cover)`);
   if (m.titoloDentro) v('badge o titolo dentro le colonne');

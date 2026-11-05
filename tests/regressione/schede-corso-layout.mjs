@@ -33,6 +33,15 @@ for (const [w, h] of MISURE) {
       const card = r(document.querySelector('.cp-info-area')?.firstElementChild);
       const tabs = r(document.querySelector('.cp-tabs-area'));
       const nota = r(document.querySelector('.cp-info-area > p'));
+      // blocchi interni del riquadro: vuoti tra un blocco e il successivo, spazio sopra/sotto il contenuto, linea divisoria
+      const cardEl = document.querySelector('.cp-info-area')?.firstElementChild;
+      const figli = cardEl ? [...cardEl.children].map((e) => e.getBoundingClientRect()) : [];
+      const cardR = cardEl?.getBoundingClientRect(); const cs = cardEl ? getComputedStyle(cardEl) : null;
+      const vuoti = figli.slice(1).map((x, i) => x.top - figli[i].bottom);
+      const sopra = cardR ? figli[0].top - cardR.top - parseFloat(cs.paddingTop) - parseFloat(cs.borderTopWidth) : 0;
+      const sotto = cardR ? cardR.bottom - figli[figli.length - 1].bottom - parseFloat(cs.paddingBottom) - parseFloat(cs.borderBottomWidth) : 0;
+      const cta = cardEl ? [...cardEl.querySelectorAll('a')].find((a) => /Richiedi un preventivo/.test(a.textContent)) : null; const margineCta = cta ? parseFloat(getComputedStyle(cta).marginTop) : 0;
+      const iscrizione = !!cardEl?.querySelector('a[href^="/iscrizione"]'); const conLinea = [...(cardEl?.children || [])].some((e) => getComputedStyle(e).borderTopWidth !== '0px');
       const switches = [...document.querySelectorAll('[role="tablist"]')].map((g) => {
         const gr = g.getBoundingClientRect(); const par = g.parentElement.getBoundingClientRect();
         const bt = [...g.querySelectorAll('button')].map((b) => {
@@ -42,7 +51,7 @@ for (const [w, h] of MISURE) {
         });
         return { label: g.getAttribute('aria-label'), esce: gr.right > par.right + 1, hMin: Math.min(...bt.map((x) => x.h)), hMax: Math.max(...bt.map((x) => x.h)), spezzati: bt.filter((x) => x.righe > 1).length };
       });
-      return { scheda, card, tabs, nota, switches, overflowX: document.documentElement.scrollWidth > innerWidth + 1 };
+      return { vuoti, sopra, sotto, margineCta, iscrizione, conLinea, scheda, card, tabs, nota, switches, overflowX: document.documentElement.scrollWidth > innerWidth + 1 };
     });
     const v = (msg) => violazioni.push(`${w}x${h} ${u}: ${msg}`);
     if (!m.scheda || !m.card) { v('scheda tecnica o riquadro mancanti'); continue; }
@@ -58,6 +67,10 @@ for (const [w, h] of MISURE) {
       if (!(c.left >= s.right)) v('da 1100px il riquadro deve stare a destra');
       if (t && t.top - s.bottom > 60) v(`vuoto di ${Math.round(t.top - s.bottom)}px tra scheda tecnica e tab`);
     }
+    if (Math.max(0, ...m.vuoti) > 40) v(`buco dentro il riquadro: ${Math.round(Math.max(...m.vuoti))}px tra due blocchi`);
+    if (m.margineCta > 0) v(`il pulsante "Richiedi un preventivo" ha un margine di ${m.margineCta}px (.text-center)`);
+    if (m.iscrizione && m.conLinea) v('riquadro a iscrizione: linea divisoria tra l\'avviso giallo e il pulsante');
+    if (w >= 744 && w <= 1099 && Math.abs(m.sopra - m.sotto) > 2) v(`contenuto non centrato nel riquadro (spazio sopra ${Math.round(m.sopra)}px, sotto ${Math.round(m.sotto)}px)`);
     if (w < 1100 && nota && t && nota.bottom > t.top - 6) v(`la nota "Riceverai una conferma" tocca le tab (${Math.round(nota.bottom)} > ${Math.round(t.top)})`);
     for (const sw of m.switches) {
       if (sw.hMin < 44) v(`switch "${sw.label}": pillola alta ${sw.hMin}px (< 44)`);
