@@ -56,6 +56,8 @@ import addettiCaricatoriCmmAggiornamentoContent from '../../data/content/addetti
 import addettiCarripontiPensileCabinaContent from '../../data/content/addetti-conduzione-carriponti-pensile-cabina-content';
 import addettiCarripontiPensileCabinaAggiornamentoContent from '../../data/content/addetti-conduzione-carriponti-pensile-cabina-aggiornamento-content';
 import addettiMacchinaRaccogliFruttaAggiornamentoContent from '../../data/content/addetti-macchina-raccogli-frutta-aggiornamento-content';
+import ossContent from '../../data/content/oss-operatore-socio-sanitario-content';
+import asacomContent from '../../data/content/asacom-assistente-alla-comunicazione-content';
 import lavoratoriSegnaleticaStradaleContent from '../../data/content/lavoratori-addetti-segnaletica-stradale-content';
 import macchineMovimentoTerraContent from '../../data/content/macchine-movimento-terra-content';
 import macchineMovimentoTerraAggiornamentoContent from '../../data/content/macchine-movimento-terra-aggiornamento-content';
@@ -113,6 +115,13 @@ const EDITORIAL_CONTENT = {
   },
   'addetti-macchina-raccogli-frutta-aggiornamento': {
     corso: addettiMacchinaRaccogliFruttaAggiornamentoContent['addetti-macchina-raccogli-frutta-aggiornamento'],
+  },
+  // Corsi qualificati (variante unica 'corso', a iscrizione): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
+  'oss-operatore-socio-sanitario': {
+    corso: ossContent['oss-operatore-socio-sanitario'],
+  },
+  'asacom-assistente-alla-comunicazione': {
+    corso: asacomContent['asacom-assistente-alla-comunicazione'],
   },
   // Famiglia "dpi-3-categoria": un solo livello ('default') con varianti corso (8h) / aggiornamento (4h).
   'dpi-3-categoria': {
@@ -1415,6 +1424,10 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
   // switcher corso/aggiornamento è nascosto e selectedTipo resta bloccato sul default 'corso',
   // che altrimenti farebbe fallire il lookup pur avendo contenuto editoriale disponibile.
   const contenutoLivello = EDITORIAL_CONTENT[family.id]?.[varianteCorrente.tipo]?.[editorialLivelloKey] ?? null;
+  // Durata sotto il titolo: solo se contiene un numero (ore). Prima, senza le ore nel contenuto, compariva il testo grezzo dell'elenco
+  // ("Qualifica Riconosciuta", "Esame in Sede", "In sede"): meglio niente che un dato sbagliato.
+  const durataGrezza = contenutoLivello?.durataOre ? `${contenutoLivello.durataOre} ore` : course.duration;
+  const durataHeader = /\d/.test(durataGrezza || '') ? durataGrezza : null;
 
   // Corsi correlati: priorità alla curatela editoriale (contenutoLivello.corsiCorrelati, nei file
   // data/content/*.js), con fallback automatico quando è assente o troppo corta - Regola 1: mai il
@@ -1587,10 +1600,10 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
         </h1>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', marginBottom: '1.25rem' }}>
-          {(contenutoLivello?.durataOre ?? course.duration) && (
+          {durataHeader && (
             <span className="text-slate-600 dark:text-gray-300" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', fontWeight: 600 }}>
               <i className="fas fa-clock" style={{ color: '#008C95' }}></i>
-              {contenutoLivello?.durataOre ? `${contenutoLivello.durataOre} ore` : course.duration}
+              {durataHeader}
             </span>
           )}
           {(contenutoLivello?.modalita ?? course.modality) && (
@@ -1670,7 +1683,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
               { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita, show: !!contenutoLivello.modalita },
               { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita, show: !!contenutoLivello.validita },
               { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato, show: !!contenutoLivello.attestato },
-              { icon: 'fas fa-users', label: 'Partecipanti', value: `Max ${contenutoLivello.partecipantiMax} persone`, show: contenutoLivello.partecipantiMax != null },
+              { icon: 'fas fa-users', label: 'Partecipanti', value: contenutoLivello.partecipantiMax != null ? `Max ${contenutoLivello.partecipantiMax} persone` : `Minimo ${contenutoLivello.partecipantiMin} persone`, show: contenutoLivello.partecipantiMax != null || contenutoLivello.partecipantiMin != null },
+              // Luogo del corso (solo corsi in aula che lo indicano): il nome del luogo è un link alla mappa
+              { icon: 'fas fa-location-dot', label: 'Luogo del corso', value: contenutoLivello.luogoCorso ? (<a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contenutoLivello.luogoCorso.indirizzo)}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px' }}>{contenutoLivello.luogoCorso.testo} <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.7rem', marginLeft: '0.2rem' }} aria-hidden="true"></i></a>) : null, show: !!contenutoLivello.luogoCorso },
             ].filter(({ show }) => show).map(({ show, ...item }) => item)}
           />
         ) : (
@@ -1719,6 +1734,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
 
             {contenutoLivello.aChiERivolto?.length > 0 && (<>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
+            {contenutoLivello.aChiERivoltoIntro && contenutoLivello.aChiERivoltoIntro.split('\n\n').map((paragrafo, i) => (
+              <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginBottom: '0.75rem' }}>{paragrafo}</p>
+            ))}
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.aChiERivolto.map((riga, i) => (
                 <li key={i} style={{ padding: '0.4rem 0', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
@@ -1727,10 +1745,12 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 </li>
               ))}
             </ul>
+            {contenutoLivello.aChiERivoltoNota && <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginTop: '-1rem', marginBottom: '2rem' }}>{contenutoLivello.aChiERivoltoNota}</p>}
             </>)}
 
             {contenutoLivello.cosaImparerai?.length > 0 && (<>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Cosa imparerai</h2>
+            {contenutoLivello.cosaImparaIntro && <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginBottom: '0.75rem' }}>{contenutoLivello.cosaImparaIntro}</p>}
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.cosaImparerai.map((outcome, i) => (
                 <li key={i} style={{ padding: '0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -1739,6 +1759,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 </li>
               ))}
             </ul>
+            {contenutoLivello.cosaImparaNota && <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginTop: '-1rem', marginBottom: '2rem' }}>{contenutoLivello.cosaImparaNota}</p>}
             </>)}
 
             {/* FAQ - accordion, una sola domanda aperta alla volta */}
@@ -1806,6 +1827,14 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 </tbody>
               </table>
             </div>
+            {contenutoLivello.moduliNota && (
+              <div style={{ marginTop: '1.5rem' }}>
+                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: '0 0 0.5rem' }}>{contenutoLivello.moduliNota.titolo}</h3>
+                {contenutoLivello.moduliNota.testo.map((paragrafo, i) => (
+                  <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', margin: '0 0 0.5rem' }}>{paragrafo}</p>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
