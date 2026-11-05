@@ -3481,3 +3481,6 @@ html.dark .switch-opt:not([aria-selected="true"]):hover { background: rgba(255, 
   .split-testo-foto { grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 400px); gap: 3rem; }
   .split-testo-foto__foto { order: 0; aspect-ratio: auto; min-height: 320px; }
 }
+
+/* ── Card delle news (pages/news/index.js): l'intera card è un link; il focus da tastiera si vede sul bordo della card. */
+.news-card-link:focus-visible { outline: 3px solid #008C95; outline-offset: 3px; }
