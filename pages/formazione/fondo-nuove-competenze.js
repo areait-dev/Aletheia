@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getLenis } from '../../lib/lenis';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import FormAzienda from '../../components/FormAzienda';
@@ -14,6 +15,24 @@ import { withSiteOptions } from '../../lib/wp-site';
 
 // Vantaggi e servizi: schede di WordPress (liste `fnc-vantaggi`, `fnc-servizi`) o data/schede.js; icone SVG per nome (data/icone-svg.js).
 
+// Scroll fluido (Lenis) verso il form aziendale in fondo alla pagina (id di components/FormAzienda), con fallback nativo se Lenis
+// non è ancora inizializzato (retry limitato). Stesso modello di agenzia-per-il-lavoro/servizi-alle-imprese.js.
+function scrollToContattaAzienda() {
+  const target = document.getElementById('contatta-azienda');
+  if (!target) return;
+  let attempts = 0;
+  const tryScroll = () => {
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -80 });
+    } else if (attempts++ < 20) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(tryScroll, 150);
+    }
+  };
+  tryScroll();
+}
+
 // FAQ: WordPress (CPT faq) se WP_URL è impostato, altrimenti data/faq.js (vedi lib/wp-faq.ts).
 async function getPageStaticProps() {
   return { props: { pagina: await getPagina('formazione/fondo-nuove-competenze'), faqs: await getFaqs('fondo-nuove-competenze'), target: await getSchede('fnc-target'), vantaggi: await getSchede('fnc-vantaggi'), servizi: await getSchede('fnc-servizi') }, ...isrOptions() };
@@ -22,6 +41,12 @@ async function getPageStaticProps() {
 export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, pagina }) {
   const T = pagina.testi;
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  // Arrivando con #contatta-azienda nell'URL Lenis riporta lo scroll a 0 all'avvio e annulla il salto nativo: lo rifacciamo dopo il mount.
+  useEffect(() => {
+    if (window.location.hash !== '#contatta-azienda') return;
+    const timer = setTimeout(scrollToContattaAzienda, 100);
+    return () => clearTimeout(timer);
+  }, []);
   const { theme } = useTheme() || { theme: 'light' };
   const isDark = theme === 'dark';
 
@@ -280,7 +305,17 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
             </h1>
 
           <div className="page-hero-actions fade-up fade-up-3">
-            <a href={T.hero_cta1.href} className="btn btn-lg btn-light">{T.hero_cta1.label}<i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
+            <a
+              href={T.hero_cta1.href}
+              className="btn btn-lg btn-light"
+              onClick={(e) => {
+                // Link interno al form: scroll fluido invece del salto (e senza uscire dalla pagina)
+                if (T.hero_cta1.href === '#contatta-azienda') {
+                  e.preventDefault();
+                  scrollToContattaAzienda();
+                }
+              }}
+            >{T.hero_cta1.label}<i className="fas fa-arrow-right" style={{ fontSize: '0.8rem' }}></i>
             </a>
           </div>
         </div>

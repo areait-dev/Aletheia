@@ -74,7 +74,7 @@ export const PAGINE = {
     "hero_titolo": "Fondo *Nuove Competenze*",
     "hero_cta1": {
       "label": "Verifica se la tua azienda può accedere",
-      "href": "/contatti"
+      "href": "#contatta-azienda"
     },
     "intro_badge": "A chi si rivolge",
     "intro_titolo": "Pensato per le aziende che vogliono crescere senza fermarsi",
