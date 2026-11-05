@@ -1,5 +1,5 @@
 {
-  "tutti": 39,
+  "tutti": 40,
   "fse-plus": {
     "url": "?categoria=fse-plus",
     "schede": []
@@ -68,6 +68,7 @@
     "schede": [
       "/all-courses/icdl-base",
       "/all-courses/icdl-standard",
+      "/all-courses/icdl-full-standard",
       "/all-courses/icdl-digcomp-2-2",
       "/all-courses/icdl-update"
     ]
@@ -77,6 +78,7 @@
     "schede": [
       "/all-courses/icdl-base",
       "/all-courses/icdl-standard",
+      "/all-courses/icdl-full-standard",
       "/all-courses/icdl-digcomp-2-2",
       "/all-courses/icdl-update"
     ]
@@ -99,7 +101,7 @@
   },
   "dopoReset": {
     "url": "",
-    "schede": 39
+    "schede": 40
   },
   "livello2": {
     "url": "?livello=2",
