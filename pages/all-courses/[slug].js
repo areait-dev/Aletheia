@@ -52,6 +52,10 @@ import coordinatoriCantieriCseCspAggiornamentoContent from '../../data/content/c
 import addettiCarriponteContent from '../../data/content/addetti-alla-conduzione-di-carriponte-content';
 import addettiCarriponteAggiornamentoContent from '../../data/content/addetti-alla-conduzione-di-carriponte-aggiornamento-content';
 import addettiCaricatoriCmmContent from '../../data/content/addetti-caricatori-movimentazione-di-materiali-cmm-content';
+import addettiCaricatoriCmmAggiornamentoContent from '../../data/content/addetti-caricatori-movimentazione-di-materiali-cmm-aggiornamento-content';
+import addettiCarripontiPensileCabinaContent from '../../data/content/addetti-conduzione-carriponti-pensile-cabina-content';
+import addettiCarripontiPensileCabinaAggiornamentoContent from '../../data/content/addetti-conduzione-carriponti-pensile-cabina-aggiornamento-content';
+import addettiMacchinaRaccogliFruttaAggiornamentoContent from '../../data/content/addetti-macchina-raccogli-frutta-aggiornamento-content';
 import lavoratoriSegnaleticaStradaleContent from '../../data/content/lavoratori-addetti-segnaletica-stradale-content';
 import macchineMovimentoTerraContent from '../../data/content/macchine-movimento-terra-content';
 import macchineMovimentoTerraAggiornamentoContent from '../../data/content/macchine-movimento-terra-aggiornamento-content';
@@ -103,9 +107,12 @@ const EDITORIAL_CONTENT = {
   },
   // Famiglia "addetti-macchina-raccogli-frutta-crf" a variante unica (tipo 'corso', 8 ore): la famiglia
   // "addetti-macchina-raccogli-frutta-aggiornamento" è SEPARATA (non una variante "aggiornamento" di
-  // questa, vedi buildCourseFamilies) e non ha ancora contenuto editoriale proprio.
+  // questa, vedi buildCourseFamilies), variante unica di tipo 'corso' (4 ore), con contenuto proprio dal 5 novembre 2026.
   'addetti-macchina-raccogli-frutta-crf': {
     corso: addettiMacchinaRaccogliFruttaContent['addetti-macchina-raccogli-frutta-crf'],
+  },
+  'addetti-macchina-raccogli-frutta-aggiornamento': {
+    corso: addettiMacchinaRaccogliFruttaAggiornamentoContent['addetti-macchina-raccogli-frutta-aggiornamento'],
   },
   // Famiglia "dpi-3-categoria": un solo livello ('default') con varianti corso (8h) / aggiornamento (4h).
   'dpi-3-categoria': {
@@ -196,10 +203,17 @@ const EDITORIAL_CONTENT = {
     corso: addettiCarriponteContent['addetti-alla-conduzione-di-carriponte'],
     aggiornamento: addettiCarriponteAggiornamentoContent,
   },
-  // Solo "corso": la variante "aggiornamento" non aveva contenuto editoriale nella pagina isolata
-  // originale (solo scheda tecnica + placeholder) - vedi addetti-caricatori-movimentazione-di-materiali-cmm-content.js.
+  // L'aggiornamento (4 ore) ha il suo contenuto dal 5 novembre 2026 (documento Word del reparto formazione): vedi
+  // addetti-caricatori-movimentazione-di-materiali-cmm-aggiornamento-content.js.
   'addetti-caricatori-movimentazione-di-materiali-cmm': {
     corso: addettiCaricatoriCmmContent['addetti-caricatori-movimentazione-di-materiali-cmm'],
+    aggiornamento: addettiCaricatoriCmmAggiornamentoContent,
+  },
+  // Carriponti Pensile/Cabina (corso 11 ore + aggiornamento 4 ore): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
+  // Il corso "Carriponte" da 10 ore (famiglia sopra) ha i suoi testi separati.
+  'addetti-alla-conduzione-di-carriponti-pensile-cabina': {
+    corso: addettiCarripontiPensileCabinaContent['addetti-alla-conduzione-di-carriponti-pensile-cabina'],
+    aggiornamento: addettiCarripontiPensileCabinaAggiornamentoContent,
   },
   // Nessun aggiornamento raw corrispondente per questa famiglia.
   'lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale': {

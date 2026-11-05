@@ -19,7 +19,7 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 Due script a mano, da rilanciare prima dei DNS: `node tests/regressione/audit-segnaposto.mjs <indirizzo>` (testo visibile di 102 pagine + link a `#`) e `node tests/regressione/audit-dati-schede.mjs <indirizzo>` (durata/attestato/modalità di ogni scheda corso per ogni switch). Vanno lanciati su una build in esecuzione (es. `http://localhost:3101`, o l'anteprima Vercel).
 
 **Testi segnaposto da sostituire o togliere**
-1. **«Contenuto dettagliato in arrivo. Nel frattempo trovi qui accanto durata, modalità e attestato.»** (riquadro della Panoramica) su 5 schede: `oss-operatore-socio-sanitario`, `asacom-assistente-alla-comunicazione`, `addetti-alla-conduzione-di-carriponti-pensile-cabina` (corso base e aggiornamento), `addetti-caricatori-movimentazione-di-materiali-cmm` (solo la variante Aggiornamento), `addetti-macchina-raccogli-frutta-aggiornamento`. Serve il contenuto editoriale in `data/content/`.
+1. **«Contenuto dettagliato in arrivo. Nel frattempo trovi qui accanto durata, modalità e attestato.»** (riquadro della Panoramica): ~~5 schede~~ **ne restano 2**, `oss-operatore-socio-sanitario` e `asacom-assistente-alla-comunicazione` (branch `contenuti-corsi`, 5 novembre: arrivati i testi di Carriponti Pensile/Cabina corso e aggiornamento, Caricatori CMM aggiornamento, Raccogli frutta aggiornamento). Serve il contenuto editoriale in `data/content/`.
 2. **«Da definire» nella Validità** della scheda tecnica: `macchine-movimento-terra` (tutte le 6 varianti: «Da definire — aggiornamento disponibile (4 ore)»), `patentino-fitosanitario` e `personale-alimentarista-osa` (corso base: «Da definire — aggiornamento disponibile (…)»; aggiornamento: «Da ripetere periodicamente — da definire»).
 3. ~~**Icone social che non portano da nessuna parte** (`href="#"`)~~ — **RISOLTO** (5 novembre): `components/FormAzienda.tsx` e `components/FormCandidato.tsx` usano `identita.social`, gli stessi quattro link del footer (Facebook, Instagram, LinkedIn, Telegram), con nome accessibile e apertura in nuova scheda; test `social.spec.mjs` sulle 4 pagine (`/agenzia-per-il-lavoro/servizi-alla-persona`, `/servizi-alle-imprese`, `/formazione/fondi-interprofessionali`, `/formazione/fondo-nuove-competenze`).
 4. **«Prossimamente»** nelle card dei programmi senza pagina di `/formazione/regionale`: da confermare se è uno stato reale o un segnaposto.
@@ -35,9 +35,25 @@ Falsi positivi dello script (testo vero, non segnaposto): «le novità in arrivo
 - **Antincendio, tre varianti «Aggiornamento»** (Livello 1, 2, 3: 2, 5 e 8 ore) — la scheda tecnica ha solo la Durata: mancano Modalità, Attestato, Validità, Partecipanti (sotto il titolo compare «In presenza» di default). Serve il contenuto editoriale degli aggiornamenti.
 - **Conduttore d'Impresa Agricola** — manca l'Attestato (e i Partecipanti).
 - **Partecipanti mancante**: BLSD, Conduttore d'Impresa Agricola, DPI 3ª categoria, Formazione per formatore, ICDL DigComp 2.2, ICDL Update, Antincendio (aggiornamenti).
-- **Carriponti pensile cabina, Caricatori CMM (aggiornamento), Raccogli frutta (aggiornamento)** — Partecipanti «Su richiesta», Attestato «Patentino Nazionale» (testo grezzo dell'elenco), nessuna Validità.
+- **Carriponti pensile cabina (aggiornamento), Caricatori CMM (aggiornamento), Raccogli frutta (aggiornamento)** — ora hanno descrizione, destinatari, obiettivi, FAQ e programma (documenti Word del 5 novembre), ma la scheda tecnica ha solo Durata e Modalità: **i documenti non indicano attestato, validità e partecipanti max**, da chiedere (prima della correzione la pagina mostrava «Patentino Nazionale» e «Su richiesta», presi dall'elenco generico). Il corso base **Carriponti Pensile/Cabina (11 ore)** è completo (scheda tecnica compresa).
 - **Modalità incoerente**: Caricatori CMM, corso base «Aula» e aggiornamento «In presenza».
 - Tutte le altre schede (e tutte le combinazioni di switch) hanno durata in ore, attestato e modalità coerenti.
+
+## Contenuti dei corsi decreto attrezzature (5 novembre 2026) – branch `contenuti-corsi`
+
+Arrivati dal reparto formazione (cartella `NUOVO SITO ALETHEIA\CONTENUTI DEF\corsi decreto attrezzature`, 4 file Word). Testi copiati **senza modifiche** (137 frasi controllate in automatico contro il testo estratto dai Word) in `data/content/`:
+- `addetti-conduzione-carriponti-pensile-cabina-content.js` (corso 11 ore) e `...-aggiornamento-content.js` (4 ore), famiglia `addetti-alla-conduzione-di-carriponti-pensile-cabina`;
+- `addetti-caricatori-movimentazione-di-materiali-cmm-aggiornamento-content.js` (4 ore), aggiunto alla famiglia CMM esistente;
+- `addetti-macchina-raccogli-frutta-aggiornamento-content.js` (4 ore), famiglia separata dalla CRF da 8 ore.
+Test: `contenuti-attrezzature.spec.mjs`. Ogni file riporta in testa fonte e punti da confermare.
+
+**Da confermare con il reparto formazione**
+- **Abbinamento dei due file «Carroponte»**: il titolo dice «Carroponte», ma il corso dura 11 ore e cita «comando pensile, radiocomando e/o comando in cabina»: l'ho abbinato a **Carriponti Pensile/Cabina (11 ore)**, non al «Carriponte» da 10 ore (che ha già i suoi testi, scritti per il vecchio Accordo: 2 ore giuridico-normative + 2 pratiche). Se i nuovi testi dovevano sostituire anche quelli del «Carriponte» da 10 ore, va deciso.
+- **Mancano nei documenti** (non inseriti): attestato, validità e partecipanti max dei tre aggiornamenti.
+- **Raccogli frutta, aggiornamento**: il 2° punto di «A chi è rivolto» parla di «conseguire l'abilitazione» in un corso di aggiornamento (per chi è già abilitato).
+- **«Luogo del corso (click che si apre la mappa)»** (nel documento da 11 ore, «da inserire solo nei corsi in aula»): il sito non ha ancora quel blocco in nessun corso, quindi non è stato inserito.
+- **Modalità degli aggiornamenti**: «In presenza», ricavata dal testo («si svolge esclusivamente in presenza»).
+- Date normative nei testi (Accordo Stato-Regioni del 17 aprile 2025; «dal 24 maggio 2026» per il carroponte): riportate come nei documenti, non verificate.
 
 ## Stato al rientro (5 novembre 2026, mattina)
 
