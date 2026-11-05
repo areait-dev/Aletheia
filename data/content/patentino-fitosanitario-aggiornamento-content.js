@@ -7,7 +7,7 @@ module.exports = {
     titolo: 'Aggiornamento Patentino Fitosanitario',
     durataOre: 12,
     modalita: ['Aula'],
-    validita: 'Da ripetere periodicamente — da definire',
+    validita: 'Da ripetere ogni 5 anni',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
     prezzo: 100,

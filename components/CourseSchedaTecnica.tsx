@@ -23,9 +23,9 @@ interface CourseSchedaTecnicaProps {
  */
 export default function CourseSchedaTecnica({ items = [], children }: CourseSchedaTecnicaProps) {
   return (
-    <div style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', borderRadius: '1.5rem', padding: 'clamp(1.5rem, 3.5vw, 2rem)', position: 'relative', overflow: 'hidden', marginBottom: '2rem' }}>
+    <div className="cp-scheda-root" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 100%)', borderRadius: '1.5rem', padding: 'clamp(1.5rem, 3.5vw, 2rem)', position: 'relative', overflow: 'hidden', marginBottom: '2rem' }}>
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16,185,129,0.14) 0%, transparent 70%)' }} />
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div className="cp-scheda-body" style={{ position: 'relative', zIndex: 1 }}>
         <h2 style={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 1.25rem' }}>
           Scheda tecnica
         </h2>

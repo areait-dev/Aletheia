@@ -16,12 +16,16 @@ function NewsCard({ news }) {
   const [hovered, setHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
 
+  // L'INTERA card è un solo link verso l'articolo (nessun link annidato: "Leggi l'articolo" è ora un'etichetta dentro il link).
   return (
-    <div
+    <Link
+      href={`/news/${news.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
+      className="news-card-link bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]"
       style={{
+        color: 'inherit',
+        textDecoration: 'none',
         borderRadius: '1rem',
         overflow: 'hidden',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
@@ -87,8 +91,7 @@ function NewsCard({ news }) {
           {news.excerpt}
         </p>
 
-        <Link
-          href={`/news/${news.slug}`}
+        <span
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -97,13 +100,12 @@ function NewsCard({ news }) {
             fontSize: '0.82rem',
             fontWeight: 700,
             color: '#008C95',
-            textDecoration: 'none',
           }}
         >
           Leggi l&#39;articolo
-        </Link>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }
 

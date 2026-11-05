@@ -7,7 +7,7 @@ module.exports = {
     titolo: 'Aggiornamento Personale Alimentarista – OSA',
     durataOre: 6,
     modalita: ['Aula', 'FAD'],
-    validita: 'Da ripetere periodicamente — da definire',
+    validita: 'Da ripetere ogni 2 anni',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
     prezzo: 60,
@@ -18,7 +18,7 @@ Il percorso è incentrato sul ripasso delle corrette prassi igieniche apprese ne
 
 Particolare attenzione è dedicata al richiamo dei punti critici di controllo (CCP) del sistema HACCP, alla prevenzione dei rischi emergenti in ambito alimentare, alla tracciabilità e rintracciabilità dei prodotti lungo la filiera, e alla corretta gestione documentale del manuale di autocontrollo aziendale.
 
-Al termine delle 6 ore di formazione viene rilasciato l'attestato di frequenza, che consente il mantenimento della validità della formazione OSA su tutto il territorio nazionale. Il corso è disponibile in Aula (€ 60,00 + IVA) o in FAD (€ 50,00 + IVA).`,
+Al termine delle 6 ore di formazione viene rilasciato l'attestato di frequenza, che consente il mantenimento della validità della formazione OSA su tutto il territorio nazionale. Il corso è disponibile in Aula o in FAD.`,
 
     aChiERivolto: [
       'Personale alimentarista e OSA già in possesso dell\'attestato base da 12 ore che deve adempiere all\'obbligo di aggiornamento periodico',

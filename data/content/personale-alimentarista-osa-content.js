@@ -14,7 +14,7 @@ module.exports = {
       titolo: 'Corso Personale Alimentarista – OSA',
       durataOre: 12,
       modalita: ['Aula', 'FAD'],
-      validita: 'Da definire — aggiornamento disponibile (6 ore, pagina dedicata)',
+      validita: 'Aggiornamento ogni 2 anni',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
       prezzo: 80,

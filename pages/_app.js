@@ -4,12 +4,16 @@ import 'lenis/dist/lenis.css';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { ThemeProvider } from '../context/ThemeContext';
-import { initLenis, destroyLenis } from '../lib/lenis';
+import { initLenis, destroyLenis, scrollToTopNow } from '../lib/lenis';
 import { SITE_NAME, SITE_URL } from '../components/SeoHead';
 import CookieConsent from '../components/CookieConsent';
 import { SITE_OPTIONS } from '../data/site-options';
 import { SiteOptionsProvider } from '../context/SiteOptionsContext';
+
+// Istante dell'ultimo Indietro/Avanti del browser (vedi il gestore dei cambi di pagina in MyApp).
+let ultimoRitornoCronologia = 0;
 
 // Chatbot non contribuisce al first paint: caricato lato client dopo l'idratazione
 // per non bloccare il rendering iniziale della pagina.
@@ -49,6 +53,23 @@ function MyApp({ Component, pageProps }) {
     initLenis();
     return () => destroyLenis();
   }, []);
+
+  // Ogni pagina nuova parte dall'ALTO, anche se si è cliccato mentre Lenis stava ancora animando lo scorrimento (altrimenti la pagina
+  // nuova veniva portata a metà dall'animazione della precedente). Non vale per: cambi di sola query (shallow: filtri, livelli),
+  // link con # (ancore) e tasto Indietro/Avanti (lì il ripristino della posizione lo fa Next).
+  const router = useRouter();
+  useEffect(() => {
+    router.beforePopState(() => { ultimoRitornoCronologia = Date.now(); return true; });
+    const alCambio = (url, { shallow } = {}) => {
+      // Indietro/Avanti: niente reset (la posizione la ripristina il browser). La marca è a livello di MODULO: dentro l'effetto si perdeva,
+      // perché useRouter() cambia a ogni navigazione e l'effetto si riesegue. Scade dopo 3s se la navigazione non si completa.
+      if (Date.now() - ultimoRitornoCronologia < 3000) { ultimoRitornoCronologia = 0; return; }
+      if (shallow || String(url).includes('#')) return;
+      scrollToTopNow();
+    };
+    router.events.on('routeChangeComplete', alCambio);
+    return () => router.events.off('routeChangeComplete', alCambio);
+  }, [router]);
 
   return (
     <>

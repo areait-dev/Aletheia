@@ -51,8 +51,8 @@
     "ICDL Base"
   ],
   "intestazioni": 5,
-  "testoLunghezza": 3101,
-  "testoSha1": "fc8aef75a55d50372dc7d9e44eade7b0beeffa36",
+  "testoLunghezza": 3108,
+  "testoSha1": "f2188ec20eae6d9c8c82e9d8af8af48d98bd2a5e",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -61,8 +61,8 @@
     "/aiuti-di-stato/2023",
     "/aiuti-di-stato/2024",
     "/all-courses",
-    "/all-courses/antincendio",
     "/all-courses/icdl-digcomp-2-2",
+    "/all-courses/icdl-full-standard",
     "/all-courses/icdl-standard",
     "/all-courses/icdl-update",
     "/all-courses?categoria=certificazione",
@@ -94,5 +94,5 @@
     "mailto:info@aletheiasrl.it"
   ],
   "immaginiConAlt": 11,
-  "immaginiAlt": "1ba64255562dc2ac333b3a28c0d6a4e247df9a2a"
+  "immaginiAlt": "6f335c40ba52d737728e61e221382eb6db3b76e7"
 }

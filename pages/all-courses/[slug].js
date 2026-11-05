@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CoursePricingSidebar from '../../components/CoursePricingSidebar';
-import { whatsappLink } from '../../lib/whatsapp';
+import { whatsappLink, WHATSAPP_FORMAZIONE } from '../../lib/whatsapp';
+import { scrollToTopNow } from '../../lib/lenis';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
@@ -52,6 +53,12 @@ import coordinatoriCantieriCseCspAggiornamentoContent from '../../data/content/c
 import addettiCarriponteContent from '../../data/content/addetti-alla-conduzione-di-carriponte-content';
 import addettiCarriponteAggiornamentoContent from '../../data/content/addetti-alla-conduzione-di-carriponte-aggiornamento-content';
 import addettiCaricatoriCmmContent from '../../data/content/addetti-caricatori-movimentazione-di-materiali-cmm-content';
+import addettiCaricatoriCmmAggiornamentoContent from '../../data/content/addetti-caricatori-movimentazione-di-materiali-cmm-aggiornamento-content';
+import addettiCarripontiPensileCabinaContent from '../../data/content/addetti-conduzione-carriponti-pensile-cabina-content';
+import addettiCarripontiPensileCabinaAggiornamentoContent from '../../data/content/addetti-conduzione-carriponti-pensile-cabina-aggiornamento-content';
+import addettiMacchinaRaccogliFruttaAggiornamentoContent from '../../data/content/addetti-macchina-raccogli-frutta-aggiornamento-content';
+import ossContent from '../../data/content/oss-operatore-socio-sanitario-content';
+import asacomContent from '../../data/content/asacom-assistente-alla-comunicazione-content';
 import lavoratoriSegnaleticaStradaleContent from '../../data/content/lavoratori-addetti-segnaletica-stradale-content';
 import macchineMovimentoTerraContent from '../../data/content/macchine-movimento-terra-content';
 import macchineMovimentoTerraAggiornamentoContent from '../../data/content/macchine-movimento-terra-aggiornamento-content';
@@ -103,9 +110,19 @@ const EDITORIAL_CONTENT = {
   },
   // Famiglia "addetti-macchina-raccogli-frutta-crf" a variante unica (tipo 'corso', 8 ore): la famiglia
   // "addetti-macchina-raccogli-frutta-aggiornamento" è SEPARATA (non una variante "aggiornamento" di
-  // questa, vedi buildCourseFamilies) e non ha ancora contenuto editoriale proprio.
+  // questa, vedi buildCourseFamilies), variante unica di tipo 'corso' (4 ore), con contenuto proprio dal 5 novembre 2026.
   'addetti-macchina-raccogli-frutta-crf': {
     corso: addettiMacchinaRaccogliFruttaContent['addetti-macchina-raccogli-frutta-crf'],
+  },
+  'addetti-macchina-raccogli-frutta-aggiornamento': {
+    corso: addettiMacchinaRaccogliFruttaAggiornamentoContent['addetti-macchina-raccogli-frutta-aggiornamento'],
+  },
+  // Corsi qualificati (variante unica 'corso', a iscrizione): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
+  'oss-operatore-socio-sanitario': {
+    corso: ossContent['oss-operatore-socio-sanitario'],
+  },
+  'asacom-assistente-alla-comunicazione': {
+    corso: asacomContent['asacom-assistente-alla-comunicazione'],
   },
   // Famiglia "dpi-3-categoria": un solo livello ('default') con varianti corso (8h) / aggiornamento (4h).
   'dpi-3-categoria': {
@@ -196,10 +213,17 @@ const EDITORIAL_CONTENT = {
     corso: addettiCarriponteContent['addetti-alla-conduzione-di-carriponte'],
     aggiornamento: addettiCarriponteAggiornamentoContent,
   },
-  // Solo "corso": la variante "aggiornamento" non aveva contenuto editoriale nella pagina isolata
-  // originale (solo scheda tecnica + placeholder) - vedi addetti-caricatori-movimentazione-di-materiali-cmm-content.js.
+  // L'aggiornamento (4 ore) ha il suo contenuto dal 5 novembre 2026 (documento Word del reparto formazione): vedi
+  // addetti-caricatori-movimentazione-di-materiali-cmm-aggiornamento-content.js.
   'addetti-caricatori-movimentazione-di-materiali-cmm': {
     corso: addettiCaricatoriCmmContent['addetti-caricatori-movimentazione-di-materiali-cmm'],
+    aggiornamento: addettiCaricatoriCmmAggiornamentoContent,
+  },
+  // Carriponti Pensile/Cabina (corso 11 ore + aggiornamento 4 ore): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
+  // Il corso "Carriponte" da 10 ore (famiglia sopra) ha i suoi testi separati.
+  'addetti-alla-conduzione-di-carriponti-pensile-cabina': {
+    corso: addettiCarripontiPensileCabinaContent['addetti-alla-conduzione-di-carriponti-pensile-cabina'],
+    aggiornamento: addettiCarripontiPensileCabinaAggiornamentoContent,
   },
   // Nessun aggiornamento raw corrispondente per questa famiglia.
   'lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale': {
@@ -252,6 +276,7 @@ const EDITORIAL_CONTENT = {
   'blsd-basic-life-support-and-defibrillation': { corso: blsdContent['blsd-basic-life-support-and-defibrillation'] },
   'icdl-base': { corso: icdlContent['icdl-base'] },
   'icdl-standard': { corso: icdlContent['icdl-standard'] },
+  'icdl-full-standard': { corso: icdlContent['icdl-full-standard'] },
   'icdl-update': { corso: icdlContent['icdl-update'] },
   'icdl-digcomp-2-2': { corso: icdlContent['icdl-digcomp-2-2'] },
 };
@@ -1304,8 +1329,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
   const families = useMemo(() => buildCourseFamilies(coursesRaw, coursesDetails), [coursesRaw]);
   const family = useMemo(() => families.find((f) => f.slug === slug), [families, slug]);
 
+  // In cima a ogni corso: scrollToTopNow azzera anche Lenis (window.scrollTo da solo non basta se si arriva durante un'animazione di scorrimento).
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollToTopNow();
   }, [slug]);
 
   // Naviga da corso a corso (es. click su un "corso correlato") non smonta il componente pagina
@@ -1440,6 +1466,11 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
     priceVariants: null,
   };
 
+  // Durata sotto il titolo: solo se contiene un numero (ore). Prima, senza le ore nel contenuto, compariva il testo grezzo dell'elenco
+  // ("Qualifica Riconosciuta", "Esame in Sede", "In sede"): meglio niente che un dato sbagliato. Va DOPO `course` (usa course.duration).
+  const durataGrezza = contenutoLivello?.durataOre ? `${contenutoLivello.durataOre} ore` : course.duration;
+  const durataHeader = /\d/.test(durataGrezza || '') ? durataGrezza : null;
+
   return (
     <>
       <Head>
@@ -1460,9 +1491,13 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
           gap: 1.5rem;
           align-items: start;
         }
-        @media (min-width: 992px) {
+        @media (min-width: 1100px) {
           .cp-page-grid {
             grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            /* Righe esplicite: il riquadro "info" spanna "scheda" e "tabs"; se è più alto delle due, l'altezza in più
+               va tutta alla riga "tabs" (1fr) e non si divide con "scheda" (prima lasciava un vuoto sotto la scheda tecnica
+               nei corsi con il riquadro lungo, es. OSS). */
+            grid-template-rows: auto auto 1fr;
             /* "info" ripetuta su due righe adiacenti nella stessa colonna = spanna entrambe le righe,
                con l'inizio allineato alla riga "scheda" (non a "top"/breadcrumb): la sidebar parte
                esattamente dall'altezza della scheda tecnica, come da richiesta. */
@@ -1475,7 +1510,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
         .cp-scheda-area { grid-area: scheda; min-width: 0; }
         .cp-tabs-area { grid-area: tabs; min-width: 0; }
         .cp-info-area { grid-area: info; min-width: 0; }
-        @media (min-width: 992px) {
+        @media (min-width: 1100px) {
           /* top: 7rem - l'header è fixed con blur/glass (site-header, ~110-120px di altezza reale con
              logo+padding); un offset più piccolo (es. 2rem) fa scorrere la sidebar SOTTO l'header,
              nascondendo il titolo "Prezzi e iscrizione" dietro il glass. 7rem lascia margine visibile.
@@ -1484,7 +1519,35 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
           .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
+        /* Sotto i 744px (telefoni, anche in orizzontale) le due card sono impilate: il riquadro occupa tutta la larghezza
+           (prima max-w-sm + ml-auto lo spingeva a destra lasciando un vuoto a sinistra). A 390px non cambia nulla: 350 < 384. */
+        @media (max-width: 1099px) { .cp-info-area > div { max-width: none; margin-left: 0; } }
+
+        /* Tablet (744-1099px, iPad in verticale): scheda tecnica e riquadro di richiesta sulla STESSA riga, stessa altezza,
+           allineati in alto e in basso; il contenuto più corto si distribuisce (pulsante in fondo al riquadro, voci della
+           scheda ripartite) senza allungare la pagina. Le tab passano sotto, a tutta larghezza. */
+        @media (min-width: 744px) and (max-width: 1099px) {
+          .cp-page-grid {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            grid-template-areas: "top top" "scheda info" "tabs tabs";
+            column-gap: 1.5rem;
+            row-gap: 2.25rem; /* spazio per la nota "Riceverai una conferma…" sotto il riquadro, qui fuori flusso (8px di margine + riga di testo) */
+            align-items: stretch;
+          }
+          .cp-scheda-area, .cp-info-area { display: flex; flex-direction: column; }
+          .cp-info-area { position: relative; }
+          .cp-scheda-area > .cp-scheda-root { flex: 1; margin-bottom: 0 !important; /* inline 2rem del componente */ }
+          /* contenuto del riquadro unito e centrato in verticale: niente buchi in mezzo se la riga è più alta del contenuto */
+          .cp-info-area > div:first-child { flex: 1; justify-content: center; }
+          /* nota sotto il riquadro (solo corsi a iscrizione): fuori flusso, così non altera l'altezza della riga */
+          .cp-info-area > p { position: absolute; top: 100%; left: 0; right: 0; margin: 0.5rem 0 0 !important; }
+        }
+        .cp-scheda-root { display: flex; flex-direction: column; }
+        .cp-scheda-body { flex: 1; display: flex; flex-direction: column; }
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        /* Larghezza della colonna sotto ~385px: le voci in una colonna (due colonne le stringono a ~100px di testo) */
+        @media (min-width: 744px) and (max-width: 959px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
+        @media (min-width: 744px) and (max-width: 1099px) { .cp-scheda-grid { flex: 1; align-content: space-evenly; } }
         @media (max-width: 560px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
 
         .cp-valore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
@@ -1541,10 +1604,10 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
         </h1>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', marginBottom: '1.25rem' }}>
-          {(contenutoLivello?.durataOre ?? course.duration) && (
+          {durataHeader && (
             <span className="text-slate-600 dark:text-gray-300" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', fontWeight: 600 }}>
               <i className="fas fa-clock" style={{ color: '#008C95' }}></i>
-              {contenutoLivello?.durataOre ? `${contenutoLivello.durataOre} ore` : course.duration}
+              {durataHeader}
             </span>
           )}
           {(contenutoLivello?.modalita ?? course.modality) && (
@@ -1558,7 +1621,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
         {(hasMultipleLivelli || hasAggiornamento) && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem' }}>
           {hasAggiornamento && (
-            <div role="tablist" aria-label="Corso o aggiornamento" className="bg-slate-100 dark:bg-[#1c2423]" style={{ display: 'inline-flex', gap: '0.25rem', borderRadius: '9999px', padding: '0.25rem' }}>
+            <div role="tablist" aria-label="Corso o aggiornamento" className="switch-group bg-slate-100 dark:bg-[#1c2423]">
               {['corso', 'aggiornamento'].map((tipo) => {
                 const durataTipo = variantiLivello.find((v) => v.tipo === tipo)?.durataOre;
                 return (
@@ -1568,26 +1631,17 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                   type="button"
                   aria-selected={selectedTipo === tipo}
                   onClick={() => selectTipo(tipo)}
-                  className={selectedTipo === tipo ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}
-                  style={{
-                    padding: '0.5rem 1.1rem',
-                    borderRadius: '9999px',
-                    border: 'none',
-                    background: selectedTipo === tipo ? '#008C95' : 'transparent',
-                    color: selectedTipo === tipo ? '#fff' : undefined,
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    cursor: 'pointer',
-                  }}
+                  title={`${tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}${durataTipo ? ` · ${durataTipo}` : ''}`}
+                  className={`switch-opt ${selectedTipo === tipo ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}`}
                 >
-                  {tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}{durataTipo ? ` · ${durataTipo}` : ''}
+                  <span>{tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}{durataTipo ? ` · ${durataTipo}` : ''}</span>
                 </button>
                 );
               })}
             </div>
           )}
           {hasMultipleLivelli && (
-            <div role="tablist" aria-label="Livello del corso" className="bg-slate-100 dark:bg-[#1c2423]" style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.25rem', borderRadius: '9999px', padding: '0.25rem' }}>
+            <div role="tablist" aria-label="Livello del corso" className="switch-group bg-slate-100 dark:bg-[#1c2423]">
               {(() => {
                 // Livelli "solo aggiornamento" (nessuna variante corso su quel livello) - la loro label
                 // grezza è spesso poco leggibile in un pulsante di switch (fallback sul titolo famiglia
@@ -1608,19 +1662,10 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                     type="button"
                     aria-selected={activeLivelloKey === key}
                     onClick={() => selectLivello(key)}
-                    className={activeLivelloKey === key ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}
-                    style={{
-                      padding: '0.5rem 1.1rem',
-                      borderRadius: '9999px',
-                      border: 'none',
-                      background: activeLivelloKey === key ? '#008C95' : 'transparent',
-                      color: activeLivelloKey === key ? '#fff' : undefined,
-                      fontWeight: 700,
-                      fontSize: '0.85rem',
-                      cursor: 'pointer',
-                    }}
+                    title={displayLabel}
+                    className={`switch-opt ${activeLivelloKey === key ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}`}
                   >
-                    {displayLabel}
+                    <span>{displayLabel}</span>
                   </button>
                 );
                 });
@@ -1642,7 +1687,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
               { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita, show: !!contenutoLivello.modalita },
               { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita, show: !!contenutoLivello.validita },
               { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato, show: !!contenutoLivello.attestato },
-              { icon: 'fas fa-users', label: 'Partecipanti', value: `Max ${contenutoLivello.partecipantiMax} persone`, show: contenutoLivello.partecipantiMax != null },
+              { icon: 'fas fa-users', label: 'Partecipanti', value: contenutoLivello.partecipantiMax != null ? `Max ${contenutoLivello.partecipantiMax} persone` : `Minimo ${contenutoLivello.partecipantiMin} persone`, show: contenutoLivello.partecipantiMax != null || contenutoLivello.partecipantiMin != null },
+              // Luogo del corso (solo corsi in aula che lo indicano): il nome del luogo è un link alla mappa
+              { icon: 'fas fa-location-dot', label: 'Luogo del corso', value: contenutoLivello.luogoCorso ? (<a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contenutoLivello.luogoCorso.indirizzo)}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px' }}>{contenutoLivello.luogoCorso.testo} <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.7rem', marginLeft: '0.2rem' }} aria-hidden="true"></i></a>) : null, show: !!contenutoLivello.luogoCorso },
             ].filter(({ show }) => show).map(({ show, ...item }) => item)}
           />
         ) : (
@@ -1664,7 +1711,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
             { id: 'overview', label: 'Panoramica' },
             { id: 'moduli', label: 'Moduli' },
           ].filter(({ id }) => id !== 'moduli' || !contenutoLivello || contenutoLivello.moduli?.length).map(({ id, label }) => (
-            <button key={id} onClick={() => setActiveTab(id)} style={{ background: 'none', border: 'none', padding: '0.75rem 1.5rem', fontSize: '1rem', fontWeight: activeTab === id ? '700' : '500', color: activeTab === id ? '#008C95' : '#6B7280', cursor: 'pointer', borderBottom: activeTab === id ? '3px solid #008C95' : '3px solid transparent', marginBottom: '-2px', transition: 'all 0.2s ease' }}>
+            <button key={id} onClick={() => setActiveTab(id)} style={{ background: 'none', border: 'none', padding: '0.75rem 1.5rem', minHeight: '44px', whiteSpace: 'nowrap', fontSize: '1rem', fontWeight: activeTab === id ? '700' : '500', color: activeTab === id ? '#008C95' : '#6B7280', cursor: 'pointer', borderBottom: activeTab === id ? '3px solid #008C95' : '3px solid transparent', marginBottom: '-2px', transition: 'all 0.2s ease' }}>
               {label}
             </button>
           ))}
@@ -1691,6 +1738,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
 
             {contenutoLivello.aChiERivolto?.length > 0 && (<>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, margin: '2rem 0 1rem' }}>A chi è rivolto</h2>
+            {contenutoLivello.aChiERivoltoIntro && contenutoLivello.aChiERivoltoIntro.split('\n\n').map((paragrafo, i) => (
+              <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginBottom: '0.75rem' }}>{paragrafo}</p>
+            ))}
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.aChiERivolto.map((riga, i) => (
                 <li key={i} style={{ padding: '0.4rem 0', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
@@ -1699,10 +1749,12 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 </li>
               ))}
             </ul>
+            {contenutoLivello.aChiERivoltoNota && <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginTop: '-1rem', marginBottom: '2rem' }}>{contenutoLivello.aChiERivoltoNota}</p>}
             </>)}
 
             {contenutoLivello.cosaImparerai?.length > 0 && (<>
             <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1rem' }}>Cosa imparerai</h2>
+            {contenutoLivello.cosaImparaIntro && <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginBottom: '0.75rem' }}>{contenutoLivello.cosaImparaIntro}</p>}
             <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
               {contenutoLivello.cosaImparerai.map((outcome, i) => (
                 <li key={i} style={{ padding: '0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -1711,6 +1763,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 </li>
               ))}
             </ul>
+            {contenutoLivello.cosaImparaNota && <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', marginTop: '-1rem', marginBottom: '2rem' }}>{contenutoLivello.cosaImparaNota}</p>}
             </>)}
 
             {/* FAQ - accordion, una sola domanda aperta alla volta */}
@@ -1778,6 +1831,14 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 </tbody>
               </table>
             </div>
+            {contenutoLivello.moduliNota && (
+              <div style={{ marginTop: '1.5rem' }}>
+                <h3 className="text-slate-900 dark:text-white" style={{ fontSize: '1.05rem', fontWeight: 800, margin: '0 0 0.5rem' }}>{contenutoLivello.moduliNota.titolo}</h3>
+                {contenutoLivello.moduliNota.testo.map((paragrafo, i) => (
+                  <p className="text-slate-600 dark:text-gray-300" style={{ lineHeight: '1.7', margin: '0 0 0.5rem' }}>{paragrafo}</p>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -1799,6 +1860,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 return (
                   <>
                     <CoursePricingSidebar
+                      divisore={false}
                       primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
                       customContent={
                         <div className="flex flex-col gap-3">
@@ -1845,7 +1907,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
               }
 
               /* WhatsApp: solo nei corsi di formazione obbligatoria (CASO 4A); tutti gli altri casi non lo passano alla sidebar.
-                 Compare da solo quando NEXT_PUBLIC_WHATSAPP è impostata (lib/whatsapp.ts); senza, nessun pulsante (mai href="#").
+                 Numero del reparto formazione in lib/whatsapp.ts (NEXT_PUBLIC_WHATSAPP, se impostata, lo sostituisce); mai href="#".
                  CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
                  regione a regione, quindi niente prezzo in vetrina - solo "Richiedi
                  preventivo", che porta alla pagina dedicata /richiedi-preventivo (come il CASO 5).
@@ -1855,7 +1917,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                   <CoursePricingSidebar
                     priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
                     primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
-                    whatsappHref={whatsappLink(process.env.NEXT_PUBLIC_WHATSAPP) || undefined}
+                    whatsappHref={whatsappLink(process.env.NEXT_PUBLIC_WHATSAPP) || whatsappLink(WHATSAPP_FORMAZIONE) || undefined}
                   />
                 );
               }

@@ -89,9 +89,9 @@
   "h1": [
     "Tutti i Corsi"
   ],
-  "intestazioni": 47,
-  "testoLunghezza": 5460,
-  "testoSha1": "b7b0f15a33269c93e3b57f25adbbd1372c2bc0f1",
+  "intestazioni": 48,
+  "testoLunghezza": 5525,
+  "testoSha1": "940953e8335172c5433e3085c8e1da435ee938fd",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -119,6 +119,7 @@
     "/all-courses/formazione-per-formatore",
     "/all-courses/icdl-base",
     "/all-courses/icdl-digcomp-2-2",
+    "/all-courses/icdl-full-standard",
     "/all-courses/icdl-standard",
     "/all-courses/icdl-update",
     "/all-courses/lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale",
@@ -166,6 +167,6 @@
     "https://www.instagram.com/aletheiasrl/",
     "mailto:info@aletheiasrl.it"
   ],
-  "immaginiConAlt": 46,
-  "immaginiAlt": "4fd661df4f7e151f89122b4b05dd97e56e7d52f9"
+  "immaginiConAlt": 47,
+  "immaginiAlt": "04f7e8625abc35c3ff87fd71e45c202e9e699cb8"
 }

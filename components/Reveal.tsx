@@ -1,19 +1,28 @@
-import { useEffect, useRef, useState, ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, ReactNode, Ref } from 'react';
 
 interface RevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
   as?: 'div' | 'section';
+  /** React 19: `ref` arriva come prop (es. da AnimatePresence popLayout di framer-motion). Va unito al ref interno, non sostituito. */
+  ref?: Ref<HTMLElement>;
   [key: string]: any;
 }
 
 /**
  * Fade-in + slide-up quando l'elemento entra nel viewport.
  * Rispetta prefers-reduced-motion (nessuna animazione, contenuto sempre visibile).
+ * Regola: un `ref` passato dal genitore si UNISCE a quello interno (vedi setRef). Prima `...rest` lo sovrascriveva: dentro un
+ * AnimatePresence mode="popLayout" (offerte di lavoro) l'elemento restava invisibile per sempre.
  */
-export default function Reveal({ children, className = '', delay = 0, as = 'div', ...rest }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function Reveal({ children, className = '', delay = 0, as = 'div', ref: refEsterno, ...rest }: RevealProps) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const setRef = useCallback((node: HTMLDivElement | null) => {
+    ref.current = node;
+    if (typeof refEsterno === 'function') refEsterno(node);
+    else if (refEsterno) (refEsterno as { current: HTMLElement | null }).current = node;
+  }, [refEsterno]);
   const [visible, setVisible] = useState(false);
   const Tag = as as any;
 
@@ -43,7 +52,7 @@ export default function Reveal({ children, className = '', delay = 0, as = 'div'
 
   return (
     <Tag
-      ref={ref}
+      ref={setRef}
       className={className}
       {...rest}
       style={{
