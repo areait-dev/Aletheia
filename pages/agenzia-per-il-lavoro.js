@@ -457,10 +457,13 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
       {/* ── CHI SIAMO ────────────────────────────────────────── */}
       <section className="bg-light dark:bg-dark-card border-b border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ padding: '5rem 0' }}>
         <div className="container">
-          <div style={{ display: 'flex', gap: '4rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+          {/* Testo su due colonne + foto alta quanto il blocco di testo: componente .split-testo-foto (globals.css).
+              Telefono: una colonna, foto sopra. 744-1023px: foto sopra a tutta larghezza, testo su due colonne (>= 45 caratteri per riga).
+              Da 1024px: testo | foto affiancati, foto alta quanto il testo. */}
+          <div className="split-testo-foto">
 
-            {/* Colonna testo (60%) */}
-            <Reveal className="flex-[3_1_300px]">
+            {/* Colonna testo */}
+            <Reveal className="split-testo-foto__testo">
               <span style={{
                 display: 'inline-block', fontSize: '0.68rem', fontWeight: 800,
                 letterSpacing: '0.1em', textTransform: 'uppercase',
@@ -477,20 +480,22 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
                 <span className="text-primary-text dark:text-primary-on-dark">ecosistema per il lavoro</span>
               </h2>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <p className="text-slate-900 dark:text-gray-100" style={{ fontSize: '1.2rem', fontWeight: 600, lineHeight: 1.65, margin: 0 }}>
+              {/* Le colonne dividono il testo SOLO tra paragrafi interi (break-inside: avoid); il primo paragrafo, più grande, occupa
+                  tutta la larghezza sopra le due colonne: il titolo sta fuori dalle colonne, quindi non resta mai isolato in fondo. */}
+              <div className="split-testo-foto__colonne">
+                <p className="split-testo-foto__lead text-slate-900 dark:text-gray-100" style={{ fontSize: '1.2rem', fontWeight: 600, lineHeight: 1.65 }}>
                   Alètheia S.r.l. offre un servizio attento e preciso: ricerca e seleziona personale qualificato
                   per l'inserimento in azienda e aiuta le persone nella ricerca del lavoro. Compito dell'agenzia
                   per il lavoro è agevolare l'incontro tra persone in cerca di lavoro e imprese in cerca di lavoratori.
                 </p>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
+                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9 }}>
                   In un mercato sempre più veloce e competitivo, Alètheia S.r.l., Agenzia per il Lavoro è in grado
                   di offrire una consulenza integrata nel campo delle Risorse Umane e di anticipare le esigenze
                   organizzative, formare e riqualificare le competenze necessarie per determinati ruoli e posizioni,
                   sviluppare un accurato processo di ricerca e selezione del personale e contribuire all'incontro
                   tra domanda e offerta di lavoro.
                 </p>
-                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9, margin: 0 }}>
+                <p className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.95rem', lineHeight: 1.9 }}>
                   Attraverso Alètheia S.r.l., ente accreditato quale Agenzia per il Lavoro,{' '}
                   <strong className="text-slate-900 dark:text-white">Promotergroup S.p.A.</strong> amplia il proprio
                   ruolo di leva del sistema economico e sociale, mettendo la professionalità dei propri consulenti
@@ -499,27 +504,17 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
               </div>
             </Reveal>
 
-            {/* Colonna immagine: una sola foto, più grande, niente doppia foto sfalsata
-               (due stock generiche appesantivano la sezione senza aggiungere valore). */}
-            <Reveal delay={100} className="flex-[2_1_260px] pt-8">
-              <div
-                className="shadow-xl shadow-slate-300/50 dark:shadow-none"
-                style={{
-                  position: 'relative',
-                  borderRadius: '1.5rem',
-                  overflow: 'hidden',
-                  aspectRatio: '4/3',
-                }}
-              >
-                <Image
-                  src={T.s2_immagine.src}
-                  alt={T.s2_immagine.alt}
-                  fill
-                  sizes="(min-width: 768px) 40vw, 100vw"
-                  loading="lazy"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
+            {/* Colonna immagine: una sola foto, alta quanto il blocco di testo (cover, senza deformarla). object-position 52% 50%:
+               la stretta di mano resta al centro anche col ritaglio alto e stretto; nella foto non ci sono volti interi da tagliare. */}
+            <Reveal delay={100} className="split-testo-foto__foto shadow-xl shadow-slate-300/50 dark:shadow-none">
+              <Image
+                src={T.s2_immagine.src}
+                alt={T.s2_immagine.alt}
+                fill
+                sizes="(min-width: 1024px) 24vw, 100vw"
+                loading="lazy"
+                style={{ objectFit: 'cover', objectPosition: '52% 50%' }}
+              />
             </Reveal>
 
           </div>

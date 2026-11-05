@@ -3441,3 +3441,43 @@ html.dark .switch-opt:not([aria-selected="true"]):hover { background: rgba(255, 
   outline: 2px solid #008C95;
   outline-offset: 2px;
 }
+
+/* ── Sezione testo + foto (.split-testo-foto) ────────────────────────────────────────────────
+   Per i blocchi con un testo lungo e una foto (es. "Chi siamo" di /agenzia-per-il-lavoro). Prima il testo stava in una sola colonna
+   lunga e la foto restava piccola (4:3 nella colonna destra). Ora:
+   - telefono (< 744px): una colonna, foto SOPRA il testo (16:10);
+   - 744-1023px: foto sopra a tutta larghezza (16:7), testo su due colonne se restano leggibili: column-width 20rem (320px, circa
+     45 caratteri per riga a 0,95rem); se non ci stanno diventa una colonna da solo;
+   - da 1024px: testo | foto affiancati, foto alta quanto il blocco di testo (la cella della griglia si stira), object-fit: cover.
+   Le colonne dividono il testo SOLO tra paragrafi interi (break-inside: avoid). Il primo paragrafo (.split-testo-foto__lead)
+   occupa tutta la larghezza sopra le colonne; badge e titolo stanno fuori dalle colonne, così non restano mai isolati in fondo
+   alla prima. La posizione del ritaglio si regola con object-position sull'immagine (stile inline). */
+.split-testo-foto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+.split-testo-foto__testo { min-width: 0; }
+.split-testo-foto__foto {
+  position: relative;
+  order: -1; /* sotto i 1024px la foto sta sopra il testo */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  /* Un elemento di griglia con aspect-ratio ha l'allineamento "normal" che vale "start": in WebKit (iPad, iPhone) la foto, che contiene
+     solo un'immagine assoluta, restava larga 0. Esplicito: occupa tutta la cella. */
+  width: 100%;
+  justify-self: stretch;
+}
+.split-testo-foto__colonne { columns: 2 20rem; column-gap: 2rem; }
+.split-testo-foto__colonne > p { break-inside: avoid; margin: 0 0 1.5rem; }
+.split-testo-foto__colonne > p:last-child { margin-bottom: 0; }
+.split-testo-foto__colonne > .split-testo-foto__lead { column-span: all; }
+@media (min-width: 744px) and (max-width: 1023px) {
+  .split-testo-foto__foto { aspect-ratio: 16 / 7; }
+}
+@media (min-width: 1024px) {
+  .split-testo-foto { grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 400px); gap: 3rem; }
+  .split-testo-foto__foto { order: 0; aspect-ratio: auto; min-height: 320px; }
+}
