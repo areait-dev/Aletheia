@@ -3383,3 +3383,61 @@ html.dark .legal-content td { border-bottom-color: #1F2937; }
   .chatbot-root button:not(.chatbot-toggle) { min-height: 44px; }
   .chatbot-root button[aria-label="Chiudi chat"] { min-width: 44px; }
 }
+
+/* ── Switch delle schede corso (.switch-group / .switch-opt) ─────────────────────────────────
+   Regola unica per i selettori a pulsanti (Corso base/Aggiornamento, livello, variante), prima ogni gruppo
+   aveva stili inline e due difetti: il contenitore a "capsula" (raggio 9999px) su più righe diventava un
+   ovale deformato, e su 390 px il testo andava a capo dentro la pillola (altezze 38 e 60 px).
+   - altezza uguale per tutte le opzioni, almeno 44 px (area di tocco);
+   - testo su UNA riga: se un'etichetta è più larga del gruppo si accorcia con "…" (il testo intero sta nell'attributo title);
+   - se le opzioni non stanno in una riga, vanno a capo come gruppo, in righe ordinate;
+   - raggio concentrico: pillola 22px + padding 4px = contenitore 26px, uguale con una o più righe;
+   - stato attivo: pieno #04767D con testo bianco (WCAG AA, 5,38:1). #008C95 con testo bianco da 14px fa 4,05:1: sotto soglia.
+   I colori dello stato non attivo e del contenitore restano nelle classi Tailwind del JSX (con la variante dark). */
+.switch-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 26px;
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.switch-opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.85rem; /* come prima: con 0,9rem due opzioni (Corso base + Aggiornamento) non stanno più in una riga a 390px */
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.switch-opt > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Opzioni NON attive: sfondo chiaro morbido, così su più righe si leggono come pulsanti e non come un elenco di testo */
+.switch-opt:not([aria-selected="true"]) { background: rgba(255, 255, 255, 0.75); }
+.switch-opt:not([aria-selected="true"]):hover { background: #fff; }
+html.dark .switch-opt:not([aria-selected="true"]) { background: rgba(255, 255, 255, 0.06); }
+html.dark .switch-opt:not([aria-selected="true"]):hover { background: rgba(255, 255, 255, 0.12); }
+.switch-opt[aria-selected="true"] {
+  background: #04767D; /* WCAG AA 5,38:1 con testo bianco */
+  color: #fff;
+}
+.switch-opt:focus-visible {
+  outline: 2px solid #008C95;
+  outline-offset: 2px;
+}

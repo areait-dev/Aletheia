@@ -1460,9 +1460,13 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
           gap: 1.5rem;
           align-items: start;
         }
-        @media (min-width: 992px) {
+        @media (min-width: 1100px) {
           .cp-page-grid {
             grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); /* 70% / 30% */
+            /* Righe esplicite: il riquadro "info" spanna "scheda" e "tabs"; se è più alto delle due, l'altezza in più
+               va tutta alla riga "tabs" (1fr) e non si divide con "scheda" (prima lasciava un vuoto sotto la scheda tecnica
+               nei corsi con il riquadro lungo, es. OSS). */
+            grid-template-rows: auto auto 1fr;
             /* "info" ripetuta su due righe adiacenti nella stessa colonna = spanna entrambe le righe,
                con l'inizio allineato alla riga "scheda" (non a "top"/breadcrumb): la sidebar parte
                esattamente dall'altezza della scheda tecnica, come da richiesta. */
@@ -1475,7 +1479,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
         .cp-scheda-area { grid-area: scheda; min-width: 0; }
         .cp-tabs-area { grid-area: tabs; min-width: 0; }
         .cp-info-area { grid-area: info; min-width: 0; }
-        @media (min-width: 992px) {
+        @media (min-width: 1100px) {
           /* top: 7rem - l'header è fixed con blur/glass (site-header, ~110-120px di altezza reale con
              logo+padding); un offset più piccolo (es. 2rem) fa scorrere la sidebar SOTTO l'header,
              nascondendo il titolo "Prezzi e iscrizione" dietro il glass. 7rem lascia margine visibile.
@@ -1484,7 +1488,34 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
           .cp-info-area { position: sticky; top: 7rem; align-self: start; }
         }
 
+        /* Sotto i 744px (telefoni, anche in orizzontale) le due card sono impilate: il riquadro occupa tutta la larghezza
+           (prima max-w-sm + ml-auto lo spingeva a destra lasciando un vuoto a sinistra). A 390px non cambia nulla: 350 < 384. */
+        @media (max-width: 1099px) { .cp-info-area > div { max-width: none; margin-left: 0; } }
+
+        /* Tablet (744-1099px, iPad in verticale): scheda tecnica e riquadro di richiesta sulla STESSA riga, stessa altezza,
+           allineati in alto e in basso; il contenuto più corto si distribuisce (pulsante in fondo al riquadro, voci della
+           scheda ripartite) senza allungare la pagina. Le tab passano sotto, a tutta larghezza. */
+        @media (min-width: 744px) and (max-width: 1099px) {
+          .cp-page-grid {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            grid-template-areas: "top top" "scheda info" "tabs tabs";
+            column-gap: 1.5rem;
+            row-gap: 2.25rem; /* spazio per la nota "Riceverai una conferma…" sotto il riquadro, qui fuori flusso (8px di margine + riga di testo) */
+            align-items: stretch;
+          }
+          .cp-scheda-area, .cp-info-area { display: flex; flex-direction: column; }
+          .cp-info-area { position: relative; }
+          .cp-scheda-area > .cp-scheda-root { flex: 1; margin-bottom: 0 !important; /* inline 2rem del componente */ }
+          .cp-info-area > div:first-child { flex: 1; }
+          /* nota sotto il riquadro (solo corsi a iscrizione): fuori flusso, così non altera l'altezza della riga */
+          .cp-info-area > p { position: absolute; top: 100%; left: 0; right: 0; margin: 0.5rem 0 0 !important; }
+        }
+        .cp-scheda-root { display: flex; flex-direction: column; }
+        .cp-scheda-body { flex: 1; display: flex; flex-direction: column; }
         .cp-scheda-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        /* Larghezza della colonna sotto ~385px: le voci in una colonna (due colonne le stringono a ~100px di testo) */
+        @media (min-width: 744px) and (max-width: 959px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
+        @media (min-width: 744px) and (max-width: 1099px) { .cp-scheda-grid { flex: 1; align-content: space-evenly; } }
         @media (max-width: 560px) { .cp-scheda-grid { grid-template-columns: 1fr; } }
 
         .cp-valore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
@@ -1558,7 +1589,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
         {(hasMultipleLivelli || hasAggiornamento) && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem' }}>
           {hasAggiornamento && (
-            <div role="tablist" aria-label="Corso o aggiornamento" className="bg-slate-100 dark:bg-[#1c2423]" style={{ display: 'inline-flex', gap: '0.25rem', borderRadius: '9999px', padding: '0.25rem' }}>
+            <div role="tablist" aria-label="Corso o aggiornamento" className="switch-group bg-slate-100 dark:bg-[#1c2423]">
               {['corso', 'aggiornamento'].map((tipo) => {
                 const durataTipo = variantiLivello.find((v) => v.tipo === tipo)?.durataOre;
                 return (
@@ -1568,26 +1599,17 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                   type="button"
                   aria-selected={selectedTipo === tipo}
                   onClick={() => selectTipo(tipo)}
-                  className={selectedTipo === tipo ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}
-                  style={{
-                    padding: '0.5rem 1.1rem',
-                    borderRadius: '9999px',
-                    border: 'none',
-                    background: selectedTipo === tipo ? '#008C95' : 'transparent',
-                    color: selectedTipo === tipo ? '#fff' : undefined,
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    cursor: 'pointer',
-                  }}
+                  title={`${tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}${durataTipo ? ` · ${durataTipo}` : ''}`}
+                  className={`switch-opt ${selectedTipo === tipo ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}`}
                 >
-                  {tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}{durataTipo ? ` · ${durataTipo}` : ''}
+                  <span>{tipo === 'corso' ? 'Corso base' : 'Aggiornamento'}{durataTipo ? ` · ${durataTipo}` : ''}</span>
                 </button>
                 );
               })}
             </div>
           )}
           {hasMultipleLivelli && (
-            <div role="tablist" aria-label="Livello del corso" className="bg-slate-100 dark:bg-[#1c2423]" style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.25rem', borderRadius: '9999px', padding: '0.25rem' }}>
+            <div role="tablist" aria-label="Livello del corso" className="switch-group bg-slate-100 dark:bg-[#1c2423]">
               {(() => {
                 // Livelli "solo aggiornamento" (nessuna variante corso su quel livello) - la loro label
                 // grezza è spesso poco leggibile in un pulsante di switch (fallback sul titolo famiglia
@@ -1608,19 +1630,10 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                     type="button"
                     aria-selected={activeLivelloKey === key}
                     onClick={() => selectLivello(key)}
-                    className={activeLivelloKey === key ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}
-                    style={{
-                      padding: '0.5rem 1.1rem',
-                      borderRadius: '9999px',
-                      border: 'none',
-                      background: activeLivelloKey === key ? '#008C95' : 'transparent',
-                      color: activeLivelloKey === key ? '#fff' : undefined,
-                      fontWeight: 700,
-                      fontSize: '0.85rem',
-                      cursor: 'pointer',
-                    }}
+                    title={displayLabel}
+                    className={`switch-opt ${activeLivelloKey === key ? '' : 'text-slate-700 dark:text-[#9aa8a6]'}`}
                   >
-                    {displayLabel}
+                    <span>{displayLabel}</span>
                   </button>
                 );
                 });
@@ -1664,7 +1677,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
             { id: 'overview', label: 'Panoramica' },
             { id: 'moduli', label: 'Moduli' },
           ].filter(({ id }) => id !== 'moduli' || !contenutoLivello || contenutoLivello.moduli?.length).map(({ id, label }) => (
-            <button key={id} onClick={() => setActiveTab(id)} style={{ background: 'none', border: 'none', padding: '0.75rem 1.5rem', fontSize: '1rem', fontWeight: activeTab === id ? '700' : '500', color: activeTab === id ? '#008C95' : '#6B7280', cursor: 'pointer', borderBottom: activeTab === id ? '3px solid #008C95' : '3px solid transparent', marginBottom: '-2px', transition: 'all 0.2s ease' }}>
+            <button key={id} onClick={() => setActiveTab(id)} style={{ background: 'none', border: 'none', padding: '0.75rem 1.5rem', minHeight: '44px', whiteSpace: 'nowrap', fontSize: '1rem', fontWeight: activeTab === id ? '700' : '500', color: activeTab === id ? '#008C95' : '#6B7280', cursor: 'pointer', borderBottom: activeTab === id ? '3px solid #008C95' : '3px solid transparent', marginBottom: '-2px', transition: 'all 0.2s ease' }}>
               {label}
             </button>
           ))}

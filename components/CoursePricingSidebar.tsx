@@ -48,7 +48,7 @@ export default function CoursePricingSidebar({
       </div>
 
       {/* Spazio di Conversione Principale */}
-      <div className="flex flex-col gap-4 pt-4 border-t border-slate-100 dark:border-white/5">
+      <div className="flex flex-col gap-4 pt-4 mt-auto border-t border-slate-100 dark:border-white/5">
         <a
           href={primaryHref || '#'}
           onClick={onPrimaryClick}
