@@ -4,8 +4,9 @@ import 'lenis/dist/lenis.css';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { ThemeProvider } from '../context/ThemeContext';
-import { initLenis, destroyLenis } from '../lib/lenis';
+import { initLenis, destroyLenis, scrollToTopNow } from '../lib/lenis';
 import { SITE_NAME, SITE_URL } from '../components/SeoHead';
 import CookieConsent from '../components/CookieConsent';
 import { SITE_OPTIONS } from '../data/site-options';
@@ -49,6 +50,22 @@ function MyApp({ Component, pageProps }) {
     initLenis();
     return () => destroyLenis();
   }, []);
+
+  // Ogni pagina nuova parte dall'ALTO, anche se si è cliccato mentre Lenis stava ancora animando lo scorrimento (altrimenti la pagina
+  // nuova veniva portata a metà dall'animazione della precedente). Non vale per: cambi di sola query (shallow: filtri, livelli),
+  // link con # (ancore) e tasto Indietro/Avanti (lì il ripristino della posizione lo fa Next).
+  const router = useRouter();
+  useEffect(() => {
+    let daPopstate = false;
+    router.beforePopState(() => { daPopstate = true; return true; });
+    const alCambio = (url, { shallow } = {}) => {
+      if (shallow || String(url).includes('#')) return;
+      if (daPopstate) { daPopstate = false; return; }
+      scrollToTopNow();
+    };
+    router.events.on('routeChangeComplete', alCambio);
+    return () => router.events.off('routeChangeComplete', alCambio);
+  }, [router]);
 
   return (
     <>

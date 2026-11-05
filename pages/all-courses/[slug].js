@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import { whatsappLink, WHATSAPP_FORMAZIONE } from '../../lib/whatsapp';
+import { scrollToTopNow } from '../../lib/lenis';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
@@ -1328,8 +1329,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
   const families = useMemo(() => buildCourseFamilies(coursesRaw, coursesDetails), [coursesRaw]);
   const family = useMemo(() => families.find((f) => f.slug === slug), [families, slug]);
 
+  // In cima a ogni corso: scrollToTopNow azzera anche Lenis (window.scrollTo da solo non basta se si arriva durante un'animazione di scorrimento).
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollToTopNow();
   }, [slug]);
 
   // Naviga da corso a corso (es. click su un "corso correlato") non smonta il componente pagina
