@@ -246,6 +246,16 @@ function HeroSearch() {
     return () => document.removeEventListener('pointerdown', handleClickOutside);
   }, []);
 
+  // "Cerca": porta al catalogo con testo e categoria (il catalogo legge ?q= e ?gruppo=). Senza testo né categoria apre tutto il catalogo.
+  const cerca = () => {
+    const params = new URLSearchParams();
+    const testo = query.trim();
+    if (testo) params.set('q', testo);
+    if (selected) params.set('gruppo', selected);
+    const qs = params.toString();
+    window.location.href = `/all-courses${qs ? `?${qs}` : ''}`;
+  };
+
   const selectedLabel =
     SEARCH_CATEGORIES.find((c) => c.value === selected)?.label || 'Tutte le categorie';
 
@@ -255,6 +265,8 @@ function HeroSearch() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => { if (e.key === 'Enter') cerca(); }}
+        aria-label="Cerca un corso"
         placeholder="Di cosa hai bisogno? Cerca un corso..."
         className="flex-1 px-5 py-2.5 bg-transparent text-white placeholder-white/50 dark:placeholder-white/40 focus:outline-none rounded-full"
       />
@@ -316,6 +328,7 @@ function HeroSearch() {
 
       <button
         type="button"
+        onClick={cerca}
         className="px-8 min-h-[44px] inline-flex items-center justify-center bg-[#018891] hover:bg-[#006B73] dark:bg-[#018891] dark:hover:bg-[#006B73] text-white font-bold text-sm rounded-full transition-all duration-200 whitespace-nowrap"
       >
         Cerca

@@ -47,6 +47,13 @@ const subCategoryMeta = {
   'corsi-pa':                      'Corsi per la PA',
 };
 
+// Gruppi della ricerca in homepage (HeroSearch in pages/index.js): ?gruppo= raggruppa più sotto-categorie, come nel menu Formazione.
+const gruppiRicerca = {
+  fse:           { name: 'Formazione Finanziata', subs: ['fse-plus', 'fondi-interprofessionali', 'fondo-nuove-competenze'] },
+  obbligatoria:  { name: 'Formazione Obbligatoria', subs: ['sicurezza-lavoro', 'decreto-attrezzature', 'fitosanitario', 'sicurezza-alimentare'] },
+  professionale: { name: 'Formazione Professionale e PA', subs: ['certificazione', 'corsi-pa', 'ecm', 'icdl', 'certificazioni-informatiche'] },
+};
+
 /* Catalogo: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-corsi.ts). */
 async function getPageStaticProps() {
   return { props: { pagina: await getPagina('all-courses'), coursesRaw: await getCoursesRaw() }, ...isrOptions() };
@@ -60,6 +67,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
   const [selectedCategory, setSelectedCategory] = useState('');
   // Filtro granulare attivato dal mega menu via ?categoria=<slug>
   const [selectedSub, setSelectedSub] = useState('');
+  const [selectedGroup, setSelectedGroup] = useState('');
   // Riferimento alla griglia corsi: usato per riportare in cima ai primi corsi al cambio categoria
   const gridRef = useRef(null);
 
@@ -83,7 +91,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
     setIsFiltering(true);
     const t = setTimeout(() => setIsFiltering(false), 350);
     return () => clearTimeout(t);
-  }, [selectedCategory, selectedSub]);
+  }, [selectedCategory, selectedSub, selectedGroup]);
 
   // Riporta in cima alla pagina in modo ISTANTANEO. Lo scroll fluido qui è
   // controproducente: partendo dal fondo, mentre la lista si accorcia il browser
@@ -138,15 +146,22 @@ export default function AllCourses({ coursesRaw, pagina }) {
       clearTimeout(release);
       window.removeEventListener('scroll', pinTop);
     };
-  }, [selectedCategory, selectedSub]);
+  }, [selectedCategory, selectedSub, selectedGroup]);
 
   // Al mount (o quando cambia la query) leggo ?categoria= e imposto il filtro granulare corrispondente
   useEffect(() => {
     if (!router.isReady) return;
-    const { categoria } = router.query;
+    const { categoria, q, gruppo } = router.query;
     if (categoria && subCategoryMeta[categoria]) {
       setSelectedSub(categoria);
       setSelectedCategory(''); // i due filtri sono mutuamente esclusivi
+    }
+    // Ricerca dalla homepage: ?q=testo&gruppo=fse|obbligatoria|professionale
+    if (typeof q === 'string') setSearchTerm(q.slice(0, 100));
+    if (typeof gruppo === 'string' && gruppiRicerca[gruppo]) {
+      setSelectedGroup(gruppo);
+      setSelectedCategory('');
+      setSelectedSub('');
     }
   }, [router.isReady, router.query]);
 
@@ -156,7 +171,8 @@ export default function AllCourses({ coursesRaw, pagina }) {
     setSearchTerm('');
     setSelectedCategory('');
     setSelectedSub('');
-    if (router.query.categoria) {
+    setSelectedGroup('');
+    if (router.query.categoria || router.query.q || router.query.gruppo) {
       router.replace('/all-courses', undefined, { shallow: true });
     }
   };
@@ -166,7 +182,8 @@ export default function AllCourses({ coursesRaw, pagina }) {
     scrollToCourses();
     setSelectedCategory(key);
     setSelectedSub('');
-    if (router.query.categoria) {
+    setSelectedGroup('');
+    if (router.query.categoria || router.query.q || router.query.gruppo) {
       router.replace('/all-courses', undefined, { shallow: true });
     }
   };
@@ -192,7 +209,8 @@ export default function AllCourses({ coursesRaw, pagina }) {
     const matchSub = selectedSub === '' ||
       family.subKey === selectedSub ||
       (selectedSub === 'certificazioni-informatiche' && family.subKey === 'icdl');
-    return matchSearch && matchCategory && matchSub;
+    const matchGroup = selectedGroup === '' || gruppiRicerca[selectedGroup].subs.includes(family.subKey);
+    return matchSearch && matchCategory && matchSub && matchGroup;
   });
 
   return (
@@ -260,7 +278,7 @@ export default function AllCourses({ coursesRaw, pagina }) {
               <li
                 onClick={resetFilters}
                 className={`flex justify-between items-center px-3 py-2.5 rounded-xl cursor-pointer text-sm font-medium transition-colors ${
-                  selectedCategory === '' && selectedSub === '' ? 'bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
+                  selectedCategory === '' && selectedSub === '' && selectedGroup === '' ? 'bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700'
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -317,8 +335,9 @@ export default function AllCourses({ coursesRaw, pagina }) {
               {filteredFamilies.length === 1 ? 'corso trovato' : 'corsi trovati'}
               {selectedCategory && ` in "${categoryMeta[selectedCategory]?.name}"`}
               {selectedSub && ` in "${subCategoryMeta[selectedSub]}"`}
+              {selectedGroup && ` in "${gruppiRicerca[selectedGroup].name}"`}
             </p>
-            {(searchTerm || selectedCategory || selectedSub) && (
+            {(searchTerm || selectedCategory || selectedSub || selectedGroup) && (
               <button
                 onClick={resetFilters}
                 className="text-xs text-primary font-semibold hover:underline bg-transparent border-none cursor-pointer"
