@@ -51,8 +51,8 @@
     "BLSD - Basic Life Support and Defibrillation"
   ],
   "intestazioni": 6,
-  "testoLunghezza": 2826,
-  "testoSha1": "c22cc1d7fd89a17b38076a7780a1bcb9380e86a0",
+  "testoLunghezza": 3077,
+  "testoSha1": "ca5aae7a12ef6c3460f2cf883781c80a024b9a06",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -83,6 +83,7 @@
     "/formazione/professionale-specialistica",
     "/formazione/regionale",
     "/formazione/regionale-fse",
+    "/iscrizione?corso=BLSD%20-%20Basic%20Life%20Support%20and%20Defibrillation",
     "/news",
     "/pdf/catalogo.pdf",
     "/privacy-cookie",

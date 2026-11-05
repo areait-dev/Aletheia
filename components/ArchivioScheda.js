@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import LinkText from './LinkText';
 import ArchivioShell, { DocumentiLista, H2_STYLE, LISTA_STYLE, VOCE_STYLE } from './ArchivioShell';
 import { useSiteOptions } from '../context/SiteOptionsContext';
+import { preiscrizioneChiusa } from '../lib/preiscrizione';
 
 /**
  * Layout "a scheda" di una voce dell'archivio (es. Avviso 1/2026 POC, Avviso 20/2024 FSE+): hero con briciole e badge,
@@ -11,6 +13,10 @@ import { useSiteOptions } from '../context/SiteOptionsContext';
 export default function ArchivioScheda({ voce }) {
   const { scheda: s } = voce;
   const { identita } = useSiteOptions();
+  // Pre-iscrizione chiusa se la scadenza è passata. La pagina è statica (ISR): il valore calcolato in build può essere
+  // vecchio, quindi nel browser lo si ricalcola con la data di oggi.
+  const [chiusa, setChiusa] = useState(() => preiscrizioneChiusa(s.preiscrizioneScadenza));
+  useEffect(() => { setChiusa(preiscrizioneChiusa(s.preiscrizioneScadenza)); }, [s.preiscrizioneScadenza]);
   // Un'unica lista, senza titoli di sezione: nell'ordine in cui i documenti sono stati inseriti.
   const documenti = Object.values(voce.documenti || {}).flat();
   const gruppi = [];
@@ -137,6 +143,29 @@ export default function ArchivioScheda({ voce }) {
                   <DocumentiLista documenti={docs} />
                 </div>
               ))}
+            </section>
+          )}
+
+          {/* PRE-iscrizione: solo se la scheda la prevede (`preiscrizione`, spento di default: oggi nessun avviso la ha).
+              Stesso modulo dell'iscrizione ai corsi, oggetto "[Sito] Pre-iscrizione: <avviso>". Scadenza passata: niente
+              link, solo "Pre-iscrizioni chiuse". */}
+          {s.preiscrizione && (
+            <section style={{ marginBottom: '2.5rem' }}>
+              {chiusa ? (
+                <p role="status" className="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-gray-500 bg-light dark:bg-dark-card text-gray-600 dark:text-gray-300 font-bold" style={{ margin: 0, padding: '0.7rem 1.4rem', fontSize: '0.95rem' }}>
+                  <i className="fas fa-lock" aria-hidden="true" /> Pre-iscrizioni chiuse
+                </p>
+              ) : (
+                <>
+                  <a href={`/pre-iscrizione?corso=${encodeURIComponent(voce.titolo)}`} className="btn btn-primary btn-lg">
+                    <i className="fas fa-user-plus" aria-hidden="true" /> Pre-iscriviti
+                    <i className="fas fa-arrow-right btn-arrow" aria-hidden="true" />
+                  </a>
+                  <p className="text-slate-600 dark:text-gray-400" style={{ margin: '0.75rem 0 0', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                    La pre-iscrizione non garantisce il posto: ti ricontatteremo per verificare i requisiti e le graduatorie.
+                  </p>
+                </>
+              )}
             </section>
           )}
 

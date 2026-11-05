@@ -51,8 +51,8 @@
     "Conduttore d'Impresa Agricola"
   ],
   "intestazioni": 5,
-  "testoLunghezza": 2530,
-  "testoSha1": "a832ef03e6abc8056584cc67e9f26ecbd19af976",
+  "testoLunghezza": 2781,
+  "testoSha1": "65757d53b7d60ec92e080d428530623514322184",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -83,6 +83,7 @@
     "/formazione/professionale-specialistica",
     "/formazione/regionale",
     "/formazione/regionale-fse",
+    "/iscrizione?corso=Conduttore%20d'Impresa%20Agricola",
     "/news",
     "/pdf/catalogo.pdf",
     "/privacy-cookie",

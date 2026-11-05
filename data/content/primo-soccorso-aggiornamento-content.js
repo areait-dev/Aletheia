@@ -38,7 +38,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
     faq: [
       { domanda: 'Cosa succede se è scaduto da oltre 3 anni?', risposta: 'L\'attestato decade: serve rifare il corso base da 16 ore, l\'aggiornamento non è sufficiente.' },
       { domanda: 'Qual è la differenza con il corso base?', risposta: 'Il corso base (16h) è completo per neodesignati o per chi ha l\'attestato scaduto da oltre 3 anni. L\'aggiornamento (6h) è per i rinnovi triennali.' },
-      { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, con un minimo di 15 iscritti.' },
+      { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, al raggiungimento del numero minimo di iscritti.' },
       { domanda: 'L\'attestato è valido in tutta Italia?', risposta: 'Sì.' },
       { domanda: 'Si può fare interamente in FAD?', risposta: 'No, la parte pratica con manichino richiede la presenza.' }
     ],

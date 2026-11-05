@@ -51,8 +51,8 @@
     "OSS - Operatore Socio Sanitario"
   ],
   "intestazioni": 2,
-  "testoLunghezza": 2081,
-  "testoSha1": "0f7af4b6c28396ac48b20cbf8808dc20c7ea9a01",
+  "testoLunghezza": 2023,
+  "testoSha1": "dc6ce7e6fd6745a90fa59e6ebd7311cc391683da",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuFormazione FinanziataFormazione RegionaleFondi Interprofessionali",
   "link": [
     "/",
@@ -83,9 +83,9 @@
     "/formazione/professionale-specialistica",
     "/formazione/regionale",
     "/formazione/regionale-fse",
+    "/iscrizione?corso=OSS%20-%20Operatore%20Socio%20Sanitario",
     "/news",
     "/pdf/catalogo.pdf",
-    "/pre-iscrizione?corso=OSS%20-%20Operatore%20Socio%20Sanitario",
     "/privacy-cookie",
     "/reclami-proposte",
     "/richiedi-preventivo?corso=OSS%20-%20Operatore%20Socio%20Sanitario",

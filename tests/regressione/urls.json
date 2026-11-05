@@ -403,6 +403,9 @@
       "url": "/pre-iscrizione"
     },
     {
+      "url": "/iscrizione"
+    },
+    {
       "url": "/all-courses?categoria=fse-plus",
       "visivo": false
     },

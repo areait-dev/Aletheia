@@ -10,6 +10,8 @@ import path from 'node:path';
 import * as cheerio from 'cheerio';
 import { CONSENSO } from './font-comune.mjs';
 import { urls } from './util.mjs';
+import { buildCourseFamilies } from '../../data/courseFamilies.js';
+import { coursesData } from '../../data/coursesRaw.js';
 
 const CATTURE = process.env.CATTURE_MODULI;
 const SALTA_SERVER_VERO = !!process.env.URL_BASE;
@@ -269,35 +271,105 @@ test('contatti: da ?corso= si precompilano oggetto e messaggio; conferma centrat
   await cattura(page, 'contatti-1-riuscito-centrato', 'h3:has-text("inviato")');
 });
 
-// ── Pre-iscrizione (corsi a partenza differita: OSS, ASACOM, Conduttore d'Impresa Agricola) ──────────
+// ── Iscrizione (corsi del catalogo a partenza differita) e pre-iscrizione (avvisi pubblici) ──────────
+// Un solo componente (components/ModuloIscrizione.js) per due pagine: /iscrizione e /pre-iscrizione.
 
-test('corsi a iscrizione differita: "Pre-iscriviti" porta al modulo, niente contatore né promesse di avviso @rapido', async ({ request }) => {
+test('corsi a iscrizione differita: "Iscriviti" porta al modulo di iscrizione, niente contatore né promesse di avviso @rapido', async ({ request }) => {
   const trovate = [];
+  const conWhatsapp = [];
   for (const u of urls.map((x) => x.url).filter((x) => /^\/all-courses\/[^?/]+$/.test(x))) {
     const html = await (await request.get(u)).text();
     const $ = cheerio.load(html);
-    // su TUTTE le schede: niente contatore, niente promessa di avviso, niente vecchio pulsante
+    // su TUTTE le schede: niente contatore, niente promessa di avviso, niente vecchio pulsante, niente "15 iscrizioni"
     const testo = $('body').text();
     expect(testo, `${u}: contatore di iscritti ancora presente`).not.toMatch(/\d+\/15 iscritti/);
     expect(testo, `${u}: promessa di avviso allo staff`).not.toMatch(/Iscrizione registrata|Corso confermato|lo staff (viene|verrà) avvisato/i);
+    expect(testo, `${u}: il minimo di 15 iscrizioni non va scritto`).not.toMatch(/15 iscrizioni/);
+    // WhatsApp solo nei corsi di formazione obbligatoria; "Risposta in 24h" da nessuna parte
+    expect(testo, `${u}: "Risposta in 24h" non va scritto`).not.toMatch(/Risposta in 24\s?h/i);
+    const wa = $('a').filter((_, e) => /whatsapp|wa\.me/i.test(($(e).attr('href') || '') + $(e).text()));
+    if (wa.length) conWhatsapp.push(u);
     expect($('button').filter((_, e) => /^\s*iscriviti\s*$/i.test($(e).text())).length, `${u}: il vecchio pulsante "Iscriviti" non deve esistere`).toBe(0);
-    const link = $('a').filter((_, e) => /pre-iscriviti/i.test($(e).text()));
+    // le schede del catalogo sono ISCRIZIONI: "Pre-iscriviti" non deve comparirci
+    expect($('a').filter((_, e) => /pre-iscriviti/i.test($(e).text())).length, `${u}: "Pre-iscriviti" è solo per gli avvisi`).toBe(0);
+    const link = $('a').filter((_, e) => /^\s*iscriviti\s*$/i.test($(e).text()));
     if (!link.length) continue;
     trovate.push(u);
-    expect(link.length, `${u}: un solo pulsante Pre-iscriviti`).toBe(1);
-    expect(link.attr('href'), `${u}`).toMatch(/^\/pre-iscrizione\?corso=.+/);
+    expect(link.length, `${u}: un solo pulsante Iscriviti`).toBe(1);
+    expect(link.attr('href'), `${u}`).toMatch(/^\/iscrizione\?corso=.+/);
+    // "15 iscritti" solo nei corsi qualificati (OSS, ASACOM); gli altri usano la frase generica
+    const qualificato = /oss-operatore|asacom/.test(u);
+    expect(testo, `${u}: testo sul numero minimo`).toContain(qualificato
+      ? 'Il corso parte al raggiungimento di 15 iscritti: ti contatteremo per definire quota e date'
+      : 'Il corso parte al raggiungimento del numero minimo di iscritti: ti contatteremo per definire quota e date');
+    if (!qualificato) expect(testo, `${u}: il numero 15 va solo nei corsi qualificati`).not.toMatch(/15 iscritti/);
   }
-  // Oggi la pagina scheda usa questo caso solo per OSS e ASACOM (Conduttore e BLSD hanno il flag nei dati ma un altro caso li precede)
-  expect(trovate.sort(), 'schede con "Pre-iscriviti"').toEqual(['/all-courses/asacom-assistente-alla-comunicazione', '/all-courses/oss-operatore-socio-sanitario']);
+  // WhatsApp solo nei corsi di formazione obbligatoria: ogni scheda con il pulsante deve appartenere a una famiglia con una variante obbligatoria
+  const obbligatorie = new Set(buildCourseFamilies(coursesData).filter((fam) => fam.varianti.some((v) => v.obbligatoria)).map((fam) => `/all-courses/${fam.slug}`));
+  expect(conWhatsapp.filter((u) => !obbligatorie.has(u)), 'schede NON obbligatorie con il pulsante WhatsApp').toEqual([]);
+  // Senza NEXT_PUBLIC_WHATSAPP (come la build di test e oggi la produzione) il pulsante non compare da nessuna parte, nemmeno come link "#".
+  // Con la variabile impostata comparirà nelle sole schede obbligatorie (lib/whatsapp.ts, testato in whatsapp.spec.mjs).
+  if (!process.env.NEXT_PUBLIC_WHATSAPP) expect(conWhatsapp, 'WhatsApp senza NEXT_PUBLIC_WHATSAPP').toEqual([]);
+  // Tutti i corsi con il flag enrollOnly nei dati (OSS, ASACOM, Conduttore d'Impresa Agricola, BLSD)
+  expect(trovate.sort(), 'schede con "Iscriviti"').toEqual([
+    '/all-courses/asacom-assistente-alla-comunicazione',
+    '/all-courses/blsd-basic-life-support-and-defibrillation',
+    '/all-courses/conduttore-d-impresa-agricola',
+    '/all-courses/oss-operatore-socio-sanitario',
+  ]);
+});
+
+test('avvisi: nessuna scheda mostra "Pre-iscriviti" (oggi nessun avviso la prevede; il campo resta spento di default) @rapido', async ({ request }) => {
+  const conPulsante = [];
+  for (const u of urls.map((x) => x.url).filter((x) => /^\/(formazione\/avviso|archivio\/avviso)/.test(x))) {
+    const $ = cheerio.load(await (await request.get(u)).text());
+    const link = $('a').filter((_, e) => /pre-iscriviti/i.test($(e).text()));
+    expect($('a').filter((_, e) => /^\s*iscriviti\s*$/i.test($(e).text())).length, `${u}: negli avvisi non c'è "Iscriviti"`).toBe(0);
+    if (!link.length) continue;
+    conPulsante.push(u);
+    expect(link.length, `${u}: un solo pulsante`).toBe(1);
+    expect(link.attr('href'), u).toMatch(/^\/pre-iscrizione\?corso=.+/);
+    expect($('body').text(), u).toContain('La pre-iscrizione non garantisce il posto');
+  }
+  expect(conPulsante, 'avvisi con "Pre-iscriviti"').toEqual([]);
+  // né la nota sulle graduatorie, né il testo "chiuse", sulle pagine degli avvisi
+  const poc = cheerio.load(await (await request.get('/formazione/avviso-1-2026-poc')).text())('body').text();
+  expect(poc).not.toMatch(/non garantisce il posto|Pre-iscrizioni chiuse/);
+});
+
+test('iscrizione: corso precompilato, validazione e i tre stati @rapido', async ({ page }) => {
+  await provaTreStati(page, {
+    nome: 'iscrizione', url: '/iscrizione?corso=Operatore%20Socio%20Sanitario%20(OSS)', rotta: 'iscrizione', titoloOk: 'Iscrizione inviata!',
+    oggetto: '[Sito] Iscrizione: Operatore Socio Sanitario (OSS)', attesoNelCorpo: ['Operatore Socio Sanitario (OSS)', 'mario@esempio.it', '333 1234567'],
+    compila: async (p) => {
+      await expect(p.locator('#corso')).toHaveValue('Operatore Socio Sanitario (OSS)');
+      await expect(p.locator('h1')).toHaveCount(1);
+      await expect(p.locator('h1')).toHaveText('Iscrizione al corso');
+      await p.fill('#nome', 'Mario Rossi'); await p.fill('#email', 'mario@esempio.it'); await p.fill('#telefono', '333 1234567'); await p.check('#privacy');
+    },
+    invia: (p) => p.getByRole('button', { name: /Invia l'iscrizione/i }).click(),
+  });
+  // modulo vuoto: errori e nessuna richiesta
+  await prepara(page, '/iscrizione');
+  let chiamate = 0;
+  await page.route('**/api/moduli/iscrizione', async (r) => { chiamate++; await r.fulfill({ status: 200, contentType: 'application/json', body: '{"stato":"ok"}' }); });
+  await page.getByRole('button', { name: /Invia l'iscrizione/i }).click();
+  expect(await page.locator('[role="alert"]').count()).toBeGreaterThanOrEqual(4);
+  expect(chiamate).toBe(0);
+  // l'iscrizione non parla di graduatorie
+  await expect(page.locator('main')).not.toContainText('graduatorie');
 });
 
 test('pre-iscrizione: corso precompilato, validazione e i tre stati @rapido', async ({ page }) => {
   await provaTreStati(page, {
-    nome: 'preiscrizione', url: '/pre-iscrizione?corso=Operatore%20Socio%20Sanitario%20(OSS)', rotta: 'preiscrizione', titoloOk: 'Pre-iscrizione inviata!',
-    oggetto: '[Sito] Pre-iscrizione: Operatore Socio Sanitario (OSS)', attesoNelCorpo: ['Operatore Socio Sanitario (OSS)', 'mario@esempio.it', '333 1234567'],
+    nome: 'preiscrizione', url: '/pre-iscrizione?corso=Avviso%20n.%201%2F2026%20POC%20Sicilia', rotta: 'preiscrizione', titoloOk: 'Pre-iscrizione inviata!',
+    oggetto: '[Sito] Pre-iscrizione: Avviso n. 1/2026 POC Sicilia', attesoNelCorpo: ['Avviso n. 1/2026 POC Sicilia', 'mario@esempio.it', '333 1234567'],
     compila: async (p) => {
-      await expect(p.locator('#corso')).toHaveValue('Operatore Socio Sanitario (OSS)');
+      await expect(p.locator('#corso')).toHaveValue('Avviso n. 1/2026 POC Sicilia');
       await expect(p.locator('h1')).toHaveCount(1);
+      // la pre-iscrizione dice che non garantisce il posto e che seguono requisiti e graduatorie
+      await expect(p.locator('main')).toContainText('non garantisce il posto');
+      await expect(p.locator('main')).toContainText('graduatorie');
       await p.fill('#nome', 'Mario Rossi'); await p.fill('#email', 'mario@esempio.it'); await p.fill('#telefono', '333 1234567'); await p.check('#privacy');
     },
     invia: (p) => p.getByRole('button', { name: /Invia la pre-iscrizione/i }).click(),

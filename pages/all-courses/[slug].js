@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CoursePricingSidebar from '../../components/CoursePricingSidebar';
+import { whatsappLink } from '../../lib/whatsapp';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
@@ -1188,6 +1189,7 @@ export const coursesDetails = {
   // CORSI QUALIFICATI
   'oss-operatore-socio-sanitario': {
     enrollOnly: true,
+    minimoIscritti: 15, // corso qualificato: il numero minimo si scrive solo qui e in ASACOM
     title: 'OSS - Operatore Socio Sanitario',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
     category: 'Formazione Professionale',
@@ -1214,6 +1216,7 @@ export const coursesDetails = {
   },
   'asacom-assistente-alla-comunicazione': {
     enrollOnly: true,
+    minimoIscritti: 15, // corso qualificato: il numero minimo si scrive solo qui e in OSS
     title: 'ASACOM - Assistente alla Comunicazione',
     image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=400&q=80',
     category: 'Formazione Professionale',
@@ -1433,6 +1436,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
     level: family.level,
     students: family.students,
     enrollOnly: family.enrollOnly,
+    minimoIscritti: family.minimoIscritti,
     priceVariants: null,
   };
 
@@ -1785,13 +1789,46 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
               per i corsi senza un prezzo letterale (finanziati/gratuiti). */}
           <aside className="cp-info-area">
             {(() => {
+              /* CASO 3 - Iscrizione senza pagamento anticipato, corsi a partenza differita del catalogo (OSS, ASACOM,
+                 Conduttore d'Impresa Agricola, BLSD...): il pulsante "Iscriviti" (EnrollmentProgress) porta al modulo
+                 /iscrizione, che arriva a info@ via Resend. Nessun contatore né notifica automatica a soglia:
+                 non c'è un dato reale da cui leggere il numero di iscritti (vedi MIGRAZIONE.md).
+                 Sta PRIMA del CASO 1: Conduttore d'Impresa Agricola ha price "Finanziato PSR" e altrimenti finiva
+                 in "Richiedi informazioni" senza pulsante. */
+              if (course.enrollOnly) {
+                return (
+                  <>
+                    <CoursePricingSidebar
+                      primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
+                      customContent={
+                        <div className="flex flex-col gap-3">
+                          <div className="flex flex-col">
+                            <span className="text-[0.7rem] font-bold text-slate-600 dark:text-slate-400">Quota di iscrizione</span>
+                            <span className="text-brand-500 dark:text-primary-on-dark font-black text-3xl tracking-tight mt-0.5">Su richiesta</span>
+                          </div>
+                          <EnrollmentProgress courseTitle={course.title} />
+                          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                            <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
+                            <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
+                              <strong>Pagamento all&apos;avvio del corso.</strong> Il corso parte al raggiungimento {course.minimoIscritti ? `di ${course.minimoIscritti} iscritti` : 'del numero minimo di iscritti'}: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
+                            </p>
+                          </div>
+                        </div>
+                      }
+                    />
+                    <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: '0.75rem 0 0', textAlign: 'center' }}>
+                      Riceverai una conferma entro 24-48 ore lavorative
+                    </p>
+                  </>
+                );
+              }
+
               /* CASO 1 - Corso finanziato / gratuito */
               if (/Finanziato|Gratuito/i.test(course.price)) {
                 return (
                   <CoursePricingSidebar
                     primaryHref={`/contatti?corso=${encodeURIComponent(course.title)}`}
                     primaryLabel="Richiedi informazioni"
-                    whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                     customContent={
                       <div className="flex flex-col gap-2">
                         <span className="inline-block bg-brand-100 dark:bg-brand-600/40 text-brand-500 dark:text-primary-on-dark px-3 py-1 rounded-full font-bold text-xs w-fit">
@@ -1807,40 +1844,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 );
               }
 
-              /* CASO 3 - Pre-iscrizione senza pagamento anticipato, corsi a partenza differita (OSS, ASACOM,
-                 Conduttore d'Impresa Agricola): il pulsante "Pre-iscriviti" (EnrollmentProgress) porta al modulo
-                 /pre-iscrizione, che arriva a info@ via Resend. Nessun contatore né notifica automatica a soglia:
-                 non c'è un dato reale da cui leggere il numero di iscritti (vedi MIGRAZIONE.md). */
-              if (course.enrollOnly) {
-                return (
-                  <>
-                    <CoursePricingSidebar
-                      primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
-                      whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
-                      customContent={
-                        <div className="flex flex-col gap-3">
-                          <div className="flex flex-col">
-                            <span className="text-[0.7rem] font-bold text-slate-600 dark:text-slate-400">Quota di iscrizione</span>
-                            <span className="text-brand-500 dark:text-primary-on-dark font-black text-3xl tracking-tight mt-0.5">Su richiesta</span>
-                          </div>
-                          <EnrollmentProgress courseTitle={course.title} />
-                          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/40 rounded-xl" style={{ padding: '0.75rem 1rem', display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
-                            <i className="fas fa-info-circle" style={{ color: '#D97706', marginTop: '0.15rem', flexShrink: 0 }}></i>
-                            <p className="text-amber-800 dark:text-amber-200" style={{ fontSize: '0.8rem', lineHeight: 1.55, margin: 0 }}>
-                              <strong>Pagamento all&apos;avvio del corso.</strong> Il corso parte al raggiungimento di 15 iscrizioni: ti contatteremo per definire quota e date. Non è richiesto alcun pagamento anticipato.
-                            </p>
-                          </div>
-                        </div>
-                      }
-                    />
-                    <p className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.75rem', margin: '0.75rem 0 0', textAlign: 'center' }}>
-                      Riceverai una conferma entro 24-48 ore lavorative
-                    </p>
-                  </>
-                );
-              }
-
-              /* CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
+              /* WhatsApp: solo nei corsi di formazione obbligatoria (CASO 4A); tutti gli altri casi non lo passano alla sidebar.
+                 Compare da solo quando NEXT_PUBLIC_WHATSAPP è impostata (lib/whatsapp.ts); senza, nessun pulsante (mai href="#").
+                 CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
                  regione a regione, quindi niente prezzo in vetrina - solo "Richiedi
                  preventivo", che porta alla pagina dedicata /richiedi-preventivo (come il CASO 5).
                  Il form in fondo a /formazione/obbligatoria resta per chi arriva dalla pagina di categoria. */
@@ -1849,7 +1855,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                   <CoursePricingSidebar
                     priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
                     primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
-                    whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
+                    whatsappHref={whatsappLink(process.env.NEXT_PUBLIC_WHATSAPP) || undefined}
                   />
                 );
               }
@@ -1860,7 +1866,6 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 <CoursePricingSidebar
                   priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
                   primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
-                  whatsappHref={process.env.NEXT_PUBLIC_WHATSAPP_URL || '#'}
                 />
               );
             })()}

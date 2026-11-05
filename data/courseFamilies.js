@@ -26,6 +26,10 @@ const ALIAS_TO_DETAILS = {
   'personale-alimentarista-osa': 'sicurezza-alimentare',
   'carrelli-elevatori-semoventi-con-conduttore-a-bordo': 'carrelli-elevatori',
   'operatore-di-gru-per-autocarro': 'gru-su-autocarro',
+  // Il titolo "... Life Support and Defibrillation" dà lo slug con "-and-"; coursesDetails usa la chiave senza (portava via il flag enrollOnly: niente pulsante "Iscriviti").
+  'blsd-basic-life-support-and-defibrillation': 'blsd-basic-life-support-defibrillation',
+  // Stesso problema: "Conduttore d'Impresa Agricola" dà "conduttore-d-impresa-agricola", i dati usano "conduttore-impresa-agricola".
+  'conduttore-d-impresa-agricola': 'conduttore-impresa-agricola',
   // Nessun alias per "ple-piattaforme-di-lavoro-mobili-elevabili": coursesDetails/EDITORIAL_CONTENT usano
   // già quella chiave esatta (famTitle esteso a scopo SEO/UX sulle card, stesso pattern di "trattori-agricoli-o-forestali").
   // Nessun alias per "trattori-agricoli-o-forestali": le 4 varianti (Ruote/Cingoli/Ruote e Cingoli/
@@ -238,6 +242,7 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
     family.students = details?.students || null;
     family.priceLabel = details?.price || null; // stringa grezza (es. "Finanziato", "Gratuito") per CTA
     family.enrollOnly = details?.enrollOnly || false;
+    family.minimoIscritti = details?.minimoIscritti || null; // solo corsi qualificati (OSS, ASACOM); gli altri usano la frase generica
     if (!family.image && details?.image) family.image = details.image;
 
     // Famiglia "isolata": una sola variante ma con un descrittore di livello/gruppo/modulo
