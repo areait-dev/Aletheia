@@ -3,13 +3,12 @@ import Image from 'next/image';
 import Footer from '../components/Footer';
 import CtaFinale from '../components/CtaFinale';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import SeoHead from '../components/SeoHead';
 import { formatDate } from '../lib/newsData';
 import { getNewsList } from '../lib/wp-news';
-import JobSkeleton from '../components/JobSkeleton';
 import Reveal from '../components/Reveal';
 import { withSiteOptions } from '../lib/wp-site';
 import { getPagina } from '../lib/wp-pagine';
@@ -117,13 +116,7 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
   const T = pagina.testi;
   const [hoveredPanel, setHoveredPanel] = useState(null);
   const { seo } = useSiteOptions(); // immagine OG predefinita (opzioni globali)
-  // Skeleton di cortesia durante l'inizializzazione della pagina (evita reflow al mount).
-  const [jobsLoading, setJobsLoading] = useState(true);
-  useEffect(() => {
-    const t = setTimeout(() => setJobsLoading(false), 450);
-    return () => clearTimeout(t);
-  }, []);
-
+  // Le offerte arrivano da getStaticProps (HTML pre-renderizzato, ricaricato ogni 5 minuti): niente scheletro né attesa nel browser.
   const [locationFilter, setLocationFilter] = useState(null);
   const jobLocations = [...new Set(jobs.map((j) => j.location).filter(Boolean))];
   const filteredJobs = locationFilter ? jobs.filter((j) => j.location === locationFilter) : jobs;
@@ -552,17 +545,6 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
                 }}>
                   Posizioni aperte
                 </span>
-                {!jobsLoading && jobs.length > 0 && (
-                  <span
-                    className="bg-[#018891]/10 dark:bg-[#018891]/10 text-[#006066] dark:text-primary-on-dark"
-                    style={{
-                      fontSize: '0.68rem', fontWeight: 800,
-                      padding: '0.15rem 0.55rem', borderRadius: '999px',
-                    }}
-                  >
-                    {jobs.length}
-                  </span>
-                )}
               </div>
               <h2 className="text-slate-900 dark:text-white" style={{
                 fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 900,
@@ -574,7 +556,7 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
                 Consulta le nostre offerte di lavoro attive e candidati direttamente online.
               </p>
 
-              {!jobsLoading && jobLocations.length > 1 && (
+              {jobLocations.length > 1 && (
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
                   <button
                     onClick={() => setLocationFilter(null)}
@@ -626,16 +608,12 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
             </div>
 
             {/* Right: offerte live da aletheia4job.it */}
-            {jobsLoading ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {Array.from({ length: 3 }).map((_, i) => <JobSkeleton key={i} />)}
-              </div>
-            ) : filteredJobs.length > 0 ? (
+            {filteredJobs.length > 0 ? (
               <motion.div layout style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <AnimatePresence mode="popLayout">
-                  {filteredJobs.map((job, i) => (
-                    <Reveal key={job.id} delay={i * 80}>
+                  {filteredJobs.map((job) => (
                     <motion.a
+                      key={job.id}
                       layout
                       href={job.url}
                       target="_blank"
@@ -672,7 +650,6 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
                       </div>
                       <i className="fas fa-arrow-right" style={{ color: '#008C95', fontSize: '0.85rem', flexShrink: 0 }}></i>
                     </motion.a>
-                    </Reveal>
                   ))}
                 </AnimatePresence>
               </motion.div>
@@ -681,17 +658,23 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
                 Nessuna offerta trovata per questo filtro.
               </p>
             ) : (
-              <p className="text-slate-600 dark:text-gray-400" style={{ fontSize: '0.9rem' }}>
-                Nessuna offerta disponibile al momento. Consulta tutte le posizioni su{' '}
-                <a
-                  href="https://aletheia4job.it/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}
-                >
-                  aletheia4job.it
-                </a>.
-              </p>
+              /* Nessuna offerta (o API non raggiungibile): mai una sezione vuota. */
+              <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1rem', padding: '1.75rem' }}>
+                <p className="text-slate-900 dark:text-white" style={{ margin: '0 0 0.5rem', fontWeight: 800, fontSize: '1.05rem' }}>
+                  Al momento non ci sono posizioni aperte
+                </p>
+                <p className="text-slate-600 dark:text-gray-300" style={{ margin: '0 0 1.25rem', fontSize: '0.92rem', lineHeight: 1.65 }}>
+                  Le nuove offerte vengono pubblicate su aletheia4job.it. Se vuoi, inviaci una candidatura spontanea: la terremo presente per le prossime selezioni.
+                </p>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <a href="/agenzia-per-il-lavoro/servizi-alla-persona#contatta-candidato" className="btn btn-primary btn-md">
+                    Candidatura spontanea
+                  </a>
+                  <a href="https://aletheia4job.it/" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-md">
+                    Vai ad aletheia4job.it
+                  </a>
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -768,16 +751,25 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
 }
 
 async function getPageStaticProps() {
+  // Offerte da aletheia4job.it, lato server: finiscono nell'HTML e si ricaricano ogni 5 minuti (ISR). JOBS_API_URL serve solo ai test
+  // (build con un elenco fisso, così i riferimenti non dipendono dalle offerte del giorno): vedi tests/regressione/build-test.mjs.
+  const JOBS_API_URL = process.env.JOBS_API_URL || 'https://aletheia4job.it/api/public/jobs?limit=3';
   let jobs = [];
-
+  let jobsOk = false;
   try {
-    const res = await fetch('https://aletheia4job.it/api/public/jobs?limit=3');
+    const res = await fetch(JOBS_API_URL, { signal: AbortSignal.timeout(8000) });
     if (res.ok) {
       const data = await res.json();
-      jobs = data.jobs || [];
+      if (Array.isArray(data.jobs)) {
+        jobsOk = true;
+        // Solo i campi usati (niente undefined nelle props) e solo link verso aletheia4job.it.
+        jobs = data.jobs
+          .filter((j) => j && j.id && j.title && typeof j.url === 'string' && j.url.startsWith('https://aletheia4job.it/'))
+          .map((j) => ({ id: String(j.id), title: String(j.title), location: j.location ? String(j.location) : null, contractType: j.contractType ? String(j.contractType) : null, url: j.url }));
+      }
     }
   } catch (err) {
-    // Fonte esterna non raggiungibile in fase di build: la sezione mostra il fallback statico
+    // Fonte esterna non raggiungibile: la sezione mostra "Al momento non ci sono posizioni aperte" con i link, e si riprova presto.
   }
 
   // Solo le news rilevanti per l'Agenzia per il Lavoro (tag 'apl'): WordPress se attivo, altrimenti dati locali.
@@ -788,7 +780,7 @@ async function getPageStaticProps() {
 
   return {
     props: { jobs, aplNews, pagina },
-    revalidate: 300, // 5 minuti, coerente con la cache lato aletheia4job.it (s-maxage=300)
+    revalidate: jobsOk ? 300 : 60, // 5 minuti, coerente con la cache lato aletheia4job.it (s-maxage=300); se l'API non risponde si riprova dopo 1 minuto
   };
 }
 
