@@ -275,6 +275,7 @@ const EDITORIAL_CONTENT = {
   'blsd-basic-life-support-and-defibrillation': { corso: blsdContent['blsd-basic-life-support-and-defibrillation'] },
   'icdl-base': { corso: icdlContent['icdl-base'] },
   'icdl-standard': { corso: icdlContent['icdl-standard'] },
+  'icdl-full-standard': { corso: icdlContent['icdl-full-standard'] },
   'icdl-update': { corso: icdlContent['icdl-update'] },
   'icdl-digcomp-2-2': { corso: icdlContent['icdl-digcomp-2-2'] },
 };
