@@ -193,6 +193,14 @@ export default function Header({ active, solid = false }: HeaderProps) {
             >
               <i className="fas fa-arrow-left" aria-hidden="true"></i> Torna al menu
             </button>
+            {/* Come nel mega-menu desktop (colonna Calendario): link alla pagina con tutti i corsi. In CIMA alla schermata: in fondo alla lista lunga (~760px) restava fuori vista e andava cercato scorrendo */}
+            <a
+              href={header.megaCorsiBtn.href}
+              className="navbar-formazione-calendar navbar-formazione-corsi"
+              onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
+            >
+              {header.megaCorsiBtn.label} <i className="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
             {FORMAZIONE_GROUPS.map((group) => (
               <div key={group.href} className="navbar-formazione-group">
                 <a
@@ -214,14 +222,6 @@ export default function Header({ active, solid = false }: HeaderProps) {
                 </div>
               </div>
             ))}
-            {/* Come nel mega-menu desktop (colonna Calendario): link alla pagina con tutti i corsi */}
-            <a
-              href={header.megaCorsiBtn.href}
-              className="navbar-formazione-calendar navbar-formazione-corsi"
-              onClick={() => { setMenuOpen(false); setMobileFormazioneScreen(false); }}
-            >
-              {header.megaCorsiBtn.label} <i className="fas fa-arrow-right" aria-hidden="true"></i>
-            </a>
             <a
               href={header.megaCalendario.btn.href}
               className="navbar-formazione-calendar"

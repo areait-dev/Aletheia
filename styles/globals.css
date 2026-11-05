@@ -2907,6 +2907,9 @@ html.dark .elearning p {
   /* "Scopri tutti i corsi" sta sopra il link al calendario: un solo filetto di separazione (quello del calendario) */
   .navbar-formazione-calendar.navbar-formazione-corsi {
     border-top: 0;
+    padding-top: 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12); /* è in cima alla schermata: il filetto sta sotto */
   }
 
   /* Il menu mobile a schermo intero deve restare sempre leggibile (testo bianco,
