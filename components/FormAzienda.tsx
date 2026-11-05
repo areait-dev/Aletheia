@@ -241,14 +241,11 @@ export default function FormAzienda({
               ))}
             </div>
 
-            {/* Social */}
+            {/* Social: gli stessi link del footer (identita.social: Facebook, Instagram, LinkedIn, Telegram; con WordPress attivo arrivano dalle
+                Opzioni Globali). Prima erano tre icone con href="#" e aria-label uguale al nome della classe (fab fa-facebook-f). */}
             <div style={{ display: 'flex', gap: '0.65rem' }}>
-              {[
-                { icon: 'fab fa-facebook-f', href: '#' },
-                { icon: 'fab fa-instagram',  href: '#' },
-                { icon: 'fab fa-linkedin-in', href: '#' },
-              ].map((s, i) => (
-                <a key={i} href={s.href} aria-label={s.icon} style={{
+              {identita.social.map((s) => (
+                <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name || undefined} title={s.name || undefined} style={{
                   width: '38px', height: '38px', borderRadius: '50%',
                   background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
