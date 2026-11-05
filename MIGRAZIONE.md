@@ -11,6 +11,31 @@ Branch di lavoro: `migrazione-app-router` (creato da `master`). Il ramo principa
 - **Switch.** Tre tipi nelle schede: A Corso base/Aggiornamento (16 schede), B livello/variante (12 schede, 2–7 opzioni), C tab Panoramica/Moduli. Difetti misurati: pillole alte 38 o 60 px (testo a capo dentro la pillola a 390 px), capsula con raggio 9999 px che su più righe diventa un ovale, opzioni non attive senza sfondo, stato attivo con contrasto 4,05:1. Regola unica `.switch-group` / `.switch-opt` in `styles/globals.css`: altezza 44 px per tutte, una riga (etichetta lunga con "…" e `title`), il gruppo va a capo in righe ordinate, raggio concentrico 22+4=26 px, attivo #04767D con testo bianco (5,38:1).
 - **Verifica.** `node tests/regressione/schede-corso-layout.mjs <indirizzo>` (WebKit, 39 schede × 12 misure iPad + 390 px = 507 caricamenti): dopo 0 violazioni, sulla build di `master` 405. Suite rapida 191/191 dopo aver rigenerato i due riferimenti visivi locali (antincendio e macchine a 1440 px: +13 px di altezza per le fasce di switch). Confronto prima/dopo: cartella `Desktop\layout-scheda-corso\index.html`.
 
+## Blocchi per il lancio: testi segnaposto e dati da completare (audit del 5 novembre 2026)
+
+Due script a mano, da rilanciare prima dei DNS: `node tests/regressione/audit-segnaposto.mjs <indirizzo>` (testo visibile di 102 pagine + link a `#`) e `node tests/regressione/audit-dati-schede.mjs <indirizzo>` (durata/attestato/modalità di ogni scheda corso per ogni switch). Vanno lanciati su una build in esecuzione (es. `http://localhost:3101`, o l'anteprima Vercel).
+
+**Testi segnaposto da sostituire o togliere**
+1. **«Contenuto dettagliato in arrivo. Nel frattempo trovi qui accanto durata, modalità e attestato.»** (riquadro della Panoramica) su 5 schede: `oss-operatore-socio-sanitario`, `asacom-assistente-alla-comunicazione`, `addetti-alla-conduzione-di-carriponti-pensile-cabina` (corso base e aggiornamento), `addetti-caricatori-movimentazione-di-materiali-cmm` (solo la variante Aggiornamento), `addetti-macchina-raccogli-frutta-aggiornamento`. Serve il contenuto editoriale in `data/content/`.
+2. **«Da definire» nella Validità** della scheda tecnica: `macchine-movimento-terra` (tutte le 6 varianti: «Da definire — aggiornamento disponibile (4 ore)»), `patentino-fitosanitario` e `personale-alimentarista-osa` (corso base: «Da definire — aggiornamento disponibile (…)»; aggiornamento: «Da ripetere periodicamente — da definire»).
+3. **Icone social che non portano da nessuna parte** (`href="#"`, e `aria-label` uguale al nome della classe, es. `fab fa-facebook-f`): in `components/FormAzienda.tsx` e `components/FormCandidato.tsx`, quindi su `/agenzia-per-il-lavoro/servizi-alla-persona`, `/agenzia-per-il-lavoro/servizi-alle-imprese`, `/formazione/fondi-interprofessionali`, `/formazione/fondo-nuove-competenze`. Gli indirizzi veri sono in `data/site-options.js`.
+4. **«Prossimamente»** nelle card dei programmi senza pagina di `/formazione/regionale`: da confermare se è uno stato reale o un segnaposto.
+5. **Sezione «Loghi clienti»** della home disattivata con `{false && …}` e un `TODO` («riattivare con loghi reali dopo consenso clienti», `pages/index.js`): non si vede, ma va deciso.
+6. **«Partecipanti»** nelle schede: «300+» (OSS) e «150+» (ASACOM) sembrano conteggi storici, non il massimo per sessione come «Max 30 persone» delle altre; «Su richiesta» su 4 schede senza contenuto; assente su altre (elenco sotto).
+
+Falsi positivi dello script (testo vero, non segnaposto): «le novità in arrivo con il DDL Semplificazioni» (notizia), «per aiutarti a definire il tuo percorso» (servizi alla persona). Nessun «lorem ipsum» nel sito.
+
+**Dati delle schede corso da chiedere al reparto formazione (non inventare le ore)**
+- **OSS** — Durata «Qualifica Riconosciuta» (sia nella scheda tecnica sia sotto il titolo) e Attestato uguale alla Durata. Nei dati di dettaglio c'è `duration: '1.000 ore'`, ma i moduli sommano 800 ore (100+150+100+450): **chiedere il totale ufficiale e la ripartizione dei moduli**. Il valore sbagliato arriva dal campo `meta` di `data/coursesRaw.js`, non dalle ore.
+- **ASACOM** — stesso difetto (Durata e Attestato «Qualifica Riconosciuta»). Nei dati di dettaglio: `duration: '600 ore'`, moduli 80+150+120+250 = 600, coerenti: **chiedere conferma delle 600 ore e il nome esatto dell'attestato**.
+- **ICDL DigComp 2.2** — nessuna durata nella scheda tecnica; sotto il titolo compare «Esame in Sede» (non sono ore). **ICDL Update** — nessuna durata; sotto il titolo «In sede», uguale alla Modalità. **Chiedere la durata della sessione d'esame, o decidere di non mostrarla.**
+- **Antincendio, tre varianti «Aggiornamento»** (Livello 1, 2, 3: 2, 5 e 8 ore) — la scheda tecnica ha solo la Durata: mancano Modalità, Attestato, Validità, Partecipanti (sotto il titolo compare «In presenza» di default). Serve il contenuto editoriale degli aggiornamenti.
+- **Conduttore d'Impresa Agricola** — manca l'Attestato (e i Partecipanti).
+- **Partecipanti mancante**: BLSD, Conduttore d'Impresa Agricola, DPI 3ª categoria, Formazione per formatore, ICDL DigComp 2.2, ICDL Update, Antincendio (aggiornamenti).
+- **Carriponti pensile cabina, Caricatori CMM (aggiornamento), Raccogli frutta (aggiornamento)** — Partecipanti «Su richiesta», Attestato «Patentino Nazionale» (testo grezzo dell'elenco), nessuna Validità.
+- **Modalità incoerente**: Caricatori CMM, corso base «Aula» e aggiornamento «In presenza».
+- Tutte le altre schede (e tutte le combinazioni di switch) hanno durata in ore, attestato e modalità coerenti.
+
 ## Stato al rientro (5 novembre 2026, mattina)
 
 **Branch `iscrizione-corsi`, unito in `master` il 5 novembre.** Corregge la pre-iscrizione del 4 novembre: i corsi del catalogo sono ISCRIZIONI, solo gli avvisi (se la prevedono) sono PRE-ISCRIZIONI.
