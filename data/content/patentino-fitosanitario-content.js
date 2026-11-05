@@ -9,7 +9,7 @@ module.exports = {
       titolo: 'Corso Patentino Fitosanitario',
       durataOre: 20,
       modalita: ['Aula'],
-      validita: 'Da definire — aggiornamento disponibile (12 ore, pagina dedicata)',
+      validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
       prezzo: 130,
