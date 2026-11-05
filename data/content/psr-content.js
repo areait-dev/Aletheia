@@ -6,8 +6,9 @@
 // FONTE: public/pdf/archivio/descrizioni.json, chiavi 'misura-psr-1-1' (titolo), 'misura-psr-1-1/conduttore-impresa-agricola',
 // 'misura-psr-1-1/ammodernamento-aziende-agricole', 'misura-psr-1-1/nuove-strategie-sviluppo-investimento'.
 // Dal testo sorgente sono stati tolti solo i recapiti telefonici e le etichette dei link (ALLEGATO BANDO, MODULO DI
-// ISCRIZIONE, "NON DISPONIBILE"). I campi non presenti in fonte (validità, attestato, partecipanti max, programma a
+// ISCRIZIONE, "NON DISPONIBILE"). I campi non presenti in fonte (validità, partecipanti max, programma a
 // moduli, FAQ) sono omessi e la pagina li nasconde (guardie opzionali in pages/all-courses/[slug].js).
+// ATTESTATO del Conduttore d'Impresa Agricola (Qualifica 3 EQF): fornito dal reparto formazione il 5 novembre 2026.
 // NOTA: la famiglia generica ha slug raw 'misura-psr-1-2' ma l'archivio parla di Misura 1.1 - da verificare.
 // FAQ: sintesi di fonti ufficiali + dati già nel progetto (nessun dato aggiunto sui corsi Alètheia):
 //  - PSR Sicilia 2014-2020, Misura 1 e Sottomisura 1.1 (titoli, articolazione, destinatari "addetti dei settori
@@ -57,6 +58,9 @@ Workshop di approfondimento (8 ore ciascuno): Strategie di Marketing per le azie
       titolo: "Conduttore d'impresa agricola (ex Capo Azienda)",
       durataOre: 200,
       modalita: ['FAD'],
+      // Certificazione dal reparto formazione (5 novembre 2026), riportata come indicata (apostrofo compreso). Il corso ha UNA sola variante
+      // (niente corso base/aggiornamento): non c'è ereditarietà, il valore è proprio.
+      attestato: 'Conduttore d’Impresa Agricola – Qualifica 3 EQF',
 
       descrizione: `Il Conduttore d'Impresa Agricola gestisce i processi aziendali gestionali e produttivi in riferimento al contesto produttivo e territoriale di riferimento.
 
