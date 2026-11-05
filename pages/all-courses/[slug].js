@@ -6,6 +6,7 @@ import Footer from '../../components/Footer';
 import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import { whatsappLink, WHATSAPP_FORMAZIONE } from '../../lib/whatsapp';
 import { scrollToTopNow } from '../../lib/lenis';
+import { ereditaDalBase } from '../../lib/ereditarieta-contenuti';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
@@ -1426,7 +1427,12 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
   // per famiglie a variante unica di tipo "aggiornamento" (es. trattori-agricoli-o-forestali) lo
   // switcher corso/aggiornamento è nascosto e selectedTipo resta bloccato sul default 'corso',
   // che altrimenti farebbe fallire il lookup pur avendo contenuto editoriale disponibile.
-  const contenutoLivello = EDITORIAL_CONTENT[family.id]?.[varianteCorrente.tipo]?.[editorialLivelloKey] ?? null;
+  const contenutoDiretto = EDITORIAL_CONTENT[family.id]?.[varianteCorrente.tipo]?.[editorialLivelloKey] ?? null;
+  // Una variante di AGGIORNAMENTO eredita dal corso base dello stesso livello modalità, attestato, validità e partecipanti quando non li
+  // indica (lib/ereditarieta-contenuti.ts): nei file data/content/ non si copiano a mano, e vale anche per i corsi futuri.
+  const contenutoLivello = varianteCorrente.tipo === 'aggiornamento'
+    ? ereditaDalBase(contenutoDiretto, EDITORIAL_CONTENT[family.id]?.corso?.[editorialLivelloKey] ?? null)
+    : contenutoDiretto;
 
   // Corsi correlati: priorità alla curatela editoriale (contenutoLivello.corsiCorrelati, nei file
   // data/content/*.js), con fallback automatico quando è assente o troppo corta - Regola 1: mai il
