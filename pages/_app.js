@@ -12,6 +12,9 @@ import CookieConsent from '../components/CookieConsent';
 import { SITE_OPTIONS } from '../data/site-options';
 import { SiteOptionsProvider } from '../context/SiteOptionsContext';
 
+// Istante dell'ultimo Indietro/Avanti del browser (vedi il gestore dei cambi di pagina in MyApp).
+let ultimoRitornoCronologia = 0;
+
 // Chatbot non contribuisce al first paint: caricato lato client dopo l'idratazione
 // per non bloccare il rendering iniziale della pagina.
 const Chatbot = dynamic(() => import('../components/Chatbot'), { ssr: false });
@@ -56,11 +59,12 @@ function MyApp({ Component, pageProps }) {
   // link con # (ancore) e tasto Indietro/Avanti (lì il ripristino della posizione lo fa Next).
   const router = useRouter();
   useEffect(() => {
-    let daPopstate = false;
-    router.beforePopState(() => { daPopstate = true; return true; });
+    router.beforePopState(() => { ultimoRitornoCronologia = Date.now(); return true; });
     const alCambio = (url, { shallow } = {}) => {
+      // Indietro/Avanti: niente reset (la posizione la ripristina il browser). La marca è a livello di MODULO: dentro l'effetto si perdeva,
+      // perché useRouter() cambia a ogni navigazione e l'effetto si riesegue. Scade dopo 3s se la navigazione non si completa.
+      if (Date.now() - ultimoRitornoCronologia < 3000) { ultimoRitornoCronologia = 0; return; }
       if (shallow || String(url).includes('#')) return;
-      if (daPopstate) { daPopstate = false; return; }
       scrollToTopNow();
     };
     router.events.on('routeChangeComplete', alCambio);
