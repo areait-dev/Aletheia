@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CoursePricingSidebar from '../../components/CoursePricingSidebar';
-import { whatsappLink } from '../../lib/whatsapp';
+import { whatsappLink, WHATSAPP_FORMAZIONE } from '../../lib/whatsapp';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import Link from 'next/link';
@@ -1874,7 +1874,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
               }
 
               /* WhatsApp: solo nei corsi di formazione obbligatoria (CASO 4A); tutti gli altri casi non lo passano alla sidebar.
-                 Compare da solo quando NEXT_PUBLIC_WHATSAPP è impostata (lib/whatsapp.ts); senza, nessun pulsante (mai href="#").
+                 Numero del reparto formazione in lib/whatsapp.ts (NEXT_PUBLIC_WHATSAPP, se impostata, lo sostituisce); mai href="#".
                  CASO 4A - Corso di formazione obbligatoria (badge "Obbligatoria"): la tariffa varia da
                  regione a regione, quindi niente prezzo in vetrina - solo "Richiedi
                  preventivo", che porta alla pagina dedicata /richiedi-preventivo (come il CASO 5).
@@ -1884,7 +1884,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                   <CoursePricingSidebar
                     priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
                     primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
-                    whatsappHref={whatsappLink(process.env.NEXT_PUBLIC_WHATSAPP) || undefined}
+                    whatsappHref={whatsappLink(process.env.NEXT_PUBLIC_WHATSAPP) || whatsappLink(WHATSAPP_FORMAZIONE) || undefined}
                   />
                 );
               }

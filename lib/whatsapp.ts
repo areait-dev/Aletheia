@@ -1,9 +1,13 @@
 // Link WhatsApp dei corsi di formazione obbligatoria (pages/all-courses/[slug].js, CoursePricingSidebar).
-// Il numero lo fornisce il reparto formazione e arriva dalla variabile NEXT_PUBLIC_WHATSAPP (Vercel, Production e Preview).
-// Finché la variabile manca, o non è valida, la funzione restituisce null e il pulsante NON compare: mai href="#".
+// Il numero del reparto formazione è WHATSAPP_FORMAZIONE (5 novembre 2026). Un'eventuale variabile NEXT_PUBLIC_WHATSAPP (Vercel,
+// Production e Preview, con redeploy) lo SOSTITUISCE, per cambiare numero senza toccare il codice.
+// Se il valore non è valido la funzione restituisce null e il pulsante NON compare: mai href="#".
 // Accetta un indirizzo completo (https://wa.me/39…) oppure il solo numero con prefisso internazionale ("+39 333 1234567",
 // "0039 333…", "39333…"). Un numero senza prefisso (es. "333 1234567") viene rifiutato: un link sbagliato è peggio di nessun link.
 // NEXT_PUBLIC_*: il valore entra nel codice al momento della build, quindi dopo averlo cambiato serve un nuovo deploy.
+
+/** Numero WhatsApp del reparto formazione, con prefisso internazionale (fornito senza prefisso: 348 407 2803, cellulare italiano). */
+export const WHATSAPP_FORMAZIONE = '+39 348 407 2803';
 
 /** Link `https://…` pronto per l'href, oppure null (= niente pulsante). */
 export function whatsappLink(valore: string | null | undefined): string | null {

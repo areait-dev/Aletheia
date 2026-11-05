@@ -277,6 +277,7 @@ test('contatti: da ?corso= si precompilano oggetto e messaggio; conferma centrat
 test('corsi a iscrizione differita: "Iscriviti" porta al modulo di iscrizione, niente contatore né promesse di avviso @rapido', async ({ request }) => {
   const trovate = [];
   const conWhatsapp = [];
+  const hrefWhatsapp = new Set();
   for (const u of urls.map((x) => x.url).filter((x) => /^\/all-courses\/[^?/]+$/.test(x))) {
     const html = await (await request.get(u)).text();
     const $ = cheerio.load(html);
@@ -289,6 +290,7 @@ test('corsi a iscrizione differita: "Iscriviti" porta al modulo di iscrizione, n
     expect(testo, `${u}: "Risposta in 24h" non va scritto`).not.toMatch(/Risposta in 24\s?h/i);
     const wa = $('a').filter((_, e) => /whatsapp|wa\.me/i.test(($(e).attr('href') || '') + $(e).text()));
     if (wa.length) conWhatsapp.push(u);
+    wa.each((_, e) => hrefWhatsapp.add($(e).attr('href')));
     expect($('button').filter((_, e) => /^\s*iscriviti\s*$/i.test($(e).text())).length, `${u}: il vecchio pulsante "Iscriviti" non deve esistere`).toBe(0);
     // le schede del catalogo sono ISCRIZIONI: "Pre-iscriviti" non deve comparirci
     expect($('a').filter((_, e) => /pre-iscriviti/i.test($(e).text())).length, `${u}: "Pre-iscriviti" è solo per gli avvisi`).toBe(0);
@@ -307,9 +309,9 @@ test('corsi a iscrizione differita: "Iscriviti" porta al modulo di iscrizione, n
   // WhatsApp solo nei corsi di formazione obbligatoria: ogni scheda con il pulsante deve appartenere a una famiglia con una variante obbligatoria
   const obbligatorie = new Set(buildCourseFamilies(coursesData).filter((fam) => fam.varianti.some((v) => v.obbligatoria)).map((fam) => `/all-courses/${fam.slug}`));
   expect(conWhatsapp.filter((u) => !obbligatorie.has(u)), 'schede NON obbligatorie con il pulsante WhatsApp').toEqual([]);
-  // Senza NEXT_PUBLIC_WHATSAPP (come la build di test e oggi la produzione) il pulsante non compare da nessuna parte, nemmeno come link "#".
-  // Con la variabile impostata comparirà nelle sole schede obbligatorie (lib/whatsapp.ts, testato in whatsapp.spec.mjs).
-  if (!process.env.NEXT_PUBLIC_WHATSAPP) expect(conWhatsapp, 'WhatsApp senza NEXT_PUBLIC_WHATSAPP').toEqual([]);
+  // Il pulsante c'è nelle schede obbligatorie e porta al numero del reparto formazione (lib/whatsapp.ts), mai a "#".
+  expect(conWhatsapp.length, 'schede obbligatorie con il pulsante WhatsApp').toBeGreaterThan(0);
+  if (!process.env.NEXT_PUBLIC_WHATSAPP) expect([...hrefWhatsapp], 'indirizzi WhatsApp').toEqual(['https://wa.me/393484072803']);
   // Tutti i corsi con il flag enrollOnly nei dati (OSS, ASACOM, Conduttore d'Impresa Agricola, BLSD)
   expect(trovate.sort(), 'schede con "Iscriviti"').toEqual([
     '/all-courses/asacom-assistente-alla-comunicazione',
