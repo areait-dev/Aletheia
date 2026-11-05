@@ -21,8 +21,7 @@ test('news: un clic in qualsiasi punto della card apre l\'articolo @rapido', asy
   await page.goto('/news', { waitUntil: 'networkidle' });
   const prima = page.locator('a.news-card-link').first();
   const href = await prima.getAttribute('href');
-  const box = await prima.boundingBox();
-  // clic sull'immagine (in alto a sinistra), non sul titolo né su "Leggi l'articolo"
-  await page.mouse.click(box.x + 20, box.y + 20);
+  // clic sull'immagine (in alto a sinistra), non sul titolo né su "Leggi l'articolo": Playwright scorre fino alla card prima di cliccare
+  await prima.click({ position: { x: 20, y: 20 } });
   await expect(page).toHaveURL(new RegExp(href.replace(/[/-]/g, '\$&') + '$'));
 });

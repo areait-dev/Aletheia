@@ -1425,10 +1425,6 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
   // switcher corso/aggiornamento è nascosto e selectedTipo resta bloccato sul default 'corso',
   // che altrimenti farebbe fallire il lookup pur avendo contenuto editoriale disponibile.
   const contenutoLivello = EDITORIAL_CONTENT[family.id]?.[varianteCorrente.tipo]?.[editorialLivelloKey] ?? null;
-  // Durata sotto il titolo: solo se contiene un numero (ore). Prima, senza le ore nel contenuto, compariva il testo grezzo dell'elenco
-  // ("Qualifica Riconosciuta", "Esame in Sede", "In sede"): meglio niente che un dato sbagliato.
-  const durataGrezza = contenutoLivello?.durataOre ? `${contenutoLivello.durataOre} ore` : course.duration;
-  const durataHeader = /\d/.test(durataGrezza || '') ? durataGrezza : null;
 
   // Corsi correlati: priorità alla curatela editoriale (contenutoLivello.corsiCorrelati, nei file
   // data/content/*.js), con fallback automatico quando è assente o troppo corta - Regola 1: mai il
@@ -1467,6 +1463,11 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
     minimoIscritti: family.minimoIscritti,
     priceVariants: null,
   };
+
+  // Durata sotto il titolo: solo se contiene un numero (ore). Prima, senza le ore nel contenuto, compariva il testo grezzo dell'elenco
+  // ("Qualifica Riconosciuta", "Esame in Sede", "In sede"): meglio niente che un dato sbagliato. Va DOPO `course` (usa course.duration).
+  const durataGrezza = contenutoLivello?.durataOre ? `${contenutoLivello.durataOre} ore` : course.duration;
+  const durataHeader = /\d/.test(durataGrezza || '') ? durataGrezza : null;
 
   return (
     <>
