@@ -1506,7 +1506,8 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
           .cp-scheda-area, .cp-info-area { display: flex; flex-direction: column; }
           .cp-info-area { position: relative; }
           .cp-scheda-area > .cp-scheda-root { flex: 1; margin-bottom: 0 !important; /* inline 2rem del componente */ }
-          .cp-info-area > div:first-child { flex: 1; }
+          /* contenuto del riquadro unito e centrato in verticale: niente buchi in mezzo se la riga è più alta del contenuto */
+          .cp-info-area > div:first-child { flex: 1; justify-content: center; }
           /* nota sotto il riquadro (solo corsi a iscrizione): fuori flusso, così non altera l'altezza della riga */
           .cp-info-area > p { position: absolute; top: 100%; left: 0; right: 0; margin: 0.5rem 0 0 !important; }
         }
@@ -1812,6 +1813,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                 return (
                   <>
                     <CoursePricingSidebar
+                      divisore={false}
                       primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
                       customContent={
                         <div className="flex flex-col gap-3">

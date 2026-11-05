@@ -13,6 +13,8 @@ interface CoursePricingSidebarProps {
   onPrimaryClick?: MouseEventHandler<HTMLAnchorElement>;
   /** Solo nei corsi di formazione obbligatoria: negli altri casi non va passato (niente pulsante WhatsApp). */
   whatsappHref?: string;
+  /** Linea sopra i pulsanti. Falsa per il riquadro a iscrizione (ha già i suoi blocchi: la linea lasciava un vuoto tra l'avviso giallo e "Richiedi un preventivo"). */
+  divisore?: boolean;
 }
 
 /**
@@ -27,6 +29,7 @@ export default function CoursePricingSidebar({
   primaryHref,
   onPrimaryClick,
   whatsappHref,
+  divisore = true,
 }: CoursePricingSidebarProps) {
   const label = primaryLabel || 'Richiedi un preventivo';
   const icon = 'fas fa-arrow-right';
@@ -47,12 +50,13 @@ export default function CoursePricingSidebar({
         )))}
       </div>
 
-      {/* Spazio di Conversione Principale */}
-      <div className="flex flex-col gap-4 pt-4 mt-auto border-t border-slate-100 dark:border-white/5">
+      {/* Spazio di Conversione Principale. `!mt-0` sui link con `text-center`: in globals.css .text-center aggiunge margin-top:3rem
+          (48px di vuoto sopra il pulsante, vedi CLAUDE.md). */}
+      <div className={`flex flex-col gap-4 ${divisore ? 'pt-4 border-t border-slate-100 dark:border-white/5' : ''}`}>
         <a
           href={primaryHref || '#'}
           onClick={onPrimaryClick}
-          className="w-full text-center text-white rounded-full min-h-[52px] px-6 font-bold no-underline bg-[#018891] dark:bg-[#018891] hover:bg-[#006B73] dark:hover:bg-[#006B73] transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-[#018891]/20 dark:shadow-none group whitespace-nowrap"
+          className="w-full text-center !mt-0 text-white rounded-full min-h-[52px] px-6 font-bold no-underline bg-[#018891] dark:bg-[#018891] hover:bg-[#006B73] dark:hover:bg-[#006B73] transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-[#018891]/20 dark:shadow-none group whitespace-nowrap"
         >
           {label}
           <i className={`${icon} text-xs transition-transform group-hover:translate-x-1`}></i>
@@ -61,7 +65,7 @@ export default function CoursePricingSidebar({
         {whatsappHref && (
           <a
             href={whatsappHref} target="_blank" rel="noopener noreferrer"
-            className="w-full text-center py-2 font-medium text-xs no-underline text-slate-600 dark:text-[#9aa8a6] hover:text-[#018891] dark:hover:text-primary-on-dark bg-transparent flex items-center justify-center gap-1.5 transition-colors"
+            className="w-full text-center !mt-0 py-2 font-medium text-xs no-underline text-slate-600 dark:text-[#9aa8a6] hover:text-[#018891] dark:hover:text-primary-on-dark bg-transparent flex items-center justify-center gap-1.5 transition-colors"
           >
             <i className="fab fa-whatsapp text-sm text-[#018891]"></i> Parla con un consulente su WhatsApp
           </a>
