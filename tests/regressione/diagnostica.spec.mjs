@@ -37,6 +37,19 @@ test('Prova 1 blocca il trascinamento orizzontale (touch-action: pan-y) e Azzera
   await expect.poll(() => page.evaluate(() => document.documentElement.style.touchAction + document.body.style.touchAction)).toBe('');
 });
 
+test('lo storico aggiunge una riga a ogni cambio di misure (rotazione) @rapido', async ({ page }) => {
+  await page.setViewportSize({ width: 744, height: 1133 });
+  await page.goto('/diagnostica-b');
+  const righe = page.locator('[data-storico] li');
+  await expect(righe).toHaveCount(1);
+  await page.setViewportSize({ width: 1133, height: 744 }); // come girare l'iPad in orizzontale
+  await expect(righe).toHaveCount(2);
+  await expect(righe.nth(1)).toContainText('inner 1133×744');
+  await page.setViewportSize({ width: 744, height: 1133 });
+  await expect(righe).toHaveCount(3);
+  await expect(righe.nth(2)).toContainText('inner 744×1133');
+});
+
 test('le pagine di diagnostica non sono linkate dalle altre pagine @rapido', async ({ request }) => {
   for (const url of ['/', '/chi-siamo', '/contatti', '/all-courses', '/news', '/privacy-cookie', '/calendario-corsi']) {
     const html = await (await request.get(url)).text();

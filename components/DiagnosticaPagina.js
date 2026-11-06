@@ -45,9 +45,21 @@ function misura() {
 export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuardare }) {
   const [m, setM] = useState(null);
   const [copiato, setCopiato] = useState(false);
+  // Storico: una riga a ogni cambio di misure (rotazione, ridimensionamento, zoom): con una sola schermata si vedono verticale e orizzontale.
+  const [storico, setStorico] = useState([]);
 
   useEffect(() => {
-    const aggiorna = () => setM(misura());
+    const aggiorna = () => {
+      const mm = misura();
+      setM(mm);
+      const firma = [mm.orientamento, mm.innerWidth, mm.innerHeight, mm.visualViewportWidth, mm.visualViewportScale, mm.scrollWidth, mm.screenWidth, mm.screenHeight].join('|');
+      setStorico((prima) => {
+        if (prima.length && prima[prima.length - 1].firma === firma) return prima;
+        const ora = new Date().toLocaleTimeString('it-IT');
+        const riga = `${ora} · ${String(mm.orientamento).replace('-primary', '')} · inner ${mm.innerWidth}×${mm.innerHeight} · vv ${mm.visualViewportWidth} (scala ${mm.visualViewportScale}) · scrollWidth ${mm.scrollWidth} · schermo ${mm.screenWidth}×${mm.screenHeight}`;
+        return [...prima, { firma, riga }].slice(-12);
+      });
+    };
     aggiorna();
     window.addEventListener('resize', aggiorna);
     window.addEventListener('orientationchange', aggiorna);
@@ -132,7 +144,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
 
   const copia = async () => {
     try {
-      await navigator.clipboard.writeText(JSON.stringify(m, null, 2));
+      await navigator.clipboard.writeText(JSON.stringify({ ...m, storico: storico.map((s) => s.riga) }, null, 2));
       setCopiato(true);
     } catch {
       setCopiato(false);
@@ -171,6 +183,16 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
                 </div>
               ))}
             </div>
+
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Storico delle misure</h2>
+            <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '1rem' }}>
+              Ruota l'iPad in orizzontale e di nuovo in verticale, poi fai uno screenshot: ogni cambio di misure aggiunge una riga.
+            </p>
+            <ol data-storico style={{ margin: 0, paddingLeft: '1.25rem', fontSize: '0.95rem', lineHeight: 1.6, overflowWrap: 'anywhere' }}>
+              {storico.map((s) => (
+                <li key={s.firma + s.riga}>{s.riga}</li>
+              ))}
+            </ol>
 
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Dettagli</h2>
             <dl style={{ margin: 0, fontSize: '1rem', lineHeight: 1.5 }}>
