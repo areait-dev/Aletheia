@@ -3487,3 +3487,38 @@ html.dark .switch-opt:not([aria-selected="true"]):hover { background: rgba(255, 
 
 /* ── Card delle news (pages/news/index.js): l'intera card è un link; il focus da tastiera si vede sul bordo della card. */
 .news-card-link:focus-visible { outline: 3px solid #008C95; outline-offset: 3px; }
+
+/* iPad in modalità "sito desktop" (classe messa da lib/ipad-desktop.js SOLO se la pagina è più larga dello schermo visibile):
+   la pagina desktop viene rimpicciolita con zoom alla larghezza visibile (--ipad-zoom = visibile/layout, es. 744/1024).
+   Le media query non si possono cambiare da una classe, quindi il layout tablet qui non è raggiungibile: si rimpicciolisce il desktop.
+   touch-action pan-y: il layout del browser resta largo come prima, la parte a destra del contenuto rimpicciolito è vuota e non deve
+   essere raggiungibile con lo scorrimento orizzontale (il pizzico per ingrandire resta permesso). */
+html.ipad-desktop {
+  zoom: var(--ipad-zoom, 1);
+  /* zoom da solo ridistribuirebbe la pagina su più spazio: la larghezza resta quella di layout (es. 1024px), resa = 1024 × zoom = schermo. */
+  width: var(--ipad-layout, 100%);
+}
+html.ipad-desktop,
+html.ipad-desktop body {
+  touch-action: pan-y pinch-zoom;
+}
+/* Elementi position:fixed: seguono la larghezza di LAYOUT del browser (1024), non quella visibile (744). Li riportiamo alla larghezza
+   visibile = --ipad-layout in unità zoomate (resa 1024 × zoom). Header, modale a tutto schermo e barre fisse inline (banner cookie
+   in CookieConsent.tsx, barra di lettura delle news) partono da sinistra con larghezza = layout; il pulsante della chat (ancorato a destra)
+   si ancora al bordo destro visibile. */
+html.ipad-desktop .site-header,
+html.ipad-desktop .fixed.inset-0 {
+  right: auto;
+  width: var(--ipad-layout, 100%);
+}
+html.ipad-desktop [style*="position: fixed"][style*="right: 0"] {
+  right: auto !important;
+  width: var(--ipad-layout, 100%) !important;
+  box-sizing: border-box;
+}
+html.ipad-desktop .chatbot-root {
+  right: auto;
+  left: var(--ipad-layout, 100%);
+  margin-left: -2rem;
+  transform: translateX(-100%);
+}
