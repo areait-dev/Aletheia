@@ -320,6 +320,22 @@ export default function ArticlePage({ article: initialArticle, related, isPrevie
           gap: 3.5rem;
           align-items: flex-start;
         }
+        /* Sidebar (correlate, tag, contatti) sticky su desktop. Prima non lo era davvero: con align-items: flex-start la colonna era alta quanto il
+           proprio contenuto (~716px contro ~2100px del testo), quindi il box sticky non aveva spazio per scorrere. align-self: stretch la fa alta
+           quanto la riga; il box resta attaccato sotto l'header (7.5rem, l'header è alto 104px) e, se lo schermo è più basso del suo contenuto, scorre al proprio interno. */
+        .article-sidebar { align-self: stretch; }
+        .article-sidebar-sticky {
+          position: sticky;
+          top: 7.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          max-height: calc(100vh - 8.5rem);
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          scrollbar-width: thin;
+          padding-bottom: 0.75rem; /* spazio per l'ombra del pulsante "Contattaci ora" al passaggio del mouse */
+        }
         .related-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -356,13 +372,14 @@ export default function ArticlePage({ article: initialArticle, related, isPrevie
       {/* ══════════════════════════════════════════════════════════
           HERO - solo gradiente, nessuna immagine. Titolo + meta.
           ══════════════════════════════════════════════════════════ */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-[#004D52] min-h-[320px] flex items-center pt-28 pb-12 px-5 sm:px-6 md:pt-32 md:pb-16">
+      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-[#004D52] min-h-[320px] flex items-center pt-28 pb-12 md:pt-32 md:pb-16">
 
         {/* Linea accent turchese in cima */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: '#008C95' }} />
 
-        {/* Contenuto hero centrato */}
-        <div className="max-w-5xl mx-auto w-full">
+        {/* Contenuto hero: stesso contenitore (.container) del corpo dell'articolo, così badge, titolo e data partono dallo stesso bordo sinistro del testo
+            (prima era max-w-5xl centrato: a 1440px il titolo partiva a 208px e il testo a 120px). */}
+        <div className="container">
 
           {/* Badge categoria */}
           <div className="hero-animate hero-animate-1" style={{ marginBottom: '1rem' }}>
@@ -383,6 +400,7 @@ export default function ArticlePage({ article: initialArticle, related, isPrevie
             fontWeight: 900, color: '#fff',
             lineHeight: 1.12, letterSpacing: '-0.02em',
             marginBottom: '1.25rem',
+            maxWidth: '64rem', /* 1024px come prima (max-w-5xl): righe leggibili sugli schermi molto larghi, il blocco resta allineato a sinistra */
             textShadow: '0 2px 20px rgba(0,0,0,0.4)',
           }}>
             {article.title}
@@ -474,7 +492,7 @@ export default function ArticlePage({ article: initialArticle, related, isPrevie
 
             {/* ── Sidebar (30%) ───────────────────────────────── */}
             <aside className="article-sidebar">
-              <div style={{ position: 'sticky', top: '6rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              <div className="article-sidebar-sticky">
 
                 {/* Widget: articoli correlati */}
                 <div className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '1rem', overflow: 'hidden' }}>
