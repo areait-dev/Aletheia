@@ -1,0 +1,63 @@
+{
+  "etichetta": "dopo2-obbligatoria",
+  "lighthouse": "13.6.0",
+  "passate": 3,
+  "data": "2026-11-06T10:54:45.162Z",
+  "node": "v24.16.0",
+  "risultati": [
+    {
+      "forma": "mobile",
+      "pagina": "/formazione/obbligatoria",
+      "mediana": {
+        "performance": 96,
+        "accessibility": 91,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1949,
+        "lcpMs": 1949,
+        "tbtMs": 134,
+        "cls": 0,
+        "pesoTotaleKB": 732,
+        "javascriptKB": 158
+      },
+      "passate": [
+        {
+          "performance": 96,
+          "accessibility": 91,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1935,
+          "lcpMs": 1935,
+          "tbtMs": 162,
+          "cls": 0,
+          "pesoTotaleKB": 732,
+          "javascriptKB": 158
+        },
+        {
+          "performance": 97,
+          "accessibility": 91,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1958,
+          "lcpMs": 1958,
+          "tbtMs": 90,
+          "cls": 0,
+          "pesoTotaleKB": 732,
+          "javascriptKB": 158
+        },
+        {
+          "performance": 96,
+          "accessibility": 91,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1949,
+          "lcpMs": 1949,
+          "tbtMs": 134,
+          "cls": 0,
+          "pesoTotaleKB": 732,
+          "javascriptKB": 158
+        }
+      ]
+    }
+  ]
+}

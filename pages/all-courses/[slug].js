@@ -14,6 +14,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { getCoursesRaw } from '../../lib/wp-corsi';
 import { isrOptions } from '../../lib/wp';
 import { buildCourseFamilies, resolveRelatedCourse } from '../../data/courseFamilies';
+import { FALLBACK_DEFAULT } from '../../data/courseImages';
 import antincendioContent from '../../data/content/antincendio-content';
 import antincendioAggiornamentoContent from '../../data/content/antincendio-aggiornamento-content';
 import carrelliElevatoriContent from '../../data/content/carrelli-elevatori-content';
@@ -1452,9 +1453,12 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
     .map((f) => ({ titolo: f.titolo, href: `/all-courses/${f.slug}` }));
 
   const corsiCorrelatiRisolti = [...corsiCorrelatiCurati, ...corsiCorrelatiAutoFill].map((c) => {
-    const relatedSlug = c.href.split('/').pop();
+    // Lo slug della famiglia va preso SENZA query: i correlati curati con livello hanno href "/all-courses/antincendio?livello=2"; prima
+    // "antincendio?livello=2" non trovava la famiglia e la card mostrava il gradiente con lo scudo invece della foto.
+    const relatedSlug = c.href.split('/').pop().split('?')[0];
     const relatedFamily = families.find((f) => f.slug === relatedSlug);
-    return { ...c, image: relatedFamily?.image || null };
+    // Mai il gradiente: se la famiglia non si trova, immagine generica (data/courseImages.js).
+    return { ...c, image: relatedFamily?.image || FALLBACK_DEFAULT.src, imageAlt: relatedFamily?.imageAlt || FALLBACK_DEFAULT.alt };
   });
 
   // Oggetto "course" sintetizzato dalla famiglia + variante selezionata: mantiene compatibile il resto del render sottostante
@@ -1975,7 +1979,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
                     {c.image ? (
                       <Image
                         src={c.image}
-                        alt={c.titolo}
+                        alt={c.imageAlt || c.titolo}
                         fill
                         sizes="(max-width: 768px) 100vw, 300px"
                         className="object-cover transition-transform duration-300 group-hover:scale-105"

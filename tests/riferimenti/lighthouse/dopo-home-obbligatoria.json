@@ -1,0 +1,117 @@
+{
+  "etichetta": "dopo-home-obbligatoria",
+  "lighthouse": "13.6.0",
+  "passate": 3,
+  "data": "2026-11-06T10:52:26.774Z",
+  "node": "v24.16.0",
+  "risultati": [
+    {
+      "forma": "mobile",
+      "pagina": "/",
+      "mediana": {
+        "performance": 96,
+        "accessibility": 97,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 2023,
+        "lcpMs": 2023,
+        "tbtMs": 124,
+        "cls": 0,
+        "pesoTotaleKB": 841,
+        "javascriptKB": 154
+      },
+      "passate": [
+        {
+          "performance": 97,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1968,
+          "lcpMs": 1968,
+          "tbtMs": 61,
+          "cls": 0,
+          "pesoTotaleKB": 841,
+          "javascriptKB": 154
+        },
+        {
+          "performance": 96,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 2105,
+          "lcpMs": 2105,
+          "tbtMs": 124,
+          "cls": 0,
+          "pesoTotaleKB": 841,
+          "javascriptKB": 154
+        },
+        {
+          "performance": 94,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 2023,
+          "lcpMs": 2023,
+          "tbtMs": 200,
+          "cls": 0,
+          "pesoTotaleKB": 841,
+          "javascriptKB": 154
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/formazione/obbligatoria",
+      "mediana": {
+        "performance": 88,
+        "accessibility": 91,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1911,
+        "lcpMs": 1911,
+        "tbtMs": 324,
+        "cls": 0,
+        "pesoTotaleKB": 732,
+        "javascriptKB": 158
+      },
+      "passate": [
+        {
+          "performance": 88,
+          "accessibility": 91,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1984,
+          "lcpMs": 1984,
+          "tbtMs": 324,
+          "cls": 0,
+          "pesoTotaleKB": 732,
+          "javascriptKB": 158
+        },
+        {
+          "performance": 95,
+          "accessibility": 91,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1911,
+          "lcpMs": 1911,
+          "tbtMs": 182,
+          "cls": 0,
+          "pesoTotaleKB": 732,
+          "javascriptKB": 158
+        },
+        {
+          "performance": 85,
+          "accessibility": 91,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1816,
+          "lcpMs": 1816,
+          "tbtMs": 516,
+          "cls": 0,
+          "pesoTotaleKB": 731,
+          "javascriptKB": 158
+        }
+      ]
+    }
+  ]
+}

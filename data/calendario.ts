@@ -27,6 +27,9 @@ export interface CorsoCalendario {
   durata: string; // es. "8 ore"
   posti: number;
   postiDisponibili: number;
+  // Foto della riga, aggiunta da lib/wp-calendario.ts (upcomingDays/daysByCategory): quella del corso o la generica della categoria
+  image?: string;
+  imageAlt?: string;
   // Campi opzionali, usati solo dagli aggiornamenti ECM (categoria: 'ecm')
   relatore?: string;
   creditiEcm?: number;

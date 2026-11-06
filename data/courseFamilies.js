@@ -13,7 +13,7 @@
  * coursesDetails, per le famiglie che hanno già dati editoriali granulari.
  */
 
-const { COURSE_IMAGES } = require('./courseImages');
+const { COURSE_IMAGES, COURSE_IMAGE_ALT, IMAGE_FALLBACK_BY_CATEGORY, FALLBACK_DEFAULT, CALENDAR_FALLBACK } = require('./courseImages');
 
 const ALIAS_TO_DETAILS = {
   'formazione-dei-lavoratori': 'formazione-lavoratori',
@@ -259,8 +259,18 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
   }
 
   // Immagine di famiglia da data/courseImages.js (se presente), altrimenti quella della scheda in coursesData
+  // Ordine: immagine propria della famiglia (con alt descrittivo se definito) > immagine della scheda > ripiego per categoria (mai il gradiente).
+  // imageAlt è sempre null o stringa (getStaticProps non accetta undefined).
   families.forEach((family) => {
-    if (COURSE_IMAGES[family.slug]) family.image = COURSE_IMAGES[family.slug];
+    family.imageAlt = null;
+    if (COURSE_IMAGES[family.slug]) {
+      family.image = COURSE_IMAGES[family.slug];
+      family.imageAlt = COURSE_IMAGE_ALT[family.slug] || null;
+    } else if (!family.image) {
+      const fb = IMAGE_FALLBACK_BY_CATEGORY[family.categoryKey] || FALLBACK_DEFAULT;
+      family.image = fb.src;
+      family.imageAlt = fb.alt;
+    }
   });
 
   return Array.from(families.values());
@@ -318,4 +328,16 @@ function resolveRelatedCourse(rawSlug, families) {
   return null;
 }
 
-module.exports = { buildCourseFamilies, findFamilyByVariantSlug, resolveRelatedCourse };
+/**
+ * Foto di un corso del calendario (home "Corsi in partenza", /formazione/obbligatoria): quella della sua famiglia nel catalogo
+ * (lo slug del calendario è lo slug della famiglia o di una sua variante), altrimenti la generica della categoria del calendario
+ * (CALENDAR_FALLBACK in data/courseImages.js). Ritorna sempre { src, alt }; alt è null se vale il titolo del corso.
+ */
+function resolveCourseImage(slug, categoria, families) {
+  const family = families.find((f) => f.slug === slug) || findFamilyByVariantSlug(families, slug)?.family;
+  if (family?.image) return { src: family.image, alt: family.imageAlt || null };
+  const fb = CALENDAR_FALLBACK[categoria] || FALLBACK_DEFAULT;
+  return { src: fb.src, alt: fb.alt };
+}
+
+module.exports = { buildCourseFamilies, findFamilyByVariantSlug, resolveRelatedCourse, resolveCourseImage };

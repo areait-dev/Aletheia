@@ -175,14 +175,11 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
             >
               <div className="corso-row-thumb">
                 <Image
-                  src={`/images/courses/${(c.id % 3) + 1}.jpg`}
-                  alt={c.titolo}
+                  src={c.image}
+                  alt={c.imageAlt || c.titolo}
                   width={140}
                   height={100}
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&q=80';
-                  }}
                 />
                 {/* Badge data: bollino sovrapposto all'angolo dell'immagine */}
                 <span className="corso-row-date-badge">

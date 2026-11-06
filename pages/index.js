@@ -112,12 +112,8 @@ const CATEGORIA_BADGE = {
   'professionale': 'bg-slate-50 text-slate-700 border border-slate-200 dark:bg-white/5 dark:text-gray-200 dark:border-white/15',
 };
 
-// Thumbnail placeholder per categoria (sostituibili con immagini reali)
-const CATEGORIA_THUMB = {
-  'obbligatoria': 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&q=80',
-  'regionale-fse': 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=400&q=80',
-  'professionale': 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=400&q=80',
-};
+// La foto di ogni riga di "Corsi in partenza" (corso.image / corso.imageAlt) arriva da lib/wp-calendario.ts: la foto del corso, oppure
+// la generica della sua categoria. Niente più thumbnail remoti né le tre foto a rotazione.
 
 // Modalità derivata dalla sede (Online vs In presenza)
 function modalitaFromSede(sede) {
@@ -172,14 +168,11 @@ function CorsiCalendarTabs({ giorni }) {
             {/* Immagine di anteprima */}
             <div className="w-full md:w-32 h-24 rounded-xl overflow-hidden relative shrink-0">
               <Image
-                src={`/images/courses/${(corso.id % 3) + 1}.jpg`}
-                alt={corso.titolo}
+                src={corso.image}
+                alt={corso.imageAlt || corso.titolo}
                 width={128}
                 height={96}
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = CATEGORIA_THUMB[corso.categoria] || CATEGORIA_THUMB['professionale'];
-                }}
               />
             </div>
 

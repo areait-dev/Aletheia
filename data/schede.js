@@ -216,8 +216,8 @@ export const SCHEDE_LOCALI = {
       "title": "Avviso 6/2025 GOL",
       "text": "Garanzia di Occupabilità dei Lavoratori finanzia percorsi di formazione gratuiti dedicati a chi desidera aggiornare le proprie competenze e rientrare rapidamente nel mondo del lavoro.",
       "modalita": "Aula (o variabile)",
-      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "Persona in colloquio di lavoro per il reinserimento occupazionale"
+      "image": "/images/avvisi/avviso-6-2025-gol.webp",
+      "imageAlt": "Due giovani sorridenti, schiena contro schiena e a braccia conserte, su sfondo chiaro"
     },
     {
       "badge": "Qualifica, Stage, Indennità di frequenza",
@@ -238,8 +238,8 @@ export const SCHEDE_LOCALI = {
       "durata": "300 ore",
       "modalita": "Aula + Stage",
       "href": "/archivio/avviso-20-2024-fse",
-      "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "Assistente familiare che si prende cura di una persona anziana"
+      "image": "/images/avvisi/avviso-20-2024-fse.webp",
+      "imageAlt": "Donna anziana che conversa sorridendo con una giovane donna su un divano"
     }
   ],
   "gol-misure": [
@@ -391,8 +391,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri le certificazioni",
       "href": "/all-courses?categoria=certificazioni-informatiche",
-      "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Certificazioni Informatiche ICDL",
+      "image": "/images/corsi/icdl-generica.webp",
+      "imageAlt": "Tre persone al lavoro con il computer portatile in un'aula di formazione luminosa",
       "gradient": "linear-gradient(135deg, #0F172A 0%, #134E4A 100%)"
     },
     {
@@ -405,8 +405,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri i corsi qualificati",
       "href": "/all-courses?categoria=certificazione",
-      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Corsi Qualificati",
+      "image": "/images/corsi/qualificati-generica.webp",
+      "imageAlt": "Gruppo di quattro corsisti sorridenti con quaderni e cartelline in un'aula di formazione",
       "gradient": "linear-gradient(135deg, #0F172A 0%, #008C95 100%)"
     },
     {
@@ -419,8 +419,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri i corsi ECM",
       "href": "/formazione/ecm",
-      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Corsi ECM",
+      "image": "/images/formazione/ecm.webp",
+      "imageAlt": "Medico sorridente con camice e stetoscopio che tiene un tablet in un corridoio d'ospedale",
       "gradient": "linear-gradient(135deg, #134E4A 0%, #10B981 100%)"
     },
     {
@@ -433,8 +433,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri la formazione PA",
       "href": "/formazione/corsi-pa",
-      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Formazione per la PA",
+      "image": "/images/formazione/pa.webp",
+      "imageAlt": "Impiegata al computer portatile in un archivio pieno di faldoni",
       "gradient": "linear-gradient(135deg, #008C95 0%, #0F172A 100%)"
     }
   ],
@@ -491,8 +491,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri i corsi",
       "href": "/formazione/regionale",
-      "image": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Aula di formazione regionale con studenti al lavoro"
+      "image": "/images/formazione/regionale.webp",
+      "imageAlt": "Gruppo eterogeneo di corsisti che lavora insieme attorno a un tavolo in un'aula luminosa"
     },
     {
       "badge": "La formazione che la tua azienda sta già finanziando",
@@ -506,8 +506,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri di più",
       "href": "/formazione/fondi-interprofessionali",
-      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Riunione aziendale per la formazione dei dipendenti"
+      "image": "/images/formazione/fondi-interprofessionali.webp",
+      "imageAlt": "Ampio ufficio moderno e luminoso, con travi a vista e spazi di lavoro in fondo al corridoio"
     },
     {
       "badge": "Forma i tuoi dipendenti senza costi retributivi",
@@ -521,8 +521,8 @@ export const SCHEDE_LOCALI = {
       ],
       "cta": "Scopri di più",
       "href": "/formazione/fondo-nuove-competenze",
-      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80",
-      "imageAlt": "Team che lavora su innovazione e competenze digitali"
+      "image": "/images/formazione/fondo-nuove-competenze.webp",
+      "imageAlt": "Tavolo di lavoro visto dall'alto con computer portatili, smartphone e quaderni, e persone al lavoro"
     }
   ],
   "fnc-vantaggi": [
@@ -811,8 +811,8 @@ export const SCHEDE_LOCALI = {
       "title": "Formazione Finanziata",
       "description": "Percorsi finanziati da fondi regionali, europei e interprofessionali per acquisire nuove competenze e ottenere qualifiche professionali.",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80",
-      "imageAlt": "Persone che collaborano durante un percorso di formazione finanziata"
+      "image": "/images/formazione/regionale.webp",
+      "imageAlt": "Gruppo eterogeneo di corsisti che lavora insieme attorno a un tavolo in un'aula luminosa"
     },
     {
       "href": "/formazione/obbligatoria",
@@ -821,8 +821,8 @@ export const SCHEDE_LOCALI = {
       "title": "Formazione obbligatoria",
       "description": "Corsi obbligatori conformi al D.Lgs. 81/08. Sicurezza sul lavoro, Decreto Attrezzature, Fitosanitario e Sicurezza alimentare.",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=80",
-      "imageAlt": "Lavoratore con casco e dispositivi di sicurezza in cantiere"
+      "image": "/images/formazione-obbligatoria/sicurezza-sul-lavoro-2.webp",
+      "imageAlt": "Elmetto giallo, occhiali di protezione e cartelline su una scrivania"
     },
     {
       "href": "/formazione/professionale-specialistica",
@@ -831,8 +831,8 @@ export const SCHEDE_LOCALI = {
       "title": "Formazione professionale",
       "description": "Certificazioni ICDL, corsi con qualifica professionale, formazione continua e percorsi per la Pubblica Amministrazione.",
       "color": "#008C95",
-      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
-      "imageAlt": "Persona che sostiene un esame di certificazione al computer"
+      "image": "/images/corsi/qualificati-generica.webp",
+      "imageAlt": "Gruppo di quattro corsisti sorridenti con quaderni e cartelline in un'aula di formazione"
     }
   ],
 };

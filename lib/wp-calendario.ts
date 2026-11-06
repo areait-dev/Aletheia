@@ -1,4 +1,6 @@
 import { CALENDARIO } from '../data/calendario';
+import { coursesData } from '../data/coursesRaw';
+import { buildCourseFamilies, resolveCourseImage } from '../data/courseFamilies';
 import type { CategoriaCorso, CorsoCalendario } from '../data/calendario';
 import { decodeEntities, isWpEnabled, wpGetAll } from './wp';
 
@@ -143,10 +145,24 @@ export async function getCalendario(): Promise<CorsoCalendario[]> {
 
 export type GiornoCalendario = { data: string; corsi: CorsoCalendario[] };
 
+// Famiglie del catalogo locale: servono solo per trovare la foto di ogni corso (immagini fisse in data/courseImages.js), quindi bastano i
+// dati locali anche con WordPress attivo; un corso nuovo non presente nel catalogo locale prende la generica della sua categoria.
+let famiglieLocali: ReturnType<typeof buildCourseFamilies> | null = null;
+function famiglie() {
+  if (!famiglieLocali) famiglieLocali = buildCourseFamilies(coursesData, {}, { quiet: true });
+  return famiglieLocali;
+}
+
+/** Aggiunge a ogni corso `image` e `imageAlt` (stringhe, mai undefined: le props di getStaticProps non lo ammettono). */
+function conFoto(c: CorsoCalendario): CorsoCalendario {
+  const { src, alt } = resolveCourseImage(c.slug, c.categoria, famiglie());
+  return { ...c, image: src, imageAlt: alt || c.titolo };
+}
+
 function groupByDay(corsi: CorsoCalendario[], maxDays: number): GiornoCalendario[] {
   return Array.from(new Set(corsi.map((c) => c.data)))
     .slice(0, maxDays)
-    .map((data) => ({ data, corsi: corsi.filter((c) => c.data === data) }));
+    .map((data) => ({ data, corsi: corsi.filter((c) => c.data === data).map(conFoto) }));
 }
 
 /** Prossimi giorni con corsi a partire da oggi (home "Corsi in partenza"). `oggi` = YYYY-MM-DD. */

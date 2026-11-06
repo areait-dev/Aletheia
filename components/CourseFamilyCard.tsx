@@ -15,6 +15,7 @@ interface Family {
   titolo: string;
   provider: string;
   image?: string;
+  imageAlt?: string | null; // alt descrittivo dell'immagine (data/courseImages.js); se assente vale il titolo
   gradient?: string;
   badge: string;
   varianti: Variante[];
@@ -64,7 +65,7 @@ export default function CourseFamilyCard({ family }: { family: Family }) {
           {family.image && (
             <Image
               src={family.image}
-              alt={family.titolo}
+              alt={family.imageAlt || family.titolo}
               fill
               sizes="(max-width: 768px) 100vw, 340px"
               className="object-cover"

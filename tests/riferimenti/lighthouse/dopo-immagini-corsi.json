@@ -1,0 +1,117 @@
+{
+  "etichetta": "dopo-immagini-corsi",
+  "lighthouse": "13.6.0",
+  "passate": 3,
+  "data": "2026-11-06T10:07:02.517Z",
+  "node": "v24.16.0",
+  "risultati": [
+    {
+      "forma": "mobile",
+      "pagina": "/all-courses",
+      "mediana": {
+        "performance": 73,
+        "accessibility": 96,
+        "bestPractices": 100,
+        "seo": 100,
+        "fcpMs": 1928,
+        "lcpMs": 5389,
+        "tbtMs": 289,
+        "cls": 0,
+        "pesoTotaleKB": 881,
+        "javascriptKB": 195
+      },
+      "passate": [
+        {
+          "performance": 73,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1943,
+          "lcpMs": 5452,
+          "tbtMs": 275,
+          "cls": 0,
+          "pesoTotaleKB": 881,
+          "javascriptKB": 195
+        },
+        {
+          "performance": 73,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1909,
+          "lcpMs": 5389,
+          "tbtMs": 289,
+          "cls": 0,
+          "pesoTotaleKB": 881,
+          "javascriptKB": 195
+        },
+        {
+          "performance": 73,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 100,
+          "fcpMs": 1928,
+          "lcpMs": 5063,
+          "tbtMs": 327,
+          "cls": 0,
+          "pesoTotaleKB": 881,
+          "javascriptKB": 195
+        }
+      ]
+    },
+    {
+      "forma": "mobile",
+      "pagina": "/all-courses/icdl-base",
+      "mediana": {
+        "performance": 76,
+        "accessibility": 96,
+        "bestPractices": 100,
+        "seo": 92,
+        "fcpMs": 1931,
+        "lcpMs": 5707,
+        "tbtMs": 115,
+        "cls": 0,
+        "pesoTotaleKB": 849,
+        "javascriptKB": 266
+      },
+      "passate": [
+        {
+          "performance": 75,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 92,
+          "fcpMs": 1931,
+          "lcpMs": 5708,
+          "tbtMs": 175,
+          "cls": 0,
+          "pesoTotaleKB": 849,
+          "javascriptKB": 266
+        },
+        {
+          "performance": 76,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 92,
+          "fcpMs": 1929,
+          "lcpMs": 5707,
+          "tbtMs": 104,
+          "cls": 0,
+          "pesoTotaleKB": 849,
+          "javascriptKB": 266
+        },
+        {
+          "performance": 77,
+          "accessibility": 96,
+          "bestPractices": 100,
+          "seo": 92,
+          "fcpMs": 1949,
+          "lcpMs": 5603,
+          "tbtMs": 115,
+          "cls": 0,
+          "pesoTotaleKB": 849,
+          "javascriptKB": 266
+        }
+      ]
+    }
+  ]
+}
