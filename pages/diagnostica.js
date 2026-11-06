@@ -63,6 +63,20 @@ export default function Diagnostica() {
     ['maxTouchPoints', m.maxTouchPoints],
   ];
 
+  // Prova dal vivo di meta viewport alternativi (il browser li rilegge): serve a sapere quale correzione funzionerebbe sull'iPad vero.
+  const [metaAttivo, setMetaAttivo] = useState('width=device-width, initial-scale=1');
+  const provaMeta = (contenuto) => {
+    const el = document.querySelector('meta[name="viewport"]');
+    if (el) el.setAttribute('content', contenuto);
+    setMetaAttivo(contenuto);
+    setTimeout(() => setM(misura()), 400);
+  };
+  const VARIANTI = [
+    ['A · come il sito', 'width=device-width, initial-scale=1'],
+    ['B · senza initial-scale', 'width=device-width'],
+    ['C · width=1024', 'width=1024'],
+  ];
+
   const copia = async () => {
     try {
       await navigator.clipboard.writeText(JSON.stringify(m, null, 2));
@@ -76,6 +90,8 @@ export default function Diagnostica() {
     <>
       <Head>
         <title>Diagnostica viewport</title>
+        {/* Stesso meta viewport di tutte le altre pagine del sito (ognuna lo dichiara da sé): così la misura è rappresentativa. */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex, nofollow, noarchive" />
       </Head>
       <main className="bg-white dark:bg-dark-card text-gray-900 dark:text-gray-50" style={{ minHeight: '100vh', padding: '1rem' }}>
@@ -124,6 +140,18 @@ export default function Diagnostica() {
                 </li>
               ))}
             </ul>
+
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Prova meta viewport</h2>
+            <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '1rem' }}>
+              Tocca A, B, C e guarda se i numeri e la pagina cambiano. In uso: <strong>{metaAttivo}</strong>
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              {VARIANTI.map(([nome, valore]) => (
+                <button key={nome} type="button" onClick={() => provaMeta(valore)} className="btn btn-outline btn-md" aria-pressed={metaAttivo === valore}>
+                  {nome}
+                </button>
+              ))}
+            </div>
 
             <button type="button" onClick={copia} className="btn btn-primary btn-md" style={{ marginTop: '1.5rem' }}>
               {copiato ? 'Copiato' : 'Copia i dati'}
