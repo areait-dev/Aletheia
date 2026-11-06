@@ -540,3 +540,6 @@ La migrazione all'App Router è sospesa. Note utili per riprenderla (decisioni g
 - **`DATA_FISSA_TEST`:** riportare identica la logica nella nuova home, altrimenti i test della home falliscono per il motivo sbagliato.
 - **Altre decisioni minori:** approvate le proposte del report, salvo quelle che cambiano URL, status HTTP o aspetto (da chiedere).
 - **Regole:** un commit per passo, `MIGRAZIONE.md` aggiornato, mai su `master`, nessun redesign né refactoring extra.
+
+## DA TOGLIERE PRIMA DEL PASSAGGIO DEI DNS: pagina `/diagnostica` (6 novembre 2026)
+Pagina temporanea (`pages/diagnostica.js`, test `tests/regressione/diagnostica.spec.mjs`) per misurare sull'iPad vero che larghezza vede il sito (innerWidth, visualViewport, clientWidth/scrollWidth, devicePixelRatio, user agent, maxTouchPoints, pointer/hover, orientamento), perché lo scorrimento orizzontale segnalato su iPad in verticale non si riproduce in Chromium né in WebKit emulato. Ha `noindex`, non è linkata da nessuna parte e il sito non ha una sitemap. **Prima del passaggio dei DNS: eliminare i due file e riavviare la suite.** Se i dati dell'iPad spiegano il problema, annotare qui la causa e la correzione.
