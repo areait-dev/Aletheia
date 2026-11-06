@@ -1,5 +1,6 @@
 const { coursesData } = require('./data/coursesRaw');
 const { buildCourseFamilies } = require('./data/courseFamilies');
+const { costruisciRedirect } = require('./lib/redirect-vecchio-sito');
 
 /**
  * Override manuali dei redirect automatici per singolo slug grezzo. Necessari quando
@@ -107,8 +108,20 @@ const nextConfig = {
     // Stessi domini di prima (images.domains è deprecato): senza protocollo/porta/percorso = identico a `domains`.
     remotePatterns: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()].map((hostname) => ({ hostname })),
   },
+  // Lo slash finale lo gestiamo noi: di default Next toglie lo slash con un redirect 308 messo PRIMA di tutti gli altri, e un vecchio URL
+  // "/index.php/chi-siamo/" farebbe due salti (308 poi 301). Così i vecchi URL con slash finale fanno un salto solo (regole con `{/}?`),
+  // mentre per tutto il resto del sito lo slash finale continua a essere tolto con lo stesso 308 di prima (regola più sotto).
+  skipTrailingSlashRedirect: true,
   async redirects() {
-    return [...buildCourseRedirects(), ...buildAiutiDiStatoRedirects(), ...buildArchivioSpostatiRedirects()];
+    return [
+      // Vecchio sito Joomla: regole ricavate da docs/mappa-redirect-301.md (lib/redirect-vecchio-sito.js), tutte 301.
+      ...costruisciRedirect().redirects,
+      ...buildCourseRedirects(),
+      ...buildAiutiDiStatoRedirects(),
+      ...buildArchivioSpostatiRedirects(),
+      // Stesso comportamento di prima per lo slash finale, escluso /index.php (gestito sopra). Identico alla regola interna di Next.
+      { source: '/:path((?!index\\.php).+)/', destination: '/:path', statusCode: 308 },
+    ];
   },
 };
 
