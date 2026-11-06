@@ -25,6 +25,9 @@ function misura() {
     innerHeight: window.innerHeight,
     outerWidth: window.outerWidth,
     screenWidth: window.screen.width,
+    // larghezza dello schermo in punti secondo tre fonti diverse (servono a scegliere come adattare la pagina)
+    puntiDaViewport: vv ? Math.round(vv.width * vv.scale) : null,
+    puntiDaScreenMin: Math.min(window.screen.width, window.screen.height),
     screenHeight: window.screen.height,
     devicePixelRatio: window.devicePixelRatio,
     orientamento: (window.screen.orientation && window.screen.orientation.type) || (window.innerHeight >= window.innerWidth ? 'portrait (stimato)' : 'landscape (stimato)'),
@@ -76,6 +79,43 @@ export default function Diagnostica() {
     ['B · senza initial-scale', 'width=device-width'],
     ['C · width=1024', 'width=1024'],
   ];
+
+  // PROVE per l'iPad in modalità sito desktop (pagina temporanea, non toccano il resto del sito). Ognuna mostra i numeri dopo la prova.
+  const [prova, setProva] = useState('nessuna');
+  const [esitoProva, setEsitoProva] = useState('');
+  const [riquadro, setRiquadro] = useState(0);
+  const azzeraProve = () => {
+    document.documentElement.style.zoom = '';
+    document.documentElement.style.width = '';
+    setRiquadro(0);
+    setProva('nessuna');
+    setEsitoProva('');
+    setTimeout(() => setM(misura()), 300);
+  };
+  const eseguiZoom = (nome, punti) => {
+    azzeraProve();
+    setTimeout(() => {
+      const layout = window.innerWidth;
+      const z = punti / layout;
+      document.documentElement.style.zoom = String(z);
+      document.documentElement.style.width = `${layout}px`; // zoom da solo ridistribuisce la pagina su più spazio: la larghezza resta quella di layout
+      setProva(nome);
+      setTimeout(() => {
+        const mm = misura();
+        setM(mm);
+        setEsitoProva(`${nome}: zoom ${z.toFixed(3)} su ${punti} pt. Dopo: scrollWidth ${mm.scrollWidth}, innerWidth ${mm.innerWidth}. La pagina entra nello schermo? Guarda se scorre ancora a destra.`);
+      }, 400);
+    }, 350);
+  };
+  const eseguiRiquadro = () => {
+    azzeraProve();
+    setTimeout(() => {
+      const w = Math.min(window.screen.width, window.screen.height);
+      setRiquadro(w);
+      setProva('3 · sito in un riquadro stretto');
+      setEsitoProva(`3 · sito in un riquadro stretto: sotto c'è /chi-siamo in un riquadro largo ${w} pt. Se qui vedi hamburger e layout a colonne, il sito dentro un riquadro stretto si adatta.`);
+    }, 350);
+  };
 
   const copia = async () => {
     try {
@@ -152,6 +192,28 @@ export default function Diagnostica() {
                 </button>
               ))}
             </div>
+
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Prove di adattamento</h2>
+            <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '1rem' }}>
+              Tocca una prova alla volta, guarda se la pagina entra nello schermo senza scorrere a destra e fai uno screenshot. "Azzera" le toglie.
+              Punti dello schermo secondo il browser: da viewport <strong>{String(m.puntiDaViewport)}</strong>, da screen <strong>{String(m.puntiDaScreenMin)}</strong>.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <button type="button" className="btn btn-outline btn-md" aria-pressed={prova.startsWith('1')} onClick={() => eseguiZoom('1 · zoom da viewport', m.puntiDaViewport || m.puntiDaScreenMin)}>
+                Prova 1 · zoom (viewport)
+              </button>
+              <button type="button" className="btn btn-outline btn-md" aria-pressed={prova.startsWith('2')} onClick={() => eseguiZoom('2 · zoom da screen', m.puntiDaScreenMin)}>
+                Prova 2 · zoom (screen)
+              </button>
+              <button type="button" className="btn btn-outline btn-md" aria-pressed={prova.startsWith('3')} onClick={eseguiRiquadro}>
+                Prova 3 · riquadro stretto
+              </button>
+              <button type="button" className="btn btn-primary btn-md" onClick={azzeraProve}>Azzera</button>
+            </div>
+            {esitoProva && <p style={{ margin: '0.75rem 0 0', fontSize: '1rem', fontWeight: 700 }}>{esitoProva}</p>}
+            {riquadro > 0 && (
+              <iframe title="Prova: sito in un riquadro stretto" src="/chi-siamo" style={{ width: `${riquadro}px`, maxWidth: 'none', height: '70vh', border: '3px solid #008C95', borderRadius: '12px', marginTop: '0.75rem', background: '#fff' }} />
+            )}
 
             <button type="button" onClick={copia} className="btn btn-primary btn-md" style={{ marginTop: '1.5rem' }}>
               {copiato ? 'Copiato' : 'Copia i dati'}
