@@ -11,6 +11,7 @@
       "News -> /news",
       "Contatti -> /contatti",
       "Sei un docente? Candidati -> https://aletheia4job.it/diventa-docente",
+      "Scopri tutti i corsi -> /all-courses",
       "Formazione Finanziata -> /formazione/regionale-fse",
       "Formazione Regionale -> /formazione/regionale",
       "Fondi Interprofessionali -> /formazione/fondi-interprofessionali",
@@ -25,7 +26,6 @@
       "Corsi Qualificati -> /all-courses?categoria=certificazione",
       "ECM -> /formazione/ecm",
       "Corsi per la PA -> /formazione/corsi-pa",
-      "Scopri tutti i corsi -> /all-courses",
       "Calendario Corsi -> /calendario-corsi"
     ]
   },
