@@ -153,7 +153,7 @@ function fonte(): Fonte {
 }
 
 const NOME_SCHEDA_FOGLIO = 'Corsi';
-const MEMO_TTL_FOGLIO_MS = 60_000; // il foglio ha un limite di richieste al minuto: una lettura ogni 60 s al massimo (build e rigenerazioni condividono la copia)
+const MEMO_TTL_FOGLIO_MS = 20_000; // il foglio ha un limite di richieste al minuto: una lettura ogni 20 s al massimo (build e rigenerazioni condividono la copia)
 let ultimoFoglioValido: CorsoCalendario[] | null = null;
 
 /** Il catalogo come serve al foglio: famiglie (slug, titolo, categoria del calendario). */
@@ -195,14 +195,33 @@ export async function getCalendario(): Promise<CorsoCalendario[]> {
   return memo.value;
 }
 
+/** Dimentica la copia in memoria del foglio: la prossima lettura è fresca (pulsante "Pubblica aggiornamenti" del foglio, rotta /api/revalidate). */
+export function azzeraCacheCalendario(): void {
+  memo = null;
+}
+
+/** Pagine che mostrano le date dei corsi: home, calendario, Formazione obbligatoria e la scheda di ogni corso del catalogo. */
+export function percorsiCalendario(): string[] {
+  return ['/', '/calendario-corsi', '/formazione/obbligatoria', ...famiglie().map((f) => `/all-courses/${f.slug}`)];
+}
+
 /** "Oggi" come data italiana YYYY-MM-DD (non UTC: tra mezzanotte e le 2 il giorno cambia prima). DATA_FISSA_TEST la congela nei test. */
 export function oggiItalia(): string {
   return process.env.DATA_FISSA_TEST || new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome' }).format(new Date());
 }
 
-/** IL filtro sul futuro, uguale per tutte le pagine: un'edizione si vede finché la sua ultima giornata (data_fine, o la data) non è passata. */
+/**
+ * Edizioni ancora visibili: un'edizione si vede finché la sua ultima giornata (data_fine, o la data) non è passata. Lo usa il calendario
+ * (/calendario-corsi), dove le edizioni già iniziate restano con l'etichetta "In corso" (vedi inCorso). "Corsi in partenza" della home e le righe di
+ * Formazione obbligatoria mostrano invece solo quelle che INIZIANO da oggi in poi (upcomingDays, daysByCategory).
+ */
 export function soloFuture(calendario: CorsoCalendario[], oggi: string = oggiItalia()): CorsoCalendario[] {
   return calendario.filter((c) => (c.dataFine || c.data) >= oggi);
+}
+
+/** Edizione già iniziata ma non ancora finita (etichetta "In corso" nel calendario). */
+export function inCorso(c: CorsoCalendario, oggi: string = oggiItalia()): boolean {
+  return c.data < oggi && (c.dataFine || c.data) >= oggi;
 }
 
 /** Scheda corso: la prima edizione che INIZIA da oggi in poi per quel corso (slug della famiglia), oppure null (comportamento di prima). */
@@ -235,12 +254,12 @@ function groupByDay(corsi: CorsoCalendario[], maxDays: number): GiornoCalendario
 
 /** Prossimi giorni con corsi a partire da oggi (home "Corsi in partenza"). `oggi` = YYYY-MM-DD. */
 export function upcomingDays(calendario: CorsoCalendario[], oggi: string, maxDays = 10): GiornoCalendario[] {
-  const ordinati = soloFuture(calendario, oggi).sort((a, b) => a.data.localeCompare(b.data));
+  const ordinati = calendario.filter((c) => c.data >= oggi).sort((a, b) => a.data.localeCompare(b.data)); // solo edizioni che INIZIANO da oggi
   return groupByDay(ordinati, maxDays);
 }
 
-/** Giorni con corsi futuri di una categoria (pagina Formazione obbligatoria). `oggi` = YYYY-MM-DD. */
+/** Giorni con corsi che iniziano da oggi in poi, di una categoria (pagina Formazione obbligatoria). `oggi` = YYYY-MM-DD. */
 export function daysByCategory(calendario: CorsoCalendario[], categoria: CategoriaCorso, oggi: string, maxDays = 8): GiornoCalendario[] {
-  const ordinati = soloFuture(calendario, oggi).filter((c) => c.categoria === categoria).sort((a, b) => a.data.localeCompare(b.data));
+  const ordinati = calendario.filter((c) => c.data >= oggi && c.categoria === categoria).sort((a, b) => a.data.localeCompare(b.data)); // solo edizioni che INIZIANO da oggi
   return groupByDay(ordinati, maxDays);
 }

@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 import { righeFoglioToEdizioni, dataFoglio } from '../../lib/calendario-foglio.ts';
-import { soloFuture, prossimaEdizione, daysByCategory, upcomingDays, oggiItalia } from '../../lib/wp-calendario.ts';
+import { soloFuture, prossimaEdizione, daysByCategory, upcomingDays, oggiItalia, inCorso } from '../../lib/wp-calendario.ts';
 import { foglioGoogleConfigurato, leggiScheda, descriviErroreFoglio } from '../../lib/google-sheets.ts';
 
 const CATALOGO = [
@@ -65,7 +65,7 @@ test('intestazione cambiata o colonna mancante: errore, non date sbagliate @rapi
   expect(righeFoglioToEdizioni([], CATALOGO).edizioni).toEqual([]);
 });
 
-test('filtro sul futuro unico: data_fine >= oggi; "prossima edizione" solo se INIZIA da oggi in poi @rapido', () => {
+test('visibilità: calendario fino a data_fine ("In corso"), home e Formazione obbligatoria solo da data_inizio; "prossima edizione" solo se INIZIA da oggi @rapido', () => {
   const ed = leggi(
     { data_inizio: '03/11/2026', data_fine: '03/11/2026', variante: 'passata' },
     { data_inizio: '05/11/2026', data_fine: '09/11/2026', variante: 'in corso' },
@@ -80,9 +80,15 @@ test('filtro sul futuro unico: data_fine >= oggi; "prossima edizione" solo se IN
   expect(prossimaEdizione(ed, 'antincendio', '2026-11-07').variante).toBe('futura');
   expect(prossimaEdizione(ed, 'antincendio', '2026-11-21')).toBeNull();
   expect(prossimaEdizione(ed, 'rls', '2026-11-06')).toBeNull();
-  // home e Formazione obbligatoria usano lo stesso filtro
-  expect(upcomingDays(ed, '2026-11-07').flatMap((g) => g.corsi.map((c) => c.variante))).toEqual(['in corso', 'futura']);
-  expect(daysByCategory(ed, 'obbligatoria', '2026-11-07').flatMap((g) => g.corsi.map((c) => c.variante))).toEqual(['in corso', 'futura']);
+  // etichetta "In corso" del calendario: già iniziata e non ancora finita
+  expect(ed.filter((e) => inCorso(e, '2026-11-06')).map((e) => e.variante)).toEqual(['in corso']);
+  expect(ed.filter((e) => inCorso(e, '2026-11-07')).map((e) => e.variante)).toEqual(['in corso']);
+  expect(ed.filter((e) => inCorso(e, '2026-11-10')).map((e) => e.variante)).toEqual([]); // finita il 9: non è più visibile né "in corso"
+  // "Corsi in partenza" (home) e righe di Formazione obbligatoria: solo le edizioni che INIZIANO da oggi in poi (le "in corso" restano fuori)
+  expect(upcomingDays(ed, '2026-11-07').flatMap((g) => g.corsi.map((c) => c.variante))).toEqual(['futura']);
+  expect(upcomingDays(ed, '2026-11-06').flatMap((g) => g.corsi.map((c) => c.variante))).toEqual(['oggi', 'futura']);
+  expect(daysByCategory(ed, 'obbligatoria', '2026-11-07').flatMap((g) => g.corsi.map((c) => c.variante))).toEqual(['futura']);
+  expect(daysByCategory(ed, 'obbligatoria', '2026-11-06').flatMap((g) => g.corsi.map((c) => c.variante))).toEqual(['oggi', 'futura']);
   expect(daysByCategory(ed, 'professionale', '2026-11-07')).toEqual([]);
 });
 
@@ -125,5 +131,33 @@ test('credenziali Google: nessun dato esce negli errori (chiave non valida, ness
       if (v === undefined) delete process.env[k];
       else process.env[k] = v;
     }
+  }
+});
+
+test('rotta /api/revalidate con scope "calendario": segreto obbligatorio, rigenera home, calendario, Formazione obbligatoria e le schede @rapido', async () => {
+  const modulo = await import('../../pages/api/revalidate.js');
+  const handler = typeof modulo.default === 'function' ? modulo.default : modulo.default.default; // interoperabilità ESM/CJS del trasformatore dei test
+  const salvato = process.env.WP_SHARED_SECRET;
+  const chiama = async (header, body) => {
+    const rigenerate = [];
+    const res = { code: 0, json: null, setHeader() {}, status(c) { this.code = c; return this; }, json(o) { this.body = o; return this; }, revalidate: async (p) => { rigenerate.push(p); } };
+    await handler({ method: 'POST', headers: header ? { 'x-aletheia-secret': header } : {}, body }, res);
+    return { codice: res.code, corpo: res.body, rigenerate };
+  };
+  try {
+    delete process.env.WP_SHARED_SECRET;
+    expect((await chiama('qualsiasi', { scope: 'calendario' })).codice).toBe(503); // sito senza segreto: il pulsante lo segnala
+    process.env.WP_SHARED_SECRET = 'segreto-di-prova-lungo-0123456789';
+    expect((await chiama('sbagliato', { scope: 'calendario' })).codice).toBe(401);
+    expect((await chiama('', { scope: 'calendario' })).codice).toBe(401);
+    const ok = await chiama('segreto-di-prova-lungo-0123456789', { scope: 'calendario' });
+    expect(ok.codice).toBe(200);
+    expect(ok.corpo.failed).toEqual([]);
+    for (const p of ['/', '/calendario-corsi', '/formazione/obbligatoria', '/all-courses/antincendio', '/all-courses/personale-alimentarista-osa']) expect(ok.rigenerate, p).toContain(p);
+    expect(ok.rigenerate.filter((p) => p.startsWith('/all-courses/')).length).toBeGreaterThanOrEqual(30); // una per ogni corso del catalogo
+    expect(ok.corpo.revalidated).toEqual(ok.rigenerate);
+  } finally {
+    if (salvato === undefined) delete process.env.WP_SHARED_SECRET;
+    else process.env.WP_SHARED_SECRET = salvato;
   }
 });

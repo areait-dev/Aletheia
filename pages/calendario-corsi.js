@@ -43,10 +43,12 @@ function postiStyle(postiDisponibili) {
 
 /* Calendario: foglio Google, WordPress o dati locali (vedi getCalendario in lib/wp-calendario.ts). Solo edizioni future: soloFuture è lo stesso filtro di home e Formazione obbligatoria. */
 async function getPageStaticProps() {
-  return { props: { calendario: soloFuture(await getCalendario(), oggiItalia()) }, ...isrOptions() };
+  // `oggi` serve a marcare "In corso" le edizioni già iniziate: calcolato qui (Europe/Rome), non nel browser.
+  const oggi = oggiItalia();
+  return { props: { calendario: soloFuture(await getCalendario(), oggi), oggi }, ...isrOptions() };
 }
 
-export default function CalendarioCorsi({ calendario }) {
+export default function CalendarioCorsi({ calendario, oggi }) {
   const [categoriaFiltro, setCategoriaFiltro] = useState(''); // es. "obbligatoria"
   const [meseAperto, setMeseAperto] = useState(null); // indice mese (0-11) espanso in fisarmonica, o null
 
@@ -283,6 +285,17 @@ export default function CalendarioCorsi({ calendario }) {
                                           }}>
                                             {categoryLabel[corso.categoria]}
                                           </span>
+                                          {/* Edizione già iniziata ma non finita (data < oggi <= data_fine): resta in calendario fino a data_fine. */}
+                                          {corso.data < oggi && (
+                                            <span className="in-corso-badge" style={{
+                                              display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+                                              padding: '0.2rem 0.7rem', borderRadius: '999px',
+                                              background: '#04767D', color: '#fff', /* bianco su #04767D = 5,38:1, WCAG AA */
+                                              fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+                                            }}>
+                                              In corso
+                                            </span>
+                                          )}
                                         </div>
 
                                         <h5 className="text-slate-900 dark:text-gray-50 font-extrabold text-base leading-snug mb-3">

@@ -1,11 +1,14 @@
 import { isAuthConfigured, verifyWebhookSecret } from '../../lib/wp-auth';
 import { isWpEnabled, wpGet } from '../../lib/wp';
+import { azzeraCacheCalendario, percorsiCalendario } from '../../lib/wp-calendario';
 
 /**
  * Webhook di pubblicazione istantanea (ISR on-demand), chiamato dal plugin WordPress al salvataggio.
  * Contratto in wordpress/README.md §7:
  *   POST /api/revalidate   header x-aletheia-secret: <WP_SHARED_SECRET>
- *   body { paths: string[] }  oppure  { scope: "all" }
+ *   body { paths: string[] }  oppure  { scope: "all" }  oppure  { scope: "calendario" }
+ * scope "calendario" (pulsante "Sito → Pubblica aggiornamenti" del foglio, docs/apps-script-pubblica-aggiornamenti.md): rilegge il foglio e rigenera
+ * le pagine con le date dei corsi (home, calendario, Formazione obbligatoria, schede corso).
  */
 
 const MAX_PATHS = 300;
@@ -38,7 +41,8 @@ export default async function handler(req, res) {
   const body = req.body && typeof req.body === 'object' ? req.body : {};
   let requested;
   try {
-    requested = body.scope === 'all' ? await allPaths() : body.paths;
+    if (body.scope === 'calendario') azzeraCacheCalendario(); // lettura fresca del foglio, non la copia in memoria
+    requested = body.scope === 'calendario' ? percorsiCalendario() : body.scope === 'all' ? await allPaths() : body.paths;
   } catch (err) {
     return res.status(502).json({ error: `Elenco rotte non disponibile: ${err.message}` });
   }

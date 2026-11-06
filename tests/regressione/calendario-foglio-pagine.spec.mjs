@@ -44,7 +44,7 @@ test.describe.serial('foglio con edizioni @calendario', () => {
 
   test('calendario: solo edizioni pubblicate, Multiaziendali e non concluse; posti non indicati senza "esaurito" @calendario', async ({ page }) => {
     await page.goto(s.base + '/calendario-corsi');
-    await expect(page.getByText('4 corsi in programma').first()).toBeVisible(); // Antincendio, OSA, Lavoratori, Trattori in corso (la passata e le altre no)
+    await expect(page.getByText('5 corsi in programma').first()).toBeVisible(); // Antincendio, OSA, Lavoratori + 2 già iniziate (Trattori, RSPP); la passata, le bozze e le altre no
     await page.getByRole('button', { name: /Novembre 2026/ }).click();
     const html = await page.locator('main').innerText();
     expect(html).toContain('Antincendio — Rischio medio Livello 2 (8 ore)');
@@ -52,7 +52,12 @@ test.describe.serial('foglio con edizioni @calendario', () => {
     expect(html).toContain('9:00-13:00');
     expect(html).toContain('12/11/2026, 16/11/2026, 17/11/2026');
     expect(html).toContain('Personale Alimentarista OSA — Nuovo (12 ore)');
-    expect(html).toContain('Trattori Agricoli o Forestali — Su ruote e cingoli (13 ore)'); // in corso: finisce il 9 novembre
+    expect(html).toContain('Trattori Agricoli o Forestali — Su ruote e cingoli (13 ore)'); // già iniziata: resta fino a data_fine (9 novembre)
+    expect(html).toContain('RSPP - Datore Di Lavoro — IN CORSO OBBLIGATORIA');
+    // etichetta "In corso": solo sulle due edizioni già iniziate, non sulle altre
+    await expect(page.locator('.in-corso-badge')).toHaveCount(2);
+    await expect(page.locator('div', { hasText: 'Trattori Agricoli o Forestali — Su ruote e cingoli (13 ore)' }).last()).toContainText('In corso');
+    await expect(page.locator('div', { hasText: 'Antincendio — Rischio medio Livello 2 (8 ore)' }).last()).not.toContainText('In corso');
     for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE', 'Aggiornamento (4 ore)', 'nota interna', 'NON PUBBLICA']) expect(html, vietato).not.toContain(vietato);
     // OSA (FAD, senza sede e senza posti): niente riga posti, niente "esaurito" né lista d'attesa; Lavoratori con posti 0: lista d'attesa
     const osa = page.locator('div', { hasText: 'Personale Alimentarista OSA — Nuovo (12 ore)' }).last();
@@ -65,10 +70,10 @@ test.describe.serial('foglio con edizioni @calendario', () => {
   test('home "Corsi in partenza": i giorni delle edizioni valide, nient\'altro @calendario', async ({ page }) => {
     await page.goto(s.base + '/');
     const tabs = page.locator('.cal-tab');
-    await expect(tabs).toHaveCount(4); // 5 nov (in corso), 12, 13, 19
+    await expect(tabs).toHaveCount(3); // 12, 13, 19 novembre: le edizioni già iniziate (4 e 5 novembre) non sono "in partenza"
     const html = await page.locator('#calendario-heading').locator('xpath=ancestor::section').innerText();
-    for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE']) expect(html, vietato).not.toContain(vietato);
-    await tabs.nth(1).click();
+    for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE', 'IN CORSO OBBLIGATORIA', 'Su ruote e cingoli']) expect(html, vietato).not.toContain(vietato);
+    await tabs.nth(0).click();
     await expect(page.getByText('Antincendio — Rischio medio Livello 2 (8 ore)')).toBeVisible();
     await expect(page.getByText('Nuove date in arrivo')).toHaveCount(0);
   });
@@ -79,7 +84,7 @@ test.describe.serial('foglio con edizioni @calendario', () => {
     expect(html).toContain('Antincendio — Rischio medio Livello 2 (8 ore)');
     expect(html).toContain('Personale Alimentarista OSA — Nuovo (12 ore)');
     expect(html).toContain('FAD'); // OSA non ha sede: mostra la modalità
-    for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE']) expect(html, vietato).not.toContain(vietato);
+    for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE', 'IN CORSO OBBLIGATORIA']) expect(html, vietato).not.toContain(vietato); // l'edizione già iniziata non è "in partenza"
     await expect(page.getByText('Nuove date in arrivo')).toHaveCount(0);
   });
 
