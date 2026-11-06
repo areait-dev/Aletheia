@@ -31,7 +31,6 @@ function misura() {
     maxTouchPoints: navigator.maxTouchPoints,
     platform: navigator.platform,
     userAgent: navigator.userAgent,
-    adattamentoIpad: de.classList.contains('ipad-desktop') ? `ATTIVO (zoom ${de.style.getPropertyValue('--ipad-zoom')})` : 'non attivo',
     metaViewport: (document.querySelector('meta[name="viewport"]') || {}).content || null,
     mq: MQ.map((q) => [q, window.matchMedia(q).matches]),
   };
@@ -61,7 +60,6 @@ export default function Diagnostica() {
     ['documentElement.scrollWidth', m.scrollWidth],
     ['devicePixelRatio', m.devicePixelRatio],
     ['orientamento', m.orientamento],
-    ['adattamento iPad desktop', m.adattamentoIpad],
     ['maxTouchPoints', m.maxTouchPoints],
   ];
 
