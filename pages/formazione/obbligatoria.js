@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getCalendario, daysByCategory } from '../../lib/wp-calendario';
+import { getCalendario, daysByCategory, oggiItalia } from '../../lib/wp-calendario';
+import NuoveDateInArrivo from '../../components/NuoveDateInArrivo';
 import { isrOptions } from '../../lib/wp';
 import { getFaqs } from '../../lib/wp-faq';
 import { getSchede } from '../../lib/wp-schede';
@@ -88,7 +89,14 @@ const MONTHS_IT_SHORT = ['GEN', 'FEB', 'MAR', 'APR', 'MAG', 'GIU', 'LUG', 'AGO',
 function CorsiObbligatoriTabs({ giorni, isDark }) {
   const [selectedDate, setSelectedDate] = useState('all');
 
-  if (!giorni.length) return null;
+  // Nessuna edizione futura pubblicata: messaggio unico, sulle due colonne di sinistra (sotto i 992px la grid è a una colonna).
+  if (!giorni.length) {
+    return (
+      <div className="corsi-nuove-date">
+        <NuoveDateInArrivo />
+      </div>
+    );
+  }
 
   const corsi = giorni
     .flatMap(({ data, corsi: c }) => c.map((corso) => ({ ...corso, data })))
@@ -193,7 +201,7 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
                 </h3>
                 <span className="inline-flex items-center gap-1.5" style={{ fontSize: '0.75rem', color: isDark ? 'rgba(255,255,255,0.55)' : '#64748B' }}>
                   <i className="fas fa-location-dot" aria-hidden="true" />
-                  {c.sede}
+                  {c.sede || c.modalita}
                 </span>
               </div>
 
@@ -422,7 +430,7 @@ function ConsulenzaForm({ isDark }) {
 /* Calendario e FAQ: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-calendario.ts). */
 async function getPageStaticProps() {
   const calendario = await getCalendario();
-  return { props: { pagina: await getPagina('formazione/obbligatoria'), giorniObbligatoria: daysByCategory(calendario, 'obbligatoria', 8), faqs: await getFaqs('obbligatoria'), step: await getSchede('step'), aree: await getSchede('aree-obbligatoria'), puntiForza: await getSchede('obbligatoria-punti') }, ...isrOptions() };
+  return { props: { pagina: await getPagina('formazione/obbligatoria'), giorniObbligatoria: daysByCategory(calendario, 'obbligatoria', oggiItalia(), 8), faqs: await getFaqs('obbligatoria'), step: await getSchede('step'), aree: await getSchede('aree-obbligatoria'), puntiForza: await getSchede('obbligatoria-punti') }, ...isrOptions() };
 }
 
 export default function FormazioneObbligatoria({ giorniObbligatoria, faqs, step, aree, puntiForza, pagina }) {
@@ -634,6 +642,7 @@ export default function FormazioneObbligatoria({ giorniObbligatoria, faqs, step,
           align-items: start;
           width: 100%;
         }
+        .corsi-nuove-date { grid-column: 1 / span 2; }
         .colonna-destra-form {
           position: sticky;
           /* 110px, non 40px: l'header del sito è fixed (~100-120px con logo e
@@ -804,6 +813,7 @@ export default function FormazioneObbligatoria({ giorniObbligatoria, faqs, step,
              cresce oltre il container quando il contenuto interno (es. le pillole
              date con overflow-x) ha un min-content più largo dello spazio disponibile. */
           .calendario-form-grid2 { grid-template-columns: minmax(0, 1fr); }
+          .corsi-nuove-date { grid-column: auto; }
           .colonna-destra-form { position: static; top: auto; }
         }
         /* Padding interno del form contatto: 3.25rem è troppo su schermi stretti

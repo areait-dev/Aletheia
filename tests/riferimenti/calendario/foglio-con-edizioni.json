@@ -1,0 +1,12 @@
+[
+  ["ente", "corso", "variante", "tipologia", "modalita", "data_inizio", "data_fine", "giorni", "orario", "sede", "posti", "note", "stato"],
+  ["Aletheia Srl", "Antincendio", "Rischio medio Livello 2 (8 ore)", "Multiaziendale", "Aula", "12/11/2026", "17/11/2026", "12/11/2026, 16/11/2026, 17/11/2026", "9:00-13:00", "Vittoria, Via del Carrubo", "20", "nota interna NON PUBBLICA ALFA", "pubblicato"],
+  ["Promoter Soc Coop", "Personale Alimentarista OSA", "Nuovo (12 ore)", "Multiaziendale", "FAD", "13/11/2026", "23/11/2026", "Dal 13/11/2026 al 23/11/2026", "", "", "", "", "pubblicato"],
+  ["Aletheia Srl", "Formazione Dei Lavoratori", "Rischio alto (16 ore)", "Multiaziendale", "Aula", "19/11/2026", "27/11/2026", "19/11/2026, 27/11/2026", "", "Vittoria", "0", "", "pubblicato"],
+  ["Aletheia Srl", "Trattori Agricoli o Forestali", "Su ruote e cingoli (13 ore)", "Multiaziendale", "Aula", "05/11/2026", "09/11/2026", "05/11/2026, 09/11/2026", "", "Vittoria", "10", "", "pubblicato"],
+  ["Aletheia Srl", "Trattori Agricoli o Forestali", "Aggiornamento (4 ore)", "Multiaziendale", "Aula", "03/11/2026", "03/11/2026", "03/11/2026", "", "Vittoria", "10", "", "pubblicato"],
+  ["Aletheia Srl", "RLS", "Nuovo (32 ore) RISERVATO", "Aziendale", "In azienda", "20/11/2026", "30/11/2026", "", "", "Presso il cliente", "", "", "pubblicato"],
+  ["Aletheia Srl", "Lavori in Quota", "BOZZA NON VISIBILE", "Multiaziendale", "Aula", "24/11/2026", "24/11/2026", "24/11/2026", "", "Vittoria", "10", "", "bozza"],
+  ["Aletheia Srl", "Corso Che Non Esiste", "NON A CATALOGO", "Multiaziendale", "Aula", "25/11/2026", "25/11/2026", "25/11/2026", "", "Vittoria", "10", "", "pubblicato"],
+  ["Aletheia Srl", "Primo Soccorso Aziendale", "DATA IMPOSSIBILE", "Multiaziendale", "Aula", "17/11/206", "17/11/206", "", "", "Vittoria", "10", "", "pubblicato"]
+]

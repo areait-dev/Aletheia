@@ -9,6 +9,8 @@ import { scrollToTopNow } from '../../lib/lenis';
 import { ereditaDalBase } from '../../lib/ereditarieta-contenuti';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
+import ProssimaEdizione from '../../components/ProssimaEdizione';
+import { getCalendario, prossimaEdizione as trovaProssimaEdizione, oggiItalia } from '../../lib/wp-calendario';
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { getCoursesRaw } from '../../lib/wp-corsi';
@@ -1306,10 +1308,12 @@ export async function getStaticPaths() {
 
 /* Catalogo: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-corsi.ts). */
 async function getPageStaticProps({ params }) {
-  return { props: { slug: params.slug, coursesRaw: await getCoursesRaw() }, ...isrOptions() };
+  // Prossima edizione dal calendario (stesso foglio di calendario, home e Formazione obbligatoria). null = nessuna: la scheda resta com'era (props senza undefined).
+  const prossimaEdizione = trovaProssimaEdizione(await getCalendario(), params.slug, oggiItalia());
+  return { props: { slug: params.slug, coursesRaw: await getCoursesRaw(), prossimaEdizione }, ...isrOptions() };
 }
 
-export default function CourseDetail({ slug: slugProp, coursesRaw }) {
+export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizione }) {
   const router = useRouter();
   const slug = slugProp ?? router.query.slug;
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'moduli' - indipendente da livello/tipo, non si resetta al cambio
@@ -1859,6 +1863,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw }) {
               (glassmorphism/SaaS minimale) copre prezzo/preventivo + CTA - mai una sidebar vuota anche
               per i corsi senza un prezzo letterale (finanziati/gratuiti). */}
           <aside className="cp-info-area">
+            <ProssimaEdizione edizione={prossimaEdizione ?? null} />
             {(() => {
               /* CASO 3 - Iscrizione senza pagamento anticipato, corsi a partenza differita del catalogo (OSS, ASACOM,
                  Conduttore d'Impresa Agricola, BLSD...): il pulsante "Iscriviti" (EnrollmentProgress) porta al modulo

@@ -24,9 +24,16 @@ export interface CorsoCalendario {
   data: string; // formato YYYY-MM-DD
   orario: string; // es. "09:00 - 13:00"
   sede: string;
-  durata: string; // es. "8 ore"
-  posti: number;
-  postiDisponibili: number;
+  durata: string; // es. "8 ore" ('' se non indicata)
+  // null = dato non indicato (nel foglio "posti" è facoltativo): NON significa esaurito, la riga dei posti non si mostra
+  posti: number | null;
+  postiDisponibili: number | null;
+  // Solo dal foglio Google (lib/calendario-foglio.ts), tutti stringhe ('' se assenti, mai undefined: le props di getStaticProps non lo ammettono)
+  dataFine?: string; // YYYY-MM-DD, ultimo giorno; dopo questa data l'edizione sparisce dal sito
+  giorni?: string; // date delle lezioni, come scritte nel foglio ("12/11/2026, 16/11/2026" o "Dal ... al ...")
+  modalita?: string; // Aula, Aula virtuale, Aula / Aula virtuale, FAD, In azienda
+  variante?: string; // livello/rischio/durata, come nel calendario del reparto formazione
+  ente?: string;
   // Foto della riga, aggiunta da lib/wp-calendario.ts (upcomingDays/daysByCategory): quella del corso o la generica della categoria
   image?: string;
   imageAlt?: string;

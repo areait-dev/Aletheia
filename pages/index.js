@@ -9,7 +9,8 @@ import Reveal from '../components/Reveal';
 import HeroParallax from '../components/HeroParallax';
 import CtaFinale from '../components/CtaFinale';
 import { CATEGORIE } from '../data/calendario';
-import { getCalendario, upcomingDays } from '../lib/wp-calendario';
+import { getCalendario, upcomingDays, oggiItalia } from '../lib/wp-calendario';
+import NuoveDateInArrivo from '../components/NuoveDateInArrivo';
 import { isrOptions, isWpEnabled } from '../lib/wp';
 import { getPartners } from '../lib/wp-partner';
 import { getSchede } from '../lib/wp-schede';
@@ -128,6 +129,8 @@ const WEEKDAYS_IT = ['DOM', 'LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB'];
 function CorsiCalendarTabs({ giorni }) {
   const [activeTab, setActiveTab] = useState(giorni[0]?.data);
   const attivo = giorni.find((g) => g.data === activeTab) || giorni[0];
+  // Nessuna edizione futura pubblicata nel foglio del calendario: messaggio unico (components/NuoveDateInArrivo.tsx).
+  if (!attivo) return <NuoveDateInArrivo />;
 
   return (
     <div>
@@ -182,13 +185,15 @@ function CorsiCalendarTabs({ giorni }) {
                 <span className={`font-semibold px-2 py-0.5 rounded-full ${CATEGORIA_BADGE[corso.categoria] || 'bg-slate-50 text-slate-700 border border-slate-200'}`}>
                   {CATEGORIA_LABEL[corso.categoria]}
                 </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <i className="fas fa-location-dot" aria-hidden="true" />
-                  {corso.sede}
-                </span>
+                {corso.sede && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <i className="fas fa-location-dot" aria-hidden="true" />
+                    {corso.sede}
+                  </span>
+                )}
                 <span className="inline-flex items-center gap-1.5">
                   <i className="fas fa-laptop-house" aria-hidden="true" />
-                  {modalitaFromSede(corso.sede)}
+                  {corso.modalita || modalitaFromSede(corso.sede)}
                 </span>
               </div>
               <h3 className="text-base md:text-lg font-bold text-gray-950 dark:text-white">
@@ -347,7 +352,7 @@ async function getPageStaticProps() {
   const calendario = await getCalendario();
   // DATA_FISSA_TEST (YYYY-MM-DD): solo per i test di regressione, congela "oggi" così la sezione "Corsi in partenza" è riproducibile.
   // In produzione la variabile non esiste e vale la data reale, come prima.
-  const oggiISO = process.env.DATA_FISSA_TEST || new Date().toISOString().slice(0, 10);
+  const oggiISO = oggiItalia();
   return { props: { giorniCalendario: upcomingDays(calendario, oggiISO, 10), gruppoLoghi: await getPartners('ecosistema'), categorie: await getSchede('categorie-home'), pagina: await getPagina('home'), newsItems: await ultimeNews() }, ...isrOptions() };
 }
 

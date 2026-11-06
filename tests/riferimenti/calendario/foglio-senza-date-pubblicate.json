@@ -1,0 +1,5 @@
+[
+  ["ente", "corso", "variante", "tipologia", "modalita", "data_inizio", "data_fine", "giorni", "orario", "sede", "posti", "note", "stato"],
+  ["Aletheia Srl", "Antincendio", "Rischio medio Livello 2 (8 ore)", "Multiaziendale", "Aula", "12/12/2026", "16/12/2026", "", "", "Vittoria", "20", "", "bozza"],
+  ["Aletheia Srl", "Lavori in Quota", "Nuovo (8 ore)", "Multiaziendale", "Aula", "10/10/2026", "10/10/2026", "10/10/2026", "", "Vittoria", "10", "", "pubblicato"]
+]

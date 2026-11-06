@@ -57,7 +57,8 @@ export default defineConfig({
   webServer: URL_BASE ? undefined : {
     command: `node node_modules/next/dist/bin/next start -p ${PORTA} -H 127.0.0.1`,
     // JOBS_API_URL: lo stesso elenco fisso di offerte della build (offerte-di-prova.mjs); la pagina si rigenera ogni 5 minuti (ISR)
-    env: { NEXT_DIST_DIR: process.env.NEXT_DIST_DIR || '.next-test', JOBS_API_URL: process.env.JOBS_API_URL || OFFERTE_DI_PROVA },
+    env: { NEXT_DIST_DIR: process.env.NEXT_DIST_DIR || '.next-test', CALENDARIO_FONTE: 'locale', // dati locali: i test non leggono mai il foglio Google vero (.env.local)
+       JOBS_API_URL: process.env.JOBS_API_URL || OFFERTE_DI_PROVA },
     url: `http://127.0.0.1:${PORTA}/`,
     reuseExistingServer: false,
     timeout: 120_000,

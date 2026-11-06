@@ -8,6 +8,6 @@ const radice = path.resolve(import.meta.dirname, '..', '..');
 const r = spawnSync(process.execPath, [path.join(radice, 'node_modules', 'next', 'dist', 'bin', 'next'), 'build', '--webpack'], {
   cwd: radice,
   stdio: 'inherit',
-  env: { ...process.env, NEXT_DIST_DIR: '.next-test', DATA_FISSA_TEST: process.env.DATA_FISSA_TEST || '2026-08-10', JOBS_API_URL: process.env.JOBS_API_URL || OFFERTE_DI_PROVA },
+  env: { ...process.env, NEXT_DIST_DIR: '.next-test', CALENDARIO_FONTE: 'locale', DATA_FISSA_TEST: process.env.DATA_FISSA_TEST || '2026-08-10', JOBS_API_URL: process.env.JOBS_API_URL || OFFERTE_DI_PROVA },
 });
 process.exit(r.status ?? 1);

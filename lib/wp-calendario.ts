@@ -3,6 +3,9 @@ import { coursesData } from '../data/coursesRaw';
 import { buildCourseFamilies, resolveCourseImage } from '../data/courseFamilies';
 import type { CategoriaCorso, CorsoCalendario } from '../data/calendario';
 import { decodeEntities, isWpEnabled, wpGetAll } from './wp';
+import { descriviErroreFoglio, foglioGoogleConfigurato, leggiScheda } from './google-sheets';
+import { righeFoglioToEdizioni } from './calendario-foglio';
+import type { VoceCatalogo } from './calendario-foglio';
 
 /**
  * Calendario corsi: sorgente WordPress (CPT `edizione_corso`) con ripiego sui dati locali.
@@ -116,7 +119,7 @@ export function fromWpEdizione(
 
 // Stesso criterio delle news: il TTL breve evita di servire dati vecchi dopo un webhook.
 const MEMO_TTL_MS = 5000;
-let memo: { at: number; value: Promise<CorsoCalendario[]> } | null = null;
+let memo: { at: number; fonte: Fonte; value: Promise<CorsoCalendario[]> } | null = null;
 
 async function loadCalendario(): Promise<CorsoCalendario[]> {
   try {
@@ -136,11 +139,76 @@ async function loadCalendario(): Promise<CorsoCalendario[]> {
   return CALENDARIO;
 }
 
-/** Tutte le edizioni (WordPress se attivo, altrimenti dati locali). */
+// ───────── Fonte del calendario ─────────
+// UNICA funzione che alimenta tutte le pagine (calendario, "Corsi in partenza" in home, Formazione obbligatoria, schede corso).
+// Ordine: file di prova (solo test) > foglio Google > WordPress > dati locali (data/calendario.ts, sviluppo e test).
+// CALENDARIO_FONTE=locale forza i dati locali anche se ci sono le credenziali Google (build e server dei test di regressione).
+type Fonte = 'file' | 'google' | 'wp' | 'locale';
+function fonte(): Fonte {
+  if (process.env.CALENDARIO_FOGLIO_FILE) return 'file';
+  if (process.env.CALENDARIO_FONTE === 'locale') return 'locale';
+  if (foglioGoogleConfigurato()) return 'google';
+  if (isWpEnabled()) return 'wp';
+  return 'locale';
+}
+
+const NOME_SCHEDA_FOGLIO = 'Corsi';
+const MEMO_TTL_FOGLIO_MS = 60_000; // il foglio ha un limite di richieste al minuto: una lettura ogni 60 s al massimo (build e rigenerazioni condividono la copia)
+let ultimoFoglioValido: CorsoCalendario[] | null = null;
+
+/** Il catalogo come serve al foglio: famiglie (slug, titolo, categoria del calendario). */
+function catalogoPerFoglio(): VoceCatalogo[] {
+  return famiglie().map((f) => ({
+    slug: f.slug,
+    titolo: f.titolo,
+    categoria: CATEGORIA_BY_TERM[f.categoryKey as string] ?? 'professionale',
+  }));
+}
+
+async function loadFoglio(f: 'file' | 'google'): Promise<CorsoCalendario[]> {
+  try {
+    const righe =
+      f === 'file'
+        ? (JSON.parse((await import('node:fs')).readFileSync(process.env.CALENDARIO_FOGLIO_FILE as string, 'utf8')) as string[][])
+        : await leggiScheda(NOME_SCHEDA_FOGLIO);
+    const { edizioni, avvisi } = righeFoglioToEdizioni(righe, catalogoPerFoglio());
+    for (const a of avvisi) console.warn(`[calendario] ${a}`);
+    ultimoFoglioValido = edizioni;
+    return edizioni;
+  } catch (err) {
+    // Mai date inventate: se il foglio non si legge si tiene l'ultima lettura buona, altrimenti "Nuove date in arrivo". Messaggio senza credenziali.
+    const msg = f === 'file' ? (err as Error).message : descriviErroreFoglio(err);
+    const seguito = ultimoFoglioValido ? ': uso la lettura valida precedente' : ': nessuna edizione';
+    console.warn(`[calendario] foglio non disponibile (${msg})${seguito}`);
+    return ultimoFoglioValido ?? [];
+  }
+}
+
+/** Tutte le edizioni pubblicate (anche passate: il filtro sul futuro è soloFuture, uguale per tutte le pagine). */
 export async function getCalendario(): Promise<CorsoCalendario[]> {
-  if (!isWpEnabled()) return CALENDARIO;
-  if (!memo || Date.now() - memo.at > MEMO_TTL_MS) memo = { at: Date.now(), value: loadCalendario() };
+  const f = fonte();
+  if (f === 'locale') return CALENDARIO;
+  const ttl = f === 'wp' ? MEMO_TTL_MS : MEMO_TTL_FOGLIO_MS;
+  if (!memo || memo.fonte !== f || Date.now() - memo.at > ttl) {
+    memo = { at: Date.now(), fonte: f, value: f === 'wp' ? loadCalendario() : loadFoglio(f) };
+  }
   return memo.value;
+}
+
+/** "Oggi" come data italiana YYYY-MM-DD (non UTC: tra mezzanotte e le 2 il giorno cambia prima). DATA_FISSA_TEST la congela nei test. */
+export function oggiItalia(): string {
+  return process.env.DATA_FISSA_TEST || new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome' }).format(new Date());
+}
+
+/** IL filtro sul futuro, uguale per tutte le pagine: un'edizione si vede finché la sua ultima giornata (data_fine, o la data) non è passata. */
+export function soloFuture(calendario: CorsoCalendario[], oggi: string = oggiItalia()): CorsoCalendario[] {
+  return calendario.filter((c) => (c.dataFine || c.data) >= oggi);
+}
+
+/** Scheda corso: la prima edizione che INIZIA da oggi in poi per quel corso (slug della famiglia), oppure null (comportamento di prima). */
+export function prossimaEdizione(calendario: CorsoCalendario[], slug: string, oggi: string = oggiItalia()): CorsoCalendario | null {
+  const prossime = calendario.filter((c) => c.slug === slug && c.data >= oggi).sort((a, b) => a.data.localeCompare(b.data) || a.id - b.id);
+  return prossime[0] ?? null;
 }
 
 export type GiornoCalendario = { data: string; corsi: CorsoCalendario[] };
@@ -167,12 +235,12 @@ function groupByDay(corsi: CorsoCalendario[], maxDays: number): GiornoCalendario
 
 /** Prossimi giorni con corsi a partire da oggi (home "Corsi in partenza"). `oggi` = YYYY-MM-DD. */
 export function upcomingDays(calendario: CorsoCalendario[], oggi: string, maxDays = 10): GiornoCalendario[] {
-  const ordinati = calendario.filter((c) => c.data >= oggi).sort((a, b) => a.data.localeCompare(b.data));
+  const ordinati = soloFuture(calendario, oggi).sort((a, b) => a.data.localeCompare(b.data));
   return groupByDay(ordinati, maxDays);
 }
 
-/** Giorni con corsi di una categoria (pagina Formazione obbligatoria): come prima, senza filtro sulla data. */
-export function daysByCategory(calendario: CorsoCalendario[], categoria: CategoriaCorso, maxDays = 8): GiornoCalendario[] {
-  const ordinati = calendario.filter((c) => c.categoria === categoria).sort((a, b) => a.data.localeCompare(b.data));
+/** Giorni con corsi futuri di una categoria (pagina Formazione obbligatoria). `oggi` = YYYY-MM-DD. */
+export function daysByCategory(calendario: CorsoCalendario[], categoria: CategoriaCorso, oggi: string, maxDays = 8): GiornoCalendario[] {
+  const ordinati = soloFuture(calendario, oggi).filter((c) => c.categoria === categoria).sort((a, b) => a.data.localeCompare(b.data));
   return groupByDay(ordinati, maxDays);
 }

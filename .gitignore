@@ -30,6 +30,7 @@ npm-debug.log*
 
 # build e report temporanei dei test di regressione (in tests/riferimenti sono versionati JSON, copie di rete e Lighthouse; gli screenshot no)
 /.next-test/
+/.next-test-calendario*/
 /test-results/
 /playwright-report/
 

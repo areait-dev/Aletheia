@@ -3,7 +3,8 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { CATEGORIE } from '../data/calendario';
-import { getCalendario } from '../lib/wp-calendario';
+import { getCalendario, soloFuture, oggiItalia } from '../lib/wp-calendario';
+import NuoveDateInArrivo from '../components/NuoveDateInArrivo';
 import { isrOptions } from '../lib/wp';
 import { withSiteOptions } from '../lib/wp-site';
 
@@ -34,14 +35,15 @@ function formatLongDate(s) {
 }
 
 function postiStyle(postiDisponibili) {
+  // null = posti non indicati nel foglio: la riga non si mostra (vedi sotto), mai "esaurito".
   if (postiDisponibili === 0) return { color: '#DC2626', label: 'Posti esauriti', icon: 'fa-circle-xmark' };
   if (postiDisponibili <= 3) return { color: '#F59E0B', label: `${postiDisponibili} posti rimasti`, icon: 'fa-triangle-exclamation' };
   return { color: 'var(--primary-text)', label: `${postiDisponibili} posti disponibili`, icon: 'fa-circle-check' };
 }
 
-/* Calendario: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-calendario.ts). */
+/* Calendario: foglio Google, WordPress o dati locali (vedi getCalendario in lib/wp-calendario.ts). Solo edizioni future: soloFuture è lo stesso filtro di home e Formazione obbligatoria. */
 async function getPageStaticProps() {
-  return { props: { calendario: await getCalendario() }, ...isrOptions() };
+  return { props: { calendario: soloFuture(await getCalendario(), oggiItalia()) }, ...isrOptions() };
 }
 
 export default function CalendarioCorsi({ calendario }) {
@@ -55,28 +57,17 @@ export default function CalendarioCorsi({ calendario }) {
       .sort((a, b) => a.data.localeCompare(b.data));
   }, [calendario, categoriaFiltro]);
 
-  // Finestra fissa del calendario: da Agosto 2026 a Luglio 2027 (12 mesi consecutivi a cavallo di due anni)
-  const FINESTRA_MESI = useMemo(() => {
-    const out = [];
-    for (let i = 0; i < 12; i++) {
-      const m = (7 + i) % 12; // 7 = Agosto (indice 0-based)
-      const y = 2026 + Math.floor((7 + i) / 12);
-      out.push({ m, y });
-    }
-    return out;
-  }, []);
-
-  // I mesi della finestra, ciascuno con i propri corsi (array vuoto se nessuno)
+  // Solo i mesi che hanno edizioni future (il reparto formazione pubblica il calendario mese per mese): niente finestra fissa di 12 mesi con mesi vuoti.
   const mesiConCorsi = useMemo(() => {
     const map = new Map(); // "y-m" -> corsi[]
     corsiFiltrati.forEach((c) => {
       const { y, m } = parseDate(c.data);
       const key = `${y}-${m}`;
-      if (!map.has(key)) map.set(key, []);
-      map.get(key).push(c);
+      if (!map.has(key)) map.set(key, { m, y, corsi: [] });
+      map.get(key).corsi.push(c);
     });
-    return FINESTRA_MESI.map(({ m, y }) => ({ m, y, corsi: map.get(`${y}-${m}`) || [] }));
-  }, [corsiFiltrati, FINESTRA_MESI]);
+    return [...map.values()].sort((a, b) => a.y - b.y || a.m - b.m);
+  }, [corsiFiltrati]);
 
   // Raggruppamento per data dei corsi di un singolo mese (usato nell'accordion aperto)
   const gruppiPerMese = (corsiDelMese) => {
@@ -88,7 +79,7 @@ export default function CalendarioCorsi({ calendario }) {
     return [...map.entries()]; // [ [data, corsi[]], ... ]
   };
 
-  const toggleMese = (m) => setMeseAperto((prev) => (prev === m ? null : m));
+  const toggleMese = (chiave) => setMeseAperto((prev) => (prev === chiave ? null : chiave));
 
   const hasFilters = categoriaFiltro !== '';
   const resetFiltri = () => { setCategoriaFiltro(''); };
@@ -190,7 +181,9 @@ export default function CalendarioCorsi({ calendario }) {
               </p>
             </div>
 
-            {corsiFiltrati.length === 0 ? (
+            {calendario.length === 0 ? (
+              <NuoveDateInArrivo />
+            ) : corsiFiltrati.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <i className="far fa-calendar-xmark text-4xl text-slate-300 dark:text-gray-600 mb-3" />
                 <p className="text-slate-600 dark:text-gray-300 text-lg font-medium">Nessun corso trovato</p>
@@ -199,16 +192,17 @@ export default function CalendarioCorsi({ calendario }) {
             ) : (
               <div className="flex flex-col gap-4">
                 {mesiConCorsi.map(({ m, y, corsi }) => {
-                  const aperto = meseAperto === m;
+                  const chiaveMese = `${y}-${m}`;
+                  const aperto = meseAperto === chiaveMese;
                   return (
                     <div
-                      key={m}
+                      key={chiaveMese}
                       className="bg-white dark:bg-dark-card border border-slate-200 dark:border-[rgba(255,255,255,0.08)] rounded-2xl shadow-sm overflow-hidden"
                     >
                       {/* Header mese - cliccabile per espandere/chiudere solo se ha corsi in programma */}
                       <button
                         type="button"
-                        onClick={() => corsi.length > 0 && toggleMese(m)}
+                        onClick={() => corsi.length > 0 && toggleMese(chiaveMese)}
                         aria-expanded={aperto}
                         disabled={corsi.length === 0}
                         className={`w-full flex items-center justify-between gap-4 px-5 py-4 text-left transition-colors ${
@@ -255,8 +249,9 @@ export default function CalendarioCorsi({ calendario }) {
                               <div className="flex flex-col gap-4">
                                 {corsiDelGiorno.map((corso) => {
                                   const { d, m: meseCorso } = parseDate(corso.data);
-                                  const posti = postiStyle(corso.postiDisponibili);
-                                  const esaurito = corso.postiDisponibili === 0;
+                                  const postiNoti = corso.postiDisponibili !== null && corso.postiDisponibili !== undefined;
+                                  const posti = postiNoti ? postiStyle(corso.postiDisponibili) : null;
+                                  const esaurito = postiNoti && corso.postiDisponibili === 0;
                                   return (
                                     <div
                                       key={corso.id}
@@ -295,21 +290,39 @@ export default function CalendarioCorsi({ calendario }) {
                                         </h5>
 
                                         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600 dark:text-gray-300">
-                                          <span className="inline-flex items-center gap-1.5">
-                                            <i className="fas fa-location-dot text-primary dark:text-primary-on-dark" /> {corso.sede}
-                                          </span>
-                                          <span className="inline-flex items-center gap-1.5">
-                                            <i className="far fa-clock text-primary dark:text-primary-on-dark" /> {corso.orario}
-                                          </span>
-                                          <span className="inline-flex items-center gap-1.5">
-                                            <i className="fas fa-hourglass-half text-primary dark:text-primary-on-dark" /> {corso.durata}
-                                          </span>
+                                          {corso.sede && (
+                                            <span className="inline-flex items-center gap-1.5">
+                                              <i className="fas fa-location-dot text-primary dark:text-primary-on-dark" /> {corso.sede}
+                                            </span>
+                                          )}
+                                          {corso.modalita && (
+                                            <span className="inline-flex items-center gap-1.5">
+                                              <i className="fas fa-laptop-house text-primary dark:text-primary-on-dark" /> {corso.modalita}
+                                            </span>
+                                          )}
+                                          {corso.orario && (
+                                            <span className="inline-flex items-center gap-1.5">
+                                              <i className="far fa-clock text-primary dark:text-primary-on-dark" /> {corso.orario}
+                                            </span>
+                                          )}
+                                          {corso.durata && (
+                                            <span className="inline-flex items-center gap-1.5">
+                                              <i className="fas fa-hourglass-half text-primary dark:text-primary-on-dark" /> {corso.durata}
+                                            </span>
+                                          )}
                                         </div>
+                                        {corso.giorni && (
+                                          <p className="text-sm text-slate-600 dark:text-gray-300" style={{ margin: '0.6rem 0 0' }}>
+                                            <i className="far fa-calendar-check text-primary dark:text-primary-on-dark" /> {corso.giorni}
+                                          </p>
+                                        )}
 
                                         {/* Posti */}
-                                        <div className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: posti.color }}>
-                                          <i className={`fas ${posti.icon}`} /> {posti.label}
-                                        </div>
+                                        {posti && (
+                                          <div className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: posti.color }}>
+                                            <i className={`fas ${posti.icon}`} /> {posti.label}
+                                          </div>
+                                        )}
                                       </div>
 
                                       {/* Azione */}
