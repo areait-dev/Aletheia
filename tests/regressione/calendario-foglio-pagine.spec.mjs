@@ -67,6 +67,23 @@ test.describe.serial('foglio con edizioni @calendario', () => {
     await expect(page.getByText('Nuove date in arrivo')).toHaveCount(0);
   });
 
+  test('card del calendario con livello ed edizione; scheda con Course e CourseInstance @calendario', async ({ request }) => {
+    // /calendario-corsi e home: la card di Antincendio "Rischio medio Livello 2 (8 ore)" apre la scheda sul livello 2 e sull'edizione del 12 novembre
+    for (const pagina of ['/calendario-corsi', '/']) {
+      const html = await (await request.get(s.base + pagina)).text();
+      expect(html, pagina).toContain('href="/corsi/antincendio?livello=2&amp;edizione=2026-11-12"');
+      expect(html, pagina).not.toContain('href="/corsi/antincendio"');
+    }
+    // scheda: Course con un CourseInstance per ogni edizione in calendario
+    const scheda = await (await request.get(s.base + '/corsi/antincendio')).text();
+    const dati = [...scheda.matchAll(/<script[^>]*application\/ld\+json[^>]*>(.*?)<\/script>/gs)].map((m) => JSON.parse(m[1]));
+    const corso = dati.find((d) => d['@type'] === 'Course');
+    expect(corso.provider.name).toBe('Alètheia Srl');
+    const istanza = corso.hasCourseInstance.find((i) => i.startDate === '2026-11-12');
+    expect(istanza).toMatchObject({ '@type': 'CourseInstance', courseMode: 'onsite', endDate: '2026-11-17', courseWorkload: 'PT8H' });
+    expect(istanza.location.address.addressLocality).toBe('Vittoria');
+  });
+
   test('home "Corsi in partenza": i giorni delle edizioni valide, nient\'altro @calendario', async ({ page }) => {
     await page.goto(s.base + '/');
     const tabs = page.locator('.cal-tab');
