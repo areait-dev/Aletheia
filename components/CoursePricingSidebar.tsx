@@ -13,6 +13,8 @@ interface CoursePricingSidebarProps {
   onPrimaryClick?: MouseEventHandler<HTMLAnchorElement>;
   /** Solo nei corsi di formazione obbligatoria: negli altri casi non va passato (niente pulsante WhatsApp). */
   whatsappHref?: string;
+  /** Riga di testo sotto il pulsante principale (es. "Gratuito e senza impegno: ti inviamo quota e date entro 24 ore"). */
+  sottoCta?: string;
   /** Linea sopra i pulsanti. Falsa per il riquadro a iscrizione (ha già i suoi blocchi: la linea lasciava un vuoto tra l'avviso giallo e "Richiedi un preventivo"). */
   divisore?: boolean;
 }
@@ -29,6 +31,7 @@ export default function CoursePricingSidebar({
   primaryHref,
   onPrimaryClick,
   whatsappHref,
+  sottoCta,
   divisore = true,
 }: CoursePricingSidebarProps) {
   const label = primaryLabel || 'Richiedi un preventivo';
@@ -61,6 +64,11 @@ export default function CoursePricingSidebar({
           {label}
           <i className={`${icon} text-xs transition-transform group-hover:translate-x-1`}></i>
         </a>
+
+        {sottoCta && (
+          // Niente `text-center`: in globals.css aggiunge margin-top:3rem (vedi il commento sopra).
+          <p className="text-xs leading-snug text-slate-600 dark:text-[#9aa8a6] m-0 !mt-0 [text-align:center]">{sottoCta}</p>
+        )}
 
         {whatsappHref && (
           <a

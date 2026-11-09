@@ -11,7 +11,8 @@ import { testoPartecipanti } from '../../lib/partecipanti';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import ProssimaEdizione from '../../components/ProssimaEdizione';
-import { getCalendario, prossimaEdizione as trovaProssimaEdizione, oggiItalia } from '../../lib/wp-calendario';
+import { getCalendario, prossimaEdizione as trovaProssimaEdizione, soloFuture, oggiItalia } from '../../lib/wp-calendario';
+import { dataEstesa, riconosciVariante } from '../../lib/parametri-scheda';
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { getCoursesRaw } from '../../lib/wp-corsi';
@@ -1311,10 +1312,13 @@ export async function getStaticPaths() {
 async function getPageStaticProps({ params }) {
   // Prossima edizione dal calendario (stesso foglio di calendario, home e Formazione obbligatoria). null = nessuna: la scheda resta com'era (props senza undefined).
   const prossimaEdizione = trovaProssimaEdizione(await getCalendario(), params.slug, oggiItalia());
-  return { props: { slug: params.slug, coursesRaw: await getCoursesRaw(), prossimaEdizione }, ...isrOptions() };
+  // Tutte le edizioni future del corso: la scheda può aprirsi su una precisa (?edizione=AAAA-MM-GG, dalle card del calendario).
+  const oggi = oggiItalia();
+  const edizioni = soloFuture(await getCalendario(), oggi).filter((c) => c.slug === params.slug && c.data >= oggi).sort((a, b) => a.data.localeCompare(b.data) || a.id - b.id);
+  return { props: { slug: params.slug, coursesRaw: await getCoursesRaw(), prossimaEdizione, edizioni }, ...isrOptions() };
 }
 
-export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizione }) {
+export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizione, edizioni = [] }) {
   const router = useRouter();
   const slug = slugProp ?? router.query.slug;
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'moduli' - indipendente da livello/tipo, non si resetta al cambio
@@ -1358,7 +1362,9 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
     const fromQuery = parseInt(router.query.livello, 10);
     const initialKey = (fromQuery >= 1 && livelloKeys[fromQuery - 1]) || livelloKeys[0];
     setSelectedLivelloKey(initialKey);
-  }, [family, router.isReady, router.query.livello, selectedLivelloKey]);
+    // ?tipo=aggiornamento (dalle card del calendario): la scheda si apre sull'aggiornamento invece che sul corso
+    if (router.query.tipo === 'aggiornamento') setSelectedTipo('aggiornamento');
+  }, [family, router.isReady, router.query.livello, router.query.tipo, selectedLivelloKey]);
 
   // Su un caricamento diretto (refresh/URL diretto) il router non è ancora "ready" al primo render
   // server/client: router.query.slug è vuoto finché Next.js non idrata i parametri della route, quindi
@@ -1419,6 +1425,26 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
     setSelectedTipo(tipo);
     setOpenFaqIndex(null);
   };
+
+  // Edizione mostrata: quella scelta con ?edizione= (card del calendario) se esiste ancora, altrimenti la prossima.
+  const edizioneScelta = typeof router.query.edizione === 'string' ? edizioni.find((e) => e.data === router.query.edizione) ?? null : null;
+  const edizioneMostrata = edizioneScelta ?? prossimaEdizione ?? null;
+  // Richiesta di preventivo precompilata (/richiedi-preventivo?corso=…&edizione=…): corso + livello/variante scelti + edizione.
+  const etichettaLivello = hasMultipleLivelli ? livelloEntries.find(([key]) => key === activeLivelloKey)?.[1] : '';
+  const oreVariante = /\d/.test(String(varianteCorrente.durataOre ?? '')) ? ` (${varianteCorrente.durataOre})` : '';
+  const corsoPerPreventivo = `${family.titolo}${etichettaLivello ? ` - ${etichettaLivello}` : ''}${varianteCorrente.tipo === 'aggiornamento' ? ' - aggiornamento' : ''}${oreVariante}`;
+  // L'edizione va nel preventivo solo se è della variante che l'utente sta guardando (la prossima edizione di Antincendio livello 1 non c'entra con il livello 2).
+  const idxLivello = livelloEntries.findIndex(([key]) => key === activeLivelloKey) + 1;
+  const edizioneCoerente = (() => {
+    if (!edizioneMostrata) return null;
+    const r = riconosciVariante(edizioneMostrata, family);
+    if (r.aggiornamento !== (varianteCorrente.tipo === 'aggiornamento')) return null;
+    return r.livello && r.livello !== idxLivello ? null : edizioneMostrata;
+  })();
+  const luogoEdizione = edizioneCoerente ? edizioneCoerente.sede || edizioneCoerente.modalita || '' : '';
+  const testoEdizione = edizioneCoerente ? `${dataEstesa(edizioneCoerente.data)}${luogoEdizione ? `, ${luogoEdizione}` : ''}` : '';
+  const hrefPreventivo = `/richiedi-preventivo?corso=${encodeURIComponent(corsoPerPreventivo)}${testoEdizione ? `&edizione=${encodeURIComponent(testoEdizione)}` : ''}`;
+  const SOTTO_CTA = 'Gratuito e senza impegno: ti inviamo quota e date entro 24 ore';
 
   const prezzoTesto = varianteCorrente.prezzo != null ? `€ ${varianteCorrente.prezzo},00` : (family.priceLabel || varianteCorrente.prezzoLabel);
 
@@ -1864,7 +1890,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
               (glassmorphism/SaaS minimale) copre prezzo/preventivo + CTA - mai una sidebar vuota anche
               per i corsi senza un prezzo letterale (finanziati/gratuiti). */}
           <aside className="cp-info-area">
-            <ProssimaEdizione edizione={prossimaEdizione ?? null} />
+            <ProssimaEdizione edizione={edizioneMostrata} scelta={!!edizioneScelta} />
             {(() => {
               /* CASO 3 - Iscrizione senza pagamento anticipato, corsi a partenza differita del catalogo (OSS, ASACOM,
                  Conduttore d'Impresa Agricola, BLSD...): il pulsante "Iscriviti" (EnrollmentProgress) porta al modulo
@@ -1877,7 +1903,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
                   <>
                     <CoursePricingSidebar
                       divisore={false}
-                      primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
+                      primaryHref={hrefPreventivo}
                       customContent={
                         <div className="flex flex-col gap-3">
                           <div className="flex flex-col">
@@ -1932,7 +1958,8 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
                 return (
                   <CoursePricingSidebar
                     priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
-                    primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
+                    primaryHref={hrefPreventivo}
+                    sottoCta={SOTTO_CTA}
                     whatsappHref={whatsappLink(process.env.NEXT_PUBLIC_WHATSAPP) || whatsappLink(WHATSAPP_FORMAZIONE) || undefined}
                   />
                 );
@@ -1943,7 +1970,8 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
               return (
                 <CoursePricingSidebar
                   priceRows={[{ label: 'Quota di partecipazione', value: 'Su richiesta' }]}
-                  primaryHref={`/richiedi-preventivo?corso=${encodeURIComponent(course.title)}`}
+                  primaryHref={hrefPreventivo}
+                  sottoCta={SOTTO_CTA}
                 />
               );
             })()}

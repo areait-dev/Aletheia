@@ -90,8 +90,8 @@
     "Il ponte tra formazione e lavoro"
   ],
   "intestazioni": 16,
-  "testoLunghezza": 4155,
-  "testoSha1": "0478518dd56d46e2149243691a0efadb9f6b074c",
+  "testoLunghezza": 4169,
+  "testoSha1": "2b4821fb3e748113ecf80d3a69666e6bdaa71417",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -106,9 +106,9 @@
     "/corsi",
     "/corsi/certificazioni-informatiche",
     "/corsi/corsi-qualificati",
-    "/corsi/datore-di-lavoro",
+    "/corsi/datore-di-lavoro?livello=1&edizione=2026-08-10",
     "/corsi/decreto-attrezzature",
-    "/corsi/formazione-del-preposto",
+    "/corsi/formazione-del-preposto?edizione=2026-08-10",
     "/corsi/patentino-fitosanitario",
     "/corsi/personale-alimentarista-osa",
     "/corsi/sicurezza-lavoro",

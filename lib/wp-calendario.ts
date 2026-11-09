@@ -1,3 +1,4 @@
+import { hrefEdizione } from './parametri-scheda';
 import { CALENDARIO } from '../data/calendario';
 import { coursesData } from '../data/coursesRaw';
 import { buildCourseFamilies, resolveCourseImage } from '../data/courseFamilies';
@@ -216,7 +217,8 @@ export function oggiItalia(): string {
  * Formazione obbligatoria mostrano invece solo quelle che INIZIANO da oggi in poi (upcomingDays, daysByCategory).
  */
 export function soloFuture(calendario: CorsoCalendario[], oggi: string = oggiItalia()): CorsoCalendario[] {
-  return calendario.filter((c) => (c.dataFine || c.data) >= oggi);
+  // `href` serve al calendario (/calendario-corsi); home e Formazione obbligatoria lo ricevono da conFoto, che lo ricalcola allo stesso modo.
+  return calendario.filter((c) => (c.dataFine || c.data) >= oggi).map((c) => ({ ...c, href: hrefEdizione(c, famiglie().find((f) => f.slug === c.slug)) }));
 }
 
 /** Edizione già iniziata ma non ancora finita (etichetta "In corso" nel calendario). */
@@ -243,7 +245,9 @@ function famiglie() {
 /** Aggiunge a ogni corso `image` e `imageAlt` (stringhe, mai undefined: le props di getStaticProps non lo ammettono). */
 function conFoto(c: CorsoCalendario): CorsoCalendario {
   const { src, alt } = resolveCourseImage(c.slug, c.categoria, famiglie());
-  return { ...c, image: src, imageAlt: alt || c.titolo };
+  // `href`: la scheda si apre già su livello, tipo ed edizione di questa riga (lib/parametri-scheda.ts).
+  const fam = famiglie().find((f) => f.slug === c.slug);
+  return { ...c, image: src, imageAlt: alt || c.titolo, href: hrefEdizione(c, fam) };
 }
 
 function groupByDay(corsi: CorsoCalendario[], maxDays: number): GiornoCalendario[] {

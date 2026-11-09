@@ -13,7 +13,7 @@ function dataEstesa(iso: string): string {
  * (prossimaEdizione in lib/wp-calendario.ts). Senza edizione (null) non mostra nulla: la scheda resta com'era. Per la FAD, che non ha sede, al posto
  * della sede c'è la modalità.
  */
-export default function ProssimaEdizione({ edizione }: { edizione: CorsoCalendario | null }) {
+export default function ProssimaEdizione({ edizione, scelta = false }: { edizione: CorsoCalendario | null; scelta?: boolean }) {
   if (!edizione) return null;
   const luogo = edizione.sede || edizione.modalita || '';
   return (
@@ -23,7 +23,7 @@ export default function ProssimaEdizione({ edizione }: { edizione: CorsoCalendar
     >
       <p className="text-slate-900 dark:text-gray-50" style={{ margin: 0, fontSize: '0.98rem', fontWeight: 800, lineHeight: 1.4 }}>
         <i className="fas fa-calendar-check text-primary-text dark:text-primary-on-dark" aria-hidden="true" style={{ marginRight: '0.5rem' }} />
-        Prossima edizione: {dataEstesa(edizione.data)}
+        {scelta ? 'Edizione scelta' : 'Prossima edizione'}: {dataEstesa(edizione.data)}
         {luogo ? `, ${luogo}` : ''}
       </p>
       {edizione.variante && (

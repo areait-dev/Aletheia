@@ -206,10 +206,10 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
               </div>
 
               <a
-                href={`/corsi/${c.slug}`}
+                href={c.href || `/corsi/${c.slug}`}
                 className="bg-primary hover:bg-[#006B73] text-white font-semibold rounded-full text-sm transition-colors text-center corso-row-cta"
               >
-                Iscriviti ora
+                Prenota il tuo posto
               </a>
             </div>
           );

@@ -37,6 +37,8 @@ export interface CorsoCalendario {
   // Foto della riga, aggiunta da lib/wp-calendario.ts (upcomingDays/daysByCategory): quella del corso o la generica della categoria
   image?: string;
   imageAlt?: string;
+  // Indirizzo della scheda con livello, tipo ed edizione già selezionati (lib/parametri-scheda.ts), aggiunto da lib/wp-calendario.ts
+  href?: string;
   // Campi opzionali, usati solo dagli aggiornamenti ECM (categoria: 'ecm')
   relatore?: string;
   creditiEcm?: number;
