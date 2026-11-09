@@ -135,7 +135,8 @@ const nextConfig = {
       ...costruisciRedirect().redirects,
       ...buildCourseRedirects(),
       // Sezione rinominata: /all-courses → /corsi (301). Vanno DOPO i redirect per singolo slug, che hanno la precedenza.
-      { source: '/all-courses', destination: '/corsi', statusCode: 301 },
+      // Con ?categoria= la gestisce proxy.ts (un solo salto verso la destinazione finale, senza la query).
+      { source: '/all-courses', missing: [{ type: 'query', key: 'categoria' }], destination: '/corsi', statusCode: 301 },
       { source: '/all-courses/:slug', destination: '/corsi/:slug', statusCode: 301 },
       ...buildAiutiDiStatoRedirects(),
       ...buildArchivioSpostatiRedirects(),

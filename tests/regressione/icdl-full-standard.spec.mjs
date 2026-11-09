@@ -17,6 +17,6 @@ test('ICDL Full Standard: pagina completa @rapido', async ({ page }) => {
 });
 
 test('ICDL Full Standard: compare nel catalogo ICDL @rapido', async ({ page }) => {
-  await page.goto('/corsi?categoria=icdl', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/certificazioni-informatiche', { waitUntil: 'networkidle' });
   await expect(page.locator('a[href="/corsi/icdl-full-standard"]').first()).toBeVisible();
 });

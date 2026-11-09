@@ -1,19 +1,7 @@
 {
   "tutti": 40,
-  "fse-plus": {
-    "url": "?categoria=fse-plus",
-    "schede": []
-  },
-  "fondi-interprofessionali": {
-    "url": "?categoria=fondi-interprofessionali",
-    "schede": []
-  },
-  "fondo-nuove-competenze": {
-    "url": "?categoria=fondo-nuove-competenze",
-    "schede": []
-  },
   "sicurezza-lavoro": {
-    "url": "?categoria=sicurezza-lavoro",
+    "url": "",
     "schede": [
       "/corsi/antincendio",
       "/corsi/formazione-dei-lavoratori",
@@ -36,7 +24,7 @@
     ]
   },
   "decreto-attrezzature": {
-    "url": "?categoria=decreto-attrezzature",
+    "url": "",
     "schede": [
       "/corsi/carrelli-elevatori-semoventi-con-conduttore-a-bordo",
       "/corsi/operatore-di-gru-per-autocarro",
@@ -52,29 +40,19 @@
     ]
   },
   "fitosanitario": {
-    "url": "?categoria=fitosanitario",
+    "url": "",
     "schede": [
       "/corsi/patentino-fitosanitario"
     ]
   },
   "sicurezza-alimentare": {
-    "url": "?categoria=sicurezza-alimentare",
+    "url": "",
     "schede": [
       "/corsi/personale-alimentarista-osa"
     ]
   },
-  "icdl": {
-    "url": "?categoria=icdl",
-    "schede": [
-      "/corsi/icdl-base",
-      "/corsi/icdl-standard",
-      "/corsi/icdl-full-standard",
-      "/corsi/icdl-digcomp-2-2",
-      "/corsi/icdl-update"
-    ]
-  },
   "certificazioni-informatiche": {
-    "url": "?categoria=certificazioni-informatiche",
+    "url": "",
     "schede": [
       "/corsi/icdl-base",
       "/corsi/icdl-standard",
@@ -83,21 +61,13 @@
       "/corsi/icdl-update"
     ]
   },
-  "ecm": {
-    "url": "?categoria=ecm",
-    "schede": []
-  },
-  "certificazione": {
-    "url": "?categoria=certificazione",
+  "corsi-qualificati": {
+    "url": "",
     "schede": [
       "/corsi/oss-operatore-socio-sanitario",
       "/corsi/asacom-assistente-alla-comunicazione",
       "/corsi/blsd-basic-life-support-and-defibrillation"
     ]
-  },
-  "corsi-pa": {
-    "url": "?categoria=corsi-pa",
-    "schede": []
   },
   "dopoReset": {
     "url": "",

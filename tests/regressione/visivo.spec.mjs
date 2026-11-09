@@ -9,7 +9,7 @@ const MASCHERE = [];
 
 // Suite rapida (npm run test:rapido): solo queste 20 pagine, a 1440 px, tema chiaro (tag @rapido nel titolo).
 const PAGINE_RAPIDE = new Set([
-  '/', '/calendario-corsi', '/corsi', '/corsi?categoria=sicurezza-lavoro', '/corsi/antincendio', '/corsi/macchine-movimento-terra',
+  '/', '/calendario-corsi', '/corsi', '/corsi/sicurezza-lavoro', '/corsi/antincendio', '/corsi/macchine-movimento-terra',
   '/news', '/news/bonus-giovani-under-35-aprile-2026', '/formazione/obbligatoria', '/formazione/ecm', '/formazione/avviso-1-2026-poc',
   '/chi-siamo', '/contatti', '/aiuti-di-stato/2023', '/archivio', '/archivio/avviso-7-2023', '/agenzia-per-il-lavoro',
   '/agenzia-per-il-lavoro/servizi-alla-persona', '/privacy-cookie', '/url-inesistente-404',

@@ -1,0 +1,149 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": "__variable_9302a3 __variable_37b1ed",
+  "classeBody": null,
+  "title": "Corsi di sicurezza sul lavoro - Alètheia Srl",
+  "description": [
+    "Corsi di sicurezza sul lavoro a Vittoria (RG): lavoratori, preposti, dirigenti, RSPP, antincendio e primo soccorso. Attestato valido in tutta Italia."
+  ],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [
+    "https://www.aletheiasrl.it/corsi/sicurezza-lavoro"
+  ],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:title": [
+      "Corsi di sicurezza sul lavoro - Alètheia Srl"
+    ],
+    "og:description": [
+      "Corsi di sicurezza sul lavoro a Vittoria (RG): lavoratori, preposti, dirigenti, RSPP, antincendio e primo soccorso. Attestato valido in tutta Italia."
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/corsi/sicurezza-lavoro"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Corsi di sicurezza sul lavoro - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Corsi di sicurezza sul lavoro a Vittoria (RG): lavoratori, preposti, dirigenti, RSPP, antincendio e primo soccorso. Attestato valido in tutta Italia."
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ]
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://cdnjs.cloudflare.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Corsi di sicurezza sul lavoro"
+  ],
+  "intestazioni": 20,
+  "testoLunghezza": 3347,
+  "testoSha1": "630a11511b61136468527e815147491bb6a64c1c",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/corsi",
+    "/corsi/antincendio",
+    "/corsi/certificazioni-informatiche",
+    "/corsi/coordinatori-cantieri-cse-csp",
+    "/corsi/corsi-qualificati",
+    "/corsi/datore-di-lavoro",
+    "/corsi/decreto-attrezzature",
+    "/corsi/dpi-3-categoria",
+    "/corsi/fitosanitario",
+    "/corsi/formazione-dei-lavoratori",
+    "/corsi/formazione-del-preposto",
+    "/corsi/formazione-dirigente",
+    "/corsi/formazione-per-formatore",
+    "/corsi/lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale",
+    "/corsi/lavori-in-quota",
+    "/corsi/modulo-aggiuntivo-cantieri-per-datore-di-lavoro",
+    "/corsi/pes-pav-lavori-elettrici",
+    "/corsi/pimus-ponteggi",
+    "/corsi/primo-soccorso-aziendale",
+    "/corsi/rls",
+    "/corsi/rspp-aspp",
+    "/corsi/rspp-datore-di-lavoro",
+    "/corsi/sicurezza-alimentare",
+    "/corsi/sicurezza-lavoro",
+    "/corsi/spazi-confinati",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 25,
+  "immaginiAlt": "83f32211fbd2902aa84933135a58a6dce62e951d"
+}

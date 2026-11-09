@@ -1,0 +1,136 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": "__variable_9302a3 __variable_37b1ed",
+  "classeBody": null,
+  "title": "Corsi certificazioni informatiche ICDL - Alètheia Srl",
+  "description": [
+    "Corsi per le certificazioni informatiche ICDL a Vittoria (RG): Base, Standard, Full Standard, DigComp 2.2 e Update. Certifica le tue competenze digitali."
+  ],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [
+    "https://www.aletheiasrl.it/corsi/certificazioni-informatiche"
+  ],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:title": [
+      "Corsi certificazioni informatiche ICDL - Alètheia Srl"
+    ],
+    "og:description": [
+      "Corsi per le certificazioni informatiche ICDL a Vittoria (RG): Base, Standard, Full Standard, DigComp 2.2 e Update. Certifica le tue competenze digitali."
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/corsi/certificazioni-informatiche"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Corsi certificazioni informatiche ICDL - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Corsi per le certificazioni informatiche ICDL a Vittoria (RG): Base, Standard, Full Standard, DigComp 2.2 e Update. Certifica le tue competenze digitali."
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ]
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://cdnjs.cloudflare.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Corsi per certificazioni informatiche"
+  ],
+  "intestazioni": 7,
+  "testoLunghezza": 1882,
+  "testoSha1": "6a9aa1121d90a59bbb3c57c3733e6d119cb0f2b8",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/corsi",
+    "/corsi/certificazioni-informatiche",
+    "/corsi/corsi-qualificati",
+    "/corsi/decreto-attrezzature",
+    "/corsi/fitosanitario",
+    "/corsi/icdl-base",
+    "/corsi/icdl-digcomp-2-2",
+    "/corsi/icdl-full-standard",
+    "/corsi/icdl-standard",
+    "/corsi/icdl-update",
+    "/corsi/sicurezza-alimentare",
+    "/corsi/sicurezza-lavoro",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 12,
+  "immaginiAlt": "f630c568b6a70feacf32cc20b5f8fccc5cfbfa24"
+}

@@ -23,9 +23,8 @@ const percorsi = html(pagine)
   .map((p) => (p === 'index' ? '/' : `/${p}`))
   .sort();
 
-// Varianti con query string usate da menu e redirect.
-const chiaviCategoria = ['fse-plus', 'fondi-interprofessionali', 'fondo-nuove-competenze', 'sicurezza-lavoro', 'decreto-attrezzature', 'fitosanitario', 'sicurezza-alimentare', 'icdl', 'certificazioni-informatiche', 'ecm', 'certificazione', 'corsi-pa'];
-const conQuery = [...chiaviCategoria.map((k) => `/corsi?categoria=${k}`), '/corsi/antincendio?livello=2'];
+// Varianti con query string (le pagine di categoria sono file statici e arrivano da sole in `percorsi`).
+const conQuery = ['/corsi/antincendio?livello=2'];
 
 // Redirect di next.config.js (ground truth: stesso file usato dal sito).
 const config = require(path.join(radice, 'next.config.js'));
@@ -37,7 +36,7 @@ const dinamiche = ['/corsi/', '/news/', '/archivio/', '/aiuti-di-stato/'];
 const campioneVisivo = (p) => {
   if (!dinamiche.some((d) => p.startsWith(d))) return true;
   return [
-    '/corsi/antincendio', '/corsi/macchine-movimento-terra', '/corsi/icdl-base', '/corsi/formazione-dei-lavoratori',
+    '/corsi/antincendio', '/corsi/macchine-movimento-terra', '/corsi/icdl-base', '/corsi/sicurezza-lavoro', '/corsi/certificazioni-informatiche', '/corsi/formazione-dei-lavoratori',
     '/news/bonus-giovani-under-35-aprile-2026', '/news/corsi-gratuiti-progetto-gol-sicilia',
     '/archivio/avviso-7-2023', '/archivio/misura-psr-1-1', '/archivio/avviso-2-2018/corso-di-cucina',
     '/aiuti-di-stato/2023', '/aiuti-di-stato/2024',
@@ -46,7 +45,7 @@ const campioneVisivo = (p) => {
 
 const urls = [
   ...percorsi.map((p) => ({ url: p, visivo: campioneVisivo(p) })),
-  ...conQuery.map((p) => ({ url: p, visivo: ['/corsi?categoria=sicurezza-lavoro', '/corsi?categoria=icdl', '/corsi/antincendio?livello=2'].includes(p) })),
+  ...conQuery.map((p) => ({ url: p, visivo: ['/corsi/antincendio?livello=2'].includes(p) })),
   { url: '/url-inesistente-404', visivo: true, atteso: 404 },
 ];
 

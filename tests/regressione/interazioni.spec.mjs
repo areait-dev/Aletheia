@@ -6,7 +6,8 @@ import { preparaPagina, caricaTutto, verificaRete, STILE_SCREENSHOT } from './pa
 
 const nascondiChat = (page) => page.addStyleTag({ content: STILE_SCREENSHOT });
 
-const CHIAVI_CATEGORIA = ['fse-plus', 'fondi-interprofessionali', 'fondo-nuove-competenze', 'sicurezza-lavoro', 'decreto-attrezzature', 'fitosanitario', 'sicurezza-alimentare', 'icdl', 'certificazioni-informatiche', 'ecm', 'certificazione', 'corsi-pa'];
+// Pagine di categoria del catalogo (data/categorie-corsi.js): il vecchio filtro ?categoria= ora è un redirect 301 (vedi categorie-corsi.spec.mjs).
+const CHIAVI_CATEGORIA = ['sicurezza-lavoro', 'decreto-attrezzature', 'fitosanitario', 'sicurezza-alimentare', 'certificazioni-informatiche', 'corsi-qualificati'];
 
 const testiLink = (loc) => loc.evaluateAll((els) => els.map((e) => `${e.textContent.replace(/\s+/g, ' ').trim()} -> ${e.getAttribute('href')}`));
 
@@ -96,13 +97,13 @@ test('filtri di /corsi: query string, selezione e reset @rapido', async ({ page 
   await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
   traccia.tutti = (await schede()).length;
   for (const k of CHIAVI_CATEGORIA) {
-    await page.goto(`/corsi?categoria=${k}`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`/corsi/${k}`, { waitUntil: 'domcontentloaded' });
     await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
     await page.waitForTimeout(400);
     traccia[k] = { url: new URL(page.url()).search, schede: await schede() };
   }
-  // reset: il parametro sparisce dall'indirizzo senza ricaricare
-  await page.goto('/corsi?categoria=icdl', { waitUntil: 'domcontentloaded' });
+  // reset: il parametro di ricerca sparisce dall'indirizzo senza ricaricare
+  await page.goto('/corsi?q=icdl', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
   await page.getByRole('button', { name: /Rimuovi filtri/ }).first().click({ timeout: 10_000 }); // il bottone compare solo con un filtro attivo
   await page.waitForTimeout(400);

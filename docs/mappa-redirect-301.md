@@ -29,7 +29,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/i-nostri-corsi/formazione-professionale                                                                                                                                        /formazione/regionale
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro                                                                                                                    /corsi?categoria=sicurezza-lavoro
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro                                                                                                                    /corsi/sicurezza-lavoro
 
   /index.php/i-nostri-corsi/formazione-obbligatoria                                                                                                                                         /formazione/obbligatoria
 
@@ -37,7 +37,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/news                                                                                                                                                                           /news
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature                                                                                                                    /corsi?categoria=decreto-attrezzature
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature                                                                                                                    /corsi/decreto-attrezzature
 
   /index.php/contattaci/privacy-e-cookie                                                                                                                                                    /privacy-cookie
 
@@ -67,7 +67,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/news/item/503-avviso-23-2024-occupazione-donna-nuove-opportunita-per-il-lavoro-femminile-in-sicilia                                                                            /news
 
-  /index.php/i-nostri-corsi/ecdl-icdl                                                                                                                                                       /corsi?categoria=certificazioni-informatiche
+  /index.php/i-nostri-corsi/ecdl-icdl                                                                                                                                                       /corsi/certificazioni-informatiche
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/464-furgonista-magazziniere                                                                                                                  https://aletheia4job.it/
 
@@ -277,9 +277,9 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/457-formatore-sicurezza-luoghi-di-lavoro-speciale-decreto-attrezzature                                                                       https://aletheia4job.it/
 
-  /index.php/component/k2/item/123-corsi-di-sicurezza-sul-lavoro                                                                                                                            /corsi?categoria=sicurezza-lavoro
+  /index.php/component/k2/item/123-corsi-di-sicurezza-sul-lavoro                                                                                                                            /corsi/sicurezza-lavoro
 
-  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-icdl-videocorso-online                                                                                                                           /corsi?categoria=certificazioni-informatiche
+  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-icdl-videocorso-online                                                                                                                           /corsi/certificazioni-informatiche
 
   /index.php/news/item/204-workshop-il-conduttore-di-impresa-agricola-8-ore                                                                                                                 /archivio/misura-psr-1-1/workshop-conduttore-impresa-agricola
 
@@ -381,7 +381,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/i-nostri-corsi/calendario-corsi-fad/                                                                                                                                           /calendario-corsi
 
-  /index.php/i-nostri-corsi/ecdl-icdl/convenzioni-enti-scuole                                                                                                                               /corsi?categoria=certificazioni-informatiche
+  /index.php/i-nostri-corsi/ecdl-icdl/convenzioni-enti-scuole                                                                                                                               /corsi/certificazioni-informatiche
 
   /index.php/news/item/506-labour-hoarding-cos-e-e-perche-conta-nel-mercato-del-lavoro-italiano                                                                                             /news
 
@@ -479,7 +479,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/556-docenti-per-corsi-antincendio                                                                                                            https://aletheia4job.it/
 
-  /index.php/online-essentials-mod-2                                                                                                                                                        /corsi?categoria=certificazioni-informatiche
+  /index.php/online-essentials-mod-2                                                                                                                                                        /corsi/certificazioni-informatiche
 
   /index.php/apl-lavoro/garanzia-giovani-2/item/236-misura-2a-formazione-mirata-all-inserimento-lavorativo                                                                                  /agenzia-per-il-lavoro/servizi-alla-persona
 
@@ -539,29 +539,29 @@ visite negli ultimi 12 mesi.
 
   /corsi                                         datore-di-lavoro                                                                                     /news/priorita-lavoratori-2026-workforce-trends
 
-  /corsi?categoria=sicurezza-lavoro              dpi-3-categoria                                                                                      /news/sicilia-microchip-ingegneri-elettronici
+  /corsi/sicurezza-lavoro              dpi-3-categoria                                                                                      /news/sicilia-microchip-ingegneri-elettronici
 
-  /corsi?categoria=decreto-attrezzature          formazione-dei-lavoratori                                                                            /news/sicurezza-lavoro-trend-formazione-futuro
+  /corsi/decreto-attrezzature          formazione-dei-lavoratori                                                                            /news/sicurezza-lavoro-trend-formazione-futuro
 
-  /corsi?categoria=fitosanitario                 formazione-del-preposto                                                                              /news/smart-working-inclusione-sicurezza-futuro
+  /corsi/fitosanitario                 formazione-del-preposto                                                                              /news/smart-working-inclusione-sicurezza-futuro
 
-  /corsi?categoria=sicurezza-alimentare          formazione-dirigente                                                                                 /news/stress-lavoro-salute-mentale-italiani
+  /corsi/sicurezza-alimentare          formazione-dirigente                                                                                 /news/stress-lavoro-salute-mentale-italiani
 
                                                                               formazione-per-formatore                                                                             /archivio
 
-  /corsi?categoria=certificazioni-informatiche   icdl-base                                                                                            /archivio/avviso-2-2018
+  /corsi/certificazioni-informatiche   icdl-base                                                                                            /archivio/avviso-2-2018
 
-  /corsi?categoria=certificazione                icdl-digcomp-2-2                                                                                     /archivio/avviso-2-2018/addetto-panificatore-pasticciere
+  /corsi/corsi-qualificati                icdl-digcomp-2-2                                                                                     /archivio/avviso-2-2018/addetto-panificatore-pasticciere
 
-  /corsi?categoria=ecm                           icdl-standard                                                                                        /archivio/avviso-2-2018/corso-di-cucina
+  /formazione/ecm                           icdl-standard                                                                                        /archivio/avviso-2-2018/corso-di-cucina
 
-  /corsi?categoria=corsi-pa                      icdl-update                                                                                          /archivio/avviso-2-2018/operatore-informatico-risorse-web
+  /formazione/corsi-pa                      icdl-update                                                                                          /archivio/avviso-2-2018/operatore-informatico-risorse-web
 
-  /corsi?categoria=fse-plus                      lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale   /archivio/avviso-20-2024-fse
+  /formazione/regionale-fse                      lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale   /archivio/avviso-20-2024-fse
 
-  /corsi?categoria=fondi-interprofessionali      lavori-in-quota                                                                                      /archivio/avviso-29-2019
+  /formazione/fondi-interprofessionali      lavori-in-quota                                                                                      /archivio/avviso-29-2019
 
-  /corsi?categoria=fondo-nuove-competenze        macchine-movimento-terra                                                                             /archivio/avviso-33-2019
+  /formazione/fondo-nuove-competenze        macchine-movimento-terra                                                                             /archivio/avviso-33-2019
 
   /formazione/obbligatoria                             modulo-aggiuntivo-cantieri-per-datore-di-lavoro                                                      /archivio/avviso-7-2023
 

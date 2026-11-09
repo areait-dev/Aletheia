@@ -1,0 +1,142 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": "__variable_9302a3 __variable_37b1ed",
+  "classeBody": null,
+  "title": "Corsi Decreto Attrezzature - Alètheia Srl",
+  "description": [
+    "Corsi Decreto Attrezzature a Vittoria (RG): carrelli elevatori, PLE, gru, macchine movimento terra e trattori. Teoria in aula e prova pratica."
+  ],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [
+    "https://www.aletheiasrl.it/corsi/decreto-attrezzature"
+  ],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:title": [
+      "Corsi Decreto Attrezzature - Alètheia Srl"
+    ],
+    "og:description": [
+      "Corsi Decreto Attrezzature a Vittoria (RG): carrelli elevatori, PLE, gru, macchine movimento terra e trattori. Teoria in aula e prova pratica."
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/corsi/decreto-attrezzature"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Corsi Decreto Attrezzature - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Corsi Decreto Attrezzature a Vittoria (RG): carrelli elevatori, PLE, gru, macchine movimento terra e trattori. Teoria in aula e prova pratica."
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/logo.png"
+    ]
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Alètheia Srl",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    }
+  ],
+  "preconnect": [
+    "https://cdnjs.cloudflare.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Corsi Decreto Attrezzature"
+  ],
+  "intestazioni": 13,
+  "testoLunghezza": 2841,
+  "testoSha1": "f6d32609ac38bb6882fb16ca5aee4d8e1b7cb8bf",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/corsi",
+    "/corsi/addetti-alla-conduzione-di-carriponte",
+    "/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina",
+    "/corsi/addetti-caricatori-movimentazione-di-materiali-cmm",
+    "/corsi/addetti-macchina-raccogli-frutta-aggiornamento",
+    "/corsi/addetti-macchina-raccogli-frutta-crf",
+    "/corsi/carrelli-elevatori-semoventi-con-conduttore-a-bordo",
+    "/corsi/certificazioni-informatiche",
+    "/corsi/corsi-qualificati",
+    "/corsi/decreto-attrezzature",
+    "/corsi/fitosanitario",
+    "/corsi/macchine-movimento-terra",
+    "/corsi/operatore-di-gru-per-autocarro",
+    "/corsi/ple-piattaforme-di-lavoro-mobili-elevabili",
+    "/corsi/pompe-per-calcestruzzo",
+    "/corsi/sicurezza-alimentare",
+    "/corsi/sicurezza-lavoro",
+    "/corsi/trattori-agricoli-o-forestali",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 18,
+  "immaginiAlt": "a82a745ae81d073fe4f2e34c9422bfa79b360bef"
+}

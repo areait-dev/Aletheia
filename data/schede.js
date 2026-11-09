@@ -163,7 +163,7 @@ export const SCHEDE_LOCALI = {
       "title": "Sicurezza sul lavoro",
       "text": "Corsi obbligatori per lavoratori, preposti, dirigenti e addetti alle emergenze (RSPP, antincendio, primo soccorso).",
       "cta": "Scopri i corsi sicurezza",
-      "href": "/corsi?categoria=sicurezza-lavoro",
+      "href": "/corsi/sicurezza-lavoro",
       "image": "/images/formazione-obbligatoria/sicurezza-sul-lavoro.jpg",
       "imageAlt": "Lavoratore con casco e giubbotto ad alta visibilità davanti a un'aula di formazione"
     },
@@ -173,7 +173,7 @@ export const SCHEDE_LOCALI = {
       "title": "Corsi abilitazione attrezzature di lavoro",
       "text": "Corsi per il rilascio del patentino attrezzature: carrelli elevatori, gru, piattaforme aeree (PLE) ed escavatori.",
       "cta": "Scopri i corsi attrezzature",
-      "href": "/corsi?categoria=decreto-attrezzature",
+      "href": "/corsi/decreto-attrezzature",
       "image": "/images/formazione-obbligatoria/decreto-attrezzature.jpg",
       "imageAlt": "Operaio con il casco arancione in mano davanti a un mezzo da cantiere"
     },
@@ -183,7 +183,7 @@ export const SCHEDE_LOCALI = {
       "title": "Fitosanitario",
       "text": "Corsi per il rilascio e il rinnovo del patentino obbligatorio per l'acquisto, l'utilizzo e la distribuzione di prodotti professionali.",
       "cta": "Scopri i corsi",
-      "href": "/corsi?categoria=fitosanitario",
+      "href": "/corsi/fitosanitario",
       "image": "/images/formazione-obbligatoria/patentino-fitosanitario.jpg",
       "imageAlt": "Operatore con guanti e mascherina che spruzza un prodotto fitosanitario sulle piante"
     },
@@ -193,7 +193,7 @@ export const SCHEDE_LOCALI = {
       "title": "Sicurezza alimentare",
       "text": "Corsi HACCP per tutti gli operatori del settore alimentare: titolari, manipolatori, addetti alla conservazione e vendita.",
       "cta": "Scopri i corsi",
-      "href": "/corsi?categoria=sicurezza-alimentare",
+      "href": "/corsi/sicurezza-alimentare",
       "image": "/images/formazione-obbligatoria/personale-alimentarista.jpg",
       "imageAlt": "Operatore alimentare con guanti monouso che prepara le verdure"
     }
@@ -390,7 +390,7 @@ export const SCHEDE_LOCALI = {
         "Percorsi flessibili per studenti, professionisti e docenti"
       ],
       "cta": "Scopri le certificazioni",
-      "href": "/corsi?categoria=certificazioni-informatiche",
+      "href": "/corsi/certificazioni-informatiche",
       "image": "/images/corsi/icdl-generica.webp",
       "imageAlt": "Tre persone al lavoro con il computer portatile in un'aula di formazione luminosa",
       "gradient": "linear-gradient(135deg, #0F172A 0%, #134E4A 100%)"
@@ -404,7 +404,7 @@ export const SCHEDE_LOCALI = {
         "Certificazione delle competenze acquisite con titoli riconosciuti"
       ],
       "cta": "Scopri i corsi qualificati",
-      "href": "/corsi?categoria=certificazione",
+      "href": "/corsi/corsi-qualificati",
       "image": "/images/corsi/qualificati-generica.webp",
       "imageAlt": "Gruppo di quattro corsisti sorridenti con quaderni e cartelline in un'aula di formazione",
       "gradient": "linear-gradient(135deg, #0F172A 0%, #008C95 100%)"

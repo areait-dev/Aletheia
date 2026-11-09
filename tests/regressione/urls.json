@@ -29,6 +29,30 @@
       "visivo": true
     },
     {
+      "url": "/corsi/sicurezza-lavoro",
+      "visivo": true
+    },
+    {
+      "url": "/corsi/decreto-attrezzature",
+      "visivo": false
+    },
+    {
+      "url": "/corsi/fitosanitario",
+      "visivo": false
+    },
+    {
+      "url": "/corsi/sicurezza-alimentare",
+      "visivo": false
+    },
+    {
+      "url": "/corsi/certificazioni-informatiche",
+      "visivo": true
+    },
+    {
+      "url": "/corsi/corsi-qualificati",
+      "visivo": false
+    },
+    {
       "url": "/corsi/addetti-alla-conduzione-di-carriponte",
       "visivo": false
     },
@@ -408,54 +432,6 @@
     },
     {
       "url": "/iscrizione"
-    },
-    {
-      "url": "/corsi?categoria=fse-plus",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=fondi-interprofessionali",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=fondo-nuove-competenze",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=sicurezza-lavoro",
-      "visivo": true
-    },
-    {
-      "url": "/corsi?categoria=decreto-attrezzature",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=fitosanitario",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=sicurezza-alimentare",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=icdl",
-      "visivo": true
-    },
-    {
-      "url": "/corsi?categoria=certificazioni-informatiche",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=ecm",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=certificazione",
-      "visivo": false
-    },
-    {
-      "url": "/corsi?categoria=corsi-pa",
-      "visivo": false
     },
     {
       "url": "/corsi/antincendio?livello=2",

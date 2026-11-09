@@ -16,10 +16,10 @@ async function salto(request, baseURL, url) {
 }
 const comeAtteso = (baseURL, dest) => (dest.startsWith('http') ? new URL(dest).toString() : new URL(dest, baseURL).toString());
 
-test('la mappa ha 250 righe e nessun ?categoria=icdl (non esiste: si usa certificazioni-informatiche) @rapido', () => {
+test('la mappa ha 250 righe, nessuna destinazione con ?categoria= (si va diritti alla pagina di categoria) @rapido', () => {
   expect(righe).toHaveLength(250);
-  expect(righe.filter((r) => r.a.includes('categoria=icdl'))).toEqual([]);
-  expect(righe.filter((r) => r.a.includes('categoria=certificazioni-informatiche'))).toHaveLength(4);
+  expect(righe.filter((r) => r.a.includes('categoria='))).toEqual([]);
+  expect(righe.filter((r) => r.a === '/corsi/certificazioni-informatiche')).toHaveLength(4);
 });
 
 test('i 250 URL della mappa: 301 diretto (un solo salto) alla destinazione della mappa @rapido', async ({ request, baseURL }) => {
@@ -77,8 +77,8 @@ test('le offerte di lavoro: una regola sola verso aletheia4job.it (anche con sla
 test('riserva: qualunque altro /index.php/... va alla pagina madre più vicina, mai 404 @rapido', async ({ request, baseURL }) => {
   const casi = [
     ['/index.php/i-nostri-corsi/sezione-nuova/pagina', '/corsi'],
-    ['/index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/qualcosa', '/corsi?categoria=sicurezza-lavoro'],
-    ['/index.php/i-nostri-corsi/ecdl-icdl/nuovo-corso-icdl', '/corsi?categoria=certificazioni-informatiche'],
+    ['/index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/qualcosa', '/corsi/sicurezza-lavoro'],
+    ['/index.php/i-nostri-corsi/ecdl-icdl/nuovo-corso-icdl', '/corsi/certificazioni-informatiche'],
     ['/index.php/contattaci/pagina-nuova', '/contatti'],
     ['/index.php/chi-siamo/team', '/chi-siamo'],
     ['/index.php/apl-lavoro/servizio-nuovo', '/agenzia-per-il-lavoro'],

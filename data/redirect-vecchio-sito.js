@@ -29,15 +29,15 @@ const redirectVecchioSito = [
   r(`${OLD}/contattaci/reclami-e-proposte`, '/reclami-proposte'),
   r(`${OLD}/news`, '/news'),
   r(`${OLD}/coordinatore-della-sicurezza`, '/corsi/coordinatori-cantieri-cse-csp'),
-  r(`${OLD}/online-essentials-mod-2`, '/corsi?categoria=icdl'),
+  r(`${OLD}/online-essentials-mod-2`, '/corsi/certificazioni-informatiche'),
 
   // ── Corsi: pagine di sezione ───────────────────────────────────────────────────
   r(`${OLD}/i-nostri-corsi`, '/corsi'),
   r(`${OLD}/i-nostri-corsi/calendario-corsi-fad/:resto*`, '/calendario-corsi'),
   r(`${OLD}/i-nostri-corsi/programma-gol`, '/programma-gol'),
   r(`${OLD}/i-nostri-corsi/formazione-obbligatoria`, '/formazione/obbligatoria'),
-  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro`, '/corsi?categoria=sicurezza-lavoro'),
-  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature`, '/corsi?categoria=decreto-attrezzature'),
+  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro`, '/corsi/sicurezza-lavoro'),
+  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature`, '/corsi/decreto-attrezzature'),
   r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/formazione-covid`, '/formazione/obbligatoria'),
   r(`${OLD}/i-nostri-corsi/obblighi-di-pubblicazione-per-i-beneficiari-di-contributi-2022`, '/aiuti-di-stato/2023'), // DA VERIFICARE
 
@@ -55,7 +55,7 @@ const redirectVecchioSito = [
   r(`${OLD}/i-nostri-corsi/formazione-professionale/archivio/misura-psr/conduttore-d-impresa-agricola-200-ore`, '/corsi/conduttore-d-impresa-agricola'),
 
   // ── ICDL ───────────────────────────────────────────────────────────────────────
-  r(`${OLD}/i-nostri-corsi/ecdl-icdl`, '/corsi?categoria=icdl'),
+  r(`${OLD}/i-nostri-corsi/ecdl-icdl`, '/corsi/certificazioni-informatiche'),
   r(`${OLD}/i-nostri-corsi/ecdl-icdl/ecdl-icdl`, '/corsi/icdl-base'),
   r(`${OLD}/i-nostri-corsi/ecdl-icdl/icdl-digcomp2-2`, '/corsi/icdl-digcomp-2-2'),
   r(`${OLD}/i-nostri-corsi/ecdl-icdl/ecdl-standard`, '/corsi/icdl-standard'),
@@ -81,7 +81,7 @@ const redirectVecchioSito = [
   k2(228, '/corsi/spazi-confinati'),
   k2(162, '/corsi/dpi-3-categoria'),
   k2(148, '/corsi/operatore-di-gru-per-autocarro'),
-  k2(123, '/corsi?categoria=sicurezza-lavoro'),
+  k2(123, '/corsi/sicurezza-lavoro'),
 
   // ── News K2 che esistono anche sul sito nuovo (per ID) ─────────────────────────
   k2(543, '/news/bonus-giovani-under-35-aprile-2026'),
@@ -117,9 +117,9 @@ const redirectVecchioSito = [
   // ── Ripieghi per sezione (tutto ciò che non è stato mappato sopra) ────────────
   r(`${OLD}/news/:resto*`, '/news'),
   r(`${OLD}/i-nostri-corsi/formazione-professionale/:resto*`, '/archivio'),
-  r(`${OLD}/i-nostri-corsi/ecdl-icdl/:resto*`, '/corsi?categoria=icdl'),
-  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/:resto*`, '/corsi?categoria=decreto-attrezzature'),
-  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/:resto*`, '/corsi?categoria=sicurezza-lavoro'),
+  r(`${OLD}/i-nostri-corsi/ecdl-icdl/:resto*`, '/corsi/certificazioni-informatiche'),
+  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/:resto*`, '/corsi/decreto-attrezzature'),
+  r(`${OLD}/i-nostri-corsi/formazione-obbligatoria/:resto*`, '/corsi/sicurezza-lavoro'),
   r(`${OLD}/i-nostri-corsi/:resto*`, '/corsi'),
   r(`${OLD}/apl-lavoro/:resto*`, '/agenzia-per-il-lavoro'),
   r(`${OLD}/contattaci/:resto*`, '/contatti'),
