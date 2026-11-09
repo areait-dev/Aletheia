@@ -13,6 +13,8 @@ import EnrollmentProgress from '../../components/EnrollmentProgress';
 import ProssimaEdizione from '../../components/ProssimaEdizione';
 import { getCalendario, prossimaEdizione as trovaProssimaEdizione, soloFuture, oggiItalia } from '../../lib/wp-calendario';
 import { dataEstesa, riconosciVariante } from '../../lib/parametri-scheda';
+import { descrizioneScheda, titoloScheda } from '../../lib/seo-schede';
+import { OG_IMAGE_DEFAULT, urlAssoluto } from '../../lib/seo';
 import Link from 'next/link';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { getCoursesRaw } from '../../lib/wp-corsi';
@@ -1308,17 +1310,77 @@ export async function getStaticPaths() {
   return { paths: families.map((f) => ({ params: { slug: f.slug } })), fallback: 'blocking' };
 }
 
+// Nome ridotto per i titoli troppo lunghi, solo per la descrizione SEO (il titolo mostrato sulla scheda non cambia)
+const NOME_BREVE_SEO = {
+  'lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale': 'segnaletica stradale (addetti)',
+};
+
+/** Titolo, descrizione, immagine e dati strutturati (Course + un CourseInstance per ogni edizione in calendario) della scheda, per components/SeoCentrale.tsx. */
+function seoScheda(famiglia, edizioni) {
+  // Contenuti dei livelli del corso base (l'aggiornamento non entra nell'intervallo di ore); se la famiglia ha solo aggiornamenti, quelli.
+  const livelli = Array.from(new Set(famiglia.varianti.map((v) => v.livelloKey)));
+  const per = (tipo) => livelli.map((_, i) => EDITORIAL_CONTENT[famiglia.id]?.[tipo]?.[`livello-${i + 1}`]).filter(Boolean);
+  const contenuti = per('corso').length ? per('corso') : per('aggiornamento');
+  const modalita = [];
+  contenuti.forEach((c) => [].concat(c.modalita || []).forEach((m) => modalita.push(m)));
+  const prezzoLabel = String(famiglia.varianti[0]?.prezzoLabel ?? famiglia.priceLabel ?? '');
+  const dati = {
+    nome: famiglia.titolo,
+    ore: contenuti.map((c) => Number(c.durataOre)).filter((n) => Number.isFinite(n) && n > 0),
+    aModuli: famiglia.varianti.some((v) => /modulo/i.test(v.label)),
+    modalita,
+    attestato: contenuti.find((c) => c.attestato)?.attestato || '',
+    cta: famiglia.enrollOnly ? 'iscrizione' : /Finanziato|Gratuito/i.test(prezzoLabel) ? 'informazioni' : 'preventivo',
+    nomeBreve: NOME_BREVE_SEO[famiglia.slug],
+  };
+  const descrizione = descrizioneScheda(dati);
+  const percorso = `/corsi/${famiglia.slug}`;
+  const immagine = famiglia.image ? urlAssoluto(famiglia.image) : OG_IMAGE_DEFAULT;
+  const corso = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    '@id': `${urlAssoluto(percorso)}#corso`,
+    name: famiglia.titolo,
+    description: descrizione,
+    url: urlAssoluto(percorso),
+    inLanguage: 'it',
+    image: immagine,
+    provider: { '@type': 'EducationalOrganization', '@id': `${urlAssoluto('/')}#organizzazione`, name: 'Alètheia Srl', url: urlAssoluto('/') },
+    ...(edizioni.length
+      ? {
+          hasCourseInstance: edizioni.map((e) => {
+            const modo = String(e.modalita || '');
+            const online = /FAD|virtuale|online/i.test(modo);
+            const inSede = /aula|presenza|sede|azienda/i.test(modo) || (!online && !!e.sede);
+            const ore = Number(String(e.durata || '').replace(/\D+/g, ''));
+            return {
+              '@type': 'CourseInstance',
+              name: e.variante ? `${famiglia.titolo} - ${e.variante}` : famiglia.titolo,
+              courseMode: online && inSede ? ['onsite', 'online'] : online ? 'online' : 'onsite',
+              startDate: e.data,
+              ...(e.dataFine ? { endDate: e.dataFine } : {}),
+              ...(ore ? { courseWorkload: `PT${ore}H` } : {}),
+              ...(e.sede ? { location: { '@type': 'Place', name: e.sede, address: { '@type': 'PostalAddress', addressLocality: String(e.sede).split(/[\s(—-]+/)[0], addressRegion: 'RG', addressCountry: 'IT' } } } : online ? { location: { '@type': 'VirtualLocation', url: urlAssoluto(percorso) } } : {}),
+            };
+          }),
+        }
+      : {}),
+  };
+  return { title: titoloScheda(famiglia.titolo), description: descrizione, image: immagine, jsonLd: [corso] };
+}
+
 /* Catalogo: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-corsi.ts). */
 async function getPageStaticProps({ params }) {
   // Uno slug che non è un corso del catalogo risponde 404 vero (prima: pagina "Corso non trovato" con stato 200, un soft 404 che i motori di ricerca indicizzano).
   const catalogo = await getCoursesRaw();
-  if (!buildCourseFamilies(catalogo, coursesDetails, { quiet: true }).some((f) => f.slug === params.slug)) return { notFound: true, ...isrOptions() };
+  const famigliaSeo = buildCourseFamilies(catalogo, coursesDetails, { quiet: true }).find((f) => f.slug === params.slug);
+  if (!famigliaSeo) return { notFound: true, ...isrOptions() };
   // Prossima edizione dal calendario (stesso foglio di calendario, home e Formazione obbligatoria). null = nessuna: la scheda resta com'era (props senza undefined).
   const prossimaEdizione = trovaProssimaEdizione(await getCalendario(), params.slug, oggiItalia());
   // Tutte le edizioni future del corso: la scheda può aprirsi su una precisa (?edizione=AAAA-MM-GG, dalle card del calendario).
   const oggi = oggiItalia();
   const edizioni = soloFuture(await getCalendario(), oggi).filter((c) => c.slug === params.slug && c.data >= oggi).sort((a, b) => a.data.localeCompare(b.data) || a.id - b.id);
-  return { props: { slug: params.slug, coursesRaw: await getCoursesRaw(), prossimaEdizione, edizioni }, ...isrOptions() };
+  return { props: { slug: params.slug, coursesRaw: catalogo, prossimaEdizione, edizioni, seoPagina: seoScheda(famigliaSeo, edizioni) }, ...isrOptions() };
 }
 
 export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizione, edizioni = [] }) {
