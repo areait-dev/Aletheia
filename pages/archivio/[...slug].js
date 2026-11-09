@@ -5,6 +5,7 @@ import { FAMIGLIE } from '../../data/archivio-famiglie';
 import { descrizioneFamiglia, getArchivio, getFamiglia, getVoce, SEZIONI, sottovociPanoramica, VOCI_SPOSTATE } from '../../lib/wp-archivio';
 import { isWpEnabled, isrOptions } from '../../lib/wp';
 import { withSiteOptions } from '../../lib/wp-site';
+import { breadcrumbJsonLd, descrizioneEntro, titoloPagina } from '../../lib/seo';
 
 /**
  * Archivio dei bandi: un'unica rotta per tutte le pagine.
@@ -25,21 +26,43 @@ export async function getStaticPaths() {
   return { paths, fallback: isWpEnabled() ? 'blocking' : false };
 }
 
+// Frasi che completano una descrizione troppo corta fino ai 140 caratteri minimi (le descrizioni dell'archivio sono spesso brevi)
+const RIEMPITIVI_ARCHIVIO = ['Documenti, bandi ed esiti consultabili nell’archivio di Alètheia Srl.', 'Alètheia Srl, ente di formazione a Vittoria (RG).', 'Archivio di Alètheia Srl, Vittoria (RG).', 'Archivio di Alètheia Srl.'];
+
 async function getPageStaticProps({ params }) {
   const slug = params.slug.join('/');
 
   const famiglia = getFamiglia(slug);
   if (famiglia) {
     const voci = await getArchivio();
+    const descr = descrizioneFamiglia(slug);
+    const titolo = descr.titolo || famiglia.titolo;
+    const seoPagina = {
+      title: titoloPagina(titolo),
+      description: descrizioneEntro(descr.descrizione || `${titolo}: documenti, bandi e avvisi dell'archivio storico di Alètheia Srl.`, RIEMPITIVI_ARCHIVIO),
+      // Stesse briciole mostrate nella hero: Home › Archivio › famiglia
+      jsonLd: [breadcrumbJsonLd([{ nome: 'Home', percorso: '/' }, { nome: 'Archivio', percorso: '/archivio' }, { nome: famiglia.titolo, percorso: `/archivio/${slug}` }])],
+    };
     return {
-      props: { tipo: 'panoramica', famiglia, descr: descrizioneFamiglia(slug), sottovoci: sottovociPanoramica(famiglia, voci) },
+      props: { tipo: 'panoramica', famiglia, descr, sottovoci: sottovociPanoramica(famiglia, voci), seoPagina },
       ...isrOptions(),
     };
   }
 
   const voce = await getVoce(slug);
   if (!voce || VOCI_SPOSTATE[slug]) return { notFound: true, ...isrOptions() };
-  return { props: { tipo: 'voce', voce }, ...isrOptions() };
+  const fam = getFamiglia(voce.famiglia);
+  const seoPagina = {
+    title: voce.metaTitolo || titoloPagina(voce.titolo),
+    description: descrizioneEntro(voce.metaDescrizione || voce.descrizione || `${voce.titolo}: documenti, bandi e avvisi dell'archivio storico di Alètheia Srl.`, RIEMPITIVI_ARCHIVIO),
+    jsonLd: [breadcrumbJsonLd([
+      { nome: 'Home', percorso: '/' },
+      { nome: 'Archivio', percorso: '/archivio' },
+      ...(fam ? [{ nome: fam.titolo, percorso: `/archivio/${fam.chiave}` }] : []),
+      { nome: voce.titolo, percorso: `/archivio/${slug}` },
+    ])],
+  };
+  return { props: { tipo: 'voce', voce, seoPagina }, ...isrOptions() };
 }
 
 // Corpo delle pagine non a scheda: stesso schema della scheda (sezioni con titolo H2, righe a scheda), dentro ArchivioShell.

@@ -5,26 +5,71 @@
   "classeBody": null,
   "title": "Le nuove frontiere del lavoro: come la formazione supporta il cambiamento - Alètheia Srl",
   "description": [
-    "Lo studio della Banca Centrale Europea ha evidenziato che sono soprattutto i lavoratori meno qualificati a cambiare lavoro. La formazione diventa strumento essenziale di adattamento."
+    "Lo studio della Banca Centrale Europea ha evidenziato che sono soprattutto i lavoratori meno qualificati a cambiare lavoro. La formazione diventa strumento…"
   ],
   "robots": [],
   "googleVerification": [],
   "viewport": [
     "width=device-width, initial-scale=1"
   ],
-  "canonical": [],
+  "canonical": [
+    "https://www.aletheiasrl.it/news/formazione-frontiere-lavoro-cambiamento"
+  ],
   "icon": [
     "/favicon.png"
   ],
-  "og": {},
-  "twitter": {},
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "og:title": [
+      "Le nuove frontiere del lavoro: come la formazione supporta il cambiamento - Alètheia Srl"
+    ],
+    "og:description": [
+      "Lo studio della Banca Centrale Europea ha evidenziato che sono soprattutto i lavoratori meno qualificati a cambiare lavoro. La formazione diventa strumento…"
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/media/k2/items/cache/8240a1907e29481b04619a0df33df9ab_L.jpg"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/news/formazione-frontiere-lavoro-cambiamento"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Le nuove frontiere del lavoro: come la formazione supporta il cambiamento - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Lo studio della Banca Centrale Europea ha evidenziato che sono soprattutto i lavoratori meno qualificati a cambiare lavoro. La formazione diventa strumento…"
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/media/k2/items/cache/8240a1907e29481b04619a0df33df9ab_L.jpg"
+    ]
+  },
   "jsonld": [
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": [
+        "EducationalOrganization",
+        "Organization"
+      ],
+      "@id": "https://www.aletheiasrl.it/#organizzazione",
       "name": "Alètheia Srl",
+      "legalName": "Alètheia S.r.l.",
       "url": "https://www.aletheiasrl.it",
       "logo": "https://www.aletheiasrl.it/logo.png",
+      "image": "https://www.aletheiasrl.it/images/og-default.png",
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via del Carrubo, snc",
@@ -33,14 +78,121 @@
         "postalCode": "97019",
         "addressCountry": "IT"
       },
-      "telephone": "+39 0932 862613",
-      "email": "info@aletheiasrl.it",
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Vittoria",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via del Carrubo, snc",
+            "addressLocality": "Vittoria",
+            "addressRegion": "RG",
+            "postalCode": "97019",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Ragusa",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Viale delle Americhe, 141",
+            "addressLocality": "Ragusa",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Pozzallo",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Ginevra, 9",
+            "addressLocality": "Pozzallo",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Acate",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "C.da Casazza, snc",
+            "addressLocality": "Acate",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "14:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Sicilia"
+      },
       "sameAs": [
         "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
         "https://www.instagram.com/aletheiasrl/",
         "https://it.linkedin.com/company/al%C3%A9theia-srl",
         "https://t.me/alethiaapl"
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.aletheiasrl.it/news/formazione-frontiere-lavoro-cambiamento"
+      },
+      "headline": "Le nuove frontiere del lavoro: come la formazione supporta il cambiamento",
+      "description": "Lo studio della Banca Centrale Europea ha evidenziato che sono soprattutto i lavoratori meno qualificati a cambiare lavoro. La formazione diventa strumento…",
+      "image": [
+        "https://www.aletheiasrl.it/media/k2/items/cache/8240a1907e29481b04619a0df33df9ab_L.jpg"
+      ],
+      "datePublished": "2025-12-10",
+      "dateModified": "2025-12-10",
+      "author": {
+        "@type": "Organization",
+        "name": "Alètheia Srl"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.aletheiasrl.it/#organizzazione",
+        "name": "Alètheia Srl",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.aletheiasrl.it/logo.png"
+        }
+      }
     }
   ],
   "preconnect": [

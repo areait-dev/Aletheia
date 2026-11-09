@@ -3,26 +3,73 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "OSS - Operatore Socio Sanitario - Alètheia Srl",
-  "description": [],
+  "title": "Corso OSS - Operatore Socio Sanitario - Alètheia Srl",
+  "description": [
+    "Corso OSS - Operatore Socio Sanitario a Vittoria (RG): 1000 ore, in presenza. Qualifica professionale di Operatore Socio Sanitario (OSS). Iscriviti subito."
+  ],
   "robots": [],
   "googleVerification": [],
   "viewport": [
     "width=device-width, initial-scale=1"
   ],
-  "canonical": [],
+  "canonical": [
+    "https://www.aletheiasrl.it/corsi/oss-operatore-socio-sanitario"
+  ],
   "icon": [
     "/favicon.png"
   ],
-  "og": {},
-  "twitter": {},
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:title": [
+      "Corso OSS - Operatore Socio Sanitario - Alètheia Srl"
+    ],
+    "og:description": [
+      "Corso OSS - Operatore Socio Sanitario a Vittoria (RG): 1000 ore, in presenza. Qualifica professionale di Operatore Socio Sanitario (OSS). Iscriviti subito."
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/images/corsi/oss.webp"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/corsi/oss-operatore-socio-sanitario"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Corso OSS - Operatore Socio Sanitario - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Corso OSS - Operatore Socio Sanitario a Vittoria (RG): 1000 ore, in presenza. Qualifica professionale di Operatore Socio Sanitario (OSS). Iscriviti subito."
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/images/corsi/oss.webp"
+    ]
+  },
   "jsonld": [
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": [
+        "EducationalOrganization",
+        "Organization"
+      ],
+      "@id": "https://www.aletheiasrl.it/#organizzazione",
       "name": "Alètheia Srl",
+      "legalName": "Alètheia S.r.l.",
       "url": "https://www.aletheiasrl.it",
       "logo": "https://www.aletheiasrl.it/logo.png",
+      "image": "https://www.aletheiasrl.it/images/og-default.png",
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via del Carrubo, snc",
@@ -31,14 +78,109 @@
         "postalCode": "97019",
         "addressCountry": "IT"
       },
-      "telephone": "+39 0932 862613",
-      "email": "info@aletheiasrl.it",
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Vittoria",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via del Carrubo, snc",
+            "addressLocality": "Vittoria",
+            "addressRegion": "RG",
+            "postalCode": "97019",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Ragusa",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Viale delle Americhe, 141",
+            "addressLocality": "Ragusa",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Pozzallo",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Ginevra, 9",
+            "addressLocality": "Pozzallo",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Acate",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "C.da Casazza, snc",
+            "addressLocality": "Acate",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "14:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Sicilia"
+      },
       "sameAs": [
         "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
         "https://www.instagram.com/aletheiasrl/",
         "https://it.linkedin.com/company/al%C3%A9theia-srl",
         "https://t.me/alethiaapl"
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "@id": "https://www.aletheiasrl.it/corsi/oss-operatore-socio-sanitario#corso",
+      "name": "OSS - Operatore Socio Sanitario",
+      "description": "Corso OSS - Operatore Socio Sanitario a Vittoria (RG): 1000 ore, in presenza. Qualifica professionale di Operatore Socio Sanitario (OSS). Iscriviti subito.",
+      "url": "https://www.aletheiasrl.it/corsi/oss-operatore-socio-sanitario",
+      "inLanguage": "it",
+      "image": "https://www.aletheiasrl.it/images/corsi/oss.webp",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "@id": "https://www.aletheiasrl.it/#organizzazione",
+        "name": "Alètheia Srl",
+        "url": "https://www.aletheiasrl.it/"
+      }
     }
   ],
   "preconnect": [

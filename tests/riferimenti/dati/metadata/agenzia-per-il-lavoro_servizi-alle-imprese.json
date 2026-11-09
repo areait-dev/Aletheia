@@ -5,26 +5,71 @@
   "classeBody": null,
   "title": "Servizi alle Imprese - Alètheia Srl",
   "description": [
-    "Alètheia Srl - Consulenza HR integrata per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."
+    "Consulenza HR integrata di Alètheia Srl per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."
   ],
   "robots": [],
   "googleVerification": [],
   "viewport": [
     "width=device-width, initial-scale=1"
   ],
-  "canonical": [],
+  "canonical": [
+    "https://www.aletheiasrl.it/agenzia-per-il-lavoro/servizi-alle-imprese"
+  ],
   "icon": [
     "/favicon.png"
   ],
-  "og": {},
-  "twitter": {},
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:title": [
+      "Servizi alle Imprese - Alètheia Srl"
+    ],
+    "og:description": [
+      "Consulenza HR integrata di Alètheia Srl per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/images/og-default.png"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/agenzia-per-il-lavoro/servizi-alle-imprese"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Servizi alle Imprese - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Consulenza HR integrata di Alètheia Srl per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/images/og-default.png"
+    ]
+  },
   "jsonld": [
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": [
+        "EducationalOrganization",
+        "Organization"
+      ],
+      "@id": "https://www.aletheiasrl.it/#organizzazione",
       "name": "Alètheia Srl",
+      "legalName": "Alètheia S.r.l.",
       "url": "https://www.aletheiasrl.it",
       "logo": "https://www.aletheiasrl.it/logo.png",
+      "image": "https://www.aletheiasrl.it/images/og-default.png",
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via del Carrubo, snc",
@@ -33,8 +78,87 @@
         "postalCode": "97019",
         "addressCountry": "IT"
       },
-      "telephone": "+39 0932 862613",
-      "email": "info@aletheiasrl.it",
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Vittoria",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via del Carrubo, snc",
+            "addressLocality": "Vittoria",
+            "addressRegion": "RG",
+            "postalCode": "97019",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Ragusa",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Viale delle Americhe, 141",
+            "addressLocality": "Ragusa",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Pozzallo",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Ginevra, 9",
+            "addressLocality": "Pozzallo",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Acate",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "C.da Casazza, snc",
+            "addressLocality": "Acate",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "14:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Sicilia"
+      },
       "sameAs": [
         "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
         "https://www.instagram.com/aletheiasrl/",

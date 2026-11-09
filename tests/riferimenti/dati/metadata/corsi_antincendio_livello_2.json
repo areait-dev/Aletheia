@@ -3,26 +3,73 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Antincendio - Alètheia Srl",
-  "description": [],
+  "title": "Corso Antincendio a Vittoria (RG) - Alètheia Srl",
+  "description": [
+    "Corso Antincendio a Vittoria (RG): da 4 a 16 ore, in aula e aula virtuale. Attestato Antincendio valido in tutta Italia. Richiedi quota e date senza impegno."
+  ],
   "robots": [],
   "googleVerification": [],
   "viewport": [
     "width=device-width, initial-scale=1"
   ],
-  "canonical": [],
+  "canonical": [
+    "https://www.aletheiasrl.it/corsi/antincendio"
+  ],
   "icon": [
     "/favicon.png"
   ],
-  "og": {},
-  "twitter": {},
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:title": [
+      "Corso Antincendio a Vittoria (RG) - Alètheia Srl"
+    ],
+    "og:description": [
+      "Corso Antincendio a Vittoria (RG): da 4 a 16 ore, in aula e aula virtuale. Attestato Antincendio valido in tutta Italia. Richiedi quota e date senza impegno."
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/images/corsi/antincendio.jpg"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/corsi/antincendio"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Corso Antincendio a Vittoria (RG) - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Corso Antincendio a Vittoria (RG): da 4 a 16 ore, in aula e aula virtuale. Attestato Antincendio valido in tutta Italia. Richiedi quota e date senza impegno."
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/images/corsi/antincendio.jpg"
+    ]
+  },
   "jsonld": [
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": [
+        "EducationalOrganization",
+        "Organization"
+      ],
+      "@id": "https://www.aletheiasrl.it/#organizzazione",
       "name": "Alètheia Srl",
+      "legalName": "Alètheia S.r.l.",
       "url": "https://www.aletheiasrl.it",
       "logo": "https://www.aletheiasrl.it/logo.png",
+      "image": "https://www.aletheiasrl.it/images/og-default.png",
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via del Carrubo, snc",
@@ -31,13 +78,161 @@
         "postalCode": "97019",
         "addressCountry": "IT"
       },
-      "telephone": "+39 0932 862613",
-      "email": "info@aletheiasrl.it",
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Vittoria",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via del Carrubo, snc",
+            "addressLocality": "Vittoria",
+            "addressRegion": "RG",
+            "postalCode": "97019",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Ragusa",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Viale delle Americhe, 141",
+            "addressLocality": "Ragusa",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Pozzallo",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Ginevra, 9",
+            "addressLocality": "Pozzallo",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Acate",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "C.da Casazza, snc",
+            "addressLocality": "Acate",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "14:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Sicilia"
+      },
       "sameAs": [
         "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
         "https://www.instagram.com/aletheiasrl/",
         "https://it.linkedin.com/company/al%C3%A9theia-srl",
         "https://t.me/alethiaapl"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "@id": "https://www.aletheiasrl.it/corsi/antincendio#corso",
+      "name": "Antincendio",
+      "description": "Corso Antincendio a Vittoria (RG): da 4 a 16 ore, in aula e aula virtuale. Attestato Antincendio valido in tutta Italia. Richiedi quota e date senza impegno.",
+      "url": "https://www.aletheiasrl.it/corsi/antincendio",
+      "inLanguage": "it",
+      "image": "https://www.aletheiasrl.it/images/corsi/antincendio.jpg",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "@id": "https://www.aletheiasrl.it/#organizzazione",
+        "name": "Alètheia Srl",
+        "url": "https://www.aletheiasrl.it/"
+      },
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "name": "Antincendio",
+          "courseMode": "onsite",
+          "startDate": "2026-08-17",
+          "courseWorkload": "PT4H",
+          "location": {
+            "@type": "Place",
+            "name": "Vittoria (RG) — Sede Alètheia",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Vittoria",
+              "addressRegion": "RG",
+              "addressCountry": "IT"
+            }
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "Antincendio",
+          "courseMode": "onsite",
+          "startDate": "2026-12-08",
+          "courseWorkload": "PT4H",
+          "location": {
+            "@type": "Place",
+            "name": "Ragusa — Area Pratica",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Ragusa",
+              "addressRegion": "RG",
+              "addressCountry": "IT"
+            }
+          }
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "Antincendio",
+          "courseMode": "onsite",
+          "startDate": "2027-06-24",
+          "courseWorkload": "PT4H",
+          "location": {
+            "@type": "Place",
+            "name": "Online — Aula Virtuale",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Online",
+              "addressRegion": "RG",
+              "addressCountry": "IT"
+            }
+          }
+        }
       ]
     }
   ],

@@ -7,6 +7,7 @@ import { getSchede } from '../lib/wp-schede';
 import { isrOptions } from '../lib/wp';
 import { getPagina } from '../lib/wp-pagine';
 import { withSiteOptions } from '../lib/wp-site';
+import { breadcrumbJsonLd } from '../lib/seo';
 
 function CourseCard({ title, icon, description, misura, target }) {
   const [hovered, setHovered] = useState(false);
@@ -97,7 +98,9 @@ function CourseCard({ title, icon, description, misura, target }) {
 
 // Liste di card: WordPress (CPT scheda) se WP_URL è impostato, altrimenti data/schede.js (vedi lib/wp-schede.ts).
 async function getPageStaticProps() {
-  return { props: { pagina: await getPagina('programma-gol'), corsiGOL: await getSchede('gol-misure') }, ...isrOptions() };
+  // Briciole mostrate nella hero (Home › Agenzia per il Lavoro › Servizi alla Persona › Programma G.O.L.) anche come BreadcrumbList
+  const seoPagina = { jsonLd: [breadcrumbJsonLd([{ nome: 'Home', percorso: '/' }, { nome: 'Agenzia per il Lavoro', percorso: '/agenzia-per-il-lavoro' }, { nome: 'Servizi alla Persona', percorso: '/agenzia-per-il-lavoro/servizi-alla-persona' }, { nome: 'Programma G.O.L.', percorso: '/programma-gol' }])] };
+  return { props: { pagina: await getPagina('programma-gol'), corsiGOL: await getSchede('gol-misure'), seoPagina }, ...isrOptions() };
 }
 
 export default function ProgrammaGOL({ corsiGOL, pagina }) {

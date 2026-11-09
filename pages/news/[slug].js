@@ -10,6 +10,7 @@ import { isWpEnabled, isrOptions } from '../../lib/wp';
 import { useLiveNews } from '../../lib/live-preview';
 import { useTheme } from '../../context/ThemeContext';
 import { withSiteOptions } from '../../lib/wp-site';
+import { articoloJsonLd, descrizioneEntro, titoloPagina } from '../../lib/seo';
 
 /* ─── Data fetching (invariato) ─────────────────────────────── */
 
@@ -29,7 +30,17 @@ async function getPageStaticProps({ params, preview = false, previewData }) {
     .filter((n) => n.slug !== article.slug)
     .slice(0, 3)
     .map(({ body, bodyHtml, ...rest }) => rest);
-  return { props: { article, related, isPreview: Boolean(preview) }, ...isrOptions() };
+  // SEO (components/SeoCentrale.tsx): descrizione di 140-160 caratteri dall'estratto, immagine dell'articolo, NewsArticle. Solo template: il testo delle news non si tocca.
+  const percorso = `/news/${article.slug}`;
+  const descrizione = descrizioneEntro(article.excerpt || article.title, ['Le news di Alètheia Srl su formazione, sicurezza e lavoro in Sicilia.', 'Alètheia Srl, ente di formazione a Vittoria (RG).', 'Le news di Alètheia Srl.', 'News di Alètheia Srl.']);
+  const seoPagina = {
+    title: titoloPagina(article.title),
+    description: descrizione,
+    ...(article.image ? { image: article.image } : {}),
+    type: 'article',
+    jsonLd: [articoloJsonLd({ titolo: article.title, descrizione, percorso, immagine: article.image || '/images/og-default.png', dataPubblicazione: article.date })],
+  };
+  return { props: { article, related, isPreview: Boolean(preview), seoPagina }, ...isrOptions() };
 }
 
 /* ─── Utilities ─────────────────────────────────────────────── */
