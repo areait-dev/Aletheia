@@ -1,4 +1,4 @@
 {
   "status": 200,
-  "testo": "User-agent: *\nDisallow: /checkout\nDisallow: /carrello\n"
+  "testo": "User-agent: *\n\nSitemap: https://www.aletheiasrl.it/sitemap.xml\n"
 }
