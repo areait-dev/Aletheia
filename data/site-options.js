@@ -78,7 +78,6 @@ export const SITE_OPTIONS = {
           {
             sottotitolo: 'Formazione',
             links: [
-              { label: 'Catalogo corsi (pdf scaricabile)', href: '/pdf/catalogo.pdf' },
               { label: 'Calendario corsi', href: '/calendario-corsi' },
               { label: 'Piattaforma e-learning', href: 'https://www.aletheiasrl.it/elearning2/' },
             ],

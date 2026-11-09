@@ -322,7 +322,6 @@ group('opt', 'Opzioni Globali Alètheia', PAGE_LOC, () => [
   url('footer_indirizzo_link', 'Link mappa dell\'indirizzo'),
   list('footer_link_legali', 'Link legali', 'Etichetta|URL (Privacy e Cookie, Reclami, Aiuti di Stato…)', { rows: 5 }),
   list('footer_colonne', 'Link rapidi', 'Riga "# Titolo colonna", riga "## Sottotitolo" (facoltativa), poi righe "Etichetta|URL"', { rows: 14 }),
-  F('file', 'footer_catalogo_pdf', 'Catalogo corsi (PDF)', { return_format: 'array', library: 'all', mime_types: 'pdf' }),
   list('footer_accreditamenti', 'Accreditamenti (testo)', 'una riga per accreditamento', { rows: 5 }),
   text('footer_copyright', 'Barra inferiore (©, P.IVA, PEC)'),
   text('footer_credits_testo', 'Credits: testo', { placeholder: 'Ente della rete di imprese' }),

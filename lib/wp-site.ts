@@ -78,7 +78,6 @@ const DEFAULTS = LOCAL as unknown as SiteOptions;
 
 function build(acf: Acf, certificazioni: Partner[], chatbotFaq: ChatbotFaqs | null): SiteOptions {
   const d = DEFAULTS;
-  const catalogo = (acf.footer_catalogo_pdf as { url?: string } | null | undefined)?.url;
   const colonne = list(parseFooterColonne(acf.footer_colonne), d.footer.colonne);
   return {
     identita: {
@@ -103,13 +102,7 @@ function build(acf: Acf, certificazioni: Partner[], chatbotFaq: ChatbotFaqs | nu
       indirizzo: text(acf.footer_indirizzo, d.footer.indirizzo),
       indirizzoLink: text(acf.footer_indirizzo_link, d.footer.indirizzoLink),
       linkLegali: list(parseLinks(acf.footer_link_legali), d.footer.linkLegali),
-      // Il PDF caricato in WordPress sostituisce l'URL del link al catalogo (quello locale è /pdf/catalogo.pdf).
-      colonne: catalogo
-        ? colonne.map((c) => ({
-            ...c,
-            gruppi: c.gruppi.map((g) => ({ ...g, links: g.links.map((l) => (l.href === '/pdf/catalogo.pdf' ? { ...l, href: catalogo } : l)) })),
-          }))
-        : colonne,
+      colonne,
       accreditamentiTitolo: d.footer.accreditamentiTitolo,
       accreditamenti: list(lines(acf.footer_accreditamenti), d.footer.accreditamenti),
       certificazioni,

@@ -377,24 +377,6 @@
       "new_lines": ""
     },
     {
-      "key": "field_al_opt_footer_catalogo_pdf",
-      "label": "Catalogo corsi (PDF)",
-      "name": "footer_catalogo_pdf",
-      "aria-label": "",
-      "type": "file",
-      "instructions": "",
-      "required": 0,
-      "conditional_logic": 0,
-      "wrapper": {
-        "width": "",
-        "class": "",
-        "id": ""
-      },
-      "return_format": "array",
-      "library": "all",
-      "mime_types": "pdf"
-    },
-    {
       "key": "field_al_opt_footer_accreditamenti",
       "label": "Accreditamenti (testo)",
       "name": "footer_accreditamenti",

@@ -57,7 +57,7 @@ Per rigenerare i gruppi da zero: `node wordpress/build-acf-json.mjs` (sovrascriv
 | Liste di card con testo/immagine (avvisi regionali, misure GOL, servizi alla persona/imprese, aree, vantaggi, "perché noi") | array in `pages/*.js` | CPT `scheda` + tassonomia `lista_schede` (un termine per lista, ordine = Attributi pagina) |
 | Testi e opzioni dei moduli (servizi, settori, privacy, successo) | `FormCandidato.tsx`, `FormAzienda.tsx` | Opzioni Globali → tab Moduli |
 | Menu e mega-menu (voci, gruppi Formazione, riquadro calendario, pulsanti lavoro/e-learning) | `Header.tsx` | Opzioni Globali → tab Menu |
-| Footer (indirizzo, link legali, link rapidi, catalogo PDF, accreditamenti, barra inferiore, credits) | `Footer.tsx` | Opzioni Globali → tab Footer; loghi certificazioni = CPT `partner` (con variante per tema scuro) |
+| Footer (indirizzo, link legali, link rapidi, accreditamenti, barra inferiore, credits) | `Footer.tsx` | Opzioni Globali → tab Footer; loghi certificazioni = CPT `partner` (con variante per tema scuro) |
 | Contatti, chatbot, SEO globale, cookie/privacy | `contatti.js`, `Chatbot.tsx`, `SeoHead.tsx`, `CookieConsent.tsx` | Opzioni Globali (tab dedicate) |
 | SEO per pagina | `SeoHead.tsx` | Gruppo **SEO** (`seo_titolo`, `seo_descrizione`, `seo_og_image`, `seo_noindex`) |
 
