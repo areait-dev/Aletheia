@@ -135,7 +135,7 @@ export default function FormAzienda({
           : 'linear-gradient(135deg, #0F172A 0%, #0D1F2D 100%)',
         padding: '5rem 0',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'clip', // clip, non hidden: hidden rompe position:sticky della colonna laterale
         scrollMarginTop: '100px',
       }}
     >
@@ -182,8 +182,8 @@ export default function FormAzienda({
           gap: '4rem', alignItems: 'start',
         }} className="form-az-grid">
 
-          {/* ── Colonna sinistra: info ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {/* ── Colonna sinistra: info (sticky su desktop, vedi .form-side-sticky in globals.css) ── */}
+          <div className="form-side-sticky" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {INFO_ITEMS.map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem' }}>

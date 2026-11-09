@@ -65,7 +65,7 @@ export default function FondiInterprofessionali({ faqs, vantaggi, pagina }) {
         .partner-row {
           display: grid;
           gap: 1.25rem;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(2, minmax(0, 1fr)); /* minmax(0,…): i nomi lunghi non allargano la colonna oltre lo schermo */
         }
         @media (min-width: 640px) { .partner-row { grid-template-columns: repeat(3, 1fr); } }
         /* 5 colonne desktop: 9 fondi su due file (5 + 4) */
@@ -156,7 +156,7 @@ export default function FondiInterprofessionali({ faqs, vantaggi, pagina }) {
                     textAlign: 'center',
                   }}
                 >
-                  <span style={{ fontSize: '1.05rem', fontWeight: 800, lineHeight: 1.3 }}>{p}</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 800, lineHeight: 1.3, overflowWrap: 'anywhere' }}>{p}</span>
                 </div>
               ))}
             </div>

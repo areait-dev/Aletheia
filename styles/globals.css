@@ -3487,3 +3487,42 @@ html.dark .switch-opt:not([aria-selected="true"]):hover { background: rgba(255, 
 
 /* ── Card delle news (pages/news/index.js): l'intera card è un link; il focus da tastiera si vede sul bordo della card. */
 .news-card-link:focus-visible { outline: 3px solid #008C95; outline-offset: 3px; }
+
+/* ── Tabelle "a schede" su mobile (.table-stack) ────────────────────────────────────────────
+   Sotto i 640px la tabella non scorre né viene tagliata a destra: ogni riga diventa una scheda e ogni cella mostra la propria
+   etichetta di colonna (attributo data-label sul <td>, mostrato da ::before). L'intestazione resta solo per gli screen reader.
+   Colori: etichetta var(--muted-text) (#6B7280 su bianco 4,83:1, #9CA3AF su scuro) — token del sito, con variante dark già inclusa. */
+@media (max-width: 639px) {
+  .table-stack, .table-stack tbody, .table-stack tr, .table-stack td { display: block; width: 100%; min-width: 0; }
+  .table-stack { min-width: 0 !important; }
+  .table-stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .table-stack tr { padding: 0.75rem 1rem; }
+  .table-stack tr + tr { border-top: 1px solid rgba(128, 128, 128, 0.25); }
+  .table-stack td { padding: 0.35rem 0 !important; white-space: normal !important; overflow-wrap: anywhere; border: 0 !important; }
+  .table-stack td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--muted-text);
+  }
+}
+
+/* ── Colonna laterale dei form (info, "come funziona", contatti): resta ferma mentre si compila il form ──────────────
+   Solo quando le colonne sono affiancate (≥ 1024px: il preventivo e l'iscrizione sono affiancati da lg; sotto, i form vanno in colonna singola o con colonne strette e sticky sarebbe dannoso).
+   top 7rem = sotto l'header fisso. Se la colonna è più alta dello schermo scorre normalmente (max-height + overflow-y). */
+@media (min-width: 1024px) {
+  .form-side-sticky {
+    position: sticky;
+    top: 7rem;
+    align-self: start !important;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}
+
+/* Badge sulle foto: su mobile il testo lungo può andare a capo invece di allargare la card oltre lo schermo
+   (formazione/regionale-fse: due card erano larghe 485px su 375). */
+@media (max-width: 639px) {
+  .badge-overlay { white-space: normal; max-width: 100%; text-align: left; }
+}

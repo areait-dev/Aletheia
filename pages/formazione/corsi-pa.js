@@ -557,8 +557,8 @@ export default function CorsiPA({ faqs, aree, mepaElenco, pagina }) {
       <section id="contatti" className="bg-slate-50 dark:bg-dark-bg" style={{ padding: '5rem 0' }}>
         <div className="container">
           <div className="pa-contact-grid-2col">
-            {/* Colonna sinistra: testo introduttivo */}
-            <div>
+            {/* Colonna sinistra: testo introduttivo (sticky su desktop) */}
+            <div className="form-side-sticky">
               <span className="section-badge">Parliamone</span>
               <h3 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.3 }}>
                 Vuoi un piano formativo per il tuo ente?

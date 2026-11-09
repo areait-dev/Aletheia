@@ -247,7 +247,7 @@ export default function ModuloIscrizione({ tipo = 'iscrizione' }) {
               </div>
 
               {/* COLONNA LATERALE: come funziona + contatti diretti */}
-              <aside className="flex flex-col gap-6">
+              <aside className="form-side-sticky flex flex-col gap-6">
                 <div className="bg-white dark:bg-dark-card rounded-3xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
                   <h2 className="text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300 mb-5">Come funziona</h2>
                   <ol className="list-none m-0 p-0 flex flex-col gap-5">

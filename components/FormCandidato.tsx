@@ -152,7 +152,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
         background: 'linear-gradient(135deg, #0F172A 0%, #0D2D2A 100%)',
         padding: '5rem 0',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'clip', // clip, non hidden: hidden rompe position:sticky della colonna laterale
       }}
     >
       {/* Decorative blobs */}
@@ -201,8 +201,8 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
           className="form-grid"
         >
 
-          {/* ── Colonna sinistra: info ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {/* ── Colonna sinistra: info (sticky su desktop, vedi .form-side-sticky in globals.css) ── */}
+          <div className="form-side-sticky" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {INFO_ITEMS.map((item, i) => (

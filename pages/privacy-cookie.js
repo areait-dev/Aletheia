@@ -1,3 +1,4 @@
+import { Children, cloneElement } from 'react';
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -25,7 +26,7 @@ function SubTitle({ children }) {
 function DataTable({ head, rows }) {
   return (
     <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 my-4">
-      <table className="w-full text-left text-sm border-collapse min-w-[720px]">
+      <table className="table-stack w-full text-left text-sm border-collapse min-w-[720px]">
         <thead>
           <tr className="bg-gray-50 dark:bg-gray-800">
             {head.map((h) => (
@@ -35,7 +36,12 @@ function DataTable({ head, rows }) {
             ))}
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody>
+          {/* data-label su ogni cella: su mobile la riga diventa una scheda (.table-stack in globals.css) */}
+          {rows.map((tr) =>
+            cloneElement(tr, {}, Children.map(tr.props.children, (td, i) => cloneElement(td, { 'data-label': head[i] })))
+          )}
+        </tbody>
       </table>
     </div>
   );

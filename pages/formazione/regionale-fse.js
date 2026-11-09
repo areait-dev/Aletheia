@@ -44,7 +44,7 @@ function PercorsoCard({ badge, icon, title, bullets, cta, href, image, imageAlt 
       />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(4,15,20,0.92) 10%, rgba(4,15,20,0.6) 55%, rgba(4,15,20,0.12) 100%)' }} />
 
-      <div style={{ position: 'relative', zIndex: 1, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1, justifyContent: 'flex-end' }}>
+      <div style={{ position: 'relative', zIndex: 1, minWidth: 0, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1, justifyContent: 'flex-end' }}>
         <span className="badge-overlay">
           <span className="badge-overlay-dot" aria-hidden="true" />
           {badge}
@@ -108,7 +108,7 @@ export default function FormazioneFinanziataSicilia({ percorsi, pagina }) {
           gap: 1.5rem;
         }
         @media (max-width: 1024px) {
-          .percorsi-grid { grid-template-columns: 1fr; }
+          .percorsi-grid { grid-template-columns: minmax(0, 1fr); } /* minmax(0,…): evita che le card superino lo schermo (era 485px su 375) */
         }
 
         .calendario-orientamento-grid {

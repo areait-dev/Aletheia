@@ -1816,7 +1816,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
               Il corso è strutturato in {contenutoLivello.moduli.length} moduli {contenutoLivello.durataOre != null && ` per un totale di ${contenutoLivello.durataOre} ore`}
             </p>
             <div className="border border-slate-200 dark:border-[rgba(255,255,255,0.08)]" style={{ borderRadius: '0.75rem', overflow: 'hidden' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <table className="table-stack" style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                   <tr className="bg-slate-50 dark:bg-gray-700">
                     <th className="text-slate-900 dark:text-white" style={{ textAlign: 'left', padding: '0.85rem 1.25rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modulo</th>
@@ -1827,13 +1827,13 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
                 <tbody>
                   {contenutoLivello.moduli.map((modulo, i) => (
                     <tr key={i} className="border-t border-slate-200 dark:border-[rgba(255,255,255,0.08)]">
-                      <td className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{modulo.titolo}</td>
-                      <td style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>
+                      <td data-label="Modulo" className="text-slate-900 dark:text-white" style={{ padding: '1rem 1.25rem', fontWeight: 700, fontSize: '0.9rem', verticalAlign: 'top' }}>{modulo.titolo}</td>
+                      <td data-label="Durata" style={{ padding: '1rem 1.25rem', color: '#008C95', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', verticalAlign: 'top' }}>
                         {modulo.durataOreTeoria != null
                           ? `Teoria: ${modulo.durataOreTeoria}h · Pratica: ${modulo.durataOrePratica}h`
                           : modulo.durataOre != null ? `${modulo.durataOre} ore` : '—'}
                       </td>
-                      <td style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
+                      <td data-label="Argomenti" style={{ padding: '1rem 1.25rem', verticalAlign: 'top' }}>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
                           {(modulo.argomenti || []).map((arg, j) => (
                             <li key={j} className="text-slate-600 dark:text-gray-300" style={{ fontSize: '0.85rem' }}>{arg}</li>

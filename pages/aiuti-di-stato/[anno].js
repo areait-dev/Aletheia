@@ -13,7 +13,7 @@ function TabellaEnte({ anno, ente, righe }) {
         {ente} (ente erogatore) le seguenti somme:
       </p>
       <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-        <table className="w-full text-sm text-left">
+        <table className="table-stack w-full text-sm text-left">
           <thead className="bg-gray-50 dark:bg-gray-800">
             <tr>
               <th className="px-4 py-3 font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap">DATA</th>
@@ -25,10 +25,10 @@ function TabellaEnte({ anno, ente, righe }) {
           <tbody>
             {righe.map((r, i) => (
               <tr key={i} className="border-t border-gray-200 dark:border-gray-700">
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 whitespace-nowrap align-top">{r.data}</td>
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 whitespace-nowrap align-top">{r.importo}</td>
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top">{r.titolo}</td>
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top">{r.cup}</td>
+                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 whitespace-nowrap align-top" data-label="DATA">{r.data}</td>
+                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 whitespace-nowrap align-top" data-label="IMPORTO">{r.importo}</td>
+                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top" data-label="TITOLO PROGETTO">{r.titolo}</td>
+                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top" data-label="CIP – CUP - RUP">{r.cup}</td>
               </tr>
             ))}
           </tbody>
