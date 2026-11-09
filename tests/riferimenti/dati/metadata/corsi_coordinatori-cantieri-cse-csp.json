@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Coordinatori Cantieri CSE/CSP - Alètheia Srl",
+  "title": "Corso Coordinatori cantieri CSE/CSP - Alètheia Srl",
   "description": [
-    "Corso Coordinatori Cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+    "Corso Coordinatori cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Coordinatori Cantieri CSE/CSP - Alètheia Srl"
+      "Corso Coordinatori cantieri CSE/CSP - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Coordinatori Cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Coordinatori cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/coordinatori-cantieri.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Coordinatori Cantieri CSE/CSP - Alètheia Srl"
+      "Corso Coordinatori cantieri CSE/CSP - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Coordinatori Cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Coordinatori cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/coordinatori-cantieri.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/coordinatori-cantieri-cse-csp#corso",
-      "name": "Coordinatori Cantieri CSE/CSP",
-      "description": "Corso Coordinatori Cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
+      "name": "Coordinatori cantieri CSE/CSP",
+      "description": "Corso Coordinatori cantieri CSE/CSP a Vittoria (RG): 120 ore, in aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
       "url": "https://www.aletheiasrl.it/corsi/coordinatori-cantieri-cse-csp",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/coordinatori-cantieri.jpg",
@@ -184,7 +184,7 @@
       "hasCourseInstance": [
         {
           "@type": "CourseInstance",
-          "name": "Coordinatori Cantieri CSE/CSP",
+          "name": "Coordinatori cantieri CSE/CSP",
           "courseMode": "onsite",
           "startDate": "2026-08-13",
           "courseWorkload": "PT120H",
@@ -201,7 +201,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Coordinatori Cantieri CSE/CSP",
+          "name": "Coordinatori cantieri CSE/CSP",
           "courseMode": "onsite",
           "startDate": "2026-11-16",
           "courseWorkload": "PT120H",
@@ -218,7 +218,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Coordinatori Cantieri CSE/CSP",
+          "name": "Coordinatori cantieri CSE/CSP",
           "courseMode": "onsite",
           "startDate": "2027-06-08",
           "courseWorkload": "PT120H",
@@ -243,11 +243,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Coordinatori Cantieri CSE/CSP"
+    "Coordinatori cantieri CSE/CSP"
   ],
   "intestazioni": 6,
   "testoLunghezza": 5436,
-  "testoSha1": "ee8baeede94da4a49a36fcad18cbee80f13f26a8",
+  "testoSha1": "4b7f320fadf92e68370d41967e7450d28c2fd4fe",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -281,7 +281,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Coordinatori%20Cantieri%20CSE%2FCSP%20(120%20ore)&edizione=13%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=Coordinatori%20cantieri%20CSE%2FCSP%20(120%20ore)&edizione=13%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

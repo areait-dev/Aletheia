@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso RSPP - Datore Di Lavoro a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso RSPP - Datore di lavoro a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso RSPP - Datore Di Lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+    "Corso RSPP - Datore di lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso RSPP - Datore Di Lavoro a Vittoria (RG) - Alètheia Srl"
+      "Corso RSPP - Datore di lavoro a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso RSPP - Datore Di Lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso RSPP - Datore di lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/rspp-datore-di-lavoro.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso RSPP - Datore Di Lavoro a Vittoria (RG) - Alètheia Srl"
+      "Corso RSPP - Datore di lavoro a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso RSPP - Datore Di Lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso RSPP - Datore di lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/rspp-datore-di-lavoro.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/rspp-datore-di-lavoro#corso",
-      "name": "RSPP - Datore Di Lavoro",
-      "description": "Corso RSPP - Datore Di Lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date.",
+      "name": "RSPP - Datore di lavoro",
+      "description": "Corso RSPP - Datore di lavoro a Vittoria (RG): moduli da 8 a 16 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date.",
       "url": "https://www.aletheiasrl.it/corsi/rspp-datore-di-lavoro",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/rspp-datore-di-lavoro.jpg",
@@ -184,7 +184,7 @@
       "hasCourseInstance": [
         {
           "@type": "CourseInstance",
-          "name": "RSPP - Datore Di Lavoro",
+          "name": "RSPP - Datore di lavoro",
           "courseMode": "onsite",
           "startDate": "2026-08-18",
           "courseWorkload": "PT8H",
@@ -201,7 +201,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "RSPP - Datore Di Lavoro",
+          "name": "RSPP - Datore di lavoro",
           "courseMode": "onsite",
           "startDate": "2026-12-16",
           "courseWorkload": "PT8H",
@@ -218,7 +218,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "RSPP - Datore Di Lavoro",
+          "name": "RSPP - Datore di lavoro",
           "courseMode": "onsite",
           "startDate": "2027-07-08",
           "courseWorkload": "PT8H",
@@ -243,11 +243,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "RSPP - Datore Di Lavoro"
+    "RSPP - Datore di lavoro"
   ],
   "intestazioni": 6,
   "testoLunghezza": 5243,
-  "testoSha1": "b9c368d8b4b1b110b9466fe71c0a636cda8c1cf3",
+  "testoSha1": "c005aa6aca5d578777d295ea86b29b5fc11058cc",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -282,7 +282,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=RSPP%20-%20Datore%20Di%20Lavoro%20-%20Modulo%20Comune%20(8%20ore)&edizione=18%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=RSPP%20-%20Datore%20di%20lavoro%20-%20Modulo%20comune%20(8%20ore)&edizione=18%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

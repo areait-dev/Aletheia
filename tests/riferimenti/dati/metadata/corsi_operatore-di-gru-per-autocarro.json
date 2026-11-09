@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Operatore Di Gru Per Autocarro - Alètheia Srl",
+  "title": "Corso Operatore di gru per autocarro - Alètheia Srl",
   "description": [
-    "Corso Operatore Di Gru Per Autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+    "Corso Operatore di gru per autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Operatore Di Gru Per Autocarro - Alètheia Srl"
+      "Corso Operatore di gru per autocarro - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Operatore Di Gru Per Autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Operatore di gru per autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/gru-per-autocarro.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Operatore Di Gru Per Autocarro - Alètheia Srl"
+      "Corso Operatore di gru per autocarro - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Operatore Di Gru Per Autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Operatore di gru per autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/gru-per-autocarro.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/operatore-di-gru-per-autocarro#corso",
-      "name": "Operatore Di Gru Per Autocarro",
-      "description": "Corso Operatore Di Gru Per Autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
+      "name": "Operatore di gru per autocarro",
+      "description": "Corso Operatore di gru per autocarro a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
       "url": "https://www.aletheiasrl.it/corsi/operatore-di-gru-per-autocarro",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/gru-per-autocarro.jpg",
@@ -190,11 +190,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Operatore Di Gru Per Autocarro"
+    "Operatore di gru per autocarro"
   ],
   "intestazioni": 6,
   "testoLunghezza": 5252,
-  "testoSha1": "b15b3250487645606f1cf0fab9cb8688048cb442",
+  "testoSha1": "87aa11245d416f16b45a1578a6d7a5df47f19f86",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -228,7 +228,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Operatore%20Di%20Gru%20Per%20Autocarro%20(12%20ore)",
+    "/richiedi-preventivo?corso=Operatore%20di%20gru%20per%20autocarro%20(12%20ore)",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

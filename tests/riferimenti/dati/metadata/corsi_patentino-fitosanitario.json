@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Patentino Fitosanitario a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso Patentino fitosanitario a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso Patentino Fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato."
+    "Corso Patentino fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Patentino Fitosanitario a Vittoria (RG) - Alètheia Srl"
+      "Corso Patentino fitosanitario a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Patentino Fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato."
+      "Corso Patentino fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/formazione-obbligatoria/patentino-fitosanitario.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Patentino Fitosanitario a Vittoria (RG) - Alètheia Srl"
+      "Corso Patentino fitosanitario a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Patentino Fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato."
+      "Corso Patentino fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/formazione-obbligatoria/patentino-fitosanitario.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/patentino-fitosanitario#corso",
-      "name": "Patentino Fitosanitario",
-      "description": "Corso Patentino Fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato.",
+      "name": "Patentino fitosanitario",
+      "description": "Corso Patentino fitosanitario a Vittoria (RG): 20 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno. Ente accreditato.",
       "url": "https://www.aletheiasrl.it/corsi/patentino-fitosanitario",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/formazione-obbligatoria/patentino-fitosanitario.jpg",
@@ -190,11 +190,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Patentino Fitosanitario"
+    "Patentino fitosanitario"
   ],
   "intestazioni": 6,
   "testoLunghezza": 4695,
-  "testoSha1": "3b24e0b8431a7b32f673237a8b5433087503e8fe",
+  "testoSha1": "53bc59bb0b5785688a78732f8526e5e1fe95f6c3",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -228,7 +228,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Patentino%20Fitosanitario%20(20%20ore)",
+    "/richiedi-preventivo?corso=Patentino%20fitosanitario%20(20%20ore)",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

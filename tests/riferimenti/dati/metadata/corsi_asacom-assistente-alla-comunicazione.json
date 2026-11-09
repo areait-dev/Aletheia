@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso ASACOM - Assistente alla Comunicazione - Alètheia Srl",
+  "title": "Corso ASACOM - Assistente alla comunicazione - Alètheia Srl",
   "description": [
-    "Corso ASACOM - Assistente alla Comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana."
+    "Corso ASACOM - Assistente alla comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso ASACOM - Assistente alla Comunicazione - Alètheia Srl"
+      "Corso ASACOM - Assistente alla comunicazione - Alètheia Srl"
     ],
     "og:description": [
-      "Corso ASACOM - Assistente alla Comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana."
+      "Corso ASACOM - Assistente alla comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/asacom.webp"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso ASACOM - Assistente alla Comunicazione - Alètheia Srl"
+      "Corso ASACOM - Assistente alla comunicazione - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso ASACOM - Assistente alla Comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana."
+      "Corso ASACOM - Assistente alla comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/asacom.webp"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/asacom-assistente-alla-comunicazione#corso",
-      "name": "ASACOM - Assistente alla Comunicazione",
-      "description": "Corso ASACOM - Assistente alla Comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana.",
+      "name": "ASACOM - Assistente alla comunicazione",
+      "description": "Corso ASACOM - Assistente alla comunicazione a Vittoria (RG): in presenza. Iscriviti subito. Ente di formazione accreditato dalla Regione Siciliana.",
       "url": "https://www.aletheiasrl.it/corsi/asacom-assistente-alla-comunicazione",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/asacom.webp",
@@ -190,11 +190,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "ASACOM - Assistente alla Comunicazione"
+    "ASACOM - Assistente alla comunicazione"
   ],
   "intestazioni": 6,
   "testoLunghezza": 5325,
-  "testoSha1": "2c996ae023261208b2d293d37a09a6fd30c54d57",
+  "testoSha1": "6c136a4f9bc654e38104268466f4d9c6d9e2f4de",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -225,11 +225,11 @@
     "/formazione/professionale-specialistica",
     "/formazione/regionale",
     "/formazione/regionale-fse",
-    "/iscrizione?corso=ASACOM%20-%20Assistente%20alla%20Comunicazione",
+    "/iscrizione?corso=ASACOM%20-%20Assistente%20alla%20comunicazione",
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=ASACOM%20-%20Assistente%20alla%20Comunicazione",
+    "/richiedi-preventivo?corso=ASACOM%20-%20Assistente%20alla%20comunicazione",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

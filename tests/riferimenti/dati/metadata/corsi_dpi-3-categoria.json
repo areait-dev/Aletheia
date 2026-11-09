@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso DPI 3° Categoria a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso DPI 3° categoria a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso DPI 3° Categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno."
+    "Corso DPI 3° categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso DPI 3° Categoria a Vittoria (RG) - Alètheia Srl"
+      "Corso DPI 3° categoria a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso DPI 3° Categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno."
+      "Corso DPI 3° categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/dpi-3-categoria.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso DPI 3° Categoria a Vittoria (RG) - Alètheia Srl"
+      "Corso DPI 3° categoria a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso DPI 3° Categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno."
+      "Corso DPI 3° categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/dpi-3-categoria.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/dpi-3-categoria#corso",
-      "name": "DPI 3° Categoria",
-      "description": "Corso DPI 3° Categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno.",
+      "name": "DPI 3° categoria",
+      "description": "Corso DPI 3° categoria a Vittoria (RG): 8 ore, in aula. Attestato valido su tutto il territorio nazionale. Richiedi quota e date senza impegno.",
       "url": "https://www.aletheiasrl.it/corsi/dpi-3-categoria",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/dpi-3-categoria.jpg",
@@ -190,11 +190,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "DPI 3° Categoria"
+    "DPI 3° categoria"
   ],
   "intestazioni": 6,
   "testoLunghezza": 3749,
-  "testoSha1": "34baec7aaa3d9fcf4144b418f601cf870be154cd",
+  "testoSha1": "83f32c1389cf381206189fbdba483e110bed6b90",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -228,7 +228,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=DPI%203%C2%B0%20Categoria%20(8%20ore)",
+    "/richiedi-preventivo?corso=DPI%203%C2%B0%20categoria%20(8%20ore)",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

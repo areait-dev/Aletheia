@@ -1,4 +1,4 @@
 {
   "status": 200,
-  "testo": "User-agent: *\n\nSitemap: https://www.aletheiasrl.it/sitemap.xml\n"
+  "testo": "User-agent: *\r\n\r\nSitemap: https://www.aletheiasrl.it/sitemap.xml\r\n"
 }

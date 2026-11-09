@@ -125,6 +125,9 @@ function stripFillerPrefixes(title) {
   return out.trim();
 }
 
+// Titoli in sentence case (data/coursesRaw.js): tolti i prefissi "Corso"/"Aggiornamento" o il descrittore di livello, il primo carattere resta minuscolo: si ripristina la maiuscola
+const maiuscolaIniziale = (t) => (t ? t.charAt(0).toUpperCase() + t.slice(1) : t);
+
 function slugify(str) {
   return normalizeForMatch(str).replace(/\s+/g, '-');
 }
@@ -197,7 +200,7 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
       families.set(familyKey, {
         id: familyKey,
         slug: familyKey,
-        titolo: famTitle,
+        titolo: maiuscolaIniziale(famTitle),
         categoria: course.category,
         categoryKey: course.categoryKey,
         subKey: course.subKey,
@@ -213,7 +216,7 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
     family.varianti.push({
       id: `${levelKeyFromLabel(levelLabel)}-${isAggiornamento ? 'aggiornamento' : 'corso'}`,
       livelloKey: levelKeyFromLabel(levelLabel),
-      label: levelLabel || famTitle,
+      label: maiuscolaIniziale(levelLabel || famTitle),
       tipo: isAggiornamento ? 'aggiornamento' : 'corso',
       slug: course.slug, // slug originale per-livello: mantenuto per compatibilità/redirect
       durataOre: course.meta?.[0]?.text || null,

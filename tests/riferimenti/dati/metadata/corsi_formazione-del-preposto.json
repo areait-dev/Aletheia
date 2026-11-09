@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Formazione Del Preposto a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso Formazione del preposto a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso Formazione Del Preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+    "Corso Formazione del preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Formazione Del Preposto a Vittoria (RG) - Alètheia Srl"
+      "Corso Formazione del preposto a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Formazione Del Preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Formazione del preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/preposto.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Formazione Del Preposto a Vittoria (RG) - Alètheia Srl"
+      "Corso Formazione del preposto a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Formazione Del Preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Formazione del preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/preposto.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/formazione-del-preposto#corso",
-      "name": "Formazione Del Preposto",
-      "description": "Corso Formazione Del Preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
+      "name": "Formazione del preposto",
+      "description": "Corso Formazione del preposto a Vittoria (RG): 12 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
       "url": "https://www.aletheiasrl.it/corsi/formazione-del-preposto",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/preposto.jpg",
@@ -184,7 +184,7 @@
       "hasCourseInstance": [
         {
           "@type": "CourseInstance",
-          "name": "Formazione Del Preposto",
+          "name": "Formazione del preposto",
           "courseMode": "onsite",
           "startDate": "2026-08-10",
           "courseWorkload": "PT12H",
@@ -201,7 +201,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Formazione Del Preposto",
+          "name": "Formazione del preposto",
           "courseMode": "onsite",
           "startDate": "2026-10-08",
           "courseWorkload": "PT12H",
@@ -218,7 +218,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Formazione Del Preposto",
+          "name": "Formazione del preposto",
           "courseMode": "onsite",
           "startDate": "2027-04-24",
           "courseWorkload": "PT12H",
@@ -243,11 +243,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Formazione Del Preposto"
+    "Formazione del preposto"
   ],
   "intestazioni": 6,
   "testoLunghezza": 5135,
-  "testoSha1": "6d62956ed2411a6a584b2ae0b963d4fe9e13d209",
+  "testoSha1": "dc6795eb3ec9b9a6855de478bc39f3e59fc02235",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -281,7 +281,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Formazione%20Del%20Preposto%20(12%20ore)&edizione=10%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=Formazione%20del%20preposto%20(12%20ore)&edizione=10%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

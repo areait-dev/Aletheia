@@ -56,7 +56,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   // ── Pagine standalone dedicate ──────────────────────────────
   {
     id: 1,
-    titolo: 'Formazione del Preposto',
+    titolo: 'Formazione del preposto',
     slug: 'formazione-del-preposto',
     categoria: 'obbligatoria',
     data: '2026-08-10',
@@ -68,7 +68,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 2,
-    titolo: 'Datore di Lavoro',
+    titolo: 'Datore di lavoro',
     slug: 'datore-di-lavoro',
     categoria: 'obbligatoria',
     data: '2026-08-10',
@@ -80,7 +80,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 3,
-    titolo: 'Aggiornamento Formazione del Preposto',
+    titolo: 'Aggiornamento formazione del preposto',
     slug: 'aggiornamento-formazione-del-preposto',
     categoria: 'obbligatoria',
     data: '2026-08-11',
@@ -92,7 +92,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 4,
-    titolo: 'Addetti alla Conduzione di Carriponte',
+    titolo: 'Addetti alla conduzione di carriponte',
     slug: 'addetti-alla-conduzione-di-carriponte',
     categoria: 'obbligatoria',
     data: '2026-08-12',
@@ -104,7 +104,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 5,
-    titolo: 'Coordinatori Cantieri CSE/CSP',
+    titolo: 'Coordinatori cantieri CSE/CSP',
     slug: 'coordinatori-cantieri-cse-csp',
     categoria: 'obbligatoria',
     data: '2026-08-13',
@@ -116,7 +116,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 6,
-    titolo: 'Aggiornamento Coordinatori Cantieri CSE/CSP',
+    titolo: 'Aggiornamento coordinatori cantieri CSE/CSP',
     slug: 'aggiornamento-coordinatori-cantieri-cse-csp',
     categoria: 'obbligatoria',
     data: '2026-08-14',
@@ -141,7 +141,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 8,
-    titolo: 'RSPP - Datore di Lavoro',
+    titolo: 'RSPP - Datore di lavoro',
     slug: 'rspp-datore-di-lavoro',
     categoria: 'obbligatoria',
     data: '2026-08-18',
@@ -177,7 +177,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 11,
-    titolo: 'Formazione dei Lavoratori',
+    titolo: 'Formazione dei lavoratori',
     slug: 'formazione-dei-lavoratori',
     categoria: 'obbligatoria',
     data: '2026-08-24',
@@ -189,7 +189,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 12,
-    titolo: 'Formazione Dirigente',
+    titolo: 'Formazione dirigente',
     slug: 'formazione-dirigente',
     categoria: 'obbligatoria',
     data: '2026-08-25',
@@ -201,7 +201,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 13,
-    titolo: 'Primo Soccorso Aziendale',
+    titolo: 'Primo soccorso aziendale',
     slug: 'primo-soccorso-aziendale',
     categoria: 'obbligatoria',
     data: '2026-08-26',
@@ -213,7 +213,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 14,
-    titolo: 'Lavori in Quota',
+    titolo: 'Lavori in quota',
     slug: 'lavori-in-quota',
     categoria: 'obbligatoria',
     data: '2026-08-27',
@@ -237,7 +237,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 16,
-    titolo: 'Carrelli Elevatori Semoventi con Conduttore a Bordo',
+    titolo: 'Carrelli elevatori semoventi con conduttore a bordo',
     slug: 'carrelli-elevatori-semoventi-con-conduttore-a-bordo',
     categoria: 'obbligatoria',
     data: '2026-09-01',
@@ -249,7 +249,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 17,
-    titolo: 'Trattori Agricoli o Forestali',
+    titolo: 'Trattori agricoli o forestali',
     slug: 'trattori-agricoli-o-forestali',
     categoria: 'obbligatoria',
     data: '2026-09-02',
@@ -263,7 +263,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   // nuove date per coprire ogni mese del calendario. ──
   {
     id: 18,
-    titolo: 'Formazione del Preposto',
+    titolo: 'Formazione del preposto',
     slug: 'formazione-del-preposto',
     categoria: 'obbligatoria',
     data: '2026-10-08',
@@ -275,7 +275,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 19,
-    titolo: 'Datore di Lavoro',
+    titolo: 'Datore di lavoro',
     slug: 'datore-di-lavoro',
     categoria: 'obbligatoria',
     data: '2026-10-16',
@@ -287,7 +287,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 20,
-    titolo: 'Aggiornamento Formazione del Preposto',
+    titolo: 'Aggiornamento formazione del preposto',
     slug: 'aggiornamento-formazione-del-preposto',
     categoria: 'obbligatoria',
     data: '2026-10-24',
@@ -299,7 +299,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 21,
-    titolo: 'Addetti alla Conduzione di Carriponte',
+    titolo: 'Addetti alla conduzione di carriponte',
     slug: 'addetti-alla-conduzione-di-carriponte',
     categoria: 'obbligatoria',
     data: '2026-11-08',
@@ -311,7 +311,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 22,
-    titolo: 'Coordinatori Cantieri CSE/CSP',
+    titolo: 'Coordinatori cantieri CSE/CSP',
     slug: 'coordinatori-cantieri-cse-csp',
     categoria: 'obbligatoria',
     data: '2026-11-16',
@@ -323,7 +323,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 23,
-    titolo: 'Aggiornamento Coordinatori Cantieri CSE/CSP',
+    titolo: 'Aggiornamento coordinatori cantieri CSE/CSP',
     slug: 'aggiornamento-coordinatori-cantieri-cse-csp',
     categoria: 'obbligatoria',
     data: '2026-11-24',
@@ -347,7 +347,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 25,
-    titolo: 'RSPP - Datore di Lavoro',
+    titolo: 'RSPP - Datore di lavoro',
     slug: 'rspp-datore-di-lavoro',
     categoria: 'obbligatoria',
     data: '2026-12-16',
@@ -383,7 +383,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 28,
-    titolo: 'Formazione dei Lavoratori',
+    titolo: 'Formazione dei lavoratori',
     slug: 'formazione-dei-lavoratori',
     categoria: 'obbligatoria',
     data: '2027-01-16',
@@ -395,7 +395,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 29,
-    titolo: 'Formazione Dirigente',
+    titolo: 'Formazione dirigente',
     slug: 'formazione-dirigente',
     categoria: 'obbligatoria',
     data: '2027-01-24',
@@ -407,7 +407,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 30,
-    titolo: 'Primo Soccorso Aziendale',
+    titolo: 'Primo soccorso aziendale',
     slug: 'primo-soccorso-aziendale',
     categoria: 'obbligatoria',
     data: '2027-02-08',
@@ -419,7 +419,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 31,
-    titolo: 'Lavori in Quota',
+    titolo: 'Lavori in quota',
     slug: 'lavori-in-quota',
     categoria: 'obbligatoria',
     data: '2027-02-16',
@@ -443,7 +443,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 33,
-    titolo: 'Carrelli Elevatori Semoventi con Conduttore a Bordo',
+    titolo: 'Carrelli elevatori semoventi con conduttore a bordo',
     slug: 'carrelli-elevatori-semoventi-con-conduttore-a-bordo',
     categoria: 'obbligatoria',
     data: '2027-03-08',
@@ -455,7 +455,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 34,
-    titolo: 'Trattori Agricoli o Forestali',
+    titolo: 'Trattori agricoli o forestali',
     slug: 'trattori-agricoli-o-forestali',
     categoria: 'obbligatoria',
     data: '2027-03-16',
@@ -503,7 +503,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 38,
-    titolo: 'Formazione del Preposto',
+    titolo: 'Formazione del preposto',
     slug: 'formazione-del-preposto',
     categoria: 'obbligatoria',
     data: '2027-04-24',
@@ -515,7 +515,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 39,
-    titolo: 'Datore di Lavoro',
+    titolo: 'Datore di lavoro',
     slug: 'datore-di-lavoro',
     categoria: 'obbligatoria',
     data: '2027-05-08',
@@ -527,7 +527,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 40,
-    titolo: 'Aggiornamento Formazione del Preposto',
+    titolo: 'Aggiornamento formazione del preposto',
     slug: 'aggiornamento-formazione-del-preposto',
     categoria: 'obbligatoria',
     data: '2027-05-16',
@@ -539,7 +539,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 41,
-    titolo: 'Addetti alla Conduzione di Carriponte',
+    titolo: 'Addetti alla conduzione di carriponte',
     slug: 'addetti-alla-conduzione-di-carriponte',
     categoria: 'obbligatoria',
     data: '2027-05-24',
@@ -551,7 +551,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 42,
-    titolo: 'Coordinatori Cantieri CSE/CSP',
+    titolo: 'Coordinatori cantieri CSE/CSP',
     slug: 'coordinatori-cantieri-cse-csp',
     categoria: 'obbligatoria',
     data: '2027-06-08',
@@ -563,7 +563,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 43,
-    titolo: 'Aggiornamento Coordinatori Cantieri CSE/CSP',
+    titolo: 'Aggiornamento coordinatori cantieri CSE/CSP',
     slug: 'aggiornamento-coordinatori-cantieri-cse-csp',
     categoria: 'obbligatoria',
     data: '2027-06-16',
@@ -587,7 +587,7 @@ export const CALENDARIO: CorsoCalendario[] = [
   },
   {
     id: 45,
-    titolo: 'RSPP - Datore di Lavoro',
+    titolo: 'RSPP - Datore di lavoro',
     slug: 'rspp-datore-di-lavoro',
     categoria: 'obbligatoria',
     data: '2027-07-08',

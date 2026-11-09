@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Formazione Dirigente a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso Formazione dirigente a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso Formazione Dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+    "Corso Formazione dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Formazione Dirigente a Vittoria (RG) - Alètheia Srl"
+      "Corso Formazione dirigente a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Formazione Dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso Formazione dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/dirigente-sicurezza.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Formazione Dirigente a Vittoria (RG) - Alètheia Srl"
+      "Corso Formazione dirigente a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Formazione Dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso Formazione dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/dirigente-sicurezza.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/formazione-dirigente#corso",
-      "name": "Formazione Dirigente",
-      "description": "Corso Formazione Dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date.",
+      "name": "Formazione dirigente",
+      "description": "Corso Formazione dirigente a Vittoria (RG): modulo da 12 ore, in FAD, aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date.",
       "url": "https://www.aletheiasrl.it/corsi/formazione-dirigente",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/dirigente-sicurezza.jpg",
@@ -184,7 +184,7 @@
       "hasCourseInstance": [
         {
           "@type": "CourseInstance",
-          "name": "Formazione Dirigente",
+          "name": "Formazione dirigente",
           "courseMode": "onsite",
           "startDate": "2026-08-25",
           "courseWorkload": "PT12H",
@@ -201,7 +201,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Formazione Dirigente",
+          "name": "Formazione dirigente",
           "courseMode": "onsite",
           "startDate": "2027-01-24",
           "courseWorkload": "PT12H",
@@ -226,11 +226,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Formazione Dirigente"
+    "Formazione dirigente"
   ],
   "intestazioni": 6,
   "testoLunghezza": 4599,
-  "testoSha1": "83d716f1c6c9d367270ea95f564568c1af8055f2",
+  "testoSha1": "ba98fe5acf0cde9461222d331a39eb6e6ec64760",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -264,7 +264,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Formazione%20Dirigente%20-%20Modulo%20Comune%20(12%20ore)&edizione=25%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=Formazione%20dirigente%20-%20Modulo%20comune%20(12%20ore)&edizione=25%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

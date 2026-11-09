@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Carrelli Elevatori Semoventi Con Conduttore A Bordo - Alètheia Srl",
+  "title": "Corso Carrelli elevatori semoventi con conduttore a bordo - Alètheia Srl",
   "description": [
-    "Corso Carrelli Elevatori Semoventi Con Conduttore A Bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date."
+    "Corso Carrelli elevatori semoventi con conduttore a bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Carrelli Elevatori Semoventi Con Conduttore A Bordo - Alètheia Srl"
+      "Corso Carrelli elevatori semoventi con conduttore a bordo - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Carrelli Elevatori Semoventi Con Conduttore A Bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso Carrelli elevatori semoventi con conduttore a bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/carrelli-elevatori.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Carrelli Elevatori Semoventi Con Conduttore A Bordo - Alètheia Srl"
+      "Corso Carrelli elevatori semoventi con conduttore a bordo - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Carrelli Elevatori Semoventi Con Conduttore A Bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso Carrelli elevatori semoventi con conduttore a bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/carrelli-elevatori.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/carrelli-elevatori-semoventi-con-conduttore-a-bordo#corso",
-      "name": "Carrelli Elevatori Semoventi Con Conduttore A Bordo",
-      "description": "Corso Carrelli Elevatori Semoventi Con Conduttore A Bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date.",
+      "name": "Carrelli elevatori semoventi con conduttore a bordo",
+      "description": "Corso Carrelli elevatori semoventi con conduttore a bordo a Vittoria (RG): 12 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date.",
       "url": "https://www.aletheiasrl.it/corsi/carrelli-elevatori-semoventi-con-conduttore-a-bordo",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/carrelli-elevatori.jpg",
@@ -184,7 +184,7 @@
       "hasCourseInstance": [
         {
           "@type": "CourseInstance",
-          "name": "Carrelli Elevatori Semoventi Con Conduttore A Bordo",
+          "name": "Carrelli elevatori semoventi con conduttore a bordo",
           "courseMode": "onsite",
           "startDate": "2026-09-01",
           "courseWorkload": "PT12H",
@@ -201,7 +201,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Carrelli Elevatori Semoventi Con Conduttore A Bordo",
+          "name": "Carrelli elevatori semoventi con conduttore a bordo",
           "courseMode": "onsite",
           "startDate": "2027-03-08",
           "courseWorkload": "PT12H",
@@ -226,11 +226,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Carrelli Elevatori Semoventi Con Conduttore A Bordo"
+    "Carrelli elevatori semoventi con conduttore a bordo"
   ],
   "intestazioni": 6,
   "testoLunghezza": 4966,
-  "testoSha1": "5a0b5a8daa90d35cd2901cd99b41234c21e47a1e",
+  "testoSha1": "14c7fa060602868d6ba0b68d66a8cf6115c2113c",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -264,7 +264,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Carrelli%20Elevatori%20Semoventi%20Con%20Conduttore%20A%20Bordo%20(12%20ore)&edizione=1%20settembre%202026%2C%20Ragusa%20%E2%80%94%20Area%20Pratica",
+    "/richiedi-preventivo?corso=Carrelli%20elevatori%20semoventi%20con%20conduttore%20a%20bordo%20(12%20ore)&edizione=1%20settembre%202026%2C%20Ragusa%20%E2%80%94%20Area%20Pratica",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

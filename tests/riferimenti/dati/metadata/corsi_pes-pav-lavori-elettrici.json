@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso PES/PAV Lavori Elettrici a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso PES/PAV lavori elettrici a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso PES/PAV Lavori Elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+    "Corso PES/PAV lavori elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso PES/PAV Lavori Elettrici a Vittoria (RG) - Alètheia Srl"
+      "Corso PES/PAV lavori elettrici a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso PES/PAV Lavori Elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso PES/PAV lavori elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/pes-pav.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso PES/PAV Lavori Elettrici a Vittoria (RG) - Alètheia Srl"
+      "Corso PES/PAV lavori elettrici a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso PES/PAV Lavori Elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso PES/PAV lavori elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/pes-pav.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/pes-pav-lavori-elettrici#corso",
-      "name": "PES/PAV Lavori Elettrici",
-      "description": "Corso PES/PAV Lavori Elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
+      "name": "PES/PAV lavori elettrici",
+      "description": "Corso PES/PAV lavori elettrici a Vittoria (RG): da 12 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
       "url": "https://www.aletheiasrl.it/corsi/pes-pav-lavori-elettrici",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/pes-pav.jpg",
@@ -190,11 +190,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "PES/PAV Lavori Elettrici"
+    "PES/PAV lavori elettrici"
   ],
   "intestazioni": 6,
   "testoLunghezza": 4407,
-  "testoSha1": "c5da05129d3f06c946e81d845e6ac8814e9a10dd",
+  "testoSha1": "1842192c5ab2c3bb0e5425345e2fa49e46bfd843",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -227,7 +227,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=PES%2FPAV%20Lavori%20Elettrici%20-%20Sotto%20Tensione%20(16%20ore)",
+    "/richiedi-preventivo?corso=PES%2FPAV%20lavori%20elettrici%20-%20Sotto%20tensione%20(16%20ore)",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

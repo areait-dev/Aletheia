@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Addetti alla Conduzione di Carriponte - Alètheia Srl",
+  "title": "Corso Addetti alla conduzione di carriponte - Alètheia Srl",
   "description": [
-    "Corso Addetti alla Conduzione di Carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+    "Corso Addetti alla conduzione di carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Addetti alla Conduzione di Carriponte - Alètheia Srl"
+      "Corso Addetti alla conduzione di carriponte - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Addetti alla Conduzione di Carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso Addetti alla conduzione di carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/carroponte.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Addetti alla Conduzione di Carriponte - Alètheia Srl"
+      "Corso Addetti alla conduzione di carriponte - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Addetti alla Conduzione di Carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
+      "Corso Addetti alla conduzione di carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/carroponte.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/addetti-alla-conduzione-di-carriponte#corso",
-      "name": "Addetti alla Conduzione di Carriponte",
-      "description": "Corso Addetti alla Conduzione di Carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date.",
+      "name": "Addetti alla conduzione di carriponte",
+      "description": "Corso Addetti alla conduzione di carriponte a Vittoria (RG): 10 ore, in aula e aula virtuale. Attestato valido in tutta Italia. Richiedi quota e date.",
       "url": "https://www.aletheiasrl.it/corsi/addetti-alla-conduzione-di-carriponte",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/carroponte.jpg",
@@ -184,7 +184,7 @@
       "hasCourseInstance": [
         {
           "@type": "CourseInstance",
-          "name": "Addetti alla Conduzione di Carriponte",
+          "name": "Addetti alla conduzione di carriponte",
           "courseMode": "onsite",
           "startDate": "2026-08-12",
           "courseWorkload": "PT11H",
@@ -201,7 +201,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Addetti alla Conduzione di Carriponte",
+          "name": "Addetti alla conduzione di carriponte",
           "courseMode": "onsite",
           "startDate": "2026-11-08",
           "courseWorkload": "PT11H",
@@ -218,7 +218,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Addetti alla Conduzione di Carriponte",
+          "name": "Addetti alla conduzione di carriponte",
           "courseMode": "onsite",
           "startDate": "2027-05-24",
           "courseWorkload": "PT11H",
@@ -243,11 +243,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Addetti alla Conduzione di Carriponte"
+    "Addetti alla conduzione di carriponte"
   ],
   "intestazioni": 6,
   "testoLunghezza": 3847,
-  "testoSha1": "56ceae3c138b47f22b155856252ddf62768e1f4d",
+  "testoSha1": "f12da46dc4fc585e64ff47637b620957e13a20c5",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -281,7 +281,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Addetti%20alla%20Conduzione%20di%20Carriponte%20(10%20ore)&edizione=12%20agosto%202026%2C%20Ragusa%20%E2%80%94%20Area%20Pratica",
+    "/richiedi-preventivo?corso=Addetti%20alla%20conduzione%20di%20carriponte%20(10%20ore)&edizione=12%20agosto%202026%2C%20Ragusa%20%E2%80%94%20Area%20Pratica",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

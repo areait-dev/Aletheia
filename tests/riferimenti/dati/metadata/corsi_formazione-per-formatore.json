@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Formazione Per Formatore a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso Formazione per formatore a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso Formazione Per Formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date."
+    "Corso Formazione per formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Formazione Per Formatore a Vittoria (RG) - Alètheia Srl"
+      "Corso Formazione per formatore a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Formazione Per Formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date."
+      "Corso Formazione per formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/formatori.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Formazione Per Formatore a Vittoria (RG) - Alètheia Srl"
+      "Corso Formazione per formatore a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Formazione Per Formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date."
+      "Corso Formazione per formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/formatori.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/formazione-per-formatore#corso",
-      "name": "Formazione Per Formatore",
-      "description": "Corso Formazione Per Formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date.",
+      "name": "Formazione per formatore",
+      "description": "Corso Formazione per formatore a Vittoria (RG): 24 ore, in FAD, aula e aula virtuale. Attestato valido su tutto il territorio nazionale. Richiedi quota e date.",
       "url": "https://www.aletheiasrl.it/corsi/formazione-per-formatore",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/formatori.jpg",
@@ -190,11 +190,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Formazione Per Formatore"
+    "Formazione per formatore"
   ],
   "intestazioni": 6,
   "testoLunghezza": 3776,
-  "testoSha1": "ace118f2cde518469454f8c2724cb74bca809dda",
+  "testoSha1": "f62e89664971fbbddd38aa4d744b161f2c73ab55",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -228,7 +228,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Formazione%20Per%20Formatore%20(24%20ore)",
+    "/richiedi-preventivo?corso=Formazione%20per%20formatore%20(24%20ore)",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

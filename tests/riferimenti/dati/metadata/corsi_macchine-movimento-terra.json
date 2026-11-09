@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Macchine Movimento Terra a Vittoria (RG) - Alètheia Srl",
+  "title": "Corso Macchine movimento terra a Vittoria (RG) - Alètheia Srl",
   "description": [
-    "Corso Macchine Movimento Terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+    "Corso Macchine movimento terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Macchine Movimento Terra a Vittoria (RG) - Alètheia Srl"
+      "Corso Macchine movimento terra a Vittoria (RG) - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Macchine Movimento Terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Macchine movimento terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/macchine-movimento-terra.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Macchine Movimento Terra a Vittoria (RG) - Alètheia Srl"
+      "Corso Macchine movimento terra a Vittoria (RG) - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Macchine Movimento Terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Macchine movimento terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/macchine-movimento-terra.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/macchine-movimento-terra#corso",
-      "name": "Macchine Movimento Terra",
-      "description": "Corso Macchine Movimento Terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
+      "name": "Macchine movimento terra",
+      "description": "Corso Macchine movimento terra a Vittoria (RG): da 10 a 16 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
       "url": "https://www.aletheiasrl.it/corsi/macchine-movimento-terra",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/macchine-movimento-terra.jpg",
@@ -190,11 +190,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Macchine Movimento Terra"
+    "Macchine movimento terra"
   ],
   "intestazioni": 6,
   "testoLunghezza": 3690,
-  "testoSha1": "c634c2dedd0976c5206c8796f15aa344acaf37c5",
+  "testoSha1": "cae0a07050b841e73cbe43f7196d799f2b6e5e1a",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -228,7 +228,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Macchine%20Movimento%20Terra%20-%20Escavatori%20Idraulici%20(10%20ore)",
+    "/richiedi-preventivo?corso=Macchine%20movimento%20terra%20-%20Escavatori%20idraulici%20(10%20ore)",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

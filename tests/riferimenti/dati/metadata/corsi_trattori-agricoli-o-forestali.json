@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Trattori Agricoli o Forestali - Alètheia Srl",
+  "title": "Corso Trattori agricoli o forestali - Alètheia Srl",
   "description": [
-    "Corso Trattori Agricoli o Forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+    "Corso Trattori agricoli o forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Trattori Agricoli o Forestali - Alètheia Srl"
+      "Corso Trattori agricoli o forestali - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Trattori Agricoli o Forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Trattori agricoli o forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/trattori-agricoli.jpg"
@@ -46,10 +46,10 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Trattori Agricoli o Forestali - Alètheia Srl"
+      "Corso Trattori agricoli o forestali - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Trattori Agricoli o Forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
+      "Corso Trattori agricoli o forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/trattori-agricoli.jpg"
@@ -170,8 +170,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/trattori-agricoli-o-forestali#corso",
-      "name": "Trattori Agricoli o Forestali",
-      "description": "Corso Trattori Agricoli o Forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
+      "name": "Trattori agricoli o forestali",
+      "description": "Corso Trattori agricoli o forestali a Vittoria (RG): da 8 a 13 ore, in aula. Attestato valido in tutta Italia. Richiedi quota e date senza impegno.",
       "url": "https://www.aletheiasrl.it/corsi/trattori-agricoli-o-forestali",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/trattori-agricoli.jpg",
@@ -184,7 +184,7 @@
       "hasCourseInstance": [
         {
           "@type": "CourseInstance",
-          "name": "Trattori Agricoli o Forestali",
+          "name": "Trattori agricoli o forestali",
           "courseMode": "onsite",
           "startDate": "2026-09-02",
           "courseWorkload": "PT8H",
@@ -201,7 +201,7 @@
         },
         {
           "@type": "CourseInstance",
-          "name": "Trattori Agricoli o Forestali",
+          "name": "Trattori agricoli o forestali",
           "courseMode": "onsite",
           "startDate": "2027-03-16",
           "courseWorkload": "PT8H",
@@ -226,11 +226,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Trattori Agricoli o Forestali"
+    "Trattori agricoli o forestali"
   ],
   "intestazioni": 6,
   "testoLunghezza": 4401,
-  "testoSha1": "5fb9991c2a67e910576903513f286eb03a86a2ea",
+  "testoSha1": "8c0bfcf2e3e5a17a74031ac2679d9f64f8f3a743",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -264,7 +264,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Trattori%20Agricoli%20o%20Forestali%20-%20Ruote%20(8%20ore)&edizione=2%20settembre%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=Trattori%20agricoli%20o%20forestali%20-%20Ruote%20(8%20ore)&edizione=2%20settembre%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",
