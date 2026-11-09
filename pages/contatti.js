@@ -275,6 +275,13 @@ export default function Contatti({ sedi: SEDI, pagina }) {
           gap: 0.75rem;
         }
 
+        /* Area cliccabile di "Apri in Maps" di almeno 44px di altezza sui telefoni, senza cambiare l'aspetto: la estende un pseudo-elemento
+           trasparente (il testo è alto ~17px), come per i link del footer (vedi "Touch" in globals.css). */
+        .sede-maps-link { position: relative; }
+        @media (max-width: 767.98px) {
+          .sede-maps-link::after { content: ''; position: absolute; left: 0; right: -8px; top: -14px; bottom: -14px; }
+        }
+
         .sede-card {
           padding: 1rem 1.1rem;
           border-radius: 1rem;
@@ -388,18 +395,18 @@ export default function Contatti({ sedi: SEDI, pagina }) {
                       <p className="text-slate-600 dark:text-[#9aa8a6]" style={{ margin: 0, fontSize: '0.75rem', lineHeight: 1.45, paddingLeft: '1.3rem' }}>
                         {sede.indirizzo}
                       </p>
-                      {activeSede === i && (
-                        <a
-                          href={sede.mapsHref}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="text-[#018891] dark:text-primary-on-dark"
-                          style={{ fontSize: '0.7rem', fontWeight: 700, textDecoration: 'none', display: 'inline-block', marginTop: '0.4rem', paddingLeft: '1.3rem' }}
-                        >
-                          Apri in Maps →
-                        </a>
-                      )}
+                      {/* "Apri in Maps": su tutte le sedi (prima solo sulla selezionata, cioè Vittoria all'apertura della pagina) */}
+                      <a
+                        href={sede.mapsHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="sede-maps-link text-[#018891] dark:text-primary-on-dark"
+                        aria-label={`Apri in Maps: sede di ${sede.città}`}
+                        style={{ fontSize: '0.7rem', fontWeight: 700, textDecoration: 'none', display: 'inline-block', marginTop: '0.4rem', paddingLeft: '1.3rem' }}
+                      >
+                        Apri in Maps →
+                      </a>
                     </button>
                   ))}
                 </div>
