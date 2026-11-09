@@ -27,6 +27,8 @@ export type NewsItem = {
   tempoLettura?: number;
   /** Data (YYYY-MM-DD) dopo la quale la news non compare più in home: resta in /news e al suo indirizzo. */
   scadenza?: string;
+  /** Titolo breve (sotto i 60 caratteri) per <title> e og:title al posto di "<titolo> - Alètheia Srl"; l'H1 resta il titolo completo. */
+  titoloSeo?: string;
 };
 
 type WpAcf = Record<string, unknown>;

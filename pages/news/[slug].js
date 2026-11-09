@@ -34,7 +34,8 @@ async function getPageStaticProps({ params, preview = false, previewData }) {
   const percorso = `/news/${article.slug}`;
   const descrizione = descrizioneEntro(article.excerpt || article.title, ['Le news di Alètheia Srl su formazione, sicurezza e lavoro in Sicilia.', 'Alètheia Srl, ente di formazione a Vittoria (RG).', 'Le news di Alètheia Srl.', 'News di Alètheia Srl.']);
   const seoPagina = {
-    title: titoloPagina(article.title),
+    // Con `titoloSeo` il <title> e og:title sono quel titolo breve (senza suffisso, per restare sotto i 60 caratteri); l'H1 resta il titolo completo
+    title: article.titoloSeo || titoloPagina(article.title),
     description: descrizione,
     ...(article.image ? { image: article.image } : {}),
     type: 'article',
