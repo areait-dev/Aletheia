@@ -67,3 +67,18 @@ test('home: le 3 news più recenti non scadute, senza elenchi scritti a mano; Bo
   expect(elenco('a[href="/news/bonus-giovani-under-35-aprile-2026"]').length).toBeGreaterThan(0);
   expect((await request.get('/news/bonus-giovani-under-35-aprile-2026')).status()).toBe(200);
 });
+
+test('fonti: le news con il campo "fonti" le mostrano in fondo come "Fonte:", con link in una nuova scheda; le altre non hanno il blocco @rapido', async ({ request }) => {
+  for (const n of ALL_NEWS) {
+    const $ = cheerio.load(await (await request.get(`/news/${n.slug}`)).text());
+    const blocco = $('article ~ p:contains("Fonte:")');
+    if (!n.fonti?.length) { expect(blocco.length, n.slug).toBe(0); continue; }
+    for (const f of n.fonti) {
+      const a = blocco.find(`a[href="${f.url}"]`);
+      expect(a.length, `${n.slug}: ${f.url}`).toBe(1);
+      expect(a.attr('target')).toBe('_blank');
+      expect(a.attr('rel')).toContain('noopener');
+      expect(a.text()).toBe(f.titolo);
+    }
+  }
+});

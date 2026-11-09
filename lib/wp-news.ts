@@ -29,6 +29,8 @@ export type NewsItem = {
   scadenza?: string;
   /** Titolo breve (sotto i 60 caratteri) per <title> e og:title al posto di "<titolo> - Alètheia Srl"; l'H1 resta il titolo completo. */
   titoloSeo?: string;
+  /** Fonti dell'articolo (titolo + URL), mostrate in fondo come "Fonte:" con link in una nuova scheda. Vuoto = nessun blocco. */
+  fonti?: { titolo: string; url: string }[];
 };
 
 type WpAcf = Record<string, unknown>;

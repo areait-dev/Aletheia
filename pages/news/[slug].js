@@ -473,6 +473,21 @@ export default function ArticlePage({ article: initialArticle, related, isPrevie
                 )}
               </article>
 
+              {/* Fonti: solo se l'articolo ne ha (campo `fonti`); i link si aprono in una nuova scheda */}
+              {article.fonti?.length > 0 && (
+                <p className="article-p" style={{ fontSize: '0.95rem', textAlign: 'left' }}>
+                  <em>
+                    Fonte:{' '}
+                    {article.fonti.map((f, i) => (
+                      <span key={f.url}>
+                        {i > 0 && '; '}
+                        <a href={f.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-text)', textDecoration: 'underline' }}>{f.titolo}</a>
+                      </span>
+                    ))}
+                  </em>
+                </p>
+              )}
+
               {/* Condividi */}
               <ShareBar />
 
