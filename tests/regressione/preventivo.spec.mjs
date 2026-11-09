@@ -50,8 +50,12 @@ test('pagina /richiedi-preventivo: corso precompilato, controlli e conferma @rap
   // invio vuoto: errori sui campi obbligatori e focus sul primo
   await page.getByRole('button', { name: /Invia la richiesta/i }).click();
   expect(await page.locator('[role="alert"]').count(), 'nessun messaggio di errore con il modulo vuoto').toBeGreaterThanOrEqual(5);
-  await expect(page.locator('#tipologia')).toBeFocused();
+  await expect(page.locator('#destinatario')).toBeFocused();
+  // "Per me": niente tipo di organizzazione, ragione sociale e partecipanti
+  await page.selectOption('#destinatario', 'Per me');
+  for (const id of ['#tipologia', '#azienda', '#partecipanti']) await expect(page.locator(id)).toHaveCount(0);
   // invio valido: conferma con corso ed email
+  await page.selectOption('#destinatario', 'Per la mia azienda o ente');
   await page.selectOption('#tipologia', 'Azienda');
   await page.fill('#azienda', 'Azienda di prova S.r.l.');
   await page.fill('#nome', 'Mario'); await page.fill('#cognome', 'Rossi');
@@ -66,4 +70,27 @@ test('pagina /richiedi-preventivo: corso precompilato, controlli e conferma @rap
   await expect(page.getByText('Richiesta inviata!')).toBeVisible();
   await expect(page.getByText('Antincendio Livello 2').first()).toBeVisible();
   await expect(page.getByText('mario@esempio.it').first()).toBeVisible();
+  // conferma: passi successivi e WhatsApp (link del sito)
+  await expect(page.getByText('Cosa succede adesso')).toBeVisible();
+  await expect(page.getByText('Quota e date entro 24 ore')).toBeVisible();
+  await expect(page.getByRole('link', { name: /WhatsApp/i })).toHaveAttribute('href', /^https:\/\/wa\.me\/\d+$/);
+});
+
+test('/richiedi-preventivo: edizione da ?edizione= nelle note e "Per me" invia Privato con 1 partecipante @rapido', async ({ page }) => {
+  await page.addInitScript(() => { try { localStorage.setItem('cookie-consent', 'accepted'); } catch {} });
+  await page.goto('/richiedi-preventivo?corso=Antincendio%20-%20Rischio%20medio%20Livello%202%20(8%20ore)&edizione=12%20novembre%202026%2C%20Vittoria%20(RG)', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#corso')).toHaveValue('Antincendio - Rischio medio Livello 2 (8 ore)');
+  await expect(page.locator('#messaggio')).toHaveValue('Edizione di interesse: 12 novembre 2026, Vittoria (RG).');
+  await page.selectOption('#destinatario', 'Per me');
+  await page.fill('#nome', 'Mario'); await page.fill('#cognome', 'Rossi');
+  await page.fill('#email', 'mario@esempio.it'); await page.fill('#telefono', '+39 333 1234567');
+  await page.selectOption('#modalita', 'Presso una sede Alètheia'); await page.check('#privacy');
+  let inviato = null;
+  await page.route('**/api/moduli/preventivo', async (r) => { inviato = r.request().postData() || ''; await r.fulfill({ status: 200, contentType: 'application/json', body: '{"stato":"ok"}' }); });
+  await page.waitForTimeout(3300);
+  await page.getByRole('button', { name: /Invia la richiesta/i }).click();
+  await expect(page.getByText('Richiesta inviata!')).toBeVisible();
+  expect(inviato).toContain('name="tipologia"\r\n\r\nPrivato');
+  expect(inviato).toContain('name="partecipanti"\r\n\r\n1\r\n');
+  expect(inviato).toContain('name="destinatario"\r\n\r\nPer me');
 });

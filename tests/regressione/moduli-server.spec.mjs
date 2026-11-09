@@ -10,7 +10,7 @@ import { TIPI_MODULO, CAMPO_TRAPPOLA, MAX_ALLEGATO, oggettoEmail, costruisciMail
 
 const EMAIL = 'mario@esempio.it';
 const VALIDI = {
-  preventivo: { corso: 'Antincendio Livello 2', tipologia: 'Azienda', azienda: 'Azienda di prova S.r.l.', nome: 'Mario', cognome: 'Rossi', email: EMAIL, telefono: '+39 333 1234567', partecipanti: '8', modalita: 'Presso la mia azienda', messaggio: 'Preferiamo marzo', privacy: 'true' },
+  preventivo: { corso: 'Antincendio Livello 2', destinatario: 'Per la mia azienda o ente', tipologia: 'Azienda', azienda: 'Azienda di prova S.r.l.', nome: 'Mario', cognome: 'Rossi', email: EMAIL, telefono: '+39 333 1234567', partecipanti: '8', modalita: 'Presso la mia azienda', messaggio: 'Preferiamo marzo', privacy: 'true' },
   iscrizione: { corso: 'Operatore Socio Sanitario (OSS)', nome: 'Mario Rossi', email: EMAIL, telefono: '333 1234567', privacy: 'true' },
   preiscrizione: { corso: 'Avviso n. 1/2026 POC Sicilia 2014-2020', nome: 'Mario Rossi', email: EMAIL, telefono: '333 1234567', privacy: 'true' },
   contatti: { nome: 'Mario', cognome: 'Rossi', email: EMAIL, telefono: '', motivo: 'Informazioni su un corso', messaggio: 'Buongiorno, vorrei informazioni.', privacy: 'true' },

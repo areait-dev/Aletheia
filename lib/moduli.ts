@@ -70,7 +70,9 @@ export const DEFINIZIONI: Record<TipoModulo, ModuloDef> = {
     oggetto: (d) => `[Sito] Preventivo: ${d.corso}`,
     campi: [
       { nome: 'corso', etichetta: 'Corso', tipo: 'testo', obbligatorio: true, msgVuoto: 'Indica il corso di tuo interesse' },
-      { nome: 'tipologia', etichetta: 'Tipologia', tipo: 'testo', obbligatorio: true, msgVuoto: 'Seleziona chi sei' },
+      { nome: 'destinatario', etichetta: 'Per chi è il corso', tipo: 'testo', obbligatorio: true, msgVuoto: 'Indica per chi è il corso' },
+      // "Per me" -> il modulo manda tipologia 'Privato' e 1 partecipante; "Per la mia azienda o ente" -> tipologia 'Azienda' o 'Ente pubblico / PA'
+      { nome: 'tipologia', etichetta: 'Tipologia', tipo: 'testo', obbligatorio: true, msgVuoto: 'Seleziona il tipo di organizzazione' },
       { nome: 'azienda', etichetta: 'Azienda / Ente', tipo: 'testo', obbligatorio: (d) => !!d.tipologia && d.tipologia !== 'Privato' },
       { nome: 'nome', etichetta: 'Nome', tipo: 'testo', obbligatorio: true },
       { nome: 'cognome', etichetta: 'Cognome', tipo: 'testo', obbligatorio: true },

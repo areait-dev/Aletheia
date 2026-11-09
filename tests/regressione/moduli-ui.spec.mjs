@@ -94,7 +94,7 @@ test('preventivo: invio riuscito, errore e senza chiave @rapido', async ({ page 
     nome: 'preventivo', url: '/richiedi-preventivo?corso=Antincendio%20Livello%202', rotta: 'preventivo', titoloOk: 'Richiesta inviata!',
     oggetto: '[Sito] Preventivo: Antincendio Livello 2', attesoNelCorpo: ['Antincendio Livello 2', 'mario@esempio.it'],
     compila: async (p) => {
-      await p.selectOption('#tipologia', 'Azienda'); await p.fill('#azienda', 'Azienda di prova S.r.l.');
+      await p.selectOption('#destinatario', 'Per la mia azienda o ente'); await p.selectOption('#tipologia', 'Azienda'); await p.fill('#azienda', 'Azienda di prova S.r.l.');
       await p.fill('#nome', 'Mario'); await p.fill('#cognome', 'Rossi'); await p.fill('#email', 'mario@esempio.it');
       await p.fill('#telefono', '+39 333 1234567'); await p.fill('#partecipanti', '8'); await p.selectOption('#modalita', 'Presso la mia azienda');
       await p.check('#privacy');

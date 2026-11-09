@@ -10,13 +10,19 @@ import { withSiteOptions } from '../lib/wp-site';
 import { validaModulo } from '../lib/moduli';
 import { useInvioModulo } from '../lib/use-invio-modulo';
 import EsitoModulo from '../components/EsitoModulo';
+import { whatsappLink, WHATSAPP_FORMAZIONE } from '../lib/whatsapp';
 import CampoTrappola from '../components/CampoTrappola';
 
 const PAGE_TITLE = 'Richiedi un preventivo - Alètheia Srl';
 const PAGE_DESCRIPTION =
   'Richiedi un preventivo gratuito per i corsi di formazione Alètheia Srl: indica corso, partecipanti e modalità e ti rispondiamo entro 24 ore lavorative.';
 
-const TIPOLOGIE = ['Azienda', 'Ente pubblico / PA', 'Privato'];
+// Per chi è il corso. "Per me" = privato (tipologia 'Privato', 1 partecipante, nessuna ragione sociale);
+// "Per la mia azienda o ente" = tipologia a scelta tra Azienda ed Ente pubblico / PA (i valori che il campo "Sei" aveva prima), con ragione sociale e partecipanti.
+const PER_ME = 'Per me';
+const PER_AZIENDA = 'Per la mia azienda o ente';
+const DESTINATARI = [PER_ME, PER_AZIENDA];
+const TIPOLOGIE_ORGANIZZAZIONE = ['Azienda', 'Ente pubblico / PA'];
 const MODALITA = ['Presso una sede Alètheia', 'Presso la mia azienda', 'Online / e-learning', 'Non lo so ancora'];
 
 const PASSI = [
@@ -25,8 +31,15 @@ const PASSI = [
   { icon: 'fas fa-file-invoice', titolo: 'Ricevi il preventivo', testo: 'Quota e date su misura, gratuito e personalizzato.' },
 ];
 
+// Dopo l'invio: cosa succede adesso
+const PASSI_DOPO_INVIO = [
+  { icon: 'fas fa-inbox', titolo: 'Richiesta ricevuta', testo: 'Abbiamo la tua richiesta: non devi fare altro.' },
+  { icon: 'fas fa-headset', titolo: 'Quota e date entro 24 ore', testo: 'Un consulente ti scrive con quota e date, gratuito e senza impegno.' },
+  { icon: 'fas fa-circle-check', titolo: 'Confermi il tuo posto', testo: 'Se la proposta ti va bene, ci dici come procedere e riserviamo il tuo posto.' },
+];
+
 const EMPTY = {
-  corso: '', tipologia: '', azienda: '', nome: '', cognome: '', email: '', telefono: '',
+  corso: '', destinatario: '', tipologia: '', azienda: '', nome: '', cognome: '', email: '', telefono: '',
   partecipanti: '', modalita: '', messaggio: '', privacy: false,
 };
 
@@ -72,13 +85,22 @@ export default function RichiediPreventivo() {
   // Il corso arriva da ?corso= (pulsante "Richiedi preventivo" delle schede corso). Non sovrascrive ciò che l'utente ha già scritto.
   useEffect(() => {
     if (!router.isReady) return;
-    const { corso } = router.query;
+    const { corso, edizione } = router.query;
     if (typeof corso === 'string' && corso.trim()) {
       setFields((p) => (p.corso ? p : { ...p, corso: corso.trim().slice(0, 200) }));
     }
+    // ?edizione= (scheda corso): l'edizione scelta entra nelle note, modificabili. Non sovrascrive ciò che l'utente ha già scritto.
+    if (typeof edizione === 'string' && edizione.trim()) {
+      setFields((p) => (p.messaggio ? p : { ...p, messaggio: `Edizione di interesse: ${edizione.trim().slice(0, 150)}.` }));
+    }
   }, [router.isReady, router.query]);
 
-  const isPrivato = fields.tipologia === 'Privato';
+  const perMe = fields.destinatario === PER_ME;
+  const perAzienda = fields.destinatario === PER_AZIENDA;
+  const whatsapp = whatsappLink(process.env.NEXT_PUBLIC_WHATSAPP) || whatsappLink(WHATSAPP_FORMAZIONE);
+
+  // Valori inviati e validati. "Per me": tipologia Privato, 1 partecipante, nessuna azienda (stessi campi di prima per il server e per l'email).
+  const valoriInvio = () => (perMe ? { ...fields, tipologia: 'Privato', azienda: '', partecipanti: '1' } : fields);
 
   function onChange(e) {
     const { name, value, type, checked } = e.target;
@@ -96,10 +118,11 @@ export default function RichiediPreventivo() {
 
   async function handleSubmit(ev) {
     ev.preventDefault();
-    const errs = validaModulo('preventivo', fields);
+    const valori = valoriInvio();
+    const errs = validaModulo('preventivo', valori);
     if (Object.keys(errs).length > 0) { mostraErrori(errs); return; }
     setErrors({});
-    const r = await invia(ev.currentTarget, fields);
+    const r = await invia(ev.currentTarget, valori);
     if (r.stato === 'errori') mostraErrori(r.errori);
   }
 
@@ -151,10 +174,29 @@ export default function RichiediPreventivo() {
                       Grazie, abbiamo ricevuto la tua richiesta per <strong>{fields.corso}</strong>.
                     </p>
                     <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-md mx-auto mb-8">
-                      Ti ricontatteremo entro 24 ore lavorative all&apos;indirizzo <strong>{fields.email}</strong>.
+                      Ti rispondiamo entro 24 ore lavorative all&apos;indirizzo <strong>{fields.email}</strong>.
                     </p>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300 mb-4">Cosa succede adesso</h3>
+                    <ol className="list-none m-0 p-0 mb-8 flex flex-col gap-4 text-left max-w-md mx-auto">
+                      {PASSI_DOPO_INVIO.map((p, i) => (
+                        <li key={p.titolo} className="flex gap-4">
+                          <span className="w-10 h-10 rounded-xl bg-[#018891]/10 flex items-center justify-center shrink-0" aria-hidden="true">
+                            <i className={`${p.icon} text-primary-text dark:text-primary-on-dark`} />
+                          </span>
+                          <div>
+                            <p className="m-0 font-bold text-sm text-gray-900 dark:text-gray-50">{i + 1}. {p.titolo}</p>
+                            <p className="m-0 mt-0.5 text-sm text-gray-600 dark:text-gray-300 leading-snug">{p.testo}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
                     <div className="flex flex-wrap gap-3 justify-center">
-                      <a href="/corsi" className="btn btn-primary btn-md">Torna ai corsi</a>
+                      {whatsapp && (
+                        <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-md">
+                          <i className="fab fa-whatsapp" aria-hidden="true" /> Scrivici su WhatsApp
+                        </a>
+                      )}
+                      <a href="/corsi" className={`btn ${whatsapp ? 'btn-outline' : 'btn-primary'} btn-md`}>Torna ai corsi</a>
                       <button type="button" onClick={reset} className="btn btn-outline btn-md">Nuova richiesta</button>
                     </div>
                   </div>
@@ -173,17 +215,34 @@ export default function RichiediPreventivo() {
                     </Field>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <Field id="tipologia" label="Sei" required error={errors.tipologia}>
-                        <select id="tipologia" name="tipologia" value={fields.tipologia} onChange={onChange} className={cls('tipologia')} {...aria('tipologia')}>
+                      <Field id="destinatario" label="Per chi è il corso" required error={errors.destinatario}>
+                        <select id="destinatario" name="destinatario" value={fields.destinatario} onChange={onChange} className={cls('destinatario')} {...aria('destinatario')}>
                           <option value="">Seleziona…</option>
-                          {TIPOLOGIE.map((t) => <option key={t} value={t}>{t}</option>)}
+                          {DESTINATARI.map((d) => <option key={d} value={d}>{d}</option>)}
                         </select>
                       </Field>
-                      <Field id="azienda" label={isPrivato ? 'Azienda / Ente (facoltativo)' : 'Azienda / Ente'} required={!!fields.tipologia && !isPrivato} error={errors.azienda}>
-                        <input id="azienda" name="azienda" type="text" value={fields.azienda} onChange={onChange} autoComplete="organization"
-                          placeholder="Ragione sociale" className={cls('azienda')} {...aria('azienda')} />
-                      </Field>
+                      {perAzienda && (
+                        <Field id="tipologia" label="Tipo di organizzazione" required error={errors.tipologia}>
+                          <select id="tipologia" name="tipologia" value={fields.tipologia} onChange={onChange} className={cls('tipologia')} {...aria('tipologia')}>
+                            <option value="">Seleziona…</option>
+                            {TIPOLOGIE_ORGANIZZAZIONE.map((t) => <option key={t} value={t}>{t}</option>)}
+                          </select>
+                        </Field>
+                      )}
                     </div>
+
+                    {perAzienda && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <Field id="azienda" label="Ragione sociale" required error={errors.azienda}>
+                          <input id="azienda" name="azienda" type="text" value={fields.azienda} onChange={onChange} autoComplete="organization"
+                            placeholder="Es. Rossi S.r.l." className={cls('azienda')} {...aria('azienda')} />
+                        </Field>
+                        <Field id="partecipanti" label="Numero di partecipanti" required error={errors.partecipanti}>
+                          <input id="partecipanti" name="partecipanti" type="number" inputMode="numeric" min="1" max="999" value={fields.partecipanti} onChange={onChange}
+                            placeholder="Es. 10" className={cls('partecipanti')} {...aria('partecipanti')} />
+                        </Field>
+                      </div>
+                    )}
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Field id="nome" label="Nome" required error={errors.nome}>
@@ -208,10 +267,6 @@ export default function RichiediPreventivo() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <Field id="partecipanti" label="Numero di partecipanti" required error={errors.partecipanti}>
-                        <input id="partecipanti" name="partecipanti" type="number" inputMode="numeric" min="1" max="999" value={fields.partecipanti} onChange={onChange}
-                          placeholder="Es. 10" className={cls('partecipanti')} {...aria('partecipanti')} />
-                      </Field>
                       <Field id="modalita" label="Modalità preferita" required error={errors.modalita}>
                         <select id="modalita" name="modalita" value={fields.modalita} onChange={onChange} className={cls('modalita')} {...aria('modalita')}>
                           <option value="">Seleziona…</option>
