@@ -13,12 +13,12 @@ export const SCHEDE_ARCHIVIO = [
     descrizione: "Obiettivo specifico dell'Avviso è quello di promuovere l'apprendimento permanente e le opportunità di miglioramento del livello delle competenze e di riqualificazione flessibili per tutti, tenendo conto delle competenze imprenditoriali e digitali, anticipando meglio il cambiamento e le nuove competenze richieste sulla base delle esigenze del mercato del lavoro, facilitando il riorientamento professionale e promuovendo la mobilità professionale.",
     // `gruppo`: titoletto sopra i documenti dello stesso tipo (come nella pagina originale)
     documenti: [
-      { gruppo: 'Scopri tutti gli altri corsi disponibili', titoloLink: 'Catalogo completo', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO1-POC/catalogo_completo.pdf' },
-      { gruppo: 'Scopri tutti gli altri corsi disponibili', titoloLink: 'Catalogo descrittivo', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO1-POC/catalogo_corsi_web.pdf' },
-      { gruppo: 'Domanda di iscrizione docenti', titoloLink: 'Domanda di iscrizione docenti', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO1-POC/allegati-bando-DOCENTI-avv.-1.26-POC-Sicilia_Aletheia.pdf' },
-      { gruppo: 'Bandi selezione docenti', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO1-POC/BANDO-DOCENTI-avv.-1.26-POC-Sicilia_Aletheia.pdf' },
-      { gruppo: 'Domanda di iscrizione allievi', titoloLink: 'Domanda di iscrizione allievi', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO1-POC/Domanda-di-iscrizione-ALLIEVI_Avv.1.26-POC-Sicilia.pdf' },
-      { gruppo: 'Bandi selezione allievi', titoloLink: 'Bando selezione allievi', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO1-POC/BANDO-ALLIEVI-avv.-1.26-POC-Sicilia_Aletheia.pdf' },
+      { gruppo: 'Scopri tutti gli altri corsi disponibili', titoloLink: 'Catalogo completo', percorsoLocale: '/pdf/avvisi/avviso-1-2026-poc/catalogo_completo.pdf' },
+      { gruppo: 'Scopri tutti gli altri corsi disponibili', titoloLink: 'Catalogo descrittivo', percorsoLocale: '/pdf/avvisi/avviso-1-2026-poc/catalogo_corsi_web.pdf' },
+      { gruppo: 'Domanda di iscrizione docenti', titoloLink: 'Domanda di iscrizione docenti', percorsoLocale: '/pdf/avvisi/avviso-1-2026-poc/allegati-bando-DOCENTI-avv.-1.26-POC-Sicilia_Aletheia.pdf' },
+      { gruppo: 'Bandi selezione docenti', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: '/pdf/avvisi/avviso-1-2026-poc/BANDO-DOCENTI-avv.-1.26-POC-Sicilia_Aletheia.pdf' },
+      { gruppo: 'Domanda di iscrizione allievi', titoloLink: 'Domanda di iscrizione allievi', percorsoLocale: '/pdf/avvisi/avviso-1-2026-poc/Domanda-di-iscrizione-ALLIEVI_Avv.1.26-POC-Sicilia.pdf' },
+      { gruppo: 'Bandi selezione allievi', titoloLink: 'Bando selezione allievi', percorsoLocale: '/pdf/avvisi/avviso-1-2026-poc/BANDO-ALLIEVI-avv.-1.26-POC-Sicilia_Aletheia.pdf' },
     ],
     scheda: {
       titoloBreve: 'Avviso 1/2026 POC',
@@ -74,16 +74,16 @@ export const SCHEDE_ARCHIVIO = [
     descrizione: "Obiettivo specifico dell'Avviso 7/2023 è quello di promuovere l'apprendimento permanente e le opportunità di miglioramento del livello delle competenze e di riqualificazione flessibili per tutti, tenendo conto delle competenze imprenditoriali e digitali, anticipando meglio il cambiamento e le nuove competenze richieste sulla base delle esigenze del mercato del lavoro, facilitando il riorientamento professionale e promuovendo la mobilità professionale.",
     // `gruppo`: titoletto sopra i documenti dello stesso tipo (come nella pagina originale)
     documenti: [
-      { gruppo: 'Domanda di iscrizione docenti', titoloLink: 'Domanda di iscrizione docenti', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/allegati_bando_DOCENTI_avv7fse_fin2_Aletheia.pdf' },
-      { gruppo: 'Bandi selezione docenti', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/BANDO_DOCENTI_avv7fse_fin2_Aletheia.pdf' },
-      { gruppo: 'Bandi selezione docenti', titoloLink: 'Appendice', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/appendice-BANDI-DOCENTI-avv.-7fse_fin2_Aletheia.pdf' },
-      { gruppo: 'Bandi selezione personale non docente – operatore di segreteria', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: 'https://www.aletheiasrl.it/images/Bando-selezione--Operatore-di-segreteria-Avviso-7-II-finestra-aletheia.pdf' },
-      { gruppo: 'Bandi selezione docenti di sostegno', titoloLink: 'Manifestazione di interesse docenti di sostegno', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/Bando-selezione--docenti-di-sostegno-Aletheia.pdf' },
-      { gruppo: 'Bandi selezione docenti di sostegno', titoloLink: 'Domanda di iscrizione docente di sostegno', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/allegati-bando-DOCENTI-SOSTEGNO-avv.-7fse_fin2_Aletheia.pdf' },
-      { gruppo: 'Bandi selezione tutor', titoloLink: 'Manifestazione di interesse tutor', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/Bando-selezione-TUTOR-Aletheia.pdf' },
-      { gruppo: 'Bandi selezione tutor', titoloLink: 'Domanda di iscrizione tutor', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/allegati-bando-TUTOR-avv.-7fse_fin2_Aletheia.pdf' },
-      { gruppo: 'Domanda di iscrizione allievi', titoloLink: 'Domanda di iscrizione allievi', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/Domanda_iscrizione_ALLIEVI_finestra2_FSEAvv.7.2023.pdf' },
-      { gruppo: 'Bandi selezione allievi', titoloLink: 'Bando selezione allievi', percorsoLocale: 'https://www.aletheiasrl.it/images/AVVISO7-IIFINESTRA/BANDO_ALLIEVI_avv7fse_fin2_Aletheia.pdf' },
+      { gruppo: 'Domanda di iscrizione docenti', titoloLink: 'Domanda di iscrizione docenti', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/allegati_bando_DOCENTI_avv7fse_fin2_Aletheia.pdf' },
+      { gruppo: 'Bandi selezione docenti', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/BANDO_DOCENTI_avv7fse_fin2_Aletheia.pdf' },
+      { gruppo: 'Bandi selezione docenti', titoloLink: 'Appendice', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/appendice-BANDI-DOCENTI-avv.-7fse_fin2_Aletheia.pdf' },
+      { gruppo: 'Bandi selezione personale non docente – operatore di segreteria', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/Bando-selezione--Operatore-di-segreteria-Avviso-7-II-finestra-aletheia.pdf' },
+      { gruppo: 'Bandi selezione docenti di sostegno', titoloLink: 'Manifestazione di interesse docenti di sostegno', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/Bando-selezione--docenti-di-sostegno-Aletheia.pdf' },
+      { gruppo: 'Bandi selezione docenti di sostegno', titoloLink: 'Domanda di iscrizione docente di sostegno', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/allegati-bando-DOCENTI-SOSTEGNO-avv.-7fse_fin2_Aletheia.pdf' },
+      { gruppo: 'Bandi selezione tutor', titoloLink: 'Manifestazione di interesse tutor', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/Bando-selezione-TUTOR-Aletheia.pdf' },
+      { gruppo: 'Bandi selezione tutor', titoloLink: 'Domanda di iscrizione tutor', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/allegati-bando-TUTOR-avv.-7fse_fin2_Aletheia.pdf' },
+      { gruppo: 'Domanda di iscrizione allievi', titoloLink: 'Domanda di iscrizione allievi', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/Domanda_iscrizione_ALLIEVI_finestra2_FSEAvv.7.2023.pdf' },
+      { gruppo: 'Bandi selezione allievi', titoloLink: 'Bando selezione allievi', percorsoLocale: '/pdf/avvisi/avviso-7-2023-seconda-finestra/BANDO_ALLIEVI_avv7fse_fin2_Aletheia.pdf' },
     ],
     scheda: {
       titoloBreve: 'Avviso 7/2023 - Seconda Finestra',
@@ -134,10 +134,10 @@ export const SCHEDE_ARCHIVIO = [
     descrizione: "Il percorso formativo di Assistente Familiare ha come obiettivo quello di fornire e/o sviluppare competenze tecnico-professionali, relazionali e comunicative nonché socio-culturali nel campo dell’assistenza familiare fornendo ai partecipanti gli strumenti necessari per poter affrontare le difficoltà che emergono nell’ambito dell’assistenza e cura alla persona. Il percorso è finalizzato al rilascio della qualifica “Assistente Familiare” del Repertorio delle qualificazioni di cui al D.A.n.5816 del 26 luglio 2017.\n\nL’Assistente Familiare collabora all'attuazione di percorsi terapeutici volti alla cura e ad uno sviluppo equilibrato dei soggetti assistiti, li assiste nel proprio ambiente domestico, fornendo prestazioni di tipo preventivo, assistenziale e riabilitativo. L’Assistente Familiare, occupandosi del benessere delle persone parzialmente o totalmente non autosufficienti, dovrà consentire loro di mantenere nel proprio ambiente condizioni di vita adeguate e tutelarne cura e benessere.",
     // `gruppo`: titoletto sopra i documenti dello stesso tipo (come nella pagina originale)
     documenti: [
-      { gruppo: 'Domanda di iscrizione docenti', titoloLink: 'Domanda di iscrizione docenti', percorsoLocale: 'https://www.aletheiasrl.it/images/avviso20_2024/allegati_bando_DOCENTI_avv20_2024_Aletheia.pdf' },
-      { gruppo: 'Bandi selezione docenti', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: 'https://www.aletheiasrl.it/images/avviso20_2024/BANDO_DOCENTI_avv20_2024fse_Aletheia.pdf' },
-      { gruppo: 'Domanda di iscrizione allievi', titoloLink: 'Domanda di iscrizione allievi', percorsoLocale: 'https://www.aletheiasrl.it/images/avviso20_2024/Domanda_iscrizione_ALLIEVI_avv20_2024.pdf' },
-      { gruppo: 'Bandi selezione allievi', titoloLink: 'Bando selezione allievi', percorsoLocale: 'https://www.aletheiasrl.it/images/avviso20_2024/BANDO_ALLIEVI_avv20_2024fse_Aletheia.pdf' },
+      { gruppo: 'Domanda di iscrizione docenti', titoloLink: 'Domanda di iscrizione docenti', percorsoLocale: '/pdf/avvisi/avviso-20-2024-fse/allegati_bando_DOCENTI_avv20_2024_Aletheia.pdf' },
+      { gruppo: 'Bandi selezione docenti', titoloLink: 'Manifestazione di interesse docenti', percorsoLocale: '/pdf/avvisi/avviso-20-2024-fse/BANDO_DOCENTI_avv20_2024fse_Aletheia.pdf' },
+      { gruppo: 'Domanda di iscrizione allievi', titoloLink: 'Domanda di iscrizione allievi', percorsoLocale: '/pdf/avvisi/avviso-20-2024-fse/Domanda_iscrizione_ALLIEVI_avv20_2024.pdf' },
+      { gruppo: 'Bandi selezione allievi', titoloLink: 'Bando selezione allievi', percorsoLocale: '/pdf/avvisi/avviso-20-2024-fse/BANDO_ALLIEVI_avv20_2024fse_Aletheia.pdf' },
     ],
     scheda: {
       titoloBreve: 'Avviso 20/2024 FSE+',

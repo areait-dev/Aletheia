@@ -67,13 +67,17 @@ test.describe.serial('foglio con edizioni @calendario', () => {
     await expect(page.getByText('Nuove date in arrivo')).toHaveCount(0);
   });
 
-  test('card del calendario con livello ed edizione; scheda con Course e CourseInstance @calendario', async ({ request }) => {
+  test('card del calendario con livello ed edizione; scheda con Course e CourseInstance @calendario', async ({ page, request }) => {
     // /calendario-corsi e home: la card di Antincendio "Rischio medio Livello 2 (8 ore)" apre la scheda sul livello 2 e sull'edizione del 12 novembre
-    for (const pagina of ['/calendario-corsi', '/']) {
-      const html = await (await request.get(s.base + pagina)).text();
-      expect(html, pagina).toContain('href="/corsi/antincendio?livello=2&amp;edizione=2026-11-12"');
-      expect(html, pagina).not.toContain('href="/corsi/antincendio"');
-    }
+    // (le card si disegnano nel browser, per mese o per giorno: serve la pagina vera)
+    const atteso = '/corsi/antincendio?livello=2&edizione=2026-11-12';
+    await page.goto(s.base + '/calendario-corsi');
+    await page.getByRole('button', { name: /Novembre 2026/ }).click();
+    const hrefPrenota = async () => page.locator('a', { hasText: 'Prenota il tuo posto' }).evaluateAll((els) => els.map((e) => e.getAttribute('href')));
+    expect(await hrefPrenota(), 'calendario').toContain(atteso);
+    await page.goto(s.base + '/');
+    await page.locator('.cal-tab').nth(0).click();
+    expect(await hrefPrenota(), 'home').toContain(atteso);
     // scheda: Course con un CourseInstance per ogni edizione in calendario
     const scheda = await (await request.get(s.base + '/corsi/antincendio')).text();
     const dati = [...scheda.matchAll(/<script[^>]*application\/ld\+json[^>]*>(.*?)<\/script>/gs)].map((m) => JSON.parse(m[1]));
