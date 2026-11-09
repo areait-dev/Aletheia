@@ -25,6 +25,8 @@ export type NewsItem = {
   bodyHtml?: string;
   fonte?: string;
   tempoLettura?: number;
+  /** Data (YYYY-MM-DD) dopo la quale la news non compare più in home: resta in /news e al suo indirizzo. */
+  scadenza?: string;
 };
 
 type WpAcf = Record<string, unknown>;

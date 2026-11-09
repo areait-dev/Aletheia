@@ -54,3 +54,16 @@ test('"Altre notizie" di un articolo: le più recenti prima, mai l\'articolo ste
     expect($(`aside a[href="/news/${slug}"]`).length, slug).toBe(0);
   }
 });
+
+test('home: le 3 news più recenti non scadute, senza elenchi scritti a mano; Bonus Giovani (scaduto) non compare ma resta in /news e al suo indirizzo @rapido', async ({ request }) => {
+  const $ = cheerio.load(await (await request.get('/')).text());
+  const slugs = unici($('a[href^="/news/"]').map((_, e) => slugDa($(e).attr('href'))).get());
+  expect(slugs).toEqual([
+    'intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze',
+    'il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende',
+    'priorita-lavoratori-2026-workforce-trends', // 15 marzo 2026: la 1 aprile (Bonus Giovani) è scaduta il 30 aprile
+  ]);
+  const elenco = cheerio.load(await (await request.get('/news')).text());
+  expect(elenco('a[href="/news/bonus-giovani-under-35-aprile-2026"]').length).toBeGreaterThan(0);
+  expect((await request.get('/news/bonus-giovani-under-35-aprile-2026')).status()).toBe(200);
+});
