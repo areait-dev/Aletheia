@@ -3356,6 +3356,17 @@ html.dark .legal-content td { border-bottom-color: #1F2937; }
 /* Statistiche di contorno: filetto sottile tra una e l'altra */
 .numbers-hero-side > * + * { border-left: 1px solid rgba(255,255,255,0.12); }
 
+/* ── Campi dei moduli sotto i 768px: testo a 16px ────────────────────────────────────────────────────────────────────
+   iOS Safari ingrandisce la pagina quando si mette a fuoco un campo con testo sotto i 16px (i campi avevano 14,4px). La regola per
+   `pointer: coarse` qui sotto non basta: un browser stretto con il mouse (o l'anteprima responsive) non è "coarse". Vale per larghezza. */
+@media (max-width: 767.98px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="submit"]):not([type="button"]):not([type="range"]):not([type="hidden"]),
+  select,
+  textarea {
+    font-size: 16px !important; /* !important: gli stili dei campi sono sparsi in styled-jsx, stili inline e classi Tailwind */
+  }
+}
+
 /* ── Touch (puntatore "coarse": telefoni e tablet, a qualsiasi larghezza) ─────────────────────────────────────────
    Il mouse (desktop) non è toccato. Misurato a 390px: 34-49 aree cliccabili sotto i 44px per pagina e campi con testo
    di 13-14px (iOS Safari ingrandisce la pagina quando si mette a fuoco un campo sotto i 16px). */

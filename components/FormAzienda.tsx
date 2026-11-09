@@ -315,7 +315,7 @@ export default function FormAzienda({
                 {/* Ragione Sociale + P.IVA */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="az-row">
                   <Field label="Ragione Sociale" required error={errors.ragioneSociale} isDark={isDark}>
-                    <input type="text" value={fields.ragioneSociale} onChange={set('ragioneSociale')}
+                    <input autoComplete="organization" type="text" value={fields.ragioneSociale} onChange={set('ragioneSociale')}
                       placeholder="Azienda S.r.l."
                       style={baseInput(!!errors.ragioneSociale, isDark)}
                       onFocus={focusOn} onBlur={focusOff(!!errors.ragioneSociale, isDark)} />
@@ -331,13 +331,13 @@ export default function FormAzienda({
                 {/* Nome + Cognome referente */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="az-row">
                   <Field label="Nome referente" required error={errors.nomeReferente} isDark={isDark}>
-                    <input type="text" value={fields.nomeReferente} onChange={set('nomeReferente')}
+                    <input autoComplete="given-name" type="text" value={fields.nomeReferente} onChange={set('nomeReferente')}
                       placeholder="Mario"
                       style={baseInput(!!errors.nomeReferente, isDark)}
                       onFocus={focusOn} onBlur={focusOff(!!errors.nomeReferente, isDark)} />
                   </Field>
                   <Field label="Cognome referente" required error={errors.cognomeReferente} isDark={isDark}>
-                    <input type="text" value={fields.cognomeReferente} onChange={set('cognomeReferente')}
+                    <input autoComplete="family-name" type="text" value={fields.cognomeReferente} onChange={set('cognomeReferente')}
                       placeholder="Rossi"
                       style={baseInput(!!errors.cognomeReferente, isDark)}
                       onFocus={focusOn} onBlur={focusOff(!!errors.cognomeReferente, isDark)} />
@@ -347,13 +347,13 @@ export default function FormAzienda({
                 {/* Email + Telefono */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="az-row">
                   <Field label="Email aziendale" required error={errors.email} isDark={isDark}>
-                    <input type="email" value={fields.email} onChange={set('email')}
+                    <input autoComplete="email" type="email" value={fields.email} onChange={set('email')}
                       placeholder="info@azienda.it"
                       style={baseInput(!!errors.email, isDark)}
                       onFocus={focusOn} onBlur={focusOff(!!errors.email, isDark)} />
                   </Field>
                   <Field label="Telefono" required error={errors.telefono} isDark={isDark}>
-                    <input type="tel" value={fields.telefono} onChange={set('telefono')}
+                    <input autoComplete="tel" type="tel" value={fields.telefono} onChange={set('telefono')}
                       placeholder="+39 0932 000000"
                       style={baseInput(!!errors.telefono, isDark)}
                       onFocus={focusOn} onBlur={focusOff(!!errors.telefono, isDark)} />

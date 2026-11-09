@@ -119,10 +119,10 @@ export default function ReclamiProposte({ pagina }) {
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field label="Nome e Cognome (facoltativo)" error={errors.nome}>
-                  <input type="text" value={fields.nome} onChange={set('nome')} placeholder="Mario Rossi" className={inputClass} />
+                  <input autoComplete="name" type="text" value={fields.nome} onChange={set('nome')} placeholder="Mario Rossi" className={inputClass} />
                 </Field>
                 <Field label="Email (facoltativa, per ricevere risposta)" error={errors.email}>
-                  <input type="email" value={fields.email} onChange={set('email')} placeholder="mario@esempio.it" className={inputClass} />
+                  <input autoComplete="email" type="email" value={fields.email} onChange={set('email')} placeholder="mario@esempio.it" className={inputClass} />
                 </Field>
               </div>
 

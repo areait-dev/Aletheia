@@ -328,7 +328,7 @@ function ConsulenzaForm({ isDark }) {
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
           <FormField label="Ragione sociale" required isDark={isDark} error={errors.ragioneSociale}>
-            <input type="text" required value={fields.ragioneSociale} onChange={set('ragioneSociale')} placeholder="Azienda S.r.l." style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="organization" type="text" required value={fields.ragioneSociale} onChange={set('ragioneSociale')} placeholder="Azienda S.r.l." style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="P.IVA / Codice Fiscale" required isDark={isDark} error={errors.piva}>
             <input type="text" required value={fields.piva} onChange={set('piva')} placeholder="IT12345678901" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
@@ -347,18 +347,18 @@ function ConsulenzaForm({ isDark }) {
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
           <FormField label="Nome" required isDark={isDark} error={errors.nome}>
-            <input type="text" required value={fields.nome} onChange={set('nome')} placeholder="Mario" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="given-name" type="text" required value={fields.nome} onChange={set('nome')} placeholder="Mario" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="Cognome" required isDark={isDark} error={errors.cognome}>
-            <input type="text" required value={fields.cognome} onChange={set('cognome')} placeholder="Rossi" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="family-name" type="text" required value={fields.cognome} onChange={set('cognome')} placeholder="Rossi" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }} className="obb-form-row">
           <FormField label="Telefono" required isDark={isDark} error={errors.telefono}>
-            <input type="tel" required value={fields.telefono} onChange={set('telefono')} placeholder="+39 0932 000000" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="tel" type="tel" required value={fields.telefono} onChange={set('telefono')} placeholder="+39 0932 000000" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="Email" required isDark={isDark} error={errors.email}>
-            <input type="email" required value={fields.email} onChange={set('email')} placeholder="info@azienda.it" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="email" type="email" required value={fields.email} onChange={set('email')} placeholder="info@azienda.it" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
       </div>

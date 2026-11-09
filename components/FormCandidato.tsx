@@ -311,7 +311,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                 {/* Nome + Cognome */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="name-row">
                   <Field label="Nome" required error={errors.nome}>
-                    <input
+                    <input autoComplete="given-name"
                       type="text" value={fields.nome} onChange={set('nome')}
                       placeholder="Mario"
                       style={inputStyle(!!errors.nome)}
@@ -320,7 +320,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     />
                   </Field>
                   <Field label="Cognome" required error={errors.cognome}>
-                    <input
+                    <input autoComplete="family-name"
                       type="text" value={fields.cognome} onChange={set('cognome')}
                       placeholder="Rossi"
                       style={inputStyle(!!errors.cognome)}
@@ -333,7 +333,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                 {/* Email + Telefono */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="name-row">
                   <Field label="Email" required error={errors.email}>
-                    <input
+                    <input autoComplete="email"
                       type="email" value={fields.email} onChange={set('email')}
                       placeholder="mario@esempio.it"
                       style={inputStyle(!!errors.email)}
@@ -342,7 +342,7 @@ export default function FormCandidato({ posizioneDefault = '' }: FormCandidatoPr
                     />
                   </Field>
                   <Field label="Telefono" error={errors.telefono}>
-                    <input
+                    <input autoComplete="tel"
                       type="tel" value={fields.telefono} onChange={set('telefono')}
                       placeholder="+39 333 1234567"
                       style={inputStyle(!!errors.telefono)}

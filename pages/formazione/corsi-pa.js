@@ -154,7 +154,7 @@ function ConsulenzaPAForm({ isDark }) {
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }} className="pa-form-row">
           <FormField label="Ente / Amministrazione" required isDark={isDark} error={errors.ente}>
-            <input type="text" required value={fields.ente} onChange={set('ente')} placeholder="Comune di…" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="organization" type="text" required value={fields.ente} onChange={set('ente')} placeholder="Comune di…" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="Area formativa di interesse" isDark={isDark}>
             <input type="text" value={fields.area} onChange={set('area')} placeholder="Es. Digitalizzazione, Appalti…" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
@@ -168,7 +168,7 @@ function ConsulenzaPAForm({ isDark }) {
         </span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }} className="pa-form-row">
           <FormField label="Referente (Nome e Cognome)" required isDark={isDark} error={errors.referente}>
-            <input type="text" required value={fields.referente} onChange={set('referente')} placeholder="Mario Rossi" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="name" type="text" required value={fields.referente} onChange={set('referente')} placeholder="Mario Rossi" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="Ruolo / Ufficio" isDark={isDark}>
             <input type="text" value={fields.ruolo} onChange={set('ruolo')} placeholder="Es. Responsabile ufficio personale" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
@@ -176,10 +176,10 @@ function ConsulenzaPAForm({ isDark }) {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }} className="pa-form-row">
           <FormField label="Email istituzionale" required isDark={isDark} error={errors.email}>
-            <input type="email" required value={fields.email} onChange={set('email')} placeholder="nome.cognome@ente.it" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="email" type="email" required value={fields.email} onChange={set('email')} placeholder="nome.cognome@ente.it" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
           <FormField label="Telefono" isDark={isDark} error={errors.telefono}>
-            <input type="tel" value={fields.telefono} onChange={set('telefono')} placeholder="+39 0932 000000" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
+            <input autoComplete="tel" type="tel" value={fields.telefono} onChange={set('telefono')} placeholder="+39 0932 000000" style={inputStyle} onFocus={focusOn} onBlur={focusOff(isDark)} />
           </FormField>
         </div>
       </div>

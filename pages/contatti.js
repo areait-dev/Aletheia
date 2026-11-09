@@ -496,12 +496,12 @@ export default function Contatti({ sedi: SEDI, pagina }) {
                     <div className="form-row">
                       <div className="field">
                         <label htmlFor="nome" className="text-slate-700 dark:text-[#9aa8a6]">Nome <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="nome" name="nome" type="text" placeholder="Mario" value={form.nome} onChange={handleChange} aria-invalid={!!errors.nome} aria-describedby={errors.nome ? 'nome-error' : undefined} className={`${errors.nome ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
+                        <input autoComplete="given-name" id="nome" name="nome" type="text" placeholder="Mario" value={form.nome} onChange={handleChange} aria-invalid={!!errors.nome} aria-describedby={errors.nome ? 'nome-error' : undefined} className={`${errors.nome ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.nome && <p id="nome-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.nome}</p>}
                       </div>
                       <div className="field">
                         <label htmlFor="cognome" className="text-slate-700 dark:text-[#9aa8a6]">Cognome <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="cognome" name="cognome" type="text" placeholder="Rossi" value={form.cognome} onChange={handleChange} aria-invalid={!!errors.cognome} aria-describedby={errors.cognome ? 'cognome-error' : undefined} className={`${errors.cognome ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
+                        <input autoComplete="family-name" id="cognome" name="cognome" type="text" placeholder="Rossi" value={form.cognome} onChange={handleChange} aria-invalid={!!errors.cognome} aria-describedby={errors.cognome ? 'cognome-error' : undefined} className={`${errors.cognome ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.cognome && <p id="cognome-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.cognome}</p>}
                       </div>
                     </div>
@@ -509,12 +509,12 @@ export default function Contatti({ sedi: SEDI, pagina }) {
                     <div className="form-row">
                       <div className="field">
                         <label htmlFor="email" className="text-slate-700 dark:text-[#9aa8a6]">Email <span style={{ color: '#EF4444' }}>*</span></label>
-                        <input id="email" name="email" type="email" placeholder="mario@esempio.it" value={form.email} onChange={handleChange} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} className={`${errors.email ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
+                        <input autoComplete="email" id="email" name="email" type="email" placeholder="mario@esempio.it" value={form.email} onChange={handleChange} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} className={`${errors.email ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.email && <p id="email-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.email}</p>}
                       </div>
                       <div className="field">
                         <label htmlFor="telefono" className="text-slate-700 dark:text-[#9aa8a6]">Telefono</label>
-                        <input id="telefono" name="telefono" type="tel" placeholder="+39 000 0000000" value={form.telefono} onChange={handleChange} aria-invalid={!!errors.telefono} aria-describedby={errors.telefono ? 'telefono-error' : undefined} className={`${errors.telefono ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
+                        <input autoComplete="tel" id="telefono" name="telefono" type="tel" placeholder="+39 000 0000000" value={form.telefono} onChange={handleChange} aria-invalid={!!errors.telefono} aria-describedby={errors.telefono ? 'telefono-error' : undefined} className={`${errors.telefono ? 'error' : ''} bg-white dark:bg-[#1c2423] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#9aa8a6]`} />
                         {errors.telefono && <p id="telefono-error" className="err-msg"><i className="fas fa-exclamation-circle"></i>{errors.telefono}</p>}
                       </div>
                     </div>
