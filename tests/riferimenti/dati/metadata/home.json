@@ -177,8 +177,8 @@
     "Il ponte tra formazione e lavoro"
   ],
   "intestazioni": 16,
-  "testoLunghezza": 4179,
-  "testoSha1": "2cc7caccb1ec40666a5248dc3d398da15c8095b1",
+  "testoLunghezza": 4351,
+  "testoSha1": "a9282be3bd4a517a8d55a3eaaa817aca280ab1d5",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -208,9 +208,9 @@
     "/formazione/regionale",
     "/formazione/regionale-fse",
     "/news",
-    "/news/accordo-stato-regioni-formazione-sicurezza-2025",
     "/news/bonus-giovani-under-35-aprile-2026",
-    "/news/priorita-lavoratori-2026-workforce-trends",
+    "/news/il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende",
+    "/news/intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze",
     "/privacy-cookie",
     "/reclami-proposte",
     "https://www.aletheiasrl.it/elearning2/",
@@ -219,5 +219,5 @@
     "mailto:info@aletheiasrl.it"
   ],
   "immaginiConAlt": 33,
-  "immaginiAlt": "4ce37e1dc34bfb29f6c8f9608cd635808b8a3e16"
+  "immaginiAlt": "0af3e8633feb082cdcd18006823e33982ec6d21d"
 }

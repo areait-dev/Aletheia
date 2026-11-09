@@ -177,8 +177,8 @@
     "Agenzia per il Lavoro Alètheia: servizi per candidati e per imprese"
   ],
   "intestazioni": 9,
-  "testoLunghezza": 4027,
-  "testoSha1": "f525358ccabfe3aa81aa9a424cc6e7acdddcfbd7",
+  "testoLunghezza": 3984,
+  "testoSha1": "348fa784f12907498fad16cd883e275063371b97",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -209,8 +209,8 @@
     "/formazione/regionale-fse",
     "/news",
     "/news/bonus-giovani-under-35-aprile-2026",
-    "/news/domanda-lavoro-italia-vocazioni-professionali-2025",
     "/news/empowerment-femminile-retribuzioni-eque",
+    "/news/il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende",
     "/privacy-cookie",
     "/reclami-proposte",
     "https://www.aletheiasrl.it/elearning2/",
@@ -219,5 +219,5 @@
     "mailto:info@aletheiasrl.it"
   ],
   "immaginiConAlt": 13,
-  "immaginiAlt": "163fd7f9d3fc8c703258ed849c5e15becc960c30"
+  "immaginiAlt": "a65f59dead1793542ac5fbbf9f7d73519b914487"
 }

@@ -1,0 +1,250 @@
+{
+  "status": 200,
+  "lang": "it",
+  "classeHtml": "__variable_9302a3 __variable_37b1ed",
+  "classeBody": null,
+  "title": "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze - Alètheia Srl",
+  "description": [
+    "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi…"
+  ],
+  "robots": [],
+  "googleVerification": [],
+  "viewport": [
+    "width=device-width, initial-scale=1"
+  ],
+  "canonical": [
+    "https://www.aletheiasrl.it/news/intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze"
+  ],
+  "icon": [
+    "/favicon.png"
+  ],
+  "og": {
+    "og:site_name": [
+      "Alètheia Srl"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "og:title": [
+      "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze - Alètheia Srl"
+    ],
+    "og:description": [
+      "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi…"
+    ],
+    "og:image": [
+      "https://www.aletheiasrl.it/images/news/b190b9bcae39ee6b68c160e3e6f45456_L.jpg"
+    ],
+    "og:url": [
+      "https://www.aletheiasrl.it/news/intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze"
+    ],
+    "og:locale": [
+      "it_IT"
+    ]
+  },
+  "twitter": {
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze - Alètheia Srl"
+    ],
+    "twitter:description": [
+      "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi…"
+    ],
+    "twitter:image": [
+      "https://www.aletheiasrl.it/images/news/b190b9bcae39ee6b68c160e3e6f45456_L.jpg"
+    ]
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "EducationalOrganization",
+        "Organization"
+      ],
+      "@id": "https://www.aletheiasrl.it/#organizzazione",
+      "name": "Alètheia Srl",
+      "legalName": "Alètheia S.r.l.",
+      "url": "https://www.aletheiasrl.it",
+      "logo": "https://www.aletheiasrl.it/logo.png",
+      "image": "https://www.aletheiasrl.it/images/og-default.png",
+      "telephone": "+39 0932 862613",
+      "email": "info@aletheiasrl.it",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via del Carrubo, snc",
+        "addressLocality": "Vittoria",
+        "addressRegion": "RG",
+        "postalCode": "97019",
+        "addressCountry": "IT"
+      },
+      "location": [
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Vittoria",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via del Carrubo, snc",
+            "addressLocality": "Vittoria",
+            "addressRegion": "RG",
+            "postalCode": "97019",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Ragusa",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Viale delle Americhe, 141",
+            "addressLocality": "Ragusa",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Pozzallo",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Ginevra, 9",
+            "addressLocality": "Pozzallo",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        },
+        {
+          "@type": "Place",
+          "name": "Alètheia Srl - sede di Acate",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "C.da Casazza, snc",
+            "addressLocality": "Acate",
+            "addressRegion": "RG",
+            "addressCountry": "IT"
+          },
+          "telephone": "+39 0932 862613"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "14:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Sicilia"
+      },
+      "sameAs": [
+        "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+        "https://www.instagram.com/aletheiasrl/",
+        "https://it.linkedin.com/company/al%C3%A9theia-srl",
+        "https://t.me/alethiaapl"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.aletheiasrl.it/news/intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze"
+      },
+      "headline": "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze",
+      "description": "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi…",
+      "image": [
+        "https://www.aletheiasrl.it/images/news/b190b9bcae39ee6b68c160e3e6f45456_L.jpg"
+      ],
+      "datePublished": "2026-10-06",
+      "dateModified": "2026-10-06",
+      "author": {
+        "@type": "Organization",
+        "name": "Alètheia Srl"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.aletheiasrl.it/#organizzazione",
+        "name": "Alètheia Srl",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.aletheiasrl.it/logo.png"
+        }
+      }
+    }
+  ],
+  "preconnect": [
+    "https://cdnjs.cloudflare.com"
+  ],
+  "stylesheetEsterni": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  ],
+  "h1": [
+    "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze"
+  ],
+  "intestazioni": 6,
+  "testoLunghezza": 7815,
+  "testoSha1": "d0820a354924796e68f44ce73d0afde90bba50ec",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/corsi",
+    "/corsi/certificazioni-informatiche",
+    "/corsi/corsi-qualificati",
+    "/corsi/decreto-attrezzature",
+    "/corsi/patentino-fitosanitario",
+    "/corsi/personale-alimentarista-osa",
+    "/corsi/sicurezza-lavoro",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/news/bonus-giovani-under-35-aprile-2026",
+    "/news/il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende",
+    "/news/priorita-lavoratori-2026-workforce-trends",
+    "/pdf/news/EDUNext_Nuovi_scenari_per_Education_e_competenze_era_AI2026.pdf",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 14,
+  "immaginiAlt": "0ecf5f344efbd9a14f377829b0f4b09a4076a3c9"
+}

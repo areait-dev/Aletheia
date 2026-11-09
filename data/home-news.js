@@ -2,6 +2,22 @@
 // Con WP_URL attivo la home usa invece le ultime notizie pubblicate (vedi pages/index.js, ultimeNews).
 export const HOME_NEWS = [
   {
+    id: 16,
+    slug: 'intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze',
+    title: "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze",
+    excerpt: "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi strutturati per i lavoratori.",
+    date: '2026-10-06',
+    image: '/images/news/b190b9bcae39ee6b68c160e3e6f45456_L.jpg',
+  },
+  {
+    id: 17,
+    slug: 'il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende',
+    title: "Il full remote perde terreno: come cambiano le offerte di lavoro delle grandi aziende",
+    excerpt: "Un'indagine su 329 annunci di tre grandi aziende mostra che meno dell'1% delle offerte prevede il full remote, mentre il 27% indica il lavoro ibrido e il 79% cerca profili tech.",
+    date: '2026-09-30',
+    image: '/images/news/6cd7000b5fdc149d15c15e2b49b0ac68_L.jpg',
+  },
+  {
     id: 1,
     slug: 'bonus-giovani-under-35-aprile-2026',
     title: "Aprile 2026, ultimo mese per l'assunzione di under 35 con il Bonus Giovani",

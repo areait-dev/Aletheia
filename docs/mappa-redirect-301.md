@@ -437,8 +437,9 @@ visite negli ultimi 12 mesi.
 
   /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/148-corso-operatore-di-gru-corso-12h-aggiornamento-4h                                                         /corsi/operatore-di-gru-per-autocarro
 
-  /index.php/news/item/568-intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze                                                                    /news
+  /index.php/news/item/568-intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze                                                                    /news/intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze
 
+  /index.php/news/item/571-il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende                                                                             /news/il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende
   /index.php/apl-lavoro/offerte-di-lavoro/item/319-addetto-impianti-elettrici-civili-e-industriali                                                                                          https://aletheia4job.it/
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/423-portiere-per-controllo-accessi                                                                                                           https://aletheia4job.it/

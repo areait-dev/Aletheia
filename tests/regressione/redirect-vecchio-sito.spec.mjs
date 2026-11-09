@@ -1,5 +1,5 @@
 // Redirect 301 dal vecchio sito Joomla (docs/mappa-redirect-301.md -> lib/redirect-vecchio-sito.js -> next.config.js).
-// Verifica sul server di test (build di produzione): tutti i 250 URL della mappa, le varianti con slash finale, le schede K2 con slug
+// Verifica sul server di test (build di produzione): tutti i 251 URL della mappa, le varianti con slash finale, le schede K2 con slug
 // diverso, le riserve ("mai 404"), i parametri Joomla e che ogni destinazione risponda 200 senza altri salti (nessuna catena).
 import { test, expect } from '@playwright/test';
 import redirectVecchioSito from '../../lib/redirect-vecchio-sito.js';
@@ -16,13 +16,13 @@ async function salto(request, baseURL, url) {
 }
 const comeAtteso = (baseURL, dest) => (dest.startsWith('http') ? new URL(dest).toString() : new URL(dest, baseURL).toString());
 
-test('la mappa ha 250 righe, nessuna destinazione con ?categoria= (si va diritti alla pagina di categoria) @rapido', () => {
-  expect(righe).toHaveLength(250);
+test('la mappa ha 251 righe, nessuna destinazione con ?categoria= (si va diritti alla pagina di categoria) @rapido', () => {
+  expect(righe).toHaveLength(251);
   expect(righe.filter((r) => r.a.includes('categoria='))).toEqual([]);
   expect(righe.filter((r) => r.a === '/corsi/certificazioni-informatiche')).toHaveLength(4);
 });
 
-test('i 250 URL della mappa: 301 diretto (un solo salto) alla destinazione della mappa @rapido', async ({ request, baseURL }) => {
+test('i 251 URL della mappa: 301 diretto (un solo salto) alla destinazione della mappa @rapido', async ({ request, baseURL }) => {
   const errori = [];
   for (const r of righe) {
     if (r.da === '/') continue; // "/" -> "/" non è un redirect

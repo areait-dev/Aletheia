@@ -176,9 +176,9 @@
   "h1": [
     "Ultime Notizie"
   ],
-  "intestazioni": 15,
-  "testoLunghezza": 5403,
-  "testoSha1": "05cefef52bf9b74c9ed8e8b38474732474444511",
+  "intestazioni": 17,
+  "testoLunghezza": 6005,
+  "testoSha1": "e18eeac6c57310488270798f5e5f1bbb9a2a1b57",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -213,6 +213,8 @@
     "/news/domanda-lavoro-italia-vocazioni-professionali-2025",
     "/news/empowerment-femminile-retribuzioni-eque",
     "/news/formazione-frontiere-lavoro-cambiamento",
+    "/news/il-full-remote-perde-terreno-come-cambiano-le-offerte-di-lavoro-delle-grandi-aziende",
+    "/news/intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze",
     "/news/intelligenza-artificiale-obbligo-formazione-2025",
     "/news/lavoratori-stranieri-alloggi-ddl-semplificazioni",
     "/news/piccole-imprese-assumere-profili-mancanti",
@@ -228,6 +230,6 @@
     "https://www.instagram.com/aletheiasrl/",
     "mailto:info@aletheiasrl.it"
   ],
-  "immaginiConAlt": 22,
-  "immaginiAlt": "14f37763e444b7604a84e5b5cdba82e0206f7da9"
+  "immaginiConAlt": 24,
+  "immaginiAlt": "7a4d9425320696b069159ce1f58140a775ca55ee"
 }
