@@ -23,10 +23,10 @@ const PAGES = [
   { key: 'home', path: '/' },
   { key: 'chi-siamo', path: '/chi-siamo' },
   { key: 'contatti', path: '/contatti' },
-  { key: 'all-courses', path: '/all-courses' },
-  // pagina corso servita dal template dinamico pages/all-courses/[slug].js
-  // (non da uno dei file statici pages/all-courses/<slug>.js)
-  { key: 'corso-dinamico', path: '/all-courses/lavori-in-quota' },
+  { key: 'corsi', path: '/corsi' },
+  // pagina corso servita dal template dinamico pages/corsi/[slug].js
+  // (non da uno dei file statici pages/corsi/<slug>.js)
+  { key: 'corso-dinamico', path: '/corsi/lavori-in-quota' },
   { key: 'agenzia-per-il-lavoro', path: '/agenzia-per-il-lavoro' },
 ];
 

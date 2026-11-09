@@ -1,6 +1,6 @@
 import { chromium } from 'playwright-core';
 const EXE = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
-const BASE = 'http://localhost:3003/all-courses';
+const BASE = 'http://localhost:3003/corsi';
 const browser = await chromium.launch({ executablePath: EXE, headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 
