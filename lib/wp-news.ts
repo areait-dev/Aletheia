@@ -56,7 +56,15 @@ type WpPagePayload = {
   acf?: WpAcf | unknown[];
 };
 
-const LOCAL_NEWS = ALL_NEWS as NewsItem[];
+/**
+ * Ordine UNICO delle news in tutto il sito (/news, home, correlati, sitemap, news dell'agenzia): data di pubblicazione decrescente, letta dal campo
+ * `date` dell'articolo (YYYY-MM-DD) e non dall'ordine in cui sono scritti i dati; a parità di data, per titolo. Non modifica l'array ricevuto.
+ */
+export function ordinaNews<T extends { date: string; title: string }>(news: T[]): T[] {
+  return [...news].sort((a, b) => b.date.slice(0, 10).localeCompare(a.date.slice(0, 10)) || a.title.localeCompare(b.title, 'it'));
+}
+
+const LOCAL_NEWS = ordinaNews(ALL_NEWS as NewsItem[]);
 
 /* ─── Adattatori WordPress → NewsItem ─────────────────────────── */
 
@@ -137,7 +145,7 @@ async function loadAllNews(): Promise<NewsItem[]> {
 /** Tutte le news, complete di corpo, dalla più recente. */
 export async function getAllNews(): Promise<NewsItem[]> {
   if (!isWpEnabled()) return LOCAL_NEWS;
-  if (!memo || Date.now() - memo.at > MEMO_TTL_MS) memo = { at: Date.now(), value: loadAllNews() };
+  if (!memo || Date.now() - memo.at > MEMO_TTL_MS) memo = { at: Date.now(), value: loadAllNews().then(ordinaNews) };
   return memo.value;
 }
 
