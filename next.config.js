@@ -119,6 +119,16 @@ const nextConfig = {
   // "/index.php/chi-siamo/" farebbe due salti (308 poi 301). Così i vecchi URL con slash finale fanno un salto solo (regole con `{/}?`),
   // mentre per tutto il resto del sito lo slash finale continua a essere tolto con lo stesso 308 di prima (regola più sotto).
   skipTrailingSlashRedirect: true,
+  // Anteprime e qualsiasi host diverso dal dominio definitivo non vanno indicizzati: X-Robots-Tag noindex, nofollow.
+  // Due regole, entrambe attive: (1) per host, valutata a ogni richiesta (copre anche aletheiasrl.vercel.app e gli alias
+  // dell'anteprima); (2) per ambiente di build, se VERCEL_ENV è impostata e non è "production". Su www.aletheiasrl.it in
+  // produzione non viene aggiunta nessuna intestazione.
+  async headers() {
+    const noindex = [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }];
+    const regole = [{ source: '/:path*', has: [{ type: 'host', value: '(?!www\\.aletheiasrl\\.it$).*' }], headers: noindex }];
+    if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') regole.push({ source: '/:path*', headers: noindex });
+    return regole;
+  },
   async redirects() {
     return [
       // Vecchio sito Joomla: regole ricavate da docs/mappa-redirect-301.md (lib/redirect-vecchio-sito.js), tutte 301.
