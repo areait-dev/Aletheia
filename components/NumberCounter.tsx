@@ -23,26 +23,37 @@ export default function NumberCounter({
   labelClassName = 'text-xs', // WCAG AA: bianco 75% su sfondo scuro > 4.5:1
   smallSuffix = false,
 }: NumberCounterProps) {
-  const [count, setCount] = useState(0);
+  const numericTarget = parseInt(target.toString().replace(/[^0-9]/g, ''));
+  // Il valore FINALE è quello renderizzato dal server (HTML pre-renderizzato, crawler, schermi senza JavaScript, prefers-reduced-motion).
+  // L'animazione parte solo nel browser, e solo se il contatore è ancora fuori dallo schermo e l'utente non ha chiesto meno movimento:
+  // così non c'è nessun "0" visibile e nessun salto del numero già in vista.
+  const [count, setCount] = useState(numericTarget);
+  const [animabile, setAnimabile] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) return undefined; // già in vista: resta il valore finale
+    setCount(0); // fuori schermo: si può ripartire da zero senza che nessuno lo veda
+    setAnimabile(true);
     const observer = new IntersectionObserver(
       entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !hasStarted) setHasStarted(true);
-        });
+        if (entries.some(entry => entry.isIntersecting)) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
       },
       { threshold: 0.1 }
     );
-    if (ref.current) observer.observe(ref.current);
-    return () => { if (ref.current) observer.unobserve(ref.current); };
-  }, [hasStarted]);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    if (!hasStarted) return;
-    const numericTarget = parseInt(target.toString().replace(/[^0-9]/g, ''));
+    if (!animabile || !hasStarted) return undefined;
     let currentCount = 0;
     const increment = numericTarget / (duration / 50);
     const interval = setInterval(() => {
@@ -55,7 +66,7 @@ export default function NumberCounter({
       }
     }, 50);
     return () => clearInterval(interval);
-  }, [hasStarted, target, duration]);
+  }, [animabile, hasStarted, numericTarget, duration]);
 
   const suffix = target.toString().includes('+') ? '+' : target.toString().includes('%') ? '%' : '';
   const displayValue = prefix + count.toLocaleString('it-IT') + (smallSuffix ? '' : suffix);
