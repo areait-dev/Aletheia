@@ -7,7 +7,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from '../context/ThemeContext';
 import { initLenis, destroyLenis, scrollToTopNow } from '../lib/lenis';
-import { SITE_NAME, SITE_URL } from '../components/SeoHead';
+import SeoCentrale from '../components/SeoCentrale';
 import CookieConsent from '../components/CookieConsent';
 import { SITE_OPTIONS } from '../data/site-options';
 import { SiteOptionsProvider } from '../context/SiteOptionsContext';
@@ -18,28 +18,6 @@ let ultimoRitornoCronologia = 0;
 // Chatbot non contribuisce al first paint: caricato lato client dopo l'idratazione
 // per non bloccare il rendering iniziale della pagina.
 const Chatbot = dynamic(() => import('../components/Chatbot'), { ssr: false });
-
-// Dati strutturati Organization: telefono, email e social seguono le opzioni globali (WordPress o data/site-options.js).
-function organizationJsonLd(identita) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Via del Carrubo, snc',
-      addressLocality: 'Vittoria',
-      addressRegion: 'RG',
-      postalCode: '97019',
-      addressCountry: 'IT',
-    },
-    telephone: identita.telefono,
-    email: identita.email,
-    sameAs: identita.social.map((s) => s.href),
-  };
-}
 
 function MyApp({ Component, pageProps }) {
   // `siteOptions` arriva da getStaticProps (lib/wp-site.ts → withSiteOptions); se manca, il contesto usa i dati locali.
@@ -84,17 +62,6 @@ function MyApp({ Component, pageProps }) {
           <meta name="robots" content="noindex, nofollow" />
         </Head>
       )}
-      {/* Descrizione predefinita (opzioni globali → SEO): vale per le pagine che non ne hanno una propria,
-          perché next/head tiene l'ultimo meta description (quello della pagina, se c'è). Vuota in locale. */}
-      {seo.descrizione && (
-        <Head>
-          <meta name="description" content={seo.descrizione} />
-        </Head>
-      )}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd(identita)) }}
-      />
       <script dangerouslySetInnerHTML={{__html: `
         (function() {
           try {
@@ -116,6 +83,16 @@ function MyApp({ Component, pageProps }) {
           <div className={`${nunito.variable} ${viga.variable}`} style={{ display: 'contents' }}>
             <SiteOptionsProvider value={siteOptions}>
               <Component {...restProps} />
+              {/* SEO di ogni pagina (title, description, canonical, Open Graph, JSON-LD): DOPO la pagina, così i suoi valori prevalgono. Vedi components/SeoCentrale.tsx */}
+              <SeoCentrale
+                asPath={router.asPath}
+                pathname={router.pathname}
+                seo={restProps.seoPagina}
+                paginaSeo={restProps.pagina?.seo}
+                ogImageGlobale={seo.ogImage}
+                descrizioneGlobale={seo.descrizione}
+                identita={identita}
+              />
               <Chatbot />
               <CookieConsent />
             </SiteOptionsProvider>

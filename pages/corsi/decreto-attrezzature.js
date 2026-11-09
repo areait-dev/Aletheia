@@ -13,6 +13,7 @@ export default function Pagina({ coursesRaw }) {
 }
 
 async function getPageStaticProps() {
-  return { props: { coursesRaw: await getCoursesRaw() }, ...isrOptions() };
+  // `seoPagina`: titolo e descrizione della categoria per components/SeoCentrale.tsx (canonical, Open Graph, JSON-LD)
+  return { props: { coursesRaw: await getCoursesRaw(), seoPagina: { title: categoria.title, description: categoria.description } }, ...isrOptions() };
 }
 export const getStaticProps = withSiteOptions(getPageStaticProps);

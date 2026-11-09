@@ -1,58 +1,21 @@
 /**
- * Blocco di meta tag SEO/Open Graph riutilizzabile. Non renderizza un proprio <Head> —
- * va inserito DENTRO il <Head> già presente in ogni pagina (title, favicon, viewport
- * restano dove sono), così le pagine mantengono il controllo di title/link esistenti.
+ * OBSOLETO: i meta tag SEO (description, canonical, Open Graph, Twitter) e il JSON-LD li emette ora components/SeoCentrale.tsx per ogni pagina
+ * (montato in pages/_app.js; valori in data/seo-pagine.js o in `seoPagina` tra le props della pagina). Questo componente non renderizza più nulla:
+ * resta solo perché alcune pagine lo importano ancora e per le costanti. Nelle pagine nuove NON usarlo.
  */
+import { SITE_NAME, SITE_URL } from '../lib/seo';
 
-export const SITE_NAME = 'Alètheia Srl';
-export const SITE_URL = 'https://www.aletheiasrl.it';
-const DEFAULT_OG_IMAGE = `${SITE_URL}/logo.png`;
+export { SITE_NAME, SITE_URL };
 
 interface SeoHeadProps {
-  /** Titolo della pagina, usato anche per og:title/twitter:title (senza duplicare <title>) */
-  title: string;
-  description: string;
-  /** URL assoluto o path relativo (verrà risolto rispetto a SITE_URL) */
+  title?: string;
+  description?: string;
   ogImage?: string;
-  /** Path relativo (es. "/chi-siamo") o URL assoluto della pagina */
-  url: string;
+  url?: string;
   type?: 'website' | 'article';
 }
 
-function resolveUrl(value: string, base: string): string {
-  try {
-    return new URL(value, base).toString();
-  } catch {
-    return value;
-  }
-}
-
-export default function SeoHead({ title, description, ogImage, url, type = 'website' }: SeoHeadProps) {
-  // Nota: i figli di next/head sono renderizzati fuori dal provider delle opzioni globali, quindi qui non si
-  // legge il contesto: le pagine passano `ogImage` (pagina.seo.ogImage || opzioni globali via useSiteOptions);
-  // la descrizione predefinita e la verifica Google sono emesse da _app.
-  const absoluteUrl = resolveUrl(url, SITE_URL);
-  const absoluteImage = ogImage ? resolveUrl(ogImage, SITE_URL) : DEFAULT_OG_IMAGE;
-
-  return (
-    <>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={absoluteUrl} />
-
-      {/* Open Graph */}
-      <meta property="og:site_name" content={SITE_NAME} />
-      <meta property="og:type" content={type} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={absoluteImage} />
-      <meta property="og:url" content={absoluteUrl} />
-      <meta property="og:locale" content="it_IT" />
-
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={absoluteImage} />
-    </>
-  );
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function SeoHead(_props: SeoHeadProps) {
+  return null;
 }
