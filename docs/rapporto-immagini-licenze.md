@@ -1,0 +1,125 @@
+# Immagini del sito che non vengono da Unsplash (da verificare per le licenze)
+
+Generato il 9 novembre 2026 dal codice. Nel repository non c'è nessun registro delle fonti: per le foto locali l'origine non è tracciata.
+
+## 1. Foto "Formazione dei lavoratori"
+
+- File: `public/images/corsi/formazione-lavoratori.jpg` (131 KB). È la foto del 1932 "Lunch atop a Skyscraper" (operai sulla trave del Rockefeller Center).
+- Collegata in `data/courseImages.js` (riga 18) alla famiglia `formazione-dei-lavoratori`. Da lì compare: card nel catalogo /corsi, scheda corso /corsi/formazione-dei-lavoratori (immagine principale), righe del calendario e "Corsi in partenza" in home, elenco in Formazione obbligatoria, corsi correlati, immagine di condivisione.
+- Nessuna sostituzione fatta, come richiesto.
+
+## 2. Immagini remote che non sono Unsplash
+
+- Pexels: `data/pagine.js` riga 335 (https://images.pexels.com/photos/3184465/...).
+- Vecchio sito (www.aletheiasrl.it): immagini delle news (`/media/k2/items/cache/...`, 19 riferimenti), degli avvisi (`/images/AVVISO7-IIFINESTRA`, `AVVISO1-POC`, `avviso20_2024`) e altre in `data/` e `lib/newsData.js`. Diventeranno irraggiungibili quando il vecchio sito sarà sostituito.
+
+## 3. File locali in public/images (origine non tracciata)
+
+### corsi (39 file)
+- antincendio.jpg (61 KB)
+- asacom.webp (75 KB)
+- blsd.webp (85 KB)
+- cantieri-datore-di-lavoro.jpg (77 KB)
+- caricatori-movimentazione.jpg (179 KB)
+- carrelli-elevatori.jpg (62 KB)
+- carroponte.jpg (127 KB)
+- coordinatori-cantieri.jpg (79 KB)
+- datore-di-lavoro.jpg (63 KB)
+- dirigente-sicurezza.jpg (111 KB)
+- dpi-3-categoria.jpg (158 KB)
+- formatori.jpg (98 KB)
+- formazione-lavoratori.jpg (128 KB)
+- gru-per-autocarro.jpg (91 KB)
+- icdl-base.webp (69 KB)
+- icdl-digcomp-2-2.webp (65 KB)
+- icdl-full-standard.webp (49 KB)
+- icdl-generica.webp (53 KB)
+- icdl-standard.webp (67 KB)
+- icdl-update.webp (64 KB)
+- impresa-agricola.jpg (95 KB)
+- lavori-in-quota.jpg (82 KB)
+- macchine-movimento-terra.jpg (99 KB)
+- oss.webp (31 KB)
+- pes-pav.jpg (137 KB)
+- pimus-ponteggi.jpg (206 KB)
+- ple.jpg (128 KB)
+- pompe-calcestruzzo.jpg (121 KB)
+- preposto.jpg (47 KB)
+- primo-soccorso.jpg (91 KB)
+- qualificati-generica.webp (54 KB)
+- raccogli-frutta.jpg (144 KB)
+- rls.jpg (91 KB)
+- rspp-aspp.jpg (85 KB)
+- rspp-datore-di-lavoro.jpg (56 KB)
+- segnaletica-stradale.jpg (85 KB)
+- sicurezza-alimentare.jpg (75 KB)
+- spazi-confinati.jpg (121 KB)
+- trattori-agricoli.jpg (158 KB)
+
+### courses (6 file)
+- 1.jpg (57 KB)
+- 2.jpg (37 KB)
+- 3.jpg (64 KB)
+- Pittogramma White.png (57 KB)
+- Pittogramma.png (61 KB)
+- Screenshot 2026-06-04 122824.png (97 KB)
+
+### formazione (5 file)
+- ecm.webp (34 KB)
+- fondi-interprofessionali.webp (22 KB)
+- fondo-nuove-competenze.webp (47 KB)
+- pa.webp (73 KB)
+- regionale.webp (63 KB)
+
+### formazione-obbligatoria (5 file)
+- decreto-attrezzature.jpg (156 KB)
+- patentino-fitosanitario.jpg (111 KB)
+- personale-alimentarista.jpg (102 KB)
+- sicurezza-sul-lavoro.jpg (90 KB)
+- sicurezza-sul-lavoro-2.webp (37 KB)
+
+### per la persona (6 file)
+- garanzia giovani.jpg (122 KB)
+- orientamento.jpg (281 KB)
+- outplacement.jpg (112 KB)
+- programma gol.jpg (340 KB)
+- supporto al colloquio.jpg (86 KB)
+- Thumbs.db (14 KB)
+
+### per le imprese (8 file)
+- consulenza hr.jpg (91 KB)
+- formazione aziendale.jpg (143 KB)
+- orientamento professionale.jpg (67 KB)
+- politiche attive lavoro.jpg (155 KB)
+- ricerca e selezione.jpg (62 KB)
+- somministrazione.jpg (105 KB)
+- Thumbs.db (18 KB)
+- tirocini.jpg (133 KB)
+
+### gruppo (19 file)
+- aletheia.svg (6 KB)
+- DOSES - logo orizzontale.png (18 KB)
+- doses.svg (19 KB)
+- DOSES-logo-orizzontale-bianco.png (15 KB)
+- iside.svg (114 KB)
+- iside-bianco.png (55 KB)
+- iside-bold.svg (114 KB)
+- Logo Promotergroup (R).png (85 KB)
+- logo_promosan.png (19 KB)
+- promesys-bianco.png (44 KB)
+- promesys-rebranding.png (6 KB)
+- promosan.svg (3 KB)
+- promoteragri.png (22 KB)
+- promoteragri.svg (5 KB)
+- promotergroup.svg (7 KB)
+- promoter-soc-coop-bianco.png (3 KB)
+- promoter-srl.png (11 KB)
+- promoter-srl.svg (5 KB)
+- Risorsa 8.png (23 KB)
+
+### avvisi (3 file)
+- avviso-1-e-7.jpg (180 KB)
+- avviso-20-2024-fse.webp (75 KB)
+- avviso-6-2025-gol.webp (78 KB)
+
+Loghi e certificazioni (accreditamenti, certificazioni, logo): materiale istituzionale, non fotografie stock.
