@@ -334,7 +334,7 @@ export default function Contatti({ sedi: SEDI, pagina }) {
           <div className="contatti-layout">
 
             {/* ── Colonna sinistra: info ── */}
-            <div className="form-side-sticky" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignSelf: 'stretch' }}>
 
               {/* Info cards: telefono, email, orari */}
               {INFO_ITEMS.map((item, i) => (
@@ -406,7 +406,7 @@ export default function Contatti({ sedi: SEDI, pagina }) {
               </div>
 
               {/* Mappa embed - aggiornata in base alla sede selezionata */}
-              <div className="border border-slate-200 dark:border-[#2a3433]" style={{ flex: 1, minHeight: '260px', borderRadius: '1.25rem', overflow: 'hidden' }}>
+              <div className="border border-slate-200 dark:border-[#2a3433]" style={{ flex: 1, minHeight: '200px', borderRadius: '1.25rem', overflow: 'hidden' }}>
                 {mapsConsent ? (
                   <iframe
                     key={activeSede}
