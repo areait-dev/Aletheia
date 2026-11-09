@@ -31,6 +31,8 @@ export type NewsItem = {
   titoloSeo?: string;
   /** Fonti dell'articolo (titolo + URL), mostrate in fondo come "Fonte:" con link in una nuova scheda. Vuoto = nessun blocco. */
   fonti?: { titolo: string; url: string }[];
+  /** Corsi collegati: slug di schede corso o di pagine di categoria (es. "certificazioni-informatiche"), mostrati in fondo come "Corsi collegati". */
+  corsiCollegati?: string[];
 };
 
 type WpAcf = Record<string, unknown>;

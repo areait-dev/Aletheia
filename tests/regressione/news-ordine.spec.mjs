@@ -82,3 +82,18 @@ test('fonti: le news con il campo "fonti" le mostrano in fondo come "Fonte:", co
     }
   }
 });
+
+test('corsi collegati: la news sull\u2019intelligenza artificiale ha il riquadro con la pagina ICDL e le cinque schede; le altre news non lo hanno @rapido', async ({ request }) => {
+  const slugIA = 'intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze';
+  const $ = cheerio.load(await (await request.get(`/news/${slugIA}`)).text());
+  const sezione = $('section[aria-labelledby="corsi-collegati-titolo"]');
+  expect(sezione.find('h2').text()).toBe('Corsi collegati');
+  const href = sezione.find('a').map((_, e) => $(e).attr('href')).get();
+  expect(href).toEqual(['/corsi/certificazioni-informatiche', '/corsi/icdl-base', '/corsi/icdl-standard', '/corsi/icdl-full-standard', '/corsi/icdl-digcomp-2-2', '/corsi/icdl-update']);
+  for (const n of ALL_NEWS.filter((x) => x.slug !== slugIA)) {
+    const altra = cheerio.load(await (await request.get(`/news/${n.slug}`)).text());
+    expect(altra('section[aria-labelledby="corsi-collegati-titolo"]').length, n.slug).toBe(0);
+  }
+  // ogni collegamento porta a una pagina che esiste
+  for (const h of href) expect((await request.get(h)).status(), h).toBe(200);
+});

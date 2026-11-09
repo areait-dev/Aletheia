@@ -11,6 +11,10 @@ import { useLiveNews } from '../../lib/live-preview';
 import { useTheme } from '../../context/ThemeContext';
 import { withSiteOptions } from '../../lib/wp-site';
 import { articoloJsonLd, descrizioneEntro, titoloPagina } from '../../lib/seo';
+import CorsiCollegati from '../../components/CorsiCollegati';
+import { buildCourseFamilies } from '../../data/courseFamilies';
+import { CATEGORIE_CORSI } from '../../data/categorie-corsi';
+import { getCoursesRaw } from '../../lib/wp-corsi';
 
 /* ─── Data fetching (invariato) ─────────────────────────────── */
 
@@ -41,7 +45,19 @@ async function getPageStaticProps({ params, preview = false, previewData }) {
     type: 'article',
     jsonLd: [articoloJsonLd({ titolo: article.title, descrizione, percorso, immagine: article.image || '/images/og-default.png', dataPubblicazione: article.date })],
   };
-  return { props: { article, related, isPreview: Boolean(preview), seoPagina }, ...isrOptions() };
+  // Corsi collegati (campo `corsiCollegati`): slug di scheda corso o di pagina di categoria -> { titolo, href, immagine }
+  const corsiCollegati = [];
+  if (article.corsiCollegati?.length) {
+    const famiglie = buildCourseFamilies(await getCoursesRaw(), {}, { quiet: true });
+    for (const slug of article.corsiCollegati) {
+      const categoria = CATEGORIE_CORSI[slug];
+      const famiglia = famiglie.find((f) => f.slug === slug) || (categoria ? famiglie.find((f) => f.subKey === categoria.subKey) : null);
+      if (categoria) corsiCollegati.push({ titolo: categoria.nome, href: `/corsi/${slug}`, image: famiglia?.image || '', imageAlt: categoria.nome });
+      else if (famiglia) corsiCollegati.push({ titolo: famiglia.titolo, href: `/corsi/${famiglia.slug}`, image: famiglia.image || '', imageAlt: famiglia.imageAlt || famiglia.titolo });
+      else console.warn(`[news] corso collegato "${slug}" non trovato (${article.slug})`);
+    }
+  }
+  return { props: { article, related, isPreview: Boolean(preview), seoPagina, corsiCollegati }, ...isrOptions() };
 }
 
 /* ─── Utilities ─────────────────────────────────────────────── */
@@ -252,7 +268,7 @@ function RelatedCardLarge({ article }) {
 
 /* ─── Page ───────────────────────────────────────────────────── */
 
-export default function ArticlePage({ article: initialArticle, related, isPreview = false }) {
+export default function ArticlePage({ article: initialArticle, related, isPreview = false, corsiCollegati = [] }) {
   // Nell'editor di WordPress (iframe con ?live=1) mostra le modifiche non ancora salvate.
   const article = useLiveNews(initialArticle);
   const category = getCategory(article.slug);
@@ -487,6 +503,9 @@ export default function ArticlePage({ article: initialArticle, related, isPrevie
                   </em>
                 </p>
               )}
+
+              {/* Corsi collegati: solo se l'articolo ne ha (campo `corsiCollegati`) */}
+              <CorsiCollegati corsi={corsiCollegati} />
 
               {/* Condividi */}
               <ShareBar />
