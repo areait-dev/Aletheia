@@ -3,15 +3,19 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "404: This page could not be found",
+  "title": "Pagina non trovata - Alètheia Srl",
   "description": [],
-  "robots": [],
+  "robots": [
+    "noindex, nofollow"
+  ],
   "googleVerification": [],
   "viewport": [
-    "width=device-width"
+    "width=device-width, initial-scale=1"
   ],
   "canonical": [],
-  "icon": [],
+  "icon": [
+    "/favicon.png"
+  ],
   "og": {},
   "twitter": {},
   "jsonld": [
@@ -46,13 +50,45 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "404"
+    "Pagina non trovata"
   ],
   "intestazioni": 1,
-  "testoLunghezza": 32,
-  "testoSha1": "34594e7078d16d235caeb281aa26525ff90b9089",
-  "testoInizio": "404This page could not be found.",
-  "link": [],
-  "immaginiConAlt": 0,
-  "immaginiAlt": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  "testoLunghezza": 1340,
+  "testoSha1": "35eb4a522507dc431ca06ca6f94848888635b955",
+  "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
+  "link": [
+    "/",
+    "/#formazione",
+    "/agenzia-per-il-lavoro",
+    "/aiuti-di-stato/2023",
+    "/aiuti-di-stato/2024",
+    "/archivio",
+    "/calendario-corsi",
+    "/chi-siamo",
+    "/contatti",
+    "/corsi",
+    "/corsi/certificazioni-informatiche",
+    "/corsi/corsi-qualificati",
+    "/corsi/decreto-attrezzature",
+    "/corsi/patentino-fitosanitario",
+    "/corsi/personale-alimentarista-osa",
+    "/corsi/sicurezza-lavoro",
+    "/formazione/corsi-pa",
+    "/formazione/ecm",
+    "/formazione/fondi-interprofessionali",
+    "/formazione/fondo-nuove-competenze",
+    "/formazione/obbligatoria",
+    "/formazione/professionale-specialistica",
+    "/formazione/regionale",
+    "/formazione/regionale-fse",
+    "/news",
+    "/privacy-cookie",
+    "/reclami-proposte",
+    "https://www.aletheiasrl.it/elearning2/",
+    "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
+    "https://www.instagram.com/aletheiasrl/",
+    "mailto:info@aletheiasrl.it"
+  ],
+  "immaginiConAlt": 7,
+  "immaginiAlt": "39d27fb0dc79abf5013c3ea4646380caea17bdd4"
 }

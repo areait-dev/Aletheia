@@ -1,46 +1,68 @@
 import Head from 'next/head';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { isrOptions } from '../lib/wp';
+import { withSiteOptions } from '../lib/wp-site';
 
 /**
- * Pagina 404: riproduce ESATTAMENTE la 404 predefinita di Next 13.4 (stesso markup, stessi stili, stesso testo in inglese),
- * ma passando da _app come prima (chat, JSON-LD, tema). Da Next 16 la 404 predefinita NON passa più da _app e cambia
- * aspetto (altezza di riga già diversa da 13.5): senza questo file il sito perderebbe la chat e l'aspetto cambierebbe.
- * Nessun redesign: non modificare il testo né gli stili.
+ * Pagina 404 del sito. Next la serve con stato HTTP 404 reale (è pages/404.js: pagina statica, non una pagina normale che mostra un messaggio).
+ * Non va indicizzata (noindex) e propone i punti da cui ripartire: corsi, calendario, contatti. Passa da _app come ogni altra pagina
+ * (chat, tema); intestazione e piè di pagina arrivano dalle opzioni globali (getStaticProps con withSiteOptions).
  */
-const stili = {
-  errore: {
-    fontFamily: 'system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',
-    height: '100vh',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  desc: { display: 'inline-block', textAlign: 'left' },
-  h1: { display: 'inline-block', margin: '0 20px 0 0', paddingRight: 23, fontSize: 24, fontWeight: 500, verticalAlign: 'top', lineHeight: '49px' },
-  h2: { fontSize: 14, fontWeight: 400, lineHeight: '49px', margin: 0 },
-};
+const LINK = [
+  { href: '/corsi', label: 'Tutti i corsi', icona: 'fas fa-graduation-cap', primario: true },
+  { href: '/calendario-corsi', label: 'Calendario corsi', icona: 'fas fa-calendar-days' },
+  { href: '/contatti', label: 'Contatti', icona: 'fas fa-envelope' },
+];
+
+async function getPageStaticProps() {
+  return { props: {}, ...isrOptions() };
+}
 
 export default function NotFound() {
   return (
-    <div style={stili.errore}>
+    <>
       <Head>
-        <title>404: This page could not be found</title>
+        <title>Pagina non trovata - Alètheia Srl</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
-      <div>
-        <style
-          dangerouslySetInnerHTML={{
-            __html:
-              'body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}',
-          }}
-        />
-        <h1 className="next-error-h1" style={stili.h1}>
-          404
-        </h1>
-        <div style={stili.desc}>
-          <h2 style={stili.h2}>This page could not be found.</h2>
-        </div>
-      </div>
-    </div>
+
+      <Header />
+
+      <main>
+        <section className="page-hero page-hero--dark page-hero--left">
+          <div className="container">
+            <div className="page-hero-badge">Errore 404</div>
+            <h1>Pagina non trovata</h1>
+            <p>La pagina che cerchi non esiste più o l&apos;indirizzo non è corretto. Da qui puoi ripartire.</p>
+          </div>
+        </section>
+
+        <section className="bg-light dark:bg-dark-bg py-16 md:py-20">
+          <div className="container">
+            <div className="bg-white dark:bg-dark-card rounded-3xl border border-gray-200 dark:border-gray-700 p-6 md:p-10 shadow-sm max-w-2xl">
+              <h2 className="text-xl font-extrabold text-gray-900 dark:text-gray-50 mb-2">Dove vuoi andare?</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">Scegli una di queste pagine, oppure torna alla home.</p>
+              <div className="flex flex-wrap gap-3">
+                {LINK.map((l) => (
+                  <a key={l.href} href={l.href} className={`btn ${l.primario ? 'btn-primary' : 'btn-outline'} btn-md`}>
+                    <i className={l.icona} aria-hidden="true" /> {l.label}
+                  </a>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-6 mb-0">
+                <a href="/" className="text-primary-text dark:text-primary-on-dark font-bold">Torna alla home</a>
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
   );
 }
+
+export const getStaticProps = withSiteOptions(getPageStaticProps);

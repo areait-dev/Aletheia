@@ -1310,6 +1310,9 @@ export async function getStaticPaths() {
 
 /* Catalogo: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-corsi.ts). */
 async function getPageStaticProps({ params }) {
+  // Uno slug che non è un corso del catalogo risponde 404 vero (prima: pagina "Corso non trovato" con stato 200, un soft 404 che i motori di ricerca indicizzano).
+  const catalogo = await getCoursesRaw();
+  if (!buildCourseFamilies(catalogo, coursesDetails, { quiet: true }).some((f) => f.slug === params.slug)) return { notFound: true, ...isrOptions() };
   // Prossima edizione dal calendario (stesso foglio di calendario, home e Formazione obbligatoria). null = nessuna: la scheda resta com'era (props senza undefined).
   const prossimaEdizione = trovaProssimaEdizione(await getCalendario(), params.slug, oggiItalia());
   // Tutte le edizioni future del corso: la scheda può aprirsi su una precisa (?edizione=AAAA-MM-GG, dalle card del calendario).
