@@ -47,11 +47,11 @@ test('Antincendio: gli aggiornamenti dei tre livelli mostrano i dati del rispett
   for (const [livello, ore] of [['Rischio Basso Livello 1', '2 ore'], ['Rischio Medio Livello 2', '5 ore'], ['Rischio Alto Livello 3', '8 ore']]) {
     await page.getByRole('tab', { name: livello }).click();
     await page.getByRole('tab', { name: /^Aggiornamento/ }).click();
-    for (const v of [ore, 'Aula · FAD · Videoconferenza', 'Aggiornamento ogni 5 anni', 'Attestato Antincendio valido in tutta Italia', 'Max 30 persone']) {
+    for (const v of [ore, 'Aula · Aula virtuale (solo teoria)', 'Aggiornamento ogni 5 anni', 'Attestato Antincendio valido in tutta Italia', 'Max 30 persone']) {
       await expect(scheda, `${livello} aggiornamento: ${v}`).toContainText(v);
     }
     // anche la riga sotto il titolo usa la modalità del base (non più "In presenza" generico)
-    await expect(page.locator('h1 ~ div').first(), `${livello}: riga sotto il titolo`).toContainText('Aula · FAD · Videoconferenza');
+    await expect(page.locator('h1 ~ div').first(), `${livello}: riga sotto il titolo`).toContainText('Aula · Aula virtuale (solo teoria)');
   }
 });
 
@@ -59,8 +59,8 @@ test('Carriponti Pensile/Cabina: l\'aggiornamento eredita attestato, validità e
   await page.goto('/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
   await page.getByRole('tab', { name: /^Aggiornamento/ }).click();
   const scheda = page.locator('.cp-scheda-area');
-  for (const v of ['4 ore', 'In presenza', 'Attestato valido in tutta Italia', 'Aggiornamento ogni 5 anni', 'Max 30 persone']) await expect(scheda).toContainText(v);
-  await expect(scheda).not.toContainText('Videoconferenza (solo parte teorica)'); // quella del base: l'aggiornamento ha la sua modalità
+  for (const v of ['4 ore', 'In presenza', 'Attestato valido in tutta Italia', 'Aggiornamento ogni 5 anni', 'Max 25 per la teoria in aula · Max 6 per la pratica']) await expect(scheda).toContainText(v);
+  await expect(scheda).not.toContainText('Aula virtuale (solo parte teorica)'); // quella del base: l'aggiornamento ha la sua modalità
 });
 
 test('Conduttore d\'Impresa Agricola: certificazione Qualifica 3 EQF, modalità FAD, nessuna variante di aggiornamento @rapido', async ({ page }) => {

@@ -5,8 +5,10 @@
 import { test, expect } from '@playwright/test';
 import * as cheerio from 'cheerio';
 import { urls } from './util.mjs';
+import categorie from '../../data/categorie-corsi.js';
 
-const CORSI = urls.map((u) => u.url).filter((u) => /^\/corsi\/[^?/]+$/.test(u));
+// Le pagine di categoria (/corsi/sicurezza-lavoro, ...) sono elenchi di corsi, non schede: senza colonna prezzo.
+const CORSI = urls.map((u) => u.url).filter((u) => /^\/corsi\/[^?/]+$/.test(u) && !(u.replace('/corsi/', '') in categorie.CATEGORIE_CORSI));
 const ETICHETTA_PREVENTIVO = /^\s*richiedi (un )?preventivo\s*$/i;
 const ETICHETTA_INFO = /^\s*richiedi informazioni\s*$/i;
 

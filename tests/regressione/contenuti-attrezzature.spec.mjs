@@ -40,5 +40,5 @@ test('attrezzature: le varianti Aggiornamento hanno il loro contenuto @rapido', 
 test('attrezzature: scheda tecnica del corso Carriponti Pensile/Cabina (11 ore) @rapido', async ({ page }) => {
   await page.goto('/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
   const scheda = page.locator('.cp-scheda-area');
-  for (const v of ['11 ore', 'Aula', 'Videoconferenza (solo parte teorica)', 'Aggiornamento ogni 5 anni', 'Attestato valido in tutta Italia', 'Max 30 persone']) await expect(scheda).toContainText(v);
+  for (const v of ['11 ore', 'Aula', 'Aula virtuale (solo parte teorica)', 'Aggiornamento ogni 5 anni', 'Attestato valido in tutta Italia', 'Max 25 per la teoria in aula · Max 6 per la pratica']) await expect(scheda).toContainText(v);
 });
