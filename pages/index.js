@@ -383,6 +383,20 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
   const heroRiga1 = primoAsterisco > 0 ? T.hero_titolo.slice(0, primoAsterisco).trim() : '';
   const heroRiga2 = primoAsterisco > 0 ? T.hero_titolo.slice(primoAsterisco) : T.hero_titolo;
   const numeri = contatori(T.numeri);
+  // Carosello loghi: il loop continuo scorre di metà traccia (-50%), quindi la traccia sono DUE metà identiche; ogni metà deve coprire la larghezza
+  // della finestra. Si parte con 1 gruppo per metà (2 copie in tutto, bastano fino a ~2180px) e, se la finestra è più larga di un gruppo, se ne
+  // aggiungono (2 per metà, ecc.). Prima erano 6 copie fisse (48 loghi nel DOM, 40 duplicati letti anche agli screen reader).
+  const [gruppiPerMeta, setGruppiPerMeta] = useState(1);
+  const gruppoRef = useRef(null);
+  useEffect(() => {
+    const misura = () => {
+      const w = gruppoRef.current?.getBoundingClientRect().width;
+      if (w) setGruppiPerMeta(Math.max(1, Math.ceil(window.innerWidth / w)));
+    };
+    misura();
+    window.addEventListener('resize', misura);
+    return () => window.removeEventListener('resize', misura);
+  }, [gruppoLoghi]);
   const { seo } = useSiteOptions(); // immagine OG predefinita (opzioni globali): i figli di <Head> non leggono il contesto
   return (
     <>
@@ -649,11 +663,13 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
 
         {/* Ticker loghi gruppo - ogni metà ripetuta più volte per riempire sempre la banda */}
         <div className="relative overflow-hidden marquee-mask">
-          <div className="flex w-max animate-marquee">
-            {[...gruppoLoghi, ...gruppoLoghi, ...gruppoLoghi, ...gruppoLoghi, ...gruppoLoghi, ...gruppoLoghi].map((logo, i) => (
+          {/* Stessa velocità di prima (3 gruppi in 55 s): la durata cresce con i gruppi per metà */}
+          <div className="flex w-max animate-marquee" style={{ animationDuration: `${(55 / 3) * gruppiPerMeta}s` }}>
+            {Array.from({ length: gruppiPerMeta * 2 }, (_, copia) => (
+            <div key={copia} ref={copia === 0 ? gruppoRef : undefined} aria-hidden={copia > 0 ? 'true' : undefined} className="flex shrink-0" /* la prima copia è l'unica letta dagli screen reader; le altre servono solo al loop */>
+            {gruppoLoghi.map((logo, i) => (
               <div
                 key={i}
-                aria-hidden={i >= gruppoLoghi.length * 3}
                 className="flex items-center justify-center h-24 mx-7 shrink-0" /* gap costante, loghi centrati in verticale */
               >
                 {/* <img> nativo intenzionale: il marquee ripete questi loghi 6x (36 istanze
@@ -664,7 +680,7 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
                     next/image non porta beneficio reale qui. */}
                 <img
                   src={logo.src}
-                  alt={logo.name}
+                  alt={copia === 0 ? logo.name : ''}
                   decoding="sync"
                   // Altezza ottica per logo (vedi LOGO_METRICS); --logo-k riduce tutto su mobile; stessa opacità per tutti
                   style={{ height: `calc(${logoSize(logo.src).h}px * var(--logo-k, 1))`, maxWidth: `calc(${logoSize(logo.src).maxW}px * var(--logo-k, 1))`, transform: `translateY(calc(${logoSize(logo.src).offsetY}px * var(--logo-k, 1)))` }}
@@ -679,6 +695,8 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
                   }}
                 />
               </div>
+            ))}
+            </div>
             ))}
           </div>
         </div>
