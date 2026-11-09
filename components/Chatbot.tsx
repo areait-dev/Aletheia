@@ -144,6 +144,21 @@ export default function Chatbot() {
   const { chatbot, identita } = useSiteOptions();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  // Home su telefono: il bottone tondo coprirebbe "Cerca" della hero (a 390px con finestre alte 675-760px). Resta nascosto finché la hero
+  // non è scorsa via; sulle altre pagine, a schermi larghi o con la chat aperta c'è sempre. Senza JS (primo render) è visibile.
+  const [oltreHero, setOltreHero] = useState(true);
+  useEffect(() => {
+    if (router.pathname !== '/') { setOltreHero(true); return undefined; }
+    const mobile = window.matchMedia('(max-width: 640px)');
+    const aggiorna = () => {
+      const hero = document.querySelector('section.hero');
+      setOltreHero(!mobile.matches || !hero || hero.getBoundingClientRect().bottom <= 0);
+    };
+    aggiorna();
+    window.addEventListener('scroll', aggiorna, { passive: true });
+    window.addEventListener('resize', aggiorna);
+    return () => { window.removeEventListener('scroll', aggiorna); window.removeEventListener('resize', aggiorna); };
+  }, [router.pathname]);
   const [selected, setSelected] = useState<Faq | null>(null);
   const [aiAnswer, setAiAnswer] = useState<string | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
@@ -239,15 +254,15 @@ export default function Chatbot() {
   if (!chatbot.attivo) return null;
 
   return (
-    <div className="chatbot-root">
+    <div className={`chatbot-root${oltreHero || open ? '' : ' chatbot-root--nascosto'}`}>
       <style jsx>{`
         .chatbot-root {
           position: fixed;
           /* Il banner cookie (CookieConsent.tsx) alza --cookie-banner-height alla propria
              altezza reale mentre è visibile, così il FAB resta sempre sopra e non finisce
              nascosto dietro il banner su nessuna dimensione di schermo. */
-          bottom: calc(2rem + var(--cookie-banner-height, 0px));
-          right: 2rem;
+          bottom: calc(2rem + var(--cookie-banner-height, 0px) + env(safe-area-inset-bottom, 0px));
+          right: calc(2rem + env(safe-area-inset-right, 0px));
           z-index: 9999;
           display: flex;
           flex-direction: column;
@@ -260,10 +275,13 @@ export default function Chatbot() {
            lo rimpiccioliamo e lo avviciniamo all'angolo per ridurre l'area coperta. */
         @media (max-width: 1024px) {
           .chatbot-root {
-            bottom: calc(0.75rem + var(--cookie-banner-height, 0px));
-            right: 0.75rem;
+            bottom: calc(0.75rem + var(--cookie-banner-height, 0px) + env(safe-area-inset-bottom, 0px));
+            right: calc(0.75rem + env(safe-area-inset-right, 0px));
           }
         }
+        /* Home su telefono, hero ancora in vista: il bottone non c'è (visibility e non display: niente salti, e non resta nel tab order). */
+        .chatbot-root--nascosto { opacity: 0; visibility: hidden; transform: translateY(8px); }
+        .chatbot-root { transition: bottom 0.25s ease, opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; }
         @keyframes chatbot-breathe {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.16); }
