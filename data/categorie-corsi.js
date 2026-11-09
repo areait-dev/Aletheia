@@ -1,5 +1,5 @@
 /**
- * Pagine di categoria del catalogo: /corsi/<slug>. Sono SOLO queste sei (elenco esplicito): ogni slug qui sotto ha il suo file in
+ * Pagine di categoria del catalogo: /corsi/<slug>. Sono SOLO queste quattro (elenco esplicito): ogni slug qui sotto ha il suo file in
  * pages/corsi/<slug>.js, che in Next ha la precedenza sulla route dinamica pages/corsi/[slug].js (le schede corso).
  * tests/regressione/categorie-corsi.spec.mjs controlla che nessuno slug di corso coincida con uno di questi.
  *
@@ -33,28 +33,6 @@ const CATEGORIE_CORSI = {
     title: 'Corsi Decreto Attrezzature - Alètheia Srl',
     description: 'Corsi Decreto Attrezzature a Vittoria (RG): carrelli elevatori, PLE, gru, macchine movimento terra e trattori. Teoria in aula e prova pratica.',
   },
-  fitosanitario: {
-    slug: 'fitosanitario',
-    subKey: 'fitosanitario',
-    macroKey: 'fitosanitario',
-    nome: 'Fitosanitario',
-    eyebrow: 'Settore agricolo',
-    h1: 'Corsi *fitosanitario*',
-    sottotitolo: 'Il corso per il patentino fitosanitario: l’abilitazione per acquistare e usare i prodotti fitosanitari in agricoltura.',
-    title: 'Corsi fitosanitario - Alètheia Srl',
-    description: 'Corso per il patentino fitosanitario a Vittoria (RG): abilitazione all’acquisto e all’uso dei prodotti fitosanitari. Richiedi quota e date senza impegno.',
-  },
-  'sicurezza-alimentare': {
-    slug: 'sicurezza-alimentare',
-    subKey: 'sicurezza-alimentare',
-    macroKey: 'sicurezza-alimentare',
-    nome: 'Sicurezza alimentare',
-    eyebrow: 'Igiene e alimenti',
-    h1: 'Corsi di *sicurezza* alimentare',
-    sottotitolo: 'La formazione per il personale alimentarista (OSA): igiene degli alimenti e prevenzione dei rischi per chi lavora con gli alimenti.',
-    title: 'Corsi di sicurezza alimentare - Alètheia Srl',
-    description: 'Corso per personale alimentarista (OSA) a Vittoria (RG): formazione su igiene e sicurezza alimentare con attestato. Richiedi quota e date senza impegno.',
-  },
   'certificazioni-informatiche': {
     slug: 'certificazioni-informatiche',
     subKey: 'icdl',
@@ -86,8 +64,8 @@ const CATEGORIE_CORSI = {
 const DESTINAZIONE_CATEGORIA = {
   'sicurezza-lavoro': '/corsi/sicurezza-lavoro',
   'decreto-attrezzature': '/corsi/decreto-attrezzature',
-  fitosanitario: '/corsi/fitosanitario',
-  'sicurezza-alimentare': '/corsi/sicurezza-alimentare',
+  fitosanitario: '/corsi/patentino-fitosanitario', // un solo corso: niente pagina di categoria, si va alla scheda
+  'sicurezza-alimentare': '/corsi/personale-alimentarista-osa', // un solo corso: niente pagina di categoria, si va alla scheda
   icdl: '/corsi/certificazioni-informatiche',
   'certificazioni-informatiche': '/corsi/certificazioni-informatiche',
   certificazione: '/corsi/corsi-qualificati',
@@ -98,4 +76,7 @@ const DESTINAZIONE_CATEGORIA = {
   'corsi-pa': '/formazione/corsi-pa',
 };
 
-module.exports = { CATEGORIE_CORSI, DESTINAZIONE_CATEGORIA };
+/** Categorie "grandi" della sidebar con un solo corso: il link va direttamente alla scheda. */
+const LINK_DIRETTI_MACRO = { fitosanitario: '/corsi/patentino-fitosanitario', 'sicurezza-alimentare': '/corsi/personale-alimentarista-osa' };
+
+module.exports = { CATEGORIE_CORSI, DESTINAZIONE_CATEGORIA, LINK_DIRETTI_MACRO };

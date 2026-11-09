@@ -183,7 +183,7 @@ export const SCHEDE_LOCALI = {
       "title": "Fitosanitario",
       "text": "Corsi per il rilascio e il rinnovo del patentino obbligatorio per l'acquisto, l'utilizzo e la distribuzione di prodotti professionali.",
       "cta": "Scopri i corsi",
-      "href": "/corsi/fitosanitario",
+      "href": "/corsi/patentino-fitosanitario",
       "image": "/images/formazione-obbligatoria/patentino-fitosanitario.jpg",
       "imageAlt": "Operatore con guanti e mascherina che spruzza un prodotto fitosanitario sulle piante"
     },
@@ -193,7 +193,7 @@ export const SCHEDE_LOCALI = {
       "title": "Sicurezza alimentare",
       "text": "Corsi HACCP per tutti gli operatori del settore alimentare: titolari, manipolatori, addetti alla conservazione e vendita.",
       "cta": "Scopri i corsi",
-      "href": "/corsi/sicurezza-alimentare",
+      "href": "/corsi/personale-alimentarista-osa",
       "image": "/images/formazione-obbligatoria/personale-alimentarista.jpg",
       "imageAlt": "Operatore alimentare con guanti monouso che prepara le verdure"
     }

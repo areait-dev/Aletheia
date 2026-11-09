@@ -38,8 +38,8 @@ export const SITE_OPTIONS = {
         items: [
           { label: 'Sicurezza sui luoghi di lavoro', href: '/corsi/sicurezza-lavoro' },
           { label: 'Decreto attrezzature', href: '/corsi/decreto-attrezzature' },
-          { label: 'Fitosanitario', href: '/corsi/fitosanitario' },
-          { label: 'Sicurezza alimentare', href: '/corsi/sicurezza-alimentare' },
+          { label: 'Fitosanitario', href: '/corsi/patentino-fitosanitario' },
+          { label: 'Sicurezza alimentare', href: '/corsi/personale-alimentarista-osa' },
         ],
       },
       {

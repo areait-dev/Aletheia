@@ -7,7 +7,7 @@ import { preparaPagina, caricaTutto, verificaRete, STILE_SCREENSHOT } from './pa
 const nascondiChat = (page) => page.addStyleTag({ content: STILE_SCREENSHOT });
 
 // Pagine di categoria del catalogo (data/categorie-corsi.js): il vecchio filtro ?categoria= ora è un redirect 301 (vedi categorie-corsi.spec.mjs).
-const CHIAVI_CATEGORIA = ['sicurezza-lavoro', 'decreto-attrezzature', 'fitosanitario', 'sicurezza-alimentare', 'certificazioni-informatiche', 'corsi-qualificati'];
+const CHIAVI_CATEGORIA = ['sicurezza-lavoro', 'decreto-attrezzature', 'certificazioni-informatiche', 'corsi-qualificati'];
 
 const testiLink = (loc) => loc.evaluateAll((els) => els.map((e) => `${e.textContent.replace(/\s+/g, ' ').trim()} -> ${e.getAttribute('href')}`));
 

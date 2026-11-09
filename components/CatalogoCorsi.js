@@ -14,7 +14,7 @@ import SeoHead from '../components/SeoHead';
 import HeroTitle from '../components/HeroTitle';
 
 import { useSiteOptions } from '../context/SiteOptionsContext';
-import { CATEGORIE_CORSI } from '../data/categorie-corsi';
+import { CATEGORIE_CORSI, LINK_DIRETTI_MACRO } from '../data/categorie-corsi';
 
 const GRID_SPRING = { type: 'spring', stiffness: 500, damping: 40 };
 
@@ -36,7 +36,7 @@ const gruppiRicerca = {
 };
 
 // Categoria "grande" della sidebar -> pagina di categoria con gli stessi corsi (link diretto, senza passare da redirect).
-const hrefMacro = Object.fromEntries(Object.values(CATEGORIE_CORSI).map((c) => [c.macroKey, `/corsi/${c.slug}`]));
+const hrefMacro = { ...Object.fromEntries(Object.values(CATEGORIE_CORSI).map((c) => [c.macroKey, `/corsi/${c.slug}`])), ...LINK_DIRETTI_MACRO };
 
 /**
  * Catalogo corsi. Senza `categoria` è la pagina /corsi (tutti i corsi, ricerca e filtro per categoria "grande");

@@ -543,9 +543,9 @@ visite negli ultimi 12 mesi.
 
   /corsi/decreto-attrezzature          formazione-dei-lavoratori                                                                            /news/sicurezza-lavoro-trend-formazione-futuro
 
-  /corsi/fitosanitario                 formazione-del-preposto                                                                              /news/smart-working-inclusione-sicurezza-futuro
+  /corsi/patentino-fitosanitario                 formazione-del-preposto                                                                              /news/smart-working-inclusione-sicurezza-futuro
 
-  /corsi/sicurezza-alimentare          formazione-dirigente                                                                                 /news/stress-lavoro-salute-mentale-italiani
+  /corsi/personale-alimentarista-osa          formazione-dirigente                                                                                 /news/stress-lavoro-salute-mentale-italiani
 
                                                                               formazione-per-formatore                                                                             /archivio
 
