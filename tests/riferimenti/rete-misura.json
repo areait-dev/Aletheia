@@ -365,7 +365,7 @@
     ]
   },
   {
-    "url": "/all-courses",
+    "url": "/corsi",
     "caricamentoMs": 91506,
     "richiesteEsterne": [
       {
@@ -413,7 +413,7 @@
     ]
   },
   {
-    "url": "/all-courses/antincendio",
+    "url": "/corsi/antincendio",
     "caricamentoMs": 1069,
     "richiesteEsterne": [
       {
@@ -461,7 +461,7 @@
     ]
   },
   {
-    "url": "/all-courses/formazione-dei-lavoratori",
+    "url": "/corsi/formazione-dei-lavoratori",
     "caricamentoMs": 1046,
     "richiesteEsterne": [
       {
@@ -509,7 +509,7 @@
     ]
   },
   {
-    "url": "/all-courses/icdl-base",
+    "url": "/corsi/icdl-base",
     "caricamentoMs": 1081,
     "richiesteEsterne": [
       {
@@ -578,7 +578,7 @@
     ]
   },
   {
-    "url": "/all-courses/macchine-movimento-terra",
+    "url": "/corsi/macchine-movimento-terra",
     "caricamentoMs": 1305,
     "richiesteEsterne": [
       {
@@ -2025,7 +2025,7 @@
     ]
   },
   {
-    "url": "/all-courses?categoria=sicurezza-lavoro",
+    "url": "/corsi?categoria=sicurezza-lavoro",
     "caricamentoMs": 19828,
     "richiesteEsterne": [
       {
@@ -2073,7 +2073,7 @@
     ]
   },
   {
-    "url": "/all-courses?categoria=icdl",
+    "url": "/corsi?categoria=icdl",
     "caricamentoMs": 1645,
     "richiesteEsterne": [
       {
@@ -2149,7 +2149,7 @@
     ]
   },
   {
-    "url": "/all-courses/antincendio?livello=2",
+    "url": "/corsi/antincendio?livello=2",
     "caricamentoMs": 1041,
     "richiesteEsterne": [
       {

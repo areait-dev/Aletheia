@@ -1,6 +1,6 @@
 // Contenuti editoriali per le famiglie ICDL: 'icdl-base', 'icdl-standard', 'icdl-update' (family.id = slug raw).
 // Varianti uniche (solo tipo 'corso'), un solo livello 'livello-1'.
-// FONTE: voci 'icdl-base', 'icdl-standard', 'icdl-update' di coursesDetails in pages/all-courses/[slug].js
+// FONTE: voci 'icdl-base', 'icdl-standard', 'icdl-update' di coursesDetails in pages/corsi/[slug].js
 // (overview -> descrizione, target -> aChiERivolto, learningOutcomes -> cosaImparerai), spostate qui senza modifiche
 // di contenuto perché quelle voci non vengono mostrate come descrizione dalla pagina.
 // ICDL Base: durata (60 ore = 30 incontri da 2 ore, circa 7 mesi), classi (10-12 allievi), moduli e titoli rilasciati

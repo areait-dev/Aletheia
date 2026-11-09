@@ -42,7 +42,7 @@ test('ereditarietà: partecipanti massimo e minimo sono lo stesso dato, se ne in
 });
 
 test('Antincendio: gli aggiornamenti dei tre livelli mostrano i dati del rispettivo base @rapido', async ({ page }) => {
-  await page.goto('/all-courses/antincendio', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/antincendio', { waitUntil: 'networkidle' });
   const scheda = page.locator('.cp-scheda-area');
   for (const [livello, ore] of [['Rischio Basso Livello 1', '2 ore'], ['Rischio Medio Livello 2', '5 ore'], ['Rischio Alto Livello 3', '8 ore']]) {
     await page.getByRole('tab', { name: livello }).click();
@@ -56,7 +56,7 @@ test('Antincendio: gli aggiornamenti dei tre livelli mostrano i dati del rispett
 });
 
 test('Carriponti Pensile/Cabina: l\'aggiornamento eredita attestato, validità e partecipanti ma tiene la sua modalità @rapido', async ({ page }) => {
-  await page.goto('/all-courses/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
   await page.getByRole('tab', { name: /^Aggiornamento/ }).click();
   const scheda = page.locator('.cp-scheda-area');
   for (const v of ['4 ore', 'In presenza', 'Attestato valido in tutta Italia', 'Aggiornamento ogni 5 anni', 'Max 30 persone']) await expect(scheda).toContainText(v);
@@ -64,7 +64,7 @@ test('Carriponti Pensile/Cabina: l\'aggiornamento eredita attestato, validità e
 });
 
 test('Conduttore d\'Impresa Agricola: certificazione Qualifica 3 EQF, modalità FAD, nessuna variante di aggiornamento @rapido', async ({ page }) => {
-  await page.goto('/all-courses/conduttore-d-impresa-agricola', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/conduttore-d-impresa-agricola', { waitUntil: 'networkidle' });
   const scheda = page.locator('.cp-scheda-area');
   await expect(scheda).toContainText('Conduttore d’Impresa Agricola – Qualifica 3 EQF');
   await expect(scheda).toContainText('FAD');

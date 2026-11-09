@@ -278,7 +278,7 @@ test('corsi a iscrizione differita: "Iscriviti" porta al modulo di iscrizione, n
   const trovate = [];
   const conWhatsapp = [];
   const hrefWhatsapp = new Set();
-  for (const u of urls.map((x) => x.url).filter((x) => /^\/all-courses\/[^?/]+$/.test(x))) {
+  for (const u of urls.map((x) => x.url).filter((x) => /^\/corsi\/[^?/]+$/.test(x))) {
     const html = await (await request.get(u)).text();
     const $ = cheerio.load(html);
     // su TUTTE le schede: niente contatore, niente promessa di avviso, niente vecchio pulsante, niente "15 iscrizioni"
@@ -307,17 +307,17 @@ test('corsi a iscrizione differita: "Iscriviti" porta al modulo di iscrizione, n
     if (!qualificato) expect(testo, `${u}: il numero 15 va solo nei corsi qualificati`).not.toMatch(/15 iscritti/);
   }
   // WhatsApp solo nei corsi di formazione obbligatoria: ogni scheda con il pulsante deve appartenere a una famiglia con una variante obbligatoria
-  const obbligatorie = new Set(buildCourseFamilies(coursesData).filter((fam) => fam.varianti.some((v) => v.obbligatoria)).map((fam) => `/all-courses/${fam.slug}`));
+  const obbligatorie = new Set(buildCourseFamilies(coursesData).filter((fam) => fam.varianti.some((v) => v.obbligatoria)).map((fam) => `/corsi/${fam.slug}`));
   expect(conWhatsapp.filter((u) => !obbligatorie.has(u)), 'schede NON obbligatorie con il pulsante WhatsApp').toEqual([]);
   // Il pulsante c'è nelle schede obbligatorie e porta al numero del reparto formazione (lib/whatsapp.ts), mai a "#".
   expect(conWhatsapp.length, 'schede obbligatorie con il pulsante WhatsApp').toBeGreaterThan(0);
   if (!process.env.NEXT_PUBLIC_WHATSAPP) expect([...hrefWhatsapp], 'indirizzi WhatsApp').toEqual(['https://wa.me/393484072803']);
   // Tutti i corsi con il flag enrollOnly nei dati (OSS, ASACOM, Conduttore d'Impresa Agricola, BLSD)
   expect(trovate.sort(), 'schede con "Iscriviti"').toEqual([
-    '/all-courses/asacom-assistente-alla-comunicazione',
-    '/all-courses/blsd-basic-life-support-and-defibrillation',
-    '/all-courses/conduttore-d-impresa-agricola',
-    '/all-courses/oss-operatore-socio-sanitario',
+    '/corsi/asacom-assistente-alla-comunicazione',
+    '/corsi/blsd-basic-life-support-and-defibrillation',
+    '/corsi/conduttore-d-impresa-agricola',
+    '/corsi/oss-operatore-socio-sanitario',
   ]);
 });
 

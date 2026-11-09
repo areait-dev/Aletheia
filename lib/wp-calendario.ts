@@ -202,7 +202,7 @@ export function azzeraCacheCalendario(): void {
 
 /** Pagine che mostrano le date dei corsi: home, calendario, Formazione obbligatoria e la scheda di ogni corso del catalogo. */
 export function percorsiCalendario(): string[] {
-  return ['/', '/calendario-corsi', '/formazione/obbligatoria', ...famiglie().map((f) => `/all-courses/${f.slug}`)];
+  return ['/', '/calendario-corsi', '/formazione/obbligatoria', ...famiglie().map((f) => `/corsi/${f.slug}`)];
 }
 
 /** "Oggi" come data italiana YYYY-MM-DD (non UTC: tra mezzanotte e le 2 il giorno cambia prima). DATA_FISSA_TEST la congela nei test. */

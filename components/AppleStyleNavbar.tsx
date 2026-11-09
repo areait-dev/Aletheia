@@ -14,7 +14,7 @@ interface AppleStyleNavbarProps {
 const DEFAULT_LINKS: NavLink[] = [
   { label: 'Formazione', href: '/formazione' },
   { label: 'Agenzia per il Lavoro', href: '/agenzia-per-il-lavoro' },
-  { label: 'Corsi', href: '/all-courses' },
+  { label: 'Corsi', href: '/corsi' },
   { label: 'Chi Siamo', href: '/chi-siamo' },
   { label: 'Contatti', href: '/contatti' },
 ];

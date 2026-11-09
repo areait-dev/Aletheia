@@ -1,0 +1,110 @@
+{
+  "tutti": 40,
+  "fse-plus": {
+    "url": "?categoria=fse-plus",
+    "schede": []
+  },
+  "fondi-interprofessionali": {
+    "url": "?categoria=fondi-interprofessionali",
+    "schede": []
+  },
+  "fondo-nuove-competenze": {
+    "url": "?categoria=fondo-nuove-competenze",
+    "schede": []
+  },
+  "sicurezza-lavoro": {
+    "url": "?categoria=sicurezza-lavoro",
+    "schede": [
+      "/corsi/antincendio",
+      "/corsi/formazione-dei-lavoratori",
+      "/corsi/rspp-datore-di-lavoro",
+      "/corsi/rspp-aspp",
+      "/corsi/rls",
+      "/corsi/primo-soccorso-aziendale",
+      "/corsi/formazione-del-preposto",
+      "/corsi/formazione-per-formatore",
+      "/corsi/formazione-dirigente",
+      "/corsi/coordinatori-cantieri-cse-csp",
+      "/corsi/pes-pav-lavori-elettrici",
+      "/corsi/lavori-in-quota",
+      "/corsi/dpi-3-categoria",
+      "/corsi/pimus-ponteggi",
+      "/corsi/spazi-confinati",
+      "/corsi/lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale",
+      "/corsi/modulo-aggiuntivo-cantieri-per-datore-di-lavoro",
+      "/corsi/datore-di-lavoro"
+    ]
+  },
+  "decreto-attrezzature": {
+    "url": "?categoria=decreto-attrezzature",
+    "schede": [
+      "/corsi/carrelli-elevatori-semoventi-con-conduttore-a-bordo",
+      "/corsi/operatore-di-gru-per-autocarro",
+      "/corsi/ple-piattaforme-di-lavoro-mobili-elevabili",
+      "/corsi/trattori-agricoli-o-forestali",
+      "/corsi/macchine-movimento-terra",
+      "/corsi/addetti-alla-conduzione-di-carriponte",
+      "/corsi/pompe-per-calcestruzzo",
+      "/corsi/addetti-macchina-raccogli-frutta-crf",
+      "/corsi/addetti-macchina-raccogli-frutta-aggiornamento",
+      "/corsi/addetti-caricatori-movimentazione-di-materiali-cmm",
+      "/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina"
+    ]
+  },
+  "fitosanitario": {
+    "url": "?categoria=fitosanitario",
+    "schede": [
+      "/corsi/patentino-fitosanitario"
+    ]
+  },
+  "sicurezza-alimentare": {
+    "url": "?categoria=sicurezza-alimentare",
+    "schede": [
+      "/corsi/personale-alimentarista-osa"
+    ]
+  },
+  "icdl": {
+    "url": "?categoria=icdl",
+    "schede": [
+      "/corsi/icdl-base",
+      "/corsi/icdl-standard",
+      "/corsi/icdl-full-standard",
+      "/corsi/icdl-digcomp-2-2",
+      "/corsi/icdl-update"
+    ]
+  },
+  "certificazioni-informatiche": {
+    "url": "?categoria=certificazioni-informatiche",
+    "schede": [
+      "/corsi/icdl-base",
+      "/corsi/icdl-standard",
+      "/corsi/icdl-full-standard",
+      "/corsi/icdl-digcomp-2-2",
+      "/corsi/icdl-update"
+    ]
+  },
+  "ecm": {
+    "url": "?categoria=ecm",
+    "schede": []
+  },
+  "certificazione": {
+    "url": "?categoria=certificazione",
+    "schede": [
+      "/corsi/oss-operatore-socio-sanitario",
+      "/corsi/asacom-assistente-alla-comunicazione",
+      "/corsi/blsd-basic-life-support-and-defibrillation"
+    ]
+  },
+  "corsi-pa": {
+    "url": "?categoria=corsi-pa",
+    "schede": []
+  },
+  "dopoReset": {
+    "url": "",
+    "schede": 40
+  },
+  "livello2": {
+    "url": "?livello=2",
+    "h1": "ANTINCENDIO"
+  }
+}

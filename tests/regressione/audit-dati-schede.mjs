@@ -20,7 +20,7 @@ function trovaChromium() {
   } catch { /* usa quello di Playwright */ }
   return undefined;
 }
-const pagine = urls.map((u) => u.url).filter((u) => /^\/all-courses\/[^?/]+$/.test(u));
+const pagine = urls.map((u) => u.url).filter((u) => /^\/corsi\/[^?/]+$/.test(u));
 const browser = await chromium.launch({ executablePath: trovaChromium() });
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
 await ctx.addInitScript(() => { try { localStorage.setItem('cookie-consent', 'all'); } catch { /* niente */ } });
@@ -57,7 +57,7 @@ const SEGNAPOSTO = /da definire|in arrivo|lorem|ipsum|tbd|prossimamente/i;
 const ore = (t) => /\d/.test(t || '') && /ore/i.test(t || '');
 const gravi = []; const note = [];
 for (const s of stati) {
-  const nome = `${s.u.replace('/all-courses/', '')}${s.sel.length ? ` [${s.sel.join(' > ')}]` : ''}`;
+  const nome = `${s.u.replace('/corsi/', '')}${s.sel.length ? ` [${s.sel.join(' > ')}]` : ''}`;
   const d = s.items['Durata']; const m = s.items['Modalità']; const a = s.items['Attestato'];
   const dh = s.meta.find((x) => x.icona === 'durata')?.testo; const mh = s.meta.find((x) => x.icona === 'modalita')?.testo;
   if (!d) gravi.push(`${nome}: Durata MANCANTE nella scheda tecnica (sotto il titolo: "${dh ?? '-'}")`);

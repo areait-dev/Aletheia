@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Coordinatori Cantieri CSE/CSP" (ex pagina isolata
-// pages/all-courses/coordinatori-cantieri-cse-csp.js). Famiglia a variante unica (livelloKey 'default'):
+// pages/corsi/coordinatori-cantieri-cse-csp.js). Famiglia a variante unica (livelloKey 'default'):
 // un solo livello posizionale 'livello-1' condiviso da corso e aggiornamento (vedi
 // coordinatori-cantieri-cse-csp-aggiornamento-content.js).
 

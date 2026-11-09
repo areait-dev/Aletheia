@@ -1,5 +1,5 @@
 // Controllo a tappeto del layout delle schede corso (riquadro di richiesta + scheda tecnica, switch) in WebKit:
-// tutte le schede /all-courses/<slug> x 12 misure iPad (verticale e orizzontale) + telefono 390 px.
+// tutte le schede /corsi/<slug> x 12 misure iPad (verticale e orizzontale) + telefono 390 px.
 // Script a parte (non un test di Playwright Test): dentro il lanciatore webkit.launch() si chiude subito su questa macchina
 // (vedi font-webkit.mjs). Uso:  node tests/regressione/schede-corso-layout.mjs <indirizzo-base>   (es. http://localhost:3101)
 // Esce con 1 se trova anche una sola violazione. Regole verificate:
@@ -13,7 +13,7 @@ import { urls } from './util.mjs';
 
 const base = process.argv[2] || 'http://localhost:3101';
 const MISURE = [[744, 1133], [1133, 744], [768, 1024], [1024, 768], [820, 1180], [1180, 820], [834, 1194], [1194, 834], [1024, 1366], [1366, 1024], [1032, 1376], [1376, 1032], [390, 844]];
-const pagine = urls.map((u) => u.url).filter((u) => /^\/all-courses\/[^?/]+$/.test(u));
+const pagine = urls.map((u) => u.url).filter((u) => /^\/corsi\/[^?/]+$/.test(u));
 
 const browser = await webkit.launch();
 const violazioni = [];

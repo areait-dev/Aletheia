@@ -3,7 +3,7 @@
  * Solo corsi con contenuti editoriali reali già scritti (non il fallback generico del template
  * [slug].js): le 6 pagine standalone (Formazione del Preposto, Coordinatori Cantieri CSE/CSP,
  * Datore di Lavoro, Addetti Carriponte, con relativi aggiornamenti) e le famiglie con contenuti
- * dedicati in EDITORIAL_CONTENT (pages/all-courses/[slug].js): Antincendio, Carrelli Elevatori,
+ * dedicati in EDITORIAL_CONTENT (pages/corsi/[slug].js): Antincendio, Carrelli Elevatori,
  * Trattori Agricoli o Forestali, Formazione Dirigente, Formazione dei Lavoratori, Lavori in Quota,
  * PIMUS/Ponteggi, Primo Soccorso Aziendale, RLS, RSPP - Datore di Lavoro, RSPP/ASPP.
  * Qui si aggiungono solo i dati di pianificazione (data, orario, sede, durata, posti).
@@ -19,7 +19,7 @@ export type CategoriaCorso = 'regionale-fse' | 'obbligatoria' | 'professionale' 
 export interface CorsoCalendario {
   id: number;
   titolo: string;
-  slug: string; // corrisponde allo slug del corso (o della famiglia) in /all-courses/[slug]
+  slug: string; // corrisponde allo slug del corso (o della famiglia) in /corsi/[slug]
   categoria: CategoriaCorso;
   data: string; // formato YYYY-MM-DD
   orario: string; // es. "09:00 - 13:00"

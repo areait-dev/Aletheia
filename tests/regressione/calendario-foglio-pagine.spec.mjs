@@ -89,17 +89,17 @@ test.describe.serial('foglio con edizioni @calendario', () => {
   });
 
   test('schede corso: "Prossima edizione" solo con una data futura nel foglio, altrimenti come prima @calendario', async ({ page }) => {
-    await page.goto(s.base + '/all-courses/antincendio');
+    await page.goto(s.base + '/corsi/antincendio');
     await expect(page.getByText('Prossima edizione: 12 novembre 2026, Vittoria, Via del Carrubo')).toBeVisible();
     await expect(page.locator('h1')).toHaveCount(1);
-    await page.goto(s.base + '/all-courses/personale-alimentarista-osa');
+    await page.goto(s.base + '/corsi/personale-alimentarista-osa');
     await expect(page.getByText('Prossima edizione: 13 novembre 2026, FAD')).toBeVisible(); // senza sede: la modalità
     // Trattori: l'edizione in corso è iniziata il 5 novembre (passata) e l'altra il 3: nessuna "prossima"
-    await page.goto(s.base + '/all-courses/trattori-agricoli-o-forestali');
+    await page.goto(s.base + '/corsi/trattori-agricoli-o-forestali');
     await expect(page.getByText(/Prossima edizione/)).toHaveCount(0);
     // corso senza nessuna edizione (la sua è una bozza) e corso non in calendario
     for (const slug of ['lavori-in-quota', 'rls', 'icdl-base']) {
-      await page.goto(`${s.base}/all-courses/${slug}`);
+      await page.goto(`${s.base}/corsi/${slug}`);
       await expect(page.getByText(/Prossima edizione/), slug).toHaveCount(0);
       await expect(page.locator('h1'), slug).toHaveCount(1);
     }
@@ -130,7 +130,7 @@ test.describe.serial('foglio senza date pubblicate future @calendario', () => {
 
   test('schede corso: nessuna "Prossima edizione" (comportamento di prima) @calendario', async ({ page }) => {
     for (const slug of ['antincendio', 'lavori-in-quota']) {
-      await page.goto(`${s.base}/all-courses/${slug}`);
+      await page.goto(`${s.base}/corsi/${slug}`);
       await expect(page.getByText(/Prossima edizione/), slug).toHaveCount(0);
       await expect(page.locator('h1'), slug).toHaveCount(1);
     }

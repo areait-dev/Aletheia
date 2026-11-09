@@ -2,7 +2,7 @@
 // Contenuti editoriali per la famiglia "formazione-dirigente" - corso base (Modulo Comune, 12 ore).
 // Famiglia già raggruppata automaticamente da buildCourseFamilies: la variante corso ha livelloKey
 // 'comune' (1a voce raw in data/coursesRaw.js) quindi la chiave posizionale qui è 'livello-1' - vedi
-// editorialLivelloKey in pages/all-courses/[slug].js. L'aggiornamento (livelloKey 'default', 2a voce
+// editorialLivelloKey in pages/corsi/[slug].js. L'aggiornamento (livelloKey 'default', 2a voce
 // raw) vive in formazione-dirigente-aggiornamento-content.js sotto 'livello-2'.
 
 module.exports = {

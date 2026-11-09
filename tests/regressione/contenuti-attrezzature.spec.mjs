@@ -7,9 +7,9 @@ const PLACEHOLDER = /Contenuto dettagliato in arrivo/;
 
 test('attrezzature: i corsi con contenuto non mostrano più il segnaposto (HTML) @rapido', async ({ request }) => {
   for (const [u, frasi] of [
-    ['/all-courses/addetti-alla-conduzione-di-carriponti-pensile-cabina', ['Il carroponte è la macchina destinata al sollevamento', 'Qual è la differenza tra carroponte e gru a portale?']],
-    ['/all-courses/addetti-macchina-raccogli-frutta-aggiornamento', ['Il corso di aggiornamento per lavoratori addetti alla conduzione di Macchine Agricole Raccoglifrutta (CRF)']],
-    ['/all-courses/addetti-caricatori-movimentazione-di-materiali-cmm', []],
+    ['/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', ['Il carroponte è la macchina destinata al sollevamento', 'Qual è la differenza tra carroponte e gru a portale?']],
+    ['/corsi/addetti-macchina-raccogli-frutta-aggiornamento', ['Il corso di aggiornamento per lavoratori addetti alla conduzione di Macchine Agricole Raccoglifrutta (CRF)']],
+    ['/corsi/addetti-caricatori-movimentazione-di-materiali-cmm', []],
   ]) {
     const html = await (await request.get(u)).text();
     const testo = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
@@ -23,8 +23,8 @@ test('attrezzature: i corsi con contenuto non mostrano più il segnaposto (HTML)
 
 test('attrezzature: le varianti Aggiornamento hanno il loro contenuto @rapido', async ({ page }) => {
   const casi = [
-    ['/all-courses/addetti-alla-conduzione-di-carriponti-pensile-cabina', 'carriponte, della durata di 4 ore', 'MODULO PRATICO'],
-    ['/all-courses/addetti-caricatori-movimentazione-di-materiali-cmm', 'Caricatori per la Movimentazione di Materiali (CMM), della durata di 4 ore', 'MODULO PRATICO'],
+    ['/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', 'carriponte, della durata di 4 ore', 'MODULO PRATICO'],
+    ['/corsi/addetti-caricatori-movimentazione-di-materiali-cmm', 'Caricatori per la Movimentazione di Materiali (CMM), della durata di 4 ore', 'MODULO PRATICO'],
   ];
   for (const [u, frase, modulo] of casi) {
     await page.goto(u, { waitUntil: 'networkidle' });
@@ -38,7 +38,7 @@ test('attrezzature: le varianti Aggiornamento hanno il loro contenuto @rapido', 
 });
 
 test('attrezzature: scheda tecnica del corso Carriponti Pensile/Cabina (11 ore) @rapido', async ({ page }) => {
-  await page.goto('/all-courses/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
   const scheda = page.locator('.cp-scheda-area');
   for (const v of ['11 ore', 'Aula', 'Videoconferenza (solo parte teorica)', 'Aggiornamento ogni 5 anni', 'Attestato valido in tutta Italia', 'Max 30 persone']) await expect(scheda).toContainText(v);
 });

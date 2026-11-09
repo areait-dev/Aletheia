@@ -7,7 +7,7 @@
   "risultati": [
     {
       "forma": "mobile",
-      "pagina": "/all-courses",
+      "pagina": "/corsi",
       "mediana": {
         "performance": 70,
         "accessibility": 96,
@@ -61,7 +61,7 @@
     },
     {
       "forma": "mobile",
-      "pagina": "/all-courses/icdl-base",
+      "pagina": "/corsi/icdl-base",
       "mediana": {
         "performance": 76,
         "accessibility": 96,

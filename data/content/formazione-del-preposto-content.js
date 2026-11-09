@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Formazione del Preposto" (ex pagina isolata
-// pages/all-courses/formazione-del-preposto.js). Famiglia a variante unica (livelloKey 'default'): un
+// pages/corsi/formazione-del-preposto.js). Famiglia a variante unica (livelloKey 'default'): un
 // solo livello posizionale 'livello-1' condiviso da corso e aggiornamento (vedi
 // formazione-del-preposto-aggiornamento-content.js), stesso pattern di carrelli-elevatori-content.js.
 

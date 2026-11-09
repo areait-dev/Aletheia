@@ -6,7 +6,7 @@ import { webkit } from '@playwright/test';
 import { CONSENSO, MARCA } from './font-comune.mjs';
 
 const base = process.argv[2];
-const CASI = [['/', 820, 1180], ['/all-courses', 1024, 768]];
+const CASI = [['/', 820, 1180], ['/corsi', 1024, 768]];
 const risultati = [];
 let browser;
 try {

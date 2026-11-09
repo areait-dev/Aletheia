@@ -2,7 +2,7 @@
 // un solo livello 'livello-1'.
 // FONTE: testi già presenti in pages/formazione/corsi-pa.js (aree formative, servizi MEPA, FAQ, meta description).
 // Non è un corso con ore/programma: durata, validità, attestato e moduli sono omessi e la pagina li nasconde
-// (guardie opzionali in pages/all-courses/[slug].js).
+// (guardie opzionali in pages/corsi/[slug].js).
 
 module.exports = {
   'corsi-per-la-pa': {

@@ -1,5 +1,5 @@
 
-// Contenuti editoriali per famiglia "Datore di Lavoro" (ex pagina isolata pages/all-courses/datore-di-lavoro.js).
+// Contenuti editoriali per famiglia "Datore di Lavoro" (ex pagina isolata pages/corsi/datore-di-lavoro.js).
 // Il raw title "Datore Di Lavoro Modulo Comune" contiene il descrittore "Modulo Comune" (LEVEL_PATTERNS in
 // data/courseFamilies.js), quindi la variante "corso" (16 ore) occupa la chiave posizionale 'livello-1'
 // (primo livelloKey incontrato per questa famiglia). La variante "aggiornamento" (6 ore) NON condivide lo

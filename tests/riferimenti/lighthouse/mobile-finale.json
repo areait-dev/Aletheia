@@ -61,7 +61,7 @@
     },
     {
       "forma": "mobile",
-      "pagina": "/all-courses",
+      "pagina": "/corsi",
       "mediana": {
         "performance": 83,
         "accessibility": 96,
@@ -115,7 +115,7 @@
     },
     {
       "forma": "mobile",
-      "pagina": "/all-courses?categoria=sicurezza-lavoro",
+      "pagina": "/corsi?categoria=sicurezza-lavoro",
       "mediana": {
         "performance": 70,
         "accessibility": 96,
@@ -169,7 +169,7 @@
     },
     {
       "forma": "mobile",
-      "pagina": "/all-courses/antincendio",
+      "pagina": "/corsi/antincendio",
       "mediana": {
         "performance": 88,
         "accessibility": 97,

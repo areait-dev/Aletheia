@@ -1,5 +1,5 @@
 
-// Contenuti editoriali per famiglia "Spazi Confinati" (ex pagina isolata pages/all-courses/spazi-confinati.js).
+// Contenuti editoriali per famiglia "Spazi Confinati" (ex pagina isolata pages/corsi/spazi-confinati.js).
 // Famiglia a variante unica (livelloKey 'default'): un solo livello posizionale 'livello-1' condiviso da
 // corso e aggiornamento (vedi spazi-confinati-aggiornamento-content.js), stesso pattern di
 // carrelli-elevatori-content.js. Chiave di primo livello = family.id ("spazi-confinati").

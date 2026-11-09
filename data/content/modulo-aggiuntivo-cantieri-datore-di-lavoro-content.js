@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Modulo Aggiuntivo Cantieri per Datore di Lavoro" (ex pagina isolata
-// pages/all-courses/modulo-aggiuntivo-cantieri-per-datore-di-lavoro.js). Famiglia A SÉ STANTE, non
+// pages/corsi/modulo-aggiuntivo-cantieri-per-datore-di-lavoro.js). Famiglia A SÉ STANTE, non
 // annidata sotto "datore-di-lavoro": il raw title "Modulo Aggiuntivo Cantieri per Datore di Lavoro" (in
 // data/coursesRaw.js) non contiene nessun descrittore riconosciuto da LEVEL_PATTERNS (in particolare non
 // "Modulo Comune"), quindi buildCourseFamilies lo tratta come famiglia indipendente a variante unica

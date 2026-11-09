@@ -7,7 +7,7 @@
 // 'misura-psr-1-1/ammodernamento-aziende-agricole', 'misura-psr-1-1/nuove-strategie-sviluppo-investimento'.
 // Dal testo sorgente sono stati tolti solo i recapiti telefonici e le etichette dei link (ALLEGATO BANDO, MODULO DI
 // ISCRIZIONE, "NON DISPONIBILE"). I campi non presenti in fonte (validità, partecipanti max, programma a
-// moduli, FAQ) sono omessi e la pagina li nasconde (guardie opzionali in pages/all-courses/[slug].js).
+// moduli, FAQ) sono omessi e la pagina li nasconde (guardie opzionali in pages/corsi/[slug].js).
 // ATTESTATO del Conduttore d'Impresa Agricola (Qualifica 3 EQF): fornito dal reparto formazione il 5 novembre 2026.
 // NOTA: la famiglia generica ha slug raw 'misura-psr-1-2' ma l'archivio parla di Misura 1.1 - da verificare.
 // FAQ: sintesi di fonti ufficiali + dati già nel progetto (nessun dato aggiunto sui corsi Alètheia):

@@ -1,4 +1,4 @@
-// Testo del campo "Partecipanti" della scheda tecnica di un corso (pages/all-courses/[slug].js).
+// Testo del campo "Partecipanti" della scheda tecnica di un corso (pages/corsi/[slug].js).
 // Regole del reparto formazione (9 novembre 2026):
 // - il limite massimo vale per aula e aula virtuale; in FAD non c'è nessun limite di partecipanti;
 // - Decreto Attrezzature: max 25 per la teoria in aula, max 6 per la parte pratica (campo `partecipantiPraticaMax`).

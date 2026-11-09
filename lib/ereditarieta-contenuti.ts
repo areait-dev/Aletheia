@@ -1,4 +1,4 @@
-// Ereditarietà dei dati tra corso base e aggiornamento (pages/all-courses/[slug].js).
+// Ereditarietà dei dati tra corso base e aggiornamento (pages/corsi/[slug].js).
 // Regola (confermata dal reparto formazione, 5 novembre 2026): una variante di AGGIORNAMENTO eredita dal corso base dello STESSO livello
 // modalità, attestato, validità e numero di partecipanti, quando la sua scheda in data/content/ non li indica. Così non si copiano a mano in
 // ogni scheda e vale anche per i corsi futuri. Un valore indicato nell'aggiornamento ha sempre la precedenza (es. validità "Da ripetere

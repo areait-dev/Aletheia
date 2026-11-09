@@ -22,8 +22,8 @@ interface PricingSidebarProps {
 }
 
 /**
- * Sidebar prezzo riutilizzabile per le pagine corso (pages/all-courses/[slug].js e
- * pages/all-courses/addetti-alla-conduzione-di-carriponte.js).
+ * Sidebar prezzo riutilizzabile per le pagine corso (pages/corsi/[slug].js e
+ * pages/corsi/addetti-alla-conduzione-di-carriponte.js).
  *
  * Sticky a destra su desktop, full-width in flusso su mobile (il comportamento sticky/stacking
  * è gestito dal genitore tramite la classe "cp-price-area" già presente in entrambe le pagine).

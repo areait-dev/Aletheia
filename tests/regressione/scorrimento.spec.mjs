@@ -16,18 +16,18 @@ for (const attesa of [0, 150, 500]) {
   test(`scorrimento: clic su un corso ${attesa}ms dopo la rotellina, la scheda parte dall'alto @rapido`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await installaCampionatore(page);
-    await page.goto('/all-courses', { waitUntil: 'networkidle' });
+    await page.goto('/corsi', { waitUntil: 'networkidle' });
     await page.waitForTimeout(800);
     await page.evaluate(() => { window.__camp.length = 0; });
     await rotella(page, 3000);
     await page.waitForTimeout(attesa);
     const yAlClic = await page.evaluate(() => Math.round(window.scrollY));
     expect(yAlClic, 'la pagina deve essere scorsa (se no il test non prova nulla)').toBeGreaterThan(400);
-    await page.evaluate(() => { const l = [...document.querySelectorAll('a[href^="/all-courses/"]')].find((a) => { const r = a.getBoundingClientRect(); return r.width > 50 && r.top > 0 && r.top < innerHeight; }) || document.querySelector('a[href^="/all-courses/"]'); l.click(); });
-    await page.waitForURL(/\/all-courses\/[^?]+/);
+    await page.evaluate(() => { const l = [...document.querySelectorAll('a[href^="/corsi/"]')].find((a) => { const r = a.getBoundingClientRect(); return r.width > 50 && r.top > 0 && r.top < innerHeight; }) || document.querySelector('a[href^="/corsi/"]'); l.click(); });
+    await page.waitForURL(/\/corsi\/[^?]+/);
     await page.waitForTimeout(3000);
     const campioni = await page.evaluate(() => window.__camp);
-    const nuova = campioni.filter(([, u]) => u.startsWith('/all-courses/'));
+    const nuova = campioni.filter(([, u]) => u.startsWith('/corsi/'));
     const sopra = nuova.filter(([, , y]) => y > 5);
     expect(nuova.length, 'fotogrammi sulla pagina nuova').toBeGreaterThan(50);
     expect(sopra.length, `fotogrammi della scheda con scorrimento > 0 (max y ${Math.max(0, ...sopra.map((x) => x[2]))}) su ${nuova.length}`).toBeLessThanOrEqual(4);
@@ -43,25 +43,25 @@ for (const attesa of [0, 150, 500]) {
 
 test('scorrimento: dal corso correlato si riparte dall\'alto @rapido', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.goto('/all-courses/antincendio', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/antincendio', { waitUntil: 'networkidle' });
   await page.waitForTimeout(800);
   await rotella(page, 6000);
   await page.waitForTimeout(100);
-  await page.evaluate(() => { document.querySelector('.cp-carousel-track a[href^="/all-courses/"]').click(); });
+  await page.evaluate(() => { document.querySelector('.cp-carousel-track a[href^="/corsi/"]').click(); });
   await page.waitForTimeout(2500);
   expect(await page.evaluate(() => Math.round(window.scrollY))).toBe(0);
 });
 
 test('scorrimento: il tasto Indietro ripristina la posizione del catalogo @rapido', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.goto('/all-courses', { waitUntil: 'networkidle' });
+  await page.goto('/corsi', { waitUntil: 'networkidle' });
   await page.waitForTimeout(800);
   await rotella(page, 1500);
   await page.waitForTimeout(1800);
   const prima = await page.evaluate(() => Math.round(window.scrollY));
   expect(prima).toBeGreaterThan(800);
-  await page.evaluate(() => { const l = [...document.querySelectorAll('a[href^="/all-courses/"]')].find((a) => { const r = a.getBoundingClientRect(); return r.width > 50 && r.top > 0 && r.top < innerHeight; }); l.click(); });
-  await page.waitForURL(/\/all-courses\/[^?]+/);
+  await page.evaluate(() => { const l = [...document.querySelectorAll('a[href^="/corsi/"]')].find((a) => { const r = a.getBoundingClientRect(); return r.width > 50 && r.top > 0 && r.top < innerHeight; }); l.click(); });
+  await page.waitForURL(/\/corsi\/[^?]+/);
   await page.waitForTimeout(1500);
   expect(await page.evaluate(() => Math.round(window.scrollY))).toBe(0);
   await page.goBack();

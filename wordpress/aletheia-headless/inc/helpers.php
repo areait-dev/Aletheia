@@ -59,7 +59,7 @@ function aletheia_frontend_path( WP_Post $post ): string {
 	switch ( $post->post_type ) {
 		// Le bozze non hanno ancora uno slug: si usa l'ID, che il frontend accetta solo in Preview Mode.
 		case 'corso':
-			return '/all-courses/' . ( $post->post_name ?: $post->ID );
+			return '/corsi/' . ( $post->post_name ?: $post->ID );
 		case 'news':
 			return '/news/' . ( $post->post_name ?: $post->ID );
 		case 'offerta_lavoro':

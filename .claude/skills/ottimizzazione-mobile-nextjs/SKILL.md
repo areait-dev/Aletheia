@@ -13,7 +13,7 @@ Contesto predefinito (verificalo nel progetto e adattati se diverso): Next.js 16
 
 Da verificare per primi nella Fase 1 e includere nel report:
 - elementi `sticky` con stile inline senza breakpoint, che su mobile restano attaccati e coprono contenuti;
-- la sidebar dei corsi (`/all-courses`) che su mobile si sovrappone all'elenco;
+- la sidebar dei corsi (`/corsi`) che su mobile si sovrappone all'elenco;
 - il menu hamburger e il controllo a 768 px lasciati aperti in `MIGRAZIONE.md`;
 - l'elemento LCP delle pagine corso su mobile è il banner cookie, che compare solo dopo l'idratazione;
 - il controllo manuale mobile (390 e 768 px) ancora in sospeso.
@@ -31,7 +31,7 @@ Da verificare per primi nella Fase 1 e includere nel report:
 
 ## Fase 1 – Misura di partenza e controllo mobile
 
-1. Pagine rappresentative: home, `/all-courses`, `/all-courses?categoria=sicurezza-lavoro`, una pagina corso con livelli (es. `/all-courses/antincendio`), una news, `/contatti`, `/calendario-corsi`, `/chi-siamo`, la 404.
+1. Pagine rappresentative: home, `/corsi`, `/corsi?categoria=sicurezza-lavoro`, una pagina corso con livelli (es. `/corsi/antincendio`), una news, `/contatti`, `/calendario-corsi`, `/chi-siamo`, la 404.
 2. Per ognuna, Lighthouse **mobile** (mediana di 3-5 passate): Performance, LCP, CLS, TBT, peso del JS trasferito, elemento LCP individuato.
 3. Se disponibili, dati di utenti reali (PageSpeed Insights "esperienza dei tuoi utenti reali", Vercel Speed Insights): hanno la precedenza sulle misure di laboratorio.
 4. Controllo visivo e di usabilità a 390 e 768 px (screenshot + ispezione): overflow orizzontale, elementi sovrapposti o coperti (sidebar, sticky, chat, banner), testi sotto 16 px negli input (iOS fa zoom), aree cliccabili sotto 48x48 px o troppo vicine, `100vh` che taglia contenuti, interazioni che funzionano solo con hover, menu hamburger (apertura, chiusura, sottomenu, scroll bloccato sotto il menu).

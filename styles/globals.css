@@ -649,7 +649,7 @@ html.dark .cta-nav-btn-outline:hover {
   color: #0F172A;
 }
 
-/* Catalogo corsi (/all-courses), da 1024px in su.
+/* Catalogo corsi (/corsi), da 1024px in su.
    - .catalog-sidebar: sticky come prima, ma con altezza massima e scorrimento interno: la sidebar è alta ~671px e su
      schermi bassi (laptop 12-13", iPad in orizzontale dentro Safari) il fondo (ultime categorie, box "Chiamaci")
      restava irraggiungibile. Su schermi alti non cambia nulla (nessuna barra di scorrimento).

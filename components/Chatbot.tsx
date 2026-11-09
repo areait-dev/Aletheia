@@ -84,7 +84,7 @@ function useFAQ(gruppi: FaqGruppi): Faq[] {
   const router = useRouter();
   const path = router.pathname;
   if (path.includes('agenzia-per-il-lavoro')) return gruppi.lavoro;
-  if (path.includes('all-courses') || path.includes('corsi') || path.includes('formazione')) return gruppi.formazione;
+  if (path.includes('corsi') || path.includes('formazione')) return gruppi.formazione;
   return gruppi.generale;
 }
 

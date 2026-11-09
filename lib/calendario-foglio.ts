@@ -14,7 +14,7 @@ import type { CategoriaCorso, CorsoCalendario } from '../data/calendario';
  *   - "note" è interna al reparto e non esce mai sul sito.
  */
 
-/** Corso del catalogo come serve qui: la chiave è lo slug della famiglia (/all-courses/[slug]). */
+/** Corso del catalogo come serve qui: la chiave è lo slug della famiglia (/corsi/[slug]). */
 export type VoceCatalogo = { slug: string; titolo: string; categoria: CategoriaCorso };
 
 export type EsitoFoglio = { edizioni: CorsoCalendario[]; avvisi: string[] };

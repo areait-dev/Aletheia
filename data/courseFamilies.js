@@ -2,9 +2,9 @@
  * Raggruppamento automatico dei corsi in "famiglie" (es. Antincendio, RLS, ...)
  * con le singole varianti (livello/gruppo/modulo x corso/aggiornamento) annidate.
  *
- * Fonte dati grezza: coursesData in pages/all-courses/index.js (passata come
+ * Fonte dati grezza: coursesData in pages/corsi/index.js (passata come
  * argomento a buildCourseFamilies). I prezzi per variante, quando disponibili,
- * sono recuperati da coursesDetails (pages/all-courses/[slug].js) tramite
+ * sono recuperati da coursesDetails (pages/corsi/[slug].js) tramite
  * matching per parole chiave sulle label di priceVariants - quell'oggetto NON
  * viene duplicato qui, va passato a buildCourseFamilies.
  *
@@ -85,7 +85,7 @@ const LEVEL_PATTERNS = [
   // varianti raw (5 macchine singole + corso combinato + aggiornamento) in un'unica famiglia/pagina
   // con switch, sullo stesso modello di Trattori Agricoli e PLE - vedi il commento sulle 7 voci raw in
   // data/coursesRaw.js. La famiglia risultante "macchine-movimento-terra" combacia con la pagina
-  // standalone pages/all-courses/macchine-movimento-terra.js (che ha priorità di routing sul template
+  // standalone pages/corsi/macchine-movimento-terra.js (che ha priorità di routing sul template
   // dinamico [slug].js) e con coursesDetails['macchine-movimento-terra'] in [slug].js per i prezzi.
   /\((escavatori idraulici, caricatori frontali e terne|escavatori idraulici|escavatori a fune|pale caricatrici frontali|autoribaltabili a cingoli|terne)\)/i,
 ];
@@ -179,7 +179,7 @@ function matchPriceVariant(priceVariants, levelLabel, tipo, familyKey, quiet) {
  * Raggruppa l'elenco piatto di corsi (coursesData) in famiglie con varianti annidate.
  *
  * @param {Array} rawCourses - coursesData da data/coursesRaw.js
- * @param {Object} coursesDetails - oggetto coursesDetails da pages/all-courses/[slug].js (per overview/curriculum/prezzi)
+ * @param {Object} coursesDetails - oggetto coursesDetails da pages/corsi/[slug].js (per overview/curriculum/prezzi)
  * @param {Object} [options]
  * @param {boolean} [options.quiet] - se true, non stampa i warning di prezzo mancante (usato da next.config.js, dove i prezzi non servono)
  */
@@ -304,7 +304,7 @@ function resolveRelatedCourse(rawSlug, families) {
       const idx = parseInt(livelloNum, 10) - 1;
       if (livelloKeys[idx]) {
         const label = fam.varianti.find((v) => v.livelloKey === livelloKeys[idx])?.label;
-        return { titolo: `${fam.titolo} - ${label}`, href: `/all-courses/${fam.slug}?livello=${idx + 1}` };
+        return { titolo: `${fam.titolo} - ${label}`, href: `/corsi/${fam.slug}?livello=${idx + 1}` };
       }
     }
   }
@@ -321,7 +321,7 @@ function resolveRelatedCourse(rawSlug, families) {
     });
   }
 
-  if (fam) return { titolo: fam.titolo, href: `/all-courses/${fam.slug}` };
+  if (fam) return { titolo: fam.titolo, href: `/corsi/${fam.slug}` };
 
   // eslint-disable-next-line no-console
   console.warn(`[courseFamilies] corsiCorrelati: impossibile risolvere lo slug "${rawSlug}" contro nessuna famiglia esistente`);

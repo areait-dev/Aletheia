@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Lavoratori Addetti all'attività di Apposizione Integrazione e
-// Rimozione della Segnaletica Stradale" (ex pagina isolata pages/all-courses/
+// Rimozione della Segnaletica Stradale" (ex pagina isolata pages/corsi/
 // lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale.js).
 // Nessun aggiornamento raw corrispondente in data/coursesRaw.js: famiglia a variante unica (solo tipo
 // 'corso'), un solo livello posizionale 'livello-1'. family.id = slugify(titolo raw completo), che

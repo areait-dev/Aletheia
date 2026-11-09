@@ -8,7 +8,7 @@
 // La 5a variante (Aggiornamento, tipo 'aggiornamento', 6 ore) vive in
 // formazione-lavoratori-aggiornamento-content.js sotto 'livello-5'. Le chiavi sono posizionali
 // (stesso ordine delle 5 voci raw in data/coursesRaw.js), non semantiche - vedi editorialLivelloKey
-// in pages/all-courses/[slug].js. Stesso pattern di trattori-agricoli-content.js.
+// in pages/corsi/[slug].js. Stesso pattern di trattori-agricoli-content.js.
 
 module.exports = {
   'formazione-dei-lavoratori': {

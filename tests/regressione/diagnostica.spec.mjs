@@ -51,7 +51,7 @@ test('lo storico aggiunge una riga a ogni cambio di misure (rotazione) @rapido',
 });
 
 test('le pagine di diagnostica non sono linkate dalle altre pagine @rapido', async ({ request }) => {
-  for (const url of ['/', '/chi-siamo', '/contatti', '/all-courses', '/news', '/privacy-cookie', '/calendario-corsi']) {
+  for (const url of ['/', '/chi-siamo', '/contatti', '/corsi', '/news', '/privacy-cookie', '/calendario-corsi']) {
     const html = await (await request.get(url)).text();
     expect(html, url).not.toContain('diagnostica');
   }

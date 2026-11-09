@@ -1,7 +1,7 @@
 
 // Contenuti editoriali per famiglia "RSPP Datore di Lavoro" - variante AGGIORNAMENTO (8 ore).
 // È la 6a voce raw in data/coursesRaw.js (livelloKey 'default'), quindi la chiave posizionale è
-// 'livello-6' - vedi editorialLivelloKey in pages/all-courses/[slug].js e il commento in
+// 'livello-6' - vedi editorialLivelloKey in pages/corsi/[slug].js e il commento in
 // rspp-datore-lavoro-content.js.
 
 module.exports = {

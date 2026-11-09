@@ -18,7 +18,7 @@ const SERIF = /^(times|times new roman|serif|-webkit-standard|georgia|cambria|ui
 const ATTESI = new Set(['Nunito', 'Viga']);
 
 // Pagine e larghezze: menu mobile (390, 820), header desktop (1024, 1440); home, catalogo, modulo contatti.
-const CASI = [['/', 390, 844], ['/', 1024, 768], ['/all-courses', 820, 1180], ['/contatti', 1440, 900]];
+const CASI = [['/', 390, 844], ['/', 1024, 768], ['/corsi', 820, 1180], ['/contatti', 1440, 900]];
 
 async function apri(page, url, larghezza, altezza) {
   await page.setViewportSize({ width: larghezza, height: altezza });
@@ -63,7 +63,7 @@ for (const [url, w, h] of CASI) {
 }
 
 test('nessun elemento con testo usa un serif o un font diverso da Nunito/Viga @rapido', async ({ page }) => {
-  for (const [url, w, h] of [['/', 390, 844], ['/all-courses', 1024, 768], ['/contatti', 820, 1180]]) {
+  for (const [url, w, h] of [['/', 390, 844], ['/corsi', 1024, 768], ['/contatti', 820, 1180]]) {
     await apri(page, url, w, h);
     const r = await page.evaluate(() => {
       const ok = new Set(['Nunito', 'Viga']); const bad = {}; let n = 0;

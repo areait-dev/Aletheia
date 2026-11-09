@@ -2,7 +2,7 @@
 // Contenuti editoriali per la variante "Aggiornamento" (4 ore) della famiglia trattori-agricoli-o-forestali -
 // generica, unica e valida indipendentemente dal corso base seguito (ruote, cingoli o combinato). È la 4a
 // voce raw in data/coursesRaw.js, quindi la chiave posizionale è 'livello-4' (vedi editorialLivelloKey in
-// pages/all-courses/[slug].js e il commento in trattori-agricoli-content.js).
+// pages/corsi/[slug].js e il commento in trattori-agricoli-content.js).
 
 module.exports = {
   'livello-4': {

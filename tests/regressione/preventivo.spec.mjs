@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
 import * as cheerio from 'cheerio';
 import { urls } from './util.mjs';
 
-const CORSI = urls.map((u) => u.url).filter((u) => /^\/all-courses\/[^?/]+$/.test(u));
+const CORSI = urls.map((u) => u.url).filter((u) => /^\/corsi\/[^?/]+$/.test(u));
 const ETICHETTA_PREVENTIVO = /^\s*richiedi (un )?preventivo\s*$/i;
 const ETICHETTA_INFO = /^\s*richiedi informazioni\s*$/i;
 

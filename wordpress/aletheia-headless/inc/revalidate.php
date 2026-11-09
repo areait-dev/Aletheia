@@ -23,7 +23,7 @@ function aletheia_revalidate( array $body ): void {
 /** Pagine di elenco/aggregazione che mostrano i contenuti di un certo tipo. */
 function aletheia_dependent_paths( string $post_type ): array {
 	$map = [
-		'corso'          => [ '/', '/all-courses', '/calendario-corsi', '/formazione/obbligatoria', '/formazione/professionale-specialistica', '/formazione/regionale', '/formazione/regionale-fse', '/formazione/ecm' ],
+		'corso'          => [ '/', '/corsi', '/calendario-corsi', '/formazione/obbligatoria', '/formazione/professionale-specialistica', '/formazione/regionale', '/formazione/regionale-fse', '/formazione/ecm' ],
 		'edizione_corso' => [ '/', '/calendario-corsi' ],
 		'news'           => [ '/', '/news' ],
 		'offerta_lavoro' => [ '/agenzia-per-il-lavoro', '/agenzia-per-il-lavoro/servizi-alla-persona' ],

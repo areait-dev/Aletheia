@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Addetti Caricatori Movimentazione di Materiali (CMM)" (ex pagina
-// isolata pages/all-courses/addetti-caricatori-movimentazione-di-materiali-cmm.js). Solo la variante
+// isolata pages/corsi/addetti-caricatori-movimentazione-di-materiali-cmm.js). Solo la variante
 // "corso" (8 ore) ha contenuto editoriale completo: la variante "aggiornamento" (4 ore) nella pagina
 // isolata originale non aveva descrizione/FAQ/moduli propri (solo scheda tecnica + placeholder
 // "Dettaglio moduli in aggiornamento"), quindi NON viene registrata in EDITORIAL_CONTENT - il template

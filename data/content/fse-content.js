@@ -2,7 +2,7 @@
 // percorso per Assistente Familiare. Famiglia a variante unica (solo tipo 'corso'): un solo livello 'livello-1'.
 // FONTE: testi già presenti in pages/formazione/regionale.js (card "Avviso n. 20/2024 FSE+", requisiti e FAQ).
 // Nessun dato aggiunto: i campi non presenti in fonte (validità, partecipanti max, programma a moduli) sono omessi
-// e la pagina li nasconde (vedi guardie opzionali in pages/all-courses/[slug].js).
+// e la pagina li nasconde (vedi guardie opzionali in pages/corsi/[slug].js).
 
 module.exports = {
   fse: {

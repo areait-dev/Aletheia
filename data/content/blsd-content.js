@@ -1,7 +1,7 @@
 // Contenuti editoriali per famiglia "BLSD - Basic Life Support and Defibrillation" (family.id
 // 'blsd-basic-life-support-and-defibrillation'), variante unica (solo tipo 'corso'), un solo livello 'livello-1'.
 // FONTE dei dati del corso: voce 'blsd-basic-life-support-defibrillation' di coursesDetails in
-// pages/all-courses/[slug].js (durata, destinatari, descrizione, programma a 4 moduli, obiettivi) - spostati qui
+// pages/corsi/[slug].js (durata, destinatari, descrizione, programma a 4 moduli, obiettivi) - spostati qui
 // senza modifiche di contenuto, perché quella voce non viene mostrata come descrizione dalla pagina.
 // FONTE delle FAQ (sintesi, nessun dato aggiunto sul corso Alètheia):
 //  - Legge 4 agosto 2021 n. 116, art. 1 (chi può usare il DAE) e art. 3 c. 1 lett. a) (art. 54 c.p.):

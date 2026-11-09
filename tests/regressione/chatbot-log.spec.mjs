@@ -15,13 +15,13 @@ const res = () => ({ intestazioni: {}, status(n) { this.codice = n; return this;
 test('chatbot-unanswered: 200, riga nei log del server, nessun file scritto @rapido', async () => {
   const righe = []; const orig = console.log; console.log = (...a) => righe.push(a.join(' '));
   const r = res();
-  try { handler({ method: 'POST', body: { question: 'Fate corsi di pasticceria a Vittoria?', page: '/all-courses', reason: 'off-topic' } }, r); }
+  try { handler({ method: 'POST', body: { question: 'Fate corsi di pasticceria a Vittoria?', page: '/corsi', reason: 'off-topic' } }, r); }
   finally { console.log = orig; }
   expect(r.codice).toBe(200); expect(r.corpo).toEqual({ ok: true });
   expect(righe).toHaveLength(1);
   expect(righe[0]).toMatch(/^\[chatbot-unanswered\] \{.*\}$/);
   const entry = JSON.parse(righe[0].replace('[chatbot-unanswered] ', ''));
-  expect(entry).toMatchObject({ question: 'Fate corsi di pasticceria a Vittoria?', page: '/all-courses', reason: 'off-topic' });
+  expect(entry).toMatchObject({ question: 'Fate corsi di pasticceria a Vittoria?', page: '/corsi', reason: 'off-topic' });
   expect(Date.parse(entry.timestamp)).not.toBeNaN();
   expect(fs.existsSync(cartellaLog), 'la rotta non deve creare data/chatbot-log').toBe(esisteva);
 });

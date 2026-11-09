@@ -12,7 +12,7 @@ import { decodeEntities, isWpEnabled, wpGetAll } from './wp';
  *   badge, provider, status, gradient, meta, price = campi ACF (vedi wordpress/README.md)
  *
  * Limite: il contenuto editoriale del dettaglio (data/content/*, coursesDetails, EDITORIAL_CONTENT in
- * pages/all-courses/[slug].js) resta nel codice, indicizzato per slug di famiglia: un corso nato solo in
+ * pages/corsi/[slug].js) resta nel codice, indicizzato per slug di famiglia: un corso nato solo in
  * WordPress compare nel catalogo e ha la sua pagina con il template generico.
  */
 

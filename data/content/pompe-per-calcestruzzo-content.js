@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Pompe per Calcestruzzo" (ex pagina isolata
-// pages/all-courses/pompe-per-calcestruzzo.js). Famiglia a variante unica (livelloKey 'default'): un
+// pages/corsi/pompe-per-calcestruzzo.js). Famiglia a variante unica (livelloKey 'default'): un
 // solo livello posizionale 'livello-1' condiviso da corso e aggiornamento.
 
 module.exports = {

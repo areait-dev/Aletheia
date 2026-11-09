@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "PES/PAV Lavori Elettrici" (ex pagina isolata
-// pages/all-courses/pes-pav-lavori-elettrici.js). Le 2 varianti raw in data/coursesRaw.js ("Sotto
+// pages/corsi/pes-pav-lavori-elettrici.js). Le 2 varianti raw in data/coursesRaw.js ("Sotto
 // Tensione" 16h e "In Prossimità" 12h) condividono il famTitle "PES/PAV Lavori Elettrici" (i descrittori
 // "Sotto Tensione"/"In Prossimità" sono isolati da LEVEL_PATTERNS in data/courseFamilies.js), quindi
 // 'livello-1'/'livello-2' sono posizionali (stesso ordine delle 2 voci raw). Nessun aggiornamento raw

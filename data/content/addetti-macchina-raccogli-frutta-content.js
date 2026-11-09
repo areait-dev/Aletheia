@@ -4,7 +4,7 @@
 // ALLA CONDUZIONE DI MACCHINA AGRICOLA RACCOGLIFRUTTA (CRF) [8 ORE]" ai sensi del D.Lgs. 81/2008
 // art. 73 e dell'Accordo Stato-Regioni del 17/04/2025.
 // Famiglia a variante unica (family.varianti ha un solo elemento, tipo 'corso', livelloKey 'default'),
-// quindi qui c'è una sola chiave 'livello-1' (vedi editorialLivelloKey in pages/all-courses/[slug].js).
+// quindi qui c'è una sola chiave 'livello-1' (vedi editorialLivelloKey in pages/corsi/[slug].js).
 // NOTA: la famiglia "addetti-macchina-raccogli-frutta-aggiornamento" è una famiglia SEPARATA (non una
 // variante "aggiornamento" di questa) - non è coperta da questo file, in attesa del relativo programma.
 

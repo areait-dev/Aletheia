@@ -2,7 +2,7 @@
 // Contenuti editoriali per la variante "Aggiornamento" (4 ore) della famiglia ple - generica, unica e
 // valida indipendentemente dal corso base seguito (con stabilizzatori, senza stabilizzatori o combinato).
 // È la 4a voce raw in data/coursesRaw.js, quindi la chiave posizionale è 'livello-4' (vedi
-// editorialLivelloKey in pages/all-courses/[slug].js e il commento in ple-content.js).
+// editorialLivelloKey in pages/corsi/[slug].js e il commento in ple-content.js).
 
 module.exports = {
   'livello-4': {

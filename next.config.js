@@ -8,20 +8,26 @@ const { costruisciRedirect } = require('./lib/redirect-vecchio-sito');
  * il titolo in coursesData non combacia con quello delle altre varianti della stessa categoria) e
  * quindi genererebbe un redirect verso uno slug-famiglia che non ha (o non ha più) una pagina
  * dedicata — es. le 6 varianti macchina di Macchine Movimento Terra, tutte riunite in un'unica
- * pagina switchabile su /all-courses/macchine-movimento-terra invece che sui 6 slug-famiglia
+ * pagina switchabile su /corsi/macchine-movimento-terra invece che sui 6 slug-famiglia
  * isolati che la normalizzazione automatica assegnerebbe loro.
  */
+/** Prefisso attuale della sezione corsi e prefisso storico (rinominato da /all-courses a /corsi): il vecchio deve sempre reindirizzare. */
+const PREFISSI_CORSI = ['/corsi', '/all-courses'];
+
+/** Il prefisso storico risponde 301 (richiesto); quello attuale resta com'era (permanent:true) per non cambiare i redirect già esistenti. */
+const statoRedirect = (prefisso) => (prefisso === '/all-courses' ? { statusCode: 301 } : { permanent: true });
+
 const REDIRECT_OVERRIDES = {
-  'mmt-escavatori-idraulici': '/all-courses/macchine-movimento-terra',
-  'mmt-escavatori-a-fune': '/all-courses/macchine-movimento-terra',
-  'mmt-pale-caricatrici-frontali': '/all-courses/macchine-movimento-terra',
-  'mmt-terne': '/all-courses/macchine-movimento-terra',
-  'mmt-autoribaltabili-a-cingoli': '/all-courses/macchine-movimento-terra',
-  'mmt-escavatori-caricatori-frontali-terne': '/all-courses/macchine-movimento-terra',
+  'mmt-escavatori-idraulici': '/corsi/macchine-movimento-terra',
+  'mmt-escavatori-a-fune': '/corsi/macchine-movimento-terra',
+  'mmt-pale-caricatrici-frontali': '/corsi/macchine-movimento-terra',
+  'mmt-terne': '/corsi/macchine-movimento-terra',
+  'mmt-autoribaltabili-a-cingoli': '/corsi/macchine-movimento-terra',
+  'mmt-escavatori-caricatori-frontali-terne': '/corsi/macchine-movimento-terra',
 };
 
 /**
- * Redirect 301 permanenti dai vecchi slug per-livello (es. /all-courses/antincendio-rischio-basso-livello-1,
+ * Redirect 301 permanenti dai vecchi slug per-livello (es. /corsi/antincendio-rischio-basso-livello-1,
  * già linkati in data/calendario.ts e potenzialmente indicizzati) al nuovo slug di famiglia con ?livello=.
  * Generati automaticamente da coursesData: quiet=true perché qui non servono i prezzi, solo lo slug/indice livello.
  * Gli slug elencati in REDIRECT_OVERRIDES saltano la generazione automatica e usano la destinazione
@@ -37,20 +43,21 @@ function buildCourseRedirects() {
       if (variante.slug === family.slug) return; // già canonico, nessun redirect necessario
       if (REDIRECT_OVERRIDES[variante.slug]) return; // gestito manualmente sotto
       const livelloIndex = livelloKeys.indexOf(variante.livelloKey) + 1;
-      redirects.push({
-        source: `/all-courses/${variante.slug}`,
-        destination: `/all-courses/${family.slug}?livello=${livelloIndex}`,
-        permanent: true,
-      });
+      // Sia il prefisso attuale sia quello storico (/all-courses): un solo salto, senza passare da due 301.
+      for (const prefisso of PREFISSI_CORSI) {
+        redirects.push({
+          source: `${prefisso}/${variante.slug}`,
+          destination: `/corsi/${family.slug}?livello=${livelloIndex}`,
+          ...statoRedirect(prefisso),
+        });
+      }
     });
   }
 
   Object.entries(REDIRECT_OVERRIDES).forEach(([slug, destination]) => {
-    redirects.push({
-      source: `/all-courses/${slug}`,
-      destination,
-      permanent: true,
-    });
+    for (const prefisso of PREFISSI_CORSI) {
+      redirects.push({ source: `${prefisso}/${slug}`, destination, ...statoRedirect(prefisso) });
+    }
   });
 
   return redirects;
@@ -117,6 +124,9 @@ const nextConfig = {
       // Vecchio sito Joomla: regole ricavate da docs/mappa-redirect-301.md (lib/redirect-vecchio-sito.js), tutte 301.
       ...costruisciRedirect().redirects,
       ...buildCourseRedirects(),
+      // Sezione rinominata: /all-courses → /corsi (301). Vanno DOPO i redirect per singolo slug, che hanno la precedenza.
+      { source: '/all-courses', destination: '/corsi', statusCode: 301 },
+      { source: '/all-courses/:slug', destination: '/corsi/:slug', statusCode: 301 },
       ...buildAiutiDiStatoRedirects(),
       ...buildArchivioSpostatiRedirects(),
       // Stesso comportamento di prima per lo slash finale, escluso /index.php (gestito sopra). Identico alla regola interna di Next.

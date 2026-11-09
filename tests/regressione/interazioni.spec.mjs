@@ -1,4 +1,4 @@
-// Interazioni: menu mobile, sottomenu Formazione, filtri del calendario, filtri di /all-courses via query string,
+// Interazioni: menu mobile, sottomenu Formazione, filtri del calendario, filtri di /corsi via query string,
 // 404 e form (senza inviare). Ogni test registra una "traccia" confrontata con il riferimento.
 import { test, expect } from '@playwright/test';
 import { confronta } from './util.mjs';
@@ -85,33 +85,33 @@ test('filtri di /calendario-corsi: categoria, reset e contatore @rapido', async 
   confronta('interazioni/calendario-filtri', traccia);
 });
 
-test('filtri di /all-courses: query string, selezione e reset @rapido', async ({ page }) => {
+test('filtri di /corsi: query string, selezione e reset @rapido', async ({ page }) => {
   test.setTimeout(300_000);
   page.setDefaultTimeout(20_000);
   await page.setViewportSize({ width: 1440, height: 900 });
   await preparaPagina(page, 'chiaro');
-  const schede = async () => (await page.locator('main a[href^="/all-courses/"]').evaluateAll((els) => Array.from(new Set(els.map((e) => e.getAttribute('href'))))).catch(() => []));
+  const schede = async () => (await page.locator('main a[href^="/corsi/"]').evaluateAll((els) => Array.from(new Set(els.map((e) => e.getAttribute('href'))))).catch(() => []));
   const traccia = {};
-  await page.goto('/all-courses', { waitUntil: 'domcontentloaded' });
+  await page.goto('/corsi', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
   traccia.tutti = (await schede()).length;
   for (const k of CHIAVI_CATEGORIA) {
-    await page.goto(`/all-courses?categoria=${k}`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`/corsi?categoria=${k}`, { waitUntil: 'domcontentloaded' });
     await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
     await page.waitForTimeout(400);
     traccia[k] = { url: new URL(page.url()).search, schede: await schede() };
   }
   // reset: il parametro sparisce dall'indirizzo senza ricaricare
-  await page.goto('/all-courses?categoria=icdl', { waitUntil: 'domcontentloaded' });
+  await page.goto('/corsi?categoria=icdl', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
   await page.getByRole('button', { name: /Rimuovi filtri/ }).first().click({ timeout: 10_000 }); // il bottone compare solo con un filtro attivo
   await page.waitForTimeout(400);
   traccia.dopoReset = { url: new URL(page.url()).search, schede: (await schede()).length };
   // livelli di un corso con ?livello=
-  await page.goto('/all-courses/antincendio?livello=2', { waitUntil: 'domcontentloaded' });
+  await page.goto('/corsi/antincendio?livello=2', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
   traccia.livello2 = { url: new URL(page.url()).search, h1: await page.locator('h1').first().innerText() };
-  confronta('interazioni/all-courses-query', traccia);
+  confronta('interazioni/corsi-query', traccia);
 });
 
 test('pagina 404 inesistente @rapido', async ({ page }) => {

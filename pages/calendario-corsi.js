@@ -349,7 +349,7 @@ export default function CalendarioCorsi({ calendario, oggi }) {
                                           </a>
                                         ) : (
                                           <a
-                                            href={`/all-courses/${corso.slug}`}
+                                            href={`/corsi/${corso.slug}`}
                                             className="inline-flex items-center justify-center text-white font-bold text-sm px-6 min-h-[44px] rounded-full no-underline transition-colors whitespace-nowrap"
                                             style={{ background: '#008C95' }}
                                             onMouseEnter={(e) => (e.currentTarget.style.background = '#006B73')}

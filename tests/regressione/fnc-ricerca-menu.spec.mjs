@@ -18,17 +18,17 @@ test('Home: la ricerca porta al catalogo e filtra @rapido', async ({ page }) => 
   await page.goto('/', { waitUntil: 'networkidle' });
   await page.getByPlaceholder(/Cerca un corso/).fill('antincendio');
   await page.getByRole('button', { name: 'Cerca', exact: true }).click();
-  await page.waitForURL(/\/all-courses\?q=antincendio/);
+  await page.waitForURL(/\/corsi\?q=antincendio/);
   await expect(page.getByPlaceholder(/cerca/i).first()).toHaveValue('antincendio');
-  await expect(page.locator('a[href^="/all-courses/antincendio"]').first()).toBeVisible();
-  const filtrati = await page.locator('a[href^="/all-courses/"]:visible').count();
-  await page.goto('/all-courses', { waitUntil: 'networkidle' });
-  expect(filtrati).toBeLessThan(await page.locator('a[href^="/all-courses/"]:visible').count());
+  await expect(page.locator('a[href^="/corsi/antincendio"]').first()).toBeVisible();
+  const filtrati = await page.locator('a[href^="/corsi/"]:visible').count();
+  await page.goto('/corsi', { waitUntil: 'networkidle' });
+  expect(filtrati).toBeLessThan(await page.locator('a[href^="/corsi/"]:visible').count());
 });
 
 test('Home: ricerca per categoria senza testo @rapido', async ({ page }) => {
   await consenso(page);
-  await page.goto('/all-courses?gruppo=fse', { waitUntil: 'networkidle' });
+  await page.goto('/corsi?gruppo=fse', { waitUntil: 'networkidle' });
   await expect(page.getByText('in "Formazione Finanziata"')).toBeVisible();
 });
 

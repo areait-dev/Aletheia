@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Addetti alla Conduzione di Carriponte" (ex pagina isolata
-// pages/all-courses/addetti-alla-conduzione-di-carriponte.js). Famiglia a variante unica (livelloKey
+// pages/corsi/addetti-alla-conduzione-di-carriponte.js). Famiglia a variante unica (livelloKey
 // 'default'): un solo livello posizionale 'livello-1' condiviso da corso e aggiornamento.
 
 module.exports = {

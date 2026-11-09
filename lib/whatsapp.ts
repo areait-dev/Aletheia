@@ -1,4 +1,4 @@
-// Link WhatsApp dei corsi di formazione obbligatoria (pages/all-courses/[slug].js, CoursePricingSidebar).
+// Link WhatsApp dei corsi di formazione obbligatoria (pages/corsi/[slug].js, CoursePricingSidebar).
 // Il numero del reparto formazione è WHATSAPP_FORMAZIONE (5 novembre 2026). Un'eventuale variabile NEXT_PUBLIC_WHATSAPP (Vercel,
 // Production e Preview, con redeploy) lo SOSTITUISCE, per cambiare numero senza toccare il codice.
 // Se il valore non è valido la funzione restituisce null e il pulsante NON compare: mai href="#".

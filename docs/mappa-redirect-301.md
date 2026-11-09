@@ -15,9 +15,9 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro                                                                                                                                                   https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/157-formazione-dei-lavoratori-art-36-37-del-d-lgs-81-08                                                       /all-courses/formazione-dei-lavoratori
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/157-formazione-dei-lavoratori-art-36-37-del-d-lgs-81-08                                                       /corsi/formazione-dei-lavoratori
 
-  /index.php/i-nostri-corsi                                                                                                                                                                 /all-courses
+  /index.php/i-nostri-corsi                                                                                                                                                                 /corsi
 
   /index.php/contattaci                                                                                                                                                                     /contatti
 
@@ -29,7 +29,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/i-nostri-corsi/formazione-professionale                                                                                                                                        /formazione/regionale
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro                                                                                                                    /all-courses?categoria=sicurezza-lavoro
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro                                                                                                                    /corsi?categoria=sicurezza-lavoro
 
   /index.php/i-nostri-corsi/formazione-obbligatoria                                                                                                                                         /formazione/obbligatoria
 
@@ -37,7 +37,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/news                                                                                                                                                                           /news
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature                                                                                                                    /all-courses?categoria=decreto-attrezzature
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature                                                                                                                    /corsi?categoria=decreto-attrezzature
 
   /index.php/contattaci/privacy-e-cookie                                                                                                                                                    /privacy-cookie
 
@@ -59,7 +59,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/contattaci/reclami-e-proposte                                                                                                                                                  /reclami-proposte
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/153-addetto-prevenzione-incendi-lotta-antincendio-e-gestione-delle-emergenze                                  /all-courses/antincendio
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/153-addetto-prevenzione-incendi-lotta-antincendio-e-gestione-delle-emergenze                                  /corsi/antincendio
 
   /index.php/i-nostri-corsi/calendario-corsi-fad/list.events/-                                                                                                                              /calendario-corsi
 
@@ -67,7 +67,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/news/item/503-avviso-23-2024-occupazione-donna-nuove-opportunita-per-il-lavoro-femminile-in-sicilia                                                                            /news
 
-  /index.php/i-nostri-corsi/ecdl-icdl                                                                                                                                                       /all-courses?categoria=certificazioni-informatiche
+  /index.php/i-nostri-corsi/ecdl-icdl                                                                                                                                                       /corsi?categoria=certificazioni-informatiche
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/464-furgonista-magazziniere                                                                                                                  https://aletheia4job.it/
 
@@ -79,7 +79,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/528-ragioniere                                                                                                                               https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/155-primo-soccorso-aziendale-corso-per-gli-addetti-alla-squadra-di-primo-soccorso                             /all-courses/primo-soccorso-aziendale
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/155-primo-soccorso-aziendale-corso-per-gli-addetti-alla-squadra-di-primo-soccorso                             /corsi/primo-soccorso-aziendale
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/564-docenti-per-moduli-relazioni-efficaci-intelligenza-emotiva-e-gestione-dello-stress                                                       https://aletheia4job.it/
 
@@ -93,7 +93,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/539-agronomo-o-perito-agrario                                                                                                                https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/161-pes-pav-pei-esperta-avvertita-idonea                                                                      /all-courses/pes-pav-lavori-elettrici
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/161-pes-pav-pei-esperta-avvertita-idonea                                                                      /corsi/pes-pav-lavori-elettrici
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/322-ricerca-formatori-sicurezza-sui-luoghi-di-lavoro                                                                                         https://aletheia4job.it/
 
@@ -101,15 +101,15 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/212-ragioniere-addetto-contabile-ragusa                                                                                                      https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/158-soggetti-che-hanno-una-certa-supremazia-sugli-altri-lavoratori                                            /all-courses/formazione-del-preposto
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/158-soggetti-che-hanno-una-certa-supremazia-sugli-altri-lavoratori                                            /corsi/formazione-del-preposto
 
   /index.php/i-nostri-corsi/formazione-professionale/archivio/primo-soccorso-pediatrico                                                                                                     /archivio/primo-soccorso-pediatrico
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/156-patentino-fitosanitario-rilascio-ed-aggiornamento                                                         /all-courses/patentino-fitosanitario
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/156-patentino-fitosanitario-rilascio-ed-aggiornamento                                                         /corsi/patentino-fitosanitario
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/462-addetto-ai-servizi-mensa                                                                                                                 https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/154-personale-alimentarista-operatore-del-settore-alimentare-osa                                              /all-courses/personale-alimentarista-osa
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/154-personale-alimentarista-operatore-del-settore-alimentare-osa                                              /corsi/personale-alimentarista-osa
 
   /index.php/news/item/515-lavoratori-stranieri-e-alloggi-le-novita-in-arrivo-con-il-ddl-semplificazioni                                                                                    /news/lavoratori-stranieri-alloggi-ddl-semplificazioni
 
@@ -123,7 +123,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/249-programmatore-informatico                                                                                                                https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/150-corso-macchine-movimento-terra-corso-10h-16h-aggiornamento-4h                                             /all-courses/macchine-movimento-terra
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/150-corso-macchine-movimento-terra-corso-10h-16h-aggiornamento-4h                                             /corsi/macchine-movimento-terra
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/449-infermiere-settore-sorveglianza-sanitaria                                                                                                https://aletheia4job.it/
 
@@ -135,21 +135,21 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/488-responsabile-assistente-di-direzione                                                                                                     https://aletheia4job.it/
 
-  /index.php/news/item/188-corso-conduttore-d-impresa-agricola-ex-capo-azienda-200-ore-in-fad                                                                                               /all-courses/conduttore-d-impresa-agricola
+  /index.php/news/item/188-corso-conduttore-d-impresa-agricola-ex-capo-azienda-200-ore-in-fad                                                                                               /corsi/conduttore-d-impresa-agricola
 
   /index.php/news/item/282-career-tips-and-tricks-come-leggere-la-busta-paga                                                                                                                /news
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/537-docente-welfare-aziendale-e-benessere-organizzativo                                                                                      https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/146-abilitazione-aggiornamento-alla-conduzione-di-trattori-agricoli-e-forestali-cingoli-e-ruote               /all-courses/trattori-agricoli-o-forestali
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/146-abilitazione-aggiornamento-alla-conduzione-di-trattori-agricoli-e-forestali-cingoli-e-ruote               /corsi/trattori-agricoli-o-forestali
 
-  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-icdl                                                                                                                                             /all-courses/icdl-base
+  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-icdl                                                                                                                                             /corsi/icdl-base
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/554-docenti-per-moduli-it-intelligenza-emotiva-e-sostenibilita                                                                               https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/145-carrelli-elevatori-semoventi-con-conduttore-a-bordo                                                       /all-courses/carrelli-elevatori-semoventi-con-conduttore-a-bordo
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/145-carrelli-elevatori-semoventi-con-conduttore-a-bordo                                                       /corsi/carrelli-elevatori-semoventi-con-conduttore-a-bordo
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/164-lavori-in-quota-rischio-caduta-dall-altoda-piu-di-2-metri                                                 /all-courses/lavori-in-quota
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/164-lavori-in-quota-rischio-caduta-dall-altoda-piu-di-2-metri                                                 /corsi/lavori-in-quota
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/451-operaio-agricolo-specializzato                                                                                                           https://aletheia4job.it/
 
@@ -187,11 +187,11 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/569-hr-manager-responsabile-risorse-umane                                                                                                    https://aletheia4job.it/
 
-  /index.php/coordinatore-della-sicurezza                                                                                                                                                   /all-courses/coordinatori-cantieri-cse-csp
+  /index.php/coordinatore-della-sicurezza                                                                                                                                                   /corsi/coordinatori-cantieri-cse-csp
 
-  /index.php/i-nostri-corsi/ecdl-icdl/icdl-digcomp2-2                                                                                                                                       /all-courses/icdl-digcomp-2-2
+  /index.php/i-nostri-corsi/ecdl-icdl/icdl-digcomp2-2                                                                                                                                       /corsi/icdl-digcomp-2-2
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/159-rls-rapprensentante-dei-lavoratori-per-la-sicurezza                                                       /all-courses/rls
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/159-rls-rapprensentante-dei-lavoratori-per-la-sicurezza                                                       /corsi/rls
 
   /index.php/news/item/231-al-via-garanzia-giovani-2-in-sicilia-dalla-regione-165-milioni-per-i-disoccupati-under-35                                                                        /news
 
@@ -211,7 +211,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/526-docente-per-il-modulo-tecniche-di-pulizia-professionale-di-ultima-generazione                                                            https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/149-corso-p-l-e-piattaforme-di-lavoro-mobili-elevabili-corso-8h-10h-aggiornamento-4h                          /all-courses/ple-piattaforme-di-lavoro-mobili-elevabili
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/149-corso-p-l-e-piattaforme-di-lavoro-mobili-elevabili-corso-8h-10h-aggiornamento-4h                          /corsi/ple-piattaforme-di-lavoro-mobili-elevabili
 
   /index.php/i-nostri-corsi/formazione-professionale/misura-psr-1-2                                                                                                                         /archivio
 
@@ -225,15 +225,15 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/382-agronomo-paesaggista                                                                                                                     https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/163-corso-pimus-ponteggi-piattaforma-autosollevante                                                           /all-courses/pimus-ponteggi
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/163-corso-pimus-ponteggi-piattaforma-autosollevante                                                           /corsi/pimus-ponteggi
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/546-docente-ict-marinadiragusa                                                                                                               https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/152-corso-rspp-datore-di-lavoro-responsabile-prevenzione-e-protezione                                         /all-courses/rspp-datore-di-lavoro
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/152-corso-rspp-datore-di-lavoro-responsabile-prevenzione-e-protezione                                         /corsi/rspp-datore-di-lavoro
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/234-addetto-pubblicista-giornalista-vittoria                                                                                                 https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/151-corso-pompe-calcestruzzo-per-lavoratori-addetti-corso-14h-aggiornamento-4h                                /all-courses/pompe-per-calcestruzzo
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/151-corso-pompe-calcestruzzo-per-lavoratori-addetti-corso-14h-aggiornamento-4h                                /corsi/pompe-per-calcestruzzo
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/482-barista-barman                                                                                                                           https://aletheia4job.it/
 
@@ -243,7 +243,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/559-docente-modulo-sostenibilita-ed-impatto-ambientale-gestione-sostenibile                                                                  https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-standard                                                                                                                                         /all-courses/icdl-standard
+  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-standard                                                                                                                                         /corsi/icdl-standard
 
   /index.php/news/item/513-rendiconto-sociale-inps-2024-le-donne-guadagnano-il-25-in-meno-degli-uomini                                                                                      /news/empowerment-femminile-retribuzioni-eque
 
@@ -257,7 +257,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/412-docenti-e-tutor-corsi-di-formazione-feamp-misura-1-29                                                                                    https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/228-corso-spazi-confinati-addetti-a-lavori-in-spazi-confinati                                                 /all-courses/spazi-confinati
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/228-corso-spazi-confinati-addetti-a-lavori-in-spazi-confinati                                                 /corsi/spazi-confinati
 
   /index.php/news/item/185-workshop-strategie-di-marketing-per-le-aziende-agricole-8-ore                                                                                                    /archivio/misura-psr-1-1/workshop-strategie-marketing
 
@@ -277,9 +277,9 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/457-formatore-sicurezza-luoghi-di-lavoro-speciale-decreto-attrezzature                                                                       https://aletheia4job.it/
 
-  /index.php/component/k2/item/123-corsi-di-sicurezza-sul-lavoro                                                                                                                            /all-courses?categoria=sicurezza-lavoro
+  /index.php/component/k2/item/123-corsi-di-sicurezza-sul-lavoro                                                                                                                            /corsi?categoria=sicurezza-lavoro
 
-  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-icdl-videocorso-online                                                                                                                           /all-courses?categoria=certificazioni-informatiche
+  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-icdl-videocorso-online                                                                                                                           /corsi?categoria=certificazioni-informatiche
 
   /index.php/news/item/204-workshop-il-conduttore-di-impresa-agricola-8-ore                                                                                                                 /archivio/misura-psr-1-1/workshop-conduttore-impresa-agricola
 
@@ -315,7 +315,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/459-operatore-servizi-di-pulizia                                                                                                             https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-update                                                                                                                                           /all-courses/icdl-update
+  /index.php/i-nostri-corsi/ecdl-icdl/ecdl-update                                                                                                                                           /corsi/icdl-update
 
   /index.php/news/item/183-workshop-agricoltura-multifunzionalita-e-diversificazione-8-ore                                                                                                  /archivio/misura-psr-1-1/workshop-agricoltura-multifunzionalita
 
@@ -339,7 +339,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/567-personale-per-servizi-di-pulizie-chalet                                                                                                  https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/158-formazione-preposto                                                                                       /all-courses/formazione-del-preposto
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/158-formazione-preposto                                                                                       /corsi/formazione-del-preposto
 
   /index.php/news/item/365-diritto-alla-disconnessione-cos-e-e-come-funziona-in-italia                                                                                                      /news
 
@@ -381,7 +381,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/i-nostri-corsi/calendario-corsi-fad/                                                                                                                                           /calendario-corsi
 
-  /index.php/i-nostri-corsi/ecdl-icdl/convenzioni-enti-scuole                                                                                                                               /all-courses?categoria=certificazioni-informatiche
+  /index.php/i-nostri-corsi/ecdl-icdl/convenzioni-enti-scuole                                                                                                                               /corsi?categoria=certificazioni-informatiche
 
   /index.php/news/item/506-labour-hoarding-cos-e-e-perche-conta-nel-mercato-del-lavoro-italiano                                                                                             /news
 
@@ -407,7 +407,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/component/mailto                                                                                                                                                               /
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/162-dpi-3-categoria-dispositivi-di-protezione-individuale                                                     /all-courses/dpi-3-categoria
+  /index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/162-dpi-3-categoria-dispositivi-di-protezione-individuale                                                     /corsi/dpi-3-categoria
 
   /index.php/i-nostri-corsi/obblighi-di-pubblicazione-per-i-beneficiari-di-contributi-2022                                                                                                  /aiuti-di-stato/2023
 
@@ -435,7 +435,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/387-autista-patente-e                                                                                                                        https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/148-corso-operatore-di-gru-corso-12h-aggiornamento-4h                                                         /all-courses/operatore-di-gru-per-autocarro
+  /index.php/i-nostri-corsi/formazione-obbligatoria/decreto-attrezzature/item/148-corso-operatore-di-gru-corso-12h-aggiornamento-4h                                                         /corsi/operatore-di-gru-per-autocarro
 
   /index.php/news/item/568-intelligenza-artificiale-e-formazione-la-sfida-e-colmare-il-divario-tra-adozione-e-competenze                                                                    /news
 
@@ -451,9 +451,9 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/572-dottore-commercialista-amministrazione-e-controllo-di-gestione                                                                           https://aletheia4job.it/
 
-  /index.php/i-nostri-corsi/formazione-professionale/archivio/misura-psr/conduttore-d-impresa-agricola-200-ore                                                                              /all-courses/conduttore-d-impresa-agricola
+  /index.php/i-nostri-corsi/formazione-professionale/archivio/misura-psr/conduttore-d-impresa-agricola-200-ore                                                                              /corsi/conduttore-d-impresa-agricola
 
-  /index.php/news/item/222-aletheia-consiglia-ple-piattaforme-di-lavoro-mobili-elevabili                                                                                                    /all-courses/ple-piattaforme-di-lavoro-mobili-elevabili
+  /index.php/news/item/222-aletheia-consiglia-ple-piattaforme-di-lavoro-mobili-elevabili                                                                                                    /corsi/ple-piattaforme-di-lavoro-mobili-elevabili
 
   /index.php/news/item/344-lavoro-e-tecnologie-ecco-come-i-giovani-immaginano-il-2030                                                                                                       /news
 
@@ -479,7 +479,7 @@ visite negli ultimi 12 mesi.
 
   /index.php/apl-lavoro/offerte-di-lavoro/item/556-docenti-per-corsi-antincendio                                                                                                            https://aletheia4job.it/
 
-  /index.php/online-essentials-mod-2                                                                                                                                                        /all-courses?categoria=certificazioni-informatiche
+  /index.php/online-essentials-mod-2                                                                                                                                                        /corsi?categoria=certificazioni-informatiche
 
   /index.php/apl-lavoro/garanzia-giovani-2/item/236-misura-2a-formazione-mirata-all-inserimento-lavorativo                                                                                  /agenzia-per-il-lavoro/servizi-alla-persona
 
@@ -513,7 +513,7 @@ visite negli ultimi 12 mesi.
 ## Tutti gli URL del sito nuovo
 
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Pagine                                               Corsi /all-courses/...                                                                               News, archivio, altro
+  Pagine                                               Corsi /corsi/...                                                                               News, archivio, altro
   ---------------------------------------------------- ---------------------------------------------------------------------------------------------------- -----------------------------------------------------------------
   /                                                    addetti-alla-conduzione-di-carriponte                                                                /news
 
@@ -537,31 +537,31 @@ visite negli ultimi 12 mesi.
 
   /agenzia-per-il-lavoro/servizi-alle-imprese          coordinatori-cantieri-cse-csp                                                                        /news/piccole-imprese-assumere-profili-mancanti
 
-  /all-courses                                         datore-di-lavoro                                                                                     /news/priorita-lavoratori-2026-workforce-trends
+  /corsi                                         datore-di-lavoro                                                                                     /news/priorita-lavoratori-2026-workforce-trends
 
-  /all-courses?categoria=sicurezza-lavoro              dpi-3-categoria                                                                                      /news/sicilia-microchip-ingegneri-elettronici
+  /corsi?categoria=sicurezza-lavoro              dpi-3-categoria                                                                                      /news/sicilia-microchip-ingegneri-elettronici
 
-  /all-courses?categoria=decreto-attrezzature          formazione-dei-lavoratori                                                                            /news/sicurezza-lavoro-trend-formazione-futuro
+  /corsi?categoria=decreto-attrezzature          formazione-dei-lavoratori                                                                            /news/sicurezza-lavoro-trend-formazione-futuro
 
-  /all-courses?categoria=fitosanitario                 formazione-del-preposto                                                                              /news/smart-working-inclusione-sicurezza-futuro
+  /corsi?categoria=fitosanitario                 formazione-del-preposto                                                                              /news/smart-working-inclusione-sicurezza-futuro
 
-  /all-courses?categoria=sicurezza-alimentare          formazione-dirigente                                                                                 /news/stress-lavoro-salute-mentale-italiani
+  /corsi?categoria=sicurezza-alimentare          formazione-dirigente                                                                                 /news/stress-lavoro-salute-mentale-italiani
 
                                                                               formazione-per-formatore                                                                             /archivio
 
-  /all-courses?categoria=certificazioni-informatiche   icdl-base                                                                                            /archivio/avviso-2-2018
+  /corsi?categoria=certificazioni-informatiche   icdl-base                                                                                            /archivio/avviso-2-2018
 
-  /all-courses?categoria=certificazione                icdl-digcomp-2-2                                                                                     /archivio/avviso-2-2018/addetto-panificatore-pasticciere
+  /corsi?categoria=certificazione                icdl-digcomp-2-2                                                                                     /archivio/avviso-2-2018/addetto-panificatore-pasticciere
 
-  /all-courses?categoria=ecm                           icdl-standard                                                                                        /archivio/avviso-2-2018/corso-di-cucina
+  /corsi?categoria=ecm                           icdl-standard                                                                                        /archivio/avviso-2-2018/corso-di-cucina
 
-  /all-courses?categoria=corsi-pa                      icdl-update                                                                                          /archivio/avviso-2-2018/operatore-informatico-risorse-web
+  /corsi?categoria=corsi-pa                      icdl-update                                                                                          /archivio/avviso-2-2018/operatore-informatico-risorse-web
 
-  /all-courses?categoria=fse-plus                      lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale   /archivio/avviso-20-2024-fse
+  /corsi?categoria=fse-plus                      lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale   /archivio/avviso-20-2024-fse
 
-  /all-courses?categoria=fondi-interprofessionali      lavori-in-quota                                                                                      /archivio/avviso-29-2019
+  /corsi?categoria=fondi-interprofessionali      lavori-in-quota                                                                                      /archivio/avviso-29-2019
 
-  /all-courses?categoria=fondo-nuove-competenze        macchine-movimento-terra                                                                             /archivio/avviso-33-2019
+  /corsi?categoria=fondo-nuove-competenze        macchine-movimento-terra                                                                             /archivio/avviso-33-2019
 
   /formazione/obbligatoria                             modulo-aggiuntivo-cantieri-per-datore-di-lavoro                                                      /archivio/avviso-7-2023
 

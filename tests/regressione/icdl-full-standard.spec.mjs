@@ -3,7 +3,7 @@
 import { test, expect } from '@playwright/test';
 
 test('ICDL Full Standard: pagina completa @rapido', async ({ page }) => {
-  await page.goto('/all-courses/icdl-full-standard', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/icdl-full-standard', { waitUntil: 'networkidle' });
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('h1')).toContainText('ICDL Full Standard');
   const main = page.locator('main');
@@ -17,6 +17,6 @@ test('ICDL Full Standard: pagina completa @rapido', async ({ page }) => {
 });
 
 test('ICDL Full Standard: compare nel catalogo ICDL @rapido', async ({ page }) => {
-  await page.goto('/all-courses?categoria=icdl', { waitUntil: 'networkidle' });
-  await expect(page.locator('a[href="/all-courses/icdl-full-standard"]').first()).toBeVisible();
+  await page.goto('/corsi?categoria=icdl', { waitUntil: 'networkidle' });
+  await expect(page.locator('a[href="/corsi/icdl-full-standard"]').first()).toBeVisible();
 });

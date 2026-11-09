@@ -56,8 +56,8 @@ test('ogni destinazione interna esiste: 200 e nessun altro redirect (niente cate
 
 test('le schede K2 con slug diverso (stesso ID) vanno alla pagina giusta; le news senza equivalente vanno a /news @rapido', async ({ request, baseURL }) => {
   const casi = [
-    ['/index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/157-slug-cambiato', '/all-courses/formazione-dei-lavoratori'],
-    ['/index.php/qualunque/sezione/item/153-altro-slug', '/all-courses/antincendio'],
+    ['/index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/item/157-slug-cambiato', '/corsi/formazione-dei-lavoratori'],
+    ['/index.php/qualunque/sezione/item/153-altro-slug', '/corsi/antincendio'],
     ['/index.php/news/item/999-articolo-vecchio-senza-equivalente', '/news'],
     ['/index.php/news/item/999-articolo-vecchio-senza-equivalente/', '/news'],
   ];
@@ -76,9 +76,9 @@ test('le offerte di lavoro: una regola sola verso aletheia4job.it (anche con sla
 
 test('riserva: qualunque altro /index.php/... va alla pagina madre più vicina, mai 404 @rapido', async ({ request, baseURL }) => {
   const casi = [
-    ['/index.php/i-nostri-corsi/sezione-nuova/pagina', '/all-courses'],
-    ['/index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/qualcosa', '/all-courses?categoria=sicurezza-lavoro'],
-    ['/index.php/i-nostri-corsi/ecdl-icdl/nuovo-corso-icdl', '/all-courses?categoria=certificazioni-informatiche'],
+    ['/index.php/i-nostri-corsi/sezione-nuova/pagina', '/corsi'],
+    ['/index.php/i-nostri-corsi/formazione-obbligatoria/sicurezza-sul-lavoro/qualcosa', '/corsi?categoria=sicurezza-lavoro'],
+    ['/index.php/i-nostri-corsi/ecdl-icdl/nuovo-corso-icdl', '/corsi?categoria=certificazioni-informatiche'],
     ['/index.php/contattaci/pagina-nuova', '/contatti'],
     ['/index.php/chi-siamo/team', '/chi-siamo'],
     ['/index.php/apl-lavoro/servizio-nuovo', '/agenzia-per-il-lavoro'],
@@ -116,7 +116,7 @@ test('senza /index.php il vecchio sito rispondeva 404: nessun redirect del vecch
 });
 
 test('slash finale sul resto del sito: 308 diretto come prima (la regola interna di Next è sostituita, non persa) @rapido', async ({ request, baseURL }) => {
-  for (const [da, a] of [['/chi-siamo/', '/chi-siamo'], ['/all-courses/antincendio/', '/all-courses/antincendio'], ['/aiuti-di-stato-2023/', '/aiuti-di-stato/2023']]) {
+  for (const [da, a] of [['/chi-siamo/', '/chi-siamo'], ['/corsi/antincendio/', '/corsi/antincendio'], ['/aiuti-di-stato-2023/', '/aiuti-di-stato/2023']]) {
     const s = await salto(request, baseURL, da);
     expect([s.stato, s.loc], da).toEqual([308, comeAtteso(baseURL, a)]);
   }

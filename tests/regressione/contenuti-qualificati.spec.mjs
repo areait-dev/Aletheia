@@ -3,7 +3,7 @@
 import { test, expect } from '@playwright/test';
 
 test('OSS: contenuto completo, 1000 ore, minimo 15, luogo con mappa @rapido', async ({ page }) => {
-  await page.goto('/all-courses/oss-operatore-socio-sanitario', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/oss-operatore-socio-sanitario', { waitUntil: 'networkidle' });
   const main = page.locator('main');
   await expect(main).not.toContainText('Contenuto dettagliato in arrivo');
   await expect(main).not.toContainText('Qualifica Riconosciuta');
@@ -22,7 +22,7 @@ test('OSS: contenuto completo, 1000 ore, minimo 15, luogo con mappa @rapido', as
 });
 
 test('ASACOM: contenuto completo, nessuna durata inventata, minimo 15, 9 moduli @rapido', async ({ page }) => {
-  await page.goto('/all-courses/asacom-assistente-alla-comunicazione', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/asacom-assistente-alla-comunicazione', { waitUntil: 'networkidle' });
   const main = page.locator('main');
   await expect(main).not.toContainText('Contenuto dettagliato in arrivo');
   await expect(main).not.toContainText('Qualifica Riconosciuta');

@@ -2,7 +2,7 @@
 // Contenuti editoriali per la variante "Aggiornamento" (4 ore) della famiglia dpi-3-categoria.
 // FONTE: Word "dpi 3categoria aggiornamento.docx" (CONTENUTI DEF / corsi obbligatori), testi invariati
 // (sostituisce il testo precedente, tratto dal programma PDF). La famiglia ha una sola livelloKey ('default'),
-// quindi la chiave posizionale è 'livello-1' (vedi editorialLivelloKey in pages/all-courses/[slug].js).
+// quindi la chiave posizionale è 'livello-1' (vedi editorialLivelloKey in pages/corsi/[slug].js).
 // Il Word non indica il numero massimo di partecipanti: partecipantiMax omesso, prezzo assente.
 // Gli argomenti dei moduli nel Word sono una riga unica separata da " - " / ";": divisi in voci senza alterare le parole.
 // CORREZIONE su richiesta: la FAQ 2 nel Word diceva "5 ore (3 teoria + 2 pratica)", allineata a scheda e moduli

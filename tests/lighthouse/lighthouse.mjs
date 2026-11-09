@@ -6,7 +6,7 @@
 //   node tests/lighthouse/lighthouse.mjs confronta <base> <nuova>         → tabella Markdown (mediane) su stdout
 //
 // Avviare il server di test:  NEXT_DIST_DIR=.next-test node node_modules/next/dist/bin/next start -p 3101 -H 127.0.0.1
-// Pagine: home, /calendario-corsi, /chi-siamo, /all-courses/antincendio; mobile (emulazione predefinita) e desktop.
+// Pagine: home, /calendario-corsi, /chi-siamo, /corsi/antincendio; mobile (emulazione predefinita) e desktop.
 // Si riporta la MEDIANA di N passate. Le variabili sono quelle del giorno del base (stessa versione di Lighthouse,
 // stesse pagine, stesso Chrome di Playwright): per confronti validi lanciare base e finale sulla stessa macchina.
 import { spawnSync } from 'node:child_process';
@@ -18,7 +18,7 @@ const VERSIONE_LIGHTHOUSE = '13.6.0';
 const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:3101';
 // PAGINE (elenco separato da virgole) e FORME (mobile,desktop) si possono sovrascrivere da ambiente; senza variabili
 // valgono le quattro pagine storiche in entrambe le forme, quindi i confronti con le misure precedenti restano validi.
-const PAGINE = process.env.PAGINE ? process.env.PAGINE.split(',') : ['/', '/calendario-corsi', '/chi-siamo', '/all-courses/antincendio'];
+const PAGINE = process.env.PAGINE ? process.env.PAGINE.split(',') : ['/', '/calendario-corsi', '/chi-siamo', '/corsi/antincendio'];
 const FORME = process.env.FORME ? process.env.FORME.split(',') : ['mobile', 'desktop'];
 const radice = path.resolve(import.meta.dirname, '..', '..');
 const cartellaRis = path.join(radice, 'tests', 'riferimenti', 'lighthouse');

@@ -129,7 +129,7 @@ export const PAGINE = {
     "cta_titolo": "Non trovi il percorso formativo che cerchi?",
     "cta_bottone1": {
       "label": "Visiona tutti i nostri corsi",
-      "href": "/all-courses"
+      "href": "/corsi"
     }
   },
   "formazione/regionale": {
@@ -215,7 +215,7 @@ export const PAGINE = {
       "href": "#contatta-azienda"
     }
   },
-  "all-courses": {
+  "corsi": {
     "hero_eyebrow": "Catalogo completo",
     "hero_titolo": "Tutti i *Corsi*",
     "hero_sottotitolo": "Scopri la nostra offerta formativa completa e scegli il corso che fa per te"
@@ -276,7 +276,7 @@ export const PAGINE = {
     "hero_sottotitolo": "Trasformiamo competenze in occupazione concreta. Dall'orientamento alla formazione, fino all'inserimento lavorativo. Accompagniamo persone e imprese in ogni fase della crescita professionale.",
     "hero_cta1": {
       "label": "Scopri i corsi",
-      "href": "/all-courses"
+      "href": "/corsi"
     },
     "hero_cta2": {
       "label": "Vedi offerte di lavoro",

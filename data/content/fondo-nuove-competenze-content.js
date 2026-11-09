@@ -2,7 +2,7 @@
 // (solo tipo 'corso'), un solo livello 'livello-1'.
 // FONTE: testi già presenti in pages/formazione/fondo-nuove-competenze.js (hero, aree di intervento, servizi, FAQ).
 // Non è un corso con ore/programma: durata, validità, attestato e moduli sono omessi e la pagina li nasconde
-// (guardie opzionali in pages/all-courses/[slug].js).
+// (guardie opzionali in pages/corsi/[slug].js).
 
 module.exports = {
   'fondo-nuove-competenze': {

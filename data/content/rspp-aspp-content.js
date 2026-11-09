@@ -5,7 +5,7 @@
 // RSPP/ASPP Esterno" precede le voci dei 3 moduli, quindi l'ordine dei livelli è:
 // 'livello-1' = Aggiornamento (in rspp-aspp-aggiornamento-content.js), 'livello-2' = Modulo A,
 // 'livello-3' = Modulo B, 'livello-4' = Modulo C - vedi editorialLivelloKey in
-// pages/all-courses/[slug].js.
+// pages/corsi/[slug].js.
 
 module.exports = {
   'rspp-aspp': {

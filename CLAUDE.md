@@ -18,7 +18,7 @@ pages/                  # Next.js route pages
   agenzia-per-il-lavoro.js          # Job agency overview page
   agenzia-per-il-lavoro/            # Job agency sub-pages
   formazione/                       # Training course category pages
-  all-courses/                      # Course listing and detail pages
+  corsi/                      # Course listing and detail pages
   news/                             # News listing and detail pages
 
 components/            # React components
@@ -49,7 +49,7 @@ Components rely on inline JSX styling (React inline objects) for responsive/dyna
 No component library (Shadcn, MUI, etc.) — design is custom CSS + Tailwind
 Page Structure
 Pages are static content (no dynamic data fetching in most cases)
-Some pages use [slug].js dynamic routes (e.g., `all-courses/[slug].js`, `news/[slug].js`)
+Some pages use [slug].js dynamic routes (e.g., `corsi/[slug].js`, `news/[slug].js`)
 Pages import the `Header` component and manage their own page-specific styling
 Dati: WordPress headless predisposto ma opzionale. Senza `WP_URL` le pagine usano i dati locali (`data/*`, `lib/newsData.js`); con `WP_URL` leggono da WordPress con ripiego locale (`lib/wp.ts`, `lib/wp-auth.ts`, `lib/wp-news.ts`, API `pages/api/preview|exit-preview|revalidate`). Per collegare un nuovo tipo di contenuto seguire lo schema in `wordpress/README.md` §7 (già collegati: news, calendario, catalogo corsi, aiuti di Stato; migrazione con `wordpress/migrate-local-to-wp.mjs`; anteprima live in `lib/live-preview.ts`). Le props di `getStaticProps` non devono contenere `undefined`. Variabili in `.env.example`
 Design Language

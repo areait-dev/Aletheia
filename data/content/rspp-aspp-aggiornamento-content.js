@@ -1,7 +1,7 @@
 
 // Contenuti editoriali per famiglia "RSPP/ASPP Esterno" - variante AGGIORNAMENTO (40 ore).
 // È la 1a voce raw in data/coursesRaw.js (precede i moduli A/B/C), quindi la chiave posizionale è
-// 'livello-1' - vedi editorialLivelloKey in pages/all-courses/[slug].js e il commento in
+// 'livello-1' - vedi editorialLivelloKey in pages/corsi/[slug].js e il commento in
 // rspp-aspp-content.js.
 
 module.exports = {

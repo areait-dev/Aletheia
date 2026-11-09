@@ -146,7 +146,7 @@ export default function ModuloIscrizione({ tipo = 'iscrizione' }) {
         <SeoHead title={T.pageTitle} description={T.pageDescription} url={T.url} ogImage={seo.ogImage || undefined} />
       </Head>
 
-      <Header active="/all-courses" />
+      <Header active="/corsi" />
 
       <main>
         {/* HERO: componente comune .page-hero (globals.css) */}
@@ -176,7 +176,7 @@ export default function ModuloIscrizione({ tipo = 'iscrizione' }) {
                       Ti ricontatteremo all&apos;indirizzo <strong>{fields.email}</strong> {T.seguito}
                     </p>
                     <div className="flex flex-wrap gap-3 justify-center">
-                      <a href="/all-courses" className="btn btn-primary btn-md">Torna ai corsi</a>
+                      <a href="/corsi" className="btn btn-primary btn-md">Torna ai corsi</a>
                       <button type="button" onClick={reset} className="btn btn-outline btn-md">{T.nuova}</button>
                     </div>
                   </div>

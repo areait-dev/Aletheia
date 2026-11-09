@@ -169,7 +169,7 @@
     },
     {
       "forma": "mobile",
-      "pagina": "/all-courses/antincendio",
+      "pagina": "/corsi/antincendio",
       "mediana": {
         "performance": 89,
         "accessibility": 97,
@@ -385,7 +385,7 @@
     },
     {
       "forma": "desktop",
-      "pagina": "/all-courses/antincendio",
+      "pagina": "/corsi/antincendio",
       "mediana": {
         "performance": 97,
         "accessibility": 97,

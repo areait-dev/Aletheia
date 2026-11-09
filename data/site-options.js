@@ -36,18 +36,18 @@ export const SITE_OPTIONS = {
         title: 'Formazione Obbligatoria',
         href: '/formazione/obbligatoria',
         items: [
-          { label: 'Sicurezza sui luoghi di lavoro', href: '/all-courses?categoria=sicurezza-lavoro' },
-          { label: 'Decreto attrezzature', href: '/all-courses?categoria=decreto-attrezzature' },
-          { label: 'Fitosanitario', href: '/all-courses?categoria=fitosanitario' },
-          { label: 'Sicurezza alimentare', href: '/all-courses?categoria=sicurezza-alimentare' },
+          { label: 'Sicurezza sui luoghi di lavoro', href: '/corsi?categoria=sicurezza-lavoro' },
+          { label: 'Decreto attrezzature', href: '/corsi?categoria=decreto-attrezzature' },
+          { label: 'Fitosanitario', href: '/corsi?categoria=fitosanitario' },
+          { label: 'Sicurezza alimentare', href: '/corsi?categoria=sicurezza-alimentare' },
         ],
       },
       {
         title: 'Formazione Professionale e PA',
         href: '/formazione/professionale-specialistica',
         items: [
-          { label: 'Certificazioni Informatiche', href: '/all-courses?categoria=certificazioni-informatiche' },
-          { label: 'Corsi Qualificati', href: '/all-courses?categoria=certificazione' },
+          { label: 'Certificazioni Informatiche', href: '/corsi?categoria=certificazioni-informatiche' },
+          { label: 'Corsi Qualificati', href: '/corsi?categoria=certificazione' },
           { label: 'ECM', href: '/formazione/ecm' },
           { label: 'Corsi per la PA', href: '/formazione/corsi-pa' },
         ],
@@ -60,7 +60,7 @@ export const SITE_OPTIONS = {
       testo: 'Scopri le date dei prossimi corsi in partenza e pianifica la tua formazione.',
       btn: { label: 'Calendario Corsi', href: '/calendario-corsi' },
     },
-    megaCorsiBtn: { label: 'Scopri tutti i corsi', href: '/all-courses' },
+    megaCorsiBtn: { label: 'Scopri tutti i corsi', href: '/corsi' },
   },
   footer: {
     indirizzo: 'Via del Carrubo, snc - 97019 Vittoria (RG)',

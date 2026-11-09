@@ -3,8 +3,8 @@
 import { test, expect } from '@playwright/test';
 
 const CASI = [
-  ['/all-courses/patentino-fitosanitario', 'Aggiornamento ogni 5 anni', 'Da ripetere ogni 5 anni'],
-  ['/all-courses/personale-alimentarista-osa', 'Aggiornamento ogni 2 anni', 'Da ripetere ogni 2 anni'],
+  ['/corsi/patentino-fitosanitario', 'Aggiornamento ogni 5 anni', 'Da ripetere ogni 5 anni'],
+  ['/corsi/personale-alimentarista-osa', 'Aggiornamento ogni 2 anni', 'Da ripetere ogni 2 anni'],
 ];
 
 for (const [url, base, agg] of CASI) {
@@ -20,7 +20,7 @@ for (const [url, base, agg] of CASI) {
 }
 
 test('personale alimentarista: nessun prezzo nella descrizione dell\'aggiornamento @rapido', async ({ page }) => {
-  await page.goto('/all-courses/personale-alimentarista-osa', { waitUntil: 'networkidle' });
+  await page.goto('/corsi/personale-alimentarista-osa', { waitUntil: 'networkidle' });
   await page.getByRole('tab', { name: /Aggiornamento/ }).first().click();
   const main = page.locator('main');
   await expect(main).toContainText('Il corso è disponibile in Aula o in FAD.');

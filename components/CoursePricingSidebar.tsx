@@ -19,7 +19,7 @@ interface CoursePricingSidebarProps {
 
 /**
  * Sidebar prezzo ultra-minimale in stile glassmorphism/SaaS per le pagine corso
- * (pages/all-courses/[slug].js), sticky a destra su desktop. La label della CTA primaria
+ * (pages/corsi/[slug].js), sticky a destra su desktop. La label della CTA primaria
  * è sovrascrivibile con `primaryLabel`.
  */
 export default function CoursePricingSidebar({

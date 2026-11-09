@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Personale Alimentarista OSA" (ex pagina isolata
-// pages/all-courses/personale-alimentarista-osa.js). Famiglia a variante unica (livelloKey 'default'):
+// pages/corsi/personale-alimentarista-osa.js). Famiglia a variante unica (livelloKey 'default'):
 // un solo livello posizionale 'livello-1' condiviso da corso e aggiornamento.
 //
 // NOTA: la pagina isolata gestiva due prezzi (Aula/FAD) tramite prezzoAula/prezzoFad/prezzoRowsBuilder;

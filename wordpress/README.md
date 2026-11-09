@@ -93,7 +93,7 @@ Ogni pagina ha: Hero (con badge a icone, bottoni, immagine) + Intro + 8 sezioni 
 | `formazione/obbligatoria` | Hero · sez. "obbligo di legge" · sez. perché noi (`scheda` `perche-noi`) · sez. aree (`scheda` `aree-obbligatoria`) · sez. come lavoriamo (`scheda` `step`) · FAQ (`faq` con `pagina`) · Modulo |
 | `formazione/regionale`, `regionale-fse`, `ecm`, `corsi-pa`, `fondo-nuove-competenze`, `fondi-interprofessionali`, `professionale-specialistica` | Hero · sezioni testo/card · elenchi ricchi = `scheda` (avvisi, requisiti, vantaggi, target, servizi, verticali) · FAQ · Modulo · elenco corsi per `categoria_corso` |
 | `programma-gol` | Hero · sezioni · misure GOL = `scheda` (lista `gol-misure`, dati: misura, target) |
-| `calendario-corsi`, `all-courses`, `news` | Hero + testi; contenuti da `edizione_corso`, `corso`, `news` |
+| `calendario-corsi`, `corsi`, `news` | Hero + testi; contenuti da `edizione_corso`, `corso`, `news` |
 | `contatti` | Hero · sez. info (da Opzioni: telefono, email, orari) · sedi = CPT `sede` · motivi = Opzioni → Contatti |
 | `reclami-proposte`, `privacy-cookie` | Hero · testo lungo nell'**editor della pagina** (contenuto) |
 | `aiuti-di-stato/[anno]` | `aiuto_stato` raggruppati per `anno` ed `ente` |
@@ -110,9 +110,9 @@ Sì, da WordPress, senza toccare il codice (a frontend collegato):
 3. Compila **Scheda corso**: badge, tipo (corso/aggiornamento), livello, ore, prezzo o prezzi per modalità, modalità, validità, attestato, moduli, a chi è rivolto, cosa imparerai, corsi correlati.
 4. FAQ del corso: **FAQ → Aggiungi**, campo "Corso collegato".
 5. Date: **Calendario corsi → Aggiungi edizione**, scegli il corso, data, sede, posti.
-6. Pubblica: la pagina `/all-courses/<slug>` nasce da sola (`/routes` + `getStaticPaths`) e le liste (catalogo, home, calendario, pagine di categoria) si aggiornano via revalidazione.
+6. Pubblica: la pagina `/corsi/<slug>` nasce da sola (`/routes` + `getStaticPaths`) e le liste (catalogo, home, calendario, pagine di categoria) si aggiornano via revalidazione.
 
-Stato: **il catalogo (`/all-courses`) e il calendario sono già collegati** (con `WP_URL` impostato un corso o un'edizione creati in WP compaiono senza toccare il codice). Restano nel codice i testi editoriali del dettaglio (`EDITORIAL_CONTENT`, `data/content/*`: un corso nuovo usa il template generico) e le pagine di categoria con elenchi scritti a mano (es. `formazione/obbligatoria.js`), che dovrebbero passare a elenchi per `categoria_corso`.
+Stato: **il catalogo (`/corsi`) e il calendario sono già collegati** (con `WP_URL` impostato un corso o un'edizione creati in WP compaiono senza toccare il codice). Restano nel codice i testi editoriali del dettaglio (`EDITORIAL_CONTENT`, `data/content/*`: un corso nuovo usa il template generico) e le pagine di categoria con elenchi scritti a mano (es. `formazione/obbligatoria.js`), che dovrebbero passare a elenchi per `categoria_corso`.
 
 ## 5b. Archiviare un nuovo bando
 
@@ -151,7 +151,7 @@ Il frontend è predisposto **prima** che WordPress esista: senza `WP_URL` il sit
 | `/api/preview`, `/api/exit-preview`, `/api/revalidate` | fatto | `pages/api/*` |
 | **News** (elenco, articolo, bozze in anteprima, `fallback: 'blocking'`) | fatto | `lib/wp-news.ts`, `pages/news/*` |
 | **Calendario corsi** (CPT `edizione_corso`): home "Corsi in partenza", `/calendario-corsi`, `/formazione/obbligatoria` | fatto | `lib/wp-calendario.ts` |
-| **Catalogo corsi** (CPT `corso` + `categoria_corso`): elenco e pagine `/all-courses/*` | fatto (solo catalogo: vedi limiti) | `lib/wp-corsi.ts`, `pages/all-courses/*` |
+| **Catalogo corsi** (CPT `corso` + `categoria_corso`): elenco e pagine `/corsi/*` | fatto (solo catalogo: vedi limiti) | `lib/wp-corsi.ts`, `pages/corsi/*` |
 | **Aiuti di Stato** (CPT `aiuto_stato`) | fatto | `lib/wp-aiuti.ts`, `pages/aiuti-di-stato/[anno].js` |
 | **Anteprima live** nell'editor (`postMessage`, solo origine di WP) | fatto per le news; si estende con `useLivePayload` | `lib/live-preview.ts` |
 | **Migrazione** dei contenuti locali verso WordPress | fatto (simulazione + `--apply`, idempotente) | `wordpress/migrate-local-to-wp.mjs` |
@@ -166,7 +166,7 @@ Il frontend è predisposto **prima** che WordPress esista: senza `WP_URL` il sit
 | **Opzioni globali: tab Contatti (motivi), Moduli (elenchi, consenso, messaggi di successo), Chatbot (nome, saluto, segnaposto, messaggio di ripiego, email, on/off), Cookie (banner e pulsanti), SEO (verifica Google)** | fatto | `lib/wp-site.ts`, `components/LinkText.tsx` |
 | **Schede** (CPT `scheda` + `lista_schede`): 18 liste in 13 pagine (home, servizi alla persona/imprese, programma GOL, formazione obbligatoria/regionale/regionale-fse/ECM/corsi-pa/fondi/FNC/professionale) | fatto (mapping a due vie in `lib/wp-schede-map.ts`, dati in `data/schede.js`) | `lib/wp-schede.ts` |
 | **Archivio dei bandi** (CPT `archivio`): indice `/archivio`, voci `/archivio/<slug>` e `/archivio/<famiglia>/<slug>`, panoramiche di famiglia; una voce nuova in WP ha la sua pagina senza toccare il codice | fatto (rotta unica `pages/archivio/[...slug].js`; anche `avviso-1-2026-poc` e `avviso-20-2024-fse` ora passano da lì con il **layout a scheda**: campo "Layout della pagina" = A scheda + campi `scheda_*`, `fuori_elenco`, `meta_*`; HTML identico a prima, verificato) | `lib/wp-archivio.ts`, `components/ArchivioScheda.js`, `data/archivio-famiglie.js`, `data/archivio-schede.js` |
-| **Testi delle pagine** (hero: eyebrow, titolo con `*parola*` evidenziata, sottotitolo, 2 bottoni; prima sezione = `intro_*` e `s1..s8_*`: badge, titolo, paragrafi; CTA finale `cta_*`; SEO `seo_titolo`/`seo_descrizione`) per 14 pagine: formazione (ecm, corsi-pa, fondi, FNC, obbligatoria, professionale, regionale, regionale-fse), programma GOL, servizi alla persona/imprese, all-courses, chi-siamo, contatti, **home** (hero, calendario, percorsi, cosa facciamo, gruppo, news, CTA) ed elenco **news** (hero), **reclami-proposte** (hero, intro con link, messaggio di successo dalle opzioni Moduli, consenso privacy) e **privacy-cookie** (hero e SEO; il testo lungo = **contenuto della pagina WP**, reso con `.legal-content`; se la pagina WP è vuota o WP è spento resta il testo attuale) | fatto (solo le parole; layout, stili, ordine e comportamenti restano nel codice) | `lib/wp-pagine.ts`, `components/HeroTitle.tsx`, `data/pagine.js` |
+| **Testi delle pagine** (hero: eyebrow, titolo con `*parola*` evidenziata, sottotitolo, 2 bottoni; prima sezione = `intro_*` e `s1..s8_*`: badge, titolo, paragrafi; CTA finale `cta_*`; SEO `seo_titolo`/`seo_descrizione`) per 14 pagine: formazione (ecm, corsi-pa, fondi, FNC, obbligatoria, professionale, regionale, regionale-fse), programma GOL, servizi alla persona/imprese, corsi, chi-siamo, contatti, **home** (hero, calendario, percorsi, cosa facciamo, gruppo, news, CTA) ed elenco **news** (hero), **reclami-proposte** (hero, intro con link, messaggio di successo dalle opzioni Moduli, consenso privacy) e **privacy-cookie** (hero e SEO; il testo lungo = **contenuto della pagina WP**, reso con `.legal-content`; se la pagina WP è vuota o WP è spento resta il testo attuale) | fatto (solo le parole; layout, stili, ordine e comportamenti restano nel codice) | `lib/wp-pagine.ts`, `components/HeroTitle.tsx`, `data/pagine.js` |
 | **Non collegato**: `entiLoghi`/`clientiLoghi` (segnaposto); sezioni con markup nei paragrafi, home: barra di ricerca/chip, card "cosa facciamo", titolo con `<br>`; news: `[slug]`, filtri; altre immagini delle sezioni (collegate solo quelle elencate nella riga "Immagini e numeri"), `form_*` | **aperto** | — |
 | Non collegati dei campi opzioni: `form_email_*` (i moduli non inviano nulla), informativa/cookie policy (`legale_privacy`, `legale_cookie`: le pagine sono JSX), template titolo (`sito_seo_template`) | **aperto** | — |
 | **Immagine OG e description predefinite** (opzioni globali → SEO): l'immagine arriva a `SeoHead` dalle pagine (`pagina.seo.ogImage \|\| useSiteOptions().seo.ogImage`, i figli di `next/head` sono fuori dal provider); la description predefinita è emessa da `_app.js` e la sostituisce il `description` proprio di ogni pagina. In locale entrambe sono vuote: HTML invariato | fatto | `pages/_app.js`, `components/SeoHead.tsx`, 5 pagine con `SeoHead` |
@@ -221,7 +221,7 @@ WP_URL=https://cms… WP_USER=… WP_APP_PASSWORD=… node wordpress/migrate-loc
 - Titolo e slug delle edizioni nel calendario sono quelli del *corso* WP (titolo come nel catalogo, slug della variante) e non quelli della famiglia.
 - Dei dati di una pagina di aiuti di Stato, i **paragrafi finali** restano nel codice (non hanno un campo in WP).
 
-**Limiti del catalogo**: il contenuto editoriale del dettaglio corso (`data/content/*`, `coursesDetails`, `EDITORIAL_CONTENT` in `pages/all-courses/[slug].js`, 60 file) resta nel codice, indicizzato per slug di famiglia. Un corso creato solo in WordPress compare nel catalogo e ha la sua pagina con il template generico (senza i testi editoriali); i redirect 301 dei vecchi slug in `next.config.js` sono generati dai dati locali.
+**Limiti del catalogo**: il contenuto editoriale del dettaglio corso (`data/content/*`, `coursesDetails`, `EDITORIAL_CONTENT` in `pages/corsi/[slug].js`, 60 file) resta nel codice, indicizzato per slug di famiglia. Un corso creato solo in WordPress compare nel catalogo e ha la sua pagina con il template generico (senza i testi editoriali); i redirect 301 dei vecchi slug in `next.config.js` sono generati dai dati locali.
 
 ### Contratto
 

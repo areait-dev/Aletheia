@@ -153,8 +153,8 @@ test('rotta /api/revalidate con scope "calendario": segreto obbligatorio, rigene
     const ok = await chiama('segreto-di-prova-lungo-0123456789', { scope: 'calendario' });
     expect(ok.codice).toBe(200);
     expect(ok.corpo.failed).toEqual([]);
-    for (const p of ['/', '/calendario-corsi', '/formazione/obbligatoria', '/all-courses/antincendio', '/all-courses/personale-alimentarista-osa']) expect(ok.rigenerate, p).toContain(p);
-    expect(ok.rigenerate.filter((p) => p.startsWith('/all-courses/')).length).toBeGreaterThanOrEqual(30); // una per ogni corso del catalogo
+    for (const p of ['/', '/calendario-corsi', '/formazione/obbligatoria', '/corsi/antincendio', '/corsi/personale-alimentarista-osa']) expect(ok.rigenerate, p).toContain(p);
+    expect(ok.rigenerate.filter((p) => p.startsWith('/corsi/')).length).toBeGreaterThanOrEqual(30); // una per ogni corso del catalogo
     expect(ok.corpo.revalidated).toEqual(ok.rigenerate);
   } finally {
     if (salvato === undefined) delete process.env.WP_SHARED_SECRET;

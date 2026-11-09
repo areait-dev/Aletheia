@@ -6,7 +6,7 @@
 // - Con e Senza Stabilizzatori / combinato (10 ore) -> 'livello-3'
 // La 4a variante (Aggiornamento, tipo 'aggiornamento') vive in ple-aggiornamento-content.js sotto la
 // chiave 'livello-4' - le chiavi sono posizionali (stesso ordine delle 4 voci raw in data/coursesRaw.js),
-// non semantiche, esattamente come editorialLivelloKey in pages/all-courses/[slug].js.
+// non semantiche, esattamente come editorialLivelloKey in pages/corsi/[slug].js.
 
 module.exports = {
   ple: {

@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Macchine Movimento Terra" (ex pagina isolata standalone
-// pages/all-courses/macchine-movimento-terra.js, switch a 7 opzioni). Le 7 varianti raw in
+// pages/corsi/macchine-movimento-terra.js, switch a 7 opzioni). Le 7 varianti raw in
 // data/coursesRaw.js condividono il famTitle "Macchine Movimento Terra" (descrittore tra parentesi
 // isolato da LEVEL_PATTERNS in data/courseFamilies.js), quindi le chiavi 'livello-1'..'livello-6' qui
 // sotto sono POSIZIONALI (stesso ordine delle 6 voci raw "corso" - escavatori idraulici, escavatori a

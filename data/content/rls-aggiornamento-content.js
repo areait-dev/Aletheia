@@ -3,7 +3,7 @@
 // - Meno di 50 dipendenti (4 ore) -> 'livello-2'
 // - Più di 50 dipendenti (8 ore)  -> 'livello-3'
 // Chiavi posizionali (stesso ordine delle voci raw in data/coursesRaw.js) - vedi il commento in
-// rls-content.js e editorialLivelloKey in pages/all-courses/[slug].js.
+// rls-content.js e editorialLivelloKey in pages/corsi/[slug].js.
 
 module.exports = {
   'livello-2': {

@@ -1,7 +1,7 @@
 
 // Contenuti editoriali per la variante "Aggiornamento" (6 ore) della famiglia formazione-dei-lavoratori.
 // È la 5a voce raw in data/coursesRaw.js (livelloKey 'default'), quindi la chiave posizionale è
-// 'livello-5' - vedi editorialLivelloKey in pages/all-courses/[slug].js e il commento in
+// 'livello-5' - vedi editorialLivelloKey in pages/corsi/[slug].js e il commento in
 // formazione-lavoratori-content.js.
 
 module.exports = {

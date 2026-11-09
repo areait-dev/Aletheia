@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Operatore di Gru per Autocarro" (ex pagina isolata
-// pages/all-courses/operatore-di-gru-per-autocarro.js). Famiglia a variante unica (livelloKey
+// pages/corsi/operatore-di-gru-per-autocarro.js). Famiglia a variante unica (livelloKey
 // 'default'): un solo livello posizionale 'livello-1' condiviso da corso e aggiornamento.
 //
 // NOTA MIGRAZIONE: il raw title dell'aggiornamento in data/coursesRaw.js era "Aggiornamento Operatore Di

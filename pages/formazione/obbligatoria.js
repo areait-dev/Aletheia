@@ -206,7 +206,7 @@ function CorsiObbligatoriTabs({ giorni, isDark }) {
               </div>
 
               <a
-                href={`/all-courses/${c.slug}`}
+                href={`/corsi/${c.slug}`}
                 className="bg-primary hover:bg-[#006B73] text-white font-semibold rounded-full text-sm transition-colors text-center corso-row-cta"
               >
                 Iscriviti ora

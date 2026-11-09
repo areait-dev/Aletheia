@@ -1,6 +1,6 @@
 
 // Contenuti editoriali per famiglia "Patentino Fitosanitario" (ex pagina isolata
-// pages/all-courses/patentino-fitosanitario.js). Famiglia a variante unica (livelloKey 'default'): un
+// pages/corsi/patentino-fitosanitario.js). Famiglia a variante unica (livelloKey 'default'): un
 // solo livello posizionale 'livello-1' condiviso da corso e aggiornamento.
 
 module.exports = {
