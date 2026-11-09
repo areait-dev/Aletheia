@@ -8,7 +8,7 @@ module.exports = {
   'livello-1': {
     titolo: 'Aggiornamento RSPP/ASPP Esterno',
     durataOre: 40,
-    modalita: ['Aula', 'FAD'],
+    modalita: ['Aula', 'Aula virtuale', 'FAD'],
     validita: 'Da ripetere periodicamente ai sensi dell\'art. 32 D.Lgs 81/2008 e dell\'Accordo Stato Regioni del 17/04/2025',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -20,7 +20,7 @@ L'aggiornamento periodico è previsto perché il quadro normativo, gli strumenti
 
 Il corso, della durata di 40 ore, tratta aspetti giuridico-normativi e novità in materia di formazione, sistemi di gestione e processi organizzativi, gestione dei rischi secondo gli standard ISO, il rischio da stress lavoro-correlato, la gestione delle riunioni, la gestione delle sostanze pericolose, le novità normative sulla valutazione dei rischi, la prevenzione incendi e il benessere organizzativo.
 
-Il corso è disponibile in aula presso la sede Alètheia di Vittoria (RG) o in FAD (formazione a distanza); la modalità videoconferenza non è prevista per l'aggiornamento. È possibile organizzare la formazione anche per gruppi di professionisti provenienti dalla stessa azienda o rete di consulenza.`,
+Il corso è disponibile in aula presso la sede Alètheia di Vittoria (RG) in aula virtuale o in FAD (formazione a distanza). È possibile organizzare la formazione anche per gruppi di professionisti provenienti dalla stessa azienda o rete di consulenza.`,
 
     aChiERivolto: [
       'RSPP esterni già qualificati che devono mantenere aggiornata l\'abilitazione',
@@ -43,7 +43,7 @@ Il corso è disponibile in aula presso la sede Alètheia di Vittoria (RG) o in F
     faq: [
       { domanda: 'Ogni quanto va rinnovata la qualifica di RSPP o ASPP?', risposta: 'La qualifica richiede un aggiornamento periodico per restare valida.' },
       { domanda: 'Quanto dura il corso di aggiornamento RSPP/ASPP?', risposta: 'L\'aggiornamento dura 40 ore complessive, suddivise in nove moduli su aspetti normativi, gestionali e tecnici.' },
-      { domanda: 'Il corso di aggiornamento si può fare in FAD?', risposta: 'Sì, è disponibile sia in aula sia in FAD; la videoconferenza non è prevista.' },
+      { domanda: 'Il corso di aggiornamento si può fare in FAD o in aula virtuale?', risposta: 'Sì, è disponibile in aula, in aula virtuale e in FAD. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
       { domanda: 'Posso fare l\'aggiornamento se non ho ancora la qualifica di RSPP o ASPP?', risposta: 'No, l\'aggiornamento è riservato a chi ha già completato il percorso base. Chi non è qualificato deve frequentare prima i Moduli base.' },
       { domanda: 'L\'aggiornamento è uguale per RSPP e ASPP?', risposta: 'Il corso è proposto con un monte ore comune di 40 ore per entrambe le figure professionali.' }
     ],

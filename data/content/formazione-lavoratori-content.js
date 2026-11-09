@@ -15,7 +15,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso Formazione Generale dei Lavoratori',
       durataOre: 4,
-      modalita: ['Aula', 'FAD'],
+      modalita: ['Aula', 'Aula virtuale', 'FAD'],
       validita: 'Non ha scadenza',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -27,7 +27,7 @@ A differenza dei percorsi completi rischio basso, medio o alto - che abbinano se
 
 Questo corso è utile principalmente in due casi: quando un lavoratore ha già completato altrove la formazione specifica per il proprio livello di rischio ed è necessario integrare solo la parte generale mancante, oppure quando un'azienda organizza la formazione in due fasi separate, erogando prima il modulo generale a tutto il personale e poi il modulo specifico differenziato per mansione o reparto.
 
-Il corso è disponibile in aula o in FAD (formazione a distanza); la modalità videoconferenza non è prevista per questo modulo. È possibile organizzarlo anche direttamente in azienda per gruppi numerosi di lavoratori.`,
+Il corso è disponibile in aula, in aula virtuale o in FAD (formazione a distanza). È possibile organizzarlo anche direttamente in azienda per gruppi numerosi di lavoratori.`,
 
       aChiERivolto: [
         'Lavoratori che devono completare la parte generale',
@@ -47,7 +47,7 @@ Il corso è disponibile in aula o in FAD (formazione a distanza); la modalità v
         { domanda: 'Cos\'è e a chi serve questo corso?', risposta: 'È il modulo comune di 4 ore obbligatorio per tutti i lavoratori, sui concetti base di rischio, danno, prevenzione e protezione.' },
         { domanda: 'Basta questo corso per essere in regola?', risposta: 'No, va sempre abbinato a un modulo specifico (rischio basso, medio o alto) in base alla classificazione ATECO dell\'azienda.' },
         { domanda: 'Quanto dura?', risposta: '4 ore, suddivise in 2 moduli da 2 ore ciascuno.' },
-        { domanda: 'Si può fare in FAD?', risposta: 'Sì, è disponibile in aula o in FAD. La videoconferenza non è prevista per questo modulo.' },
+        { domanda: 'Si può fare in FAD o in aula virtuale?', risposta: 'Sì, la formazione generale è disponibile in aula, in aula virtuale e in FAD. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Ha una scadenza?', risposta: 'No, la parte generale non ha scadenza.' }
       ],
 
@@ -64,7 +64,7 @@ Il corso è disponibile in aula o in FAD (formazione a distanza); la modalità v
     'livello-2': {
       titolo: 'Corso Formazione Generale e Specifica dei Lavoratori – Rischio Basso',
       durataOre: 8,
-      modalita: ['Aula', 'FAD', 'Videoconferenza'],
+      modalita: ['Aula', 'FAD', 'Aula virtuale'],
       validita: 'Generale permanente, specifica con aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -76,7 +76,7 @@ Il livello di rischio basso riguarda le aziende classificate secondo il codice A
 
 Il corso si divide in due moduli: la formazione generale di 4 ore, comune a tutti i settori, che introduce i concetti di rischio, danno, prevenzione e protezione e illustra i soggetti del sistema di prevenzione aziendale; e la formazione specifica di 4 ore, dedicata ai rischi propri del rischio basso, dall'uso di attrezzature e videoterminali alla gestione delle emergenze e all'utilizzo dei dispositivi di protezione individuale.
 
-Il corso è disponibile in tre modalità: in aula, in videoconferenza sincrona con il docente e in FAD (formazione a distanza asincrona), per adattarsi alle esigenze organizzative di aziende con personale distribuito su più sedi. È possibile organizzare la formazione anche direttamente in azienda per gruppi numerosi di lavoratori.`,
+Il corso è disponibile in tre modalità: in aula, in aula virtuale sincrona con il docente e in FAD (formazione a distanza asincrona), per adattarsi alle esigenze organizzative di aziende con personale distribuito su più sedi. È possibile organizzare la formazione anche direttamente in azienda per gruppi numerosi di lavoratori.`,
 
       aChiERivolto: [
         'Lavoratori di uffici, negozi e studi professionali',
@@ -97,7 +97,7 @@ Il corso è disponibile in tre modalità: in aula, in videoconferenza sincrona c
       faq: [
         { domanda: 'Cos\'è e chi deve farlo?', risposta: 'È il corso completo per lavoratori di aziende classificate a basso rischio (uffici, commercio, studi professionali).' },
         { domanda: 'Quanto dura?', risposta: '8 ore totali: 4 ore di formazione generale e 4 ore di formazione specifica per il rischio basso.' },
-        { domanda: 'È disponibile in FAD o videoconferenza?', risposta: 'Sì, è disponibile in tutte e tre le modalità: aula, FAD e videoconferenza.' },
+        { domanda: 'È disponibile in FAD o aula virtuale?', risposta: 'Sì, è disponibile in tutte e tre le modalità: aula, FAD e aula virtuale. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Serve l\'aggiornamento?', risposta: 'Sì, la parte specifica va aggiornata periodicamente con un corso di aggiornamento di 6 ore.' },
         { domanda: 'Che differenza c\'è tra i livelli di rischio?', risposta: 'La classificazione ATECO dell\'azienda determina la durata della formazione specifica: 4 ore per il rischio basso, 8 ore per il medio, 12 ore per l\'alto.' }
       ],
@@ -113,7 +113,7 @@ Il corso è disponibile in tre modalità: in aula, in videoconferenza sincrona c
     'livello-3': {
       titolo: 'Corso Formazione Generale e Specifica dei Lavoratori – Rischio Medio',
       durataOre: 12,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Generale permanente, specifica con rinnovo ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -125,7 +125,7 @@ Il rischio medio riguarda tipicamente aziende manifatturiere, officine, magazzin
 
 Il corso si articola in due moduli: la formazione generale di 4 ore, identica per tutti i livelli di rischio e comune a ogni settore, e la formazione specifica di 8 ore dedicata ai rischi propri del livello medio, che include movimentazione manuale dei carichi, rischi da attrezzature e macchine, rischio elettrico, rischio incendio, stress lavoro-correlato e procedure di sicurezza aziendali.
 
-Il corso è disponibile in aula e in videoconferenza sincrona con il docente; la modalità FAD non è prevista per questo livello di rischio, data la maggiore complessità dei contenuti tecnici da trattare. È possibile organizzare la formazione direttamente in azienda per gruppi numerosi di lavoratori, calibrando gli esempi pratici sulle macchine e attrezzature realmente in uso.`,
+Il corso è disponibile in aula e in aula virtuale sincrona con il docente; la modalità FAD non è prevista per questo livello di rischio, data la maggiore complessità dei contenuti tecnici da trattare. È possibile organizzare la formazione direttamente in azienda per gruppi numerosi di lavoratori, calibrando gli esempi pratici sulle macchine e attrezzature realmente in uso.`,
 
       aChiERivolto: [
         'Operai e addetti di aziende manifatturiere e officine',
@@ -148,7 +148,7 @@ Il corso è disponibile in aula e in videoconferenza sincrona con il docente; la
       faq: [
         { domanda: 'Cos\'è e chi deve farlo?', risposta: 'È obbligatorio per i lavoratori di aziende classificate a rischio medio (manifattura, officine, logistica).' },
         { domanda: 'Quanto dura?', risposta: '12 ore totali: 4 ore di formazione generale e 8 ore di formazione specifica per il rischio medio.' },
-        { domanda: 'Si può fare in FAD?', risposta: 'No, per la complessità dei contenuti è disponibile solo in aula o in videoconferenza.' },
+        { domanda: 'Si può fare in FAD?', risposta: 'No, per la complessità dei contenuti è disponibile solo in aula o in aula virtuale. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Che differenza c\'è con il rischio basso?', risposta: 'Richiede il doppio delle ore di formazione specifica (8 ore contro 4) per la maggiore esposizione a macchine e movimentazione carichi.' },
         { domanda: 'Serve l\'aggiornamento?', risposta: 'Sì, è previsto un rinnovo periodico con un corso di aggiornamento di 6 ore.' }
       ],
@@ -164,7 +164,7 @@ Il corso è disponibile in aula e in videoconferenza sincrona con il docente; la
     'livello-4': {
       titolo: 'Corso Formazione Generale e Specifica dei Lavoratori – Rischio Alto',
       durataOre: 16,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Generale permanente, specifica con rinnovo ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -176,7 +176,7 @@ Il rischio alto riguarda i settori con la maggiore esposizione a pericoli concre
 
 Il corso si articola in due moduli: la formazione generale di 4 ore, identica per tutti i livelli di rischio e comune a ogni settore, e la formazione specifica di 12 ore dedicata ai rischi propri del livello alto, organizzata in sei unità didattiche: rischi infortunistici (cadute dall'alto, rischi meccanici ed elettrici, rischio incendio), rischi fisici (rumore, vibrazioni, campi elettromagnetici, radiazioni), rischi chimici e biologici (agenti cancerogeni, amianto, agenti biologici), ergonomia e organizzazione del lavoro, misure di prevenzione e protezione, e rischi specifici della mansione.
 
-Il corso è disponibile in aula e in videoconferenza sincrona con il docente; la modalità FAD non è prevista per questo livello di rischio, data l'elevata complessità e specificità dei contenuti tecnici da trattare. È possibile organizzare la formazione direttamente in azienda per gruppi numerosi di lavoratori, calibrando gli esempi pratici sui rischi realmente presenti in azienda.`,
+Il corso è disponibile in aula e in aula virtuale sincrona con il docente; la modalità FAD non è prevista per questo livello di rischio, data l'elevata complessità e specificità dei contenuti tecnici da trattare. È possibile organizzare la formazione direttamente in azienda per gruppi numerosi di lavoratori, calibrando gli esempi pratici sui rischi realmente presenti in azienda.`,
 
       aChiERivolto: [
         'Lavoratori di cantieri edili e industrie pesanti',
@@ -197,7 +197,7 @@ Il corso è disponibile in aula e in videoconferenza sincrona con il docente; la
       faq: [
         { domanda: 'Cos\'è e chi deve farlo?', risposta: 'È il corso per lavoratori di aziende classificate ad alto rischio (edilizia, chimica, industria pesante).' },
         { domanda: 'Quanto dura?', risposta: '16 ore totali: 4 ore di formazione generale e 12 ore di formazione specifica per il rischio alto.' },
-        { domanda: 'Si può fare in FAD?', risposta: 'No, a causa della complessità tecnica dei contenuti è disponibile solo in aula o videoconferenza.' },
+        { domanda: 'Si può fare in FAD?', risposta: 'No, a causa della complessità tecnica dei contenuti è disponibile solo in aula o aula virtuale. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Che differenza c\'è con il rischio medio?', risposta: 'Richiede 12 ore di formazione specifica (contro le 8 del rischio medio) e affronta rischi complessi come cancerogeni e amianto.' },
         { domanda: 'Serve l\'aggiornamento?', risposta: 'Sì, è previsto un rinnovo periodico con un corso di aggiornamento di 6 ore.' }
       ],

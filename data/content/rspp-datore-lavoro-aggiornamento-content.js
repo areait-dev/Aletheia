@@ -8,7 +8,7 @@ module.exports = {
   'livello-6': {
     titolo: 'Aggiornamento RSPP Datore di Lavoro',
     durataOre: 8,
-    modalita: ['Aula', 'FAD', 'Videoconferenza'],
+    modalita: ['Aula', 'FAD', 'Aula virtuale'],
     validita: 'Da ripetere periodicamente ai sensi dell\'art. 34, commi 2-3, D.Lgs 81/2008 e dell\'Accordo Stato Regioni del 17/04/2025',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -22,7 +22,7 @@ Il corso, della durata di 8 ore, è organizzato in quattro moduli: un modulo nor
 
 A differenza dei moduli di formazione iniziale - che richiedono l'abbinamento obbligatorio tra Modulo Comune e modulo integrativo settoriale - l'aggiornamento è un corso unico di 8 ore, valido indipendentemente dal settore di appartenenza dell'azienda.
 
-Il corso è disponibile in aula, in FAD e in videoconferenza; è possibile organizzarlo anche direttamente in azienda.`,
+Il corso è disponibile in aula, in FAD e in aula virtuale; è possibile organizzarlo anche direttamente in azienda.`,
 
     aChiERivolto: [
       'Datori di lavoro che già svolgono i compiti di RSPP e devono rinnovare l\'abilitazione',
@@ -46,7 +46,7 @@ Il corso è disponibile in aula, in FAD e in videoconferenza; è possibile organ
       { domanda: 'Quanto dura l\'aggiornamento RSPP Datore di Lavoro?', risposta: '8 ore complessive, divise in quattro moduli da 2 ore ciascuno (normativo-giuridico, gestionale, tecnico, relazionale).' },
       { domanda: 'L\'aggiornamento è uguale per tutti i settori (agricoltura, pesca, costruzioni, chimico)?', risposta: 'Sì, è un corso unico di 8 ore valido per tutti i settori aziendali, a differenza della formazione iniziale.' },
       { domanda: 'Posso fare l\'aggiornamento se non ho ancora l\'abilitazione RSPP?', risposta: 'No, l\'aggiornamento è riservato a chi ha già completato il percorso base (Modulo Comune + modulo integrativo).' },
-      { domanda: 'In quali modalità posso seguire l\'aggiornamento?', risposta: 'È disponibile in aula, in FAD (formazione a distanza) e in videoconferenza.' }
+      { domanda: 'In quali modalità posso seguire l\'aggiornamento?', risposta: 'È disponibile in aula, in FAD (formazione a distanza) e in aula virtuale.' }
     ],
 
     moduli: [

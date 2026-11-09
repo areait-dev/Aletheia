@@ -9,7 +9,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso Formazione per formatori della sicurezza',
       durataOre: 24,
-      modalita: ['FAD'],
+      modalita: ['FAD', 'Aula', 'Aula virtuale'],
       validita: 'Aggiornamento ogni 3 anni',
       attestato: 'Attestato valido su tutto il territorio nazionale',
 
@@ -21,7 +21,7 @@ Il percorso approfondisce i principi della comunicazione efficace, le tecniche d
 
 La formazione fornisce strumenti teorici e metodologici per migliorare la qualità degli interventi didattici e sviluppare le capacità necessarie a gestire un'aula, anche in contesti formativi rivolti ai lavoratori.
 
-Il corso è erogabile in FAD.`,
+Il corso viene proposto prevalentemente in FAD, ma può essere organizzato anche in aula e in aula virtuale.`,
 
       aChiERivolto: [
         'Consulenti in materia di salute e sicurezza sul lavoro',

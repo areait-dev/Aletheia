@@ -8,7 +8,7 @@ module.exports = {
   'livello-2': {
     titolo: 'Aggiornamento Formazione per Dirigenti',
     durataOre: 6,
-    modalita: ['FAD'],
+    modalita: ['FAD', 'Aula', 'Aula virtuale'],
     validita: 'Da ripetere periodicamente ai sensi dell\'art. 37, comma 7, D.Lgs 81/2008 e dell\'Accordo Stato Regioni del 17/04/2025',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -22,7 +22,7 @@ Il corso, erogato in un modulo unico, richiama i temi principali della formazion
 
 Il corso è pensato per chi ha già l'attestato di formazione dirigenti in scadenza. Chi invece non ha mai conseguito la formazione di base deve frequentare il corso completo di 12 ore, non l'aggiornamento.
 
-Il corso si svolge interamente in FAD, la modalità prevista secondo il listino Alètheia.`,
+Il corso viene proposto prevalentemente in FAD, ma può essere organizzato anche in aula e in aula virtuale.`,
 
     aChiERivolto: [
       'Dirigenti aziendali già formati (attestato di 12 ore) in scadenza',
@@ -52,7 +52,7 @@ Il corso si svolge interamente in FAD, la modalità prevista secondo il listino 
       },
       {
         domanda: 'Si può fare in aula?',
-        risposta: 'No, secondo il listino Alètheia questo corso è disponibile solo in modalità FAD.'
+        risposta: 'Sì. La modalità che proponiamo più spesso è la FAD, ma il corso può essere organizzato anche in aula e in aula virtuale.'
       },
       {
         domanda: 'Posso farlo senza il corso base?',

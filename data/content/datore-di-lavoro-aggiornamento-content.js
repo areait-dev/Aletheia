@@ -8,7 +8,7 @@ module.exports = {
   'livello-2': {
     titolo: 'Aggiornamento Formazione per Datore di Lavoro',
     durataOre: 6,
-    modalita: ['FAD'],
+    modalita: ['Aula', 'Aula virtuale', 'FAD'],
     validita: 'Aggiornamento periodico previsto dalla normativa',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -35,7 +35,7 @@ Il corso è pensato per chi ha già l'attestato di Formazione Datore di Lavoro i
 
     faq: [
       { domanda: 'Chi può fare l\'aggiornamento Datore di Lavoro?', risposta: 'L\'aggiornamento è riservato a chi ha già conseguito l\'attestato di Formazione Datore di Lavoro di 16 ore. Senza formazione di base è necessario frequentare il corso completo.' },
-      { domanda: 'Quanto dura l\'aggiornamento e come si articola?', risposta: 'L\'aggiornamento dura 6 ore, erogate in un modulo unico in FAD.' },
+      { domanda: 'Quanto dura l\'aggiornamento e come si articola?', risposta: 'L\'aggiornamento dura 6 ore, erogate in un modulo unico, in aula, in aula virtuale o in FAD.' },
       { domanda: 'Devo fare anche il modulo cantieri se opero in cantiere?', risposta: 'Sì, il modulo aggiuntivo "Cantieri" (6 ore) resta un percorso separato e integrativo, da abbinare al corso base o all\'aggiornamento in base alla propria situazione formativa.' }
     ],
 

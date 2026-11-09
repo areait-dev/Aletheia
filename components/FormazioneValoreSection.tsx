@@ -12,7 +12,7 @@ interface FormazioneValoreSectionProps {
 const DEFAULT_VALORI: Valore[] = [
   { icon: 'fas fa-shield-halved', titolo: 'Conformità normativa garantita', testo: 'Percorsi progettati in aderenza alla normativa vigente, con attestato valido su tutto il territorio nazionale.' },
   { icon: 'fas fa-chalkboard-user', titolo: 'Docenti qualificati', testo: 'Formatori con esperienza diretta sul campo, in grado di calare la normativa nelle situazioni operative reali.' },
-  { icon: 'fas fa-arrows-to-circle', titolo: 'Flessibilità di erogazione', testo: 'Corsi in aula o in videoconferenza, anche direttamente in azienda, per adattarsi alle esigenze organizzative di ogni realtà.' },
+  { icon: 'fas fa-arrows-to-circle', titolo: 'Flessibilità di erogazione', testo: 'Corsi in aula o in aula virtuale, anche direttamente in azienda, per adattarsi alle esigenze organizzative di ogni realtà.' },
 ];
 
 /**

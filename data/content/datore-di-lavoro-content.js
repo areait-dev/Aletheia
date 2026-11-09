@@ -21,7 +21,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso di Formazione per Datore di Lavoro',
       durataOre: 16,
-      modalita: ['FAD'],
+      modalita: ['Aula', 'Aula virtuale', 'FAD'],
       validita: 'Da mantenere con l\'aggiornamento periodico dedicato (6 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -33,7 +33,7 @@ Questo corso è distinto dal percorso RSPP Datore di Lavoro (Modulo Comune 8 ore
 
 Il corso si articola in due moduli: il Modulo I normativo (4 ore), sul sistema legislativo in materia di sicurezza, l'identificazione del ruolo del datore di lavoro, la delega di funzioni, la responsabilità civile, penale e amministrativa (D.Lgs 231/2001), e i rapporti con gli organi di vigilanza; il Modulo II sull'organizzazione e gestione della sicurezza sul lavoro (12 ore), su misure organizzative e gestionali ai sensi degli artt. 15 e 30 del D.Lgs 81/2008, valutazione dei rischi, gestione del rischio interferenziale e DUVRI, gestione delle emergenze, sorveglianza sanitaria, informazione e formazione dei lavoratori, e vigilanza sull'applicazione delle procedure di sicurezza.
 
-Il corso si svolge interamente in FAD (formazione a distanza asincrona), la modalità prevista per questo corso secondo il listino Alètheia. Per i datori di lavoro che operano in cantieri temporanei o mobili è disponibile un modulo aggiuntivo specifico dedicato a questo contesto.`,
+Il corso può essere erogato in tutte le modalità previste: in aula, in aula virtuale e in FAD (formazione a distanza asincrona). Per i datori di lavoro che operano in cantieri temporanei o mobili è disponibile un modulo aggiuntivo specifico dedicato a questo contesto.`,
 
       aChiERivolto: [
         'Datori di lavoro di qualsiasi settore che devono adempiere all\'obbligo formativo previsto dall\'art. 18 del D.Lgs 81/2008',
@@ -56,7 +56,7 @@ Il corso si svolge interamente in FAD (formazione a distanza asincrona), la moda
       faq: [
         { domanda: 'Che differenza c\'è tra questo corso e il Modulo Comune RSPP Datore di Lavoro?', risposta: 'Questo corso riguarda la formazione generale obbligatoria per il ruolo di datore di lavoro; il Modulo Comune RSPP (8 ore) serve solo se si intende svolgere direttamente anche i compiti di RSPP in azienda.' },
         { domanda: 'Quanto dura il corso Formazione Datore di Lavoro?', risposta: 'Il corso dura 16 ore complessive (4 ore modulo normativo e 12 ore organizzazione e gestione).' },
-        { domanda: 'Il corso si può fare in aula?', risposta: 'No, secondo il listino Alètheia questo corso è disponibile solo in modalità FAD.' },
+        { domanda: 'Il corso si può fare in aula o in FAD?', risposta: 'Sì, il corso può essere erogato in tutte le modalità previste: aula, aula virtuale e FAD. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Se opero in un cantiere devo fare formazione aggiuntiva?', risposta: 'Sì, per i datori di lavoro che operano in cantieri temporanei o mobili è disponibile un modulo aggiuntivo specifico di 6 ore.' },
         { domanda: 'Dopo questo corso serve un aggiornamento periodico?', risposta: 'Sì, è previsto un corso di aggiornamento dedicato di 6 ore.' }
       ],

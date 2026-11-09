@@ -10,7 +10,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso di Formazione per Dirigenti · Modulo Comune',
       durataOre: 12,
-      modalita: ['FAD'],
+      modalita: ['FAD', 'Aula', 'Aula virtuale'],
       validita: 'Aggiornamento periodico previsto dalla normativa',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -22,7 +22,7 @@ Il dirigente, secondo la definizione del D.Lgs 81/2008, è la persona che attua 
 
 Il corso si articola in quattro moduli: il Modulo I giuridico-normativo (3 ore), su sistema legislativo, soggetti della prevenzione aziendale, delega di funzioni e responsabilità del dirigente; il Modulo II sulla gestione e organizzazione della sicurezza (3 ore), su modelli organizzativi e sistemi di gestione della sicurezza; il Modulo III sui compiti specifici del dirigente (3 ore), su misure di prevenzione, sorveglianza sanitaria, appalti e gestione delle emergenze; il Modulo IV sulla comunicazione (3 ore), su tecniche di comunicazione, obblighi formativi e gestione dei rapporti con i rappresentanti dei lavoratori.
 
-Il corso si svolge interamente in FAD (formazione a distanza asincrona), la modalità prevista per questo corso secondo il listino Alètheia. È possibile completare la formazione con i moduli aggiuntivi settoriali previsti dalla normativa, come il modulo cantieri per i dirigenti che operano in questo contesto.`,
+Il corso viene proposto prevalentemente in FAD (formazione a distanza asincrona), ma può essere organizzato anche in aula e in aula virtuale. È possibile completare la formazione con i moduli aggiuntivi settoriali previsti dalla normativa, come il modulo cantieri per i dirigenti che operano in questo contesto.`,
 
       aChiERivolto: [
         'Dirigenti aziendali',
@@ -53,7 +53,7 @@ Il corso si svolge interamente in FAD (formazione a distanza asincrona), la moda
         },
         {
           domanda: 'Si può fare in aula?',
-          risposta: 'No, secondo il listino Alètheia questo corso è disponibile solo in modalità FAD.'
+          risposta: 'Sì. La modalità che proponiamo più spesso è la FAD, ma il corso può essere organizzato anche in aula e in aula virtuale.'
         },
         {
           domanda: 'Serve un aggiornamento periodico?',

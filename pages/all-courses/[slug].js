@@ -7,6 +7,7 @@ import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import { whatsappLink, WHATSAPP_FORMAZIONE } from '../../lib/whatsapp';
 import { scrollToTopNow } from '../../lib/lenis';
 import { ereditaDalBase } from '../../lib/ereditarieta-contenuti';
+import { testoPartecipanti } from '../../lib/partecipanti';
 import CourseSchedaTecnica from '../../components/CourseSchedaTecnica';
 import EnrollmentProgress from '../../components/EnrollmentProgress';
 import ProssimaEdizione from '../../components/ProssimaEdizione';
@@ -610,7 +611,7 @@ export const coursesDetails = {
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',
     category: 'Formazione Obbligatoria',
     duration: '4-16 ore',
-    modality: 'Aula / FAD / Videoconferenza',
+    modality: 'Aula / FAD / Aula virtuale',
     price: 'Da € 60,00',
     priceVariants: [
       { label: 'Livello 1 Nuovo 4H', amount: 90 },
@@ -664,7 +665,7 @@ export const coursesDetails = {
     image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&q=80',
     category: 'Formazione Obbligatoria',
     duration: '4-16 ore',
-    modality: 'Aula / FAD / Videoconferenza',
+    modality: 'Aula / FAD / Aula virtuale',
     price: 'Da € 40,00',
     priceVariants: [
       { label: 'Generale 4H (Aula)', amount: 50 },
@@ -694,7 +695,7 @@ export const coursesDetails = {
     image: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=400&q=80',
     category: 'Formazione Obbligatoria',
     duration: '12 ore (rinnovo 6 ore)',
-    modality: 'Aula / Videoconferenza',
+    modality: 'Aula / Aula virtuale',
     price: 'Da € 90,00',
     priceVariants: [
       { label: 'Nuovo 12H', amount: 160 },
@@ -746,7 +747,7 @@ export const coursesDetails = {
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80',
     category: 'Formazione Obbligatoria',
     duration: '32 ore (aggiornamento 4-8 ore)',
-    modality: 'Aula / FAD / Videoconferenza',
+    modality: 'Aula / FAD / Aula virtuale',
     price: 'Da € 60,00',
     // NOTA: le label includono il descrittore "Più/Meno Di 50 Dipendenti" (non solo la durata) perché
     // matchPriceVariant (data/courseFamilies.js) sceglie il prezzo per sovrapposizione di token con il
@@ -783,7 +784,7 @@ export const coursesDetails = {
     image: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400&q=80',
     category: 'Formazione Obbligatoria',
     duration: '8-16 ore (aggiornamento 8 ore)',
-    modality: 'Aula / Videoconferenza',
+    modality: 'Aula / Aula virtuale',
     price: 'Da € 100,00',
     priceVariants: [
       { label: 'Modulo Comune 8H', amount: 100 },
@@ -813,7 +814,7 @@ export const coursesDetails = {
     image: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400&q=80',
     category: 'Formazione Obbligatoria',
     duration: '24-48 ore (aggiornamento 40 ore)',
-    modality: 'FAD / Videoconferenza',
+    modality: 'FAD / Aula virtuale',
     price: 'Da € 350,00',
     priceVariants: [
       { label: 'Modulo A 28H', amount: 350 },
@@ -915,7 +916,7 @@ export const coursesDetails = {
     image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=400&q=80',
     category: 'Formazione Obbligatoria',
     duration: '16 ore',
-    modality: 'Aula / Videoconferenza',
+    modality: 'Aula / Aula virtuale',
     price: 'Da € 90,00',
     priceVariants: [
       { label: 'Corso PES/PAV', amount: 200 },
@@ -1701,7 +1702,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
               { icon: 'fas fa-chalkboard-user', label: 'Modalità', value: Array.isArray(contenutoLivello.modalita) ? contenutoLivello.modalita.join(' · ') : contenutoLivello.modalita, show: !!contenutoLivello.modalita },
               { icon: 'fas fa-calendar-check', label: 'Validità', value: contenutoLivello.validita, show: !!contenutoLivello.validita },
               { icon: 'fas fa-certificate', label: 'Attestato', value: contenutoLivello.attestato, show: !!contenutoLivello.attestato },
-              { icon: 'fas fa-users', label: 'Partecipanti', value: contenutoLivello.partecipantiMax != null ? `Max ${contenutoLivello.partecipantiMax} persone` : `Minimo ${contenutoLivello.partecipantiMin} persone`, show: contenutoLivello.partecipantiMax != null || contenutoLivello.partecipantiMin != null },
+              { icon: 'fas fa-users', label: 'Partecipanti', value: testoPartecipanti(contenutoLivello), show: testoPartecipanti(contenutoLivello) != null },
               // Luogo del corso (solo corsi in aula che lo indicano): il nome del luogo è un link alla mappa
               { icon: 'fas fa-location-dot', label: 'Luogo del corso', value: contenutoLivello.luogoCorso ? (<a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contenutoLivello.luogoCorso.indirizzo)}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px' }}>{contenutoLivello.luogoCorso.testo} <i className="fas fa-arrow-up-right-from-square" style={{ fontSize: '0.7rem', marginLeft: '0.2rem' }} aria-hidden="true"></i></a>) : null, show: !!contenutoLivello.luogoCorso },
             ].filter(({ show }) => show).map(({ show, ...item }) => item)}

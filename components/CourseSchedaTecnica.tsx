@@ -17,7 +17,7 @@ interface CourseSchedaTecnicaProps {
  * "Panoramica" di ogni pagina corso (standard architetturale approvato) - non più nella hero di testa.
  *
  * `items` è l'elenco base (icona/label/valore in sola lettura); `children`, se presente, viene
- * accodato come cella extra della stessa griglia (usato per lo switch Aula/Videoconferenza + link
+ * accodato come cella extra della stessa griglia (usato per lo switch Aula/Aula virtuale + link
  * mappa "Luogo del corso", che nelle pagine chiamanti restano stateful e quindi non sono riducibili
  * a un item statico).
  */

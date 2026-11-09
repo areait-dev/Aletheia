@@ -10,7 +10,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso Primo Soccorso Aziendale Gruppo A',
       durataOre: 16,
-      modalita: ['Aula', 'FAD'],
+      modalita: ['Aula', 'Aula virtuale (solo teoria)'],
       validita: 'Aggiornamento ogni 3 anni',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -22,7 +22,7 @@ Il D.M. 388/2003 definisce le caratteristiche dei corsi e suddivide le aziende i
 
 Al termine del corso viene rilasciato un attestato di primo soccorso aziendale valido in tutta Italia, con obbligo di aggiornamento ogni 3 anni, diversamente dagli altri corsi di sicurezza che prevedono aggiornamento quinquennale.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti. La parte pratica deve essere svolta obbligatoriamente in presenza.`,
+Il corso si svolge in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso); l'aula virtuale è ammessa solo per la parte teorica, mentre la FAD non è prevista. La parte pratica deve essere svolta obbligatoriamente in presenza.`,
 
       aChiERivolto: [
         'Addetti in aziende Gruppo A (attività estrattive, edili, chimiche, alto rischio)',
@@ -46,8 +46,8 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
         { domanda: 'Cos\'è il Gruppo A?', risposta: 'Sono le aziende ad alto rischio (costruzioni, chimica, industria estrattiva) o con oltre 5 dipendenti dei gruppi B/C.' },
         { domanda: 'Ogni quanto va rinnovato?', risposta: 'È obbligatorio un aggiornamento ogni 3 anni, della durata di 6 ore.' },
         { domanda: 'L\'attestato è valido in tutta Italia?', risposta: 'Sì.' },
-        { domanda: 'La parte pratica si può fare in FAD?', risposta: 'No, RCP, DAE ed emorragie richiedono la presenza. Solo la parte teorica è disponibile in FAD.' },
-        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, al raggiungimento del numero minimo di iscritti.' }
+        { domanda: 'Il corso si può fare in FAD o in aula virtuale?', risposta: 'La FAD non è prevista. Si può svolgere in aula oppure in aula virtuale limitatamente alla parte teorica: la parte pratica (RCP, DAE, emorragie) richiede la presenza. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
+        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì. Di norma si considera un gruppo di circa 8 dipendenti, con valutazione caso per caso in base alle esigenze dell\'azienda.' }
       ],
 
       moduli: [
@@ -62,7 +62,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
     'livello-2': {
       titolo: 'Corso Primo Soccorso Aziendale Gruppo B e C',
       durataOre: 12,
-      modalita: ['Aula', 'FAD', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale (solo teoria)'],
       validita: 'Aggiornamento ogni 3 anni',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -74,7 +74,7 @@ Il D.M. 388/2003 stabilisce i contenuti minimi dei corsi e distingue tre gruppi 
 
 Al termine del corso viene rilasciato un attestato di primo soccorso aziendale valido in tutta Italia. L'aggiornamento è obbligatorio ogni 3 anni, con un corso di 4 ore, diversamente dagli altri corsi di sicurezza che prevedono aggiornamento quinquennale.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti. La parte pratica deve essere svolta obbligatoriamente in presenza.`,
+Il corso si svolge in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso); l'aula virtuale è ammessa solo per la parte teorica, mentre la FAD non è prevista. La parte pratica deve essere svolta obbligatoriamente in presenza.`,
 
       aChiERivolto: [
         'Addetti in aziende del Gruppo B (3 o più lavoratori)',
@@ -100,7 +100,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
         { domanda: 'Come si determina se sono Gruppo B o C?', risposta: 'Gruppo B con 3 o più lavoratori non appartenenti al Gruppo A, Gruppo C con meno di 3 lavoratori. Il corso da 12 ore è identico per entrambi.' },
         { domanda: 'Ogni quanto va rinnovato?', risposta: 'È obbligatorio un aggiornamento ogni 3 anni, della durata di 4 ore.' },
         { domanda: 'L\'attestato è valido in tutta Italia?', risposta: 'Sì.' },
-        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, al raggiungimento del numero minimo di iscritti.' }
+        { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì. Di norma si considera un gruppo di circa 8 dipendenti, con valutazione caso per caso in base alle esigenze dell\'azienda.' }
       ],
 
       moduli: [

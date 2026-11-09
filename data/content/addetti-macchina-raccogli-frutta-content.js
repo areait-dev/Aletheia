@@ -16,7 +16,7 @@ module.exports = {
       modalita: ['Aula', 'Pratica in campo'],
       validita: 'Aggiornamento periodico previsto dalla normativa',
       attestato: 'Patentino Nazionale',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: null,
 
       descrizione: `Il corso Teorico/Pratico per Lavoratori Addetti alla Conduzione di Macchina Agricola Raccoglifrutta (CRF), della durata di 8 ore, è obbligatorio ai sensi dell'art. 73 del D.Lgs. 81/2008 e dell'Accordo Stato-Regioni del 17 aprile 2025, per chi conduce questa tipologia di attrezzatura agricola.

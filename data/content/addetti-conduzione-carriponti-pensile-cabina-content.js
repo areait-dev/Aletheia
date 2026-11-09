@@ -15,10 +15,10 @@ module.exports = {
     'livello-1': {
       titolo: "Corso Addetti alla Conduzione di Carriponti Pensile/Cabina",
       durataOre: 11,
-      modalita: ["Aula","Videoconferenza (solo parte teorica)"],
+      modalita: ["Aula","Aula virtuale (solo parte teorica)"],
       validita: "Aggiornamento ogni 5 anni",
       attestato: "Attestato valido in tutta Italia",
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: null,
 
       descrizione: `Il corso è progettato in conformità con il D.Lgs. 81/08 e con le disposizioni del nuovo Accordo Stato-Regioni, garantendo agli operatori un'abilitazione riconosciuta e valida su tutto il territorio nazionale.
@@ -31,7 +31,7 @@ Il corso forma gli operatori a condurre in sicurezza il carroponte con comando p
 
 Il percorso formativo include tecniche operative per la movimentazione carichi in sicurezza, con particolare attenzione alla valutazione della portata, alla scelta delle imbracature e alla gestione delle manovre in spazi ristretti.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti. La parte teorica è disponibile anche in videoconferenza. La prova pratica deve essere svolta obbligatoriamente in presenza.`,
+Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso). La parte teorica è disponibile anche in aula virtuale. La prova pratica deve essere svolta obbligatoriamente in presenza.`,
 
       aChiERivolto: [
         "Lavoratori che utilizzano carriponte e gru a cavalletto con comando pensile o radiocomando",
@@ -70,7 +70,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
         },
         {
           domanda: "È possibile organizzare il corso direttamente in azienda?",
-          risposta: "Sì, con un minimo di 15 partecipanti. Alètheia può organizzare il corso presso la sede aziendale, inclusa la parte pratica. Contattaci per ricevere un preventivo personalizzato.",
+          risposta: "Sì. Di norma si considera un gruppo di circa 8 dipendenti, con valutazione caso per caso. Alètheia può organizzare il corso presso la sede aziendale, inclusa la parte pratica. Contattaci per ricevere un preventivo personalizzato.",
         },
       ],
 

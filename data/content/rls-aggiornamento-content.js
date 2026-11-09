@@ -9,7 +9,7 @@ module.exports = {
   'livello-2': {
     titolo: 'Aggiornamento RLS – Aziende con Meno di 50 Dipendenti',
     durataOre: 4,
-    modalita: ['Aula', 'FAD', 'Videoconferenza'],
+    modalita: ['Aula', 'FAD', 'Aula virtuale'],
     validita: 'Da ripetere ogni anno, ai sensi dell\'art. 37, commi 10 e 11, e dell\'art. 47 del D.Lgs 81/2008',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -21,7 +21,7 @@ A differenza della maggior parte dei corsi di aggiornamento in materia di sicure
 
 Il programma 2025 di questo aggiornamento è particolarmente ricco di novità: affronta la valutazione dell'apprendimento a conclusione del percorso formativo secondo l'Accordo Stato Regioni del 17 aprile 2025, le novità introdotte dal D.L. 31 ottobre 2025 n. 159, l'evoluzione della patente a punti nel settore edile, la gestione dei near miss (classificazione, segnalazione, piano d'azione e registrazione), approfondimenti sul rischio elettrico e meccanico, e il registro dei controlli antincendio.
 
-Il corso è disponibile in aula, in FAD e in videoconferenza; è possibile organizzarlo anche direttamente in azienda.`,
+Il corso è disponibile in aula, in FAD e in aula virtuale; è possibile organizzarlo anche direttamente in azienda.`,
 
     aChiERivolto: [
       'RLS già formati (attestato di 32 ore) che operano in aziende con meno di 50 dipendenti',
@@ -57,8 +57,8 @@ Il corso è disponibile in aula, in FAD e in videoconferenza; è possibile organ
         risposta: 'No, l\'aggiornamento è riservato a chi ha già conseguito l\'attestato RLS iniziale. Senza formazione di base è necessario frequentare il corso completo di 32 ore.'
       },
       {
-        domanda: 'Il corso si può fare in FAD o videoconferenza?',
-        risposta: 'Sì, l\'aggiornamento è disponibile in aula, in FAD e in videoconferenza, in base alle esigenze organizzative dell\'azienda.'
+        domanda: 'Il corso si può fare in FAD o aula virtuale?',
+        risposta: 'Sì, l\'aggiornamento è disponibile in aula, in FAD e in aula virtuale, in base alle esigenze organizzative dell\'azienda.'
       }
     ],
 
@@ -89,7 +89,7 @@ Il corso è disponibile in aula, in FAD e in videoconferenza; è possibile organ
   'livello-3': {
     titolo: 'Aggiornamento RLS – Aziende con Più di 50 Dipendenti',
     durataOre: 8,
-    modalita: ['Aula', 'FAD', 'Videoconferenza'],
+    modalita: ['Aula', 'FAD', 'Aula virtuale'],
     validita: 'Da ripetere ogni anno, ai sensi dell\'art. 37, commi 10 e 11, e dell\'art. 47 del D.Lgs 81/2008',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -101,7 +101,7 @@ Rispetto all'aggiornamento previsto per le aziende con meno di 50 dipendenti, ch
 
 Il corso affronta le novità introdotte dai principi giuridici comunitari e nazionali in materia di salute e sicurezza sul lavoro, un approfondimento degli obblighi dei principali soggetti coinvolti nel sistema di prevenzione, le modalità per la definizione e l'individuazione dei fattori di rischio, il ruolo dell'RLS nella valutazione dei rischi e nella consultazione sul Documento di Valutazione dei Rischi (DVR), la partecipazione attiva alla riunione periodica sulla sicurezza, e competenze di comunicazione e gestione delle relazioni aziendali, incluse tecniche di gestione dei conflitti nell'ambito del confronto tra RLS, datore di lavoro e lavoratori.
 
-Il corso è disponibile in aula, in FAD e in videoconferenza; è possibile organizzarlo anche direttamente in azienda per i rappresentanti dei lavoratori di gruppi aziendali con più sedi o stabilimenti.`,
+Il corso è disponibile in aula, in FAD e in aula virtuale; è possibile organizzarlo anche direttamente in azienda per i rappresentanti dei lavoratori di gruppi aziendali con più sedi o stabilimenti.`,
 
     aChiERivolto: [
       'RLS già formati (attestato di 32 ore) che operano in aziende con più di 50 dipendenti',
@@ -137,8 +137,8 @@ Il corso è disponibile in aula, in FAD e in videoconferenza; è possibile organ
         risposta: 'No, l\'aggiornamento è riservato a chi ha già conseguito l\'attestato RLS iniziale. Senza formazione di base è necessario frequentare il corso completo di 32 ore.'
       },
       {
-        domanda: 'Il corso si può fare in FAD o videoconferenza?',
-        risposta: 'Sì, l\'aggiornamento è disponibile in aula, in FAD e in videoconferenza, in base alle esigenze organizzative dell\'azienda.'
+        domanda: 'Il corso si può fare in FAD o aula virtuale?',
+        risposta: 'Sì, l\'aggiornamento è disponibile in aula, in FAD e in aula virtuale, in base alle esigenze organizzative dell\'azienda.'
       }
     ],
 

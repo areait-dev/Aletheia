@@ -118,11 +118,11 @@ export const FAQ_PAGINE = {
     },
     {
       domanda: 'È possibile organizzare i corsi direttamente in azienda?',
-      risposta: 'Sì, con un minimo di 15 partecipanti. Alètheia organizza il corso presso la tua sede, in orari compatibili con esigenze produttive, inclusa la parte pratica dove prevista. Contattaci per un preventivo personalizzato.',
+      risposta: 'Sì. Di norma si considera un gruppo di circa 8 dipendenti, con valutazione caso per caso in base alle tue esigenze. Alètheia organizza il corso presso la tua sede, in orari compatibili con esigenze produttive, inclusa la parte pratica dove prevista. Contattaci per un preventivo personalizzato.',
     },
     {
       domanda: 'I corsi di formazione obbligatoria possono essere svolti online?',
-      risposta: 'Alcuni sì, altri no. La formazione generale per i lavoratori, alcuni moduli RSPP e la parte tecnica di molti corsi sono disponibili in FAD o videoconferenza. La parte pratica (antincendio, primo soccorso, attrezzature) deve essere svolta obbligatoriamente in presenza. Ti indichiamo noi la modalità corretta per ogni corso.',
+      risposta: 'Alcuni sì, altri no. La formazione generale e l\'aggiornamento dei lavoratori, il Modulo A degli RSPP/ASPP (e l\'aggiornamento), il datore di lavoro, il dirigente e il formatore sono disponibili anche in FAD o in aula virtuale. Antincendio e primo soccorso si svolgono in aula, con l\'aula virtuale ammessa solo per la parte teorica e senza FAD; preposto e PES/PAV non sono erogabili in FAD; la parte pratica (antincendio, primo soccorso, attrezzature) deve essere svolta obbligatoriamente in presenza. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa. Ti indichiamo noi la modalità corretta per ogni corso.',
     },
     {
       domanda: 'Con quale frequenza va rinnovata la formazione obbligatoria?',

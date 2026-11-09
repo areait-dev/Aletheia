@@ -15,7 +15,7 @@ module.exports = {
       modalita: ['Aula'],
       validita: 'Aggiornamento disponibile (4 ore, pagina dedicata)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 270,
 
       descrizione: `Il corso di Formazione Teorico-Pratico per Lavoratori Addetti alla Conduzione di Caricatori per la Movimentazione di Materiali (CMM), della durata di 8 ore, forma gli operatori sulle caratteristiche tecniche dei caricatori, sui loro dispositivi di sollevamento e sui principali rischi connessi al loro impiego.

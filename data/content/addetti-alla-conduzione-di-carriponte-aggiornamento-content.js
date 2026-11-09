@@ -6,10 +6,10 @@ module.exports = {
   'livello-1': {
     titolo: 'Aggiornamento Addetti alla Conduzione di Carriponte',
     durataOre: 4,
-    modalita: ['Aula', 'Videoconferenza (solo parte teorica)'],
+    modalita: ['Aula', 'Aula virtuale (solo parte teorica)'],
     validita: 'Da ripetere ogni 5 anni',
     attestato: 'Attestato valido in tutta Italia',
-    partecipantiMax: 30,
+    partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
     prezzo: null,
 
     descrizione: `Questo è il corso di aggiornamento abilitante per addetti all'uso del carroponte/gru a cavalletto con comando pensile/radiocomando, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale e deve rinnovarlo prima della scadenza, ai sensi degli artt. 37 comma 7, 71 e 73 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.

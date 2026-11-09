@@ -9,7 +9,7 @@ module.exports = {
     modalita: ['Aula'],
     validita: 'Aggiornamento quinquennale ai sensi art. 73 D.Lgs. 81/08',
     attestato: 'Attestato valido in tutta Italia',
-    partecipantiMax: 30,
+    partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
     prezzo: 100,
 
     descrizione: `Questo è il corso di aggiornamento quinquennale per addetti alla conduzione di pompe per calcestruzzo, della durata di 4 ore, non il corso base: è rivolto a chi ha già conseguito l'abilitazione e deve rinnovarla periodicamente, ai sensi dell'art. 73 del D.Lgs. 81/08 s.m.i. e dell'Accordo Stato-Regioni del 17 aprile 2025.

@@ -11,7 +11,7 @@ module.exports = {
     modalita: ['Aula'],
     validita: 'Aggiornamento ogni 5 anni',
     attestato: 'Attestato valido in tutta Italia',
-    partecipantiMax: 30,
+    partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
     prezzo: 80,
 
     descrizione: `Questo è il corso di aggiornamento per operatori PLE (Piattaforme di Lavoro Mobili Elevabili), della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di abilitazione (con stabilizzatori, senza stabilizzatori o combinato) e deve rinnovarlo prima della scadenza, ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.

@@ -8,10 +8,10 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso Addetti alla Conduzione di Carriponte',
       durataOre: 10,
-      modalita: ['Aula', 'Videoconferenza (solo parte teorica)'],
+      modalita: ['Aula', 'Aula virtuale (solo parte teorica)'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       // NOTA: la pagina isolata originale non mostrava un prezzo fisso per questa variante (nessun
       // CoursePricingSidebar priceRows/prezzo in CONTENUTO.base) - lasciato a null, prezzo su richiesta.
       prezzo: null,

@@ -10,7 +10,7 @@ module.exports = {
     modalita: ['Aula'],
     validita: 'Da ripetere periodicamente ai sensi dell\'art. 37, 73 e allegato IV del D.Lgs 81/2008',
     attestato: 'Attestato valido in tutta Italia',
-    partecipantiMax: 30,
+    partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
     prezzo: 100,
 
     descrizione: `Questo è il corso di aggiornamento abilitante per conducenti di gru per autocarro, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale di 12 ore e deve rinnovarlo prima della scadenza.

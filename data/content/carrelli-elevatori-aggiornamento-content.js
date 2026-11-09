@@ -10,7 +10,7 @@ module.exports = {
     modalita: ['Aula'],
     validita: 'Rinnovo ogni 5 anni',
     attestato: 'Attestato valido in tutta Italia',
-    partecipantiMax: 30,
+    partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
     prezzo: 100,
 
     descrizione: `Questo è il corso di aggiornamento per addetti alla conduzione di carrelli elevatori con operatore a bordo, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di abilitazione e deve rinnovarlo prima della scadenza, ai sensi del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.

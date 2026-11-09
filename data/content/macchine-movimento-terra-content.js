@@ -29,7 +29,7 @@ module.exports = {
       modalita: ['Aula'],
       validita: 'Da definire — aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
       descrizione: `La conduzione di escavatori idraulici richiede una specifica abilitazione ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 22 febbraio 2012. Gli escavatori idraulici sono macchine cingolate o gommate dotate di braccio articolato a comando idraulico e struttura superiore girevole a 360°, tra le più diffuse nei cantieri edili, stradali e di urbanizzazione.
 
@@ -61,7 +61,7 @@ Il corso, della durata di 10 ore, fornisce le competenze per lo scavo, la demoli
       modalita: ['Aula'],
       validita: 'Da definire — aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
       descrizione: `La conduzione di escavatori a fune richiede una specifica abilitazione ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 22 febbraio 2012. Gli escavatori a fune utilizzano un sistema di cavi e argani per il comando del braccio e della benna, anziché la trasmissione idraulica: una tecnologia più robusta, tipicamente impiegata per la gestione di carichi e volumi elevati.
 
@@ -97,7 +97,7 @@ Il corso, della durata di 10 ore, trova applicazione tipica in cantieri di grand
       modalita: ['Aula'],
       validita: 'Da definire — aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
       descrizione: `La conduzione di pale caricatrici frontali e con braccio mobile (ragno) richiede una specifica abilitazione ai sensi degli artt. 37, 71 comma 7 e 73 comma 5 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 17 aprile 2025. Sono macchine gommate o cingolate dotate di benna frontale (o braccio mobile) per il carico, lo spostamento e l'accatastamento di materiali sciolti come inerti, terra e rifiuti da costruzione.
 
@@ -129,7 +129,7 @@ Il corso, della durata di 12 ore, è la formazione di riferimento per chi opera 
       modalita: ['Aula'],
       validita: 'Da definire — aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
       descrizione: `La conduzione di terne richiede una specifica abilitazione ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 22 febbraio 2012. Le terne sono macchine combinate che uniscono nella stessa struttura una pala caricatrice anteriore e un braccio escavatore posteriore, offrendo grande versatilità operativa in un unico mezzo.
 
@@ -162,7 +162,7 @@ Il corso, della durata di 10 ore, è particolarmente indicato per cantieri di pi
       modalita: ['Aula'],
       validita: 'Da definire — aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
       descrizione: `La conduzione di autoribaltabili a cingoli richiede una specifica abilitazione ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 22 febbraio 2012. Sono mezzi cingolati dotati di cassone ribaltabile, progettati per il trasporto di materiali sciolti su terreni difficili, sconnessi o in forte pendenza, dove i normali dumper su ruote non potrebbero operare in sicurezza.
 
@@ -194,7 +194,7 @@ Il corso, della durata di 10 ore, è rivolto a chi opera soprattutto in cantieri
       modalita: ['Aula'],
       validita: 'Da definire — aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 300,
       descrizione: `Il Corso Base Combinato per Macchine Movimento Terra (MMT) da 16 ore fornisce la formazione teorico-pratica obbligatoria ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni. Questo specifico percorso formativo "all-in-one" consente di ottenere contemporaneamente l'abilitazione alla conduzione di 3 distinte categorie di macchine pesanti: gli Escavatori Idraulici (macchine cingolate o gommate con struttura superiore girevole), i Caricatori Frontali (conosciuti comunemente come pale meccaniche) e le Terne (macchine combinate che uniscono la versatilità della pala anteriore e la precisione dell'escavatore posteriore).
 

@@ -9,7 +9,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso di Formazione per Coordinatori della Sicurezza CSP-CSE',
       durataOre: 120,
-      modalita: ['Videoconferenza'],
+      modalita: ['Aula virtuale'],
       validita: 'Da mantenere con l\'aggiornamento periodico (40 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -21,7 +21,7 @@ Il Coordinatore per la Progettazione (CSP) e il Coordinatore per l'Esecuzione de
 
 Il corso, tra i più estesi previsti dalla normativa sulla sicurezza, si articola in otto moduli: due moduli giuridici (28 ore complessive) su normativa generale e specifica dei cantieri; due moduli tecnici (52 ore complessive) su rischi di caduta dall'alto, ponteggi, organizzazione del cantiere, rischi da macchine, attrezzature, sostanze chimiche, amianto e agenti fisici e biologici; due moduli metodologico-organizzativi (16 ore complessive) sull'elaborazione del PSC, del POS e del fascicolo, e su tecniche di comunicazione e gestione dei rapporti con committenza e progettisti; due moduli pratici (24 ore complessive) con stesura reale di Piani di Sicurezza e Coordinamento e simulazioni sul ruolo del coordinatore in fase di esecuzione.
 
-Il corso si svolge interamente in videoconferenza sincrona con il docente, la modalità prevista per questo corso secondo il listino Alètheia. Data l'ampiezza dei contenuti e la centralità della parte pratica di stesura dei documenti di cantiere, il percorso è pensato per fornire competenze immediatamente spendibili nel ruolo di coordinatore.`,
+Il corso si svolge interamente in aula virtuale sincrona con il docente, la modalità prevista per questo corso secondo il listino Alètheia. Data l'ampiezza dei contenuti e la centralità della parte pratica di stesura dei documenti di cantiere, il percorso è pensato per fornire competenze immediatamente spendibili nel ruolo di coordinatore.`,
 
       aChiERivolto: [
         'Chi intende svolgere il ruolo di Coordinatore per la Progettazione (CSP)',
@@ -44,7 +44,7 @@ Il corso si svolge interamente in videoconferenza sincrona con il docente, la mo
       faq: [
         { domanda: 'Che differenza c\'è tra CSP e CSE?', risposta: 'Il CSP opera nella fase di progettazione dell\'opera; il CSE opera durante l\'esecuzione dei lavori vigilando sulla sicurezza in cantiere. Questo corso abilita a entrambi i ruoli.' },
         { domanda: 'Quanto dura il corso Coordinatori CSE-CSP?', risposta: 'Il corso dura 120 ore complessive, suddivise in moduli teorici, tecnici e pratici.' },
-        { domanda: 'Il corso si può fare in aula?', risposta: 'No, secondo il listino Alètheia questo modulo da 120 ore è disponibile solo in videoconferenza sincrona.' },
+        { domanda: 'Il corso si può fare in aula?', risposta: 'No, secondo il listino Alètheia questo modulo da 120 ore è disponibile solo in aula virtuale sincrona.' },
         { domanda: 'Il corso include la stesura pratica di un Piano di Sicurezza e Coordinamento?', risposta: 'Sì, gli ultimi moduli pratici (24 ore totali) prevedono la stesura reale di PSC e simulazioni operative.' },
         { domanda: 'Dopo il corso CSE-CSP serve un aggiornamento periodico?', risposta: 'Sì, è obbligatorio un corso di aggiornamento dedicato di 40 ore.' }
       ],

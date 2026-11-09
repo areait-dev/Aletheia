@@ -27,7 +27,7 @@ module.exports = {
 
 Della durata di 2 ore, interamente pratiche, il corso permette di mantenere valida la designazione e di rinfrescare le competenze operative acquisite con il corso iniziale: uso degli estintori portatili, verifica del registro antincendio e attività di sorveglianza sugli impianti e sistemi di sicurezza.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti.`,
+Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso). La FAD non è prevista.`,
 
     aChiERivolto: [
       "Lavoratori già in possesso dell'attestato Addetto Antincendio Livello 1 in scadenza",
@@ -81,7 +81,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
 
 Della durata di 5 ore, il corso ripercorre i principi sulla combustione e le misure antincendio già affrontate nel corso iniziale, con particolare attenzione alla gestione della sicurezza in esercizio e in emergenza, e dedica una parte consistente alle esercitazioni pratiche su estintori, naspi e idranti.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti.`,
+Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso). La FAD non è prevista.`,
 
     aChiERivolto: [
       "Lavoratori già in possesso dell'attestato Addetto Antincendio Livello 2 in scadenza",
@@ -135,7 +135,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
 
 Della durata di 8 ore, il corso riprende in forma sintetica i contenuti del corso di formazione iniziale - sia gli aspetti legati all'incendio e alla prevenzione, sia la protezione antincendio e le procedure da adottare in caso di emergenza - e dedica un'ampia parte alle esercitazioni pratiche su mezzi di estinzione, dispositivi di protezione individuale ed estintori portatili.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti.`,
+Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso). La FAD non è prevista.`,
 
     aChiERivolto: [
       "Lavoratori già in possesso dell'attestato Addetto Antincendio Livello 3 in scadenza",

@@ -8,7 +8,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso Addetto Antincendio Livello 1 (Ex Rischio Basso)',
       durataOre: 4,
-      modalita: ['Aula', 'FAD', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale (solo teoria)'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato Antincendio valido in tutta Italia',
       partecipantiMax: 30,
@@ -20,7 +20,7 @@ Il D.Lgs. 81/08, all'art. 37 comma 9, obbliga il datore di lavoro a designare un
 
 I contenuti sono strutturati per essere applicabili in aziende di qualsiasi settore produttivo e coprono i principi fondamentali della combustione, le misure di prevenzione e le procedure di evacuazione in caso di pericolo grave e immediato. Al termine del corso viene rilasciato un attestato di partecipazione valido in tutta Italia, con obbligo di aggiornamento ogni 5 anni.
 
-Il corso è erogabile in tre modalità: in aula presso la sede Alètheia di Vittoria (RG), in FAD per la parte teorica e di aggiornamento, in videoconferenza per la sola parte teorica. Raggiunto un minimo di 15 partecipanti, è possibile organizzare il corso direttamente presso la sede aziendale.`,
+Il corso si svolge in aula, presso la sede Alètheia di Vittoria (RG) o direttamente in azienda; l'aula virtuale è ammessa solo per la parte teorica, mentre la FAD non è prevista. La parte pratica deve essere svolta obbligatoriamente in presenza. Per l'organizzazione in azienda si considera di norma un gruppo di circa 8 dipendenti, con una valutazione caso per caso in base alle esigenze aziendali.`,
 
       aChiERivolto: [
         'Lavoratori designati dal datore di lavoro come addetti antincendio nelle attività a rischio basso',
@@ -52,11 +52,11 @@ Il corso è erogabile in tre modalità: in aula presso la sede Alètheia di Vitt
         },
         {
           domanda: 'È possibile svolgere il corso in azienda?',
-          risposta: 'Sì. Raggiunto un numero minimo di 15 partecipanti, Alètheia può organizzare il corso direttamente presso la sede aziendale. Contattaci per un preventivo.'
+          risposta: 'Sì. Alètheia può organizzare il corso direttamente presso la sede aziendale. Di norma si prende come riferimento un gruppo di circa 8 dipendenti, ma valutiamo caso per caso in base alle esigenze dell\'azienda. Contattaci per un preventivo.'
         },
         {
-          domanda: 'Il corso può essere svolto in modalità FAD o videoconferenza?',
-          risposta: "Il corso in FAD è disponibile per la parte teorica e per l'aggiornamento. La videoconferenza è prevista solo per la parte teorica. La parte pratica deve essere svolta obbligatoriamente in presenza."
+          domanda: 'Il corso può essere svolto in FAD o in aula virtuale?',
+          risposta: "La FAD non è prevista: il corso antincendio si svolge in aula. L'aula virtuale è ammessa solo per la parte teorica, mentre la parte pratica deve essere svolta obbligatoriamente in presenza. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle."
         }
       ],
 
@@ -105,7 +105,7 @@ Il corso è erogabile in tre modalità: in aula presso la sede Alètheia di Vitt
     'livello-2': {
       titolo: 'Corso Addetto Antincendio Livello 2 (Ex Rischio Medio)',
       durataOre: 8,
-      modalita: ['Aula', 'FAD', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale (solo teoria)'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato Antincendio valido in tutta Italia',
       partecipantiMax: 30,
@@ -117,7 +117,7 @@ Rispetto al Corso Addetto Antincendio Livello 1, questo corso approfondisce in m
 
 Il corso è conforme al D.M. 02/09/2021 e al D.Lgs. 81/08, art. 37 comma 9. Al termine viene rilasciato un attestato valido in tutta Italia, con aggiornamento obbligatorio ogni 5 anni.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG), in FAD per la parte teorica e di aggiornamento, in videoconferenza per la sola parte teorica. Con un minimo di 15 partecipanti il corso può essere organizzato direttamente in azienda.`,
+Il corso si svolge in aula, presso la sede Alètheia di Vittoria (RG) o direttamente in azienda; l'aula virtuale è ammessa solo per la parte teorica, mentre la FAD non è prevista. La parte pratica deve essere svolta obbligatoriamente in presenza. Per l'organizzazione in azienda si considera di norma un gruppo di circa 8 dipendenti, con una valutazione caso per caso.`,
 
       aChiERivolto: [
         'Lavoratori designati come addetti antincendio in attività classificate a rischio medio',
@@ -158,7 +158,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG), in FAD 
         },
         {
           domanda: 'È possibile organizzare il corso in azienda?',
-          risposta: "Sì, con un minimo di 15 partecipanti. Contattaci per organizzare un'aula direttamente presso la tua sede."
+          risposta: "Sì. Di norma si considera un gruppo di circa 8 dipendenti, con una valutazione caso per caso. Contattaci per organizzare un'aula direttamente presso la tua sede."
         }
       ],
 
@@ -217,7 +217,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG), in FAD 
     'livello-3': {
       titolo: 'Corso Addetto Antincendio Livello 3 (Ex Rischio Alto)',
       durataOre: 16, // CORRETTO: il docx originale riportava erroneamente "8 ore" nella scheda tecnica
-      modalita: ['Aula', 'FAD', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale (solo teoria)'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato Antincendio valido in tutta Italia',
       partecipantiMax: 30,
@@ -231,7 +231,7 @@ Il corso è conforme al D.M. 02/09/2021 e al D.Lgs. 81/08, art. 37 comma 9. Form
 
 Al termine viene rilasciato un attestato valido in tutta Italia. L'aggiornamento è obbligatorio ogni 5 anni.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti. La parte teorica è disponibile anche in videoconferenza. La parte pratica deve essere svolta obbligatoriamente in presenza.`,
+Il corso si svolge in aula, presso la sede Alètheia di Vittoria (RG) o direttamente in azienda; l'aula virtuale è ammessa solo per la parte teorica, mentre la FAD non è prevista. La parte pratica deve essere svolta obbligatoriamente in presenza. Per l'organizzazione in azienda si considera di norma un gruppo di circa 8 dipendenti, con una valutazione caso per caso.`,
 
       aChiERivolto: [
         'Lavoratori designati come addetti antincendio in attività classificate a rischio alto dal D.M. 02/09/2021',
@@ -266,7 +266,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
         },
         {
           domanda: 'È possibile organizzare il corso direttamente in azienda?',
-          risposta: "Sì, con un minimo di 15 partecipanti. Contattaci per organizzare l'aula presso la tua sede e ricevere un preventivo personalizzato."
+          risposta: "Sì. Di norma si considera un gruppo di circa 8 dipendenti, con una valutazione caso per caso. Contattaci per organizzare l'aula presso la tua sede e ricevere un preventivo personalizzato."
         }
       ],
 

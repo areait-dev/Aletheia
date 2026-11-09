@@ -8,7 +8,7 @@ module.exports = {
   'livello-1': {
     titolo: 'Aggiornamento Formazione per Preposti',
     durataOre: 6,
-    modalita: ['Aula', 'Videoconferenza'],
+    modalita: ['Aula', 'Aula virtuale'],
     validita: 'Da ripetere periodicamente ai sensi dell\'art. 37 D.Lgs 81/2008 e dell\'Accordo Stato Regioni del 17/04/2025',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -20,7 +20,7 @@ L'aggiornamento periodico è obbligatorio perché il ruolo del preposto, per sua
 
 Il corso, erogato in un modulo unico, approfondisce l'individuazione del preposto di fatto tra designazione ed effettività del ruolo, gli obblighi connessi a contratti di appalto, d'opera e di somministrazione, la gestione del rischio interferenziale e il DUVRI, le modalità per sovraintendere e vigilare sulle attività lavorative garantendo l'attuazione delle direttive ricevute, e le modalità di comunicazione e relazione con gli altri soggetti della prevenzione aziendale.
 
-Il corso è pensato per chi ha già l'attestato di formazione preposti in scadenza. Chi invece non ha mai conseguito la formazione di base deve frequentare il corso completo di 12 ore, non l'aggiornamento. Il corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.`,
+Il corso è pensato per chi ha già l'attestato di formazione preposti in scadenza. Chi invece non ha mai conseguito la formazione di base deve frequentare il corso completo di 12 ore, non l'aggiornamento. Il corso è disponibile in aula o in aula virtuale; la modalità FAD non è prevista dall'Accordo Stato-Regioni.`,
 
     aChiERivolto: [
       'Preposti già formati (attestato di 12 ore) con formazione in scadenza',
@@ -41,7 +41,7 @@ Il corso è pensato per chi ha già l'attestato di formazione preposti in scaden
     faq: [
       { domanda: 'Ogni quanto va rinnovata la formazione per preposti?', risposta: 'La formazione va aggiornata periodicamente.' },
       { domanda: 'Quanto dura l\'aggiornamento formazione preposti?', risposta: 'L\'aggiornamento dura 6 ore, erogate in un modulo unico che approfondisce temi come il preposto di fatto, gli appalti, il DUVRI e le tecniche di vigilanza e comunicazione.' },
-      { domanda: 'Il corso si può fare in FAD?', risposta: 'No, secondo il listino Alètheia questo corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.' },
+      { domanda: 'Il corso si può fare in FAD?', risposta: 'No. La FAD non è prevista dall\'Accordo Stato-Regioni per l\'aggiornamento dei preposti: il corso si svolge in aula o in aula virtuale. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
       { domanda: 'Posso fare l\'aggiornamento se non ho mai fatto il corso base?', risposta: 'No, l\'aggiornamento è riservato a chi ha già conseguito l\'attestato di formazione preposti di 12 ore. Senza formazione di base è necessario frequentare il corso completo.' },
       { domanda: 'L\'aggiornamento tratta anche la gestione degli appalti e del DUVRI?', risposta: 'Sì, il programma include un approfondimento sugli obblighi connessi a contratti di appalto, d\'opera e di somministrazione, e sulla gestione del rischio interferenziale tramite il DUVRI.' }
     ],

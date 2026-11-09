@@ -50,7 +50,7 @@ Il corso si svolge esclusivamente in presenza presso la sede Alètheia di Vittor
       },
       {
         domanda: "Il corso di aggiornamento carroponte si può fare online?",
-        risposta: "No. L'aggiornamento per addetti alla conduzione di carriponte prevede un modulo pratico di 4 ore da svolgere in presenza. Non è possibile frequentarlo interamente in videoconferenza o in e-learning.",
+        risposta: "No. L'aggiornamento per addetti alla conduzione di carriponte prevede un modulo pratico di 4 ore da svolgere in presenza. Non è possibile frequentarlo interamente in aula virtuale o in e-learning.",
       },
       {
         domanda: "Come si svolge la prova pratica del corso di aggiornamento carroponte?",

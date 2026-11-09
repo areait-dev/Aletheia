@@ -11,7 +11,7 @@ module.exports = {
     modalita: ['Aula'],
     validita: "Da ripetere periodicamente ai sensi dell'art. 73 e dell'Allegato IX del D.Lgs 81/2008",
     attestato: 'Attestato valido in tutta Italia',
-    partecipantiMax: 30,
+    partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
     prezzo: 100,
 
     descrizione: `Questo è il corso di aggiornamento abilitante per addetti alla conduzione di escavatori idraulici, caricatori frontali e terne, della durata di 4 ore, non il corso base: è riservato a chi possiede già l'attestato di formazione iniziale e deve rinnovarlo prima della scadenza, ai sensi dell'art. 73 e dell'Allegato IX del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025.

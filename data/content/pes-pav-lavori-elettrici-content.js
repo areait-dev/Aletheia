@@ -11,7 +11,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso PES, PAV, PEI per Addetti ai Lavori Elettrici Sotto Tensione',
       durataOre: 16,
-      modalita: ['Aula', 'FAD'],
+      modalita: ['Aula'],
       validita: 'Aggiornamento periodico previsto dalla normativa',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -23,7 +23,7 @@ Il corso affronta i rischi di folgorazione, arco elettrico e ustioni connessi ai
 
 Il programma prevede 4 ore di teoria e 12 ore di pratica: la parte pratica include esercitazioni sulla scelta dei DPI, sulla messa a terra e in cortocircuito, e sulla gestione delle terre di lavoro in cantiere e in impianto.
 
-Il corso è disponibile in aula o in FAD (formazione a distanza); la videoconferenza non è prevista per questa variante, dato il carattere pratico dell'addestramento sotto tensione. È possibile organizzare la formazione anche direttamente in azienda.`,
+Il corso si svolge in aula: con la nuova normativa la modalità FAD non è più prevista. È possibile organizzare la formazione anche direttamente in azienda.`,
 
       aChiERivolto: [
         'Lavoratori che devono conseguire o rinnovare la qualifica PES o PAV',
@@ -48,7 +48,7 @@ Il corso è disponibile in aula o in FAD (formazione a distanza); la videoconfer
         { domanda: 'Cosa significano le sigle PES, PAV e PEI?', risposta: 'PES (Persona Esperta) e PAV (Persona Avvertita) sono le qualifiche previste dalla Norma CEI 11-27 per chi opera su impianti elettrici; PEI (Persona Esperta lavori sotto tensione) è la qualifica specifica per chi esegue lavori direttamente sotto tensione in bassa tensione.' },
         { domanda: 'Il corso segue la nuova edizione della CEI 11-27?', risposta: 'Sì, il programma è aggiornato alla Norma CEI 11-27, VI edizione 2025, che introduce novità sulla gestione dei lavori elettrici in bassa, media e alta tensione.' },
         { domanda: 'Quanto dura il corso e come è articolato?', risposta: 'Il corso dura 16 ore complessive: 4 ore di teoria sulla normativa e le procedure, e 12 ore di pratica con esercitazioni su DPI, messa a terra e in cortocircuito.' },
-        { domanda: 'Il corso si può fare in FAD?', risposta: 'Sì, secondo il listino Alètheia questo corso è disponibile in aula o in FAD; la videoconferenza non è prevista per questa variante.' },
+        { domanda: 'Il corso si può fare in FAD?', risposta: 'No. Con la nuova normativa la modalità FAD non è più prevista per i corsi PES/PAV: il corso si svolge in aula. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Questo corso abilita anche ai lavori in prossimità?', risposta: 'Per i soli lavori in prossimità (senza operare sotto tensione) è disponibile il corso dedicato da 12 ore, secondo livello di questa stessa famiglia.' }
       ],
 
@@ -69,7 +69,7 @@ Il corso è disponibile in aula o in FAD (formazione a distanza); la videoconfer
     'livello-2': {
       titolo: 'Corso PES, PAV per Addetti ai Lavori Elettrici in Prossimità',
       durataOre: 12,
-      modalita: ['Aula', 'FAD'],
+      modalita: ['Aula'],
       validita: 'Aggiornamento periodico previsto dalla normativa',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -81,7 +81,7 @@ A differenza del corso Sotto Tensione, questa variante non prevede addestramento
 
 Il programma tratta la CEI EN 50110-1, i ruoli di GL (Gestore Lavori), RI (Responsabile Impianto) e RLE (Referente Lavori Elettrici), il calcolo e la delimitazione delle zone di rispetto e di lavoro, la scelta dei DPI idonei ai lavori in prossimità, e le procedure di segnalazione e delimitazione dell'area.
 
-Il corso è disponibile in aula o in FAD; la videoconferenza non è prevista. È possibile organizzare la formazione anche direttamente in azienda. Chi deve operare anche sotto tensione deve invece frequentare il corso da 16 ore.`,
+Il corso si svolge in aula: con la nuova normativa la modalità FAD non è più prevista. È possibile organizzare la formazione anche direttamente in azienda. Chi deve operare anche sotto tensione deve invece frequentare il corso da 16 ore.`,
 
       aChiERivolto: [
         'Lavoratori che operano in prossimità di parti attive senza eseguire lavori sotto tensione',
@@ -104,7 +104,7 @@ Il corso è disponibile in aula o in FAD; la videoconferenza non è prevista. È
         { domanda: 'In cosa si differenzia questo corso da quello Sotto Tensione (16 ore)?', risposta: 'Questo corso abilita a operare in prossimità di parti attive senza eseguire lavori sotto tensione; per operare direttamente sotto tensione in bassa tensione è necessario il corso PEI da 16 ore, primo livello di questa stessa famiglia.' },
         { domanda: 'Il corso segue la nuova edizione della CEI 11-27?', risposta: 'Sì, il programma è aggiornato alla Norma CEI 11-27, VI edizione 2025.' },
         { domanda: 'Quanto dura il corso per lavori in prossimità?', risposta: 'Il corso dura 12 ore complessive, tra normativa, calcolo delle distanze di sicurezza e procedure operative di prossimità.' },
-        { domanda: 'Il corso si può fare in FAD?', risposta: 'Sì, secondo il listino Alètheia questo corso è disponibile in aula o in FAD; la videoconferenza non è prevista.' }
+        { domanda: 'Il corso si può fare in FAD?', risposta: 'No. Con la nuova normativa la modalità FAD non è più prevista per i corsi PES/PAV: il corso si svolge in aula. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' }
       ],
 
       moduli: [

@@ -16,7 +16,7 @@ module.exports = {
       modalita: ['Aula'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
 
       descrizione: `Il Corso PLE Con Stabilizzatori, della durata di 8 ore, è obbligatorio ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, per gli operatori che devono condurre Piattaforme di Lavoro Mobili Elevabili (PLE) dotate di stabilizzatori.
@@ -106,7 +106,7 @@ Il corso si svolge in aula e con prove pratiche presso la sede Alètheia di Vitt
       modalita: ['Aula'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
 
       descrizione: `Il Corso PLE Senza Stabilizzatori, della durata di 8 ore, è obbligatorio ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, per gli operatori che devono condurre Piattaforme di Lavoro Mobili Elevabili (PLE) prive di stabilizzatori.
@@ -194,7 +194,7 @@ Il corso si svolge in aula e con prove pratiche presso la sede Alètheia di Vitt
       modalita: ['Aula'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
 
       descrizione: `Il Corso PLE Con e Senza Stabilizzatori, della durata di 10 ore, è obbligatorio ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, ed è pensato per chi deve conseguire l'abilitazione su entrambe le tipologie di Piattaforme di Lavoro Mobili Elevabili (PLE) in un unico percorso formativo.

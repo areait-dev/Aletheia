@@ -18,7 +18,7 @@ module.exports = {
       modalita: ['Aula'],
       validita: 'Aggiornamento periodico previsto dalla normativa vigente (4 ore, pagina dedicata)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 280,
 
       descrizione: `La formazione e l'addestramento degli operatori addetti alla conduzione di gru per autocarro sono obbligatori ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato-Regioni del 22 febbraio 2012, che disciplinano l'abilitazione all'uso delle attrezzature di lavoro che richiedono conoscenze e responsabilità particolari.

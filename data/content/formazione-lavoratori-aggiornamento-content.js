@@ -8,7 +8,7 @@ module.exports = {
   'livello-5': {
     titolo: 'Aggiornamento Formazione Generale e Specifica dei Lavoratori',
     durataOre: 6,
-    modalita: ['Aula', 'FAD'],
+    modalita: ['Aula', 'Aula virtuale', 'FAD'],
     validita: 'Da ripetere ogni 5 anni',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -22,7 +22,7 @@ Il corso, della durata di 6 ore interamente teoriche, riprende in chiave aggiorn
 
 Il corso è pensato per chi ha già l'attestato di formazione generale e specifica in scadenza. Chi invece non ha mai conseguito la formazione di base, o ha un attestato scaduto da troppo tempo, deve frequentare il corso completo di formazione generale e specifica, non l'aggiornamento.
 
-Il corso è disponibile in aula presso la sede Alètheia di Vittoria (RG) o in FAD; è possibile organizzarlo anche direttamente in azienda per gruppi numerosi di lavoratori.`,
+Il corso è disponibile in aula presso la sede Alètheia di Vittoria (RG), in aula virtuale o in FAD; è possibile organizzarlo anche direttamente in azienda per gruppi numerosi di lavoratori.`,
 
     aChiERivolto: [
       'Lavoratori di qualsiasi settore con attestato base in scadenza',
@@ -43,10 +43,10 @@ Il corso è disponibile in aula presso la sede Alètheia di Vittoria (RG) o in F
 
     faq: [
       { domanda: 'Ogni quanto va rinnovata?', risposta: 'Va ripetuta periodicamente a intervalli costanti previsti dalla normativa (quinquennale di prassi).' },
-      { domanda: 'Quanto dura?', risposta: '6 ore interamente teoriche, in aula o in FAD.' },
+      { domanda: 'Quanto dura?', risposta: '6 ore interamente teoriche, in aula, in aula virtuale o in FAD.' },
       { domanda: 'Vale per tutti i livelli di rischio?', risposta: 'Sì, è generico e valido per tutti indipendentemente dal corso base seguito.' },
       { domanda: 'Posso farlo senza il corso base?', risposta: 'No, serve l\'attestato base: senza di esso va frequentato il percorso completo di formazione generale e specifica.' },
-      { domanda: 'Si può fare in videoconferenza?', risposta: 'No, per questo corso le modalità disponibili sono solo aula o FAD.' }
+      { domanda: 'Si può fare in aula virtuale?', risposta: 'Sì, l\'aggiornamento è disponibile in aula, in aula virtuale e in FAD. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' }
     ],
 
     moduli: [

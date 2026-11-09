@@ -10,7 +10,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso RSPP Datore di Lavoro – Modulo Comune',
       durataOre: 8,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite il corso dedicato Aggiornamento RSPP Datore di Lavoro (8 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -22,7 +22,7 @@ Questo percorso si compone di due parti: il Modulo Comune, uguale per tutti i se
 
 Il modulo tratta il processo di valutazione dei rischi: fattori di rischio legati a luoghi di lavoro, attrezzature, movimentazione manuale dei carichi, videoterminali, agenti fisici, sostanze pericolose, agenti biologici, atmosfere esplosive, stress lavoro-correlato e rischi legati a genere, età e provenienza; le misure tecniche, organizzative e procedurali di prevenzione; i dispositivi di protezione individuale e la segnaletica di sicurezza; i criteri per l'individuazione e la valutazione dei rischi e la struttura del documento di valutazione dei rischi (DVR).
 
-Il corso è disponibile in aula o in videoconferenza; è possibile organizzarlo anche direttamente in azienda.`,
+Il corso è disponibile in aula o in aula virtuale; è possibile organizzarlo anche direttamente in azienda.`,
 
       aChiERivolto: [
         'Datori di lavoro che intendono svolgere direttamente i compiti di RSPP',
@@ -46,7 +46,7 @@ Il corso è disponibile in aula o in videoconferenza; è possibile organizzarlo 
         { domanda: 'Il Modulo Comune basta per diventare RSPP della propria azienda?', risposta: 'No, va abbinato a un modulo integrativo settoriale (Agricoltura, Pesca, Costruzioni o Chimico). Solo la combinazione completa il percorso.' },
         { domanda: 'Quale modulo integrativo devo scegliere dopo il Modulo Comune?', risposta: 'Dipende dal settore e dal rischio ATECO aziendale. Contattaci per verificarlo.' },
         { domanda: 'Quanto dura il Modulo Comune RSPP Datore di Lavoro?', risposta: '8 ore, suddivise in due parti da 4 ore ciascuna: rischi/prevenzione e valutazione/DVR.' },
-        { domanda: 'Il corso si può fare in videoconferenza?', risposta: 'Sì, aula o videoconferenza sincrona. Non è disponibile la FAD.' },
+        { domanda: 'Il corso si può fare in aula virtuale?', risposta: 'Sì, aula o aula virtuale sincrona. Non è disponibile la FAD.' },
         { domanda: 'Dopo aver conseguito l\'abilitazione, serve un aggiornamento periodico?', risposta: 'Sì, un corso di aggiornamento RSPP Datore di Lavoro di 8 ore, valido per tutti i settori.' }
       ],
 
@@ -67,7 +67,7 @@ Il corso è disponibile in aula o in videoconferenza; è possibile organizzarlo 
     'livello-2': {
       titolo: 'Corso RSPP Datore di Lavoro – Modulo 1: Agricoltura, Silvicoltura e Zootecnia',
       durataOre: 16,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -79,7 +79,7 @@ Il comparto agricolo, silvicolo e zootecnico presenta rischi specifici legati al
 
 Rispetto agli altri moduli integrativi - Pesca, Costruzioni, Chimico-Petrolchimico - questo modulo si concentra sull'analisi degli infortuni tipici del comparto agricolo e sulla normativa tecnica per strutture e impianti rurali, oltre che sulla gestione di ambienti confinati o sospetti di inquinamento presenti in stalle, silos e depositi agricoli.
 
-Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo anche direttamente in azienda. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
+Il modulo è disponibile in aula o in aula virtuale; è possibile organizzarlo anche direttamente in azienda. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
 
       aChiERivolto: [
         'Datori di lavoro di aziende agricole che intendono ricoprire il ruolo di RSPP',
@@ -103,7 +103,7 @@ Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo
         { domanda: 'Basta il Modulo 1 Agricoltura per diventare RSPP della mia azienda agricola?', risposta: 'No, va sempre abbinato al Modulo Comune di 8 ore.' },
         { domanda: 'Quanto dura il Modulo 1 Agricoltura, Silvicoltura e Zootecnia?', risposta: '16 ore teoriche su rischi e prevenzione del comparto agricolo, forestale e zootecnico.' },
         { domanda: 'Questo modulo è adatto anche per aziende di allevamento?', risposta: 'Sì, copre agricoltura, silvicoltura e zootecnia nel suo complesso.' },
-        { domanda: 'Il modulo si può fare in videoconferenza?', risposta: 'Sì, aula o videoconferenza sincrona. Non è disponibile la FAD.' },
+        { domanda: 'Il modulo si può fare in aula virtuale?', risposta: 'Sì, aula o aula virtuale sincrona. Non è disponibile la FAD.' },
         { domanda: 'Che differenza c\'è tra questo modulo e quello per Costruzioni o Chimico-Petrolchimico?', risposta: 'Questo si concentra su agricoltura, silvicoltura e zootecnia; gli altri su pesca, cantieri edili e industria chimica.' }
       ],
 
@@ -124,7 +124,7 @@ Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo
     'livello-3': {
       titolo: 'Corso RSPP Datore di Lavoro – Modulo 2: Pesca',
       durataOre: 12,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -136,7 +136,7 @@ Il settore della pesca presenta rischi peculiari legati all'ambiente di lavoro a
 
 Rispetto al Modulo 1 (Agricoltura) o al Modulo 3 (Costruzioni), questo modulo dedica particolare attenzione alla legislazione specifica di riferimento per il settore ittico e alla gestione dell'emergenza in un contesto marittimo, dove le procedure di soccorso e le condizioni ambientali richiedono un approccio differente rispetto al lavoro su terraferma.
 
-Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo anche direttamente per gruppi di imprese del settore. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
+Il modulo è disponibile in aula o in aula virtuale; è possibile organizzarlo anche direttamente per gruppi di imprese del settore. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
 
       aChiERivolto: [
         'Datori di lavoro di imprese di pesca che intendono ricoprire il ruolo di RSPP',
@@ -160,7 +160,7 @@ Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo
         { domanda: 'Basta il Modulo 2 Pesca per diventare RSPP della mia impresa?', risposta: 'No, va sempre abbinato al Modulo Comune di 8 ore.' },
         { domanda: 'Quanto dura il Modulo 2 Pesca?', risposta: '12 ore teoriche su rischi e prevenzione del settore pesca.' },
         { domanda: 'Questo modulo copre anche i rischi legati alle immersioni subacquee?', risposta: 'Sì, include cenni su atmosfere iperbariche e attività subacquee, oltre alla vita a bordo.' },
-        { domanda: 'Il modulo si può fare in videoconferenza?', risposta: 'Sì, aula o videoconferenza sincrona. Non è disponibile la FAD.' },
+        { domanda: 'Il modulo si può fare in aula virtuale?', risposta: 'Sì, aula o aula virtuale sincrona. Non è disponibile la FAD.' },
         { domanda: 'Che differenza c\'è tra questo modulo e quello per Agricoltura o Costruzioni?', risposta: 'Questo si concentra sulla pesca professionale e i rischi a bordo; gli altri su agricoltura, cantieri e chimica.' }
       ],
 
@@ -181,7 +181,7 @@ Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo
     'livello-4': {
       titolo: 'Corso RSPP Datore di Lavoro – Modulo 3: Costruzioni',
       durataOre: 16,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -193,7 +193,7 @@ Il settore delle costruzioni è tra i comparti a più alto rischio infortunistic
 
 Rispetto agli altri moduli integrativi - Agricoltura, Pesca, Chimico-Petrolchimico - questo modulo dedica ampio spazio a temi specifici del cantiere: cadute dall'alto e opere provvisionali, lavori di demolizione e scavo, impianti elettrici e illuminazione di cantiere, attività su sedi stradali ed esempi pratici di analisi di un POS.
 
-Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo anche direttamente per gruppi di imprese edili. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
+Il modulo è disponibile in aula o in aula virtuale; è possibile organizzarlo anche direttamente per gruppi di imprese edili. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
 
       aChiERivolto: [
         'Datori di lavoro di imprese edili che intendono ricoprire il ruolo di RSPP',
@@ -217,7 +217,7 @@ Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo
         { domanda: 'Basta il Modulo 3 Costruzioni per diventare RSPP dell\'impresa edile?', risposta: 'No, va sempre abbinato al Modulo Comune di 8 ore.' },
         { domanda: 'Quanto dura il Modulo 3 Costruzioni?', risposta: '16 ore teoriche su rischi e prevenzione dei cantieri temporanei o mobili.' },
         { domanda: 'Il modulo tratta anche la redazione del POS?', risposta: 'Sì, include esempi pratici e analisi del Piano Operativo di Sicurezza (POS).' },
-        { domanda: 'Il modulo si può fare in videoconferenza?', risposta: 'Sì, aula o videoconferenza sincrona. Non è disponibile la FAD.' },
+        { domanda: 'Il modulo si può fare in aula virtuale?', risposta: 'Sì, aula o aula virtuale sincrona. Non è disponibile la FAD.' },
         { domanda: 'Che differenza c\'è tra questo modulo e quello per Agricoltura o Chimico-Petrolchimico?', risposta: 'Questo si concentra sui cantieri edili e le opere provvisionali; gli altri su agricoltura, pesca e industria chimica.' }
       ],
 
@@ -238,7 +238,7 @@ Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo
     'livello-5': {
       titolo: 'Corso RSPP Datore di Lavoro – Modulo 4: Chimico-Petrolchimico',
       durataOre: 16,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -250,7 +250,7 @@ Il settore chimico e petrolchimico presenta rischi di elevata complessità, lega
 
 Rispetto al Modulo 1 (Agricoltura), al Modulo 2 (Pesca) o al Modulo 3 (Costruzioni), questo modulo si concentra sulla manutenzione degli impianti e sulla gestione dei fornitori, sui rischi di incendio ed esplosione tipici degli ambienti industriali chimici, sulla gestione di ambienti confinati o sospetti di inquinamento e sulla gestione dei rifiuti industriali.
 
-Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo anche direttamente per gruppi di imprese del settore. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
+Il modulo è disponibile in aula o in aula virtuale; è possibile organizzarlo anche direttamente per gruppi di imprese del settore. Per completare il percorso di abilitazione è necessario aver frequentato, o frequentare in abbinamento, anche il Modulo Comune di 8 ore.`,
 
       aChiERivolto: [
         'Datori di lavoro di aziende chimiche o petrolchimiche che intendono ricoprire il ruolo di RSPP',
@@ -274,7 +274,7 @@ Il modulo è disponibile in aula o in videoconferenza; è possibile organizzarlo
         { domanda: 'Basta il Modulo 4 Chimico-Petrolchimico per diventare RSPP?', risposta: 'No, va abbinato al Modulo Comune di 8 ore per completare l\'abilitazione.' },
         { domanda: 'Quanto dura il Modulo 4 Chimico-Petrolchimico?', risposta: '16 ore teoriche su rischi e prevenzione specifici del comparto.' },
         { domanda: 'Il modulo tratta anche il rischio di incidente rilevante?', risposta: 'Sì, include cenni su rischio di incidente rilevante e industrie insalubri.' },
-        { domanda: 'Il modulo si può fare in videoconferenza?', risposta: 'Sì, aula o videoconferenza sincrona. Non è disponibile la FAD.' },
+        { domanda: 'Il modulo si può fare in aula virtuale?', risposta: 'Sì, aula o aula virtuale sincrona. Non è disponibile la FAD.' },
         { domanda: 'Che differenza c\'è tra questo modulo e quello per Costruzioni o Agricoltura?', risposta: 'Questo si concentra su impianti e processi chimico-industriali; gli altri su cantieri edili, agricoltura e pesca.' }
       ],
 

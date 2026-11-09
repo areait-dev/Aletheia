@@ -11,7 +11,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso di Formazione per Rappresentante dei Lavoratori per la Sicurezza (RLS)',
       durataOre: 32,
-      modalita: ['Aula', 'FAD', 'Videoconferenza'],
+      modalita: ['Aula', 'FAD', 'Aula virtuale'],
       validita: 'Aggiornamento annuale obbligatorio: 4 ore per aziende con meno di 50 dipendenti, 8 ore per aziende con più di 50 dipendenti',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -23,7 +23,7 @@ L'RLS è la figura che i lavoratori eleggono o designano al proprio interno per 
 
 Il corso si articola in tre moduli: il Modulo A (16 ore) sul ruolo, i compiti e le caratteristiche dell'RLS, con approfondimento del quadro normativo, degli organismi di controllo e del sistema sanzionatorio; il Modulo B (8 ore) sulla definizione, individuazione e valutazione dei rischi, con analisi del ciclo produttivo e del sistema di gestione della sicurezza; il Modulo C (8 ore) sugli aspetti normativi legati alle misure di prevenzione e protezione e sulle tecniche di comunicazione applicate alla sicurezza sul lavoro.
 
-Il corso è disponibile in aula, in FAD (formazione a distanza) e in videoconferenza, per adattarsi alle esigenze organizzative di aziende di ogni dimensione. È possibile organizzare la formazione anche direttamente in azienda per i lavoratori eletti o designati come RLS.`,
+Il corso è disponibile in aula, in FAD (formazione a distanza) e in aula virtuale, per adattarsi alle esigenze organizzative di aziende di ogni dimensione. È possibile organizzare la formazione anche direttamente in azienda per i lavoratori eletti o designati come RLS.`,
 
       aChiERivolto: [
         'Lavoratori eletti o designati dai propri colleghi come Rappresentante dei Lavoratori per la Sicurezza',
@@ -53,8 +53,8 @@ Il corso è disponibile in aula, in FAD (formazione a distanza) e in videoconfer
           risposta: 'Il corso di formazione iniziale per RLS dura 32 ore, suddivise in tre moduli: 16 ore sul ruolo e i compiti dell\'RLS, 8 ore sulla valutazione dei rischi e 8 ore sugli aspetti normativi e la comunicazione.'
         },
         {
-          domanda: 'Il corso RLS si può fare in FAD o videoconferenza?',
-          risposta: 'Sì, il corso è disponibile in aula, in FAD e in videoconferenza, in base alle esigenze organizzative dell\'azienda.'
+          domanda: 'Il corso RLS si può fare in FAD o aula virtuale?',
+          risposta: 'Sì, il corso è disponibile in aula, in FAD e in aula virtuale, in base alle esigenze organizzative dell\'azienda.'
         },
         {
           domanda: 'L\'RLS deve fare un aggiornamento periodico?',

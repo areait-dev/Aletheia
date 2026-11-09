@@ -9,7 +9,7 @@ type Contenuto = Record<string, unknown>;
 
 /** Campi ereditati dal corso base. `partecipantiMax` e `partecipantiMin` sono due modi di dire lo stesso dato: vedi `ereditaDalBase`. */
 export const CAMPI_EREDITATI = ['modalita', 'attestato', 'validita'] as const;
-const CAMPI_PARTECIPANTI = ['partecipantiMax', 'partecipantiMin'] as const;
+const CAMPI_PARTECIPANTI = ['partecipantiMax', 'partecipantiMin', 'partecipantiPraticaMax'] as const;
 
 const vuoto = (v: unknown) => v === undefined || v === null || v === '' || (Array.isArray(v) && v.length === 0);
 

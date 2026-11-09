@@ -12,7 +12,7 @@ module.exports = {
       modalita: ['Aula'],
       validita: 'Rinnovo ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 180,
 
       descrizione: `Il Corso per Addetti alla Conduzione di Carrelli Industriali Semoventi con Operatore a Bordo, della durata di 12 ore, è obbligatorio ai sensi dell'art. 73 del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, che disciplina la formazione per l'uso delle attrezzature di lavoro che richiedono conoscenze e responsabilità particolari.

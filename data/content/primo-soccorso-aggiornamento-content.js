@@ -7,7 +7,7 @@ module.exports = {
   'livello-1': {
     titolo: 'Aggiornamento Corso Primo Soccorso Aziendale Gruppo A',
     durataOre: 6,
-    modalita: ['Aula', 'FAD'],
+    modalita: ['Aula', 'Aula virtuale (solo teoria)'],
     validita: 'Aggiornamento ogni 3 anni',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -15,9 +15,9 @@ module.exports = {
 
     descrizione: `Il corso di aggiornamento primo soccorso Gruppo A è il percorso obbligatorio per tutti i lavoratori che hanno già conseguito l'attestato base da 16 ore e devono rinnovare la propria abilitazione entro i termini previsti dalla normativa. Il D.M. 388/2003, in combinato con il D.Lgs. 81/08, stabilisce che gli addetti al primo soccorso aziendale devono aggiornarsi obbligatoriamente ogni 3 anni.
 
-Per il Gruppo A l'aggiornamento ha una durata di 6 ore e deve includere una parte pratica con esercitazioni su manichino - non è sufficiente la sola formazione teorica o in FAD. La scadenza dell'attestato di primo soccorso decorre dalla data di conclusione del corso base o dell'ultimo aggiornamento effettuato. Il mancato rinnovo nei termini previsti comporta la decadenza della designazione e l'obbligo di ripetere l'intero corso base da 16 ore, non il solo aggiornamento.
+Per il Gruppo A l'aggiornamento ha una durata di 6 ore e deve includere una parte pratica con esercitazioni su manichino - non è sufficiente la sola formazione teorica. La scadenza dell'attestato di primo soccorso decorre dalla data di conclusione del corso base o dell'ultimo aggiornamento effettuato. Il mancato rinnovo nei termini previsti comporta la decadenza della designazione e l'obbligo di ripetere l'intero corso base da 16 ore, non il solo aggiornamento.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti. Le esercitazioni pratiche devono essere svolte obbligatoriamente in presenza.`,
+Il corso si svolge in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso); l'aula virtuale è ammessa solo per la parte teorica, mentre la FAD non è prevista. Le esercitazioni pratiche devono essere svolte obbligatoriamente in presenza.`,
 
     aChiERivolto: [
       'Addetti Gruppo A con attestato in scadenza o scaduto da meno di 3 anni',
@@ -38,9 +38,9 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
     faq: [
       { domanda: 'Cosa succede se è scaduto da oltre 3 anni?', risposta: 'L\'attestato decade: serve rifare il corso base da 16 ore, l\'aggiornamento non è sufficiente.' },
       { domanda: 'Qual è la differenza con il corso base?', risposta: 'Il corso base (16h) è completo per neodesignati o per chi ha l\'attestato scaduto da oltre 3 anni. L\'aggiornamento (6h) è per i rinnovi triennali.' },
-      { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì, al raggiungimento del numero minimo di iscritti.' },
+      { domanda: 'È possibile organizzarlo in azienda?', risposta: 'Sì. Di norma si considera un gruppo di circa 8 dipendenti, con valutazione caso per caso in base alle esigenze dell\'azienda.' },
       { domanda: 'L\'attestato è valido in tutta Italia?', risposta: 'Sì.' },
-      { domanda: 'Si può fare interamente in FAD?', risposta: 'No, la parte pratica con manichino richiede la presenza.' }
+      { domanda: 'Si può fare in FAD o in aula virtuale?', risposta: 'La FAD non è prevista. Si può svolgere in aula oppure in aula virtuale limitatamente alla parte teorica: la parte pratica con manichino richiede la presenza. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' }
     ],
 
     moduli: [
@@ -64,7 +64,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
   'livello-2': {
     titolo: 'Aggiornamento Corso Primo Soccorso Aziendale Gruppo B e C',
     durataOre: 4,
-    modalita: ['Aula', 'FAD'],
+    modalita: ['Aula', 'Aula virtuale (solo teoria)'],
     validita: 'Aggiornamento ogni 3 anni',
     attestato: 'Attestato valido in tutta Italia',
     partecipantiMax: 30,
@@ -74,7 +74,7 @@ Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o dirett
 
 Il D.M. 388/2003 stabilisce che la scadenza dell'attestato di primo soccorso è fissata a 3 anni dalla data del corso base o dell'ultimo aggiornamento. Superata questa scadenza senza aver effettuato il rinnovo, il lavoratore decade dalla designazione e deve ripetere l'intero corso base da 12 ore.
 
-Il corso è erogabile in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda con un minimo di 15 partecipanti.`,
+Il corso si svolge in aula presso la sede Alètheia di Vittoria (RG) o direttamente in azienda (di norma per gruppi di circa 8 dipendenti, con valutazione caso per caso); l'aula virtuale è ammessa solo per la parte teorica, mentre la FAD non è prevista.`,
 
     aChiERivolto: [
       'Addetti Gruppo B o C con attestato in scadenza o scaduto da meno di 3 anni',

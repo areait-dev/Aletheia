@@ -16,7 +16,7 @@ module.exports = {
       modalita: ['Aula'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 180,
 
       descrizione: `Il Corso per Addetti alla Conduzione di Trattori Agricoli o Forestali a Ruote, della durata di 8 ore, è obbligatorio ai sensi dell'art. 73 e dell'allegato VIII del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, che disciplina la formazione per la conduzione in sicurezza delle attrezzature semoventi con operatore a bordo.
@@ -116,7 +116,7 @@ Il corso si svolge in aula e in campo presso la sede Alètheia di Vittoria (RG),
       modalita: ['Aula'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 180,
 
       descrizione: `Il Corso per Addetti alla Conduzione di Trattori Agricoli o Forestali a Cingoli, della durata di 8 ore, è obbligatorio ai sensi dell'art. 73 e dell'allegato VIII del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, che disciplina la formazione per la conduzione in sicurezza delle attrezzature semoventi con operatore a bordo.
@@ -214,7 +214,7 @@ Il corso si svolge in aula e in campo presso la sede Alètheia di Vittoria (RG),
       modalita: ['Aula'],
       validita: 'Aggiornamento ogni 5 anni',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 250,
 
       descrizione: `Il Corso per Addetti alla Conduzione di Trattori Agricoli o Forestali a Ruote e a Cingoli, della durata di 13 ore, è obbligatorio ai sensi dell'art. 73 e dell'allegato VIII del D.Lgs 81/2008 e dell'Accordo Stato Regioni del 17 aprile 2025, ed è pensato per chi deve conseguire l'abilitazione su entrambe le categorie di trattori in un unico percorso formativo.

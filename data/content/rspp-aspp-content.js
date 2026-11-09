@@ -12,7 +12,7 @@ module.exports = {
     'livello-2': {
       titolo: 'Corso RSPP/ASPP – Modulo A',
       durataOre: 28,
-      modalita: ['FAD'],
+      modalita: ['Aula', 'Aula virtuale', 'FAD'],
       validita: 'Da mantenere con l\'aggiornamento periodico previsto per RSPP/ASPP (40 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -24,7 +24,7 @@ Il Modulo A è comune a entrambe le figure professionali ed è il punto di parte
 
 Il programma affronta l'approccio alla prevenzione nel D.Lgs 81/08, l'evoluzione legislativa in materia di salute e sicurezza sul lavoro, il sistema istituzionale della prevenzione, il sistema di vigilanza e assistenza, i soggetti del sistema di prevenzione e protezione aziendale, i concetti fondamentali di pericolo, rischio, danno, prevenzione e protezione, il processo di valutazione dei rischi, il documento di valutazione dei rischi (DVR) e gli istituti relazionali previsti dalla normativa.
 
-Il corso si svolge interamente in FAD (formazione a distanza asincrona), la modalità prevista per questo modulo secondo il listino Alètheia. Al termine del Modulo A è possibile proseguire con il Modulo B per diventare ASPP, o con Modulo B e Modulo C per diventare RSPP.`,
+Il Modulo A è erogabile in aula, in aula virtuale sincrona con il docente e in FAD (formazione a distanza asincrona). Al termine del Modulo A è possibile proseguire con il Modulo B per diventare ASPP, o con Modulo B e Modulo C per diventare RSPP.`,
 
       aChiERivolto: [
         'Chi intende diventare ASPP esterno',
@@ -46,7 +46,7 @@ Il corso si svolge interamente in FAD (formazione a distanza asincrona), la moda
 
       faq: [
         { domanda: 'Il Modulo A basta per diventare ASPP o RSPP?', risposta: 'No, è il primo passo. Per ASPP serve anche il Modulo B; per RSPP servono Modulo B e Modulo C.' },
-        { domanda: 'Il Modulo A si può fare in aula?', risposta: 'No, secondo il listino Alètheia questo modulo è disponibile solo in modalità FAD.' },
+        { domanda: 'Il Modulo A si può fare in aula o in FAD?', risposta: 'Sì, il Modulo A è disponibile in aula, in aula virtuale e in FAD. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Quanto dura il Modulo A?', risposta: '28 ore complessive, suddivise in diverse unità didattiche su quadro normativo, sistema di prevenzione e valutazione rischi.' },
         { domanda: 'Che differenza c\'è tra il Modulo A e il Modulo B?', risposta: 'Il Modulo A è la base comune giuridico-normativa e organizzativa generale; il Modulo B è specialistico e approfondisce i rischi tecnici specifici.' },
         { domanda: 'Dopo il Modulo A devo fare anche un aggiornamento periodico?', risposta: 'Sì, una volta completato l\'intero percorso RSPP o ASPP è previsto un aggiornamento periodico di 40 ore.' }
@@ -63,7 +63,7 @@ Il corso si svolge interamente in FAD (formazione a distanza asincrona), la moda
     'livello-3': {
       titolo: 'Corso RSPP/ASPP – Modulo B',
       durataOre: 48,
-      modalita: ['Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Da mantenere con l\'aggiornamento periodico previsto per RSPP/ASPP (40 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -75,7 +75,7 @@ Mentre il Modulo A fornisce le basi giuridiche e organizzative del sistema di pr
 
 Il completamento del Modulo A e del Modulo B consente di conseguire la qualifica di ASPP. Chi invece intende diventare RSPP deve, dopo il Modulo B, completare anche il Modulo C, dedicato agli aspetti gestionali, relazionali e organizzativi specifici del ruolo di responsabile.
 
-Il corso si svolge in videoconferenza sincrona con il docente, la modalità prevista per questo modulo secondo il listino Alètheia. Data l'ampiezza dei contenuti, il modulo è strutturato in dodici unità didattiche da 4 ore ciascuna, per un totale di 48 ore.`,
+Il modulo è erogabile in aula e in aula virtuale sincrona con il docente; la FAD non è prevista. Data l'ampiezza dei contenuti, il modulo è strutturato in dodici unità didattiche da 4 ore ciascuna, per un totale di 48 ore.`,
 
       aChiERivolto: [
         'Chi ha già completato il Modulo A e intende conseguire la qualifica di ASPP',
@@ -98,7 +98,7 @@ Il corso si svolge in videoconferenza sincrona con il docente, la modalità prev
       faq: [
         { domanda: 'Posso fare il Modulo B senza aver fatto il Modulo A?', risposta: 'No, il Modulo A è il prerequisito obbligatorio per accedere al Modulo B.' },
         { domanda: 'Con Modulo A e Modulo B divento RSPP o ASPP?', risposta: 'Si consegue la qualifica di ASPP. Per diventare RSPP è necessario completare anche il Modulo C.' },
-        { domanda: 'Il Modulo B si può fare in aula?', risposta: 'No, secondo il listino Alètheia questo modulo è disponibile solo in modalità videoconferenza.' },
+        { domanda: 'Il Modulo B si può fare in aula o in FAD?', risposta: 'Il Modulo B è disponibile in aula e in aula virtuale; la FAD non è prevista. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Quanto dura il Modulo B?', risposta: '48 ore complessive, suddivise in dodici unità didattiche da 4 ore ciascuna.' },
         { domanda: 'Il Modulo B tratta anche i rischi psicosociali come lo stress lavoro-correlato?', risposta: 'Sì, include un\'unità didattica specifica su stress lavoro-correlato, mobbing e burn-out.' }
       ],
@@ -114,7 +114,7 @@ Il corso si svolge in videoconferenza sincrona con il docente, la modalità prev
     'livello-4': {
       titolo: 'Corso RSPP – Modulo C',
       durataOre: 24,
-      modalita: ['Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Da mantenere con l\'aggiornamento periodico previsto per RSPP/ASPP (40 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -126,7 +126,7 @@ Se i primi due moduli forniscono le basi normative (Modulo A) e la capacità tec
 
 Il programma affronta il ruolo dell'informazione e della formazione in azienda, i sistemi di gestione della sicurezza (linee guida UNI-INAIL, integrazione con standard come OHSAS 18001 e ISO), la responsabilità amministrativa ai sensi del D.Lgs 231/2001, il sistema delle relazioni e della comunicazione aziendale, la gestione di riunioni e incontri di lavoro, e il benessere organizzativo, incluso il tema dello stress lavoro-correlato.
 
-Il corso si svolge in videoconferenza sincrona con il docente, la modalità prevista per questo modulo secondo il listino Alètheia. Con il completamento di Modulo A, Modulo B e Modulo C si conclude il percorso di formazione per la qualifica di RSPP esterno.`,
+Il modulo è erogabile in aula e in aula virtuale sincrona con il docente; la FAD non è prevista. Con il completamento di Modulo A, Modulo B e Modulo C si conclude il percorso di formazione per la qualifica di RSPP esterno.`,
 
       aChiERivolto: [
         'Chi ha completato Modulo A e B e intende conseguire la qualifica di RSPP',
@@ -149,7 +149,7 @@ Il corso si svolge in videoconferenza sincrona con il docente, la modalità prev
       faq: [
         { domanda: 'Devo fare il Modulo C se voglio diventare ASPP?', risposta: 'No, il Modulo C è richiesto esclusivamente per chi vuole diventare RSPP.' },
         { domanda: 'Posso fare il Modulo C senza aver completato Modulo A e Modulo B?', risposta: 'No, Modulo A e Modulo B sono prerequisiti obbligatori.' },
-        { domanda: 'Il Modulo C si può fare in aula?', risposta: 'No, secondo il listino Alètheia questo modulo è disponibile solo in modalità videoconferenza.' },
+        { domanda: 'Il Modulo C si può fare in aula o in FAD?', risposta: 'Il Modulo C è disponibile in aula e in aula virtuale; la FAD non è prevista. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Quanto dura il Modulo C?', risposta: 'Dura 24 ore complessive, focalizzate su competenze gestionali, relazionali e organizzative.' },
         { domanda: 'Cosa distingue il Modulo C dagli altri due moduli?', risposta: 'Si concentra su comunicazione, formazione, sistemi di gestione e benessere organizzativo, anziché sulla valutazione tecnica o sul quadro normativo.' }
       ],

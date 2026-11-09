@@ -9,7 +9,7 @@ module.exports = {
     'livello-1': {
       titolo: 'Corso di Formazione per Preposti',
       durataOre: 12,
-      modalita: ['Aula', 'Videoconferenza'],
+      modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento periodico previsto dalla normativa',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 30,
@@ -21,7 +21,7 @@ Il preposto, secondo la definizione del D.Lgs 81/2008, è la persona che sovrint
 
 Il corso si articola in quattro moduli: il Modulo I giuridico-normativo (3 ore), sull'individuazione del preposto, il preposto di fatto e i suoi compiti e obblighi; il Modulo II sulla gestione e organizzazione della sicurezza (3 ore), sulle modalità di esercizio della funzione di controllo ai sensi dell'art. 19 del D.Lgs 81/2008; il Modulo III sulla valutazione delle situazioni di rischio (3 ore), su misure di prevenzione, appalti, DUVRI e segnalazione di incidenti e infortuni mancati; il Modulo IV sulla comunicazione e informazione (3 ore), su tecniche di comunicazione e sensibilizzazione dei lavoratori, in particolare neoassunti, somministrati e stranieri.
 
-Il corso è disponibile in aula o in videoconferenza sincrona con il docente; la modalità FAD non è prevista per questo corso, dato il carattere pratico e relazionale del ruolo del preposto. È possibile organizzare la formazione anche direttamente in azienda per i preposti designati o che svolgono di fatto questa funzione.`,
+Il corso è disponibile in aula o in aula virtuale sincrona con il docente; la modalità FAD non è prevista dall'Accordo Stato-Regioni per questo corso. È possibile organizzare la formazione anche direttamente in azienda per i preposti designati o che svolgono di fatto questa funzione.`,
 
       aChiERivolto: [
         'Lavoratori designati dal datore di lavoro come preposti in azienda',
@@ -46,7 +46,7 @@ Il corso è disponibile in aula o in videoconferenza sincrona con il docente; la
         { domanda: 'Chi è il preposto e chi deve fare questo corso?', risposta: 'Il preposto è chi sovrintende all\'attività lavorativa di altri lavoratori e ne garantisce l\'attuazione delle direttive, anche solo di fatto e senza una nomina formale: la formazione è obbligatoria per chiunque svolga concretamente questo ruolo.' },
         { domanda: 'Quanto dura il corso di formazione per preposti?', risposta: 'Il corso dura 12 ore complessive, suddivise in quattro moduli da 3 ore ciascuno: giuridico-normativo, gestione e organizzazione della sicurezza, valutazione dei rischi e comunicazione.' },
         { domanda: 'Cos\'è il preposto di fatto?', risposta: 'È chi esercita concretamente funzioni di sovrintendenza e vigilanza sui lavoratori, anche senza una designazione formale da parte del datore di lavoro: la normativa gli attribuisce gli stessi obblighi formativi di un preposto formalmente nominato.' },
-        { domanda: 'Il corso si può fare in FAD?', risposta: 'No, secondo il listino Alètheia questo corso è disponibile in aula o in videoconferenza; la modalità FAD non è prevista.' },
+        { domanda: 'Il corso si può fare in FAD?', risposta: 'No. La FAD non è prevista dall\'Accordo Stato-Regioni per la formazione dei preposti: il corso si svolge in aula o in aula virtuale. Le modalità indicate sono quelle che proponiamo attualmente: altre modalità sono possibili se consentite dalla normativa, contattaci per valutarle.' },
         { domanda: 'Dopo il corso preposti serve un aggiornamento periodico?', risposta: 'Sì, è previsto un corso di aggiornamento dedicato di 6 ore.' }
       ],
 

@@ -11,7 +11,7 @@ module.exports = {
       modalita: ['Aula'],
       validita: 'Aggiornamento quinquennale obbligatorio (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
-      partecipantiMax: 30,
+      partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 250,
 
       descrizione: `Il corso Teorico/Pratico Abilitante per Addetti alla Conduzione di Autopompe per Calcestruzzo, della durata di 14 ore, è obbligatorio ai sensi degli artt. 37 e 73 del D.Lgs. 81/2008 e s.m.i. e dell'Accordo Stato-Regioni del 17 aprile 2025, per chiunque conduca autopompe per calcestruzzo in cantiere.
