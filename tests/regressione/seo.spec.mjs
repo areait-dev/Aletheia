@@ -119,3 +119,13 @@ test('BreadcrumbList solo dove le briciole sono visibili, e uguali a quelle most
   // pagine senza briciole visibili: nessun BreadcrumbList
   for (const url of ['/chi-siamo', '/news']) expect(jsonLd(await leggi(request, url)).some((d) => tipo(d, 'BreadcrumbList')), url).toBe(false);
 });
+
+test('nessuna news ha un <title> oltre i 65 caratteri @rapido', async ({ request }) => {
+  const lunghi = [];
+  for (const n of ALL_NEWS) {
+    const $ = await leggi(request, `/news/${n.slug}`);
+    const titolo = $('title').first().text();
+    if (titolo.length > 65) lunghi.push(`${n.slug}: ${titolo.length} caratteri (${titolo})`);
+  }
+  expect(lunghi, lunghi.join('\n')).toEqual([]);
+});
