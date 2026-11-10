@@ -1250,7 +1250,7 @@ export const coursesDetails = {
   'asacom-assistente-alla-comunicazione': {
     enrollOnly: true,
     minimoIscritti: 15, // corso qualificato: il numero minimo si scrive solo qui e in OSS
-    title: 'ASACOM - Assistente alla Comunicazione',
+    title: 'ASACOM - Assistente specialistico all\'autonomia e alla comunicazione',
     image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=400&q=80',
     category: 'Formazione Professionale',
     duration: '600 ore',
@@ -1260,7 +1260,7 @@ export const coursesDetails = {
     lessons: '8 moduli',
     students: '150+',
     target: 'Diplomati interessati al supporto educativo per alunni con disabilità sensoriali',
-    overview: 'Il corso ASACOM (Assistente alla Comunicazione) forma professionisti che supportano bambini e ragazzi con disabilità sensoriali (sordità, cecità, sordocecità) nell\'integrazione scolastica e sociale. Il percorso, accreditato dalla Regione Siciliana, unisce formazione teorica, competenze in Lingua dei Segni Italiana (LIS) e tirocinio diretto nelle scuole.',
+    overview: 'Il corso ASACOM (Assistente specialistico all\'autonomia e alla comunicazione) forma professionisti che supportano bambini e ragazzi con disabilità sensoriali (sordità, cecità, sordocecità) nell\'integrazione scolastica e sociale. Il percorso, accreditato dalla Regione Siciliana, unisce formazione teorica, competenze in Lingua dei Segni Italiana (LIS) e tirocinio diretto nelle scuole.',
     curriculum: [
       { week: 1, title: 'Fondamenti teorici', hours: 80, lessons: ['Normativa sull\'inclusione scolastica (L. 104/92)', 'Psicologia dello sviluppo e disabilità', 'Ruolo e funzioni dell\'ASACOM', 'Lavoro con l\'équipe educativa'] },
       { week: 2, title: 'Lingua dei Segni Italiana (LIS)', hours: 150, lessons: ['LIS livello base', 'LIS livello intermedio', 'Comunicazione aumentativa alternativa (CAA)', 'Supporto alla comunicazione orale e scritta'] },

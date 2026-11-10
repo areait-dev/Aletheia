@@ -39,7 +39,7 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | Patentino Fitosanitario | Patentino fitosanitario |
 | Personale Alimentarista OSA | Personale alimentarista OSA |
 | OSS - Operatore Socio Sanitario | OSS - Operatore socio sanitario |
-| ASACOM - Assistente alla Comunicazione | ASACOM - Assistente alla comunicazione |
+| ASACOM - Assistente alla Comunicazione | ASACOM - Assistente specialistico all'autonomia e alla comunicazione |
 | BLSD - Basic Life Support and Defibrillation | BLSD - Basic life support and defibrillation |
 | Conduttore d'Impresa Agricola | Conduttore d'impresa agricola |
 | ICDL Base | ICDL Base |
@@ -135,7 +135,7 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | Personale Alimentarista OSA | Personale alimentarista OSA |
 | Aggiornamento Personale Alimentarista OSA | Aggiornamento personale alimentarista OSA |
 | OSS - Operatore Socio Sanitario | OSS - Operatore socio sanitario |
-| ASACOM - Assistente alla Comunicazione | ASACOM - Assistente alla comunicazione |
+| ASACOM - Assistente alla Comunicazione | ASACOM - Assistente specialistico all'autonomia e alla comunicazione |
 | BLSD - Basic Life Support and Defibrillation | BLSD - Basic life support and defibrillation |
 | Conduttore d'Impresa Agricola | Conduttore d'impresa agricola |
 | ICDL Base | ICDL Base |
