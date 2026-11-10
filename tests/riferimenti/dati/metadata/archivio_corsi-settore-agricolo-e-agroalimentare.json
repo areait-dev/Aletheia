@@ -58,6 +58,30 @@
   "jsonld": [
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.aletheiasrl.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Archivio",
+          "item": "https://www.aletheiasrl.it/archivio"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Corsi Settore Agricolo E Agroalimentare",
+          "item": "https://www.aletheiasrl.it/archivio/corsi-settore-agricolo-e-agroalimentare"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": [
         "EducationalOrganization",
         "Organization"
@@ -164,30 +188,6 @@
         "https://www.instagram.com/aletheiasrl/",
         "https://it.linkedin.com/company/al%C3%A9theia-srl",
         "https://t.me/alethiaapl"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.aletheiasrl.it/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Archivio",
-          "item": "https://www.aletheiasrl.it/archivio"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Corsi Settore Agricolo E Agroalimentare",
-          "item": "https://www.aletheiasrl.it/archivio/corsi-settore-agricolo-e-agroalimentare"
-        }
       ]
     }
   ],

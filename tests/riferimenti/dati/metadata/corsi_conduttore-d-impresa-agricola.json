@@ -58,6 +58,23 @@
   "jsonld": [
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tutti i corsi",
+          "item": "https://www.aletheiasrl.it/corsi"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Settore Agricolo"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": [
         "EducationalOrganization",
         "Organization"

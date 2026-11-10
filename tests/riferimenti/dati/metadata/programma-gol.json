@@ -58,6 +58,36 @@
   "jsonld": [
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.aletheiasrl.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agenzia per il Lavoro",
+          "item": "https://www.aletheiasrl.it/agenzia-per-il-lavoro"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Servizi alla Persona",
+          "item": "https://www.aletheiasrl.it/agenzia-per-il-lavoro/servizi-alla-persona"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Programma G.O.L.",
+          "item": "https://www.aletheiasrl.it/programma-gol"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": [
         "EducationalOrganization",
         "Organization"
@@ -164,36 +194,6 @@
         "https://www.instagram.com/aletheiasrl/",
         "https://it.linkedin.com/company/al%C3%A9theia-srl",
         "https://t.me/alethiaapl"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.aletheiasrl.it/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Agenzia per il Lavoro",
-          "item": "https://www.aletheiasrl.it/agenzia-per-il-lavoro"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Servizi alla Persona",
-          "item": "https://www.aletheiasrl.it/agenzia-per-il-lavoro/servizi-alla-persona"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Programma G.O.L.",
-          "item": "https://www.aletheiasrl.it/programma-gol"
-        }
       ]
     }
   ],

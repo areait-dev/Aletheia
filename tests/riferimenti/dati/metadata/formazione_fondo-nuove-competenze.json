@@ -58,6 +58,30 @@
   "jsonld": [
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.aletheiasrl.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Formazione Finanziata",
+          "item": "https://www.aletheiasrl.it/formazione/regionale-fse"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Fondo Nuove Competenze",
+          "item": "https://www.aletheiasrl.it/formazione/fondo-nuove-competenze"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": [
         "EducationalOrganization",
         "Organization"
