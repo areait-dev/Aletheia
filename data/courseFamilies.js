@@ -132,6 +132,7 @@ const maiuscolaIniziale = (t) => (t ? t.charAt(0).toUpperCase() + t.slice(1) : t
 // quindi senza questa mappa cambierebbe anche l'URL, e con lui id, contenuti, immagini, redirect e canonical).
 const SLUG_STORICI = {
   'addetti-alla-conduzione-di-carriponte-pensile-cabina': 'addetti-alla-conduzione-di-carriponti-pensile-cabina',
+  'asacom-assistente-specialistico-all-autonomia-e-alla-comunicazione': 'asacom-assistente-alla-comunicazione', // titolo ASACOM cambiato in e0db6b0: URL e contenuto restavano orfani
 };
 
 function slugify(str) {
