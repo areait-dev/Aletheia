@@ -38,16 +38,16 @@ function AvvisoCard({ badge, logo, title, text, durata, modalita, href, external
         opacity: clickable ? 1 : 0.85,
       }}
     >
-      <div style={{ height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
-      <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1 }}>
-        <span style={{ fontSize: '0.63rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary-text)', background: 'rgba(1,136,145,0.1)', padding: '0.25rem 0.65rem', borderRadius: '999px', width: 'fit-content' }}>
+      {/* Immagine a tutta larghezza (senza margini su sopra/sinistra/destra); il badge sta sopra la foto come .badge-overlay */}
+      <div style={{ position: 'relative', height: '180px', flexShrink: 0 }}>
+        <Image src={image} alt={imageAlt || title} fill sizes="(max-width: 768px) 100vw, 340px" style={{ objectFit: 'cover', objectPosition: imagePosition || 'center' }} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(90deg, #008C95, #10B981)', opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }} />
+        <span className="badge-overlay" style={{ position: 'absolute', bottom: '0.85rem', left: '0.85rem', maxWidth: 'calc(100% - 1.7rem)', whiteSpace: 'normal', lineHeight: 1.25 }}>
+          <span className="badge-overlay-dot" aria-hidden="true" />
           {badge}
         </span>
-
-        <div style={{ borderRadius: '0.6rem', overflow: 'hidden', height: '140px', position: 'relative' }}>
-          <Image src={image} alt={imageAlt || title} fill sizes="(max-width: 768px) 100vw, 340px" style={{ objectFit: 'cover', objectPosition: imagePosition || 'center' }} />
-        </div>
-
+      </div>
+      <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1 }}>
         <span className="text-slate-600 dark:text-gray-500" style={{ fontSize: '0.68rem', fontWeight: 700 }}>
           {logo}
         </span>
