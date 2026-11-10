@@ -28,13 +28,18 @@ export async function raccogliUrl() {
   const famiglie = buildCourseFamilies(await getCoursesRaw(), {}, { quiet: true });
   famiglie.forEach((f) => aggiungi(`/corsi/${f.slug}`));
 
-  (await getAllNews()).forEach((n) => aggiungi(`/news/${n.slug}`, /^\d{4}-\d{2}-\d{2}/.test(n.date || '') ? n.date.slice(0, 10) : null));
+  const news = await getAllNews();
+  news.forEach((n) => aggiungi(`/news/${n.slug}`, /^\d{4}-\d{2}-\d{2}/.test(n.date || '') ? n.date.slice(0, 10) : null));
 
   (await getArchivio()).filter((v) => !VOCI_SPOSTATE[v.slug]).forEach((v) => aggiungi(`/archivio/${v.slug}`));
   FAMIGLIE.forEach((f) => aggiungi(`/archivio/${f.chiave}`));
   (await getAiutiAnni()).forEach((anno) => aggiungi(`/aiuti-di-stato/${anno}`));
 
-  return Array.from(voci.entries()).sort(([a], [b]) => a.localeCompare(b)).map(([percorso, lastmod]) => ({ loc: percorso === '/' ? `${SITE_URL}/` : `${SITE_URL}${percorso}`, lastmod }));
+  // Alfabetico, tranne le news: subito dopo /news, nell'ordine unico del sito (data di pubblicazione decrescente, vedi ordinaNews)
+  const percorsiNews = news.map((n) => `/news/${n.slug}`);
+  const altri = Array.from(voci.keys()).filter((p) => !percorsiNews.includes(p)).sort((x, y) => x.localeCompare(y));
+  const ordine = altri.flatMap((p) => (p === '/news' ? [p, ...percorsiNews] : [p]));
+  return ordine.map((percorso) => [percorso, voci.get(percorso) ?? null] as [string, string | null]).map(([percorso, lastmod]) => ({ loc: percorso === '/' ? `${SITE_URL}/` : `${SITE_URL}${percorso}`, lastmod }));
 }
 
 export function costruisciXml(url: { loc: string; lastmod: string | null }[]) {

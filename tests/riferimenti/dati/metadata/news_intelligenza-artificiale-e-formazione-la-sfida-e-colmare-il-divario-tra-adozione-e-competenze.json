@@ -3,7 +3,7 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze - Alètheia Srl",
+  "title": "AI e formazione: il divario nelle imprese italiane",
   "description": [
     "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi…"
   ],
@@ -26,7 +26,7 @@
       "article"
     ],
     "og:title": [
-      "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze - Alètheia Srl"
+      "AI e formazione: il divario nelle imprese italiane"
     ],
     "og:description": [
       "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi…"
@@ -46,7 +46,7 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze - Alètheia Srl"
+      "AI e formazione: il divario nelle imprese italiane"
     ],
     "twitter:description": [
       "Una ricerca dell'Osservatorio Look4ward mostra che il 31% delle imprese usa o sperimenta l'intelligenza artificiale, ma solo il 19% ha percorsi formativi…"
@@ -204,9 +204,9 @@
   "h1": [
     "Intelligenza artificiale e formazione, la sfida è colmare il divario tra adozione e competenze"
   ],
-  "intestazioni": 6,
-  "testoLunghezza": 7815,
-  "testoSha1": "d0820a354924796e68f44ce73d0afde90bba50ec",
+  "intestazioni": 7,
+  "testoLunghezza": 8002,
+  "testoSha1": "e24887bcf81dfc013e7e72674e9bba3e4cfffd2e",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -222,6 +222,11 @@
     "/corsi/certificazioni-informatiche",
     "/corsi/corsi-qualificati",
     "/corsi/decreto-attrezzature",
+    "/corsi/icdl-base",
+    "/corsi/icdl-digcomp-2-2",
+    "/corsi/icdl-full-standard",
+    "/corsi/icdl-standard",
+    "/corsi/icdl-update",
     "/corsi/patentino-fitosanitario",
     "/corsi/personale-alimentarista-osa",
     "/corsi/sicurezza-lavoro",
@@ -245,6 +250,6 @@
     "https://www.instagram.com/aletheiasrl/",
     "mailto:info@aletheiasrl.it"
   ],
-  "immaginiConAlt": 14,
-  "immaginiAlt": "0ecf5f344efbd9a14f377829b0f4b09a4076a3c9"
+  "immaginiConAlt": 20,
+  "immaginiAlt": "f43d89d608851b58b4ece92cb861387ac9dd4a63"
 }

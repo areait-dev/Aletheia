@@ -11,11 +11,10 @@ import CtaFinale from '../components/CtaFinale';
 import { CATEGORIE } from '../data/calendario';
 import { getCalendario, upcomingDays, oggiItalia } from '../lib/wp-calendario';
 import NuoveDateInArrivo from '../components/NuoveDateInArrivo';
-import { isrOptions, isWpEnabled } from '../lib/wp';
+import { isrOptions } from '../lib/wp';
 import { getPartners } from '../lib/wp-partner';
 import { getSchede } from '../lib/wp-schede';
 import { getNewsList } from '../lib/wp-news';
-import { HOME_NEWS } from '../data/home-news';
 import { getPagina } from '../lib/wp-pagine';
 import HeroTitle from '../components/HeroTitle';
 import { withSiteOptions } from '../lib/wp-site';
@@ -340,12 +339,15 @@ function HeroSearch() {
 /* Calendario: WordPress se WP_URL è impostato, altrimenti dati locali (vedi lib/wp-calendario.ts); loghi del gruppo: CPT partner (lib/wp-partner.ts).
    "Oggi" si calcola qui, a ogni rigenerazione, e non più una sola volta al caricamento del modulo.
    Il confronto su stringa 'YYYY-MM-DD' funziona perché è lessicograficamente ordinabile come una data. */
-// Ultime tre notizie: con WordPress attivo le ultime pubblicate; senza, la copia storica della home (data/home-news.js)
-// così il sito resta identico a prima. Solo i campi usati dalla card.
-async function ultimeNews() {
-  if (!isWpEnabled()) return HOME_NEWS.slice(0, 3);
+// Ultime tre notizie: le 3 più recenti per data di pubblicazione (stesso ordine di /news, vedi ordinaNews in lib/wp-news.ts), da WordPress o dai dati
+// locali, SENZA elenchi scritti a mano. Le news con `scadenza` passata (YYYY-MM-DD, es. un'agevolazione finita) non compaiono qui: restano in /news e
+// al loro indirizzo. Solo i campi usati dalla card.
+async function ultimeNews(oggi) {
   const all = await getNewsList();
-  return all.slice(0, 3).map(({ id, slug, title, excerpt, date, image }) => ({ id, slug, title, excerpt, date, image: image || '' }));
+  return all
+    .filter((n) => !n.scadenza || n.scadenza >= oggi)
+    .slice(0, 3)
+    .map(({ id, slug, title, excerpt, date, image }) => ({ id, slug, title, excerpt, date, image: image || '' }));
 }
 
 async function getPageStaticProps() {
@@ -353,7 +355,7 @@ async function getPageStaticProps() {
   // DATA_FISSA_TEST (YYYY-MM-DD): solo per i test di regressione, congela "oggi" così la sezione "Corsi in partenza" è riproducibile.
   // In produzione la variabile non esiste e vale la data reale, come prima.
   const oggiISO = oggiItalia();
-  return { props: { giorniCalendario: upcomingDays(calendario, oggiISO, 10), gruppoLoghi: await getPartners('ecosistema'), categorie: await getSchede('categorie-home'), pagina: await getPagina('home'), newsItems: await ultimeNews() }, ...isrOptions() };
+  return { props: { giorniCalendario: upcomingDays(calendario, oggiISO, 10), gruppoLoghi: await getPartners('ecosistema'), categorie: await getSchede('categorie-home'), pagina: await getPagina('home'), newsItems: await ultimeNews(oggiISO) }, ...isrOptions() };
 }
 
 // Loghi del marquee: [aspect ratio del contenuto (file già ritagliati), --logo-scale, altezza fissa px, larghezza max px, --logo-offset-y px].

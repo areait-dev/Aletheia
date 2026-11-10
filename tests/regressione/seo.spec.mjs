@@ -3,10 +3,12 @@
 import { test, expect } from '@playwright/test';
 import * as cheerio from 'cheerio';
 import { urls } from './util.mjs';
+import { ALL_NEWS } from '../../lib/newsData.js';
 
 const BASE = 'https://www.aletheiasrl.it';
 const PAGINE = urls.map((u) => u.url).filter((u) => !u.includes('?') && u !== '/url-inesistente-404');
 const SERVIZIO = ['/diagnostica', '/diagnostica-b', '/diagnostica-c'];
+const TITOLI_SEO = Object.fromEntries(ALL_NEWS.filter((n) => n.titoloSeo).map((n) => [`/news/${n.slug}`, n.titoloSeo]));
 
 async function leggi(request, url) {
   const r = await request.get(url);
@@ -30,7 +32,9 @@ test('ogni pagina ha canonical assoluto verso sé stessa, og:url uguale e metada
     if (descrizioni.has(desc)) errori.push(`${url}: description uguale a quella di ${descrizioni.get(desc)}`);
     descrizioni.set(desc, url);
     const titolo = $('title').first().text();
-    if (!/ - Alètheia Srl$/.test(titolo)) errori.push(`${url}: titolo "${titolo}"`);
+    // eccezione voluta: le news con `titoloSeo` hanno il titolo breve (sotto i 60 caratteri) senza suffisso
+    const conTitoloSeo = TITOLI_SEO[url];
+    if (conTitoloSeo ? titolo !== conTitoloSeo || titolo.length >= 60 : !/ - Alètheia Srl$/.test(titolo)) errori.push(`${url}: titolo "${titolo}"`);
     if ($('title').length !== 1) errori.push(`${url}: ${$('title').length} tag title`);
     if ($('meta[property="og:title"]').attr('content') !== titolo) errori.push(`${url}: og:title diverso dal title`);
     if ($('meta[property="og:description"]').attr('content') !== desc) errori.push(`${url}: og:description diversa`);

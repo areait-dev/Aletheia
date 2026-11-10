@@ -25,6 +25,14 @@ export type NewsItem = {
   bodyHtml?: string;
   fonte?: string;
   tempoLettura?: number;
+  /** Data (YYYY-MM-DD) dopo la quale la news non compare più in home: resta in /news e al suo indirizzo. */
+  scadenza?: string;
+  /** Titolo breve (sotto i 60 caratteri) per <title> e og:title al posto di "<titolo> - Alètheia Srl"; l'H1 resta il titolo completo. */
+  titoloSeo?: string;
+  /** Fonti dell'articolo (titolo + URL), mostrate in fondo come "Fonte:" con link in una nuova scheda. Vuoto = nessun blocco. */
+  fonti?: { titolo: string; url: string }[];
+  /** Corsi collegati: slug di schede corso o di pagine di categoria (es. "certificazioni-informatiche"), mostrati in fondo come "Corsi collegati". */
+  corsiCollegati?: string[];
 };
 
 type WpAcf = Record<string, unknown>;
@@ -56,7 +64,15 @@ type WpPagePayload = {
   acf?: WpAcf | unknown[];
 };
 
-const LOCAL_NEWS = ALL_NEWS as NewsItem[];
+/**
+ * Ordine UNICO delle news in tutto il sito (/news, home, correlati, sitemap, news dell'agenzia): data di pubblicazione decrescente, letta dal campo
+ * `date` dell'articolo (YYYY-MM-DD) e non dall'ordine in cui sono scritti i dati; a parità di data, per titolo. Non modifica l'array ricevuto.
+ */
+export function ordinaNews<T extends { date: string; title: string }>(news: T[]): T[] {
+  return [...news].sort((a, b) => b.date.slice(0, 10).localeCompare(a.date.slice(0, 10)) || a.title.localeCompare(b.title, 'it'));
+}
+
+const LOCAL_NEWS = ordinaNews(ALL_NEWS as NewsItem[]);
 
 /* ─── Adattatori WordPress → NewsItem ─────────────────────────── */
 
@@ -137,7 +153,7 @@ async function loadAllNews(): Promise<NewsItem[]> {
 /** Tutte le news, complete di corpo, dalla più recente. */
 export async function getAllNews(): Promise<NewsItem[]> {
   if (!isWpEnabled()) return LOCAL_NEWS;
-  if (!memo || Date.now() - memo.at > MEMO_TTL_MS) memo = { at: Date.now(), value: loadAllNews() };
+  if (!memo || Date.now() - memo.at > MEMO_TTL_MS) memo = { at: Date.now(), value: loadAllNews().then(ordinaNews) };
   return memo.value;
 }
 

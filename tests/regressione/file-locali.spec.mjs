@@ -46,6 +46,6 @@ test('nessun riferimento ai file del vecchio sito e tutti i file locali esistono
 });
 
 test('i file del codice (dati) non puntano al vecchio sito @rapido', () => {
-  const dati = ['data/home-news.js', 'lib/newsData.js', 'data/archivio-schede.js'];
+  const dati = ['lib/newsData.js', 'data/archivio-schede.js'];
   for (const f of dati) expect(inesistenti(fs.readFileSync(path.join(radice, f), 'utf8')), f).toEqual([]);
 });
