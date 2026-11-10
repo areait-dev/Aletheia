@@ -1,4 +1,4 @@
-// Contenuti dei corsi "decreto attrezzature" arrivati dal reparto formazione (5 novembre 2026): Carriponti Pensile/Cabina (corso 11 ore e
+// Contenuti dei corsi "decreto attrezzature" arrivati dal reparto formazione (5 novembre 2026): Carriponte Pensile/Cabina (corso 11 ore e
 // aggiornamento 4 ore), Caricatori CMM (aggiornamento) e Raccogli frutta CRF (aggiornamento). Prima mostravano solo la scheda tecnica
 // e «Contenuto dettagliato in arrivo». Vale anche con URL_BASE (anteprima/produzione).
 import { test, expect } from '@playwright/test';
@@ -37,7 +37,7 @@ test('attrezzature: le varianti Aggiornamento hanno il loro contenuto @rapido', 
   }
 });
 
-test('attrezzature: scheda tecnica del corso Carriponti Pensile/Cabina (11 ore) @rapido', async ({ page }) => {
+test('attrezzature: scheda tecnica del corso Carriponte Pensile/Cabina (11 ore) @rapido', async ({ page }) => {
   await page.goto('/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
   const scheda = page.locator('.cp-scheda-area');
   for (const v of ['11 ore', 'Aula', 'Aula virtuale (solo parte teorica)', 'Aggiornamento ogni 5 anni', 'Attestato valido in tutta Italia', 'Max 25 per la teoria in aula · Max 6 per la pratica']) await expect(scheda).toContainText(v);

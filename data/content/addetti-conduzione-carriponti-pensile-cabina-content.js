@@ -1,8 +1,8 @@
-// Contenuti editoriali per famiglia "Addetti alla Conduzione di Carriponti Pensile/Cabina" (family.id
+// Contenuti editoriali per famiglia "Addetti alla Conduzione di Carriponte Pensile/Cabina" (family.id
 // 'addetti-alla-conduzione-di-carriponti-pensile-cabina') - variante CORSO (11 ore). Chiave posizionale 'livello-1' (unico livello).
 // FONTE: documento Word "Corso Addetti alla Conduzione di Carroponte.docx" (cartella NUOVO SITO ALETHEIA / CONTENUTI DEF / corsi decreto
 // attrezzature, 5 novembre 2026). Testi e scheda tecnica (11 ore, modalità, validità, attestato, partecipanti max 30) copiati SENZA modifiche.
-// ABBINAMENTO (da confermare): il documento si intitola "Carroponte" ma dura 11 ore come "Addetti Alla Conduzione Di Carriponti Pensile/Cabina"
+// ABBINAMENTO (da confermare): il documento si intitola "Carroponte" ma dura 11 ore come "Addetti Alla Conduzione Di Carriponte Pensile/Cabina"
 // (il corso "Carriponte" da 10 ore ha già i suoi testi, vedi addetti-alla-conduzione-di-carriponte-content.js) e cita "comando pensile,
 // radiocomando e/o comando in cabina".
 // NON usato: la riga "Luogo del corso (click che si apre la mappa)" del documento: il sito non ha ancora quel blocco in nessun corso.
@@ -13,7 +13,7 @@
 module.exports = {
   'addetti-alla-conduzione-di-carriponti-pensile-cabina': {
     'livello-1': {
-      titolo: "Corso Addetti alla Conduzione di Carriponti Pensile/Cabina",
+      titolo: "Corso Addetti alla Conduzione di Carriponte Pensile/Cabina",
       durataOre: 11,
       modalita: ["Aula","Aula virtuale (solo parte teorica)"],
       validita: "Aggiornamento ogni 5 anni",

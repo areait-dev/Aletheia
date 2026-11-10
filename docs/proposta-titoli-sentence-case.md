@@ -35,7 +35,7 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | Addetti Macchina Raccogli Frutta CRF | Addetti macchina raccogli frutta CRF |
 | Addetti Macchina Raccogli Frutta Aggiornamento | Addetti macchina raccogli frutta aggiornamento |
 | Addetti Caricatori Movimentazione Di Materiali CMM | Addetti caricatori movimentazione di materiali CMM |
-| Addetti Alla Conduzione Di Carriponti Pensile/Cabina | Addetti alla conduzione di carriponti pensile/cabina |
+| Addetti Alla Conduzione Di Carriponte Pensile/Cabina | Addetti alla conduzione di carriponte pensile/cabina |
 | Patentino Fitosanitario | Patentino fitosanitario |
 | Personale Alimentarista OSA | Personale alimentarista OSA |
 | OSS - Operatore Socio Sanitario | OSS - Operatore socio sanitario |
@@ -128,8 +128,8 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | Addetti Macchina Raccogli Frutta Aggiornamento | Addetti macchina raccogli frutta aggiornamento |
 | Addetti Caricatori Movimentazione Di Materiali CMM | Addetti caricatori movimentazione di materiali CMM |
 | Aggiornamento Addetti Caricatori Movimentazione Di Materiali CMM | Aggiornamento addetti caricatori movimentazione di materiali CMM |
-| Addetti Alla Conduzione Di Carriponti Pensile/Cabina | Addetti alla conduzione di carriponti pensile/cabina |
-| Aggiornamento Addetti Alla Conduzione Di Carriponti Pensile/Cabina | Aggiornamento addetti alla conduzione di carriponti pensile/cabina |
+| Addetti Alla Conduzione Di Carriponte Pensile/Cabina | Addetti alla conduzione di carriponte pensile/cabina |
+| Aggiornamento Addetti Alla Conduzione Di Carriponte Pensile/Cabina | Aggiornamento addetti alla conduzione di carriponte pensile/cabina |
 | Patentino Fitosanitario | Patentino fitosanitario |
 | Aggiornamento Patentino Fitosanitario | Aggiornamento patentino fitosanitario |
 | Personale Alimentarista OSA | Personale alimentarista OSA |

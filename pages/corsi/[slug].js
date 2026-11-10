@@ -228,7 +228,7 @@ const EDITORIAL_CONTENT = {
     corso: addettiCaricatoriCmmContent['addetti-caricatori-movimentazione-di-materiali-cmm'],
     aggiornamento: addettiCaricatoriCmmAggiornamentoContent,
   },
-  // Carriponti Pensile/Cabina (corso 11 ore + aggiornamento 4 ore): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
+  // Carriponte Pensile/Cabina (corso 11 ore + aggiornamento 4 ore): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
   // Il corso "Carriponte" da 10 ore (famiglia sopra) ha i suoi testi separati.
   'addetti-alla-conduzione-di-carriponti-pensile-cabina': {
     corso: addettiCarripontiPensileCabinaContent['addetti-alla-conduzione-di-carriponti-pensile-cabina'],

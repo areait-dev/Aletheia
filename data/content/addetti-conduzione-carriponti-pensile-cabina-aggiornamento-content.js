@@ -1,15 +1,15 @@
-// Contenuti editoriali per famiglia "Addetti alla Conduzione di Carriponti Pensile/Cabina" - variante AGGIORNAMENTO (4 ore).
+// Contenuti editoriali per famiglia "Addetti alla Conduzione di Carriponte Pensile/Cabina" - variante AGGIORNAMENTO (4 ore).
 // Chiave posizionale 'livello-1' (unico livello della famiglia).
 // FONTE: documento Word "aggiornamento-Corso Addetti alla Conduzione di Carroponte.docx" (cartella NUOVO SITO ALETHEIA / CONTENUTI DEF /
 // corsi decreto attrezzature, 5 novembre 2026). Testi copiati SENZA modifiche.
 // ABBINAMENTO (da confermare): il documento si intitola "Carroponte" e cita "comando pensile, radiocomando e/o comando in cabina", e il
-// corso base abbinato dura 11 ore come "Addetti Alla Conduzione Di Carriponti Pensile/Cabina" (il corso "Carriponte" da 10 ore ha già i suoi testi).
+// corso base abbinato dura 11 ore come "Addetti Alla Conduzione Di Carriponte Pensile/Cabina" (il corso "Carriponte" da 10 ore ha già i suoi testi).
 // MODALITA': ["In presenza"] ricavata dal testo ("si svolge esclusivamente in presenza presso la sede Alètheia di Vittoria (RG)").
 // DA CONFERMARE (non presenti nel documento, quindi non inseriti): validità del nuovo attestato, dicitura dell'attestato, partecipanti max.
 
 module.exports = {
   'livello-1': {
-    titolo: "Aggiornamento Addetti alla Conduzione di Carriponti Pensile/Cabina",
+    titolo: "Aggiornamento Addetti alla Conduzione di Carriponte Pensile/Cabina",
     durataOre: 4,
     modalita: ["In presenza"],
     prezzo: null,
