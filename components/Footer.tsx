@@ -146,6 +146,16 @@ export default function Footer() {
                 {footer.creditsLink.label}
               </a>
             </span>
+            <span>
+              Powered by{' '}
+              <a
+                href="https://promocommunication.it"
+                {...extProps('https://promocommunication.it')}
+                className="text-[#04767D] dark:text-primary-on-dark hover:text-[#005259] dark:hover:text-[#99D1D5] transition-colors underline"
+              >
+                Promo Communication
+              </a>
+            </span>
           </div>
         </div>
       </div>
