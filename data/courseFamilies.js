@@ -128,6 +128,12 @@ function stripFillerPrefixes(title) {
 // Titoli in sentence case (data/coursesRaw.js): tolti i prefissi "Corso"/"Aggiornamento" o il descrittore di livello, il primo carattere resta minuscolo: si ripristina la maiuscola
 const maiuscolaIniziale = (t) => (t ? t.charAt(0).toUpperCase() + t.slice(1) : t);
 
+// Slug storici: il titolo è stato corretto ("carriponti" -> "carriponte") ma l'indirizzo pubblico della scheda non cambia (gli slug derivano dal titolo,
+// quindi senza questa mappa cambierebbe anche l'URL, e con lui id, contenuti, immagini, redirect e canonical).
+const SLUG_STORICI = {
+  'addetti-alla-conduzione-di-carriponte-pensile-cabina': 'addetti-alla-conduzione-di-carriponti-pensile-cabina',
+};
+
 function slugify(str) {
   return normalizeForMatch(str).replace(/\s+/g, '-');
 }
@@ -194,7 +200,8 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
     const { isAggiornamento, rest } = stripAggiornamentoPrefix(course.title);
     const { levelLabel, famTitle: famTitleRaw } = extractLevelDescriptor(rest);
     const famTitle = stripFillerPrefixes(famTitleRaw) || famTitleRaw;
-    const familyKey = slugify(famTitle);
+    const familyKeyTitolo = slugify(famTitle);
+    const familyKey = SLUG_STORICI[familyKeyTitolo] || familyKeyTitolo;
 
     if (!families.has(familyKey)) {
       families.set(familyKey, {
