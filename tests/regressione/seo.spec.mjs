@@ -117,5 +117,5 @@ test('BreadcrumbList solo dove le briciole sono visibili, e uguali a quelle most
     expect(visibile, `${url}: briciole visibili`).toEqual(attese);
   }
   // pagine senza briciole visibili: nessun BreadcrumbList
-  for (const url of ['/chi-siamo', '/corsi/antincendio']) expect(jsonLd(await leggi(request, url)).some((d) => tipo(d, 'BreadcrumbList')), url).toBe(false);
+  for (const url of ['/chi-siamo', '/news']) expect(jsonLd(await leggi(request, url)).some((d) => tipo(d, 'BreadcrumbList')), url).toBe(false);
 });

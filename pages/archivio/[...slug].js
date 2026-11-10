@@ -5,7 +5,7 @@ import { FAMIGLIE } from '../../data/archivio-famiglie';
 import { descrizioneFamiglia, getArchivio, getFamiglia, getVoce, SEZIONI, sottovociPanoramica, VOCI_SPOSTATE } from '../../lib/wp-archivio';
 import { isWpEnabled, isrOptions } from '../../lib/wp';
 import { withSiteOptions } from '../../lib/wp-site';
-import { breadcrumbJsonLd, descrizioneEntro, titoloPagina } from '../../lib/seo';
+import { descrizioneEntro, titoloPagina } from '../../lib/seo';
 
 /**
  * Archivio dei bandi: un'unica rotta per tutte le pagine.
@@ -40,8 +40,6 @@ async function getPageStaticProps({ params }) {
     const seoPagina = {
       title: titoloPagina(titolo),
       description: descrizioneEntro(descr.descrizione || `${titolo}: documenti, bandi e avvisi dell'archivio storico di Alètheia Srl.`, RIEMPITIVI_ARCHIVIO),
-      // Stesse briciole mostrate nella hero: Home › Archivio › famiglia
-      jsonLd: [breadcrumbJsonLd([{ nome: 'Home', percorso: '/' }, { nome: 'Archivio', percorso: '/archivio' }, { nome: famiglia.titolo, percorso: `/archivio/${slug}` }])],
     };
     return {
       props: { tipo: 'panoramica', famiglia, descr, sottovoci: sottovociPanoramica(famiglia, voci), seoPagina },
@@ -55,12 +53,6 @@ async function getPageStaticProps({ params }) {
   const seoPagina = {
     title: voce.metaTitolo || titoloPagina(voce.titolo),
     description: descrizioneEntro(voce.metaDescrizione || voce.descrizione || `${voce.titolo}: documenti, bandi e avvisi dell'archivio storico di Alètheia Srl.`, RIEMPITIVI_ARCHIVIO),
-    jsonLd: [breadcrumbJsonLd([
-      { nome: 'Home', percorso: '/' },
-      { nome: 'Archivio', percorso: '/archivio' },
-      ...(fam ? [{ nome: fam.titolo, percorso: `/archivio/${fam.chiave}` }] : []),
-      { nome: voce.titolo, percorso: `/archivio/${slug}` },
-    ])],
   };
   return { props: { tipo: 'voce', voce, seoPagina }, ...isrOptions() };
 }
