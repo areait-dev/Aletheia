@@ -54,7 +54,7 @@ export function privacyHtml({ finalitaTrattamento, categorieCookie, censimentoCo
     '<h3>2.2 Categorie di cookie</h3>',
     `<ul>${categorieCookie.map((c) => `<li><strong>${esc(c.nome)}</strong> (${esc(c.nota)})</li>`).join('')}</ul>`,
     '<h3>2.3 Tabella di censimento dei cookie</h3>',
-    table(['Categoria', 'Nome', 'Fornitore', 'Finalità', 'Durata', 'Base giuridica', 'Note'], censimentoCookie.map((c) => [c.categoria, c.nome, c.fornitore, c.finalita, c.durata, c.base, c.note || '-'])),
+    table(['Categoria', 'Nome', 'Fornitore', 'Finalità', 'Durata', 'Base giuridica', 'Note'], censimentoCookie.map((c) => [c.categoria, c.nome, c.fornitore, c.finalita, c.durata, c.base, c.note || '—'])),
     '<h3>2.4 Gestione del consenso</h3>',
     '<p>Per impostazione predefinita sono attivi solo i cookie tecnici. L’utente può modificare o revocare il consenso in qualsiasi momento tramite il link o pulsante “Gestisci preferenze cookie”.</p>',
 
