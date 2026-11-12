@@ -74,6 +74,39 @@ Obiettivo del committente: nessun URL cambia mai per un ritocco al titolo.
 - `slug-fissi` può partire ora, sulla base unita.
 - Gli screenshot di riferimento restano non versionati: fare una copia di sicurezza di `tests/riferimenti/immagini/` (due sono stati rigenerati oggi).
 
+## Sessione del pomeriggio (12/11): pulizia, privacy, verifica dei punti aperti
+
+**In `master`** (merge `0c38ac1` e `546e2a6`; suite completa 395/395 verde, 19,1 min; push al momento della scrittura in attesa dell'accesso a GitHub, vedi sotto).
+- **Branch `contatti-corso`:** la precompilazione di `/contatti` da `?corso=` **era già fatta dal 4/11** (`1f592c9`, con test in `moduli-ui.spec.mjs`). Corretta solo la nota vecchia in `MIGRAZIONE.md`. Resta: i link del calendario aggiungono `&intento=lista-attesa`, che il form non legge.
+- **Branch `pulizia-codice`:** rimossi `components/CourseHero.tsx`, `iside-bold.svg`, `promesys-rebranding.png` (verificato con grep su codice, dati e test: nessun uso). `images.domains` era **già** `remotePatterns` (restava un commento, aggiornato). `lib/seo.ts:66`: il trattino medio nella regex di `accorcia()` **resta di proposito** (i testi da WordPress possono averlo), con un commento che lo spiega.
+
+**Branch `privacy-resend-bozza` (`fbe2876`) — NON UNITO, da rivedere.** Nuova riga nella tabella delle finalità (moduli), oggetto `trattamentoModuliResend` in `data/privacy.js` (responsabile art. 28, regione EU, conservazione, DPA, trasferimenti extra UE), richiamato in `pages/privacy-cookie.js` (sezioni 1.3 e 1.4) e riga «Rev. 02 (BOZZA)». Le voci in `[DA VERIFICARE]` vanno confermate sul DPA e sull'account Resend. Non fatta la copia in `wordpress/privacy-html.mjs` (duplica 1.3 e 1.4). Il branch sta nel worktree `..letheia-privacy` (togliere con `git worktree remove` quando non serve).
+
+**Verifica nel codice dei punti aperti (12/11):**
+
+| Punto | Stato |
+|---|---|
+| `?corso=` in `/contatti` | **Già risolto** (4/11) |
+| `images.domains` | **Già risolto** |
+| `CourseHero.tsx`, due asset | **Risolti oggi** |
+| Foto «Lunch atop a Skyscraper» | **Già sostituita** il 10/11 (`f294bd5`); resta da verificare la licenza della nuova foto (rapporto aggiornato, modifica **non ancora committata**) |
+| Sitemap | **Esiste** (`pages/sitemap.xml.js`); la nota «nessuna sitemap» in MIGRAZIONE.md è vecchia |
+| Reveal, regole di sicurezza | **Ancora da fare**: `components/Reveal.tsx` non ha fail-open, né rete di sicurezza senza `IntersectionObserver`, né timer, né `<noscript>` |
+| `/diagnostica`, `-b`, `-c` + `diagnostica.spec.mjs` | **Ancora da togliere** prima dei DNS (i file ci sono) |
+| «Prossimamente» in `/formazione/regionale` | **Ancora aperto** (`pages/formazione/regionale.js:79`), da decidere se è stato reale |
+| Loghi clienti in home | **Ancora disattivati** (`{false && …}`, `pages/index.js:801`), serve il consenso dei clienti |
+| «Da definire» (Macchine movimento terra, 6 varianti) | **Ancora aperto**, in attesa del reparto formazione |
+| `slug-fissi` | **Non iniziato** (`slugify` ancora usato, solo `SLUG_STORICI` con le voci ASACOM e carriponti) |
+| `CLAUDE.md` «No testing framework set up» | **Vecchio**: c'è la suite Playwright |
+
+**Per domani, in quest'ordine.**
+1. `slug-fissi` (2-2,5 h). Parte dalla base unita: `SLUG_STORICI` diventa la mappa completa delle 40 famiglie.
+2. Immagini che oggi vengono dal vecchio sito (news e avvisi, circa 19 più 3), da scaricare in `public/images` **prima** dei DNS.
+3. Togliere `/diagnostica*` e rilanciare la suite.
+4. Revisione della bozza privacy (titolare o consulente) e, solo dopo, merge.
+5. Reveal (regola di sicurezza, in attesa di ok) e decisione su «Prossimamente».
+6. Per i DNS, a carico del committente: Resend e record DNS, variabili su Vercel, prove dei moduli, record della posta, redirect da apex a `www`.
+
 ## Piano di integrazione (storico, eseguito)
 
 **Stato.** `master` locale è 11 commit avanti e 9 indietro rispetto a `origin/master`. Il push del 12/11 è stato rifiutato e **non è stato forzato**. Non è stato pubblicato niente.
