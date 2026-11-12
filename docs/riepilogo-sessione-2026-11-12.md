@@ -76,7 +76,7 @@ Obiettivo del committente: nessun URL cambia mai per un ritocco al titolo.
 
 ## Sessione del pomeriggio (12/11): pulizia, privacy, verifica dei punti aperti
 
-**In `master`** (merge `0c38ac1` e `546e2a6`; suite completa 395/395 verde, 19,1 min; push al momento della scrittura in attesa dell'accesso a GitHub, vedi sotto).
+**In `master`** (merge `0c38ac1` e `546e2a6`; suite completa 395/395 verde, 19,1 min; pushato; il push è rimasto fermo circa mezz'ora in attesa dell'accesso a GitHub nel credential manager, poi è passato). **Deploy Vercel riuscito su `69dc23b`.** Controllo online: ASACOM 200 con titolo nuovo e senza segnaposto; carriponti 200; `/contatti` e `/contatti?corso=…` 200; `/privacy-cookie` 200 e **senza** il testo su Resend (la bozza non è in produzione, come previsto); `iside-bold.svg` 404 (rimosso), i loghi usati (`iside-bianco.png`, `promesys-bianco.png`) 200; footer con «Powered by».
 - **Branch `contatti-corso`:** la precompilazione di `/contatti` da `?corso=` **era già fatta dal 4/11** (`1f592c9`, con test in `moduli-ui.spec.mjs`). Corretta solo la nota vecchia in `MIGRAZIONE.md`. Resta: i link del calendario aggiungono `&intento=lista-attesa`, che il form non legge.
 - **Branch `pulizia-codice`:** rimossi `components/CourseHero.tsx`, `iside-bold.svg`, `promesys-rebranding.png` (verificato con grep su codice, dati e test: nessun uso). `images.domains` era **già** `remotePatterns` (restava un commento, aggiornato). `lib/seo.ts:66`: il trattino medio nella regex di `accorcia()` **resta di proposito** (i testi da WordPress possono averlo), con un commento che lo spiega.
 
