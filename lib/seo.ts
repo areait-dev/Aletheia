@@ -63,6 +63,8 @@ export function accorcia(testo: string, max = 160): string {
   const t = testoSemplice(testo);
   if (t.length <= max) return t;
   const taglio = t.slice(0, max - 1);
+  // Toglie punteggiatura e trattini finali prima dei puntini. Il trattino medio resta nella classe di proposito: i testi del sito usano
+  // il trattino corto, ma i contenuti che arrivano da WordPress possono avere ancora `–` a fine frase tagliata.
   return `${taglio.slice(0, Math.max(taglio.lastIndexOf(' '), 0) || taglio.length).replace(/[\s,;:.\-–]+$/, '')}…`;
 }
 

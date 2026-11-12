@@ -112,7 +112,7 @@ const nextConfig = {
     NEXT_PUBLIC_WP_ORIGIN: process.env.NEXT_PUBLIC_WP_ORIGIN || wpOrigin(),
   },
   images: {
-    // Stessi domini di prima (images.domains è deprecato): senza protocollo/porta/percorso = identico a `domains`.
+    // remotePatterns al posto di images.domains (deprecato): solo hostname, senza protocollo/porta/percorso.
     remotePatterns: ['www.aletheiasrl.it', 'images.unsplash.com', 'images.pexels.com', ...wpImageHosts()].map((hostname) => ({ hostname })),
   },
   // Lo slash finale lo gestiamo noi: di default Next toglie lo slash con un redirect 308 messo PRIMA di tutti gli altri, e un vecchio URL

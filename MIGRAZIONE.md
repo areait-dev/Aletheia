@@ -495,9 +495,9 @@ Dalle guide ufficiali di aggiornamento, ciò che riguarda questo progetto:
 - `CLAUDE.md` dice "Next.js 13" e "nessun testing framework": da aggiornare a migrazione finita.
 - Nessuna sitemap né manifest.
 - `SITE_URL` punta a `www.aletheiasrl.it`, il sito di prova è `aletheiasrl.vercel.app`: i canonical dell'anteprima puntano a un dominio diverso (comportamento attuale, non toccato).
-- `images.domains` è deprecato a favore di `remotePatterns`.
-- `components/CourseHero.tsx` non è usato da nessuna pagina.
-- `iside-bold.svg` e `promesys-rebranding.png` non sono più referenziati.
+- ~~`images.domains` è deprecato a favore di `remotePatterns`~~ — **GIÀ FATTO**: `next.config.js` usa `images.remotePatterns` (restava solo un commento).
+- ~~`components/CourseHero.tsx` non è usato da nessuna pagina~~ — **RIMOSSO** il 12 novembre (branch `pulizia-codice`).
+- ~~`iside-bold.svg` e `promesys-rebranding.png` non sono più referenziati~~ — **RIMOSSI** il 12 novembre (branch `pulizia-codice`, verificato con grep su codice, dati e test).
 - **Immagini esterne** (misurate il 2 novembre 2026, con server di produzione locale, solo sulle 37 pagine campione): arrivano **tutte da `next/image`** (`/_next/image?url=…`, ottimizzatore lato server, config `images.domains`); nessuna immagine esterna è caricata direttamente dal browser. Domini e pagine: `images.unsplash.com` (`/`, `/agenzia-per-il-lavoro`, `/corsi/icdl-base`, `/formazione/professionale-specialistica`, `/formazione/regionale`, `/formazione/regionale-fse`, `/corsi?categoria=icdl`), `images.pexels.com` (`/agenzia-per-il-lavoro`), `www.aletheiasrl.it` (`/agenzia-per-il-lavoro`, `/news`, due articoli di news). Tempi di caricamento: a freddo (cache dell'ottimizzatore vuota) 180 ms in media per Unsplash (max 308), 234 ms Pexels, 280 ms aletheiasrl.it (max 553); a caldo 30–55 ms. Altre risorse esterne dirette: font e icone (`fonts.googleapis.com`, `fonts.gstatic.com`, `cdnjs.cloudflare.com`, 37 pagine su 37) e Google Maps in `/contatti`. I timeout di 2 minuti visti nei primi test (`/corsi`) non sono dovuti alle immagini esterne e non si riproducono su una pagina alla volta: probabile carico della CPU con più worker in parallelo.
 - Dopo gli aggiornamenti di Next, il comportamento di `next/image` può cambiare (vedi i default di Next 16 nel piano della Fase 1b): ricontrollare le immagini esterne con `tests/regressione/misura-rete.mjs`.
 - `next build` con `NEXT_DIST_DIR=.next-test` fa aggiungere automaticamente a `tsconfig.json` la riga `.next-test/types/**/*.ts` (innocua).
