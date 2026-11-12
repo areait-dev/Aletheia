@@ -35,14 +35,14 @@ module.exports = {
         {
           data: '29/09/2023',
           importo: '€ 64.800,00',
-          titolo: "PO FSE 2014-2020, Azione 9.3.7: Avviso 29/2019 per la realizzazione di percorsi per la formazione di assistenti familiari – IN SICILIA SI-CURA",
-          cup: 'CIP 2014.IT.05.SFOP.014/2/9.2/7.1.1/0185 – CUP 59D20000270006',
+          titolo: "PO FSE 2014-2020, Azione 9.3.7: Avviso 29/2019 per la realizzazione di percorsi per la formazione di assistenti familiari - IN SICILIA SI-CURA",
+          cup: 'CIP 2014.IT.05.SFOP.014/2/9.2/7.1.1/0185 - CUP 59D20000270006',
         },
         {
           data: '29/09/2023',
           importo: '€ 38.800,00',
-          titolo: "PO FSE 2014-2020, Azione 9.3.7: Avviso 29/2019 per la realizzazione di percorsi per la formazione di assistenti familiari – IN SICILIA SI-CURA",
-          cup: 'CIP 2014.IT.05.SFOP.014/2/9.2/7.1.1/0185 – CUP 59D20000270006',
+          titolo: "PO FSE 2014-2020, Azione 9.3.7: Avviso 29/2019 per la realizzazione di percorsi per la formazione di assistenti familiari - IN SICILIA SI-CURA",
+          cup: 'CIP 2014.IT.05.SFOP.014/2/9.2/7.1.1/0185 - CUP 59D20000270006',
         },
       ],
     },

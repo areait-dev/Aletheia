@@ -5,7 +5,7 @@
   "classeBody": null,
   "title": "Corso Conduttore d'impresa agricola - Alètheia Srl",
   "description": [
-    "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola – Qualifica 3 EQF. Iscriviti senza pagamento anticipato."
+    "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola - Qualifica 3 EQF. Iscriviti senza pagamento anticipato."
   ],
   "robots": [],
   "googleVerification": [],
@@ -29,7 +29,7 @@
       "Corso Conduttore d'impresa agricola - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola – Qualifica 3 EQF. Iscriviti senza pagamento anticipato."
+      "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola - Qualifica 3 EQF. Iscriviti senza pagamento anticipato."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/impresa-agricola.jpg"
@@ -49,7 +49,7 @@
       "Corso Conduttore d'impresa agricola - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola – Qualifica 3 EQF. Iscriviti senza pagamento anticipato."
+      "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola - Qualifica 3 EQF. Iscriviti senza pagamento anticipato."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/impresa-agricola.jpg"
@@ -171,7 +171,7 @@
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/conduttore-d-impresa-agricola#corso",
       "name": "Conduttore d'impresa agricola",
-      "description": "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola – Qualifica 3 EQF. Iscriviti senza pagamento anticipato.",
+      "description": "Corso Conduttore d'impresa agricola a Vittoria (RG): 200 ore, in FAD. Conduttore d’Impresa Agricola - Qualifica 3 EQF. Iscriviti senza pagamento anticipato.",
       "url": "https://www.aletheiasrl.it/corsi/conduttore-d-impresa-agricola",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/impresa-agricola.jpg",
@@ -194,7 +194,7 @@
   ],
   "intestazioni": 5,
   "testoLunghezza": 2835,
-  "testoSha1": "c6c61095ec560ac473b8fbb8c8972e66ede81fb3",
+  "testoSha1": "c1161a49f06fc791430d01a95bf5ca242a01fda1",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",

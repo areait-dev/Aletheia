@@ -190,7 +190,7 @@
           "courseWorkload": "PT28H",
           "location": {
             "@type": "Place",
-            "name": "Online — Aula Virtuale",
+            "name": "Online - Aula Virtuale",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Online",
@@ -207,7 +207,7 @@
           "courseWorkload": "PT28H",
           "location": {
             "@type": "Place",
-            "name": "Comiso (RG) — Aula Formativa",
+            "name": "Comiso (RG) - Aula Formativa",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Comiso",
@@ -224,7 +224,7 @@
           "courseWorkload": "PT28H",
           "location": {
             "@type": "Place",
-            "name": "Ragusa — Area Pratica",
+            "name": "Ragusa - Area Pratica",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Ragusa",
@@ -247,7 +247,7 @@
   ],
   "intestazioni": 6,
   "testoLunghezza": 4635,
-  "testoSha1": "b07643aa75ff94b8f82d0b4969fccc80cc5ff2a8",
+  "testoSha1": "9adbf89ddeffe3577d0105fcaab99814facd4677",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",

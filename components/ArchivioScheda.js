@@ -172,7 +172,7 @@ export default function ArchivioScheda({ voce }) {
           {s.contatti && (
             <div className="border-t border-gray-200 dark:border-gray-700" style={{ marginTop: '2.5rem', paddingTop: '1.5rem', fontSize: '0.85rem' }}>
               <p className="text-slate-600 dark:text-gray-400" style={{ margin: 0 }}>
-                Per informazioni: <a href={`mailto:${identita.email}`} style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}>{identita.email}</a> — Tel. <a href={`tel:${identita.telefono.replace(/\s+/g, '')}`} style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}>{identita.telefono}</a>
+                Per informazioni: <a href={`mailto:${identita.email}`} style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}>{identita.email}</a> - Tel. <a href={`tel:${identita.telefono.replace(/\s+/g, '')}`} style={{ color: '#008C95', fontWeight: 700, textDecoration: 'none' }}>{identita.telefono}</a>
               </p>
             </div>
           )}

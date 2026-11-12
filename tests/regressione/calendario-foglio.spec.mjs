@@ -32,7 +32,7 @@ test('solo "pubblicato" e "Multiaziendale"; bozza e Aziendale non escono @rapido
 test('corso collegato al catalogo: slug, categoria, titolo con variante, durata; note mai esposte @rapido', () => {
   const { edizioni } = leggi({ note: 'SEGRETO INTERNO', sede: 'Vittoria', posti: '20', giorni: '12/11/2026, 16/11/2026' });
   const e = edizioni[0];
-  expect(e).toMatchObject({ slug: 'antincendio', categoria: 'obbligatoria', titolo: 'Antincendio — Rischio medio Livello 2 (8 ore)', data: '2026-11-12', dataFine: '2026-11-17', durata: '8 ore', sede: 'Vittoria', posti: 20, postiDisponibili: 20 });
+  expect(e).toMatchObject({ slug: 'antincendio', categoria: 'obbligatoria', titolo: 'Antincendio - Rischio medio Livello 2 (8 ore)', data: '2026-11-12', dataFine: '2026-11-17', durata: '8 ore', sede: 'Vittoria', posti: 20, postiDisponibili: 20 });
   expect(JSON.stringify(edizioni)).not.toContain('SEGRETO');
   // nome del corso con maiuscole/accenti diversi e con lo slug: stesso corso
   expect(leggi({ corso: 'ANTINCENDIO' }).edizioni).toHaveLength(1);

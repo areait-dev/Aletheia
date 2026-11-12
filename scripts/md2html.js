@@ -117,7 +117,7 @@ const doc = `<!doctype html>
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<title>Design System — Alètheia Srl</title>
+<title>Design System - Alètheia Srl</title>
 <style>
   @page { size: A4; margin: 16mm 14mm; }
   * { box-sizing: border-box; }

@@ -54,7 +54,7 @@ module.exports = {
       ],
     },
     {
-      ente: 'Regione Siciliana – Dipartimento Formazione Professionale C.F. 80012000826',
+      ente: 'Regione Siciliana - Dipartimento Formazione Professionale C.F. 80012000826',
       righe: [
         {
           data: '12/08/2024',

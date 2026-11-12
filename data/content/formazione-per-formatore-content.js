@@ -2,7 +2,7 @@
 // (solo tipo 'corso'), un solo livello 'livello-1'. FONTE: Word "formazione per formatore.docx" (CONTENUTI DEF /
 // corsi obbligatori), testi invariati.
 // Il Word non indica né le ore dei singoli moduli né il numero massimo di partecipanti: non inventati, la
-// tabella moduli mostra "—" per la durata e partecipantiMax è omesso. Aggiornamento ogni 3 anni dalla scheda tecnica.
+// tabella moduli mostra "-" per la durata e partecipantiMax è omesso. Aggiornamento ogni 3 anni dalla scheda tecnica.
 
 module.exports = {
   'formazione-per-formatore': {

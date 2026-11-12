@@ -25,7 +25,7 @@ interface CampoDef {
   obbligatorio?: boolean | ((d: Dati) => boolean);
   /** Messaggio quando il campo è vuoto (o, per il consenso, non spuntato) */
   msgVuoto?: string;
-  /** Lunghezza massima (testo) — 200 se omessa */
+  /** Lunghezza massima (testo) - 200 se omessa */
   max?: number;
   /** Intervallo (solo 'intero') */
   min?: number;

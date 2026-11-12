@@ -1360,7 +1360,7 @@ function seoScheda(famiglia, edizioni) {
               startDate: e.data,
               ...(e.dataFine ? { endDate: e.dataFine } : {}),
               ...(ore ? { courseWorkload: `PT${ore}H` } : {}),
-              ...(e.sede ? { location: { '@type': 'Place', name: e.sede, address: { '@type': 'PostalAddress', addressLocality: String(e.sede).split(/[\s,(—-]+/)[0], addressRegion: 'RG', addressCountry: 'IT' } } } : online ? { location: { '@type': 'VirtualLocation', url: urlAssoluto(percorso) } } : {}),
+              ...(e.sede ? { location: { '@type': 'Place', name: e.sede, address: { '@type': 'PostalAddress', addressLocality: String(e.sede).split(/[\s,(—–-]+/)[0], addressRegion: 'RG', addressCountry: 'IT' } } } : online ? { location: { '@type': 'VirtualLocation', url: urlAssoluto(percorso) } } : {}),
             };
           }),
         }

@@ -126,7 +126,7 @@ Alètheia Srl è Test Center AICA accreditato n. AKHF0001.`,
   // 5 novembre 2026). Testi copiati SENZA modifiche.
   // NOTE: durata 60 ore, validità 5 anni e certificazione dalle righe del documento; partecipanti "da 10 a 12 allievi" -> partecipantiMax 12
   // (come ICDL Base e Standard); modalità "In presenza" ricavata da "Sede: Comune di residenza"; il blocco "Modalità di svolgimento" è sotto
-  // il programma (moduliNota). Le ore dei singoli moduli non sono nel documento (nella tabella compare "—").
+  // il programma (moduliNota). Le ore dei singoli moduli non sono nel documento (nella tabella compare "-").
   // DA CHIARIRE con il reparto formazione: il testo di "ICDL Standard" già presente (60 ore, 7 esami) parla della stessa certificazione:
   // le due schede si sovrappongono? Nessuna lista di corsi correlati nel documento (la pagina usa quella automatica).
   'icdl-full-standard': {
@@ -192,43 +192,43 @@ La formazione ha una durata indicativa di circa 7 mesi, per un totale di 60 ore,
       ],
 
       moduli: [
-        { titolo: "Modulo 1 – Computer Essentials (Concetti di base del computer)", argomenti: [
+        { titolo: "Modulo 1 - Computer Essentials (Concetti di base del computer)", argomenti: [
           "Conoscenza delle componenti hardware e software.",
           "Utilizzo del sistema operativo.",
           "Gestione di file, cartelle e applicazioni.",
           "Organizzazione e archiviazione dei dati.",
         ] },
-        { titolo: "Modulo 2 – Online Essentials (Concetti fondamentali della rete)", argomenti: [
+        { titolo: "Modulo 2 - Online Essentials (Concetti fondamentali della rete)", argomenti: [
           "Navigazione in Internet e utilizzo dei browser.",
           "Ricerca e gestione delle informazioni online.",
           "Utilizzo della posta elettronica.",
           "Gestione dei messaggi e degli strumenti di comunicazione online.",
         ] },
-        { titolo: "Modulo 3 – Word Processing (Elaborazione testi)", argomenti: [
+        { titolo: "Modulo 3 - Word Processing (Elaborazione testi)", argomenti: [
           "Creazione e modifica di documenti di testo.",
           "Formattazione di caratteri, paragrafi e pagine.",
           "Inserimento di tabelle, immagini e altri elementi.",
           "Impostazione e stampa dei documenti.",
         ] },
-        { titolo: "Modulo 4 – Spreadsheets (Fogli elettronici)", argomenti: [
+        { titolo: "Modulo 4 - Spreadsheets (Fogli elettronici)", argomenti: [
           "Creazione e gestione di fogli di calcolo.",
           "Inserimento e organizzazione dei dati.",
           "Utilizzo di formule e funzioni.",
           "Creazione di grafici e rappresentazioni dei dati.",
         ] },
-        { titolo: "Modulo 5 – IT Security (Sicurezza informatica)", argomenti: [
+        { titolo: "Modulo 5 - IT Security (Sicurezza informatica)", argomenti: [
           "Principi di sicurezza informatica.",
           "Protezione di dispositivi, dati e informazioni personali.",
           "Riconoscimento delle principali minacce informatiche.",
           "Navigazione e utilizzo sicuro delle tecnologie digitali.",
         ] },
-        { titolo: "Modulo 6 – Presentation (Strumenti di presentazione)", argomenti: [
+        { titolo: "Modulo 6 - Presentation (Strumenti di presentazione)", argomenti: [
           "Creazione e gestione di presentazioni.",
           "Organizzazione delle diapositive.",
           "Inserimento e formattazione di testi, immagini e grafici.",
           "Preparazione e visualizzazione di presentazioni.",
         ] },
-        { titolo: "Modulo 7 – Online Collaboration (Collaborazione online)", argomenti: [
+        { titolo: "Modulo 7 - Online Collaboration (Collaborazione online)", argomenti: [
           "Utilizzo degli strumenti di collaborazione in rete.",
           "Condivisione di documenti e informazioni.",
           "Gestione di calendari e strumenti di comunicazione.",

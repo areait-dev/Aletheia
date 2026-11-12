@@ -190,7 +190,7 @@
           "courseWorkload": "PT120H",
           "location": {
             "@type": "Place",
-            "name": "Vittoria (RG) — Sede Alètheia",
+            "name": "Vittoria (RG) - Sede Alètheia",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Vittoria",
@@ -207,7 +207,7 @@
           "courseWorkload": "PT120H",
           "location": {
             "@type": "Place",
-            "name": "Vittoria (RG) — Sede Alètheia",
+            "name": "Vittoria (RG) - Sede Alètheia",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Vittoria",
@@ -224,7 +224,7 @@
           "courseWorkload": "PT120H",
           "location": {
             "@type": "Place",
-            "name": "Comiso (RG) — Aula Formativa",
+            "name": "Comiso (RG) - Aula Formativa",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Comiso",
@@ -247,7 +247,7 @@
   ],
   "intestazioni": 6,
   "testoLunghezza": 5436,
-  "testoSha1": "4b7f320fadf92e68370d41967e7450d28c2fd4fe",
+  "testoSha1": "753f1c260ef0a2aaba80619e9bddb304e092681d",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -281,7 +281,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Coordinatori%20cantieri%20CSE%2FCSP%20(120%20ore)&edizione=13%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=Coordinatori%20cantieri%20CSE%2FCSP%20(120%20ore)&edizione=13%20agosto%202026%2C%20Vittoria%20(RG)%20-%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

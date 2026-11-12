@@ -13,7 +13,7 @@ test('ICDL Full Standard: pagina completa @rapido', async ({ page }) => {
   for (const v of ['Descrizione del corso', 'A chi è rivolto', 'Cosa imparerai', 'Domande frequenti', 'Qual è la differenza tra ICDL Base e ICDL Full Standard?']) await expect(main).toContainText(v);
   await page.getByRole('button', { name: 'Moduli' }).click();
   await expect(main.locator('tbody tr')).toHaveCount(7);
-  for (const v of ['Modulo 1 – Computer Essentials', 'Modulo 5 – IT Security', 'Modulo 7 – Online Collaboration', 'Modalità di svolgimento', 'classi a numero limitato, da 10 a 12 allievi']) await expect(main).toContainText(v);
+  for (const v of ['Modulo 1 - Computer Essentials', 'Modulo 5 - IT Security', 'Modulo 7 - Online Collaboration', 'Modalità di svolgimento', 'classi a numero limitato, da 10 a 12 allievi']) await expect(main).toContainText(v);
 });
 
 test('ICDL Full Standard: compare nel catalogo ICDL @rapido', async ({ page }) => {

@@ -190,7 +190,7 @@
           "courseWorkload": "PT12H",
           "location": {
             "@type": "Place",
-            "name": "Vittoria (RG) — Sede Alètheia",
+            "name": "Vittoria (RG) - Sede Alètheia",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Vittoria",
@@ -207,7 +207,7 @@
           "courseWorkload": "PT12H",
           "location": {
             "@type": "Place",
-            "name": "Vittoria (RG) — Sede Alètheia",
+            "name": "Vittoria (RG) - Sede Alètheia",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Vittoria",
@@ -224,7 +224,7 @@
           "courseWorkload": "PT12H",
           "location": {
             "@type": "Place",
-            "name": "Comiso (RG) — Aula Formativa",
+            "name": "Comiso (RG) - Aula Formativa",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Comiso",
@@ -247,7 +247,7 @@
   ],
   "intestazioni": 6,
   "testoLunghezza": 5135,
-  "testoSha1": "dc6795eb3ec9b9a6855de478bc39f3e59fc02235",
+  "testoSha1": "b26e44fb29164ba3c6d5c5b26078044c7d070ff5",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -281,7 +281,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Formazione%20del%20preposto%20(12%20ore)&edizione=10%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=Formazione%20del%20preposto%20(12%20ore)&edizione=10%20agosto%202026%2C%20Vittoria%20(RG)%20-%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

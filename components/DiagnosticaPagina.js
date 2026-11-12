@@ -217,7 +217,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
             <ul style={{ margin: 0, padding: 0, listStyle: 'none', fontSize: '1rem', lineHeight: 1.6 }}>
               {m.mq.map(([q, ok]) => (
                 <li key={q}>
-                  <strong>{ok ? 'sì' : 'no'}</strong> — {q}
+                  <strong>{ok ? 'sì' : 'no'}</strong> - {q}
                 </li>
               ))}
             </ul>

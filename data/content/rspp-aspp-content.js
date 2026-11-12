@@ -10,7 +10,7 @@
 module.exports = {
   'rspp-aspp': {
     'livello-2': {
-      titolo: 'Corso RSPP/ASPP – Modulo A',
+      titolo: 'Corso RSPP/ASPP - Modulo A',
       durataOre: 28,
       modalita: ['Aula', 'Aula virtuale', 'FAD'],
       validita: 'Da mantenere con l\'aggiornamento periodico previsto per RSPP/ASPP (40 ore)',
@@ -61,7 +61,7 @@ Il Modulo A è erogabile in aula, in aula virtuale sincrona con il docente e in 
     },
 
     'livello-3': {
-      titolo: 'Corso RSPP/ASPP – Modulo B',
+      titolo: 'Corso RSPP/ASPP - Modulo B',
       durataOre: 48,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Da mantenere con l\'aggiornamento periodico previsto per RSPP/ASPP (40 ore)',
@@ -112,7 +112,7 @@ Il modulo è erogabile in aula e in aula virtuale sincrona con il docente; la FA
     },
 
     'livello-4': {
-      titolo: 'Corso RSPP – Modulo C',
+      titolo: 'Corso RSPP - Modulo C',
       durataOre: 24,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Da mantenere con l\'aggiornamento periodico previsto per RSPP/ASPP (40 ore)',

@@ -284,7 +284,7 @@ export default function Header({ active, solid = false }: HeaderProps) {
         >
           {/* A menu aperto la "X" sta sempre sopra l'overlay scuro a schermo intero
               (stesso gradiente in entrambi i temi, vedi .navbar), quindi va sempre
-              chiara — non dipende da `theme` come nello stato chiuso, dove invece
+              chiara - non dipende da `theme` come nello stato chiuso, dove invece
               l'icona sta sopra l'header e ne segue lo sfondo variabile. */}
           <span style={{ background: menuOpen ? '#FFFFFF' : iconColor }}></span>
           <span style={{ background: menuOpen ? '#FFFFFF' : iconColor }}></span>

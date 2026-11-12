@@ -62,7 +62,7 @@ Il corso è disponibile in aula, in aula virtuale o in FAD (formazione a distanz
     },
 
     'livello-2': {
-      titolo: 'Corso Formazione Generale e Specifica dei Lavoratori – Rischio Basso',
+      titolo: 'Corso Formazione Generale e Specifica dei Lavoratori - Rischio Basso',
       durataOre: 8,
       modalita: ['Aula', 'FAD', 'Aula virtuale'],
       validita: 'Generale permanente, specifica con aggiornamento ogni 5 anni',
@@ -111,7 +111,7 @@ Il corso è disponibile in tre modalità: in aula, in aula virtuale sincrona con
     },
 
     'livello-3': {
-      titolo: 'Corso Formazione Generale e Specifica dei Lavoratori – Rischio Medio',
+      titolo: 'Corso Formazione Generale e Specifica dei Lavoratori - Rischio Medio',
       durataOre: 12,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Generale permanente, specifica con rinnovo ogni 5 anni',
@@ -162,7 +162,7 @@ Il corso è disponibile in aula e in aula virtuale sincrona con il docente; la m
     },
 
     'livello-4': {
-      titolo: 'Corso Formazione Generale e Specifica dei Lavoratori – Rischio Alto',
+      titolo: 'Corso Formazione Generale e Specifica dei Lavoratori - Rischio Alto',
       durataOre: 16,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Generale permanente, specifica con rinnovo ogni 5 anni',

@@ -41,7 +41,7 @@ const PF_ICONE = [
 function AccreditamentoCard({ logo, logoAlt, title, code, logoScale, icon }) {
   return (
     <article className="group h-full bg-white dark:bg-dark-card rounded-xl p-6 sm:p-7 flex flex-col transition-all duration-300 shadow-sm border border-slate-200 dark:border-[rgba(255,255,255,0.08)] hover:-translate-y-1 hover:shadow-md">
-      {/* Logo — base bianca dietro l'immagine solo in dark mode: i loghi reali (Regione
+      {/* Logo - base bianca dietro l'immagine solo in dark mode: i loghi reali (Regione
           Siciliana, ECM, ecc.) sono pensati per sfondo chiaro e sparirebbero/stonerebbero
           sul teal scuro della card (dark-card = #004d52). */}
       <div className="relative w-full h-20 max-w-[70%] flex items-center justify-start">
@@ -251,7 +251,7 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
         }
       `}</style>
 
-      {/* HERO — gradiente pieno, coerente con homepage e le altre pagine interne (formazione,
+      {/* HERO - gradiente pieno, coerente con homepage e le altre pagine interne (formazione,
           agenzia-per-il-lavoro): niente intestazione "compatta" isolata su questa sola pagina. */}
       <section className="page-hero">
         <div className="container">
@@ -273,7 +273,7 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
         </div>
       </section>
 
-      {/* LA NOSTRA STORIA — timeline invece di un unico blocco di testo. Le date 2017/2019
+      {/* LA NOSTRA STORIA - timeline invece di un unico blocco di testo. Le date 2017/2019
           corrispondono agli accreditamenti reali citati più sotto in pagina (DDG n. 78 del
           20/01/2017 - Regione Siciliana; DDS n. 1100 del 26/04/2019 - Agenzia per il Lavoro),
           non sono aggiunte inventate. */}

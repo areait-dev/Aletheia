@@ -64,7 +64,7 @@ export const FAQ_PAGINE = {
     },
     {
       domanda: 'La formazione è valida ai fini degli obblighi normativi del personale pubblico?',
-      risposta: 'Sì. I nostri percorsi coprono gli adempimenti formativi obbligatori della PA — sicurezza, anticorruzione, trasparenza, privacy — con attestati riconosciuti.',
+      risposta: 'Sì. I nostri percorsi coprono gli adempimenti formativi obbligatori della PA - sicurezza, anticorruzione, trasparenza, privacy - con attestati riconosciuti.',
     },
   ],
   "fondo-nuove-competenze": [

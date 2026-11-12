@@ -19,7 +19,7 @@ function TabellaEnte({ anno, ente, righe }) {
               <th className="px-4 py-3 font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap">DATA</th>
               <th className="px-4 py-3 font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap">IMPORTO</th>
               <th className="px-4 py-3 font-bold text-gray-900 dark:text-gray-50">TITOLO PROGETTO</th>
-              <th className="px-4 py-3 font-bold text-gray-900 dark:text-gray-50">CIP – CUP - RUP</th>
+              <th className="px-4 py-3 font-bold text-gray-900 dark:text-gray-50">CIP - CUP - RUP</th>
             </tr>
           </thead>
           <tbody>
@@ -28,7 +28,7 @@ function TabellaEnte({ anno, ente, righe }) {
                 <td className="px-4 py-3 text-gray-700 dark:text-gray-300 whitespace-nowrap align-top" data-label="DATA">{r.data}</td>
                 <td className="px-4 py-3 text-gray-700 dark:text-gray-300 whitespace-nowrap align-top" data-label="IMPORTO">{r.importo}</td>
                 <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top" data-label="TITOLO PROGETTO">{r.titolo}</td>
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top" data-label="CIP – CUP - RUP">{r.cup}</td>
+                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 align-top" data-label="CIP - CUP - RUP">{r.cup}</td>
               </tr>
             ))}
           </tbody>

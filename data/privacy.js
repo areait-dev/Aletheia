@@ -51,7 +51,7 @@ export const categorieCookie = [
 export const censimentoCookie = [
   {
     categoria: 'Tecnico',
-    nome: 'Cookie di sessione del CMS / sito — nome tecnico variabile',
+    nome: 'Cookie di sessione del CMS / sito - nome tecnico variabile',
     fornitore: 'Alètheia S.r.l. / piattaforma sito',
     finalita: 'Gestione della sessione, sicurezza e corretta navigazione del sito',
     durata: 'Sessione',
@@ -60,7 +60,7 @@ export const censimentoCookie = [
   },
   {
     categoria: 'Tecnico',
-    nome: 'Cookie di preferenza consenso cookie — nome tecnico variabile',
+    nome: 'Cookie di preferenza consenso cookie - nome tecnico variabile',
     fornitore: 'Alètheia S.r.l. / eventuale CMP o plugin',
     finalita: 'Memorizzazione delle preferenze cookie dell’utente e prova tecnica della scelta',
     durata: '6/12 mesi',

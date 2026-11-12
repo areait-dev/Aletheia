@@ -51,7 +51,7 @@ export default function FormazioneECM({ faqs, modalita, pagina }) {
         
 
         /* Proposta formativa: tab selezionabili in riga, un solo blocco di testo
-           visibile alla volta — non card ripetute (pattern già usato ovunque nel sito). */
+           visibile alla volta - non card ripetute (pattern già usato ovunque nel sito). */
         .modalita-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid #E2E8F0; margin-bottom: 1.75rem; }
         :global(.dark) .modalita-tabs { border-color: rgba(255,255,255,0.1); }
         .modalita-tab {

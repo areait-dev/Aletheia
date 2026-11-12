@@ -25,7 +25,7 @@ module.exports = {
 
 Il carroponte è la macchina destinata al sollevamento e allo spostamento di materiali e merci con movimenti ristretti e confinati. Non va confuso con la gru a portale, che scorre su binari posti diversi metri più in basso della struttura, sostenuta da quattro bracci: due macchine diverse, due modalità operative diverse, due percorsi formativi diversi.
 
-Dal 24 maggio 2026 l'abilitazione carroponte è regolata dal nuovo Accordo Stato-Regioni: non è più sufficiente una formazione interna gestita dal datore di lavoro — serve un percorso strutturato con modulo teorico e prova pratica documentata, valido su tutto il territorio nazionale.
+Dal 24 maggio 2026 l'abilitazione carroponte è regolata dal nuovo Accordo Stato-Regioni: non è più sufficiente una formazione interna gestita dal datore di lavoro - serve un percorso strutturato con modulo teorico e prova pratica documentata, valido su tutto il territorio nazionale.
 
 Il corso forma gli operatori a condurre in sicurezza il carroponte con comando pensile o radiocomando, riconoscere i rischi legati all'ambiente di lavoro e alla movimentazione dei carichi, e rispettare tutti i requisiti previsti dalla normativa vigente.
 

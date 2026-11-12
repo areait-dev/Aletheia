@@ -787,13 +787,13 @@ export const SCHEDE_LOCALI = {
     {
       "logo": "/images/accreditamenti/aica.jpg",
       "logoAlt": "AICA",
-      "title": "Test Center AICA – ICDL",
+      "title": "Test Center AICA - ICDL",
       "code": "Codice AKHF0001"
     },
     {
       "logo": "/images/accreditamenti/Logo-ECM.png",
       "logoAlt": "ECM - Educazione Continua in Medicina",
-      "title": "Provider ECM – Educazione Continua in Medicina",
+      "title": "Provider ECM - Educazione Continua in Medicina",
       "code": "Provider Accreditato Ministero della Salute"
     },
     {

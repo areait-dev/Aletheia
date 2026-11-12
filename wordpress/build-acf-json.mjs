@@ -253,7 +253,7 @@ group('pagina_sezioni', 'Pagina - Sezioni', PAGE_LOC, () => {
       text(`s${i}_badge`, 'Badge'),
       text(`s${i}_titolo`, 'Titolo (H2)'),
       rich(`s${i}_testo`, 'Testo'),
-      list(`s${i}_elenco`, 'Card / elenco', 'Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi "Immagine card N", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti "Schede"'),
+      list(`s${i}_elenco`, 'Card / elenco', 'Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi "Immagine card N", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti "Schede"'),
       img(`s${i}_immagine`, 'Immagine della sezione'),
       img(`s${i}_img_1`, 'Immagine card 1'),
       img(`s${i}_img_2`, 'Immagine card 2'),

@@ -190,7 +190,7 @@
           "courseWorkload": "PT12H",
           "location": {
             "@type": "Place",
-            "name": "Ragusa — Area Pratica",
+            "name": "Ragusa - Area Pratica",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Ragusa",
@@ -207,7 +207,7 @@
           "courseWorkload": "PT12H",
           "location": {
             "@type": "Place",
-            "name": "Ragusa — Area Pratica",
+            "name": "Ragusa - Area Pratica",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Ragusa",
@@ -230,7 +230,7 @@
   ],
   "intestazioni": 6,
   "testoLunghezza": 4966,
-  "testoSha1": "14c7fa060602868d6ba0b68d66a8cf6115c2113c",
+  "testoSha1": "428040ce4c0b21c0bb4d9cbcf221f081f71d5f72",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -264,7 +264,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Carrelli%20elevatori%20semoventi%20con%20conduttore%20a%20bordo%20(12%20ore)&edizione=1%20settembre%202026%2C%20Ragusa%20%E2%80%94%20Area%20Pratica",
+    "/richiedi-preventivo?corso=Carrelli%20elevatori%20semoventi%20con%20conduttore%20a%20bordo%20(12%20ore)&edizione=1%20settembre%202026%2C%20Ragusa%20-%20Area%20Pratica",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

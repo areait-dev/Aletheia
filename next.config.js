@@ -7,7 +7,7 @@ const { costruisciRedirect } = require('./lib/redirect-vecchio-sito');
  * buildCourseFamilies() normalizza una variante in una famiglia "isolata" con slug proprio (perché
  * il titolo in coursesData non combacia con quello delle altre varianti della stessa categoria) e
  * quindi genererebbe un redirect verso uno slug-famiglia che non ha (o non ha più) una pagina
- * dedicata — es. le 6 varianti macchina di Macchine Movimento Terra, tutte riunite in un'unica
+ * dedicata - es. le 6 varianti macchina di Macchine Movimento Terra, tutte riunite in un'unica
  * pagina switchabile su /corsi/macchine-movimento-terra invece che sui 6 slug-famiglia
  * isolati che la normalizzazione automatica assegnerebbe loro.
  */

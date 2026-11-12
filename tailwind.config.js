@@ -55,7 +55,7 @@ module.exports = {
           500: '#161C1A',
           600: '#000503',
         },
-        // Sfondi DS — nomi senza prefisso "bg-" per evitare la classe doppia (bg-bg-*)
+        // Sfondi DS - nomi senza prefisso "bg-" per evitare la classe doppia (bg-bg-*)
         light: '#F2F2F2',   // → classe bg-light
         dark: '#161C1A',    // → classe bg-dark
         // Bottoni DS
@@ -67,7 +67,7 @@ module.exports = {
         // Testo brand su sfondo scuro: 4,6:1 su #004d52, 8,2:1 su #161C1A (sostituisce smeraldo/menta)
         'primary-on-dark': '#5FC2C8',
 
-        // Sfondo dark mode — pagina = DS background dark, card/pannelli = brand
+        // Sfondo dark mode - pagina = DS background dark, card/pannelli = brand
         'dark-bg': '#161C1A',
         'dark-card': '#004d52',
 

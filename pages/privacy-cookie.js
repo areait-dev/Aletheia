@@ -204,7 +204,7 @@ export default function PrivacyCookie({ pagina }) {
                     <td className="px-4 py-3">{c.finalita}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{c.durata}</td>
                     <td className="px-4 py-3">{c.base}</td>
-                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{c.note || '—'}</td>
+                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{c.note || '-'}</td>
                   </tr>
                 ))}
               />
