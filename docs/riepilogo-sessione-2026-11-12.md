@@ -4,7 +4,8 @@ Documento di lavoro. Non sostituisce MIGRAZIONE.md: i punti ancora aperti vanno 
 
 ## Stato di `master`
 
-- `master` è a `b8749a1`, **9 commit avanti a `origin/master`, NON pushato**. Nessun push senza l'ok del committente.
+- `master` locale è a `9478f44` (merge di `riepilogo-sessione`), **11 commit avanti e 9 indietro rispetto a `origin/master`, NON pushato**. Il push è stato rifiutato (non fast-forward): `origin/master` ha 9 commit del 10 novembre che questa sessione non conosceva (partita da `1f182b7`, riferimento remoto vecchio). Nessun push senza l'ok del committente. Vedi «Prossimo passo».
+- Ai 9 commit elencati sotto si aggiungono `0fe4d03` (questo documento) e il merge `9478f44`.
 - **Suite completa (`npx playwright test`, 1 worker, build di test di `master`): 393 passati, 0 falliti** (17,8 min). La suite rapida sul branch prima del merge: 331 passati, 0 falliti.
 - Commit locali, in ordine:
   - `b3ae8ad` testi: trattino lungo e medio sostituiti con il trattino corto (51 file);
@@ -23,13 +24,13 @@ Documento di lavoro. Non sostituisce MIGRAZIONE.md: i punti ancora aperti vanno 
 - Trattini: la sostituzione vale anche per il trattino medio `–`, comprese le denominazioni degli avvisi regionali e i codici CIP/CUP in `/aiuti-di-stato/*`. Confermato «così».
 - JSON-LD `hasCourseInstance[].location.name` e link «Richiedi preventivo» (parametro `edizione=`) con il trattino corto: accettati.
 - `/corsi/macchine-movimento-terra` più bassa di 25 px (il testo «Da definire - aggiornamento disponibile (4 ore)» sta su una riga): accettato.
-- ASACOM: **strada B**. Titolo nuovo («ASACOM - Assistente specialistico all'autonomia e alla comunicazione»), indirizzo storico invariato (`/corsi/asacom-assistente-alla-comunicazione`), nessun redirect.
+- ASACOM: **strada B**. Titolo nuovo («ASACOM - Assistente specialistico all'autonomia e alla comunicazione»), indirizzo storico invariato (`/corsi/asacom-assistente-alla-comunicazione`), nessun redirect. (Il meccanismo `SLUG_FAMIGLIA_FISSATI` di questa sessione sarà tolto: vale la riga già online, vedi «Prossimo passo».)
 - Il foglio Google «Corsi» (letto in sola lettura) non contiene `—` né `–` nelle celle: niente da correggere lì.
 - Checklist prima dei DNS (da riportare in MIGRAZIONE.md): suite completa verde su `master`; `audit-segnaposto` e `audit-dati-schede` senza risultati nuovi; elenco degli URL del catalogo congelato, e da lì ogni cambio di slug richiede un redirect permanente dal vecchio indirizzo (308, come `next.config.js` fa per tutti i `/corsi/*`; solo `/all-courses/…` risponde 301).
 
 ## Cosa è emerso
 
-- **Regressione già su `origin/master`.** Il commit `e0db6b0` (titolo ASACOM) cambiava lo slug di famiglia: la scheda perdeva contenuto, foto e moduli («Contenuto dettagliato in arrivo»), perché le chiavi di `data/content`, `courseImages` e `coursesDetails` erano quelle del vecchio slug. È corretta in `bc0f8c4`, ma finché `master` non è pushato la regressione può essere online. Non verificato sul sito pubblico.
+- **Regressione ASACOM (`e0db6b0`): già corretta online.** Il commit `e0db6b0` (titolo ASACOM) cambiava lo slug di famiglia: la scheda perdeva contenuto, foto e moduli («Contenuto dettagliato in arrivo»), perché le chiavi di `data/content`, `courseImages` e `coursesDetails` erano quelle del vecchio slug. Il fix `bb4a504` («ASACOM: ripristinato lo slug storico dopo il cambio titolo», 10/11, una riga nella mappa di `data/courseFamilies.js`) è su `origin/master` e **in produzione dal deploy del 10/11** (`733c2b5`). Verificato in sola lettura il 12/11: `/corsi/asacom-assistente-alla-comunicazione` risponde 200 con FAQ completa e foto, senza il segnaposto; lo slug ricavato dal titolo risponde 404. Questa sessione ha rifatto la stessa correzione (`bc0f8c4`, `SLUG_FAMIGLIA_FISSATI`) senza saperlo: si tiene quella già online (vedi «Prossimo passo»). Il lavoro del 10/11 è dello stesso autore git (`areait-dev`) e non era noto a questa sessione.
 - **Riferimenti visivi vecchi.** Erano stati generati dal codice di inizio novembre e non coprivano i commit di layout successivi: foto di «Formazione dei lavoratori» (`f294bd5`), titoli e tag in sentence case, immagine a tutta larghezza in `/formazione/regionale` (`1f182b7`), due news portate dal vecchio sito (`7a112c1`) con il nuovo ordine, titolo ASACOM. Rigenerati solo i test che fallivano, dopo aver aperto le immagini di differenza.
 - **Screenshot di riferimento (non versionati, solo su questo computer).** Rigenerati oggi: `aiuti-di-stato-2023-1440-chiaro`, `corsi-macchine-movimento-terra-1440-chiaro`, `home-corsi-in-partenza-390/768/1440`, `corsi-1440-chiaro`, `corsi-antincendio-1440-chiaro`, `corsi-sicurezza-lavoro-1440-chiaro` e 16 a 1440 px non rapidi (chiaro e scuro: agenzia, aiuti 2024, corsi, antincendio e `?livello=2`, macchine, sicurezza, regionale, news). La cartella `tests/riferimenti/immagini/` non è in Git: farne una copia di sicurezza.
 - `lib/seo.ts:66` ha ancora un `–` in una regex di pulizia della description: non toccato.
@@ -58,3 +59,30 @@ Obiettivo del committente: nessun URL cambia mai per un ritocco al titolo.
 - Fase 1 (`pulizia-documenti`): MIGRAZIONE.md unificato, cartella principale (tabella già approvata), `.gitignore` (`Claude outputs/`, `/*.png`, `/.next-*/`, `scripts/tmp/`), `docs/diario/2026-11.md`, `docs/test-regressione.md`, CLAUDE.md (hover senza stili inline, nessun `<style>` nei componenti nuovi, soglia di ~300 righe, percorso leggero e completo, `scripts/tmp/`, regola degli slug, regola «chi cambia qualcosa di visibile aggiorna i riferimenti nello stesso branch, con l'ok del committente; niente merge in `master` con test rossi»), `AGENTS.md` committato. Stop prima del commit.
 - Fasi 2, 3 e 4 come da piano del committente.
 - Prova su un iPad vero e controllo dei contenuti dei corsi da chiedere al reparto formazione: vedi MIGRAZIONE.md.
+
+## Prossimo passo (sessione nuova): integrare `origin/master` in `master`
+
+**Stato.** `master` locale è 11 commit avanti e 9 indietro rispetto a `origin/master`. Il push del 12/11 è stato rifiutato e **non è stato forzato**. Non è stato pubblicato niente.
+
+**I 9 commit presenti solo su `origin/master`** (10/11, autore `areait-dev`, già in produzione fino a `733c2b5`): BreadcrumbList generato dal componente delle briciole; `titoloSeo` sotto i 60 caratteri per le news e test sui title; fonte della news «full remote»; «carriponte» in tutti i titoli (slug invariati); virgola in «apposizione, integrazione e rimozione della segnaletica stradale»; slug «carriponti» storico per carriponti pensile/cabina; **`bb4a504` ASACOM: slug storico ripristinato**; riferimenti `metadata` aggiornati; footer «Powered by Promo Communication». In tutto 110 file toccati. Nota sull'origine: la richiesta del committente lasciava in bianco chi ha fatto questo lavoro (modello non compilato); qui è indicato solo l'autore git.
+
+**Conflitti attesi** (simulazione con `git merge-tree`, nessuna modifica all'albero): 5.
+1. `data/courseFamilies.js` (due correzioni di ASACOM)
+2. `tests/riferimenti/dati/metadata/corsi.json`
+3. `tests/riferimenti/dati/metadata/corsi_addetti-alla-conduzione-di-carriponti-pensile-cabina.json`
+4. `tests/riferimenti/dati/metadata/corsi_asacom-assistente-alla-comunicazione.json`
+5. `tests/riferimenti/dati/metadata/corsi_oss-operatore-socio-sanitario.json`
+
+Si uniscono da soli, tra gli altri: `pages/corsi/[slug].js`, `lib/newsData.js`, `pages/formazione/regionale.js`, `styles/globals.css`, `tests/regressione/ereditarieta.spec.mjs` e gli altri JSON di `metadata`.
+
+**Decisioni del committente (12/11).**
+- **Merge** di `origin/master` in `master`, **niente rebase**.
+- **ASACOM:** si tiene `bb4a504` (riga nella mappa in `data/courseFamilies.js`) e si **toglie `SLUG_FAMIGLIA_FISSATI`**, con il suo commento e l'uso accanto a `slugify`. Il test `tests/regressione/slug-asacom.spec.mjs` resta valido (verifica 200 allo slug storico, 404 allo slug dal titolo).
+- **I 4 file `metadata` in conflitto non si risolvono a mano:** dopo il merge si prende una versione qualsiasi (non conta) e si **rigenerano** con la suite, solo per quei test, aprendo prima le differenze.
+- Poi **suite completa** (`npx playwright test`, 1 worker) tutta verde, poi **push** (solo con l'ok del committente), poi si controlla il deploy e le pagine toccate online.
+- **`slug-fissi` solo dopo**, perché tocca lo stesso file (`courseFamilies.js`) e va rifatto sulla base unita.
+
+**Cose da ricontrollare dopo il merge.**
+- Gli screenshot di riferimento non versionati (solo su questo computer) sono stati rigenerati su una base senza i commit del 10/11 (footer, breadcrumb, titoli carriponte): è probabile che alcuni falliscano e vadano rigenerati, sempre dopo aver aperto le immagini di differenza.
+- I 37 JSON `metadata` rigenerati con i trattini non conoscono il `titoloSeo` e il BreadcrumbList del 10/11: possibili altri scarti oltre ai 4 in conflitto.
+- Per il passaggio in produzione vale la checklist DNS (sezione «Decisioni del committente»).
