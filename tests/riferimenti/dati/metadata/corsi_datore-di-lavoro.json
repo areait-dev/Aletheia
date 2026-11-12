@@ -190,7 +190,7 @@
           "courseWorkload": "PT16H",
           "location": {
             "@type": "Place",
-            "name": "Vittoria (RG) — Sede Alètheia",
+            "name": "Vittoria (RG) - Sede Alètheia",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Vittoria",
@@ -207,7 +207,7 @@
           "courseWorkload": "PT16H",
           "location": {
             "@type": "Place",
-            "name": "Online — Aula Virtuale",
+            "name": "Online - Aula Virtuale",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Online",
@@ -224,7 +224,7 @@
           "courseWorkload": "PT16H",
           "location": {
             "@type": "Place",
-            "name": "Vittoria (RG) — Sede Alètheia",
+            "name": "Vittoria (RG) - Sede Alètheia",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Vittoria",
@@ -247,7 +247,7 @@
   ],
   "intestazioni": 6,
   "testoLunghezza": 5045,
-  "testoSha1": "e9c97c47955aff2a7945c083991ac5ac50c4b956",
+  "testoSha1": "43d6238e0441b9bd1d9b5e6a8abdcd6baba610b9",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -281,7 +281,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Datore%20di%20lavoro%20-%20Modulo%20comune%20(16%20ore)&edizione=10%20agosto%202026%2C%20Vittoria%20(RG)%20%E2%80%94%20Sede%20Al%C3%A8theia",
+    "/richiedi-preventivo?corso=Datore%20di%20lavoro%20-%20Modulo%20comune%20(16%20ore)&edizione=10%20agosto%202026%2C%20Vittoria%20(RG)%20-%20Sede%20Al%C3%A8theia",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

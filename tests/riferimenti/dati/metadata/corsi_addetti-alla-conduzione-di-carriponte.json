@@ -190,7 +190,7 @@
           "courseWorkload": "PT11H",
           "location": {
             "@type": "Place",
-            "name": "Ragusa — Area Pratica",
+            "name": "Ragusa - Area Pratica",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Ragusa",
@@ -207,7 +207,7 @@
           "courseWorkload": "PT11H",
           "location": {
             "@type": "Place",
-            "name": "Comiso (RG) — Aula Formativa",
+            "name": "Comiso (RG) - Aula Formativa",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Comiso",
@@ -224,7 +224,7 @@
           "courseWorkload": "PT11H",
           "location": {
             "@type": "Place",
-            "name": "Ragusa — Area Pratica",
+            "name": "Ragusa - Area Pratica",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Ragusa",
@@ -247,7 +247,7 @@
   ],
   "intestazioni": 6,
   "testoLunghezza": 3847,
-  "testoSha1": "f12da46dc4fc585e64ff47637b620957e13a20c5",
+  "testoSha1": "07983aeceb3b752795ba80052f654f6c57a05394",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -281,7 +281,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Addetti%20alla%20conduzione%20di%20carriponte%20(10%20ore)&edizione=12%20agosto%202026%2C%20Ragusa%20%E2%80%94%20Area%20Pratica",
+    "/richiedi-preventivo?corso=Addetti%20alla%20conduzione%20di%20carriponte%20(10%20ore)&edizione=12%20agosto%202026%2C%20Ragusa%20-%20Area%20Pratica",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",
