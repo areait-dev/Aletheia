@@ -4,7 +4,7 @@ Documento di lavoro. Non sostituisce MIGRAZIONE.md: i punti ancora aperti vanno 
 
 ## Stato di `master`
 
-- `master` locale è a `9478f44` (merge di `riepilogo-sessione`), **11 commit avanti e 9 indietro rispetto a `origin/master`, NON pushato**. Il push è stato rifiutato (non fast-forward): `origin/master` ha 9 commit del 10 novembre che questa sessione non conosceva (partita da `1f182b7`, riferimento remoto vecchio). Nessun push senza l'ok del committente. Vedi «Prossimo passo».
+- (Storico, superato: vedi «Esito».) `master` locale era a `9478f44`, **11 commit avanti e 9 indietro rispetto a `origin/master`, NON pushato**. Il push è stato rifiutato (non fast-forward): `origin/master` ha 9 commit del 10 novembre che questa sessione non conosceva (partita da `1f182b7`, riferimento remoto vecchio). Nessun push senza l'ok del committente. Vedi «Prossimo passo».
 - Ai 9 commit elencati sotto si aggiungono `0fe4d03` (questo documento) e il merge `9478f44`.
 - **Suite completa (`npx playwright test`, 1 worker, build di test di `master`): 393 passati, 0 falliti** (17,8 min). La suite rapida sul branch prima del merge: 331 passati, 0 falliti.
 - Commit locali, in ordine:
@@ -60,7 +60,21 @@ Obiettivo del committente: nessun URL cambia mai per un ritocco al titolo.
 - Fasi 2, 3 e 4 come da piano del committente.
 - Prova su un iPad vero e controllo dei contenuti dei corsi da chiedere al reparto formazione: vedi MIGRAZIONE.md.
 
-## Prossimo passo (sessione nuova): integrare `origin/master` in `master`
+## Esito: integrazione di `origin/master` in `master` (12/11, completata)
+
+**Fatto e in produzione** (`master` `f8733c3`, deploy Vercel riuscito, https://aletheiasrl.vercel.app).
+
+- Merge `ee9301a` (niente rebase). 5 conflitti: `data/courseFamilies.js` risolto tenendo `SLUG_STORICI` (`bb4a504`) e togliendo `SLUG_FAMIGLIA_FISSATI` (il file è identico a `origin/master`); i 4 `metadata` presi da origin e poi rigenerati.
+- Rigenerazione dei riferimenti, tutta per effetto di due commit remoti del 10/11 arrivati dopo l'ultimo aggiornamento dei riferimenti: footer «Powered by Promo Communication» (`733c2b5`, +30 caratteri di testo in tutte le pagine) e rimozione del catalogo PDF dal footer (`4eee1fd`, 09/11, voluta: il catalogo non esiste). **Su `origin/master` questi test erano già rossi.**
+  - 111 `metadata` rigenerati (cambiano solo `testoLunghezza` e `testoSha1`);
+  - `interazioni/404.json` (solo il testo «Powered by»);
+  - screenshot non versionati `calendario-corsi-1440-chiaro` e `-scuro` (solo il footer; la data non c'entra: la build di test congela «oggi» a 2026-08-10).
+- Suite completa dopo il merge: 392 passati, 3 falliti (404 e i due screenshot, tutti per il footer). Rigenerati quei 3 e rilanciati solo loro: 3/3 verdi. La suite completa non è stata rieseguita dopo la rigenerazione (decisione del committente: gli altri 392 erano passati sullo stesso codice).
+- Controllo online dopo il deploy: `/corsi/asacom-assistente-alla-comunicazione` 200, titolo «ASACOM - Assistente specialistico all'autonomia e alla comunicazione», senza segnaposto; lo slug ricavato dal titolo 404. `/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina` 200, «carriponte» nel titolo; lo slug dal titolo (`carriponte`) 404. Footer con «Powered by» e senza catalogo.
+- `slug-fissi` può partire ora, sulla base unita.
+- Gli screenshot di riferimento restano non versionati: fare una copia di sicurezza di `tests/riferimenti/immagini/` (due sono stati rigenerati oggi).
+
+## Piano di integrazione (storico, eseguito)
 
 **Stato.** `master` locale è 11 commit avanti e 9 indietro rispetto a `origin/master`. Il push del 12/11 è stato rifiutato e **non è stato forzato**. Non è stato pubblicato niente.
 
