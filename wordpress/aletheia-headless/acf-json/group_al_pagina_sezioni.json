@@ -155,7 +155,7 @@
       "name": "s1_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -359,7 +359,7 @@
       "name": "s2_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -563,7 +563,7 @@
       "name": "s3_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -767,7 +767,7 @@
       "name": "s4_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -971,7 +971,7 @@
       "name": "s5_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -1175,7 +1175,7 @@
       "name": "s6_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -1379,7 +1379,7 @@
       "name": "s7_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {
@@ -1583,7 +1583,7 @@
       "name": "s8_elenco",
       "aria-label": "",
       "type": "textarea",
-      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL — le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
+      "instructions": "Una voce per riga. Formato: Icona (classe Font Awesome)|Titolo|Testo|URL - le colonne finali sono facoltative. Le immagini delle card si caricano nei campi \"Immagine card N\", nello stesso ordine. Liste ricche (testo lungo, immagine, più dati): usa i contenuti \"Schede\"",
       "required": 0,
       "conditional_logic": 0,
       "wrapper": {

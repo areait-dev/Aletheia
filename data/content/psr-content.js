@@ -60,7 +60,7 @@ Workshop di approfondimento (8 ore ciascuno): Strategie di Marketing per le azie
       modalita: ['FAD'],
       // Certificazione dal reparto formazione (5 novembre 2026), riportata come indicata (apostrofo compreso). Il corso ha UNA sola variante
       // (niente corso base/aggiornamento): non c'è ereditarietà, il valore è proprio.
-      attestato: 'Conduttore d’Impresa Agricola – Qualifica 3 EQF',
+      attestato: 'Conduttore d’Impresa Agricola - Qualifica 3 EQF',
 
       descrizione: `Il Conduttore d'Impresa Agricola gestisce i processi aziendali gestionali e produttivi in riferimento al contesto produttivo e territoriale di riferimento.
 

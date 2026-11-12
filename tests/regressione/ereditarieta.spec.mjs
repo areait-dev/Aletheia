@@ -66,7 +66,7 @@ test('Carriponti Pensile/Cabina: l\'aggiornamento eredita attestato, validità e
 test('Conduttore d\'Impresa Agricola: certificazione Qualifica 3 EQF, modalità FAD, nessuna variante di aggiornamento @rapido', async ({ page }) => {
   await page.goto('/corsi/conduttore-d-impresa-agricola', { waitUntil: 'networkidle' });
   const scheda = page.locator('.cp-scheda-area');
-  await expect(scheda).toContainText('Conduttore d’Impresa Agricola – Qualifica 3 EQF');
+  await expect(scheda).toContainText('Conduttore d’Impresa Agricola - Qualifica 3 EQF');
   await expect(scheda).toContainText('FAD');
   await expect(scheda).toContainText('200 ore');
   await expect(page.locator('[role="tablist"]')).toHaveCount(0); // un solo corso: niente switch corso/aggiornamento

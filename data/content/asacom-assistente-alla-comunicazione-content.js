@@ -3,7 +3,7 @@
 // FONTE: documento Word "Corso ASACOM.docx" (cartella NUOVO SITO ALETHEIA / CONTENUTI DEF / corsi qualificati, 5 novembre 2026).
 // Testi copiati SENZA modifiche.
 // DA CONFERMARE (NON nel documento, quindi non inseriti): la DURATA in ore (prima la pagina mostrava "Qualifica Riconosciuta"; nei dati di
-// dettaglio del sito c'era "600 ore", ma il programma a 9 moduli del documento non ha ore) e le ORE di ogni modulo (nella tabella compare "—").
+// dettaglio del sito c'era "600 ore", ma il programma a 9 moduli del documento non ha ore) e le ORE di ogni modulo (nella tabella compare "-").
 // PARTECIPANTI: "minimo 15" (non un massimo): campo partecipantiMin. LUOGO: "Vittoria (RG)", la sede di Via del Carrubo (mappa).
 // ATTESTATO: ricavato dal testo ("conseguimento della qualifica professionale di Assistente all'Autonomia e alla Comunicazione delle
 // Persone con Disabilità").
@@ -19,7 +19,7 @@ module.exports = {
       luogoCorso: { testo: "Vittoria (RG)", indirizzo: "Via del Carrubo snc, 97019 Vittoria (RG)" },
       prezzo: null,
 
-      descrizione: `Il corso ASACOM – Assistente all'Autonomia e alla Comunicazione delle Persone con Disabilità è un percorso di formazione professionale che prepara a svolgere attività di supporto all'autonomia personale, alla comunicazione e all'inclusione delle persone con disabilità, con particolare riferimento al contesto scolastico.
+      descrizione: `Il corso ASACOM - Assistente all'Autonomia e alla Comunicazione delle Persone con Disabilità è un percorso di formazione professionale che prepara a svolgere attività di supporto all'autonomia personale, alla comunicazione e all'inclusione delle persone con disabilità, con particolare riferimento al contesto scolastico.
 
 L'Assistente all'Autonomia e alla Comunicazione affianca la persona nelle attività quotidiane e nei percorsi educativi, favorendo la relazione con i compagni, la partecipazione alla vita scolastica e lo sviluppo delle capacità individuali. Il suo intervento è personalizzato in base ai bisogni e alle potenzialità della persona e si realizza in collaborazione con insegnanti, famiglie e altre figure professionali coinvolte nel progetto educativo.
 
@@ -70,52 +70,52 @@ Al termine del percorso, previo superamento dell'esame finale, è previsto il co
       ],
 
       moduli: [
-        { titolo: "Modulo 1 – La relazione nel processo di aiuto", argomenti: [
+        { titolo: "Modulo 1 - La relazione nel processo di aiuto", argomenti: [
           "Principi della relazione d'aiuto.",
           "Comunicazione interpersonale e ascolto attivo.",
           "Relazione con la persona con disabilità e con il suo contesto familiare e sociale.",
           "Gestione delle dinamiche relazionali e lavoro in équipe.",
         ] },
-        { titolo: "Modulo 2 – Psicologia dello sviluppo, linguaggio, comunicazione e disabilità", argomenti: [
+        { titolo: "Modulo 2 - Psicologia dello sviluppo, linguaggio, comunicazione e disabilità", argomenti: [
           "Elementi di psicologia dello sviluppo.",
           "Sviluppo del linguaggio e delle capacità comunicative.",
           "Principali tipologie di disabilità e bisogni specifici.",
           "Strategie e strumenti per favorire la comunicazione e l'autonomia.",
         ] },
-        { titolo: "Modulo 3 – Legislazione socio-sanitaria, scolastica e della disabilità", argomenti: [
+        { titolo: "Modulo 3 - Legislazione socio-sanitaria, scolastica e della disabilità", argomenti: [
           "Normativa di riferimento in materia di disabilità e inclusione.",
           "Organizzazione dei servizi socio-assistenziali e scolastici.",
           "Diritti e tutela della persona con disabilità.",
           "Ruolo e responsabilità dell'Assistente all'Autonomia e alla Comunicazione.",
         ] },
-        { titolo: "Modulo 4 – Comunità sorda e lingua dei segni", argomenti: [
+        { titolo: "Modulo 4 - Comunità sorda e lingua dei segni", argomenti: [
           "Elementi di cultura e storia della comunità sorda.",
           "Introduzione alla Lingua dei Segni Italiana (LIS).",
           "Modalità e strumenti per facilitare la comunicazione con persone con disabilità uditiva.",
         ] },
-        { titolo: "Modulo 5 – Disturbi dell'apprendimento e dell'attenzione", argomenti: [
+        { titolo: "Modulo 5 - Disturbi dell'apprendimento e dell'attenzione", argomenti: [
           "Principali disturbi specifici dell'apprendimento (DSA).",
           "Disturbo da deficit di attenzione e iperattività (ADHD).",
           "Strategie di supporto e facilitazione nei contesti educativi.",
         ] },
-        { titolo: "Modulo 6 – Introduzione ai disturbi dello spettro autistico", argomenti: [
+        { titolo: "Modulo 6 - Introduzione ai disturbi dello spettro autistico", argomenti: [
           "Caratteristiche dei disturbi dello spettro autistico.",
           "Bisogni comunicativi, relazionali e comportamentali.",
           "Strategie per favorire l'interazione e la partecipazione.",
         ] },
-        { titolo: "Modulo 7 – Progettazione del Piano Educativo Individualizzato (PEI)", argomenti: [
+        { titolo: "Modulo 7 - Progettazione del Piano Educativo Individualizzato (PEI)", argomenti: [
           "Finalità e struttura del PEI.",
           "Osservazione dei bisogni e delle potenzialità della persona.",
           "Definizione degli obiettivi individualizzati.",
           "Collaborazione con le figure educative e professionali coinvolte.",
         ] },
-        { titolo: "Modulo 8 – Didattica speciale e inclusione scolastica", argomenti: [
+        { titolo: "Modulo 8 - Didattica speciale e inclusione scolastica", argomenti: [
           "Principi e strategie della didattica inclusiva.",
           "Adattamento delle attività e dei materiali educativi.",
           "Supporto alla partecipazione e alla socializzazione nel gruppo classe.",
           "Utilizzo di strumenti e ausili per l'apprendimento e la comunicazione.",
         ] },
-        { titolo: "Modulo 9 – Stress e prevenzione del burnout nelle professioni di aiuto", argomenti: [
+        { titolo: "Modulo 9 - Stress e prevenzione del burnout nelle professioni di aiuto", argomenti: [
           "Riconoscimento delle situazioni di stress lavorativo.",
           "Gestione delle emozioni e delle relazioni professionali.",
           "Strategie di prevenzione del burnout.",

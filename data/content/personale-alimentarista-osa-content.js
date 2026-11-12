@@ -11,7 +11,7 @@
 module.exports = {
   'personale-alimentarista-osa': {
     'livello-1': {
-      titolo: 'Corso Personale Alimentarista – OSA',
+      titolo: 'Corso Personale Alimentarista - OSA',
       durataOre: 12,
       modalita: ['Aula', 'FAD'],
       validita: 'Aggiornamento ogni 2 anni',
@@ -21,7 +21,7 @@ module.exports = {
 
       descrizione: `La formazione degli Operatori del Settore Alimentare (OSA) è un obbligo di legge previsto dal Regolamento CE 852/2004 sull'igiene dei prodotti alimentari, che impone a chiunque manipoli, prepari, confezioni, trasporti o venda sostanze alimentari di possedere adeguate competenze in materia di igiene e sicurezza alimentare, commisurate all'attività lavorativa svolta.
 
-Il Corso Personale Alimentarista – OSA, della durata di 12 ore, fornisce le conoscenze necessarie per operare in sicurezza lungo tutta la filiera alimentare, con l'obiettivo di prevenire le contaminazioni chimiche, fisiche e biologiche che possono compromettere la salubrità degli alimenti e la salute dei consumatori.
+Il Corso Personale Alimentarista - OSA, della durata di 12 ore, fornisce le conoscenze necessarie per operare in sicurezza lungo tutta la filiera alimentare, con l'obiettivo di prevenire le contaminazioni chimiche, fisiche e biologiche che possono compromettere la salubrità degli alimenti e la salute dei consumatori.
 
 Il programma affronta la corretta gestione dell'igiene personale e delle strutture di lavorazione, le buone pratiche di manipolazione e conservazione dei cibi, il rispetto della catena del freddo e del caldo, e l'applicazione pratica dei principi del sistema HACCP (Hazard Analysis and Critical Control Points), lo strumento di autocontrollo obbligatorio per l'individuazione e la gestione dei punti critici del processo produttivo.
 

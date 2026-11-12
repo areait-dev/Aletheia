@@ -100,7 +100,7 @@ export function righeFoglioToEdizioni(righe: string[][], catalogo: VoceCatalogo[
 
     edizioni.push({
       id: 100000 + n,
-      titolo: variante ? `${voce.titolo} — ${variante}` : voce.titolo,
+      titolo: variante ? `${voce.titolo} - ${variante}` : voce.titolo,
       slug: voce.slug,
       categoria: voce.categoria,
       data,

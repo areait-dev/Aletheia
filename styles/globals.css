@@ -5,8 +5,8 @@
 :root {
   /* ── Design System ufficiale Alètheia ───────────────────── */
   /* Primary / brand */
-  --primary: #008C95;        /* Green 400 — primario brand */
-  --primary-dark: #004D52;   /* Green 600 — primario scuro */
+  --primary: #008C95;        /* Green 400 - primario brand */
+  --primary-dark: #004D52;   /* Green 600 - primario scuro */
   --primary-hover: #004D52;  /* hover = primary dark */
   --secondary: #10B981; /* accento verde su hero scure (h1 span): invariato come in origine */
 
@@ -122,7 +122,7 @@ html {
   scroll-behavior: smooth;
   /* overflow-x: clip (non "hidden"): impedisce lo scroll orizzontale senza il
      side-effect di "hidden", che forza anche overflow-y ad "auto" su html/body
-     — trasformandoli in scroll container propri e rompendo position:sticky nei
+     - trasformandoli in scroll container propri e rompendo position:sticky nei
      discendenti (es. il form calendario) in Chrome/WebKit. */
   overflow-x: clip;
 }
@@ -137,13 +137,13 @@ body {
   /* --font-nunito / --font-viga: variabili di next/font (lib/fonts.js), definite su <html> da pages/_document.js */
   font-family: var(--font-nunito), sans-serif;
   font-weight: 400;
-  background-color: var(--bg-light); /* #F2F2F2 — DS background light */
+  background-color: var(--bg-light); /* #F2F2F2 - DS background light */
   color: var(--text-dark); /* #161C1A su chiaro */
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* overflow-x: clip, non "hidden" — stesso motivo di html sopra: evita di
+  /* overflow-x: clip, non "hidden" - stesso motivo di html sopra: evita di
      rompere position:sticky nei discendenti. Il pannello off-canvas del menu
      mobile (Header) è posizionato oltre il viewport: senza questo, allarga lo
      scrollWidth della pagina e gli elementi a larghezza 100% (es. card) ne
@@ -153,7 +153,7 @@ body {
 
 
 html.dark body {
-  background-color: var(--bg-dark); /* #161C1A — DS background dark */
+  background-color: var(--bg-dark); /* #161C1A - DS background dark */
   color: var(--text-light); /* #F2F2F2 su scuro */
 }
 
@@ -240,7 +240,7 @@ h3 { font-size: 18px; line-height: 21.6px; }   /* H3 */
    --btn-radius definiti in :root. Le classi legacy (cta-nav-btn,
    hero-btn-*, course-btn, cta-btn, premium-card-btn, ecc.) sono
    state allineate agli stessi token ma mantenute per non rompere
-   i markup esistenti — per componenti nuovi preferire .btn. ── */
+   i markup esistenti - per componenti nuovi preferire .btn. ── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -375,7 +375,7 @@ img {
 /* Stesso bug di rendering di backdrop-filter+fixed già risolto sopra per .site-header--solid,
    in una variante più grave: .navbar (il menu mobile a schermo intero, position:fixed) è
    discendente di .site-header, quindi il backdrop-filter dell'header diventa il suo
-   "containing block" invece del viewport — il menu nero non copre più tutto lo schermo ma
+   "containing block" invece del viewport - il menu nero non copre più tutto lo schermo ma
    resta compresso all'altezza dell'header, con le voci sotto che sbordano senza sfondo sopra
    il contenuto della pagina. Disattiviamo il blur mentre il menu mobile è aperto: a overlay
    quasi opaco (rgba(0,0,0,0.97)) il blur dietro non è comunque visibile.
@@ -1063,7 +1063,7 @@ html.dark .cta-dropdown-item:hover {
   justify-content: center;
 }
 
-/* ===== BADGE — un solo stile per ruolo semantico =====
+/* ===== BADGE - un solo stile per ruolo semantico =====
    1) .page-hero-badge  → eyebrow sopra l'H1 delle hero interne (pill smeraldo su fondo scuro)
    2) .section-badge    → eyebrow testuale sopra gli H2 di sezione
    3) .badge-overlay    → etichetta (categoria / tipologia / contratto) sopra le foto delle card
@@ -2786,7 +2786,7 @@ html.dark .elearning p {
 
   /* Voce "Formazione": su mobile apre una sotto-schermata dedicata (drill-down
      con "Torna al menu") invece del mega-menu desktop, che sotto i 992px
-     diventa position:static e finirebbe dietro l'overlay fisso di .navbar —
+     diventa position:static e finirebbe dietro l'overlay fisso di .navbar -
      non raggiungibile dal tocco. Un accordion inline è stato scartato perché
      con 3 gruppi e ~13 link allungherebbe troppo il menu principale. */
   .navbar-formazione-caret {
@@ -2917,7 +2917,7 @@ html.dark .elearning p {
      di esso: .scrolled (header "solidificato" desktop, color:#0F172A) e
      .site-header--solid/.menu-is-open (già !important) hanno selettori con
      specificità/priorità più alta di quelli sopra e altrimenti vincerebbero,
-     rendendo il testo scuro/illeggibile su questo sfondo scuro — capitava ad
+     rendendo il testo scuro/illeggibile su questo sfondo scuro - capitava ad
      es. scrollando la pagina prima di aprire l'hamburger. */
   .navbar-open a {
     color: var(--white) !important;
@@ -3502,7 +3502,7 @@ html.dark .switch-opt:not([aria-selected="true"]):hover { background: rgba(255, 
 /* ── Tabelle "a schede" su mobile (.table-stack) ────────────────────────────────────────────
    Sotto i 640px la tabella non scorre né viene tagliata a destra: ogni riga diventa una scheda e ogni cella mostra la propria
    etichetta di colonna (attributo data-label sul <td>, mostrato da ::before). L'intestazione resta solo per gli screen reader.
-   Colori: etichetta var(--muted-text) (#6B7280 su bianco 4,83:1, #9CA3AF su scuro) — token del sito, con variante dark già inclusa. */
+   Colori: etichetta var(--muted-text) (#6B7280 su bianco 4,83:1, #9CA3AF su scuro) - token del sito, con variante dark già inclusa. */
 @media (max-width: 639px) {
   .table-stack, .table-stack tbody, .table-stack tr, .table-stack td { display: block; width: 100%; min-width: 0; }
   .table-stack { min-width: 0 !important; }

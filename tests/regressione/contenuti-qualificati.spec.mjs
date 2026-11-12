@@ -33,5 +33,5 @@ test('ASACOM: contenuto completo, nessuna durata inventata, minimo 15, 9 moduli 
   await expect(main).toContainText("L'ASACOM è un insegnante di sostegno?");
   await page.getByRole('button', { name: 'Moduli' }).click();
   await expect(main.locator('tbody tr')).toHaveCount(9);
-  await expect(main).toContainText('Modulo 4 – Comunità sorda e lingua dei segni');
+  await expect(main).toContainText('Modulo 4 - Comunità sorda e lingua dei segni');
 });

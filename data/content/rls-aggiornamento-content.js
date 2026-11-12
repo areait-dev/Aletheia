@@ -7,7 +7,7 @@
 
 module.exports = {
   'livello-2': {
-    titolo: 'Aggiornamento RLS – Aziende con Meno di 50 Dipendenti',
+    titolo: 'Aggiornamento RLS - Aziende con Meno di 50 Dipendenti',
     durataOre: 4,
     modalita: ['Aula', 'FAD', 'Aula virtuale'],
     validita: 'Da ripetere ogni anno, ai sensi dell\'art. 37, commi 10 e 11, e dell\'art. 47 del D.Lgs 81/2008',
@@ -87,7 +87,7 @@ Il corso è disponibile in aula, in FAD e in aula virtuale; è possibile organiz
   },
 
   'livello-3': {
-    titolo: 'Aggiornamento RLS – Aziende con Più di 50 Dipendenti',
+    titolo: 'Aggiornamento RLS - Aziende con Più di 50 Dipendenti',
     durataOre: 8,
     modalita: ['Aula', 'FAD', 'Aula virtuale'],
     validita: 'Da ripetere ogni anno, ai sensi dell\'art. 37, commi 10 e 11, e dell\'art. 47 del D.Lgs 81/2008',

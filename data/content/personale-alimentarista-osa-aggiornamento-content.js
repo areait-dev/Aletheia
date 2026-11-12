@@ -4,7 +4,7 @@
 
 module.exports = {
   'livello-1': {
-    titolo: 'Aggiornamento Personale Alimentarista – OSA',
+    titolo: 'Aggiornamento Personale Alimentarista - OSA',
     durataOre: 6,
     modalita: ['Aula', 'FAD'],
     validita: 'Da ripetere ogni 2 anni',
@@ -12,7 +12,7 @@ module.exports = {
     partecipantiMax: 30,
     prezzo: 60,
 
-    descrizione: `L'aggiornamento della formazione OSA è finalizzato al rinnovo periodico delle competenze in materia di igiene alimentare per gli operatori già formati, secondo la periodicità prevista dalla normativa e dalle linee guida regionali. Il corso di Aggiornamento Personale Alimentarista – OSA, della durata di 6 ore, è riservato a chi ha già frequentato il corso base da 12 ore e deve mantenere valida la propria formazione.
+    descrizione: `L'aggiornamento della formazione OSA è finalizzato al rinnovo periodico delle competenze in materia di igiene alimentare per gli operatori già formati, secondo la periodicità prevista dalla normativa e dalle linee guida regionali. Il corso di Aggiornamento Personale Alimentarista - OSA, della durata di 6 ore, è riservato a chi ha già frequentato il corso base da 12 ore e deve mantenere valida la propria formazione.
 
 Il percorso è incentrato sul ripasso delle corrette prassi igieniche apprese nel corso base, sull'analisi degli eventuali aggiornamenti normativi e delle linee guida locali intervenuti in materia di sicurezza alimentare, e sul consolidamento delle procedure di registrazione e gestione dell'autocontrollo aziendale.
 
@@ -35,7 +35,7 @@ Al termine delle 6 ore di formazione viene rilasciato l'attestato di frequenza, 
 
     faq: [
       { domanda: 'Ogni quanti anni va aggiornato il corso alimentarista OSA?', risposta: 'La formazione OSA ha una validità periodica prevista dalla normativa e dalle linee guida regionali: allo scadere del periodo previsto è necessario frequentare il corso di aggiornamento da 6 ore per mantenere valida la propria formazione.' },
-      { domanda: 'Posso fare l\'aggiornamento se non ho mai frequentato il corso base da 12 ore?', risposta: 'No, il corso di aggiornamento da 6 ore è riservato a chi ha già completato il corso base da 12 ore: chi non è ancora in possesso della formazione iniziale deve prima frequentare il corso Personale Alimentarista – OSA da 12 ore.' },
+      { domanda: 'Posso fare l\'aggiornamento se non ho mai frequentato il corso base da 12 ore?', risposta: 'No, il corso di aggiornamento da 6 ore è riservato a chi ha già completato il corso base da 12 ore: chi non è ancora in possesso della formazione iniziale deve prima frequentare il corso Personale Alimentarista - OSA da 12 ore.' },
       { domanda: 'L\'attestato rilasciato è valido fuori dalla Sicilia?', risposta: 'Sì, l\'attestato di formazione OSA rilasciato al termine del corso, così come quello di aggiornamento, è valido su tutto il territorio nazionale e non solo in Sicilia.' }
     ],
 

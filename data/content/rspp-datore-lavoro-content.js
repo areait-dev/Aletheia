@@ -8,7 +8,7 @@
 module.exports = {
   'rspp-datore-di-lavoro': {
     'livello-1': {
-      titolo: 'Corso RSPP Datore di Lavoro – Modulo Comune',
+      titolo: 'Corso RSPP Datore di Lavoro - Modulo Comune',
       durataOre: 8,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite il corso dedicato Aggiornamento RSPP Datore di Lavoro (8 ore)',
@@ -65,7 +65,7 @@ Il corso è disponibile in aula o in aula virtuale; è possibile organizzarlo an
     },
 
     'livello-2': {
-      titolo: 'Corso RSPP Datore di Lavoro – Modulo 1: Agricoltura, Silvicoltura e Zootecnia',
+      titolo: 'Corso RSPP Datore di Lavoro - Modulo 1: Agricoltura, Silvicoltura e Zootecnia',
       durataOre: 16,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',
@@ -122,7 +122,7 @@ Il modulo è disponibile in aula o in aula virtuale; è possibile organizzarlo a
     },
 
     'livello-3': {
-      titolo: 'Corso RSPP Datore di Lavoro – Modulo 2: Pesca',
+      titolo: 'Corso RSPP Datore di Lavoro - Modulo 2: Pesca',
       durataOre: 12,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',
@@ -179,7 +179,7 @@ Il modulo è disponibile in aula o in aula virtuale; è possibile organizzarlo a
     },
 
     'livello-4': {
-      titolo: 'Corso RSPP Datore di Lavoro – Modulo 3: Costruzioni',
+      titolo: 'Corso RSPP Datore di Lavoro - Modulo 3: Costruzioni',
       durataOre: 16,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',
@@ -236,7 +236,7 @@ Il modulo è disponibile in aula o in aula virtuale; è possibile organizzarlo a
     },
 
     'livello-5': {
-      titolo: 'Corso RSPP Datore di Lavoro – Modulo 4: Chimico-Petrolchimico',
+      titolo: 'Corso RSPP Datore di Lavoro - Modulo 4: Chimico-Petrolchimico',
       durataOre: 16,
       modalita: ['Aula', 'Aula virtuale'],
       validita: 'Aggiornamento tramite corso dedicato (8 ore)',

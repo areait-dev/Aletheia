@@ -4,7 +4,7 @@
 // Testi copiati SENZA modifiche. DURATA: 1000 ore dal documento (prima la pagina mostrava "Qualifica Riconosciuta").
 // NON PUBBLICATE le ore dei moduli: il documento indica "4 ore" per l'area socioculturale e "7 ore" per quella tecnico-operativa e niente per
 // quella relazionale, valori non compatibili con 1000 ore (sembrano residui di un altro modello): da chiedere al reparto formazione la
-// ripartizione ufficiale. Nella tabella dei moduli compare "—".
+// ripartizione ufficiale. Nella tabella dei moduli compare "-".
 // PARTECIPANTI: "minimo 15" (non un massimo): campo partecipantiMin. LUOGO: "Vittoria (RG)", la sede di Via del Carrubo (mappa).
 // ATTESTATO: ricavato dal testo ("rilascio della qualifica professionale di Operatore Socio Sanitario").
 // Nessuna lista di corsi correlati nel documento: la pagina usa quella automatica.
@@ -20,7 +20,7 @@ module.exports = {
       luogoCorso: { testo: "Vittoria (RG)", indirizzo: "Via del Carrubo snc, 97019 Vittoria (RG)" },
       prezzo: null,
 
-      descrizione: `Il corso OSS – Operatore Socio Sanitario è un percorso di formazione professionale finalizzato al conseguimento della qualifica di Operatore Socio Sanitario, una figura che svolge attività di assistenza e supporto alle persone in condizioni di fragilità, parziale o totale perdita di autonomia.
+      descrizione: `Il corso OSS - Operatore Socio Sanitario è un percorso di formazione professionale finalizzato al conseguimento della qualifica di Operatore Socio Sanitario, una figura che svolge attività di assistenza e supporto alle persone in condizioni di fragilità, parziale o totale perdita di autonomia.
 
 Il corso forma professionisti in grado di rispondere ai bisogni primari della persona, promuoverne il benessere e favorirne l'autonomia, collaborando con le altre figure professionali presenti nei servizi sanitari, socio-sanitari e assistenziali.
 

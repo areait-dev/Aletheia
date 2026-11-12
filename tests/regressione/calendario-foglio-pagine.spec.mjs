@@ -47,20 +47,20 @@ test.describe.serial('foglio con edizioni @calendario', () => {
     await expect(page.getByText('5 corsi in programma').first()).toBeVisible(); // Antincendio, OSA, Lavoratori + 2 già iniziate (Trattori, RSPP); la passata, le bozze e le altre no
     await page.getByRole('button', { name: /Novembre 2026/ }).click();
     const html = await page.locator('main').innerText();
-    expect(html).toContain('Antincendio — Rischio medio Livello 2 (8 ore)');
+    expect(html).toContain('Antincendio - Rischio medio Livello 2 (8 ore)');
     expect(html).toContain('Vittoria, Via del Carrubo');
     expect(html).toContain('9:00-13:00');
     expect(html).toContain('12/11/2026, 16/11/2026, 17/11/2026');
-    expect(html).toContain('Personale alimentarista OSA — Nuovo (12 ore)');
-    expect(html).toContain('Trattori agricoli o forestali — Su ruote e cingoli (13 ore)'); // già iniziata: resta fino a data_fine (9 novembre)
-    expect(html).toContain('RSPP - Datore di lavoro — IN CORSO OBBLIGATORIA');
+    expect(html).toContain('Personale alimentarista OSA - Nuovo (12 ore)');
+    expect(html).toContain('Trattori agricoli o forestali - Su ruote e cingoli (13 ore)'); // già iniziata: resta fino a data_fine (9 novembre)
+    expect(html).toContain('RSPP - Datore di lavoro - IN CORSO OBBLIGATORIA');
     // etichetta "In corso": solo sulle due edizioni già iniziate, non sulle altre
     await expect(page.locator('.in-corso-badge')).toHaveCount(2);
-    await expect(page.locator('div', { hasText: 'Trattori agricoli o forestali — Su ruote e cingoli (13 ore)' }).last()).toContainText('In corso');
-    await expect(page.locator('div', { hasText: 'Antincendio — Rischio medio Livello 2 (8 ore)' }).last()).not.toContainText('In corso');
+    await expect(page.locator('div', { hasText: 'Trattori agricoli o forestali - Su ruote e cingoli (13 ore)' }).last()).toContainText('In corso');
+    await expect(page.locator('div', { hasText: 'Antincendio - Rischio medio Livello 2 (8 ore)' }).last()).not.toContainText('In corso');
     for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE', 'Aggiornamento (4 ore)', 'nota interna', 'NON PUBBLICA']) expect(html, vietato).not.toContain(vietato);
     // OSA (FAD, senza sede e senza posti): niente riga posti, niente "esaurito" né lista d'attesa; Lavoratori con posti 0: lista d'attesa
-    const osa = page.locator('div', { hasText: 'Personale alimentarista OSA — Nuovo (12 ore)' }).last();
+    const osa = page.locator('div', { hasText: 'Personale alimentarista OSA - Nuovo (12 ore)' }).last();
     await expect(osa).not.toContainText(/posti|esauriti/i);
     await expect(page.getByText('Posti esauriti')).toHaveCount(1);
     await expect(page.getByText('Lista d\'attesa')).toHaveCount(1);
@@ -95,15 +95,15 @@ test.describe.serial('foglio con edizioni @calendario', () => {
     const html = await page.locator('#calendario-heading').locator('xpath=ancestor::section').innerText();
     for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE', 'IN CORSO OBBLIGATORIA', 'Su ruote e cingoli']) expect(html, vietato).not.toContain(vietato);
     await tabs.nth(0).click();
-    await expect(page.getByText('Antincendio — Rischio medio Livello 2 (8 ore)')).toBeVisible();
+    await expect(page.getByText('Antincendio - Rischio medio Livello 2 (8 ore)')).toBeVisible();
     await expect(page.getByText('Nuove date in arrivo')).toHaveCount(0);
   });
 
   test('Formazione obbligatoria: le edizioni della categoria, stessa regola @calendario', async ({ page }) => {
     await page.goto(s.base + '/formazione/obbligatoria');
     const html = await page.locator('#form-contatto').innerText();
-    expect(html).toContain('Antincendio — Rischio medio Livello 2 (8 ore)');
-    expect(html).toContain('Personale alimentarista OSA — Nuovo (12 ore)');
+    expect(html).toContain('Antincendio - Rischio medio Livello 2 (8 ore)');
+    expect(html).toContain('Personale alimentarista OSA - Nuovo (12 ore)');
     expect(html).toContain('FAD'); // OSA non ha sede: mostra la modalità
     for (const vietato of ['RISERVATO', 'BOZZA NON VISIBILE', 'NON A CATALOGO', 'DATA IMPOSSIBILE', 'IN CORSO OBBLIGATORIA']) expect(html, vietato).not.toContain(vietato); // l'edizione già iniziata non è "in partenza"
     await expect(page.getByText('Nuove date in arrivo')).toHaveCount(0);

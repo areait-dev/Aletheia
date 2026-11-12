@@ -93,7 +93,7 @@ function confronta(a, b) {
   console.log(`| Forma | Pagina | ${campi.map(([, n]) => n).join(' | ')} |\n|---|---|${campi.map(() => '---').join('|')}|`);
   for (const ra of A.risultati) {
     const rb = B.risultati.find((x) => x.forma === ra.forma && x.pagina === ra.pagina);
-    console.log(`| ${ra.forma} | ${ra.pagina} | ${campi.map(([k]) => `${ra.mediana[k]} → ${rb ? rb.mediana[k] : '—'}`).join(' | ')} |`);
+    console.log(`| ${ra.forma} | ${ra.pagina} | ${campi.map(([k]) => `${ra.mediana[k]} → ${rb ? rb.mediana[k] : '-'}`).join(' | ')} |`);
   }
 }
 

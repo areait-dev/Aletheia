@@ -27,7 +27,7 @@ module.exports = {
       titolo: 'Corso Addetti alla Conduzione di Escavatori Idraulici',
       durataOre: 10,
       modalita: ['Aula'],
-      validita: 'Da definire — aggiornamento disponibile (4 ore)',
+      validita: 'Da definire - aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
@@ -59,7 +59,7 @@ Il corso, della durata di 10 ore, fornisce le competenze per lo scavo, la demoli
       titolo: 'Corso Addetti alla Conduzione di Escavatori a Fune',
       durataOre: 10,
       modalita: ['Aula'],
-      validita: 'Da definire — aggiornamento disponibile (4 ore)',
+      validita: 'Da definire - aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
@@ -95,7 +95,7 @@ Il corso, della durata di 10 ore, trova applicazione tipica in cantieri di grand
       titolo: 'Corso Addetti alla Conduzione di Pale Caricatrici Frontali e con Braccio Mobile (Ragno)',
       durataOre: 12,
       modalita: ['Aula'],
-      validita: 'Da definire — aggiornamento disponibile (4 ore)',
+      validita: 'Da definire - aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
@@ -127,7 +127,7 @@ Il corso, della durata di 12 ore, è la formazione di riferimento per chi opera 
       titolo: 'Corso Addetti alla Conduzione di Terne',
       durataOre: 10,
       modalita: ['Aula'],
-      validita: 'Da definire — aggiornamento disponibile (4 ore)',
+      validita: 'Da definire - aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
@@ -160,7 +160,7 @@ Il corso, della durata di 10 ore, è particolarmente indicato per cantieri di pi
       titolo: 'Corso Addetti alla Conduzione di Autoribaltabili a Cingoli',
       durataOre: 10,
       modalita: ['Aula'],
-      validita: 'Da definire — aggiornamento disponibile (4 ore)',
+      validita: 'Da definire - aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 200,
@@ -192,7 +192,7 @@ Il corso, della durata di 10 ore, è rivolto a chi opera soprattutto in cantieri
       titolo: 'Corso Addetti alla Conduzione di Escavatori Idraulici, Caricatori Frontali e Terne',
       durataOre: 16,
       modalita: ['Aula'],
-      validita: 'Da definire — aggiornamento disponibile (4 ore)',
+      validita: 'Da definire - aggiornamento disponibile (4 ore)',
       attestato: 'Attestato valido in tutta Italia',
       partecipantiMax: 25, partecipantiPraticaMax: 6, // Decreto Attrezzature: 25 teoria in aula, 6 pratica
       prezzo: 300,

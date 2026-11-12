@@ -226,7 +226,7 @@ export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiFo
           {/* Layout asimmetrico: elenco editoriale a sinistra (senza card/box né divisori),
               riepilogo scuro con CTA integrata a destra. */}
           <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: '2.5rem', alignItems: 'stretch' }}>
-            {/* Colonna sinistra — elenco testuale, 7/12 */}
+            {/* Colonna sinistra - elenco testuale, 7/12 */}
             <ul className="lg:col-span-7" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
               {requisiti.map((r, i) => (
                 <Reveal key={r.text} delay={i * 45}>
@@ -245,7 +245,7 @@ export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiFo
               ))}
             </ul>
 
-            {/* Colonna destra — card scura di riepilogo con CTA integrata, 5/12 */}
+            {/* Colonna destra - card scura di riepilogo con CTA integrata, 5/12 */}
             <div className="lg:col-span-5" style={{
               borderRadius: '1.25rem',
               padding: '2.5rem 2rem',

@@ -793,7 +793,7 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
       </section>
 
       {/* ── 4a · LOGHI CLIENTI ───────────────────────────── */}
-      {/* TODO: riattivare con loghi reali dopo consenso clienti — vedi nota.
+      {/* TODO: riattivare con loghi reali dopo consenso clienti - vedi nota.
           Disattivata con {false && (...)} anziché rimossa: il blocco contiene
           già un commento JSX annidato, che non può stare dentro un altro
           commento a blocco. Le sezioni sopra/sotto hanno padding verticale

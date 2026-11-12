@@ -285,7 +285,7 @@ async function migrateEdizioni() {
     }
     if (!corsoId) throw new Error(`edizione ${e.id} (${e.titolo}): il corso "${corsoSlug}" non esiste ancora in WordPress (migra prima i corsi)`);
     const { created } = await upsert('edizione_corso', `${corsoSlug}-${e.data}-${e.id}`, {
-      title: `${e.titolo} — ${e.data}`,
+      title: `${e.titolo} - ${e.data}`,
       acf: {
         corso: corsoId,
         data: e.data,

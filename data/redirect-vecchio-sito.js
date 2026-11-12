@@ -1,7 +1,7 @@
 /**
  * Redirect 301 dal vecchio sito Joomla/K2 (www.aletheiasrl.it/index.php/...) al nuovo sito Next.js.
  *
- * Fonte: GA4 "Aletheia" (proprietà 487425595), report Pagine e schermate, 4 nov 2025 – 3 nov 2026
+ * Fonte: GA4 "Aletheia" (proprietà 487425595), report Pagine e schermate, 4 nov 2025 - 3 nov 2026
  * (37.716 visualizzazioni, 427 URL). Le regole sono in ordine: Next.js usa la PRIMA che corrisponde,
  * quindi prima le pagine specifiche, poi le schede per ID K2, poi le sezioni, infine il ripiego.
  *

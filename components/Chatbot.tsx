@@ -668,7 +668,7 @@ export default function Chatbot() {
           )}
         </div>
 
-        {/* Footer — barra per formulare una domanda libera (risposte solo su temi del sito) */}
+        {/* Footer - barra per formulare una domanda libera (risposte solo su temi del sito) */}
         <form onSubmit={handleAsk} className="chatbot-footer" style={{
           background: theme === 'dark' ? '#374151' : '#fff',
           borderTop: theme === 'dark' ? '1px solid #4B5563' : '1px solid #E2E8F0',
