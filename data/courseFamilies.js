@@ -15,14 +15,6 @@
 
 const { COURSE_IMAGES, COURSE_IMAGE_ALT, IMAGE_FALLBACK_BY_CATEGORY, FALLBACK_DEFAULT, CALENDAR_FALLBACK } = require('./courseImages');
 
-// Slug di famiglia FISSATI: lo slug derivato dal titolo (chiave) viene sostituito da quello storico (valore).
-// Serve quando un titolo cambia ma l'indirizzo pubblico, le chiavi dei contenuti (data/content/*, courseImages,
-// coursesDetails) e i link già indicizzati devono restare quelli di prima: così un ritocco al titolo non cambia
-// l'URL né fa perdere contenuto e foto. ASACOM: titolo "ASACOM - Assistente specialistico all'autonomia e alla comunicazione".
-const SLUG_FAMIGLIA_FISSATI = {
-  'asacom-assistente-specialistico-all-autonomia-e-alla-comunicazione': 'asacom-assistente-alla-comunicazione',
-};
-
 const ALIAS_TO_DETAILS = {
   'formazione-dei-lavoratori': 'formazione-lavoratori',
   'formazione-dei-lavoratori-parte-generale': 'formazione-lavoratori',
@@ -136,6 +128,13 @@ function stripFillerPrefixes(title) {
 // Titoli in sentence case (data/coursesRaw.js): tolti i prefissi "Corso"/"Aggiornamento" o il descrittore di livello, il primo carattere resta minuscolo: si ripristina la maiuscola
 const maiuscolaIniziale = (t) => (t ? t.charAt(0).toUpperCase() + t.slice(1) : t);
 
+// Slug storici: il titolo è stato corretto ("carriponti" -> "carriponte") ma l'indirizzo pubblico della scheda non cambia (gli slug derivano dal titolo,
+// quindi senza questa mappa cambierebbe anche l'URL, e con lui id, contenuti, immagini, redirect e canonical).
+const SLUG_STORICI = {
+  'addetti-alla-conduzione-di-carriponte-pensile-cabina': 'addetti-alla-conduzione-di-carriponti-pensile-cabina',
+  'asacom-assistente-specialistico-all-autonomia-e-alla-comunicazione': 'asacom-assistente-alla-comunicazione', // titolo ASACOM cambiato in e0db6b0: URL e contenuto restavano orfani
+};
+
 function slugify(str) {
   return normalizeForMatch(str).replace(/\s+/g, '-');
 }
@@ -202,8 +201,8 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
     const { isAggiornamento, rest } = stripAggiornamentoPrefix(course.title);
     const { levelLabel, famTitle: famTitleRaw } = extractLevelDescriptor(rest);
     const famTitle = stripFillerPrefixes(famTitleRaw) || famTitleRaw;
-    const slugDaTitolo = slugify(famTitle);
-    const familyKey = SLUG_FAMIGLIA_FISSATI[slugDaTitolo] || slugDaTitolo;
+    const familyKeyTitolo = slugify(famTitle);
+    const familyKey = SLUG_STORICI[familyKeyTitolo] || familyKeyTitolo;
 
     if (!families.has(familyKey)) {
       families.set(familyKey, {

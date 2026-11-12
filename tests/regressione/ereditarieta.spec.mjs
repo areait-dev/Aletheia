@@ -55,7 +55,7 @@ test('Antincendio: gli aggiornamenti dei tre livelli mostrano i dati del rispett
   }
 });
 
-test('Carriponti Pensile/Cabina: l\'aggiornamento eredita attestato, validità e partecipanti ma tiene la sua modalità @rapido', async ({ page }) => {
+test('Carriponte Pensile/Cabina: l\'aggiornamento eredita attestato, validità e partecipanti ma tiene la sua modalità @rapido', async ({ page }) => {
   await page.goto('/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina', { waitUntil: 'networkidle' });
   await page.getByRole('tab', { name: /^Aggiornamento/ }).click();
   const scheda = page.locator('.cp-scheda-area');

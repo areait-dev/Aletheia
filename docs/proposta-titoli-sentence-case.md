@@ -22,7 +22,7 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | DPI 3° Categoria | DPI 3° categoria |
 | PIMUS / Ponteggi | PIMUS / Ponteggi |
 | Spazi Confinati | Spazi confinati |
-| Lavoratori Addetti all'attività di Apposizione Integrazione e Rimozione Della Segnaletica Stradale | Lavoratori addetti all'attività di apposizione integrazione e rimozione della segnaletica stradale |
+| Lavoratori Addetti all'attività di Apposizione, Integrazione e Rimozione Della Segnaletica Stradale | Lavoratori addetti all'attività di apposizione, integrazione e rimozione della segnaletica stradale |
 | Modulo Aggiuntivo Cantieri per Datore di Lavoro | Modulo aggiuntivo cantieri per datore di lavoro |
 | Datore Di Lavoro | Datore di lavoro |
 | Carrelli Elevatori Semoventi Con Conduttore A Bordo | Carrelli elevatori semoventi con conduttore a bordo |
@@ -35,7 +35,7 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | Addetti Macchina Raccogli Frutta CRF | Addetti macchina raccogli frutta CRF |
 | Addetti Macchina Raccogli Frutta Aggiornamento | Addetti macchina raccogli frutta aggiornamento |
 | Addetti Caricatori Movimentazione Di Materiali CMM | Addetti caricatori movimentazione di materiali CMM |
-| Addetti Alla Conduzione Di Carriponti Pensile/Cabina | Addetti alla conduzione di carriponti pensile/cabina |
+| Addetti Alla Conduzione Di Carriponte Pensile/Cabina | Addetti alla conduzione di carriponte pensile/cabina |
 | Patentino Fitosanitario | Patentino fitosanitario |
 | Personale Alimentarista OSA | Personale alimentarista OSA |
 | OSS - Operatore Socio Sanitario | OSS - Operatore socio sanitario |
@@ -97,7 +97,7 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | Aggiornamento PIMUS / Ponteggi | Aggiornamento PIMUS / Ponteggi |
 | Corso per Spazi Confinati | Corso per spazi confinati |
 | Aggiornamento Spazi Confinati | Aggiornamento spazi confinati |
-| Lavoratori Addetti all'attività di Apposizione Integrazione e Rimozione Della Segnaletica Stradale | Lavoratori addetti all'attività di apposizione integrazione e rimozione della segnaletica stradale |
+| Lavoratori Addetti all'attività di Apposizione, Integrazione e Rimozione Della Segnaletica Stradale | Lavoratori addetti all'attività di apposizione, integrazione e rimozione della segnaletica stradale |
 | Modulo Aggiuntivo Cantieri per Datore di Lavoro | Modulo aggiuntivo cantieri per datore di lavoro |
 | Datore Di Lavoro Modulo Comune | Datore di lavoro Modulo comune |
 | Aggiornamento Datore Di Lavoro | Aggiornamento datore di lavoro |
@@ -128,8 +128,8 @@ Raggruppamento delle varianti verificato: stesse 40 famiglie, stesse varianti.
 | Addetti Macchina Raccogli Frutta Aggiornamento | Addetti macchina raccogli frutta aggiornamento |
 | Addetti Caricatori Movimentazione Di Materiali CMM | Addetti caricatori movimentazione di materiali CMM |
 | Aggiornamento Addetti Caricatori Movimentazione Di Materiali CMM | Aggiornamento addetti caricatori movimentazione di materiali CMM |
-| Addetti Alla Conduzione Di Carriponti Pensile/Cabina | Addetti alla conduzione di carriponti pensile/cabina |
-| Aggiornamento Addetti Alla Conduzione Di Carriponti Pensile/Cabina | Aggiornamento addetti alla conduzione di carriponti pensile/cabina |
+| Addetti Alla Conduzione Di Carriponte Pensile/Cabina | Addetti alla conduzione di carriponte pensile/cabina |
+| Aggiornamento Addetti Alla Conduzione Di Carriponte Pensile/Cabina | Aggiornamento addetti alla conduzione di carriponte pensile/cabina |
 | Patentino Fitosanitario | Patentino fitosanitario |
 | Aggiornamento Patentino Fitosanitario | Aggiornamento patentino fitosanitario |
 | Personale Alimentarista OSA | Personale alimentarista OSA |

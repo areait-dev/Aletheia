@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Header from './Header';
+import Briciole from './Briciole';
 import Footer from './Footer';
 import { useSiteOptions } from '../context/SiteOptionsContext';
 
@@ -64,17 +65,7 @@ export default function ArchivioShell({ titolo, badge, sottotitolo, briciole = [
         paddingBottom: '4rem',
       }}>
         <div className="container">
-          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-            <a href="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Home</a>
-            {briciole.map((b, i) => (
-              <span key={b.label} style={{ display: 'contents' }}>
-                <span aria-hidden="true">›</span>
-                {b.href && i < briciole.length - 1
-                  ? <a href={b.href} style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>{b.label}</a>
-                  : <span style={{ color: '#6EE7B7' }}>{b.label}</span>}
-              </span>
-            ))}
-          </nav>
+          <Briciole voci={briciole} />
           {badge && (
             <span style={{ display: 'inline-block', fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', background: 'rgba(1,136,145,0.12)', border: '1px solid rgba(1,136,145,0.25)', padding: '0.35rem 0.9rem', borderRadius: '999px', marginBottom: '1.25rem' }}>
               {badge}

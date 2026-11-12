@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import Header from '../components/Header';
+import Briciole from '../components/Briciole';
 import Footer from '../components/Footer';
 import CtaFinale from '../components/CtaFinale';
 import { getSchede } from '../lib/wp-schede';
 import { isrOptions } from '../lib/wp';
 import { getPagina } from '../lib/wp-pagine';
 import { withSiteOptions } from '../lib/wp-site';
-import { breadcrumbJsonLd } from '../lib/seo';
 
 function CourseCard({ title, icon, description, misura, target }) {
   const [hovered, setHovered] = useState(false);
@@ -98,9 +98,7 @@ function CourseCard({ title, icon, description, misura, target }) {
 
 // Liste di card: WordPress (CPT scheda) se WP_URL è impostato, altrimenti data/schede.js (vedi lib/wp-schede.ts).
 async function getPageStaticProps() {
-  // Briciole mostrate nella hero (Home › Agenzia per il Lavoro › Servizi alla Persona › Programma G.O.L.) anche come BreadcrumbList
-  const seoPagina = { jsonLd: [breadcrumbJsonLd([{ nome: 'Home', percorso: '/' }, { nome: 'Agenzia per il Lavoro', percorso: '/agenzia-per-il-lavoro' }, { nome: 'Servizi alla Persona', percorso: '/agenzia-per-il-lavoro/servizi-alla-persona' }, { nome: 'Programma G.O.L.', percorso: '/programma-gol' }])] };
-  return { props: { pagina: await getPagina('programma-gol'), corsiGOL: await getSchede('gol-misure'), seoPagina }, ...isrOptions() };
+  return { props: { pagina: await getPagina('programma-gol'), corsiGOL: await getSchede('gol-misure') }, ...isrOptions() };
 }
 
 export default function ProgrammaGOL({ corsiGOL, pagina }) {
@@ -177,15 +175,7 @@ export default function ProgrammaGOL({ corsiGOL, pagina }) {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <nav className="breadcrumb">
-            <a href="/">Home</a>
-            <span>›</span>
-            <a href="/agenzia-per-il-lavoro">Agenzia per il Lavoro</a>
-            <span>›</span>
-            <a href="/agenzia-per-il-lavoro/servizi-alla-persona">Servizi alla Persona</a>
-            <span>›</span>
-            <span style={{ color: 'rgba(255,255,255,0.75)' }}>Programma G.O.L.</span>
-          </nav>
+          <Briciole variante="gol" voci={[{ label: 'Agenzia per il Lavoro', href: '/agenzia-per-il-lavoro' }, { label: 'Servizi alla Persona', href: '/agenzia-per-il-lavoro/servizi-alla-persona' }, { label: 'Programma G.O.L.' }]} />
 
           <div className="page-hero-badge fade-up">{T.hero_eyebrow}</div>
 

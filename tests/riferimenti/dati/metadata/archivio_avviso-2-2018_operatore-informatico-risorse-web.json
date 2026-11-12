@@ -58,6 +58,36 @@
   "jsonld": [
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.aletheiasrl.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Archivio",
+          "item": "https://www.aletheiasrl.it/archivio"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Avviso 2/2018",
+          "item": "https://www.aletheiasrl.it/archivio/avviso-2-2018"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Operatore Informatico di risorse Web (544 ORE)",
+          "item": "https://www.aletheiasrl.it/archivio/avviso-2-2018/operatore-informatico-risorse-web"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": [
         "EducationalOrganization",
         "Organization"
@@ -164,36 +194,6 @@
         "https://www.instagram.com/aletheiasrl/",
         "https://it.linkedin.com/company/al%C3%A9theia-srl",
         "https://t.me/alethiaapl"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.aletheiasrl.it/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Archivio",
-          "item": "https://www.aletheiasrl.it/archivio"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Avviso 2/2018",
-          "item": "https://www.aletheiasrl.it/archivio/avviso-2-2018"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Operatore Informatico di risorse Web (544 ORE)",
-          "item": "https://www.aletheiasrl.it/archivio/avviso-2-2018/operatore-informatico-risorse-web"
-        }
       ]
     }
   ],

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useState, Fragment } from 'react';
 import Header from '../../components/Header';
+import Briciole from '../../components/Briciole';
 import Footer from '../../components/Footer';
 import CtaFinale from '../../components/CtaFinale';
 import Reveal from '../../components/Reveal';
@@ -152,13 +153,7 @@ export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiFo
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <nav aria-label="Breadcrumb" className="text-left justify-start" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-            <a href="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Home</a>
-            <span aria-hidden="true">›</span>
-            <a href="/formazione/regionale-fse" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Formazione Finanziata</a>
-            <span aria-hidden="true">›</span>
-            <span style={{ color: '#6EE7B7' }}>Formazione Regionale</span>
-          </nav>
+          <Briciole className="text-left justify-start" stile={{ justifyContent: 'flex-start' }} voci={[{ label: 'Formazione Finanziata', href: '/formazione/regionale-fse' }, { label: 'Formazione Regionale' }]} />
 
           {/* Contenuto principale centrato, sotto la breadcrumb allineata a sinistra */}
           <div className="text-center flex flex-col items-center justify-center w-full">

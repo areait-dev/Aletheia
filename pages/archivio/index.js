@@ -4,7 +4,6 @@ import { FAMIGLIE } from '../../data/archivio-famiglie';
 import { getArchivio } from '../../lib/wp-archivio';
 import { isrOptions } from '../../lib/wp';
 import { withSiteOptions } from '../../lib/wp-site';
-import { breadcrumbJsonLd } from '../../lib/seo';
 
 /* Elenco: voci locali storiche + voci del CPT `archivio` di WordPress (vedi lib/wp-archivio.ts).
    Le voci singole stanno in elenco; quelle di una famiglia, nel relativo accordion. */
@@ -17,9 +16,7 @@ async function getPageStaticProps() {
     panoramica: f.panoramica,
     sottovoci: archivio.filter((v) => v.famiglia === f.chiave).map((v) => ({ slug: v.ultimo, titolo: v.titoloIndice })),
   })).filter((f) => f.sottovoci.length > 0);
-  // Briciole mostrate nella hero (Home › Archivio) anche come BreadcrumbList
-  const seoPagina = { jsonLd: [breadcrumbJsonLd([{ nome: 'Home', percorso: '/' }, { nome: 'Archivio', percorso: '/archivio' }])] };
-  return { props: { voci, famiglie, seoPagina }, ...isrOptions() };
+  return { props: { voci, famiglie }, ...isrOptions() };
 }
 
 function AccordionFamiglia({ famiglia, aperta, onToggle }) {

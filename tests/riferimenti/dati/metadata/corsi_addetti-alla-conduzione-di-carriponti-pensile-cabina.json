@@ -3,9 +3,9 @@
   "lang": "it",
   "classeHtml": "__variable_9302a3 __variable_37b1ed",
   "classeBody": null,
-  "title": "Corso Addetti alla conduzione di carriponti pensile/cabina - Alètheia Srl",
+  "title": "Corso Addetti alla conduzione di carriponte pensile/cabina - Alètheia Srl",
   "description": [
-    "Corso Addetti alla conduzione di carriponti pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato."
+    "Corso Addetti alla conduzione di carriponte pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato."
   ],
   "robots": [],
   "googleVerification": [],
@@ -26,10 +26,10 @@
       "website"
     ],
     "og:title": [
-      "Corso Addetti alla conduzione di carriponti pensile/cabina - Alètheia Srl"
+      "Corso Addetti alla conduzione di carriponte pensile/cabina - Alètheia Srl"
     ],
     "og:description": [
-      "Corso Addetti alla conduzione di carriponti pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato."
+      "Corso Addetti alla conduzione di carriponte pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato."
     ],
     "og:image": [
       "https://www.aletheiasrl.it/images/corsi/carroponte.jpg"
@@ -46,16 +46,33 @@
       "summary_large_image"
     ],
     "twitter:title": [
-      "Corso Addetti alla conduzione di carriponti pensile/cabina - Alètheia Srl"
+      "Corso Addetti alla conduzione di carriponte pensile/cabina - Alètheia Srl"
     ],
     "twitter:description": [
-      "Corso Addetti alla conduzione di carriponti pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato."
+      "Corso Addetti alla conduzione di carriponte pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato."
     ],
     "twitter:image": [
       "https://www.aletheiasrl.it/images/corsi/carroponte.jpg"
     ]
   },
   "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tutti i corsi",
+          "item": "https://www.aletheiasrl.it/corsi"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Decreto Attrezzature"
+        }
+      ]
+    },
     {
       "@context": "https://schema.org",
       "@type": [
@@ -170,8 +187,8 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": "https://www.aletheiasrl.it/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina#corso",
-      "name": "Addetti alla conduzione di carriponti pensile/cabina",
-      "description": "Corso Addetti alla conduzione di carriponti pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato.",
+      "name": "Addetti alla conduzione di carriponte pensile/cabina",
+      "description": "Corso Addetti alla conduzione di carriponte pensile/cabina a Vittoria (RG): 11 ore, in aula e aula virtuale. Richiedi quota e date. Ente accreditato.",
       "url": "https://www.aletheiasrl.it/corsi/addetti-alla-conduzione-di-carriponti-pensile-cabina",
       "inLanguage": "it",
       "image": "https://www.aletheiasrl.it/images/corsi/carroponte.jpg",
@@ -190,11 +207,11 @@
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   ],
   "h1": [
-    "Addetti alla conduzione di carriponti pensile/cabina"
+    "Addetti alla conduzione di carriponte pensile/cabina"
   ],
   "intestazioni": 6,
   "testoLunghezza": 4952,
-  "testoSha1": "fe52125e21dcde3f386c361cf9f22de7cbdb504c",
+  "testoSha1": "7d2338aaef7250dd477b2aa8328cbce7591299ac",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",
@@ -228,7 +245,7 @@
     "/news",
     "/privacy-cookie",
     "/reclami-proposte",
-    "/richiedi-preventivo?corso=Addetti%20alla%20conduzione%20di%20carriponti%20pensile%2Fcabina%20(11%20ore)",
+    "/richiedi-preventivo?corso=Addetti%20alla%20conduzione%20di%20carriponte%20pensile%2Fcabina%20(11%20ore)",
     "https://www.aletheiasrl.it/elearning2/",
     "https://www.facebook.com/aletheiasrl.it/?locale=it_IT",
     "https://www.instagram.com/aletheiasrl/",

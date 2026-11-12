@@ -3537,3 +3537,9 @@ html.dark .switch-opt:not([aria-selected="true"]):hover { background: rgba(255, 
 @media (max-width: 639px) {
   .badge-overlay { white-space: normal; max-width: 100%; text-align: left; }
 }
+
+/* Briciole di Programma G.O.L. (components/Briciole.tsx, variante 'gol'): stessi valori che la pagina aveva in locale */
+.briciole-gol { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; flex-wrap: wrap; }
+.briciole-gol a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.briciole-gol a:hover { color: #6EE7B7; }
+.briciole-gol [aria-hidden="true"] { color: rgba(255,255,255,0.3); }

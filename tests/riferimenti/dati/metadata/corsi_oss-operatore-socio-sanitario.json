@@ -58,6 +58,23 @@
   "jsonld": [
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tutti i corsi",
+          "item": "https://www.aletheiasrl.it/corsi"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Formazione Professionale"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": [
         "EducationalOrganization",
         "Organization"
@@ -194,7 +211,7 @@
   ],
   "intestazioni": 6,
   "testoLunghezza": 4730,
-  "testoSha1": "1511a67bdc7d7cb9b41f41d1683882854fddcd47",
+  "testoSha1": "7fd5dddf23fc257412936ad693550b68c2b71d31",
   "testoInizio": "HomeChi SiamoFormazioneAgenzia per il LavoroNewsContattiSei un docente? Candidati Torna al menuScopri tutti i corsi Formazione FinanziataFormazione RegionaleFon",
   "link": [
     "/",

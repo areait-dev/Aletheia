@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { getLenis } from '../../lib/lenis';
 import Header from '../../components/Header';
+import Briciole from '../../components/Briciole';
 import Footer from '../../components/Footer';
 import FormAzienda from '../../components/FormAzienda';
 import { useTheme } from '../../context/ThemeContext';
@@ -290,13 +291,7 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,140,149,0.1) 0%, transparent 70%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1rem', flexWrap: 'wrap' }}>
-            <a href="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Home</a>
-            <span aria-hidden="true">›</span>
-            <a href="/formazione/regionale-fse" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Formazione Finanziata</a>
-            <span aria-hidden="true">›</span>
-            <span style={{ color: '#6EE7B7' }}>Fondo Nuove Competenze</span>
-          </nav>
+          <Briciole margineBasso="1" voci={[{ label: 'Formazione Finanziata', href: '/formazione/regionale-fse' }, { label: 'Fondo Nuove Competenze' }]} />
 
           <div className="page-hero-badge fade-up fade-up-1">{T.hero_eyebrow}</div>
 

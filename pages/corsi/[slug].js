@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import Header from '../../components/Header';
+import Briciole from '../../components/Briciole';
 import Footer from '../../components/Footer';
 import CoursePricingSidebar from '../../components/CoursePricingSidebar';
 import { whatsappLink, WHATSAPP_FORMAZIONE } from '../../lib/whatsapp';
@@ -227,7 +228,7 @@ const EDITORIAL_CONTENT = {
     corso: addettiCaricatoriCmmContent['addetti-caricatori-movimentazione-di-materiali-cmm'],
     aggiornamento: addettiCaricatoriCmmAggiornamentoContent,
   },
-  // Carriponti Pensile/Cabina (corso 11 ore + aggiornamento 4 ore): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
+  // Carriponte Pensile/Cabina (corso 11 ore + aggiornamento 4 ore): contenuti dai documenti Word del reparto formazione (5 novembre 2026).
   // Il corso "Carriponte" da 10 ore (famiglia sopra) ha i suoi testi separati.
   'addetti-alla-conduzione-di-carriponti-pensile-cabina': {
     corso: addettiCarripontiPensileCabinaContent['addetti-alla-conduzione-di-carriponti-pensile-cabina'],
@@ -1699,11 +1700,7 @@ export default function CourseDetail({ slug: slugProp, coursesRaw, prossimaEdizi
         <div className="cp-page-grid">
 
       <div className="cp-top-area">
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-          <Link href="/corsi" className="text-slate-600 dark:text-gray-400" style={{ textDecoration: 'none' }}>Tutti i corsi</Link>
-          <span className="text-slate-300 dark:text-gray-600">/</span>
-          <span className="text-slate-600 dark:text-gray-300">{course.category}</span>
-        </nav>
+        <Briciole variante="chiaro" ultimaEPagina={false} voci={[{ label: 'Tutti i corsi', href: '/corsi' }, { label: course.category }]} />
 
         <h1 className="text-slate-900 dark:text-white" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', fontWeight: 900, lineHeight: 1.2, margin: '0 0 0.9rem' }}>
           {course.title}
