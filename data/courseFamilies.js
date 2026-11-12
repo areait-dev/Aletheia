@@ -15,6 +15,14 @@
 
 const { COURSE_IMAGES, COURSE_IMAGE_ALT, IMAGE_FALLBACK_BY_CATEGORY, FALLBACK_DEFAULT, CALENDAR_FALLBACK } = require('./courseImages');
 
+// Slug di famiglia FISSATI: lo slug derivato dal titolo (chiave) viene sostituito da quello storico (valore).
+// Serve quando un titolo cambia ma l'indirizzo pubblico, le chiavi dei contenuti (data/content/*, courseImages,
+// coursesDetails) e i link già indicizzati devono restare quelli di prima: così un ritocco al titolo non cambia
+// l'URL né fa perdere contenuto e foto. ASACOM: titolo "ASACOM - Assistente specialistico all'autonomia e alla comunicazione".
+const SLUG_FAMIGLIA_FISSATI = {
+  'asacom-assistente-specialistico-all-autonomia-e-alla-comunicazione': 'asacom-assistente-alla-comunicazione',
+};
+
 const ALIAS_TO_DETAILS = {
   'formazione-dei-lavoratori': 'formazione-lavoratori',
   'formazione-dei-lavoratori-parte-generale': 'formazione-lavoratori',
@@ -194,7 +202,8 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
     const { isAggiornamento, rest } = stripAggiornamentoPrefix(course.title);
     const { levelLabel, famTitle: famTitleRaw } = extractLevelDescriptor(rest);
     const famTitle = stripFillerPrefixes(famTitleRaw) || famTitleRaw;
-    const familyKey = slugify(famTitle);
+    const slugDaTitolo = slugify(famTitle);
+    const familyKey = SLUG_FAMIGLIA_FISSATI[slugDaTitolo] || slugDaTitolo;
 
     if (!families.has(familyKey)) {
       families.set(familyKey, {
