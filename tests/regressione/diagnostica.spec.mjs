@@ -56,3 +56,22 @@ test('le pagine di diagnostica non sono linkate dalle altre pagine @rapido', asy
     expect(html, url).not.toContain('diagnostica');
   }
 });
+
+test('solo /diagnostica-b ha la sezione "Sporgenze" (elementi oltre innerWidth, sonde, misura delle pagine vere) @rapido', async ({ page }) => {
+  await page.goto('/diagnostica-b');
+  await expect(page.getByRole('heading', { name: 'Sporgenze' })).toBeVisible();
+  for (const nome of ['documentElement.clientWidth (layout)', 'larghezza vista dalle media query', 'sonda: width:100vw']) await expect(page.getByText(nome, { exact: true })).toBeVisible();
+  await expect(page.getByText(/Elementi con bordo destro oltre innerWidth: \d+ su \d+/)).toBeVisible();
+  await expect(page.getByText(/oltre la larghezza di layout \(clientWidth\): \d+ su \d+/)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Misura le pagine del sito' })).toBeVisible();
+  for (const url of ['/diagnostica', '/diagnostica-c']) {
+    await page.goto(url);
+    await expect(page.getByRole('heading', { name: 'Sporgenze' })).toHaveCount(0);
+  }
+});
+
+test('la misura delle sporgenze non cambia la pagina: nessun elemento di prova resta nel documento @rapido', async ({ page }) => {
+  await page.goto('/diagnostica-b');
+  await expect(page.getByRole('heading', { name: 'Sporgenze' })).toBeVisible();
+  expect(await page.evaluate(() => document.querySelectorAll('body > div[data-sporgenze-ignora], body > iframe').length)).toBe(0);
+});

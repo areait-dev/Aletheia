@@ -14,7 +14,84 @@ const MQ = [
   '(max-width: 1023px)', '(min-width: 1024px)', '(prefers-color-scheme: dark)',
 ];
 
-function misura() {
+// ─── Misura delle SPORGENZE (solo /diagnostica-b, prop conSporgenze; 13 nov 2026) ───
+// Domanda: chi produce scrollWidth 1133 (= lato lungo dello schermo) con innerWidth 744? Un elemento del sito largo come lo schermo in orizzontale,
+// oppure il browser che dà alla pagina un layout viewport più largo di quello visibile? Qui si elencano gli elementi per bordo destro.
+const arrotonda = (n) => Math.round(n * 10) / 10;
+
+function descrivi(el, win) {
+  const cls = typeof el.className === 'string' ? el.className.trim().replace(/s+/g, '.') : '';
+  return `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}${cls ? '.' + cls.slice(0, 80) : ''}`;
+}
+
+// Larghezza che vedono le media query (min-width): ricerca binaria su matchMedia.
+function larghezzaMedia(win) {
+  let lo = 100;
+  let hi = 6000;
+  while (lo < hi) {
+    const mid = Math.ceil((lo + hi) / 2);
+    if (win.matchMedia(`(min-width:${mid}px)`).matches) lo = mid; else hi = mid - 1;
+  }
+  return lo;
+}
+
+// Sonde: elementi temporanei invisibili per leggere quanto vale "100%", "100vw" e un elemento fixed a sinistra 0 / destra 0.
+function sonde(doc) {
+  const mk = (css) => {
+    const d = doc.createElement('div');
+    d.setAttribute('data-sporgenze-ignora', '');
+    d.style.cssText = `visibility:hidden;height:0;margin:0;padding:0;border:0;${css}`;
+    doc.body.appendChild(d);
+    const w = d.getBoundingClientRect().width;
+    d.remove();
+    return arrotonda(w);
+  };
+  return [
+    ['blocco width:100%', mk('width:100%')],
+    ['width:100vw', mk('width:100vw')],
+    ['position:fixed; left:0; right:0', mk('position:fixed;left:0;right:0')],
+  ];
+}
+
+// Elenca gli elementi del documento (anche di un iframe) il cui bordo destro supera innerWidth e quelli che superano la larghezza di layout (clientWidth).
+export function sporgenze(doc) {
+  const win = doc.defaultView;
+  const de = doc.documentElement;
+  const innerW = win.innerWidth;
+  const layoutW = de.clientWidth;
+  const tutti = [];
+  for (const el of doc.querySelectorAll('body, body *')) {
+    if (el.closest('[data-sporgenze-ignora]')) continue;
+    const r = el.getBoundingClientRect();
+    if (r.width === 0 && r.height === 0) continue;
+    tutti.push({
+      d: descrivi(el, win),
+      pos: win.getComputedStyle(el).position,
+      sinistra: arrotonda(r.left + win.scrollX),
+      destra: arrotonda(r.right + win.scrollX),
+      larghezza: arrotonda(r.width),
+    });
+  }
+  const ordinati = [...tutti].sort((a, b) => b.destra - a.destra);
+  const oltreInner = ordinati.filter((e) => e.destra > innerW + 0.5);
+  const oltreLayout = ordinati.filter((e) => e.destra > layoutW + 0.5);
+  return {
+    innerWidth: innerW,
+    clientWidth: layoutW,
+    scrollWidth: de.scrollWidth,
+    larghezzaMediaQuery: larghezzaMedia(win),
+    htmlLarghezza: arrotonda(de.getBoundingClientRect().width),
+    bodyLarghezza: arrotonda(doc.body.getBoundingClientRect().width),
+    sonde: sonde(doc),
+    elementiTotali: tutti.length,
+    oltreInnerWidth: { conteggio: oltreInner.length, primi: oltreInner.slice(0, 15) },
+    oltreLarghezzaDiLayout: { conteggio: oltreLayout.length, primi: oltreLayout.slice(0, 15) },
+    // Bordo destro massimo di tutti gli elementi: se è uguale a clientWidth nessun elemento esce dal layout
+    bordoDestroMassimo: ordinati.length ? ordinati[0].destra : 0,
+  };
+}
+
+function misura(conSporgenze) {
   const de = document.documentElement;
   const vv = window.visualViewport;
   return {
@@ -39,10 +116,12 @@ function misura() {
     scrollX: Math.round(window.scrollX),
     metaViewport: (document.querySelector('meta[name="viewport"]') || {}).content || null,
     mq: MQ.map((q) => [q, window.matchMedia(q).matches]),
+    ...(conSporgenze ? { sporgenze: sporgenze(document) } : {}),
   };
 }
 
-export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuardare }) {
+export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuardare, conSporgenze = false }) {
+  const mis = () => misura(conSporgenze);
   const [m, setM] = useState(null);
   const [copiato, setCopiato] = useState(false);
   // Storico: una riga a ogni cambio di misure (rotazione, ridimensionamento, zoom): con una sola schermata si vedono verticale e orizzontale.
@@ -50,7 +129,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
 
   useEffect(() => {
     const aggiorna = () => {
-      const mm = misura();
+      const mm = mis();
       setM(mm);
       const firma = [mm.orientamento, mm.innerWidth, mm.innerHeight, mm.visualViewportWidth, mm.visualViewportScale, mm.scrollWidth, mm.screenWidth, mm.screenHeight].join('|');
       setStorico((prima) => {
@@ -90,7 +169,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
     const el = document.querySelector('meta[name="viewport"]');
     if (el) el.setAttribute('content', contenuto);
     setMetaAttivo(contenuto);
-    setTimeout(() => setM(misura()), 400);
+    setTimeout(() => setM(mis()), 400);
   };
   const VARIANTI = [
     ['A · come il sito', 'width=device-width, initial-scale=1'],
@@ -110,7 +189,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
     setRiquadro(0);
     setProva('nessuna');
     setEsitoProva('');
-    setTimeout(() => setM(misura()), 300);
+    setTimeout(() => setM(mis()), 300);
   };
   const eseguiZoom = (nome, punti, bloccaTocco) => {
     azzeraProve();
@@ -126,7 +205,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
       }
       setProva(nome);
       setTimeout(() => {
-        const mm = misura();
+        const mm = mis();
         setM(mm);
         setEsitoProva(`${nome}: zoom ${z.toFixed(3)} su ${punti} pt. Dopo: scrollWidth ${mm.scrollWidth}, innerWidth ${mm.innerWidth}. ${bloccaTocco ? 'Con blocco del tocco orizzontale (touch-action: pan-y). ' : 'Senza blocco del tocco. '}Prova a trascinare la pagina verso destra: lo scrollX qui sopra deve restare 0.`);
       }, 400);
@@ -142,9 +221,51 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
     }, 350);
   };
 
+  // Misura delle pagine VERE del sito, una alla volta, in un riquadro largo quanto innerWidth (stesso motore dell'iPad): se un elemento del sito è più
+  // largo dello schermo, qui compare con tag e classi. Il riquadro è invisibile; servono circa 20 secondi.
+  const PAGINE_SITO = ['/', '/chi-siamo', '/corsi', '/corsi/antincendio', '/news', '/contatti', '/calendario-corsi', '/agenzia-per-il-lavoro', '/formazione/obbligatoria'];
+  const [sito, setSito] = useState({ stato: 'fermo', righe: [] });
+  const misuraPaginaSito = (percorso, larghezza) =>
+    new Promise((risolvi) => {
+      const fr = document.createElement('iframe');
+      fr.setAttribute('data-sporgenze-ignora', '');
+      fr.setAttribute('aria-hidden', 'true');
+      fr.style.cssText = `position:fixed;left:0;top:0;width:${larghezza}px;height:900px;border:0;opacity:0;pointer-events:none;`;
+      let finito = false;
+      const chiudi = (esito) => {
+        if (finito) return;
+        finito = true;
+        fr.remove();
+        risolvi({ percorso, ...esito });
+      };
+      const guasto = setTimeout(() => chiudi({ errore: 'tempo scaduto (20 s)' }), 20000);
+      fr.onload = () => {
+        setTimeout(() => {
+          clearTimeout(guasto);
+          try {
+            chiudi({ misure: sporgenze(fr.contentDocument) });
+          } catch (e) {
+            chiudi({ errore: String(e) });
+          }
+        }, 1500);
+      };
+      fr.src = percorso;
+      document.body.appendChild(fr);
+    });
+  const misuraSito = async () => {
+    setSito({ stato: 'in corso', righe: [] });
+    const larghezza = window.innerWidth;
+    const righe = [];
+    for (const p of PAGINE_SITO) {
+      righe.push(await misuraPaginaSito(p, larghezza));
+      setSito({ stato: 'in corso', righe: [...righe] });
+    }
+    setSito({ stato: 'finito', righe });
+  };
+
   const copia = async () => {
     try {
-      await navigator.clipboard.writeText(JSON.stringify({ ...m, storico: storico.map((s) => s.riga) }, null, 2));
+      await navigator.clipboard.writeText(JSON.stringify({ ...m, storico: storico.map((s) => s.riga), sito: sito.righe }, null, 2));
       setCopiato(true);
     } catch {
       setCopiato(false);
@@ -221,6 +342,67 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
                 </li>
               ))}
             </ul>
+
+            {conSporgenze && m.sporgenze && (
+              <section data-sporgenze-ignora>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Sporgenze</h2>
+                <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '1rem' }}>
+                  Se <strong>clientWidth</strong> e la larghezza vista dalle media query sono più grandi di innerWidth, il browser dà alla pagina un layout più largo
+                  dello schermo (nessun elemento "sporge": è tutto il layout). Se invece sono uguali a innerWidth e compaiono elementi nella seconda lista, sporge un elemento.
+                </p>
+                <div style={{ display: 'grid', gap: '0.5rem' }}>
+                  {[
+                    ['innerWidth (riferimento)', m.sporgenze.innerWidth],
+                    ['documentElement.clientWidth (layout)', m.sporgenze.clientWidth],
+                    ['larghezza vista dalle media query', m.sporgenze.larghezzaMediaQuery],
+                    ['<html> getBoundingClientRect().width', m.sporgenze.htmlLarghezza],
+                    ['<body> getBoundingClientRect().width', m.sporgenze.bodyLarghezza],
+                    ['scrollWidth (documentElement, ripetuto)', m.sporgenze.scrollWidth],
+                    ['bordo destro massimo tra gli elementi', m.sporgenze.bordoDestroMassimo],
+                    ...m.sporgenze.sonde.map(([nome, w]) => [`sonda: ${nome}`, w]),
+                  ].map(([nome, valore]) => (
+                    <div key={nome} className="bg-light dark:bg-dark-bg" style={{ borderRadius: '0.75rem', padding: '0.5rem 1rem' }}>
+                      <div className="text-gray-600 dark:text-gray-300" style={{ fontSize: '0.95rem' }}>{nome}</div>
+                      <div style={{ fontSize: '1.75rem', fontWeight: 800, lineHeight: 1.1 }}>{String(valore)}</div>
+                    </div>
+                  ))}
+                </div>
+                {[
+                  ['Elementi con bordo destro oltre innerWidth', m.sporgenze.oltreInnerWidth],
+                  ['Elementi con bordo destro oltre la larghezza di layout (clientWidth)', m.sporgenze.oltreLarghezzaDiLayout],
+                ].map(([titolo, gruppo]) => (
+                  <div key={titolo}>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '1rem 0 0.25rem' }}>{titolo}: {gruppo.conteggio} su {m.sporgenze.elementiTotali}</h3>
+                    <ol style={{ margin: 0, paddingLeft: '1.25rem', fontSize: '0.85rem', lineHeight: 1.5, overflowWrap: 'anywhere' }}>
+                      {gruppo.primi.map((e, i) => (
+                        <li key={i}>{e.d} · {e.pos} · sx {e.sinistra} · dx {e.destra} · largo {e.larghezza}</li>
+                      ))}
+                    </ol>
+                  </div>
+                ))}
+
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '1.25rem 0 0.25rem' }}>Pagine vere del sito, larghe quanto innerWidth ({m.innerWidth})</h3>
+                <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '0.95rem' }}>
+                  Apre in un riquadro invisibile {PAGINE_SITO.length} pagine, una alla volta (circa 20 secondi), e dice se qualcosa è più largo del riquadro.
+                </p>
+                <button type="button" className="btn btn-outline btn-md" onClick={misuraSito} disabled={sito.stato === 'in corso'}>
+                  {sito.stato === 'in corso' ? `Misura in corso (${sito.righe.length}/${PAGINE_SITO.length})…` : 'Misura le pagine del sito'}
+                </button>
+                <ol style={{ margin: '0.75rem 0 0', paddingLeft: '1.25rem', fontSize: '0.9rem', lineHeight: 1.5, overflowWrap: 'anywhere' }}>
+                  {sito.righe.map((r) => (
+                    <li key={r.percorso}>
+                      <strong>{r.percorso}</strong>
+                      {r.errore
+                        ? ` · errore: ${r.errore}`
+                        : ` · riquadro ${r.misure.innerWidth}, scrollWidth ${r.misure.scrollWidth}, ${r.misure.oltreLarghezzaDiLayout.conteggio} elementi oltre`}
+                      {!r.errore && r.misure.oltreLarghezzaDiLayout.primi.slice(0, 3).map((e, i) => (
+                        <div key={i} style={{ marginLeft: '0.5rem' }}>{e.d} · {e.pos} · dx {e.destra} · largo {e.larghezza}</div>
+                      ))}
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
 
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Prova meta viewport</h2>
             <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '1rem' }}>
