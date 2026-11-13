@@ -253,7 +253,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
             </div>
             {esitoProva && <p style={{ margin: '0.75rem 0 0', fontSize: '1rem', fontWeight: 700 }}>{esitoProva}</p>}
             {riquadro > 0 && (
-              <iframe title="Prova: sito in un riquadro stretto" src="/chi-siamo" style={{ width: `${riquadro}px`, maxWidth: 'none', height: '70vh', border: '3px solid #008C95', borderRadius: '12px', marginTop: '0.75rem', background: '#fff' }} />
+              <iframe title="Prova: sito in un riquadro stretto" src="/chi-siamo" style={{ width: `${riquadro}px`, maxWidth: 'none', height: '70vh', border: '3px solid #008C95', borderRadius: '12px', marginTop: '0.75rem', background: '#fff', boxSizing: 'border-box', marginLeft: '-1rem' /* il <main> ha padding 1rem: senza, il bordo destro dell'iframe (largo quanto lo schermo) arriva a +16 pt e il body misura 760 su 744 */ }} />
             )}
 
             <button type="button" onClick={copia} className="btn btn-primary btn-md" style={{ marginTop: '1.5rem' }}>
