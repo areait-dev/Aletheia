@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
+import { decidiLarghezza } from '../lib/rotazione-larghezza';
 
 // PAGINE TEMPORANEE DI DIAGNOSTICA (/diagnostica, /diagnostica-b, /diagnostica-c; 6 nov 2026): stesso contenuto, cambia solo il meta viewport dichiarato
 // nel codice HTML (il browser lo legge al caricamento: cambiarlo dopo non basta). Pagine in pages/diagnostica*.js.
@@ -67,19 +68,59 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
     [0, 400, 1500].forEach((ms) => setTimeout(() => {
       const mm = misura();
       const riga = `${new Date().toLocaleTimeString('it-IT')} · ${nome} +${ms}ms · inner ${mm.innerWidth}×${mm.innerHeight} · vv ${mm.visualViewportWidth} (scala ${mm.visualViewportScale}) · scrollWidth ${mm.scrollWidth} · schermo ${mm.screenWidth}×${mm.screenHeight} · rimedio ${rimedioRef.current}`;
-      setRegistro((prima) => [...prima, riga].slice(-24));
+      setRegistro((prima) => [...prima, riga].slice(-60));
     }, ms));
+  };
+
+  // RIMEDIO d (lib/rotazione-larghezza.js): meta = `width=<outerWidth>` solo se clientWidth e outerWidth differiscono di più di 20 px e outerWidth
+  // coincide con innerWidth. Un'unica decisione dopo ogni raffica di eventi (+150 ms) e due riprove (+650, +1350 ms); al massimo 3 interventi per
+  // rotazione. Nel registro: valori PRIMA di ogni intervento e DOPO (subito, +400 ms, +1,5 s), oppure il motivo per cui non è intervenuto.
+  const statoD = useRef({ interventi: 0, ultimoEvento: -Infinity, timer: [] });
+  const hms = () => { const d = new Date(); return `${d.toLocaleTimeString('it-IT')}.${String(d.getMilliseconds()).padStart(3, '0')}`; };
+  const registra = (riga) => setRegistro((prima) => [...prima, `${hms()} · ${riga}`].slice(-60));
+  const fmtV = (v) => `inner ${v.inner} · client ${v.client} · scroll ${v.scroll} · outer ${v.outer}`;
+  const metaTesto = () => { const el = document.querySelector('meta[name="viewport"]'); return el ? el.getAttribute('content') : 'ASSENTE'; };
+  const valutaD = (origine) => {
+    const st = statoD.current;
+    const d = decidiLarghezza(window);
+    const prima = `${fmtV(d.valori)} · meta "${metaTesto()}"`;
+    if (!d.agisci) { registra(`d · ${origine} · nessun intervento: ${d.motivo} · ${prima}`); return; }
+    if (st.interventi >= 3) { registra(`d · ${origine} · LIMITE di 3 interventi per rotazione, mi fermo · ${prima}`); return; }
+    const el = document.querySelector('meta[name="viewport"]');
+    if (!el) { registra(`d · ${origine} · meta ASSENTE`); return; }
+    st.interventi += 1;
+    el.setAttribute('content', `width=${d.larghezza}`);
+    setMetaAttivo(`width=${d.larghezza}`); // stesso valore nello stato, altrimenti next/head lo riscrive
+    registra(`d · ${origine} · INTERVENTO n.${st.interventi}: meta → "width=${d.larghezza}" (${d.motivo}) · PRIMA ${prima}`);
+    [0, 400, 1500].forEach((ms) => setTimeout(() => registra(`d · DOPO +${ms} ms · ${fmtV(decidiLarghezza(window).valori)} · meta "${metaTesto()}"`), ms));
+  };
+  const eventoD = (nome) => {
+    const st = statoD.current;
+    const ora = performance.now();
+    if (ora - st.ultimoEvento > 3000) st.interventi = 0; // rotazione nuova
+    st.ultimoEvento = ora;
+    st.timer.forEach(clearTimeout);
+    st.timer = [150, 650, 1350].map((ms) => setTimeout(() => valutaD(`${nome} +${ms} ms`), ms));
+  };
+  const ripristinaMeta = () => { // quando si lascia il rimedio d il meta torna a quello dichiarato dalla pagina
+    statoD.current.timer.forEach(clearTimeout);
+    const el = document.querySelector('meta[name="viewport"]');
+    if (el) el.setAttribute('content', metaViewport);
+    setMetaAttivo(metaViewport);
   };
 
   useEffect(() => {
     const evento = (nome) => () => {
+      if (rimedioRef.current === 'd') { eventoD(nome); return; } // un solo rimedio alla volta: con d non gira nessun altro
       campiona(nome);
       if (rimedioRef.current !== 'n') setTimeout(() => { rilanciaMeta(rimedioRef.current); campiona(`${nome}→rimedio ${rimedioRef.current}`); }, 120);
     };
-    const eOri = evento('orientationchange'), eRes = evento('resize');
+    const eOri = evento('orientationchange'), eRes = evento('resize'), eScr = evento('screen.orientation');
     window.addEventListener('orientationchange', eOri);
     window.addEventListener('resize', eRes);
-    return () => { window.removeEventListener('orientationchange', eOri); window.removeEventListener('resize', eRes); };
+    const so = window.screen && window.screen.orientation;
+    if (so && so.addEventListener) so.addEventListener('change', eScr);
+    return () => { window.removeEventListener('orientationchange', eOri); window.removeEventListener('resize', eRes); if (so && so.removeEventListener) so.removeEventListener('change', eScr); };
   }, []);
 
   useEffect(() => {
@@ -190,7 +231,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
       <Head>
         <title>{`Diagnostica viewport ${nomeVariante}`}</title>
         {/* Stesso meta viewport di tutte le altre pagine del sito (ognuna lo dichiara da sé): così la misura è rappresentativa. */}
-        <meta name="viewport" content={metaViewport} />
+        <meta name="viewport" content={metaAttivo} /> {/* da stato, non fisso: un setAttribute sul DOM verrebbe rimesso a posto da next/head al render successivo (~400 ms dopo) */}
         <meta name="robots" content="noindex, nofollow, noarchive" />
       </Head>
       <main className="bg-white dark:bg-dark-card text-gray-900 dark:text-gray-50" style={{ minHeight: '100vh', padding: '1rem' }}>
@@ -234,10 +275,10 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
               se la pagina resta stretta, guarda se <strong>inner</strong> resta 744 mentre <strong>schermo</strong> dice 1133, e se arriva qualche evento. "Rilancia ora" applica il rimedio senza ruotare.
             </p>
             <div role="group" aria-label="Rimedio alla rotazione" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
-              {[['n', 'Nessun rimedio'], ['a', 'a · togli e rimetti il meta'], ['b', 'b · meta nuovo'], ['c', 'c · alterna initial-scale']].map(([k, et]) => (
-                <button key={k} type="button" className="btn btn-outline btn-md" aria-pressed={rimedio === k} onClick={() => setRimedio(k)}>{et}</button>
+              {[['n', 'Nessun rimedio'], ['a', 'a · togli e rimetti il meta'], ['b', 'b · meta nuovo'], ['c', 'c · alterna initial-scale'], ['d', 'd · width = larghezza vera (solo se serve)']].map(([k, et]) => (
+                <button key={k} type="button" className="btn btn-outline btn-md" aria-pressed={rimedio === k} onClick={() => { if (rimedio === 'd' && k !== 'd') ripristinaMeta(); setRimedio(k); }}>{et}</button>
               ))}
-              <button type="button" className="btn btn-primary btn-md" onClick={() => { rilanciaMeta(rimedio); campiona(`rilancia ora ${rimedio}`); }}>Rilancia ora</button>
+              <button type="button" className="btn btn-primary btn-md" onClick={() => { if (rimedio === 'd') { statoD.current.interventi = 0; valutaD('manuale'); } else { rilanciaMeta(rimedio); campiona(`rilancia ora ${rimedio}`); } }}>Rilancia ora</button>
               <button type="button" className="btn btn-outline btn-md" onClick={() => setRegistro([])}>Svuota registro</button>
             </div>
             <ol data-registro style={{ margin: 0, paddingLeft: '1.25rem', fontSize: '0.95rem', lineHeight: 1.6, overflowWrap: 'anywhere' }}>
