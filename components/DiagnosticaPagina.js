@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // PAGINE TEMPORANEE DI DIAGNOSTICA (/diagnostica, /diagnostica-b, /diagnostica-c; 6 nov 2026): stesso contenuto, cambia solo il meta viewport dichiarato
 // nel codice HTML (il browser lo legge al caricamento: cambiarlo dopo non basta). Pagine in pages/diagnostica*.js.
@@ -47,6 +47,40 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
   const [copiato, setCopiato] = useState(false);
   // Storico: una riga a ogni cambio di misure (rotazione, ridimensionamento, zoom): con una sola schermata si vedono verticale e orizzontale.
   const [storico, setStorico] = useState([]);
+
+  // ROTAZIONE verticale → orizzontale (Chrome su iPad, modalità desktop: la pagina resta stretta, si sistema ricaricando; 13 nov 2026).
+  // `registro`: per ogni evento di rotazione/ridimensionamento le misure subito, dopo 400 ms e dopo 1,5 s (un evento che non arriva si vede dall'assenza di righe).
+  // `rimedio`: tecnica applicata da sola a ogni rotazione per costringere il browser a rileggere il meta viewport (n = nessuna).
+  const [registro, setRegistro] = useState([]);
+  const [rimedio, setRimedio] = useState('n');
+  const rimedioRef = useRef('n');
+  rimedioRef.current = rimedio;
+  const rilanciaMeta = (tecnica) => {
+    const el = document.querySelector('meta[name="viewport"]');
+    if (!el || tecnica === 'n') return;
+    const c = el.getAttribute('content');
+    if (tecnica === 'a') { el.remove(); document.head.appendChild(el); } // stesso elemento tolto e rimesso
+    else if (tecnica === 'b') { const nuovo = document.createElement('meta'); nuovo.name = 'viewport'; nuovo.content = c; nuovo.setAttribute('data-next-head', ''); /* senza, next/head reinserisce il suo e restano due meta */ el.replaceWith(nuovo); } // elemento nuovo
+    else if (tecnica === 'c') { el.setAttribute('content', `${c}, initial-scale=1`); setTimeout(() => el.setAttribute('content', c), 60); } // alterna e torna
+  };
+  const campiona = (nome) => {
+    [0, 400, 1500].forEach((ms) => setTimeout(() => {
+      const mm = misura();
+      const riga = `${new Date().toLocaleTimeString('it-IT')} · ${nome} +${ms}ms · inner ${mm.innerWidth}×${mm.innerHeight} · vv ${mm.visualViewportWidth} (scala ${mm.visualViewportScale}) · scrollWidth ${mm.scrollWidth} · schermo ${mm.screenWidth}×${mm.screenHeight} · rimedio ${rimedioRef.current}`;
+      setRegistro((prima) => [...prima, riga].slice(-24));
+    }, ms));
+  };
+
+  useEffect(() => {
+    const evento = (nome) => () => {
+      campiona(nome);
+      if (rimedioRef.current !== 'n') setTimeout(() => { rilanciaMeta(rimedioRef.current); campiona(`${nome}→rimedio ${rimedioRef.current}`); }, 120);
+    };
+    const eOri = evento('orientationchange'), eRes = evento('resize');
+    window.addEventListener('orientationchange', eOri);
+    window.addEventListener('resize', eRes);
+    return () => { window.removeEventListener('orientationchange', eOri); window.removeEventListener('resize', eRes); };
+  }, []);
 
   useEffect(() => {
     const aggiorna = () => {
@@ -144,7 +178,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
 
   const copia = async () => {
     try {
-      await navigator.clipboard.writeText(JSON.stringify({ ...m, storico: storico.map((s) => s.riga) }, null, 2));
+      await navigator.clipboard.writeText(JSON.stringify({ ...m, storico: storico.map((s) => s.riga), registro }, null, 2));
       setCopiato(true);
     } catch {
       setCopiato(false);
@@ -192,6 +226,22 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
               {storico.map((s) => (
                 <li key={s.firma + s.riga}>{s.riga}</li>
               ))}
+            </ol>
+
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Rotazione: registro e rimedi sul meta viewport</h2>
+            <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '1rem' }}>
+              Apri la pagina in VERTICALE (scheda nuova), scegli un rimedio, poi gira l'iPad in ORIZZONTALE. Il registro scrive le misure a ogni evento (subito, dopo 0,4 s e dopo 1,5 s):
+              se la pagina resta stretta, guarda se <strong>inner</strong> resta 744 mentre <strong>schermo</strong> dice 1133, e se arriva qualche evento. "Rilancia ora" applica il rimedio senza ruotare.
+            </p>
+            <div role="group" aria-label="Rimedio alla rotazione" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              {[['n', 'Nessun rimedio'], ['a', 'a · togli e rimetti il meta'], ['b', 'b · meta nuovo'], ['c', 'c · alterna initial-scale']].map(([k, et]) => (
+                <button key={k} type="button" className="btn btn-outline btn-md" aria-pressed={rimedio === k} onClick={() => setRimedio(k)}>{et}</button>
+              ))}
+              <button type="button" className="btn btn-primary btn-md" onClick={() => { rilanciaMeta(rimedio); campiona(`rilancia ora ${rimedio}`); }}>Rilancia ora</button>
+              <button type="button" className="btn btn-outline btn-md" onClick={() => setRegistro([])}>Svuota registro</button>
+            </div>
+            <ol data-registro style={{ margin: 0, paddingLeft: '1.25rem', fontSize: '0.95rem', lineHeight: 1.6, overflowWrap: 'anywhere' }}>
+              {registro.map((r, i) => <li key={i}>{r}</li>)}
             </ol>
 
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Dettagli</h2>
