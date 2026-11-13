@@ -69,3 +69,21 @@ test('dopo "Prova 3" il body non è più largo della finestra (744 pt, nessun +1
   expect(m.html).toBeLessThanOrEqual(m.iw);
   await ctx.close();
 });
+
+// Rotazione verticale → orizzontale (13 nov 2026): il registro scrive le misure a ogni evento e i rimedi sul meta lasciano sempre UN solo meta viewport.
+test('registro di rotazione e rimedi sul meta: un solo meta viewport, righe nel registro @rapido', async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 744, height: 1133 }, isMobile: true, hasTouch: true });
+  const page = await ctx.newPage();
+  await page.goto('/diagnostica-b');
+  for (const [tasto, k] of [['a · togli e rimetti il meta', 'a'], ['b · meta nuovo', 'b'], ['c · alterna initial-scale', 'c']]) {
+    await page.getByRole('button', { name: tasto }).click();
+    await page.getByRole('button', { name: 'Svuota registro' }).click();
+    await page.setViewportSize({ width: 1133, height: 744 });
+    await expect(page.locator('[data-registro] li', { hasText: `→rimedio ${k}` }).first()).toBeVisible({ timeout: 5000 });
+    expect(await page.locator('meta[name="viewport"]').count(), `rimedio ${k}`).toBe(1);
+    expect(await page.locator('meta[name="viewport"]').getAttribute('content'), `rimedio ${k}`).toBe('width=device-width');
+    await page.setViewportSize({ width: 744, height: 1133 });
+    await page.waitForTimeout(1800);
+  }
+  await ctx.close();
+});
