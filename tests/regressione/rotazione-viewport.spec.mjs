@@ -75,8 +75,7 @@ test('rotazione emulata davvero (744×1133 → 1133×744): Chromium manda l even
   await page.setViewportSize({ width: 1133, height: 744 });
   await page.waitForTimeout(1800);
   const n = (await riscritture(page)).length;
-  expect(n, 'tra 3 e 4 riscritture (orientationchange e screen.orientation riavviano la stessa sequenza)').toBeGreaterThanOrEqual(3);
-  expect(n).toBeLessThanOrEqual(4);
+  expect(n, 'orientationchange, screen.orientation e resize arrivano insieme: è la stessa rotazione, una sola sequenza').toBe(3);
   await page.waitForTimeout(3000);
   expect((await riscritture(page)).length, 'poi non scrive più').toBe(n);
   const st = await stato(page);
@@ -110,10 +109,17 @@ for (const [nome, opz] of [['telefono 390×844', TELEFONO], ['telefono in orizzo
   });
 }
 
-test('due cambi di orientamento ravvicinati: la sequenza riparte, mai più di 4 riscritture e poi niente (nessun ciclo) @rapido', async ({ browser }) => {
+test('due cambi di orientamento a 400 ms: la sequenza riparte, 4 riscritture e poi niente (nessun ciclo); a 100 ms sono la stessa rotazione (3) @rapido', async ({ browser }) => {
+  const { ctx: c0, page: p0 } = await apri(browser, IPAD);
+  await orientamento(p0);
+  await p0.waitForTimeout(100);
+  await orientamento(p0);
+  await p0.waitForTimeout(1600);
+  expect((await riscritture(p0)).length, 'due eventi a 100 ms = una rotazione').toBe(3);
+  await c0.close();
   const { ctx, page } = await apri(browser, IPAD);
   await orientamento(page);
-  await page.waitForTimeout(100);
+  await page.waitForTimeout(400);
   await orientamento(page);
   await page.waitForTimeout(1600);
   const n = (await riscritture(page)).length;
@@ -151,5 +157,40 @@ test('con ?diagnostica scrive in console ogni riscrittura @rapido', async ({ bro
   await orientamento(page);
   await page.waitForTimeout(1300);
   expect(log.filter((t) => t.startsWith('rotazione-viewport: meta riscritto'))).toHaveLength(3);
+  await ctx.close();
+});
+
+test('resize con la larghezza cambiata di piu di 50 px (iPad, nessun evento di orientamento): parte la sequenza @rapido', async ({ browser }) => {
+  const { ctx, page } = await apri(browser, IPAD);
+  await page.setViewportSize({ width: 900, height: 1133 }); // stesso orientamento: arriva solo un resize
+  await page.waitForTimeout(1800);
+  expect(await riscritture(page)).toHaveLength(3);
+  await page.waitForTimeout(2500);
+  expect((await riscritture(page)).length, 'poi non scrive piu').toBe(3);
+  await ctx.close();
+});
+
+test('resize con la larghezza cambiata di poco (< 50 px): non parte @rapido', async ({ browser }) => {
+  const { ctx, page } = await apri(browser, IPAD);
+  await page.setViewportSize({ width: 760, height: 1133 });
+  await page.waitForTimeout(1500);
+  expect(await riscritture(page)).toEqual([]);
+  await ctx.close();
+});
+
+test('resize con larghezza cambiata ma pagina zoomata (visualViewport.scale 1,5): non parte @rapido', async ({ browser }) => {
+  const { ctx, page } = await apri(browser, IPAD);
+  await page.evaluate(() => Object.defineProperty(window.visualViewport, 'scale', { get: () => 1.5, configurable: true }));
+  await page.setViewportSize({ width: 900, height: 1133 });
+  await page.waitForTimeout(1500);
+  expect(await riscritture(page)).toEqual([]);
+  await ctx.close();
+});
+
+test('desktop: nemmeno un resize con la larghezza cambiata fa partire la sequenza @rapido', async ({ browser }) => {
+  const { ctx, page } = await apri(browser, DESKTOP);
+  await page.setViewportSize({ width: 1100, height: 900 });
+  await page.waitForTimeout(1500);
+  expect(await riscritture(page)).toEqual([]);
   await ctx.close();
 });
