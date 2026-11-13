@@ -1108,7 +1108,7 @@ export const coursesDetails = {
   // Un'unica famiglia "PLE - Piattaforme di Lavoro Mobili Elevabili" con switch Con Stabilizzatori /
   // Senza Stabilizzatori / Con e Senza Stabilizzatori / Aggiornamento - vedi il commento sulle 4 voci raw
   // in data/coursesRaw.js e i LEVEL_PATTERNS in data/courseFamilies.js. La chiave qui sotto deve
-  // coincidere ESATTAMENTE con family.id (slugify del famTitle), perché EDITORIAL_CONTENT[family.id] non
+  // coincidere ESATTAMENTE con family.id (la chiave di SLUG_FAMIGLIE, che per ora è lo slug del famTitle), perché EDITORIAL_CONTENT[family.id] non
   // passa per ALIAS_TO_DETAILS (a differenza del matching prezzi in courseFamilies.js).
   'ple-piattaforme-di-lavoro-mobili-elevabili': {
     title: 'PLE - Piattaforme di Lavoro Mobili Elevabili',

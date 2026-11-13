@@ -1,5 +1,5 @@
 // ASACOM: il titolo della scheda è "ASACOM - Assistente specialistico all'autonomia e alla comunicazione", ma l'indirizzo pubblico
-// resta quello storico (SLUG_STORICI in data/courseFamilies.js). Un ritocco al titolo non deve cambiare l'URL né far
+// resta quello storico (SLUG_FAMIGLIE in data/courseFamilies.js). Un ritocco al titolo non deve cambiare l'URL né far
 // perdere contenuto e foto (chiavi di data/content, courseImages e coursesDetails sono quelle del vecchio slug).
 import { test, expect } from '@playwright/test';
 

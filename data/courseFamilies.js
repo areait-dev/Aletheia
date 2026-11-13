@@ -128,11 +128,52 @@ function stripFillerPrefixes(title) {
 // Titoli in sentence case (data/coursesRaw.js): tolti i prefissi "Corso"/"Aggiornamento" o il descrittore di livello, il primo carattere resta minuscolo: si ripristina la maiuscola
 const maiuscolaIniziale = (t) => (t ? t.charAt(0).toUpperCase() + t.slice(1) : t);
 
-// Slug storici: il titolo è stato corretto ("carriponti" -> "carriponte") ma l'indirizzo pubblico della scheda non cambia (gli slug derivano dal titolo,
-// quindi senza questa mappa cambierebbe anche l'URL, e con lui id, contenuti, immagini, redirect e canonical).
-const SLUG_STORICI = {
-  'addetti-alla-conduzione-di-carriponte-pensile-cabina': 'addetti-alla-conduzione-di-carriponti-pensile-cabina',
-  'asacom-assistente-specialistico-all-autonomia-e-alla-comunicazione': 'asacom-assistente-alla-comunicazione', // titolo ASACOM cambiato in e0db6b0: URL e contenuto restavano orfani
+// SLUG DELLE SCHEDE CORSO (URL pubblici /corsi/<slug>): lo slug di una famiglia NON si ricava dal titolo, vive qui.
+// Chiave = titolo di famiglia normalizzato (slugify del titolo in coursesRaw.js), valore = slug pubblico, che non cambia mai
+// (id, contenuti, immagini, redirect e canonical dipendono da lui). Ritoccare un titolo fa fallire la build con un errore
+// chiaro: si aggiorna la CHIAVE e il valore resta com'è. Una famiglia nuova richiede una riga nuova. Cambiare un VALORE
+// vuole un redirect 301 dal vecchio indirizzo e l'ok del committente (vedi CLAUDE.md).
+const SLUG_FAMIGLIE = {
+  'antincendio': 'antincendio',
+  'formazione-dei-lavoratori': 'formazione-dei-lavoratori',
+  'rspp-datore-di-lavoro': 'rspp-datore-di-lavoro',
+  'rspp-aspp': 'rspp-aspp',
+  'rls': 'rls',
+  'primo-soccorso-aziendale': 'primo-soccorso-aziendale',
+  'formazione-del-preposto': 'formazione-del-preposto',
+  'formazione-per-formatore': 'formazione-per-formatore',
+  'formazione-dirigente': 'formazione-dirigente',
+  'coordinatori-cantieri-cse-csp': 'coordinatori-cantieri-cse-csp',
+  'pes-pav-lavori-elettrici': 'pes-pav-lavori-elettrici',
+  'lavori-in-quota': 'lavori-in-quota',
+  'dpi-3-categoria': 'dpi-3-categoria',
+  'pimus-ponteggi': 'pimus-ponteggi',
+  'spazi-confinati': 'spazi-confinati',
+  'lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale': 'lavoratori-addetti-all-attivita-di-apposizione-integrazione-e-rimozione-della-segnaletica-stradale',
+  'modulo-aggiuntivo-cantieri-per-datore-di-lavoro': 'modulo-aggiuntivo-cantieri-per-datore-di-lavoro',
+  'datore-di-lavoro': 'datore-di-lavoro',
+  'carrelli-elevatori-semoventi-con-conduttore-a-bordo': 'carrelli-elevatori-semoventi-con-conduttore-a-bordo',
+  'operatore-di-gru-per-autocarro': 'operatore-di-gru-per-autocarro',
+  'ple-piattaforme-di-lavoro-mobili-elevabili': 'ple-piattaforme-di-lavoro-mobili-elevabili',
+  'trattori-agricoli-o-forestali': 'trattori-agricoli-o-forestali',
+  'macchine-movimento-terra': 'macchine-movimento-terra',
+  'addetti-alla-conduzione-di-carriponte': 'addetti-alla-conduzione-di-carriponte',
+  'pompe-per-calcestruzzo': 'pompe-per-calcestruzzo',
+  'addetti-macchina-raccogli-frutta-crf': 'addetti-macchina-raccogli-frutta-crf',
+  'addetti-macchina-raccogli-frutta-aggiornamento': 'addetti-macchina-raccogli-frutta-aggiornamento',
+  'addetti-caricatori-movimentazione-di-materiali-cmm': 'addetti-caricatori-movimentazione-di-materiali-cmm',
+  'addetti-alla-conduzione-di-carriponte-pensile-cabina': 'addetti-alla-conduzione-di-carriponti-pensile-cabina', // titolo cambiato dopo la pubblicazione: l'URL storico resta (ex SLUG_STORICI)
+  'patentino-fitosanitario': 'patentino-fitosanitario',
+  'personale-alimentarista-osa': 'personale-alimentarista-osa',
+  'oss-operatore-socio-sanitario': 'oss-operatore-socio-sanitario',
+  'asacom-assistente-specialistico-all-autonomia-e-alla-comunicazione': 'asacom-assistente-alla-comunicazione', // titolo cambiato dopo la pubblicazione: l'URL storico resta (ex SLUG_STORICI)
+  'blsd-basic-life-support-and-defibrillation': 'blsd-basic-life-support-and-defibrillation',
+  'conduttore-d-impresa-agricola': 'conduttore-d-impresa-agricola',
+  'icdl-base': 'icdl-base',
+  'icdl-standard': 'icdl-standard',
+  'icdl-full-standard': 'icdl-full-standard',
+  'icdl-digcomp-2-2': 'icdl-digcomp-2-2',
+  'icdl-update': 'icdl-update',
 };
 
 function slugify(str) {
@@ -202,7 +243,13 @@ function buildCourseFamilies(rawCourses, coursesDetails = {}, options = {}) {
     const { levelLabel, famTitle: famTitleRaw } = extractLevelDescriptor(rest);
     const famTitle = stripFillerPrefixes(famTitleRaw) || famTitleRaw;
     const familyKeyTitolo = slugify(famTitle);
-    const familyKey = SLUG_STORICI[familyKeyTitolo] || familyKeyTitolo;
+    const familyKey = SLUG_FAMIGLIE[familyKeyTitolo];
+    if (!familyKey) {
+      throw new Error(
+        `[courseFamilies] Nessuno slug fissato per la famiglia "${famTitle}" (chiave "${familyKeyTitolo}", corso "${course.title}"). ` +
+          'Se il titolo è stato ritoccato, sposta la riga di SLUG_FAMIGLIE sulla nuova chiave tenendo lo stesso slug; se la famiglia è nuova, aggiungi una riga in data/courseFamilies.js.'
+      );
+    }
 
     if (!families.has(familyKey)) {
       families.set(familyKey, {
