@@ -56,3 +56,16 @@ test('le pagine di diagnostica non sono linkate dalle altre pagine @rapido', asy
     expect(html, url).not.toContain('diagnostica');
   }
 });
+
+// 13 nov 2026: sull'iPad (744 pt) il body misurava 760: l'iframe di "Prova 3" è largo quanto lo schermo ma stava dentro il padding di 1rem del <main>.
+test('dopo "Prova 3" il body non è più largo della finestra (744 pt, nessun +16) @rapido', async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 744, height: 1133 }, isMobile: true, hasTouch: true });
+  const page = await ctx.newPage();
+  await page.goto('/diagnostica-b');
+  await page.getByRole('button', { name: /Prova 3/ }).click();
+  await expect(page.locator('iframe[title^="Prova: sito in un riquadro"]')).toBeVisible();
+  const m = await page.evaluate(() => ({ iw: innerWidth, html: document.documentElement.scrollWidth, body: document.body.scrollWidth }));
+  expect(m.body).toBeLessThanOrEqual(m.iw);
+  expect(m.html).toBeLessThanOrEqual(m.iw);
+  await ctx.close();
+});

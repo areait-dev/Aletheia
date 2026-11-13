@@ -280,7 +280,6 @@ export default function ArticlePage({ article: initialArticle, related, isPrevie
     <>
       <Head>
         <title>{`${article.title} - Alètheia Srl`}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={article.excerpt} />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>

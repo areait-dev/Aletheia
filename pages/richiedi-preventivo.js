@@ -139,7 +139,6 @@ export default function RichiediPreventivo() {
     <>
       <Head>
         <title>{PAGE_TITLE}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead title={PAGE_TITLE} description={PAGE_DESCRIPTION} url="/richiedi-preventivo" ogImage={seo.ogImage || undefined} />
       </Head>

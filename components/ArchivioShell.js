@@ -51,7 +51,6 @@ export default function ArchivioShell({ titolo, badge, sottotitolo, briciole = [
     <>
       <Head>
         <title>{metaTitolo || `${titolo} - Alètheia Srl`}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         {(metaDescrizione || seo.descrizione) && <meta name="description" content={metaDescrizione || seo.descrizione} />}
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>

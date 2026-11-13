@@ -90,7 +90,6 @@ export default function CalendarioCorsi({ calendario, oggi }) {
     <>
       <Head>
         <title>Calendario Corsi - Alètheia Srl</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Scopri le date dei prossimi corsi in partenza e iscriviti." />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>

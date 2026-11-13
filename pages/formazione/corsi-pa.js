@@ -254,7 +254,6 @@ export default function CorsiPA({ faqs, aree, mepaElenco, pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "Formazione per la Pubblica Amministrazione - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Formazione per Comuni, enti locali e aziende pubbliche, attivabile tramite MEPA. Alètheia, ente accreditato Regione Siciliana con 20+ anni di esperienza nella formazione della PA."}

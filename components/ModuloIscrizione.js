@@ -141,7 +141,6 @@ export default function ModuloIscrizione({ tipo = 'iscrizione' }) {
     <>
       <Head>
         <title>{T.pageTitle}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead title={T.pageTitle} description={T.pageDescription} url={T.url} ogImage={seo.ogImage || undefined} />
       </Head>

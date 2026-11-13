@@ -80,7 +80,6 @@ export default function FormazioneFinanziataSicilia({ percorsi, pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "Formazione Finanziata in Sicilia - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Corsi gratuiti in Sicilia finanziati da Regione Siciliana, Fondi Interprofessionali e Fondo Nuove Competenze. Alètheia: ente di formazione accreditato."}

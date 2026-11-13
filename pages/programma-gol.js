@@ -107,7 +107,6 @@ export default function ProgrammaGOL({ corsiGOL, pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "Programma G.O.L. - Garanzia di Occupabilità dei Lavoratori - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Alètheia Srl è operatore accreditato del Programma G.O.L. (Garanzia di Occupabilità dei Lavoratori). Percorsi gratuiti di orientamento, formazione e reinserimento professionale in Sicilia."}

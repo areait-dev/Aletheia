@@ -98,7 +98,6 @@ export default function FormazioneRegionale({ faqs, avvisi, requisiti, puntiDiFo
     <>
       <Head>
         <title>{pagina.seo.titolo || "Formazione Regionale - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Percorsi di formazione regionale finanziati dalla Regione Siciliana: FSE+, POC Sicilia, Garanzia Giovani e Programma G.O.L. Spesso gratuiti per i partecipanti."}

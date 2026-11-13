@@ -218,7 +218,6 @@ export default function ChiSiamo({ ecoLoghi, pagina, storia, tabsLista, puntiFor
     <>
       <Head>
         <title>{pagina.seo.titolo || "Chi Siamo - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead
           title="Chi Siamo - Alètheia Srl"

@@ -141,7 +141,6 @@ export default function AgenziaPerIlLavoro({ jobs = [], aplNews = [], pagina }) 
     <>
       <Head>
         <title>Agenzia per il Lavoro - Alètheia Srl</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead
           title="Agenzia per il Lavoro - Alètheia Srl"

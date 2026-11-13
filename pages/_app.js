@@ -51,6 +51,13 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      {/* Meta viewport: UNICO punto per tutte le pagine (404 compresa). Volutamente SENZA initial-scale: su iPad in modalità "sito desktop"
+          (Chrome/Safari) con initial-scale=1 il browser disegna a ~1024 pt su uno schermo da 744 pt e la pagina scorre di lato; senza,
+          fa stare la pagina nello schermo (misurato sull'iPad mini, 13 nov 2026, vedi MIGRAZIONE.md sezione iPad). Non rimetterlo nelle
+          singole pagine: next/head tiene l'ultimo meta con lo stesso name. Le pagine /diagnostica* lo ridefiniscono apposta. */}
+      <Head>
+        <meta name="viewport" content="width=device-width" />
+      </Head>
       {/* Verifica proprietà Google Search Console (opzioni globali → SEO) */}
       {seo.verificaGoogle && (
         <Head>
