@@ -7,7 +7,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from '../context/ThemeContext';
 import { initLenis, destroyLenis, scrollToTopNow } from '../lib/lenis';
-import { avviaCorrezioneRotazione } from '../lib/rotazione-viewport';
 import SeoCentrale from '../components/SeoCentrale';
 import CookieConsent from '../components/CookieConsent';
 import { SITE_OPTIONS } from '../data/site-options';
@@ -28,9 +27,6 @@ function MyApp({ Component, pageProps }) {
   // tra le props. In locale è sempre false: nessun tag in più.
   const noindex = pageProps?.pagina?.seo?.noindex === true;
   // Avvia lo smooth scrolling Lenis lato client.
-  // iPad (Chrome, modalità desktop): dopo la rotazione il layout può restare alla larghezza di prima; vedi lib/rotazione-viewport.js.
-  useEffect(() => avviaCorrezioneRotazione(window), []);
-
   useEffect(() => {
     initLenis();
     return () => destroyLenis();
