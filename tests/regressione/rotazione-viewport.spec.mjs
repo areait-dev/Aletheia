@@ -26,6 +26,7 @@ async function apri(browser, opzioni, indirizzo = '/chi-siamo?diagnostica') {
   return { ctx, page, log };
 }
 const riscritture = (page) => page.evaluate(() => window.__riscritture.slice());
+const resize = (page) => page.evaluate(() => window.dispatchEvent(new Event('resize')));
 const orientamento = (page) => page.evaluate(() => window.dispatchEvent(new Event('orientationchange')));
 const stato = (page) => page.evaluate(() => {
   const de = document.documentElement;
@@ -75,7 +76,8 @@ test('rotazione emulata davvero (744×1133 → 1133×744): Chromium manda l even
   await page.setViewportSize({ width: 1133, height: 744 });
   await page.waitForTimeout(1800);
   const n = (await riscritture(page)).length;
-  expect(n, 'orientationchange, screen.orientation e resize arrivano insieme: è la stessa rotazione, una sola sequenza').toBe(3);
+  expect(n, 'una sola sequenza (3) più i resize della raffica nella finestra').toBeGreaterThanOrEqual(3);
+  expect(n).toBeLessThanOrEqual(7);
   await page.waitForTimeout(3000);
   expect((await riscritture(page)).length, 'poi non scrive più').toBe(n);
   const st = await stato(page);
@@ -156,7 +158,7 @@ test('con ?diagnostica scrive in console ogni riscrittura @rapido', async ({ bro
   const { ctx, page, log } = await apri(browser, IPAD);
   await orientamento(page);
   await page.waitForTimeout(1300);
-  expect(log.filter((t) => t.startsWith('rotazione-viewport: meta riscritto'))).toHaveLength(3);
+  expect(log.filter((t) => /^rotazione-viewport: .* · meta riscritto/.test(t))).toHaveLength(3);
   await ctx.close();
 });
 
@@ -164,9 +166,11 @@ test('resize con la larghezza cambiata di piu di 50 px (iPad, nessun evento di o
   const { ctx, page } = await apri(browser, IPAD);
   await page.setViewportSize({ width: 900, height: 1133 }); // stesso orientamento: arriva solo un resize
   await page.waitForTimeout(1800);
-  expect(await riscritture(page)).toHaveLength(3);
-  await page.waitForTimeout(2500);
-  expect((await riscritture(page)).length, 'poi non scrive piu').toBe(3);
+  const n = (await riscritture(page)).length;
+  expect(n, 'sequenza 0/500/1000 ms + il resize nella finestra').toBeGreaterThanOrEqual(3);
+  expect(n).toBeLessThanOrEqual(5);
+  await page.waitForTimeout(3000);
+  expect((await riscritture(page)).length, 'poi non scrive piu').toBe(n);
   await ctx.close();
 });
 
@@ -192,5 +196,44 @@ test('desktop: nemmeno un resize con la larghezza cambiata fa partire la sequenz
   await page.setViewportSize({ width: 1100, height: 900 });
   await page.waitForTimeout(1500);
   expect(await riscritture(page)).toEqual([]);
+  await ctx.close();
+});
+
+test('nella finestra dopo la rotazione ogni resize riscrive il meta (~120 ms dopo); fuori dalla finestra no; nessun ciclo @rapido', async ({ browser }) => {
+  const { ctx, page } = await apri(browser, IPAD);
+  await orientamento(page); // apre la finestra di 2,5 s: 3 riscritture (0, 500, 1000)
+  for (let i = 0; i < 4; i++) { await page.waitForTimeout(250); await resize(page); } // t = 250..1000 ms, stessa larghezza
+  await page.waitForTimeout(1500);
+  const dentro = (await riscritture(page)).length;
+  expect(dentro, '3 della sequenza + resize nella finestra').toBeGreaterThanOrEqual(5);
+  expect(dentro).toBeLessThanOrEqual(7);
+  await page.waitForTimeout(1500); // ora siamo oltre 2,5 s dall'innesco
+  await resize(page); await page.waitForTimeout(600);
+  expect((await riscritture(page)).length, 'un resize fuori dalla finestra non scrive').toBe(dentro);
+  await ctx.close();
+});
+
+test('il registro dello script (window.__rotazioneLog) mostra attivazione, evento e riscritture; su desktop dice "non touch" @rapido', async ({ browser }) => {
+  const { ctx, page } = await apri(browser, IPAD);
+  await orientamento(page);
+  await page.waitForTimeout(1300);
+  const log = await page.evaluate(() => window.__rotazioneLog);
+  expect(log.some((r) => r.includes('script attivo · touch true'))).toBe(true);
+  expect(log.some((r) => r.includes('orientationchange: parte la sequenza'))).toBe(true);
+  expect(log.filter((r) => r.includes('meta riscritto'))).toHaveLength(3);
+  await ctx.close();
+  const d = await apri(browser, DESKTOP);
+  await orientamento(d.page);
+  await d.page.waitForTimeout(500);
+  const logD = await d.page.evaluate(() => window.__rotazioneLog);
+  expect(logD.some((r) => r.includes('ignorato (non touch)'))).toBe(true);
+  expect(logD.some((r) => r.includes('meta riscritto'))).toBe(false);
+  await d.ctx.close();
+});
+
+test('la pagina /diagnostica-b mostra il registro dello script del sito @rapido', async ({ browser }) => {
+  const { ctx, page } = await apri(browser, IPAD, '/diagnostica-b');
+  await expect(page.getByText('Script del sito (lib/rotazione-viewport.js)')).toBeVisible();
+  await expect(page.locator('[data-log-sito] li', { hasText: 'script attivo' })).toBeVisible();
   await ctx.close();
 });

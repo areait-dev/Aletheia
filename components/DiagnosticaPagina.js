@@ -52,6 +52,14 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
   // `registro`: per ogni evento di rotazione/ridimensionamento le misure subito, dopo 400 ms e dopo 1,5 s (un evento che non arriva si vede dall'assenza di righe).
   // `rimedio`: tecnica applicata da sola a ogni rotazione per costringere il browser a rileggere il meta viewport (n = nessuna).
   const [registro, setRegistro] = useState([]);
+  // Registro dello SCRIPT DEL SITO (lib/rotazione-viewport.js, window.__rotazioneLog): da iPad la console non si legge, quindi lo mostriamo qui.
+  const [logSito, setLogSito] = useState([]);
+  useEffect(() => {
+    const leggi = () => setLogSito((prima) => { const nuovo = window.__rotazioneLog || []; return nuovo.length === prima.length && nuovo[nuovo.length - 1] === prima[prima.length - 1] ? prima : [...nuovo]; });
+    leggi();
+    const id = setInterval(leggi, 500);
+    return () => clearInterval(id);
+  }, []);
   const [rimedio, setRimedio] = useState('n');
   const rimedioRef = useRef('n');
   rimedioRef.current = rimedio;
@@ -178,7 +186,7 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
 
   const copia = async () => {
     try {
-      await navigator.clipboard.writeText(JSON.stringify({ ...m, storico: storico.map((s) => s.riga), registro }, null, 2));
+      await navigator.clipboard.writeText(JSON.stringify({ ...m, storico: storico.map((s) => s.riga), registro, scriptSito: logSito }, null, 2));
       setCopiato(true);
     } catch {
       setCopiato(false);
@@ -242,6 +250,14 @@ export default function DiagnosticaPagina({ nomeVariante, metaViewport, cosaGuar
             </div>
             <ol data-registro style={{ margin: 0, paddingLeft: '1.25rem', fontSize: '0.95rem', lineHeight: 1.6, overflowWrap: 'anywhere' }}>
               {registro.map((r, i) => <li key={i}>{r}</li>)}
+            </ol>
+
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '1rem 0 0.25rem' }}>Script del sito (lib/rotazione-viewport.js)</h3>
+            <p className="text-gray-600 dark:text-gray-300" style={{ margin: '0 0 0.5rem', fontSize: '1rem' }}>
+              Cosa ha visto e fatto lo script che corregge la rotazione (ultime 80 righe): eventi ricevuti, se il dispositivo è touch, ogni riscrittura del meta con le misure in quel momento. Se dopo una rotazione qui non compare nulla, lo script non ha ricevuto nessun evento.
+            </p>
+            <ol data-log-sito style={{ margin: 0, paddingLeft: '1.25rem', fontSize: '0.95rem', lineHeight: 1.6, overflowWrap: 'anywhere' }}>
+              {logSito.map((r, i) => <li key={i}>{r}</li>)}
             </ol>
 
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '1.5rem 0 0.5rem' }}>Dettagli</h2>
