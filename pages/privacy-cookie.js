@@ -58,7 +58,6 @@ export default function PrivacyCookie({ pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "Privacy e Cookie Policy | Alètheia S.r.l."}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Informativa Privacy e Cookie Policy ufficiale del sito web di Alètheia S.r.l., Vittoria (RG). Aggiornata ai sensi del GDPR."}

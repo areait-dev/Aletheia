@@ -55,7 +55,6 @@ export default function FondoNuoveCompetenze({ faqs, target, vantaggi, servizi, 
     <>
       <Head>
         <title>{pagina.seo.titolo || "Fondo Nuove Competenze - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Il Fondo Nuove Competenze permette alle imprese di destinare parte dell'orario di lavoro alla formazione, ottenendo il rimborso del costo delle ore. Alètheia ti accompagna in ogni fase."}

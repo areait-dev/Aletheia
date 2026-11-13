@@ -145,7 +145,6 @@ export default function NewsPage({ news: allNews, pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "News - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Notizie e aggiornamenti su formazione, lavoro e opportunità professionali in Sicilia. Il blog di Alètheia Srl."}

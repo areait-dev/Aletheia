@@ -404,7 +404,6 @@ export default function Home({ giorniCalendario, gruppoLoghi, categorie, pagina,
     <>
       <Head>
         <title>{pagina.seo.titolo || "Alètheia Srl - Formazione Professionale"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead
           title="Alètheia Srl - Formazione Professionale"

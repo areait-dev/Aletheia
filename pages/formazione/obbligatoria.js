@@ -445,7 +445,6 @@ export default function FormazioneObbligatoria({ giorniObbligatoria, faqs, step,
     <>
       <Head>
         <title>{pagina.seo.titolo || "Formazione Obbligatoria per la Sicurezza sul Lavoro - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Corsi obbligatori per legge conformi al D.Lgs. 81/08: sicurezza sul lavoro, attrezzature, fitosanitario, HACCP. Attestati validi in tutta Italia. Alètheia S.r.l."}

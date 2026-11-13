@@ -142,7 +142,6 @@ export default function ServiziAllaPersona({ servizi: SERVICES, pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "Servizi alla Persona - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Alètheia Srl - Servizi alla persona: ricerca del lavoro, orientamento professionale, Programma G.O.L., Garanzia Giovani e outplacement in Sicilia."}

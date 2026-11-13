@@ -189,7 +189,6 @@ export default function CatalogoCorsi({ coursesRaw, pagina, categoria = null }) 
     <>
       <Head>
         <title>{categoria ? categoria.title : pagina.seo.titolo || "Corsi di formazione - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead
           title={categoria ? categoria.title : "Corsi di formazione - Alètheia Srl"}

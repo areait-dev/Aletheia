@@ -198,7 +198,6 @@ export default function ServiziAlleImprese({ servizi: SERVICES, perche: WHY_US, 
     <>
       <Head>
         <title>{pagina.seo.titolo || "Servizi alle Imprese - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Alètheia Srl - Consulenza HR integrata per le imprese: somministrazione, ricerca e selezione, formazione aziendale e intermediazione lavoro in Sicilia."}

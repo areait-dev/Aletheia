@@ -26,7 +26,6 @@ export default function FormazioneECM({ faqs, modalita, pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "Corsi ECM per Professionisti Sanitari - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Corsi ECM accreditati per medici, infermieri, fisioterapisti e OSS. Alètheia, provider ECM accreditato dalla Regione Siciliana."}

@@ -120,7 +120,6 @@ export default function Contatti({ sedi: SEDI, pagina }) {
     <>
       <Head>
         <title>{PAGE_TITLE}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <SeoHead title={PAGE_TITLE} description={PAGE_DESCRIPTION} url="/contatti" ogImage={pagina.seo.ogImage || seo.ogImage || undefined} />
       </Head>

@@ -93,7 +93,6 @@ export default function FormazioneProfessionaleSpecialistica({ heroBadges, verti
     <>
       <Head>
         <title>{pagina.seo.titolo || "Formazione Professionale e Corsi per la Pubblica Amministrazione - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Corsi qualificati, certificazioni ICDL, corsi ECM e formazione per la Pubblica Amministrazione. Alètheia, ente accreditato Regione Siciliana, Test Center AICA e Provider ECM."}

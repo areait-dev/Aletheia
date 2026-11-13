@@ -26,7 +26,6 @@ export default function FondiInterprofessionali({ faqs, vantaggi, pagina }) {
     <>
       <Head>
         <title>{pagina.seo.titolo || "Fondi Interprofessionali per Aziende - Alètheia Srl"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={pagina.seo.descrizione || "Trasforma i contributi INPS che la tua azienda versa già in formazione gratuita per i dipendenti attraverso i Fondi Paritetici Interprofessionali. Alètheia gestisce tutto il processo."}
